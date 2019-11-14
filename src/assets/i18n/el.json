@@ -1,0 +1,48 @@
+{
+  "LANGUAGE_SELECTOR": {
+    "SELECT": "Αλλαξε γλώσσα",
+    "en": "Αγγλικά",
+    "pt": "Πορτογαλικά",
+    "el": "ελληνικά"    
+  },
+  "MENU": {
+    "HOME": "Home",
+    "JOBS": "Εργασία",
+    "CVS": "Cvs",
+    "PROFILES": "Προφίλ",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "WELCOME_MESSAGE": "καλως ΗΡΘΑΤΕ",
+    "PROFILE": "Προφίλ"
+  },  
+  "HOME": {
+    "TITLE": "Home",
+    "BODY": "Αυτή είναι η αρχική σελίδα του QualiChain FE"
+  },
+  "JOBS": {
+    "TITLE": "Εργασία"
+  },
+  "CVS": {
+    "TITLE": "CVs"
+  },
+  "PROFILES": {
+    "TITLE": "Προφίλ",
+    "STUDENT_PROFILE": "Προφίλ σπουδαστών",
+    "USERNAME": "Όνομα χρήστη",
+    "NAME": "Πλήρες όνομα",
+    "SURNAME": "Πανεπιστήμιο",
+    "UNIVERSITY": "University",
+    "EMAIL": "Email",
+    "COMPLETED_COURSES": "Ολοκληρωμένα μαθήματα",
+    "SMART_BADGES": "Έξυπνες ετικέτες",
+    "CV": "CV",
+    "BEST_CARRER_OPTIONS": "Best Carrer Options",
+    "CARRER_ADVISOR": "Carrer Advisor"
+  },
+  "BCO": {
+    "TITLE": "Best Carrer Options"
+  },
+  "CARRER_ADVISOR": {
+    "TITLE": "Carrer Advisor"
+  }    
+}

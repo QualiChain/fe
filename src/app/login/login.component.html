@@ -1,0 +1,67 @@
+<h1>Login</h1>
+
+      <div class="alert alert-info">
+        <strong>Valid credentials</strong> - U: user P: user<br>
+      </div>
+
+      <div *ngIf="invalidCredentials" class="alert alert-danger" role="alert">
+          Invalid credentials<br>
+        </div>
+
+      <div class="card-body">
+
+      <form (ngSubmit)="processForm()">
+          <!-- name -->
+          
+          <div class="form-group field">
+              <label>Username</label>
+            <input 
+              type="text" 
+              name="username" 
+              class="form-control input" 
+              placeholder="Username" 
+              [(ngModel)]="name"
+              required
+              minlength="3"
+              #usernameInput="ngModel">
+            <div class="help is-error" *ngIf="usernameInput.invalid && usernameInput.dirty">
+              Username is required and needs to be at least 3 characters long.
+            </div>
+          </div>
+          <!-- email -->
+          <div class="form-group field">  
+              <label>Password</label>        
+            <input 
+              type="password" 
+              name="password" 
+              class="form-control password" 
+              placeholder="Your Password" 
+              [(ngModel)]="password"
+              required
+              minlength="3"
+              #passwordInput="ngModel">
+            <div class="help is-error" *ngIf="passwordInput.invalid && passwordInput.dirty">
+              Password is required and needs to be at least 3 characters long.
+            </div>
+          </div>
+          
+          
+          <button type="submit" class="button is-danger is-large">Login</button>
+
+        </form>      
+
+    </div>
+      
+      <!-- form goes here -->
+      
+    <!--
+          <div>
+                <button (click)="openModal('custom-modal-login')">Open Modal Window</button>
+          </div>
+            
+              
+            <jw-modal id="custom-modal-login">
+                <h1>Test</h1>
+                <button (click)="closeModal('custom-modal-login');">Close</button>
+            </jw-modal>
+          -->

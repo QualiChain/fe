@@ -1,0 +1,63 @@
+<h1>{{ 'JOBS.TITLE' | translate }}</h1>
+
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a routerLink="/jobs/create" class="nav-link" routerLinkActive="active">
+            Create Job
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+<div class="">  
+<table mat-table [dataSource]="dataSource" matSort class="table">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element">
+              <a [routerLink]="['/jobs/edit', element.id]" class="btn btn-primary">Edit</a> 
+              <a [routerLink]="" class="btn btn-danger">Delete</a>
+            </td>
+          </ng-container>
+
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- skill Column -->
+    <ng-container matColumnDef="skill">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Skill </th>
+      <td mat-cell *matCellDef="let element"> {{element.skill}} </td>
+    </ng-container>
+  
+    <!-- required_level Column -->
+    <ng-container matColumnDef="required_level">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Required level </th>
+      <td mat-cell *matCellDef="let element"> {{element.required_level}} </td>
+    </ng-container>
+  
+    <!-- priority Column -->
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
+      <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,48 @@
+{
+  "LANGUAGE_SELECTOR": {
+    "SELECT": "Alterar idioma",
+    "en": "Inglês",
+    "pt": "Português",
+    "el": "Grego"   
+  },
+  "MENU": {
+    "HOME": "Home",
+    "JOBS": "Empregos",
+    "CVS": "Cvs",
+    "PROFILES": "Perfis",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "WELCOME_MESSAGE": "Bem vinda",
+    "PROFILE": "Perfil"
+  },
+  "HOME": {
+    "TITLE": "Home",
+    "BODY": "Esta é a página inicial do QualiChain FE"
+  },
+  "JOBS": {
+    "TITLE": "Empregos"
+  },
+  "CVS": {
+    "TITLE": "CVs"
+  },
+  "PROFILES": {
+    "TITLE": "Perfis",
+    "STUDENT_PROFILE": "Perfil do aluno",
+    "USERNAME": "Nome de usuário",
+    "NAME": "Nome",
+    "SURNAME": "Surname",
+    "UNIVERSITY": "Universidade",
+    "EMAIL": "Email",
+    "COMPLETED_COURSES": "Cursos concluídos",
+    "SMART_BADGES": "Selos inteligentes",
+    "CV": "CV",
+    "BEST_CARRER_OPTIONS": "Best Carrer Options",
+    "CARRER_ADVISOR": "Carrer Advisor"
+  },
+  "BCO": {
+    "TITLE": "Best Carrer Options"
+  },
+  "CARRER_ADVISOR": {
+    "TITLE": "Carrer Advisor"
+  }    
+}

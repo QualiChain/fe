@@ -1,0 +1,177 @@
+<div class="navbar navbar-default" role="navigation">
+
+	<div class="container">
+
+		<div class="row">
+        
+			<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            	<div class="qc-icon"><a class="page-scroll navbar-brand" routerLink="" (click)="route=''" title="Qualichain"><img src="https://qualichain-project.eu/quali-data/themes/qualichain/assets/img/qualichain-icon-white.png" alt="Qualichain Icon"></a></div>
+			</div>                
+
+                <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
+                    <!--<a href="" class="logo" title="ISDS"><img src="/assets/img/ioc-logo.png" alt="ISDS Logo"></a>-->
+                    <!--<nav class="nav-collapse">-->
+					<nav role="navigation" class="nav">
+	                
+						<span class="menu-toggle" href="#head-nav">
+	                        <div class="hamburger" id="hamburger">
+	                          <span class="line"></span>
+	                          <span class="line"></span>
+	                          <span class="line"></span>
+	                        </div>
+	                    </span>
+						
+						<ul id="main-menu" class="top-nav menu clearfix">
+							<li [hidden]="(!userdata.authenticated && !menuOption.public)" *ngFor="let menuOption of menuOptions" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
+							<!--
+							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/logout'}"><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
+							-->
+							<li *ngIf="!userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
+							
+							
+							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
+								<a data-toggle="modal" data-target="#myModal" href="#">									
+									<span [hidden]="(messages.length<=0)" class="nav-item__badge">
+										<span aria-hidden="true" class="nav-item__badge-count">{{messages.length}}</span>
+										<span class="visually-hidden">{{messages.length}} notificaciones nuevas.</span>
+									</span>
+									<span class="glyphicon glyphicon-bell"></span>
+								</a>
+							</li>
+
+							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
+								<a data-toggle="modal" data-target="#myModal" href="#">
+									<span [hidden]="(messages.length<=0)" class="nav-item__badge">
+										<span aria-hidden="true" class="nav-item__badge-count">{{messages.length}}</span>
+										<span class="visually-hidden">{{messages.length}} notificaciones nuevas.</span>
+									</span>
+									<span class="glyphicon glyphicon-envelope"></span>
+								</a>
+							</li>
+
+							
+							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
+									<div class="dropdown">
+											<button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<span >
+															<div class="user-authenticated-container">
+																<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + userdata.avatar_path + ')'}"> </div>
+															</div>
+														</span>									
+											</button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<ul>
+														<li *ngIf="userdata.authenticated" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" >
+																<div class="user-authenticated-name">
+																		{{ 'MENU.WELCOME_MESSAGE' | translate }}
+																</div>
+																<div class="user-authenticated-name">
+																		{{userdata.name}} {{userdata.surname}}
+																		<hr>
+																</div>															
+														</li>
+														<li *ngIf="userdata.authenticated" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles/'+userdata.id}"><a class="navbar-item" routerLink="/profiles/{{userdata.id}}" >{{ 'MENU.PROFILE' | translate }}</a></li>
+														<li *ngIf="userdata.authenticated" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
+													</ul>
+												</div>
+									</div>
+<!--
+								<span >
+									<div class="user-authenticated-container">
+										<div class="user-authenticated-picture-image" style="background-image: url('assets/img/dilbert.jpg');"> </div>
+										<div class="info-container"><div class="user-authenticated-name">&nbsp; {{ 'MENU.WELCOME_MESSAGE' | translate }} {{userdata.name}} {{userdata.surname}} &nbsp;</div></div>
+									</div>
+								</span>	
+-->
+							</li>
+<!--
+							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
+								<a href="#">
+									<span class="glyphicon glyphicon-globe"></span>
+								</a>
+							</li>
+-->
+							<li>
+								<div class="dropdown dropdown-menu-right">
+									<button title="{{ 'LANGUAGE_SELECTOR.SELECT' | translate }}" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-globe"></span>
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<ul>
+											<li *ngFor="let lang of translate.getLangs()" [ngClass]="{current_page_parent: lang===translate.currentLang}" ><a class="dropdown-item" (click)="translate.use(lang)" [routerLink]="" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }} </a></li>
+										</ul>
+									</div>
+								</div>
+							</li>
+	
+						</ul>							                
+					<!--
+						<span *ngIf="userdata.authenticated">Welcome {{userdata.name}} !!!						
+						</span>
+					-->				
+
+					</nav>                    
+
+					
+
+                </div>
+
+
+
+                
+		</div>
+
+	</div>
+
+</div>
+
+<div id="banner-sub">
+            <article>
+                <div class="imgtxt"><img src="https://qualichain-project.eu/quali-data/themes/qualichain/assets/img/qualichain-logo.png" alt="Qualichain Logo"></div>
+            </article>
+            <div class="desktop">
+                <video autoplay="" playsinline="" muted="" loop="" preload="" class="fillWidth fadeIn animated" id="video-background" poster="https://qualichain-project.eu/quali-data/themes/qualichain/assets/img/qualichain-hero.png"></video>
+            </div>
+            <div class="phone">
+                <video autoplay="" playsinline="" muted="" loop="" preload="" class="fillWidth fadeIn animated" id="video-background" poster="https://qualichain-project.eu/quali-data/themes/qualichain/assets/img/qualichain-hero-mobile.png"></video>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+<div class="clearfix"></div>
+<div id="socialbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 centered">
+                    <a href="https://twitter.com/QualiChain" class="noborder" title="QualiChain on Twitter" target="_blank"><i class="icon ion-social-twitter-outline"></i></a> <a href="https://www.facebook.com/QualiChain" class="noborder" title="QualiChain on Facebook" target="_blank"><i class="icon ion-social-facebook-outline"></i></a> <a href="https://www.linkedin.com/company/QualiChain" class="noborder" title="QualiChain on LinkedIn" target="_blank"><i class="icon ion-social-linkedin-outline"></i></a> <a href="https://qualichain-project.eu/newsletter/" class="noborder green-tooltip" data-toggle="tooltip" data-placement="bottom" title="Sign up for the QualiChain Newsletter"><i class="icon ion-email"></i><!--<span class="desktop"> Subscribe to our newsletter</span>--></a>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Notifications</h4>
+			</div>
+			<div class="modal-body">
+				<span *ngIf="messages.length<=0">No notifications available</span>
+				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info">
+					{{message.text}}
+					<!--
+					<button class="btn btn-danger" (click)="deleteItemMessages(message.id)">Delete</button>
+					-->
+				</div>  
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>	
