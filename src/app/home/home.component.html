@@ -1,0 +1,10 @@
+
+
+<h1>{{ 'HOME.TITLE' | translate }}</h1>
+<p>	{{ 'HOME.BODY' | translate }} </p>
+
+<div *ngIf="userdata.authenticated">
+    For demo purposes
+    <button (click)="sendMessage()" class="btn btn-primary mr-2">Send Message to increase counter in notification</button>
+    <button (click)="clearMessages()" class="btn btn-secondary">Clear Messages in notifications</button>
+</div>

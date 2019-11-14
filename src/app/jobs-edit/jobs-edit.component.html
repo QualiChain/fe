@@ -1,0 +1,53 @@
+<h1>{{ 'JOBS.TITLE' | translate }} - Edit {{job.id}}</h1>
+
+<div class="card">
+        <div class="card-body">
+          <form [formGroup]="angForm" novalidate>
+            <div class="form-group">
+              <label class="col-md-4">Job Name</label>
+              <input type="text" class="form-control" 
+                formControlName="JobName" 
+                #JobName 
+                [(ngModel)] = "job.JobName"/>
+            </div>
+            <div *ngIf="angForm.controls['JobName'].invalid && (angForm.controls['JobName'].dirty || angForm.controls['JobName'].touched)" class="alert alert-danger">
+              <div *ngIf="angForm.controls['JobName'].errors.required">
+                Job Name is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4">Job Description </label>
+              <textarea class="form-control" rows = 7 cols = "5"
+              formControlName="JobDescription" 
+              #JobDescription [(ngModel)] = "job.JobDescription"></textarea>
+            </div>
+            <div *ngIf="angForm.controls['JobDescription'].invalid && (angForm.controls['JobDescription'].dirty || angForm.controls['JobDescription'].touched)" class="alert alert-danger">
+              <div *ngIf="angForm.controls['JobDescription'].errors.required">
+                Job Description is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4">Job Price</label>
+              <input type="text" class="form-control" 
+                formControlName="JobPrice" 
+                #JobPrice
+                [(ngModel)] = "job.JobPrice"
+              />
+            </div>
+            <div *ngIf="angForm.controls['JobPrice'].invalid && (angForm.controls['JobPrice'].dirty || angForm.controls['JobPrice'].touched)" class="alert alert-danger">
+              <div *ngIf="angForm.controls['JobPrice'].errors.required">
+                Job Price is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <button (click) = "updateJob(JobName.value, JobDescription.value, JobPrice.value)" type="submit" class="btn btn-primary"
+              [disabled]="angForm.invalid" >
+                Update Job
+              </button>
+
+              <button mat-raised-button color="primary" (click)="confirmDialog()">Cancel</button>
+
+            </div>
+          </form>
+        </div>
+      </div>

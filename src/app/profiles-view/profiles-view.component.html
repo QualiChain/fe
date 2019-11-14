@@ -1,0 +1,196 @@
+
+<h1>{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-8">
+            <div class="username"><span>{{ 'PROFILES.USERNAME' | translate }}:</span> {{userdata.username}}</div>            
+            <div class="fullname"><span>{{ 'PROFILES.NAME' | translate }}:</span> {{userdata.name}}</div>
+            <div class="fullname"><span>{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
+            <div class="fullname"><span>{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
+            
+            <div class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
+            <div class="row"><br></div>
+            <div class="row">
+                <div class="col col-lg-2"><button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}</button></div>
+                
+                <div class="col col-lg-2"><a [routerLink]="['/profiles', userdata.id,'best-carrer-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}</a> </div>
+
+            </div>
+        </div>
+        <div class="col col-lg-2">
+            <div><img [src]="userdata.avatar_path"></div>
+        </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+
+        <ngb-accordion #acc="ngbAccordion">
+                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}">
+                  <ng-template ngbPanelContent>
+                      <div class="">
+                            
+                            <ngb-tabset [justify]="currentJustify">
+                                    <ngb-tab id="tab-selectbyid-{{year}}"  title="Year {{year}}" *ngFor="let year of years; let i = index">
+                                      <ng-template ngbTabContent>
+                                            <div class="col-lg-4 completeCourseSectiontab">
+                                                    <div>
+                                                            <select class="form-control form-control-sm">
+                                                                    <option selected value="0">{{year}}.Specialisation Flow</option>
+                                                                    <option value="1">{{year}}.Specialisation Flow - One</option>
+                                                                    <option value="2">{{year}}.Specialisation Flow - Two</option>
+                                                                    <option value="3">{{year}}.Specialisation Flow - Three</option>
+                                                                  </select>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                            <select class="form-control form-control-sm">
+                                                                    <option>Semester {{year}}.1</option>
+                                                                    <option>Semester {{year}}.2</option>
+                                                                    <option>Semester {{year}}.3</option>
+                                                                  </select>                                                
+        
+                                                    </div> 
+                                                
+                                            </div>
+                                            <div class="col-lg-4 completeCourseSectiontab">
+                                                
+                                                    <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                              <!-- Default checked -->
+                                                              <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="check1" checked>
+                                                                <label class="custom-control-label" for="check1">Check me {{year}}</label>
+                                                              </div>
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                              <!-- Default checked -->
+                                                              <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="check2">
+                                                                <label class="custom-control-label" for="check2">Check me {{year}}</label>
+                                                              </div>
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                              <!-- Default checked -->
+                                                              <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="check3" checked>
+                                                                <label class="custom-control-label" for="check3">Check me {{year}}</label>
+                                                              </div>
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                              <!-- Default checked -->
+                                                              <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="check4" checked>
+                                                                <label class="custom-control-label" for="check4">Check me {{year}}</label>
+                                                              </div>
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                              <!-- Default checked -->
+                                                              <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="check5">
+                                                                <label class="custom-control-label" for="check5">Check me {{year}}</label>
+                                                              </div>
+                                                            </li>
+                                                          </ul>
+
+                                            </div>
+                                            <div class="col-lg-4 completeCourseSectiontab">
+                                                   {{year}}. Description: Operating Systems is a graduate-level introductory course in operating systems. this course teaches the basic operating system abstractions...
+                                            </div>
+
+                                      </ng-template>
+                                    </ngb-tab>
+                                    
+                                  </ngb-tabset>
+                      </div>
+
+                  </ng-template>
+                </ngb-panel>
+                
+                <ngb-panel id="toggle-2" title="{{ 'PROFILES.SMART_BADGES' | translate }}">
+                        <ng-template ngbPanelContent>
+                            <div class="row smartBudgesBody">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                        <br/>
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                        <br/>
+                                        C++ Programming Language Intermediate
+                                        <br/>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                        <br/>
+                                        <span class="glyphicon glyphicon-flash"></span>
+                                        <br/>
+                                        Calculus Beginner
+                                        <br/>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                        <br/>
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                        <br/>
+                                        Electrical Floor Planning Beginner
+                                        <br/>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                        <br/>
+                                        <span class="glyphicon glyphicon-flash"></span>
+                                        <br/>
+                                        Biomedical Beginer
+                                        <br/>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                        <br/>
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                        <br/>
+                                        Java Programming Language Intermidiate
+                                        <br/>
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                    <br/>
+                                  <span class="glyphicon glyphicon-star-empty"></span>
+                                  <br/>
+                                  PHP Intermidiate
+                                  <br/>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                    <br/>
+                                  <span class="glyphicon glyphicon-star-empty"></span>
+                                  <br/>
+                                  Angular Beginer
+                                  <br/>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                    <br/>
+                                  <span class="glyphicon glyphicon-flash"></span>
+                                  <br/>
+                                  Drupal 8 Beginner
+                                  <br/>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                    <br/>
+                                  <span class="glyphicon glyphicon-flash"></span>
+                                  <br/>
+                                  Python 3 Beginner
+                                  <br/>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col col-lg-8"> </div>
+                                <div class="col col-lg-2">
+                                    <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a></div>
+                            </div>
+
+                        </ng-template>
+                      </ngb-panel>
+
+        </ngb-accordion>
+
+    </div>
+
+
+
+</div>

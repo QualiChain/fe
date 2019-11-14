@@ -1,0 +1,18 @@
+.completeCourseSectiontab {
+    overflow-y: auto; 
+    max-height: 200px;
+    min-height: 200px;
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.smartBudgesBody {
+    overflow-y: auto; 
+    max-height: 180px;    
+}
+
+.smartBudge {
+    overflow-y: auto; 
+    max-height: 100px;    
+    min-height: 100px;    
+}

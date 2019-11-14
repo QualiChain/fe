@@ -1,0 +1,152 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+[hidden] {
+    display: none!important;
+}
+
+.user-authenticated-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+.user-authenticated-picture-image {
+    background-size: cover;
+    background-repeat: no-repeat; 
+    border-radius: 50%; 
+    height: 2.5rem;
+    width: 2.5rem; position: relative;
+    flex-shrink: 0;     
+    background-color: transparent;
+    border: 1px solid #edf1f7; 
+    box-sizing: border-box;
+}
+
+.user-authenticated-name {
+    color: #ffffff;
+}
+
+.navbar .dropdown-menu {
+    background: #2b69b1;
+}
+.navbar .dropdown-menu ul {
+    text-align: center;
+}
+.navbar .dropdown-menu ul li {
+    display: block;
+    min-height: 50px;
+    padding-top: 10px;
+}
+.navbar .dropdown-menu ul li button {
+    background: #2b69b1;
+}
+
+.nav-item__badge {
+    top: -5px;
+    left: 50%;
+    height: 18px;
+    line-height: 14px;
+    background-color: #d11124;
+    border: 2px solid #283e4a;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+
+
+.nav-item__badge {
+    position: absolute;
+    top: 6px;
+    left: calc(50% + 9px);
+    height: 14px;
+    min-width: 14px;
+    background-color: #cf5000;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    text-align: center;
+    padding: 0 4px;
+}
+
+.nav-item__badge {
+    top: -5px;
+    left: 50%;
+    height: 18px;
+    line-height: 14px;
+    background-color: #d11124;
+    border: 2px solid #283e4a;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.nav-item__badge span {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        background: transparent;
+        font-size: 10px;
+}
+
+.visually-hidden {
+    display: block!important;
+    border: 0!important;
+    clip: rect(0 0 0 0)!important;
+    height: 1px!important;
+    margin: -1px!important;
+    overflow: hidden!important;
+    padding: 0!important;
+    position: absolute!important;
+    white-space: nowrap!important;
+    width: 1px!important;
+}
+
+.accordion>.card:first-of-type {
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.accordion>.card {
+    overflow: hidden;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.accordion>.card .card-header {
+    margin-bottom: -1px;
+}
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}

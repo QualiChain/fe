@@ -1,0 +1,98 @@
+<h1>{{ 'BCO.TITLE' | translate }}</h1>
+
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col col-lg-2">
+                <a [routerLink]="['/profiles', userid]" class="btn btn-primary">❮  Back to user profile</a> 
+        </div>
+    </div>
+
+    <div [hidden]="cardToDisplay!=i" class="bco-card" *ngFor="let bco of best_carrer_options; let i = index">
+        <div class="bco-head">{{bco.title}} ({{i+1}}/{{best_carrer_options.length}})</div>
+        <div class="bco-body">
+            <div class="bco-body-title">Description</div>
+            <div class="bco-body-content"><p>{{bco.description}}</p></div>
+
+            <div class="bco-body-title">Statistics</div>
+            <div class="bco-body-content">
+                <div class="row">
+                        <div class="col col-lg-4">
+
+                                <p>
+                                    <ngb-progressbar showValue="true" type="info" [value]="progress_relation_cv_bar[i]"></ngb-progressbar>                                    
+                                    {{progress_relation_cv_bar[i]}}% relation with your CV
+                                    <br>
+                                    </p>
+                                <p>
+                                    <ngb-progressbar showValue="true" type="info" [value]="progress_relation_smart_badges_bar[i]"></ngb-progressbar>                                    
+                                    {{progress_relation_smart_badges_bar[i]}}% relation with your Smart Badges
+                                    <br>
+                                </p>
+
+                        </div>
+                        <div class="col col-lg-4">
+                                <div class="chart">
+                                        <canvas baseChart
+                                          [data]="pieChartData[i]"
+                                          [labels]="pieChartLabels"
+                                          [chartType]="pieChartType"
+                                          [options]="pieChartOptions"                                          
+                                          [colors]="pieChartColors"
+                                          [legend]="pieChartLegend">
+                                        </canvas>
+                                      </div>
+
+                        </div>
+                        <div class="col col-lg-4">
+                                <div class="flex-item">
+                                        <div style="display: block;">
+                                            <canvas baseChart width="400" height="400"
+                                                        [datasets]="lineChartData[i]"
+                                                        [labels]="lineChartLabels[i]"
+                                                        [options]="lineChartOptions"
+                                                        [colors]="lineChartColors"
+                                                        [legend]="lineChartLegend"
+                                                        [chartType]="lineChartType">
+                                            </canvas>
+                                        </div>
+                                      </div>
+
+
+                        </div>
+                </div>
+
+            </div>
+
+            <div class="bco-body-title">Recomendations</div>
+            <div  class="bco-body-content">
+                <div class="row">
+                    <div class="col col-lg-6">                        
+                    <a [routerLink]="['/profiles']" class="btn btn-primary">Course Recomendation (under construction)</a> 
+                    </div>
+                    <div class="col col-lg-6">
+                    <a [routerLink]="['/profiles']" class="btn btn-primary">Skill Reccomendation (under construction)</a> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="bco-body-title">Additional Courses</div>
+            <div  class="bco-body-content">
+                <div>Course 1</div>
+                <div>Course 2</div>
+                <div>Course 3</div>
+            </div>
+
+        </div>    
+    </div>
+
+    <div class="row">
+            <div class="col-xs-10" >
+                    <button title="Previous" [hidden]="cardToDisplay==0" (click)="cardToDisplay = cardToDisplay-1" ng-init="count=0">❮  </button>
+                    <button title="Next" [hidden]="cardToDisplay>=(best_carrer_options.length-1)" (click)="cardToDisplay = cardToDisplay+1" ng-init="count=0">  ❯</button>
+            </div>
+    </div>
+        
+</div>
