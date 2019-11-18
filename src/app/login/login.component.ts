@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ModalService } from '../_modal';
 import { Router } from '@angular/router';
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../_services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -13,9 +15,9 @@ export class LoginComponent implements OnInit {
   name: string;
   password: string;
   invalidCredentials: boolean;
+  loginData : {}
   
-  
-  constructor(private modalService: ModalService, private el: ElementRef, private router: Router) { 
+  constructor(private modalService: ModalService, private el: ElementRef, private router: Router, private ls: AuthService) { 
     
   }
   
@@ -35,9 +37,27 @@ export class LoginComponent implements OnInit {
    * Process the form we have. Send to whatever backend
    * Only alerting for now
    */
+
+
   processForm() {
     //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
     //alert(allInfo); 
+    this.loginData = this.ls.login(this.name, this.password);
+    //console.log(this.loginData);
+
+    if (this.loginData['authenticated']) {
+      this.invalidCredentials = false;
+      let myObj = this.loginData;
+      localStorage.setItem('userdata', JSON.stringify(myObj));
+      window.location.href="/";
+
+    }
+    else {
+      //alert("Invalid credentials");
+      this.invalidCredentials = true;
+    }
+
+    /*
     if ((this.name=='user') && (this.password=='user')) {
       //alert("Valid credentials");    
       // Create item:
@@ -45,11 +65,10 @@ export class LoginComponent implements OnInit {
       let myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 1 , 'avatar_path': 'assets/img/dilbert.jpg'};
       localStorage.setItem('userdata', JSON.stringify(myObj));
       //console.log($window.location.host);
-      /*
-      this.router.navigate(['/'], {
-        
-      });
-      */
+      //
+      //this.router.navigate(['/'], {
+      //  
+      //});      
       //window.location.reload();
       window.location.href="/";
 
@@ -58,6 +77,7 @@ export class LoginComponent implements OnInit {
       alert("Invalid credentials");
       this.invalidCredentials = true;
     }
+    */
 
   }
 
