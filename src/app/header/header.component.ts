@@ -99,7 +99,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     localStorage.removeItem('userdata');
     this.userdata = {};
     
-    window.location.reload();
+    //window.location.reload();
+    window.location.href="/";
     
   }
 
