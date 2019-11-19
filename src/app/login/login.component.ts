@@ -23,6 +23,15 @@ export class LoginComponent implements OnInit {
   
   ngOnInit() {
     this.invalidCredentials = false;
+
+  }
+
+  validCredentials(data) {
+    //console.log(data);
+    this.invalidCredentials = false;      
+    let myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 1 , 'avatar_path': 'assets/img/dilbert.jpg'};
+    localStorage.setItem('userdata', JSON.stringify(myObj));
+    window.location.href="/";
   }
 
   openModal(id: string) {
@@ -33,6 +42,8 @@ export class LoginComponent implements OnInit {
     this.modalService.close(id);
   }
 
+
+
   /**
    * Process the form we have. Send to whatever backend
    * Only alerting for now
@@ -42,42 +53,23 @@ export class LoginComponent implements OnInit {
   processForm() {
     //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
     //alert(allInfo); 
-    this.loginData = this.ls.login(this.name, this.password);
-    //console.log(this.loginData);
 
-    if (this.loginData['authenticated']) {
-      this.invalidCredentials = false;
-      let myObj = this.loginData;
-      localStorage.setItem('userdata', JSON.stringify(myObj));
-      window.location.href="/";
-
-    }
-    else {
-      //alert("Invalid credentials");
-      this.invalidCredentials = true;
-    }
-
-    /*
-    if ((this.name=='user') && (this.password=='user')) {
-      //alert("Valid credentials");    
-      // Create item:
-      this.invalidCredentials = false;
-      let myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 1 , 'avatar_path': 'assets/img/dilbert.jpg'};
-      localStorage.setItem('userdata', JSON.stringify(myObj));
-      //console.log($window.location.host);
-      //
-      //this.router.navigate(['/'], {
-      //  
-      //});      
-      //window.location.reload();
-      window.location.href="/";
-
-    }
-    else {
-      alert("Invalid credentials");
-      this.invalidCredentials = true;
-    }
-    */
+    this.ls.login(this.name, this.password).subscribe(
+        res => {
+          console.log("Valid credentials for the auth service");
+          this.validCredentials(res);
+        },
+        error => {
+          console.log("Invalid Credentials for the aut service, let's check if are the demo ones");
+          this.invalidCredentials = true;
+          if ((this.name=='user') && (this.password=='user')) {
+            console.log("Demo credentials valid!!!")
+            this.validCredentials(error);
+          }
+          
+          
+        }
+      );
 
   }
 
