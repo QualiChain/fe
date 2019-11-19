@@ -1,32 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { from, Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+ 
+  uri = environment.authUrl;
+  //uri = 'http://localhost:4000/auth';
 
-  uri = 'http://localhost:4000/auth';
-
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   login(username, password) {
-
-    const obj = { username, password};
+    const obj = { username: username, password: password};
     //console.log(obj);
-
-    /*    
-    this.http.post(`${this.uri}/athentication`, obj)
-        .subscribe(res => console.log('Done'));
-    */
-        if ((username=='user') && (password=='user')) {
-            return ({ authenticated: true, description: 'Valid credentials', id:1, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', 'avatar_path': 'assets/img/dilbert.jpg'});
-        }
-        else {
-            return({authenticated: false, description: 'Invalid credentials', data: {}});
-        }
-
+    
+    return this.httpClient.post(`${this.uri}`, obj).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
     }
 
-    
+
+
 }
