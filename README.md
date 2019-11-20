@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
 
 ## How to install
-    - Clone this repository (git clone https://gitlab.atosresearch.eu/ari/qualichain)
+    - Clone this repository (git clone https://github.com/QualiChain/fe.git)
     - Access to the main folder: cd qualichain
     - Install dependecies: npm i
 
