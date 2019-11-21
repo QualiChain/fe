@@ -1,0 +1,28 @@
+
+.user-authenticated-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+.user-authenticated-picture-image {
+    background-size: cover;
+    background-repeat: no-repeat; 
+    border-radius: 50%; 
+    height: 1.95rem;
+    width: 1.95rem; position: relative;
+    flex-shrink: 0;     
+    background-color: transparent;
+    border: 1px solid #edf1f7; 
+    box-sizing: border-box;
+}
+
+.user-authenticated-name {
+    color: #ffffff;
+}
+
+#socialbarTop {
+    background: #0e3664;
+    padding: 1px 0;
+    margin-top: 65px;
+}

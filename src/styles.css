@@ -10,27 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: none!important;
 }
 
-.user-authenticated-container {
-    display: flex;
-    align-items: center;
-    width: auto;
-}
 
-.user-authenticated-picture-image {
-    background-size: cover;
-    background-repeat: no-repeat; 
-    border-radius: 50%; 
-    height: 2.5rem;
-    width: 2.5rem; position: relative;
-    flex-shrink: 0;     
-    background-color: transparent;
-    border: 1px solid #edf1f7; 
-    box-sizing: border-box;
-}
-
-.user-authenticated-name {
-    color: #ffffff;
-}
 
 .navbar .dropdown-menu {
     background: #2b69b1;
