@@ -52,49 +52,23 @@
                                                     </div> 
                                                 
                                             </div>
-                                            <div class="col-lg-4 completeCourseSectiontab">
+                                            <div class="completeCourseSectiontab" [ngClass]="{'col-lg-4':selectedCourse.id,'col-lg-8':!selectedCourse.id}">
                                                 
                                                     <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item">
-                                                              <!-- Default checked -->
-                                                              <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="check1" checked>
-                                                                <label class="custom-control-label" for="check1">Check me {{year}}</label>
-                                                              </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                              <!-- Default checked -->
-                                                              <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="check2">
-                                                                <label class="custom-control-label" for="check2">Check me {{year}}</label>
-                                                              </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                              <!-- Default checked -->
-                                                              <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="check3" checked>
-                                                                <label class="custom-control-label" for="check3">Check me {{year}}</label>
-                                                              </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                              <!-- Default checked -->
-                                                              <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="check4" checked>
-                                                                <label class="custom-control-label" for="check4">Check me {{year}}</label>
-                                                              </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                              <!-- Default checked -->
-                                                              <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="check5">
-                                                                <label class="custom-control-label" for="check5">Check me {{year}}</label>
-                                                              </div>
-                                                            </li>
-                                                          </ul>
-
+                                                        <li  *ngFor="let course of listOfCoursesByUser" class="list-group-item" >
+                                                          <table>
+                                                            <tr>
+                                                              <td><input type="checkbox" class="custom-control-input" id="check_box_course_{{course.id}}" value="{{course.id}}"> </td>
+                                                              <td><a [routerLink]="" (click)="selectedCourse=course">{{course.title}}</a></td>
+                                                            </tr>
+                                                          </table>  
+                                                        </li>
+                                                      </ul>
                                             </div>
-                                            <div class="col-lg-4 completeCourseSectiontab">
-                                                   {{year}}. Description: Operating Systems is a graduate-level introductory course in operating systems. this course teaches the basic operating system abstractions...
+                                            <div *ngIf="selectedCourse.id" class="col-lg-4 completeCourseSectiontab">
+                                              <div class=""><h3>{{selectedCourse.title}}</h3></div>
+                                              <div class="">{{selectedCourse.description}}</div>
+                                              <div class="row"><a class="button" [routerLink]="" (click)="selectedCourse={}">Close</a></div>
                                             </div>
 
                                       </ng-template>
@@ -178,16 +152,18 @@
                                 </div>
 
                             </div>
-                            <div class="row">
-                                <div class="col col-lg-8"> </div>
-                                <div class="col col-lg-2">
-                                    <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a></div>
-                            </div>
+
 
                         </ng-template>
                       </ngb-panel>
 
         </ngb-accordion>
+
+        <div class="row carreradvisor">
+            <div class="col col-lg-8"> </div>
+            <div class="col col-lg-2">
+                <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a></div>
+        </div>
 
     </div>
 

@@ -22,11 +22,11 @@
 	                    </span>
 						
 						<ul id="main-menu" class="top-nav menu clearfix">
-							<li [hidden]="(!userdata.authenticated && !menuOption.public)" *ngFor="let menuOption of menuOptions" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
+							<li [hidden]="(!userdata.authenticated && !menuOption.public)" *ngFor="let menuOption of menuOptions" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="btn navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
 							<!--
 							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/logout'}"><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 							-->
-							<li *ngIf="!userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
+							<li *ngIf="!userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="btn navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
 							
 							
 							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
@@ -75,23 +75,10 @@
 													</ul>
 												</div>
 									</div>
-<!--
-								<span >
-									<div class="user-authenticated-container">
-										<div class="user-authenticated-picture-image" style="background-image: url('assets/img/dilbert.jpg');"> </div>
-										<div class="info-container"><div class="user-authenticated-name">&nbsp; {{ 'MENU.WELCOME_MESSAGE' | translate }} {{userdata.name}} {{userdata.surname}} &nbsp;</div></div>
-									</div>
-								</span>	
--->
+
 							</li>
-<!--
-							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
-								<a href="#">
-									<span class="glyphicon glyphicon-globe"></span>
-								</a>
-							</li>
--->
-							<li>
+
+							<li class="menu-item menu-item-type-post_type menu-item-object-page">
 								<div class="dropdown dropdown-menu-right">
 									<button title="{{ 'LANGUAGE_SELECTOR.SELECT' | translate }}" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span class="glyphicon glyphicon-globe"></span>
@@ -125,7 +112,7 @@
 
 </div>
 
-<div id="banner-sub">
+<div *ngIf="route==''" id="banner-sub">
             <article>
                 <div class="imgtxt"><img src="assets/img/qualichain-logo.png" alt="Qualichain Logo"></div>
             </article>
@@ -138,11 +125,11 @@
             <div class="clearfix"></div>
         </div>
 <div class="clearfix"></div>
-<div id="socialbar">
+<div *ngIf="route!=''" id="socialbarTop">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 centered">
-                    <a href="https://twitter.com/QualiChain" class="noborder" title="QualiChain on Twitter" target="_blank"><i class="icon ion-social-twitter-outline"></i></a> <a href="https://www.facebook.com/QualiChain" class="noborder" title="QualiChain on Facebook" target="_blank"><i class="icon ion-social-facebook-outline"></i></a> <a href="https://www.linkedin.com/company/QualiChain" class="noborder" title="QualiChain on LinkedIn" target="_blank"><i class="icon ion-social-linkedin-outline"></i></a> <a href="https://qualichain-project.eu/newsletter/" class="noborder green-tooltip" data-toggle="tooltip" data-placement="bottom" title="Sign up for the QualiChain Newsletter"><i class="icon ion-email"></i><!--<span class="desktop"> Subscribe to our newsletter</span>--></a>
+                  <span></span>
                 </div>
             </div>
         </div>
