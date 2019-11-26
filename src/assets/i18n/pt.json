@@ -28,12 +28,14 @@
   "PROFILES": {
     "TITLE": "Perfis",
     "STUDENT_PROFILE": "Perfil do aluno",
+    "TEACHER_PROFILE": "Perfil do professor",
     "USERNAME": "Nome de usuário",
     "NAME": "Nome",
     "SURNAME": "Surname",
     "UNIVERSITY": "Universidade",
     "EMAIL": "Email",
     "COMPLETED_COURSES": "Cursos concluídos",
+    "TEACHING_COURSES": "Cursos de Ensino",
     "SMART_BADGES": "Selos inteligentes",
     "CV": "CV",
     "BEST_CARRER_OPTIONS": "Best Carrer Options",
@@ -44,5 +46,13 @@
   },
   "CARRER_ADVISOR": {
     "TITLE": "Carrer Advisor"
-  }    
+  },
+  "COURSE"  : {
+    "TITLE": "Título",
+    "DESCRIPTION": "Descrição",
+    "RELATED_SKILLS": "Habilidades relacionadas",
+    "COURSE_BADGES": "Emblemas do Curso",
+    "UPDATE": "Atualizar",
+    "AWARD_SMART_BADGE": "Prêmio Smart Badge"       
+  }
 }
