@@ -1,5 +1,6 @@
 
-<h1>{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
+<h1 *ngIf="userdata.role=='Student'">{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
+<h1 *ngIf="userdata.role=='Teacher'">{{ 'PROFILES.TEACHER_PROFILE' | translate }}</h1>
 <div class="container">
     <div class="row">
         <div class="col col-lg-8">
@@ -10,7 +11,7 @@
             
             <div class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
             <div class="row"><br></div>
-            <div class="row">
+            <div class="row" *ngIf="userdata.role=='Student'">
                 <div class="col col-lg-2"><button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}</button></div>
                 
                 <div class="col col-lg-2"><a [routerLink]="['/profiles', userdata.id,'best-carrer-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}</a> </div>
@@ -25,7 +26,7 @@
     <div class="row">
 
         <ngb-accordion #acc="ngbAccordion">
-                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}">
+                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role=='Student'">
                   <ng-template ngbPanelContent>
                       <div class="">
                             
@@ -80,7 +81,65 @@
                   </ng-template>
                 </ngb-panel>
                 
-                <ngb-panel id="toggle-2" title="{{ 'PROFILES.SMART_BADGES' | translate }}">
+                <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" *ngIf="userdata.role=='Teacher'">
+                  <ng-template ngbPanelContent>
+                      <div class="">
+                            
+            
+
+                        <div class="accordion" id="accordionTeacherCourses">
+                          <div class="card" *ngFor="let course of listOfCoursesByUser">
+                            <div class="card-header" id="headingOne">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#course_' + course.id" aria-expanded="true" aria-controls="collapseOne">
+                                  {{course.title}}
+                                </button>
+                              </h5>
+                            </div>
+                        
+                            <div [attr.id]="'course_' + course.id" class="collapse" aria-labelledby="headingOne" data-parent="#accordionTeacherCourses">
+                              <div class="card-body">
+                                  <div class="courseDescription">
+                                      <div><h4>{{ 'COURSE.DESCRIPTION' | translate }}</h4></div>
+                                      <div>{{course.description}}</div>
+                                  </div>
+                                  <div>&nbsp; </div>
+                                  <div class="courseRelatedData">
+                                      <div class="col-lg-6">
+                                          <div><h4>{{ 'COURSE.RELATED_SKILLS' | translate }}</h4></div>
+                                          <div><span *ngFor="let skill of course.related_skills">{{skill}}, </span></div>
+                                       </div>
+                                        <div class="col-lg-6">
+                                            <div><h4>{{ 'COURSE.COURSE_BADGES' | translate }}</h4></div>
+                                            
+                                            <div><span *ngFor="let badge of course.course_badges">{{badge}}, </span></div>
+                                        </div>                                        
+                                  </div>
+                                  <div>&nbsp; </div>                                  
+                                  <div class="courseActions">
+                                      <div class="col-lg-6">
+
+                                          <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</button>
+
+                                      </div>
+                                       <div class="col-lg-6"></div>
+
+                                        <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-star-empty"></span> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}</button>
+                                       
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>                        
+
+      
+                      </div>
+
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel id="toggle-3" title="{{ 'PROFILES.SMART_BADGES' | translate }}">
                         <ng-template ngbPanelContent>
                             <div class="row smartBudgesBody">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">

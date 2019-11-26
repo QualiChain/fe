@@ -28,12 +28,14 @@
   "PROFILES": {
     "TITLE": "Profiles",
     "STUDENT_PROFILE": "Student Profile",
+    "TEACHER_PROFILE": "Professor Profile",
     "USERNAME": "Username",
     "NAME": "Name",
     "SURNAME": "Surname",
     "UNIVERSITY": "University",
     "EMAIL": "Email",
     "COMPLETED_COURSES": "Completed Courses",
+    "TEACHING_COURSES": "Teaching Courses",
     "SMART_BADGES": "Smart Badges",
     "CV": "CV",
     "BEST_CARRER_OPTIONS": "Best Carrer Options",
@@ -44,5 +46,13 @@
   },    
   "CARRER_ADVISOR": {
     "TITLE": "Carrer Advisor"
-  }  
+  },
+  "COURSE"  : {
+    "TITLE": "Title",
+    "DESCRIPTION": "Description",
+    "RELATED_SKILLS": "Relared Skills",
+    "COURSE_BADGES": "Course Badges",
+    "UPDATE": "Update",
+    "AWARD_SMART_BADGE": "Award Smart Badge"
+  }
 }

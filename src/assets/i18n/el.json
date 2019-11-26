@@ -28,12 +28,14 @@
   "PROFILES": {
     "TITLE": "Προφίλ",
     "STUDENT_PROFILE": "Προφίλ σπουδαστών",
+    "TEACHER_PROFILE": "Προφίλ Καθηγητή",
     "USERNAME": "Όνομα χρήστη",
     "NAME": "Πλήρες όνομα",
     "SURNAME": "Πανεπιστήμιο",
     "UNIVERSITY": "University",
     "EMAIL": "Email",
     "COMPLETED_COURSES": "Ολοκληρωμένα μαθήματα",
+    "TEACHING_COURSES": "Εκπαιδευτικά μαθήματα",
     "SMART_BADGES": "Έξυπνες ετικέτες",
     "CV": "CV",
     "BEST_CARRER_OPTIONS": "Best Carrer Options",
@@ -44,5 +46,13 @@
   },
   "CARRER_ADVISOR": {
     "TITLE": "Carrer Advisor"
-  }    
+  },
+  "COURSE"  : {
+    "TITLE": "Τίτλος",
+    "DESCRIPTION": "Περιγραφή",
+    "RELATED_SKILLS": "Σχετικές δεξιότητες",
+    "COURSE_BADGES": "Διακριτικά μαθήματος",
+    "UPDATE": "Εκσυγχρονίζω",
+    "AWARD_SMART_BADGE": "Βραβείο Έξυπνο Σήμα"
+  }
 }
