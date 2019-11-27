@@ -39,7 +39,8 @@
     "SMART_BADGES": "Selos inteligentes",
     "CV": "CV",
     "BEST_CARRER_OPTIONS": "Best Carrer Options",
-    "CARRER_ADVISOR": "Carrer Advisor"
+    "CARRER_ADVISOR": "Carrer Advisor",
+    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"
   },
   "BCO": {
     "TITLE": "Best Carrer Options"
@@ -53,6 +54,7 @@
     "RELATED_SKILLS": "Habilidades relacionadas",
     "COURSE_BADGES": "Emblemas do Curso",
     "UPDATE": "Atualizar",
-    "AWARD_SMART_BADGE": "Prêmio Smart Badge"       
+    "AWARD_SMART_BADGE": "Prêmio Smart Badge",
+    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"    
   }
 }
