@@ -218,11 +218,17 @@
 
         </ngb-accordion>
 
-        <div class="row carreradvisor">
+        <div class="row carreradvisor" *ngIf="userdata.role=='Student'">
             <div class="col col-lg-8"> </div>
             <div class="col col-lg-2">
                 <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a></div>
         </div>
+
+        <div class="row cv_gap_analysis" *ngIf="userdata.role=='Teacher'">
+          <div class="col col-lg-8"> </div>
+          <div class="col col-lg-2">
+              <a [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}</a></div>
+      </div>
 
     </div>
 

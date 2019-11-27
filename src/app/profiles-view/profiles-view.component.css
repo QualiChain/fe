@@ -17,6 +17,7 @@
     min-height: 100px;    
 }
 
-div.carreradvisor {
+div.carreradvisor,
+div.cv_gap_analysis {
     padding-top: 14px;
 }
