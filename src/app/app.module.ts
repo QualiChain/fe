@@ -13,11 +13,13 @@ import { CvsComponent } from './cvs/cvs.component';
 import { ProfilesComponent } from './profiles/profiles.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule} from '@angular/material/input';
+import { MatChipsModule} from '@angular/material/chips';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -77,11 +79,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ModalModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatAutocompleteModule,
     MatSliderModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
+    MatChipsModule,
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({

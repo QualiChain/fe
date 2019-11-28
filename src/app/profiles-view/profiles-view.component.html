@@ -10,6 +10,36 @@
             <div class="fullname"><span>{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
             
             <div class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
+
+            <div class="skills"><span>Skills:</span>
+              <mat-form-field class="example-chip-list">
+                <mat-chip-list #chipList aria-label="Skill selection">
+                  <mat-chip
+                    *ngFor="let skill of skills"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(skill)">
+                    {{skill}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New skill..."
+                    #skillInput
+                    [formControl]="skillCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                    {{skill}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role=='Student'">
                 <div class="col col-lg-2"><button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}</button></div>
