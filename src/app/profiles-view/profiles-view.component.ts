@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {ElementRef, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+
 @Component({
   selector: 'app-profiles-view',
   templateUrl: './profiles-view.component.html',
@@ -14,8 +22,67 @@ export class ProfilesViewComponent implements OnInit {
   listOfCoursesByUser: {};
   selectedCourse: {};
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  skillCtrl = new FormControl();
+  filteredSkills: Observable<string[]>;
+  skills: string[] = ['Java'];
+  allSkills: string[] = ['Angular', 'Java', 'Nodejs', 'Pyhton', 'C#'];
 
-  constructor(private route: ActivatedRoute) { }
+  @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+
+  constructor(private route: ActivatedRoute) { 
+
+    this.filteredSkills = this.skillCtrl.valueChanges.pipe(
+      startWith(null),
+      map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
+
+  }
+
+  add(event: MatChipInputEvent): void {
+    // Add fruit only when MatAutocomplete is not open
+    // To make sure this does not conflict with OptionSelected Event
+    if (!this.matAutocomplete.isOpen) {
+      const input = event.input;
+      const value = event.value;
+
+      // Add our fruit
+      if ((value || '').trim()) {
+        this.skills.push(value.trim());
+      }
+
+      // Reset the input value
+      if (input) {
+        input.value = '';
+      }
+
+      this.skillCtrl.setValue(null);
+    }
+  }
+
+  remove(fruit: string): void {
+    const index = this.skills.indexOf(fruit);
+
+    if (index >= 0) {
+      this.skills.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.skills.push(event.option.viewValue);
+    this.skillInput.nativeElement.value = '';
+    this.skillCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allSkills.filter(skill => skill.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   ngOnInit() {
 
