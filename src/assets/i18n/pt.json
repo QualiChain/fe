@@ -13,7 +13,8 @@
     "LOGIN": "Login",
     "LOGOUT": "Logout",
     "WELCOME_MESSAGE": "Bem vinda",
-    "PROFILE": "Perfil"
+    "PROFILE": "Perfil",
+    "RECRUITMENT": "Recrutamento"
   },
   "HOME": {
     "TITLE": "Home",

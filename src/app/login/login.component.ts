@@ -28,8 +28,17 @@ export class LoginComponent implements OnInit {
 
   validCredentials(data) {
     //console.log(data);
-    this.invalidCredentials = false;      
-    let myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 1 , 'avatar_path': 'assets/img/dilbert.jpg'};
+    //console.log(this.name);
+    let myObj = {};
+    this.invalidCredentials = false;   
+       
+    if (this.name=="student") {
+       myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 1 , 'avatar_path': 'assets/img/dilbert.jpg', role: 'student'};
+    }
+    else if (this.name=="recruiter") {
+
+      myObj = { authenticated: true, name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', username: 'recruiter.demo', id: 5 , 'avatar_path': 'assets/img/recruiter.png', role: 'recruiter'};      
+    }
     localStorage.setItem('userdata', JSON.stringify(myObj));
     window.location.href="/";
   }
@@ -62,8 +71,12 @@ export class LoginComponent implements OnInit {
         error => {
           console.log("Invalid Credentials for the aut service, let's check if are the demo ones");
           this.invalidCredentials = true;
-          if ((this.name=='user') && (this.password=='user')) {
-            console.log("Demo credentials valid!!!")
+          if ((this.name=='student') && (this.password=='student')) {
+            console.log("Demo credentials of a student are valid!!!")
+            this.validCredentials(error);
+          }
+          else if ((this.name=='recruiter') && (this.password=='recruiter')) {
+            console.log("Demo credentials of a recruiter are valid!!!")
             this.validCredentials(error);
           }
           
