@@ -9,9 +9,9 @@
             <div class="fullname"><span>{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
             <div class="fullname"><span>{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
             
-            <div class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
+            <div *ngIf="userdata.role!='Recruiter'" class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
 
-            <div class="skills"><span>Skills:</span>
+            <div *ngIf="userdata.role!='Recruiter'" class="skills"><span>Skills:</span>
               <mat-form-field class="example-chip-list">
                 <mat-chip-list #chipList aria-label="Skill selection">
                   <mat-chip
@@ -55,7 +55,7 @@
     <div class="row"><br></div>
     <div class="row">
 
-        <ngb-accordion #acc="ngbAccordion">
+        <ngb-accordion *ngIf="userdata.role!='Recruiter'" #acc="ngbAccordion">
                 <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role=='Student'">
                   <ng-template ngbPanelContent>
                       <div class="">

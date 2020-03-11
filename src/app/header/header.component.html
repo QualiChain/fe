@@ -23,6 +23,9 @@
 						
 						<ul id="main-menu" class="top-nav menu clearfix">
 							<li [hidden]="(!userdata.authenticated && !menuOption.public)" *ngFor="let menuOption of menuOptions" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="btn navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
+							
+							
+							<li *ngIf="userdata.role=='recruiter'" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/recruitment'}"><a class="btn navbar-item" routerLink="/recruitment" (click)="route='/recruitment'">{{ 'MENU.RECRUITMENT' | translate }}</a></li>
 							<!--
 							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/logout'}"><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 							-->
