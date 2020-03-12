@@ -10,7 +10,9 @@ import { JobsEditComponent } from './jobs-edit/jobs-edit.component';
 
 import { CvsComponent } from './cvs/cvs.component';
 import { ProfilesComponent } from './profiles/profiles.component';
+import { RecruitmentComponent } from './recruitment/recruitment.component';
 import {ProfilesViewComponent} from './profiles-view/profiles-view.component';
+import {RecruitmentViewComponent} from './recruitment-view/recruitment-view.component';
 import {BestCarrerOptionsComponent} from './best-carrer-options/best-carrer-options.component';
 import {CarrerAdvisorComponent} from './carrer-advisor/carrer-advisor.component';
 import { LoginComponent } from './login/login.component';
@@ -56,7 +58,15 @@ const routes: Routes = [
   {
     path: 'profiles/:id/carrer-advisor',
     component: CarrerAdvisorComponent
-  },  
+  },
+  {
+    path: 'recruitment',
+    component: RecruitmentComponent
+   },    
+   {
+    path: 'recruitment/:id',
+    component: RecruitmentViewComponent
+  },
   { path: '**', redirectTo: '' }
   ];
 

@@ -56,5 +56,8 @@
     "COURSE_BADGES": "Διακριτικά μαθήματος",
     "UPDATE": "Εκσυγχρονίζω",
     "AWARD_SMART_BADGE": "Βραβείο Έξυπνο Σήμα"
+  },
+  "RECRUITMENT"  : {
+    "TITLE": "Προσλήψεις"
   }
 }

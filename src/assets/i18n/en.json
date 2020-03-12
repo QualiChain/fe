@@ -56,5 +56,8 @@
     "COURSE_BADGES": "Course Badges",
     "UPDATE": "Update",
     "AWARD_SMART_BADGE": "Award Smart Badge"
+  },
+  "RECRUITMENT"  : {
+    "TITLE": "Recruitment"
   }
 }

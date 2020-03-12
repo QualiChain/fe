@@ -1,0 +1,29 @@
+
+<h1>Recruitment</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-8">
+            <div class="title"><span>{{ 'JOBS.TITLE' | translate }}:</span> {{jobdata.title}}</div>            
+
+
+        </div>
+        
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+       
+      <ul>
+        <li  *ngFor="let candidate of listOfCandidatesByJobs[jobdata.id]" class="list-group-item" >
+          <a [routerLink]="['/profiles', candidate.userid]" class="">{{candidate.name}}</a>
+          </li>
+      </ul>        
+
+    </div>
+
+
+
+</div>
+
+
+<a [routerLink]="['/recruitment']" class="btn btn-primary">Recruitment list</a>

@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CvsComponent } from './cvs/cvs.component';
 import { ProfilesComponent } from './profiles/profiles.component';
+import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -45,6 +46,7 @@ import { JobsEditComponent } from './jobs-edit/jobs-edit.component';
 
 import { JobsService } from './_services/jobs.service';
 import { ProfilesViewComponent } from './profiles-view/profiles-view.component';
+import { RecruitmentViewComponent } from './recruitment-view/recruitment-view.component';
 import { BestCarrerOptionsComponent } from './best-carrer-options/best-carrer-options.component';
 import { CarrerAdvisorComponent } from './carrer-advisor/carrer-advisor.component';
 
@@ -63,6 +65,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HomeComponent,
     CvsComponent,
     ProfilesComponent,
+    RecruitmentComponent,
     NotFoundComponent,
     LoginComponent,
     JobsAddComponent,
@@ -70,6 +73,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     JobsEditComponent,
     ConfirmDialogComponent,
     ProfilesViewComponent,
+    RecruitmentViewComponent,
     BestCarrerOptionsComponent,
     CarrerAdvisorComponent
   ],
