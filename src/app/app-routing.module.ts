@@ -17,6 +17,9 @@ import {BestCarrerOptionsComponent} from './best-carrer-options/best-carrer-opti
 import {CarrerAdvisorComponent} from './carrer-advisor/carrer-advisor.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthGuard } from './_helpers/auth.guard';
+import { Role } from './_models/role';
+
 const routes: Routes = [
   {
    path: '',
@@ -61,11 +64,15 @@ const routes: Routes = [
   },
   {
     path: 'recruitment',
-    component: RecruitmentComponent
+    component: RecruitmentComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.recruiter, Role.admin] }
    },    
    {
     path: 'recruitment/:id',
-    component: RecruitmentViewComponent
+    component: RecruitmentViewComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.recruiter, Role.admin] }    
   },
   { path: '**', redirectTo: '' }
   ];

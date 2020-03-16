@@ -9,7 +9,13 @@ import { Subscription } from 'rxjs';
 
 import { MessageService } from '../_services/index';
 
-//import { AppComponent } from '../app.component';
+import { AppComponent } from '../app.component';
+
+import { AuthService } from '../_services';
+import { User } from '../_models/user';
+import { Role } from '../_models/role';
+//import { isAdmin } from '../_services/auth.service.isA';
+
 
 export interface OPTIONS_MENU {
   id: number;
@@ -36,7 +42,7 @@ const ELEMENT_DATA: OPTIONS_MENU[] =[
 
 export class HeaderComponent implements OnInit, OnDestroy {
   
-
+  currentUser: User;
   route: string;
   userdata: {};
   messages: any[] = [];
@@ -44,9 +50,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   menuOptions =ELEMENT_DATA;
 
-  constructor(location: Location, router: Router, public translate: TranslateService, private messageService: MessageService) {
+  constructor(
+    private appcomponent: AppComponent,
+    private authservice: AuthService,
+    location: Location, router: Router, public translate: TranslateService, private messageService: MessageService) {
   //  constructor(location: Location, router: Router) {
     
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
     // subscribe to home component messages
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
@@ -91,14 +102,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
 }
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  /*
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.admin ;
+  }
 
-  
+  get isRecruiter() {
+    return this.currentUser && ((this.currentUser.role === Role.recruiter) || (this.currentUser.role === Role.admin)) ;
+  }
+  */
+
 
   logout() {
+    
+    
+
     //console.log("log out");
     localStorage.removeItem('userdata');
     this.userdata = {};
-    
+    this.authservice.logout();
+
     //window.location.reload();
     window.location.href="/";
     
