@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 //import {TranslateService} from '@ngx-translate/core';
 //import * as $ from 'node_modules/jquery';
+
+import { AuthService } from '../app/_services';
+import { User } from './_models/user';
+import { Role } from './_models/role';
 
 declare var $: any;
 
@@ -11,8 +16,32 @@ declare var $: any;
 })
 export class AppComponent {
   title = 'QualiChain-FE';
+  currentUser: User;
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private authservice: AuthService
+  ) {
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isLogged() {
+    return this.currentUser ;
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.admin ;
+  }
+
+  get isRecruiter() {
+    return this.currentUser && ((this.currentUser.role === Role.recruiter) || (this.currentUser.role === Role.admin)) ;
+  }
+
+  logout() {
+    this.authservice.logout();
+    this.router.navigate(['/login']);
+  }
+
   /*
   constructor(public translate: TranslateService) {
     translate.addLangs(['en', 'pt', 'el']);

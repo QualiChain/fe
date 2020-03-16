@@ -22,17 +22,17 @@
 	                    </span>
 						
 						<ul id="main-menu" class="top-nav menu clearfix">
-							<li [hidden]="(!userdata.authenticated && !menuOption.public)" *ngFor="let menuOption of menuOptions" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="btn navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
+							<li [hidden]="(!isLogged && !menuOption.public)" *ngFor="let menuOption of menuOptions" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="btn navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
 							
 							
-							<li *ngIf="userdata.role=='recruiter'" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/recruitment'}"><a class="btn navbar-item" routerLink="/recruitment" (click)="route='/recruitment'">{{ 'MENU.RECRUITMENT' | translate }}</a></li>
+							<li *ngIf="isRecruiter" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/recruitment'}"><a class="btn navbar-item" routerLink="/recruitment" (click)="route='/recruitment'">{{ 'MENU.RECRUITMENT' | translate }}</a></li>
 							<!--
-							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/logout'}"><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
+							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/logout'}"><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 							-->
-							<li *ngIf="!userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="btn navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
+							<li *ngIf="!isLogged" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="btn navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
 							
 							
-							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
+							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" data-target="#myModal" href="#">									
 									<span [hidden]="(messages.length<=0)" class="nav-item__badge">
 										<span aria-hidden="true" class="nav-item__badge-count">{{messages.length}}</span>
@@ -42,7 +42,7 @@
 								</a>
 							</li>
 
-							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
+							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" data-target="#myModal" href="#">
 									<span [hidden]="(messages.length<=0)" class="nav-item__badge">
 										<span aria-hidden="true" class="nav-item__badge-count">{{messages.length}}</span>
@@ -53,28 +53,28 @@
 							</li>
 
 							
-							<li *ngIf="userdata.authenticated" class="menu-item menu-item-type-post_type menu-item-object-page">
+							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 									<div class="dropdown">
 											<button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 													<span >
 															<div class="user-authenticated-container">
-																<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + userdata.avatar_path + ')'}"> </div>
+																<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + currentUser.avatar_path + ')'}"> </div>
 															</div>
 														</span>									
 											</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 													<ul>
-														<li *ngIf="userdata.authenticated" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" >
+														<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" >
 																<div class="user-authenticated-name">
 																		{{ 'MENU.WELCOME_MESSAGE' | translate }}
 																</div>
 																<div class="user-authenticated-name">
-																		{{userdata.name}} {{userdata.surname}}
+																		{{currentUser.name}} {{currentUser.surname}}
 																		<hr>
 																</div>															
 														</li>
-														<li *ngIf="userdata.authenticated" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles/'+userdata.id}"><a class="navbar-item" routerLink="/profiles/{{userdata.id}}" >{{ 'MENU.PROFILE' | translate }}</a></li>
-														<li *ngIf="userdata.authenticated" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
+														<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles/'+userdata.id}"><a class="navbar-item" routerLink="/profiles/{{currentUser.id}}" >{{ 'MENU.PROFILE' | translate }}</a></li>
+														<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 													</ul>
 												</div>
 									</div>
