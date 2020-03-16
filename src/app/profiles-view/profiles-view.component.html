@@ -42,7 +42,11 @@
 
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role=='Student'">
-                <div class="col col-lg-2"><button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}</button></div>
+
+              
+                <div class="col col-lg-2"><button class="btn btn-primary" type="button">
+                  <a data-toggle="modal" data-target="#myModalCV" href="#">	cv</a>
+                  <span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}</button></div>
                 
                 <div class="col col-lg-2"><a [routerLink]="['/profiles', userdata.id,'best-carrer-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}</a> </div>
 
@@ -265,3 +269,25 @@
 
 
 </div>
+
+
+<!-- Modal CV-->
+<div class="modal fade" id="myModalCV" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Notifications</h4>
+    </div>
+    <div class="modal-body">
+       
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+    
+  </div>
+  </div>	
