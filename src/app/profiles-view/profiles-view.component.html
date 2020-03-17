@@ -11,6 +11,7 @@
             
             <div *ngIf="userdata.role!='Recruiter'" class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
 
+            <!--
             <div *ngIf="userdata.role!='Recruiter'" class="skills"><span>Skills:</span>
               <mat-form-field class="example-chip-list">
                 <mat-chip-list #chipList aria-label="Skill selection">
@@ -39,7 +40,7 @@
                 </mat-autocomplete>
               </mat-form-field>
             </div>
-
+            -->
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role=='Student'">
 
@@ -287,28 +288,167 @@
       <h4 class="modal-title">{{ 'PROFILES.CV' | translate }}</h4>
     </div>
     <div class="modal-body">
-      <form (ngSubmit)="processFormCV()">
+      <!--
+        [formGroup]="dynamicForm"
+      -->
+      <form  (ngSubmit)="onSubmit()">
 
         <div class="form-group field">
           <label>Title</label>
           <input 
             type="text" 
             name="title" 
+            [(ngModel)]="title"
             class="form-control input" 
             placeholder="Title"           
             required
-            minlength="3">          
+            minlength="3"
+            #titleInput="ngModel"
+            >          
         </div>
       
         <div class="form-group field">
           <label>Description</label>
-          <textarea type="text" name="description"  class="form-control input" placeholder="Description" required></textarea>
+          <textarea type="text" [(ngModel)]="description" name="description"  class="form-control input" placeholder="Description" required #descriptionInput="ngModel"></textarea>
         </div>
 
+        <div class="form-group field">
+          <label>Target Sector</label>
+          <input 
+            type="text" 
+            [(ngModel)]="targetSector"
+            name="targetSector" 
+            class="form-control input" 
+            placeholder="Target Sector"           
+            required
+            minlength="3"
+            #targetSectorInput="ngModel"
+            >          
+        </div>  
+
+        <div class="form-group field">
+          <label>Expected Salary</label>
+          <input 
+            type="text"
+            [(ngModel)]="expectedSalary" 
+            name="expectedSalary" 
+            class="form-control input" 
+            placeholder="Expected Salary"           
+            required
+            minlength="3"
+            #expectedSalaryInput="ngModel"
+            >          
+        </div>
+
+        <div class="form-group field">
+          <label>Job Description</label>
+          <textarea type="text" [(ngModel)]="JobDescription" name="JobDescription"  class="form-control input" placeholder="Job description" required #JobDescriptionInput="ngModel"></textarea>
+        </div>
+
+        <div class="card m-3">
+          <h5 class="card-header">Skills</h5>
+          <div class="card-body">
+              <div class="form-row">
+                  <div class="form-group">                      
+                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">Add skill</a>                                            
+                  </div>
+              </div>
+          </div>          
+          <div *ngFor="let skillItem of t.controls; let i = index" class="list-group list-group-flush">
+              <div class="list-group-item">
+                  <h5 class="card-title">Skill {{i + 1}}</h5><a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, $i, 'skillitem')">Delete skill</a> 
+                  <div [formGroup]="skillItem" class="form-row">
+                    <div class="form-group col-6">
+                      <label>SkillLabel</label>
+                      <input type="text" formControlName="skillLabel" class="form-control" />                          
+                    </div>
+                    <div class="form-group col-6">
+                      <label>ProficiencyLevel</label>
+                      <input type="text" formControlName="proficiencyLevel" class="form-control" />
+                    </div>
+                    <div class="form-group col-6">
+                      <label>Description</label>
+                      <input type="text" formControlName="description" class="form-control" />
+                    </div>
+                  </div>
+              </div>
+          </div>
+          
+        </div> 
+        
+        <div class="card m-3">
+          <h5 class="card-header">Work History</h5>
+          <div class="card-body">
+              <div class="form-row">
+                  <div class="form-group">                      
+                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'workitem')">Add work</a>                                            
+                  </div>
+              </div>
+          </div>          
+          <div *ngFor="let workItem of w.controls; let i = index" class="list-group list-group-flush">
+              <div class="list-group-item">
+                  <h5 class="card-title">Work {{i + 1}}</h5><a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, $i, 'workitem')">Delete item</a> 
+                  <div [formGroup]="workItem" class="form-row">
+                    <div class="form-group col-6">
+                      <label>Position</label>
+                      <input type="text" formControlName="position" class="form-control" />                          
+                    </div>
+                    <div class="form-group col-6">
+                      <label>From</label>
+                      <input type="text" formControlName="from" class="form-control" />
+                    </div>
+                    <div class="form-group col-6">
+                      <label>To</label>
+                      <input type="text" formControlName="to" class="form-control" />
+                  </div>
+                  <div class="form-group col-6">
+                    <label>Employer</label>
+                    <input type="text" formControlName="employer" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>          
+
+        <div class="card m-3">
+          <h5 class="card-header">Education History</h5>
+          <div class="card-body">
+              <div class="form-row">
+                  <div class="form-group">                      
+                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">Add education</a>                                            
+                  </div>
+              </div>
+          </div>          
+          <div *ngFor="let educationItem of e.controls; let i = index" class="list-group list-group-flush">
+            <div class="list-group-item">
+                <h5 class="card-title">Education {{i + 1}}</h5><a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, $i, 'educationitem')">Delete item</a> 
+                <div [formGroup]="educationItem" class="form-row">
+                  <div class="form-group col-6">
+                    <label>Title</label>
+                    <input type="text" formControlName="title" class="form-control" />                          
+                  </div>
+                  <div class="form-group col-6">
+                    <label>From</label>
+                    <input type="text" formControlName="from" class="form-control" />
+                  </div>
+                  <div class="form-group col-6">
+                    <label>To</label>
+                    <input type="text" formControlName="to" class="form-control" />
+                  </div>
+                  <div class="form-group col-6">
+                    <label>Description</label>
+                    <input type="text" formControlName="description" class="form-control" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          
+          
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-success"  (click)="onSubmit()">Save</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
     </div>
     </div>
     
