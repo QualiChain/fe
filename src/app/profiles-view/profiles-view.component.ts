@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -8,6 +8,8 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { CVService } from '../_services/cv.service';
 
 @Component({
   selector: 'app-profiles-view',
@@ -15,6 +17,12 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./profiles-view.component.css']
 })
 export class ProfilesViewComponent implements OnInit {
+
+  dynamicForm: FormGroup;
+  dynamicFormWorks: FormGroup;
+  dynamicFormEducations: FormGroup;
+
+  submitted = false;
 
   userdata: {};
   years: {};
@@ -35,7 +43,7 @@ export class ProfilesViewComponent implements OnInit {
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService) { 
 
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
@@ -86,6 +94,17 @@ export class ProfilesViewComponent implements OnInit {
 
   ngOnInit() {
 
+    this.dynamicForm = this.formBuilder.group({
+      Skills: new FormArray([])
+    });
+    this.dynamicFormWorks = this.formBuilder.group({
+      workHistory: new FormArray([])
+    });
+    this.dynamicFormEducations = this.formBuilder.group({
+      Education: new FormArray([])
+    });
+    
+
     this.route.params.subscribe(params => {
       
       //console.log(params['id']);
@@ -125,5 +144,106 @@ export class ProfilesViewComponent implements OnInit {
     */
 
   }
+
+  // convenience getters for easy access to form fields
+  get fC() { return this.dynamicForm.controls; }  
+  get t() { return this.fC.Skills as FormArray; }
+
+  get wC() { return this.dynamicFormWorks.controls; }
+  get w() { return this.wC.workHistory as FormArray; }
+
+  get eC() { return this.dynamicFormEducations.controls; }
+  get e() { return this.eC.Education as FormArray; }
+
+  deleteFormGroupItem(e, i, type) {
+    if (type=='skillitem') {
+      this.t.removeAt(i);    
+    } 
+    else if (type=='workitem') {
+      this.w.removeAt(i);    
+    }
+    else if (type=='educationitem') {
+      this.e.removeAt(i);    
+    }
+  }
+
+  addFormGroupItem(e, type) {
+    if (type=='skillitem') {
+      this.t.push(this.formBuilder.group({
+        proficiencyLevel: ['', Validators.required],
+        skillLabel: ['', [Validators.required]],
+        description: ['', [Validators.required]],      
+      }));
+    }
+    else if (type=='workitem') {
+      this.w.push(this.formBuilder.group({
+        position: ['', Validators.required],
+        from: ['', [Validators.required]],
+        to: ['', [Validators.required]],
+        employer: ['', [Validators.required]],
+      }));
+    }
+    else if (type=='educationitem') {
+      this.e.push(this.formBuilder.group({
+        title: ['', Validators.required],
+        from: ['', [Validators.required]],
+        to: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+      }));
+    }
+
+
+  }
+
+  title: string;
+  description: string;
+  targetSector: string;
+  expectedSalary: string;
+  JobDescription: string;
+  onSubmit() {
+    //console.log("onSubmit");
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.dynamicForm.invalid) {
+        return;
+    }
+
+    if (this.dynamicFormWorks.invalid) {
+      return;
+    }
+
+    if (this.dynamicFormEducations.invalid) {
+      return;
+    }
+    
+    var dataToSend = {
+      'title':this.title,
+      'description': this.description,
+      'targetSector': this.targetSector,
+      'expectedSalary': this.expectedSalary,
+      'JobDescription': this.JobDescription,
+      'Skills': this.dynamicForm.value.Skills,
+      'workHistory': this.dynamicFormWorks.value.workHistory,
+      'Education': this.dynamicFormEducations.value.Education,
+    };
+    
+    //console.log(JSON.stringify(dataToSend, null, 4));
+
+    this.cvs.sendCV(dataToSend).subscribe(
+      res => {
+        console.log("CV sended correctly");
+        alert('Success!!');
+      },
+      error => {
+        console.log("error sending CV data");
+        alert('Error sending data!!!');
+      }
+    );
+
+
+    //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.dynamicForm.value, null, 4) + JSON.stringify(this.dynamicFormWorks.value, null, 4) + JSON.stringify(this.dynamicFormEducations.value, null, 4));
+}
+
 
 }
