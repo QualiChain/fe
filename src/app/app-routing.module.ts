@@ -25,7 +25,8 @@ const routes: Routes = [
   {
    path: '',
    pathMatch: 'full',
-   component: HomeComponent
+   component: HomeComponent,
+   canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -33,35 +34,43 @@ const routes: Routes = [
    },
   {
    path: 'jobs',
-   component: JobsComponent
+   component: JobsComponent,
+   canActivate: [AuthGuard]
   },
   {
     path: 'jobs/create',
-    component: JobsAddComponent
+    component: JobsAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'jobs/edit/:id',
-    component: JobsEditComponent
+    component: JobsEditComponent,
+    canActivate: [AuthGuard]
   },  
   {
    path: 'cvs',
-   component: CvsComponent
+   component: CvsComponent,
+   canActivate: [AuthGuard]
   },
   {
    path: 'profiles',
-   component: ProfilesComponent
+   component: ProfilesComponent,
+   canActivate: [AuthGuard]
   },
   {
     path: 'profiles/:id',
-    component: ProfilesViewComponent
+    component: ProfilesViewComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profiles/:id/best-carrer-options',
-    component: BestCarrerOptionsComponent
+    component: BestCarrerOptionsComponent,
+    canActivate: [AuthGuard]
   },  
   {
     path: 'profiles/:id/carrer-advisor',
-    component: CarrerAdvisorComponent
+    component: CarrerAdvisorComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'recruitment',
