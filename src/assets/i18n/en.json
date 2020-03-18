@@ -59,5 +59,9 @@
   },
   "RECRUITMENT"  : {
     "TITLE": "Recruitment"
+  },
+  "ACCESS_DENIED": {
+    "TITLE": "ACCESS DENIED",
+    "BODY": "Some contents of this site is restricted and you don't have enough permissions to access it."
   }
 }

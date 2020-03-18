@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { HomeComponent } from './home/home.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CvsComponent } from './cvs/cvs.component';
 import { ProfilesComponent } from './profiles/profiles.component';
@@ -63,6 +64,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FooterComponent,
     JobsComponent,
     HomeComponent,
+    AccessDeniedComponent,
     CvsComponent,
     ProfilesComponent,
     RecruitmentComponent,
