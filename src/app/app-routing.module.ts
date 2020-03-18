@@ -16,6 +16,7 @@ import {RecruitmentViewComponent} from './recruitment-view/recruitment-view.comp
 import {BestCarrerOptionsComponent} from './best-carrer-options/best-carrer-options.component';
 import {CarrerAdvisorComponent} from './carrer-advisor/carrer-advisor.component';
 import { LoginComponent } from './login/login.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
@@ -73,6 +74,10 @@ const routes: Routes = [
     component: RecruitmentViewComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.recruiter, Role.admin] }    
+  },
+  {
+    path: 'access_denied',
+    component: AccessDeniedComponent
   },
   { path: '**', redirectTo: '' }
   ];
