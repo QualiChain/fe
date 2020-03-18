@@ -13,8 +13,8 @@ import { environment } from './../../environments/environment';
 })
 export class CVService {
  
-  //uri = environment.cvUrl;
-  uri = 'http://localhost:4000/cvs';
+  uri = environment.cvUrl;
+  //uri = 'http://localhost:4000/cvs';
 
  
 
