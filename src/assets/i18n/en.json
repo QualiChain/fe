@@ -20,6 +20,15 @@
     "TITLE": "Home",
     "BODY": "This is the home page of the QualiChain FE"
   },
+  "LOGIN": {
+    "TITLE": "Login",
+    "INVALID_CREDENTIALS_MESSAGE": "Invalid credentials",
+    "USERNAME": "Username",
+    "USERNAME_HELP": "Username is required and needs to be at least 3 characters long.",
+    "PASSWORD": "Password",
+    "PASSWORD_HELP": "Password is required and needs to be at least 3 characters long.",
+    "LOGIN_BUTTON": "Login"
+  },  
   "JOBS": {
     "TITLE": "Jobs"
   },

@@ -20,6 +20,15 @@
     "TITLE": "Home",
     "BODY": "Esta é a página inicial do QualiChain FE"
   },
+  "LOGIN": {
+    "TITLE": "Login",    
+    "INVALID_CREDENTIALS_MESSAGE": "Credenciais inválidas",
+    "USERNAME": "Nome de usuário",
+    "USERNAME_HELP": "O nome de usuário é obrigatório e precisa ter pelo menos três caracteres.",
+    "PASSWORD": "Senha",
+    "PASSWORD_HELP": "A senha é necessária e precisa ter pelo menos três caracteres.",
+    "LOGIN_BUTTON": "Login"
+  },  
   "JOBS": {
     "TITLE": "Empregos"
   },
