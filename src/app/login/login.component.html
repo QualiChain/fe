@@ -1,4 +1,4 @@
-<h1>Login</h1>
+<h1>{{ 'LOGIN.TITLE' | translate }}</h1>
 
       <div class="alert alert-info">
         <strong>Valid credentials for a student</strong> - U: student P: student<br>
@@ -6,16 +6,16 @@
       </div>
 
       <div *ngIf="invalidCredentials" class="alert alert-danger" role="alert">
-          Invalid credentials<br>
+        {{ 'LOGIN.INVALID_CREDENTIALS_MESSAGE' | translate }}<br>
         </div>
 
       <div class="card-body">
 
-      <form (ngSubmit)="processForm()">
+      <form #formLogin="ngForm" (ngSubmit)="processForm()">
           <!-- name -->
           
-          <div class="form-group field">
-              <label>Username</label>
+          <div class="form-group field" [class.has-error]="usernameInput.invalid">
+              <label>{{ 'LOGIN.USERNAME' | translate }}</label>
             <input 
               type="text" 
               name="username" 
@@ -25,29 +25,28 @@
               required
               minlength="3"
               #usernameInput="ngModel">
-            <div class="help is-error" *ngIf="usernameInput.invalid && usernameInput.dirty">
-              Username is required and needs to be at least 3 characters long.
+            <div class="help is-error alert-warning" *ngIf="(usernameInput.invalid && usernameInput.dirty)  || (!name)">
+              {{ 'LOGIN.USERNAME_HELP' | translate }}
             </div>
           </div>
           <!-- email -->
-          <div class="form-group field">  
-              <label>Password</label>        
+          <div class="form-group field" [class.has-error]="passwordInput.invalid">  
+              <label>{{ 'LOGIN.PASSWORD' | translate }}</label>        
             <input 
               type="password" 
-              name="password" 
+              name="password"               
               class="form-control password" 
               placeholder="Your Password" 
               [(ngModel)]="password"
               required
               minlength="3"
               #passwordInput="ngModel">
-            <div class="help is-error" *ngIf="passwordInput.invalid && passwordInput.dirty">
-              Password is required and needs to be at least 3 characters long.
+            <div class="help is-error alert-warning" *ngIf="(passwordInput.invalid && passwordInput.dirty) || (!password)">
+              {{ 'LOGIN.PASSWORD_HELP' | translate }}
             </div>
           </div>
           
-          
-          <button type="submit" class="button is-danger is-large">Login</button>
+          <button type="submit" class="button is-danger is-large" [disabled]="formLogin.invalid">{{ 'LOGIN.LOGIN_BUTTON' | translate }}</button>
 
         </form>      
 
