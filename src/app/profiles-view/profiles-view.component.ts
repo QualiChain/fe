@@ -29,7 +29,8 @@ export class ProfilesViewComponent implements OnInit {
   currentJustify: string;
   listOfCoursesByUser: {};
   selectedCourse: {};
-
+  
+  userId = '';
   visible = true;
   selectable = true;
   removable = true;
@@ -93,6 +94,13 @@ export class ProfilesViewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      const id = +params.id;
+      if (id && id > 0) {
+        this.userId=String(id);
+      }
+    });
 
     this.dynamicForm = this.formBuilder.group({
       Skills: new FormArray([])
@@ -170,9 +178,9 @@ export class ProfilesViewComponent implements OnInit {
   addFormGroupItem(e, type) {
     if (type=='skillitem') {
       this.t.push(this.formBuilder.group({
+        SkillLabel: ['', [Validators.required]],
         proficiencyLevel: ['', Validators.required],
-        skillLabel: ['', [Validators.required]],
-        description: ['', [Validators.required]],      
+        SkillComment: ['', [Validators.required]],      
       }));
     }
     else if (type=='workitem') {
@@ -188,6 +196,7 @@ export class ProfilesViewComponent implements OnInit {
         title: ['', Validators.required],
         from: ['', [Validators.required]],
         to: ['', [Validators.required]],
+        organisation: ['', [Validators.required]],
         description: ['', [Validators.required]],
       }));
     }
@@ -195,6 +204,7 @@ export class ProfilesViewComponent implements OnInit {
 
   }
 
+  PersonURI: string;
   title: string;
   description: string;
   targetSector: string;
@@ -218,6 +228,7 @@ export class ProfilesViewComponent implements OnInit {
     }
     
     var dataToSend = {
+      'PersonURI': this.userId,
       'title':this.title,
       'description': this.description,
       'targetSector': this.targetSector,
