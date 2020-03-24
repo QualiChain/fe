@@ -73,5 +73,9 @@
   "ACCESS_DENIED": {
     "TITLE": "ACESSO NEGADO",
     "BODY": "Alguns conteúdos deste site são restritos e você não tem permissões suficientes para acessá-lo."
-  }
+  },
+  "RECOMENDED_COURSES": {
+    "TITLE": "Recommended courses",
+    "LEARN_MORE": "Learn more"
+  }  
 }

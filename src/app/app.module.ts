@@ -50,6 +50,7 @@ import { ProfilesViewComponent } from './profiles-view/profiles-view.component';
 import { RecruitmentViewComponent } from './recruitment-view/recruitment-view.component';
 import { BestCarrerOptionsComponent } from './best-carrer-options/best-carrer-options.component';
 import { CarrerAdvisorComponent } from './carrer-advisor/carrer-advisor.component';
+import { RecomendedCoursesComponent } from './recomended-courses/recomended-courses.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -77,7 +78,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ProfilesViewComponent,
     RecruitmentViewComponent,
     BestCarrerOptionsComponent,
-    CarrerAdvisorComponent
+    CarrerAdvisorComponent,
+    RecomendedCoursesComponent
   ],
   imports: [
     BrowserModule,

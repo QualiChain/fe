@@ -72,5 +72,9 @@
   "ACCESS_DENIED": {
     "TITLE": "ACCESS DENIED",
     "BODY": "Some contents of this site is restricted and you don't have enough permissions to access it."
-  }
+  },
+  "RECOMENDED_COURSES": {
+    "TITLE": "Recommended courses",
+    "LEARN_MORE": "Learn more"
+  }  
 }

@@ -72,5 +72,9 @@
   "ACCESS_DENIED": {
     "TITLE": "ΔΕΝ ΕΠΙΤΡΕΠΕΤΑΙ Η ΠΡΟΣΒΑΣΗ",
     "BODY": "Ορισμένα περιεχόμενα αυτού του ιστότοπου είναι περιορισμένα και δεν έχετε αρκετά δικαιώματα πρόσβασης."
-  }
+  },
+  "RECOMENDED_COURSES": {
+    "TITLE": "Recommended courses",
+    "LEARN_MORE": "Learn more"
+  }  
 }
