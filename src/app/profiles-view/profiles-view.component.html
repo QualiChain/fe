@@ -1,8 +1,14 @@
 
 <h1 *ngIf="userdata.role=='Student'">{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
 <h1 *ngIf="userdata.role=='Teacher'">{{ 'PROFILES.TEACHER_PROFILE' | translate }}</h1>
+
+
 <div class="container">
-    <div class="row">
+
+  <div class="row">
+    <div class="col" [ngClass]="{'col-lg-8': userdata.role=='Student'}">
+
+      <div class="row">
         <div class="col col-lg-8">
             <div class="username"><span>{{ 'PROFILES.USERNAME' | translate }}:</span> {{userdata.username}}</div>            
             <div class="fullname"><span>{{ 'PROFILES.NAME' | translate }}:</span> {{userdata.name}}</div>
@@ -271,6 +277,14 @@
       </div>
 
     </div>
+      
+    </div>
+    <div class="col col-lg-4" *ngIf="userdata.role=='Student'">
+      <app-recomended-courses></app-recomended-courses>
+    </div>
+  </div>
+
+
 
 
 
