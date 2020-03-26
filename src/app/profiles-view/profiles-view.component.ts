@@ -30,8 +30,20 @@ export class ProfilesViewComponent implements OnInit {
   submitted = false;
 
   //userdata: {};
+  /*
   userdata: {name: '', surname: '', email: '', username: '', id: 0 , avatar_path: '', university:'', role:''};
-  
+  */
+  userdata: {
+    id: number;
+    name: string;
+    surname: string;
+    email: string;
+    username: string;
+    avatar_path?: string;
+    university?: string;
+    role?: string
+};
+
   years: {};
   currentJustify: string;
   listOfCoursesByUser: {};
