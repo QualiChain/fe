@@ -11,6 +11,11 @@ import {map, startWith} from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { CVService } from '../_services/cv.service';
 
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 @Component({
   selector: 'app-profiles-view',
   templateUrl: './profiles-view.component.html',
@@ -24,7 +29,9 @@ export class ProfilesViewComponent implements OnInit {
 
   submitted = false;
 
-  userdata: {};
+  //userdata: {};
+  userdata: {name: '', surname: '', email: '', username: '', id: 0 , avatar_path: '', university:'', role:''};
+  
   years: {};
   currentJustify: string;
   listOfCoursesByUser: {};
@@ -94,6 +101,7 @@ export class ProfilesViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    
 
     this.route.params.subscribe(params => {
       const id = +params.id;
@@ -135,6 +143,13 @@ export class ProfilesViewComponent implements OnInit {
       ]
 
       this.userdata = listOfUsers[params['id']-1];
+      if (this.userdata.avatar_path=='') {
+        this.userdata.avatar_path = 'assets/img/no_avatar.jpg';
+        
+      }
+
+            
+
       this.years = [1,2,3,4,5];
       this.currentJustify = 'fill';
       this.listOfCoursesByUser = listOfCoursesByUser;
@@ -152,6 +167,86 @@ export class ProfilesViewComponent implements OnInit {
     */
 
   }
+
+  getBase64ImageFromURL(url) {
+    if (url=='') {
+      url = 'assets/img/no_avatar.jpg';
+    }
+    
+      return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.setAttribute("crossOrigin", "anonymous");
+        img.onload = () => {
+          var canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+          var dataURL = canvas.toDataURL("image/png");
+          resolve(dataURL);
+        };
+        img.onerror = error => {
+          reject(error);
+        };
+        img.src = url;
+      });
+  
+  }
+  
+
+ 
+async generatePdf(action = 'open') {
+  let docDefinition = {
+    content: [
+      {
+        text: 'PROFILE',
+        bold: true,
+        fontSize: 20,
+        alignment: 'center',
+        margin: [0, 0, 0, 20]
+      },
+      {
+        columns: [
+          [{
+            text: 'Username : ' + this.userdata.username
+          },
+          {
+            text: 'Name: ' + this.userdata.name
+          },
+          {
+            text: 'Surname: ' + this.userdata.surname
+          },      
+          {
+            text: 'Email : ' + this.userdata.email
+          }],
+          [ 
+            {image: await this.getBase64ImageFromURL(
+              this.userdata.avatar_path
+            ),
+            width: 150
+            }]
+         ]
+
+        
+      }        
+    ]
+  };
+
+  //pdfMake.createPdf(docDefinition).open();
+  switch (action) {
+    case 'open': pdfMake.createPdf(docDefinition).open();    
+    break;
+    case 'print': pdfMake.createPdf(docDefinition).print(); 
+    break;
+    case 'download':     
+    pdfMake.createPdf(docDefinition).download(); 
+    break;
+    default: pdfMake.createPdf(docDefinition).open(); 
+    break;
+  }
+}
+
+
 
   // convenience getters for easy access to form fields
   get fC() { return this.dynamicForm.controls; }  

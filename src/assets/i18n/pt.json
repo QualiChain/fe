@@ -77,5 +77,10 @@
   "RECOMENDED_COURSES": {
     "TITLE": "Recommended courses",
     "LEARN_MORE": "Learn more"
-  }  
+  },
+  "BUTTON": {
+    "OPEN_PDF": "Open PDF",
+    "DOWNLOAD_PDF": "Download PDF",
+    "PRINT_PDF": "Print PDF"
+  }
 }
