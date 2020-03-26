@@ -2,22 +2,26 @@
 <h1 *ngIf="userdata.role=='Student'">{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
 <h1 *ngIf="userdata.role=='Teacher'">{{ 'PROFILES.TEACHER_PROFILE' | translate }}</h1>
 
-<button class="btn btn-primary" (click)="generatePdf('open')">
-  
-  <i _ngcontent-axy-c0="" class="material-icons"> picture_as_pdf </i> {{ 'BUTTON.OPEN_PDF' | translate }}
-</button>
-<button class="btn btn-primary" (click)="generatePdf('download')">
-  <i _ngcontent-axy-c0="" class="material-icons"> cloud_download </i>
-  {{ 'BUTTON.DOWNLOAD_PDF' | translate }}
-</button>
-<button class="btn btn-primary" (click)="generatePdf('print')">
-  <i _ngcontent-axy-c0="" class="material-icons"> print </i>
-  {{ 'BUTTON.PRINT_PDF' | translate }}
-</button>
+
 
 
 <div class="container">
 
+  <div class="row">
+    <button class="btn btn-primary" (click)="generatePdf('open')">  
+      <i _ngcontent-axy-c0="" class="material-icons"> picture_as_pdf </i> {{ 'BUTTON.OPEN_PDF' | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="generatePdf('download')">
+      <i _ngcontent-axy-c0="" class="material-icons"> cloud_download </i>
+      {{ 'BUTTON.DOWNLOAD_PDF' | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="generatePdf('print')">
+      <i _ngcontent-axy-c0="" class="material-icons"> print </i>
+      {{ 'BUTTON.PRINT_PDF' | translate }}
+    </button>
+  </div>
+  <div class="row"><br></div>
+  
   <div class="row">
     <div class="col" [ngClass]="{'col-lg-8': userdata.role=='Student'}">
 
