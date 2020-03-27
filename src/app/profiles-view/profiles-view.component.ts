@@ -14,7 +14,7 @@ import { CVService } from '../_services/cv.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profiles-view',
@@ -47,7 +47,14 @@ export class ProfilesViewComponent implements OnInit {
   years: {};
   currentJustify: string;
   listOfCoursesByUser: {};
-  selectedCourse: {};
+  //selectedCourse: {};
+  selectedCourse: {
+    id: number, 
+    title: string, 
+    description: string, 
+    related_skills: object, 
+    course_badges: object
+  };
   
   userId = '';
   visible = true;
@@ -63,7 +70,7 @@ export class ProfilesViewComponent implements OnInit {
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService) { 
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
@@ -165,7 +172,13 @@ export class ProfilesViewComponent implements OnInit {
       this.years = [1,2,3,4,5];
       this.currentJustify = 'fill';
       this.listOfCoursesByUser = listOfCoursesByUser;
-      this.selectedCourse = {};
+      this.selectedCourse = {
+        id: 0, 
+        title: '', 
+        description: '', 
+        related_skills: [], 
+        course_badges: []
+      };
 
     });
     /*
@@ -211,7 +224,7 @@ async generatePdf(action = 'open') {
   let docDefinition = {
     content: [
       {
-        text: 'PROFILE',
+        text: this.translate.instant('PROFILES.PROFILE'),
         bold: true,
         fontSize: 20,
         alignment: 'center',
@@ -220,16 +233,16 @@ async generatePdf(action = 'open') {
       {
         columns: [
           [{
-            text: 'Username : ' + this.userdata.username
+            text: this.translate.instant('PROFILES.USERNAME')+' : ' + this.userdata.username
           },
           {
-            text: 'Name: ' + this.userdata.name
+            text: this.translate.instant('PROFILES.NAME')+': ' + this.userdata.name
           },
           {
-            text: 'Surname: ' + this.userdata.surname
+            text: this.translate.instant('PROFILES.SURNAME')+': ' + this.userdata.surname
           },      
           {
-            text: 'Email : ' + this.userdata.email
+            text: this.translate.instant('PROFILES.EMAIL')+': ' + this.userdata.email
           }],
           [ 
             {image: await this.getBase64ImageFromURL(
