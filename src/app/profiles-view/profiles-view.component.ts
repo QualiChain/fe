@@ -222,38 +222,96 @@ export class ProfilesViewComponent implements OnInit {
  
 async generatePdf(action = 'open') {
   let docDefinition = {
-    content: [
+    footer: function(currentPage, pageCount) {
+      return {
+          margin:10,
+          columns: [          
+          {
+              fontSize: 9,
+              text:[
+              {
+              text: '--------------------------------------------------------------------------' +
+              '\n',
+              margin: [0, 20]
+              },
+              {
+              text: '© QualiChain. ' + currentPage.toString() + ' of ' + pageCount,
+              }
+              ],
+              alignment: 'center',
+              color: '#0e3664'
+          }
+          ]
+      };
+  },
+    header: {
+      margin: 10,
+      columns: [
+          {
+              // usually you would use a dataUri instead of the name for client-side printing
+              // sampleImage.jpg however works inside playground so you can play with it
+              image: await this.getBase64ImageFromURL(
+                '/assets/img/qualichain-icon-white.png'
+              ),
+              width: 20,
+              margin: [40, 0, 0, 0],
+          },
+          {
+              margin: [0, 0, 40, 0],
+              text: 'QualiChain',
+              color: '#0e3664',
+              alignment: 'right',
+          }
+      ]
+  },
+    content: [      
       {
         text: this.translate.instant('PROFILES.PROFILE'),
         bold: true,
         fontSize: 20,
         alignment: 'center',
-        margin: [0, 0, 0, 20]
+        margin: [0, 0, 0, 20],
+        color: '#0e3664'
       },
       {
+        canvas: [
+            {
+                type: 'line',
+                lineColor: '#0e3664',
+                x1: 0,
+                y1: -10,
+                x2: 520,
+                y2: -10,
+                lineWidth: 5,
+            }
+        ]
+    },
+      {
         columns: [
-          [{
-            text: this.translate.instant('PROFILES.USERNAME')+' : ' + this.userdata.username
+          [
+            {
+              text: " "
+           },
+          {
+            text: this.translate.instant('PROFILES.USERNAME')+' : ' + this.userdata.username, color: '#0e3664'
           },
           {
-            text: this.translate.instant('PROFILES.NAME')+': ' + this.userdata.name
+            text: this.translate.instant('PROFILES.NAME')+': ' + this.userdata.name, color: '#0e3664'
           },
           {
-            text: this.translate.instant('PROFILES.SURNAME')+': ' + this.userdata.surname
+            text: this.translate.instant('PROFILES.SURNAME')+': ' + this.userdata.surname, color: '#0e3664'
           },      
           {
-            text: this.translate.instant('PROFILES.EMAIL')+': ' + this.userdata.email
+            text: this.translate.instant('PROFILES.EMAIL')+': ' + this.userdata.email, color: '#0e3664'
           }],
           [ 
             {image: await this.getBase64ImageFromURL(
               this.userdata.avatar_path
             ),
-            width: 150
+            height: 100
             }]
-         ]
-
-        
-      }        
+         ]      
+      }      
     ]
   };
 
