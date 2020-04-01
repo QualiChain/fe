@@ -182,7 +182,7 @@
                                   <div class="courseActions">
                                       <div class="col-lg-6">
 
-                                          <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</button>
+                                          <a [routerLink]="['/courses', course.id,'edit']" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</a>
 
                                       </div>
                                        <div class="col-lg-6"></div>
