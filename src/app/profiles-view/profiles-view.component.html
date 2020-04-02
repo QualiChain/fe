@@ -179,17 +179,16 @@
                                         </div>                                        
                                   </div>
                                   <div>&nbsp; </div>                                  
-                                  <div class="courseActions">
+                                  <div *ngIf="userdata.id==currentUser.id" class="courseActions">
                                       <div class="col-lg-6">
-
                                           <a [routerLink]="['/courses', course.id,'edit']" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</a>
-
                                       </div>
-                                       <div class="col-lg-6"></div>
+                                       <div class="col-lg-6">
 
-                                        <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-star-empty"></span> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}</button>
-                                       
+                                          <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-star-empty"></span> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}</button>
+                                      </div>
                                   </div>
+                                  <div *ngIf="userdata.id==currentUser.id">&nbsp; </div>
                               </div>
                             </div>
                           </div>

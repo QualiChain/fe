@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesEditComponent implements OnInit {
 
   courseForm: FormGroup;
-  course: any = {};
+  course: any = {id: 0, title: "", description: "", related_skills: [], course_badges: []};
   listOfCourses = [
     {id: 0, title: "", description: "", related_skills: [], course_badges: []},
     {id: 1, title: "An Introduction to Interactive Programming in Python (Part 1)", description: "This two-part course is designed to help students with very little or no computing background learn the basics of building simple interactive applications. Our language of choice, Python, is an easy-to learn, high-level computer language that is used in many of the computational courses offered on Coursera. To make learning Python easy, we have developed a new browser-based programming environment that makes developing interactive applications in Python simple. These applications will involve windows whose contents are graphical and respond to buttons, the keyboard and the mouse.", related_skills: ['Linux', 'Python 2', 'P3'], course_badges: ['b1', 'b2', 'b3']},
@@ -23,16 +23,20 @@ export class CoursesEditComponent implements OnInit {
   ]
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
-    this.createForm();
+    //this.createForm();
+    this.courseForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(10)]]
+    });
   }
-
+/*
   createForm() {
     this.courseForm = this.fb.group({
       title: ['', Validators.required ],
       description: ['', Validators.required ]
     });
   }
-
+*/
   ngOnInit() {
     this.route.params.subscribe(params => {
 
