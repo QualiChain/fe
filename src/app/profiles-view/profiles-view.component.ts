@@ -15,6 +15,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import {TranslateService} from '@ngx-translate/core';
+import { AuthService } from '../_services';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-profiles-view',
@@ -23,6 +25,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class ProfilesViewComponent implements OnInit {
 
+  currentUser: User;
   dynamicForm: FormGroup;
   dynamicFormWorks: FormGroup;
   dynamicFormEducations: FormGroup;
@@ -70,7 +73,9 @@ export class ProfilesViewComponent implements OnInit {
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+  constructor(private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),

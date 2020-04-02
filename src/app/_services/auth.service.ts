@@ -66,7 +66,17 @@ export class AuthService {
       
       this.currentUserSubject.next(myAuthObj);
     }
-    
+    else if ((username=="teacher") && (password=="teacher")) {
+
+
+      myAuthObj = { authenticated: true,  password:'******', name: 'Pointy-Haired Boss', 
+      surname: 'Adams', email: 'phb@qualichain-project.euu', 
+      username: 'phb', id: 2 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', 'role': 'teacher'};
+      
+      localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
+      
+      this.currentUserSubject.next(myAuthObj);
+    }
 
     return this.httpClient.post(`${this.uri}`, obj).
     pipe(

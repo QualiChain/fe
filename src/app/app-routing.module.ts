@@ -89,7 +89,7 @@ const routes: Routes = [
     path: 'courses/:id/edit',
     component: CoursesEditComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.teacher, Role.admin] }    
+    data: { roles: [Role.teacher, Role.admin] }    
   },  
   {
     path: 'access_denied',

@@ -2,18 +2,17 @@
 
 <div class="card">
     <div class="card-body">
-        <form [formGroup]="courseForm" novalidate>
+
+        <form [formGroup]="courseForm">
             <div class="form-group">
-                <label class="col-md-4">Course Title</label>   
-                <input [(ngModel)]="course.title"  #title  class="form-control" [ngModelOptions]="{standalone: true}" />
+                <label for="title" class="col-md-4">Course Title</label>   
+                <input [(ngModel)]="course.title" formControlName="title" id="title" placeholder="Title" class="form-control input" />
             </div>
  
             <div class="form-group">
-                <label class="col-md-4">Course Description</label>   
-                <input [(ngModel)]="course.description"  class="form-control" [ngModelOptions]="{standalone: true}" />
+                <label for="description" class="col-md-4">Course Description</label>  
+                <textarea [(ngModel)]="course.description" formControlName="description" id="description" placeholder="Description" class="form-control input"></textarea> 
             </div>
-            
- 
 
             <div class="form-group">
                 <button  type="submit" class="btn btn-primary"
