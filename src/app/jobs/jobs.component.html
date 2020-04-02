@@ -1,7 +1,9 @@
 <h1>{{ 'JOBS.TITLE' | translate }}</h1>
 
 <div class="">
-  <a [routerLink]="['/jobs/create']" class="btn btn-primary">Create Job</a>      
+  <a [routerLink]="['/jobs/create']" class="btn btn-primary">Create Job</a>
+  &nbsp;     
+  <button class="btn btn-primary" (click)="exportExcel()">Export excel </button>
 </div>
 
 
