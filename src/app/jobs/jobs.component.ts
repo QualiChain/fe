@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 
 import Job from '../_models/Job';
 import { JobsService } from '../_services/jobs.service';
+import { ExcelServiceService } from '../_services/excel/excel-service.service';
 
 export interface AvailableJobs {
   id: number;
@@ -62,7 +63,7 @@ export class JobsComponent implements OnInit {
   }
 
   jobs: Job[];
-  constructor(private js: JobsService) { }
+  constructor(private js: JobsService, private excelService:ExcelServiceService) { }
   jobsList = [];
 
   ngOnInit() {
@@ -79,6 +80,10 @@ export class JobsComponent implements OnInit {
 
     
 
+  }
+
+  exportExcel(){    
+    this.excelService.exportAsExcelFile(ELEMENT_DATA, 'list_of_jobs');
   }
 
 }
