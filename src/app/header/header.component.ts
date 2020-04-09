@@ -29,7 +29,7 @@ export interface OPTIONS_MENU {
 const ELEMENT_DATA: OPTIONS_MENU[] =[
   {id: 1, label: 'MENU.HOME', route: '', public: true},
   {id: 2, label: 'MENU.JOBS', route: '/jobs', public: false},
-  {id: 3, label: 'MENU.CVS', route: '/cvs', public: false},
+  //{id: 3, label: 'MENU.CVS', route: '/cvs', public: false},
   {id: 4, label: 'MENU.PROFILES', route: '/profiles', public: false}
 ];
 

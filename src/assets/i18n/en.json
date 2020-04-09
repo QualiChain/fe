@@ -68,7 +68,19 @@
     "AWARD_SMART_BADGE": "Award Smart Badge"
   },
   "RECRUITMENT"  : {
-    "TITLE": "Recruitment"
+    "TITLE": "Recruitment",
+    "SEARCH_LABEL" : "Job name",
+    "CV-JOB-MATCHING": "CV-JOB Matching",
+    "NAME": "Name",
+    "ROLE_APPLIED": "Role applied",
+    "AVAILABLE_AT": "Availabe at",
+    "EXPECTED_SALARY": "Expected Salary",
+    "MATCHING_SCORE": "Matching Score",
+    "CV": "CV",
+    "BUTTON" : {
+      "VIEW_CV": "View CV",
+      "SEARCH": "Search"
+    }
   },
   "ACCESS_DENIED": {
     "TITLE": "ACCESS DENIED",
