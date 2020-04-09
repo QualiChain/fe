@@ -89,5 +89,26 @@ export class AuthService {
     }
 
 
+    requestpassword(email) {
+      const obj = { email: email};
+      //console.log(obj);
+      
+      //let myAuthObj = {};
+      let myAuthObj=  new User;
+         
+      return this.httpClient.post(`${this.uri}`+"/requestpassword", obj).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+      }
 
 }
+
+
+
+
+

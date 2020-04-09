@@ -10,7 +10,7 @@
     "JOBS": "Jobs",
     "CVS": "Cvs",
     "PROFILES": "Profiles",
-    "LOGIN": "Login",
+    "LOGIN": "Log in",
     "LOGOUT": "Logout",
     "WELCOME_MESSAGE": "Welcome",
     "PROFILE": "Profile",
@@ -21,13 +21,24 @@
     "BODY": "This is the home page of the QualiChain FE"
   },
   "LOGIN": {
-    "TITLE": "Login",
+    "TITLE": "Welcome to QualiChain",
+    "TAB": {
+      "LOGIN": "Log in",
+      "REQUEST_YOUR_PASSWORD": "Request your password"
+    },
     "INVALID_CREDENTIALS_MESSAGE": "Invalid credentials",
     "USERNAME": "Username",
     "USERNAME_HELP": "Username is required and needs to be at least 3 characters long.",
     "PASSWORD": "Password",
     "PASSWORD_HELP": "Password is required and needs to be at least 3 characters long.",
-    "LOGIN_BUTTON": "Login"
+    "EMAIL": "Your email address",
+    "EMAIL_HELP": "Write your email here",
+    "VALID_REQUEST_CREDANTIALS_MESSAGE": "The request has been done.",
+    "INVALID_REQUEST_CREDANTIALS_MESSAGE": "The request has not been done.",
+    "BUTTON": {
+      "LOGIN": "Log in",
+      "SUBMIT": "Submit"
+    }
   },  
   "JOBS": {
     "TITLE": "Jobs"

@@ -21,13 +21,25 @@
     "BODY": "Αυτή είναι η αρχική σελίδα του QualiChain FE"
   },
   "LOGIN": {
-    "TITLE": "Login",
+    "TITLE": "Welcome to QualiChain",
+    "TAB": {
+      "LOGIN": "Log in",
+      "REQUEST_YOUR_PASSWORD": "Request your password"
+    },    
+    "REQUEST_YOUR_PASSWORD": "Request your password",
     "INVALID_CREDENTIALS_MESSAGE": "Μη έγκυρα διαπιστευτήρια",
     "USERNAME": "Όνομα χρήστη",
     "USERNAME_HELP": "Το όνομα χρήστη απαιτείται και πρέπει να έχει μήκος τουλάχιστον 3 χαρακτήρων.",
     "PASSWORD": "Κωδικός πρόσβασης",
     "PASSWORD_HELP": "Ο κωδικός πρόσβασης απαιτείται και πρέπει να έχει μήκος τουλάχιστον 3 χαρακτήρων.",
-    "LOGIN_BUTTON": "Login"
+    "EMAIL": "Your email address",
+    "EMAIL_HELP": "Write your email here",
+    "VALID_REQUEST_CREDANTIALS_MESSAGE": "The request has been done.",
+    "INVALID_REQUEST_CREDANTIALS_MESSAGE": "The request has not been done.",
+    "BUTTON": {
+      "LOGIN": "Log in",
+      "SUBMIT": "Submit"
+    }
   },  
   "JOBS": {
     "TITLE": "Εργασία"

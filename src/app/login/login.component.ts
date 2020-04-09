@@ -14,7 +14,10 @@ export class LoginComponent implements OnInit {
 
   name: string;
   password: string;
+  email: string;
   invalidCredentials: boolean;
+  requestPasswordError: boolean;
+  requestPasswordConfirmation: boolean;
   loginData : {}
   
   constructor(private modalService: ModalService, private el: ElementRef, private router: Router, private ls: AuthService) { 
@@ -54,12 +57,25 @@ export class LoginComponent implements OnInit {
   }
 
 
-
   /**
    * Process the form we have. Send to whatever backend
    * Only alerting for now
    */
 
+  processFormRequestPassword() {
+    this.requestPasswordError = false;
+    this.requestPasswordConfirmation = false;
+    this.ls.requestpassword(this.email).subscribe(
+      res => {
+        console.log("Request OK");
+        this.requestPasswordConfirmation = true;
+      },
+      error => {
+        console.log("Error requesting password");
+        this.requestPasswordError = true;
+      }
+    );
+  }
 
   processForm() {
     //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
