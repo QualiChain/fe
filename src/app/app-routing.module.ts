@@ -48,11 +48,11 @@ const routes: Routes = [
     component: JobsEditComponent,
     canActivate: [AuthGuard]
   },  
-  {
-   path: 'cvs',
-   component: CvsComponent,
-   canActivate: [AuthGuard]
-  },
+  //{
+  // path: 'cvs',
+  // component: CvsComponent,
+  // canActivate: [AuthGuard]
+  //},
   {
    path: 'profiles',
    component: ProfilesComponent,

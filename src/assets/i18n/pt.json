@@ -69,7 +69,19 @@
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"    
   },
   "RECRUITMENT"  : {
-    "TITLE": "Recrutamento"
+    "TITLE": "Recrutamento",
+    "SEARCH_LABEL" : "Job name",
+    "CV-JOB-MATCHING": "Correspondência CV-JOB",
+    "NAME": "Nome",
+    "ROLE_APPLIED": "Função aplicada",
+    "AVAILABLE_AT": "Disponível em",
+    "EXPECTED_SALARY": "Salário esperado",
+    "MATCHING_SCORE": "Matching Score",
+    "CV": "CV",
+    "BUTTON" : {
+      "VIEW_CV": "View CV",
+      "SEARCH": "Search"
+    }
   },
   "ACCESS_DENIED": {
     "TITLE": "ACESSO NEGADO",

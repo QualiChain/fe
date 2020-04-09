@@ -1,0 +1,10 @@
+.wrapperbarchart {
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+  }
+
+.recruitmenttable td 
+{
+    vertical-align: middle;
+}

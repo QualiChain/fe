@@ -1,20 +1,43 @@
 <h1>{{ 'RECRUITMENT.TITLE' | translate }}</h1>
 
-
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<div>
+  <form #formSearch="ngForm" (ngSubmit)="processSeacrhJobForm()">
+    <div class="form-group field" [class.has-error]="seachJobTextInputModel.invalid">
+        <label>{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}</label>
+      <input       
+        type="text" 
+        name="searchtext" 
+        class="form-control input" 
+        placeholder="{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}" 
+        [(ngModel)]="seachJobTextInput"
+        required
+        minlength="3"
+        #seachJobTextInputModel="ngModel">    
+    </div>  
+    <button type="submit" class="button is-danger is-large" [disabled]="formSearch.invalid">{{ 'RECRUITMENT.BUTTON.SEARCH' | translate }}</button>
+  </form>
+</div>
 
 <div class="">  
-<table mat-table [dataSource]="dataSource" matSort class="table">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div class="">
+
+<table mat-table [dataSource]="dataSource" matSort class="table table-bordered row-border hover recruitmenttable">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <th mat-header-cell *matHeaderCellDef> {{ 'RECRUITMENT.CV' | translate }} </th>
           <td mat-cell *matCellDef="let element">
-            <a [routerLink]="['/recruitment', element.id]" class="btn btn-primary">View</a> 
+            <!--
+            <a [routerLink]="['/recruitment', element.id]" class="btn btn-primary">View CV</a> 
+            -->
+            <a [routerLink]="['/profiles', element.id]" class="btn btn-primary">View CV</a> 
             
           </td>
         </ng-container>
@@ -26,11 +49,44 @@
   </ng-container>
 
   <!-- title Column -->
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'RECRUITMENT.NAME' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
  
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'RECRUITMENT.ROLE_APPLIED' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="available">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'RECRUITMENT.AVAILABLE_AT' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element.available}} </td>
+  </ng-container>
+    
+  <ng-container matColumnDef="expsalary">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'RECRUITMENT.EXPECTED_SALARY' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element.expsalary}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="score">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'RECRUITMENT.MATCHING_SCORE' | translate }} </th>
+    <td mat-cell *matCellDef="let element">
+      <div class="wrapperbarchart">
+        <canvas baseChart
+          [datasets]="[{ data: [element.score,(100-element.score)],label: 'Matching Score', backgroundColor: [
+          'rgba(0, 0, 0, 1)',
+          'rgba(30, 144, 255, 1)'
+      ]}]"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [chartType]="ChartType">
+        </canvas>
+      </div>
+    </td>
+  </ng-container>
+  
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
