@@ -1,5 +1,9 @@
 <h1>{{ 'RECRUITMENT.TITLE' | translate }}</h1>
 
+<div class="">
+  <button class="btn btn-primary" (click)="exportExcel()">{{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}</button>
+</div>
+<br/>
 <div>
   <form #formSearch="ngForm" (ngSubmit)="processSeacrhJobForm()">
     <div class="form-group field" [class.has-error]="seachJobTextInputModel.invalid">

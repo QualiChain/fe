@@ -3,6 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { MatchingService } from '../_services/matching.service';
+import { ExcelServiceService } from '../_services/excel/excel-service.service';
 
 @Component({
   selector: 'app-recruitment',
@@ -87,7 +88,8 @@ export class RecruitmentComponent implements OnInit {
       //public ChartType = 'bar';
   public ChartType = 'pie';
   
-  constructor(private matchingService: MatchingService) { }
+  
+  constructor(private matchingService: MatchingService, private excelService:ExcelServiceService) { }
 
   //displayedColumns: string[] = ['id', 'title', 'action'];
   displayedColumns: string[] = ['id', 'name', 'role', 'available', 'expsalary', 'score', 'action'];
@@ -103,6 +105,8 @@ export class RecruitmentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();    
   }
   
+  
+
   ngOnInit() {
     console.log(this.dataSource);
     this.dataSource.sort = this.sort;
@@ -157,7 +161,9 @@ export class RecruitmentComponent implements OnInit {
       
 }
 
-
+exportExcel(){    
+  this.excelService.exportAsExcelFile(this.listOfCandidates, 'list_of_candidates');
+}
 
 
 
