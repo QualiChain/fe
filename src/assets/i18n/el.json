@@ -105,6 +105,7 @@
   "BUTTON": {
     "OPEN_PDF": "Open PDF",
     "DOWNLOAD_PDF": "Download PDF",
-    "PRINT_PDF": "Print PDF"
+    "PRINT_PDF": "Print PDF",
+    "EXPORT_TO_EXCEL": "Export to Excel"
   }
 }
