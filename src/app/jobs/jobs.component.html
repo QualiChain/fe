@@ -1,7 +1,7 @@
 <h1>{{ 'JOBS.TITLE' | translate }}</h1>
 
 <div class="">
-  <a [routerLink]="['/jobs/create']" class="btn btn-primary">Create Job</a>
+  <a [routerLink]="['/jobs/add']" class="btn btn-primary">{{ 'JOBS.BUTTON.CREATE_JOB' | translate }}</a>
   &nbsp;     
   <button class="btn btn-primary" (click)="exportExcel()">{{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}</button>
 </div>
@@ -20,7 +20,7 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element">
-              <a [routerLink]="['/jobs/edit', element.id]" class="btn btn-primary">Edit</a> 
+              <a [routerLink]="['/jobs', element.id, 'edit']" class="btn btn-primary">Edit</a> 
               &nbsp;
               <a [routerLink]="" class="btn btn-danger">Delete</a>
             </td>

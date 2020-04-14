@@ -6,9 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { JobsComponent } from './jobs/jobs.component';
 
 import { JobsAddComponent } from './jobs-add/jobs-add.component';
-import { JobsEditComponent } from './jobs-edit/jobs-edit.component';
+//import { JobsEditComponent } from './jobs-edit/jobs-edit.component';
 
-import { CvsComponent } from './cvs/cvs.component';
+//import { CvsComponent } from './cvs/cvs.component';
 import { ProfilesComponent } from './profiles/profiles.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
 import {ProfilesViewComponent} from './profiles-view/profiles-view.component';
@@ -39,13 +39,14 @@ const routes: Routes = [
    canActivate: [AuthGuard]
   },
   {
-    path: 'jobs/create',
+    path: 'jobs/add',
     component: JobsAddComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'jobs/edit/:id',
-    component: JobsEditComponent,
+    path: 'jobs/:id/edit',
+    //component: JobsEditComponent,
+    component: JobsAddComponent,
     canActivate: [AuthGuard]
   },  
   //{

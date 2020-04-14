@@ -1,30 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
 
-  uri = 'http://localhost:4000/jobs';
+  //uri = 'http://localhost:4000/jobs';
+  private uriGet = environment.jobpostGet;
+  private uriPost = environment.jobpostUrl;
 
   constructor(private http: HttpClient) { }
 
-  addJob(JobName, JobDescription, JobPrice) {
+  addJob(Label, department, employmentType, level, JobDescription, SkillReq) {
     const obj = {
-      JobName,
+      Label,
+      department,
+      employmentType,
+      level,
       JobDescription,
-      JobPrice
+      SkillReq
     };
     //console.log(obj);
-    this.http.post(`${this.uri}/add`, obj)
+    this.http.post(`${this.uriPost}`, obj)
         .subscribe(res => console.log('Done'));
   }
 
   getJobs() {
     return this
            .http
-           .get(`${this.uri}`);
+           .get(`${this.uriGet}`);
   }
   
     getJobs2() {
@@ -50,6 +56,13 @@ export class JobsService {
       ]);
     }
 
+
+    getJob(jobId) {
+      return this
+             .http
+             .get(`${this.uriGet}/${jobId}`);
+    }
+
     editJob(id) {
       /*
       return this
@@ -59,15 +72,13 @@ export class JobsService {
              return({'id':id,'JobName':'Job name','JobDescription':'Job description','JobPrice':'22'})
     }
 
-      updateJob(JobName, JobDescription, JobPrice, id) {
+      updateJob(Label, department, employmentType, level, JobDescription, SkillReq, id) {
         const obj = {
-          JobName,
-          JobDescription,
-          JobPrice
+          Label, department, employmentType, level, JobDescription, SkillReq
         };
         this
           .http
-          .post(`${this.uri}/update/${id}`, obj)
+          .post(`${this.uriPost}/${id}`, obj)
           .subscribe(res => console.log('Done'));
     }
 }
