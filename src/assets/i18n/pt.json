@@ -26,7 +26,6 @@
       "LOGIN": "Log in",
       "REQUEST_YOUR_PASSWORD": "Request your password"
     },    
-    "REQUEST_YOUR_PASSWORD": "Request your password",
     "INVALID_CREDENTIALS_MESSAGE": "Credenciais inválidas",
     "USERNAME": "Nome de usuário",
     "USERNAME_HELP": "O nome de usuário é obrigatório e precisa ter pelo menos três caracteres.",
@@ -42,7 +41,84 @@
     }
   },  
   "JOBS": {
-    "TITLE": "Empregos"
+    "TITLE": "Empregos",
+    "REQUIRED_SKILLS": "Required Skills",
+    "BUTTON": {
+      "ADD_SKILL": "Add Skill",
+      "DELETE_SKILL": "Delete Skill",
+      "CREATE_JOB": "Create Job",
+      "UPDATE_JOB": "Update Job",
+      "CANCEL": "Cancel"
+    },
+    "CONFIRM_ACTION": "Confirm Action",
+    "CANCEL_MESSAGE": "Are you sure you want to do this?"
+  },
+  "JOB": {
+    "TITLE": {
+      "LABEL": "Title",
+      "PLACEHOLDER": "Position"
+    },
+    "DEPARTMENT": {
+      "LABEL": "Deparment",
+      "PLACEHOLDER": "Deparment"
+    },
+    "EMPLAYMENT_TYPE": {
+      "LABEL": "Employment type",
+      "PLACEHOLDER": "Selecione um",
+      "OPTIONS": {
+        "FULL_TIME": "Full-time",
+        "PART_TIME": "Part-time",
+        "CONTRACT": "Contract",
+        "TEMPORARY": "Temporary",
+        "VOLUNTEER": "Volunteer",
+        "INTERNSHIP": "Internership"
+      }
+    },    
+    "EMPLAYMENT_LEVEL": {
+      "LABEL": "Seniority Level",
+      "PLACEHOLDER": "Selecione um",
+      "OPTIONS": {
+        "INTERNERSHIP": "Internship",
+        "ENTITY_LEVEL": "Entry level",
+        "ASSOCIATE": "Associate",
+        "MID_SENIOR_LEVEL": "Mid-Senior level",
+        "DIRECTOR": "Director",
+        "EXECUTIVE": "Executive",
+        "NOT_APPLICABLE": "Not Applicable"
+      }
+    },
+    "EMPLAYMENT_DESCRIPTION": {
+      "LABEL": "Job Description",
+      "PLACEHOLDER": "Briefly explain the type of job you're offering."
+    },
+    "REQUIRED_SKILLS": {
+      "LABEL": "Required Skills"
+    },
+    "SKILL": {
+      "TITLE": "Skill",
+      "NAME" : {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Skill name"
+      },
+      "LEVEL" : {
+        "LABEL": "Level",
+        "PLACEHOLDER": "Selecione um",
+        "OPTIONS": {
+          "BASIC": "Basic",
+          "INTERMEDIATE": "Intermediate",
+          "ADVANCED": "Advanced"
+        }
+      },
+      "PRIORITY" : {
+        "LABEL": "Priority",
+        "PLACEHOLDER": "Selecione um",
+        "OPTIONS": {
+          "LOW": "Low",
+          "MEDIUM": "Medium",
+          "HIGH": "High"
+        }
+      }
+    }
   },
   "CVS": {
     "TITLE": "CVs"

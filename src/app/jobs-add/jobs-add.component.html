@@ -1,51 +1,130 @@
-<h1>{{ 'JOBS.TITLE' | translate }} - Add</h1>
+<h1>{{ 'JOBS.TITLE' | translate }} - <span *ngIf="mode=='Create'">Create</span><span *ngIf="mode=='Edit'">Edit</span></h1>
 
 <div class="card">
         <div class="card-body">
           <form [formGroup]="angForm" novalidate>
             <div class="form-group">
-              <label class="col-md-4">Job Name</label>
-              <input type="text" class="form-control" 
-                formControlName="JobName" 
-                #JobName />
+              <label class="col-md-4">{{ 'JOB.TITLE.LABEL' | translate }}</label>
+              <input formControlName="Label" class="form-control" type=text #Label placeholder="{{ 'JOB.TITLE.PLACEHOLDER' | translate }}">
             </div>
-            <div *ngIf="angForm.controls['JobName'].invalid && (angForm.controls['JobName'].dirty || angForm.controls['JobName'].touched)" class="alert alert-danger">
-              <div *ngIf="angForm.controls['JobName'].errors.required">
-                Job Name is required.
-              </div>
-            </div>
+            
             <div class="form-group">
-              <label class="col-md-4">Job Description </label>
-              <textarea class="form-control" rows = 7 cols = "5"
+              <label class="col-md-4">{{ 'JOB.DEPARTMENT.LABEL' | translate }}</label>
+              <input formControlName="department" class="form-control" type=text #Department placeholder="{{ 'JOB.DEPARTMENT.PLACEHOLDER' | translate }}">
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4">{{ 'JOB.EMPLAYMENT_TYPE.LABEL' | translate }}</label>
+              <select formControlName="employmentType" class="browser-default custom-select" #EmploymentType placeholder="Select Type">
+                <option value="" selected>{{ 'JOB.EMPLAYMENT_TYPE.PLACEHOLDER' | translate }}</option>
+                <option value="1">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</option>
+                <option value="2">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</option>
+                <option value="3">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</option>
+                <option value="4">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.TEMPORARY' | translate }}</option>
+                <option value="5">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.VOLUNTEER' | translate }}</option>
+                <option value="6">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.INTERNSHIP' | translate }}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4">{{ 'JOB.EMPLAYMENT_LEVEL.LABEL' | translate }}</label>
+              <select formControlName="level" #Level class="browser-default custom-select">
+                <option value="" selected>{{ 'JOB.EMPLAYMENT_LEVEL.PLACEHOLDER' | translate }}</option>
+                <option value="1">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</option>
+                <option value="2">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</option>
+                <option value="3">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</option>
+                <option value="4">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</option>
+                <option value="5">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.DIRECTOR' | translate }}</option>
+                <option value="6">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.EXECUTIVE' | translate }}</option>
+                <option value="7">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.NOT_APPLICABLE' | translate }}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4">{{ 'JOB.EMPLAYMENT_DESCRIPTION.LABEL' | translate }}</label>
+              <textarea class="form-control" rows = "10" cols = "40"
               formControlName="JobDescription" 
               #JobDescription></textarea>
             </div>
-            <div *ngIf="angForm.controls['JobDescription'].invalid && (angForm.controls['JobDescription'].dirty || angForm.controls['JobDescription'].touched)" class="alert alert-danger">
-              <div *ngIf="angForm.controls['JobDescription'].errors.required">
-                Job Description is required.
-              </div>
-            </div>
+            <div>{{ 'JOB.EMPLAYMENT_DESCRIPTION.PLACEHOLDER' | translate }}</div>
+            
+
+            <!--skills-->
             <div class="form-group">
-              <label class="col-md-4">Job Price</label>
-              <input type="text" class="form-control" 
-                formControlName="JobPrice" 
-                #JobPrice
-              />
-            </div>
-            <div *ngIf="angForm.controls['JobPrice'].invalid && (angForm.controls['JobPrice'].dirty || angForm.controls['JobPrice'].touched)" class="alert alert-danger">
-              <div *ngIf="angForm.controls['JobPrice'].errors.required">
-                Job Price is required.
+              <br/>
+        
+              <div class="card mb-3">
+                <div class="card-header">
+                  <span>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</span>
+                </div>
+                <div class="card-body">
+
+                  <div formArrayName="SkillReq">
+                    <div *ngFor="let skill of angForm.controls.SkillReq.controls; let i=index" class="panel panel-default">
+                    <div class="card-subtitle">      
+                        <h3>{{ 'JOB.SKILL.TITLE' | translate }} {{i + 1}}</h3>                        
+                    </div>
+                    <div class="card-text" [formGroupName]="i">
+
+                      <div class="row mb-3">
+                                          
+                        <div class="col-md-3">
+                          <label class="text-primary">{{ 'JOB.SKILL.NAME.LABEL' | translate }}</label><br/>
+                          <input type="text" class="form-control" formControlName="SkillLabel" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}">                      
+                        </div>
+                        <div class="col-md-3">
+                          <label class="text-primary">{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</label><br/>
+                          <select formControlName="proficiencyLevel" class="form-control browser-default custom-select">
+                            <option value="" selected>{{ 'JOB.SKILL.LEVEL.PLACEHOLDER' | translate }}</option>
+                            <option value="1">{{ 'JOB.SKILL.LEVEL.OPTIONS.BASIC' | translate }}</option>
+                            <option value="2">{{ 'JOB.SKILL.LEVEL.OPTIONS.INTERMEDIATE' | translate }}</option>
+                            <option value="3">{{ 'JOB.SKILL.LEVEL.OPTIONS.ADVANCED' | translate }}</option>
+                          </select>
+                        </div>                            
+                        <div class="col-md-3">
+                          <label class="text-primary">{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</label><br/>
+                          <select formControlName="skillPriority" class="form-control browser-default custom-select">
+                            <option value="" selected>{{ 'JOB.SKILL.PRIORITY.PLACEHOLDER' | translate }}</option>
+                            <option value="1">{{ 'JOB.SKILL.PRIORITY.OPTIONS.LOW' | translate }}</option>
+                            <option value="2">{{ 'JOB.SKILL.PRIORITY.OPTIONS.MEDIUM' | translate }}</option>
+                            <option value="3">{{ 'JOB.SKILL.PRIORITY.OPTIONS.HIGH' | translate }}</option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-3">
+                          <br/>
+                          <button *ngIf="i>0" class="btn btn-danger" (click) = "removeSkill(i)">{{ 'JOBS.BUTTON.DELETE_SKILL' | translate }}</button>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span class="table-add float-right mb-3 mr-2">
+                    <button class="btn btn-primary" (click) = "addSkill()">{{ 'JOBS.BUTTON.ADD_SKILL' | translate }}</button>
+                  </span>
+                </div>
+
+                 </div>
               </div>
+  
             </div>
+
+            
 
 
               <div class="form-group">
-                    <button (click) = "addJob(JobName.value, JobDescription.value, JobPrice.value)" type="submit" class="btn btn-primary"
-                    [disabled]="angForm.pristine || angForm.invalid" >
-                      Create Job
-                    </button>
-
-                    <button mat-raised-button color="primary" (click)="confirmDialog()">Cancel</button>
+                <button *ngIf="mode=='Create'" (click) = "addJob(Label.value, Department.value, EmploymentType.value, Level.value, JobDescription.value, this.angForm.controls['SkillReq'].value)" type="submit" class="btn btn-primary"
+                    [disabled]="angForm.invalid" >
+                    {{ 'JOBS.BUTTON.CREATE_JOB' | translate }}
+                </button>
+                <button *ngIf="mode=='Edit'" (click) = "updateJob(Label.value, Department.value, EmploymentType.value, Level.value, JobDescription.value, this.angForm.controls['SkillReq'].value)" type="submit" class="btn btn-primary"
+                    [disabled]="angForm.invalid" >
+                    {{ 'JOBS.BUTTON.UPDATE_JOB' | translate }}
+                </button>
+                <button class="btn btn-danger" (click)="confirmDialog()">Cancel</button>
 
             </div>
 

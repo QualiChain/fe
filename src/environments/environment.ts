@@ -11,7 +11,9 @@ export const environment = {
   educationManagementUrl : 'https://localhost:4000/educationManagement',
   competencyManagementUrl : 'https://localhost:4000/competencyManagement',
   cvUrl : 'https://localhost:4000/cvs',
-  jobmatchingUrl : 'http://localhost:8000/jobmatching'
+  jobmatchingUrl : 'http://localhost:8000/jobmatching',
+  jobpostGet : 'https://localhost:8000/jobget',  
+  jobpostUrl : 'https://localhost:8000/jobpost'
 };
 
 /*
