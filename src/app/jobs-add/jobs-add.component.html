@@ -14,39 +14,39 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.EMPLAYMENT_TYPE.LABEL' | translate }}</label>
+              <label class="col-md-4">{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}</label>
               <select formControlName="employmentType" class="browser-default custom-select" #EmploymentType placeholder="Select Type">
-                <option value="" selected>{{ 'JOB.EMPLAYMENT_TYPE.PLACEHOLDER' | translate }}</option>
-                <option value="1">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</option>
-                <option value="2">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</option>
-                <option value="3">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</option>
-                <option value="4">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.TEMPORARY' | translate }}</option>
-                <option value="5">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.VOLUNTEER' | translate }}</option>
-                <option value="6">{{ 'JOB.EMPLAYMENT_TYPE.OPTIONS.INTERNSHIP' | translate }}</option>
+                <option value="" selected>{{ 'JOB.EMPLOYMENT_TYPE.PLACEHOLDER' | translate }}</option>
+                <option value="1">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</option>
+                <option value="2">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</option>
+                <option value="3">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</option>
+                <option value="4">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.TEMPORARY' | translate }}</option>
+                <option value="5">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.VOLUNTEER' | translate }}</option>
+                <option value="6">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.INTERNSHIP' | translate }}</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.EMPLAYMENT_LEVEL.LABEL' | translate }}</label>
+              <label class="col-md-4">{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</label>
               <select formControlName="level" #Level class="browser-default custom-select">
-                <option value="" selected>{{ 'JOB.EMPLAYMENT_LEVEL.PLACEHOLDER' | translate }}</option>
-                <option value="1">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</option>
-                <option value="2">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</option>
-                <option value="3">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</option>
-                <option value="4">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</option>
-                <option value="5">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.DIRECTOR' | translate }}</option>
-                <option value="6">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.EXECUTIVE' | translate }}</option>
-                <option value="7">{{ 'JOB.EMPLAYMENT_LEVEL.OPTIONS.NOT_APPLICABLE' | translate }}</option>
+                <option value="" selected>{{ 'JOB.EMPLOYMENT_LEVEL.PLACEHOLDER' | translate }}</option>
+                <option value="1">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</option>
+                <option value="2">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</option>
+                <option value="3">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</option>
+                <option value="4">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</option>
+                <option value="5">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.DIRECTOR' | translate }}</option>
+                <option value="6">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.EXECUTIVE' | translate }}</option>
+                <option value="7">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.NOT_APPLICABLE' | translate }}</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.EMPLAYMENT_DESCRIPTION.LABEL' | translate }}</label>
+              <label class="col-md-4">{{ 'JOB.EMPLOYMENT_DESCRIPTION.LABEL' | translate }}</label>
               <textarea class="form-control" rows = "10" cols = "40"
               formControlName="JobDescription" 
               #JobDescription></textarea>
             </div>
-            <div>{{ 'JOB.EMPLAYMENT_DESCRIPTION.PLACEHOLDER' | translate }}</div>
+            <div>{{ 'JOB.EMPLOYMENT_DESCRIPTION.PLACEHOLDER' | translate }}</div>
             
 
             <!--skills-->
@@ -112,9 +112,6 @@
   
             </div>
 
-            
-
-
               <div class="form-group">
                 <button *ngIf="mode=='Create'" (click) = "addJob(Label.value, Department.value, EmploymentType.value, Level.value, JobDescription.value, this.angForm.controls['SkillReq'].value)" type="submit" class="btn btn-primary"
                     [disabled]="angForm.invalid" >
@@ -124,7 +121,7 @@
                     [disabled]="angForm.invalid" >
                     {{ 'JOBS.BUTTON.UPDATE_JOB' | translate }}
                 </button>
-                <button class="btn btn-danger" (click)="confirmDialog()">Cancel</button>
+                <button class="btn btn-danger" (click)="confirmDialog()">{{ 'BUTTON.CANCEL' | translate }}</button>
 
             </div>
 

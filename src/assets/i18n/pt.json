@@ -51,6 +51,7 @@
       "CANCEL": "Cancel"
     },
     "CONFIRM_ACTION": "Confirm Action",
+    "DELETE_MESSAGE": "Are you sure you want to delete this job?",
     "CANCEL_MESSAGE": "Are you sure you want to do this?"
   },
   "JOB": {
@@ -62,7 +63,7 @@
       "LABEL": "Deparment",
       "PLACEHOLDER": "Deparment"
     },
-    "EMPLAYMENT_TYPE": {
+    "EMPLOYMENT_TYPE": {
       "LABEL": "Employment type",
       "PLACEHOLDER": "Selecione um",
       "OPTIONS": {
@@ -74,7 +75,7 @@
         "INTERNSHIP": "Internership"
       }
     },    
-    "EMPLAYMENT_LEVEL": {
+    "EMPLOYMENT_LEVEL": {
       "LABEL": "Seniority Level",
       "PLACEHOLDER": "Selecione um",
       "OPTIONS": {
@@ -87,7 +88,7 @@
         "NOT_APPLICABLE": "Not Applicable"
       }
     },
-    "EMPLAYMENT_DESCRIPTION": {
+    "EMPLOYMENT_DESCRIPTION": {
       "LABEL": "Job Description",
       "PLACEHOLDER": "Briefly explain the type of job you're offering."
     },
@@ -183,6 +184,11 @@
     "OPEN_PDF": "Open PDF",
     "DOWNLOAD_PDF": "Download PDF",
     "PRINT_PDF": "Print PDF",
-    "EXPORT_TO_EXCEL": "Export to Excel"
-  }
+    "EXPORT_TO_EXCEL": "Export to Excel",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "CANCEL": "Cancel"
+  },
+  "ACTION": "Action",
+  "FILTER": "Filter"
 }
