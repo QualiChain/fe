@@ -12,10 +12,15 @@
         The actual rendered columns are set as a property on the row definition" -->
 
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
           <td mat-cell *matCellDef="let element">
+            <!--
             <a [routerLink]="['/profiles', element.id]" class="btn btn-primary">View</a> 
-            
+            -->
+            <button class="btn btn-primary" [routerLink]="['/profiles', element.id]">
+              <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
+            </button>
+
           </td>
         </ng-container>
 

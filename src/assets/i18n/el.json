@@ -187,7 +187,9 @@
     "EXPORT_TO_EXCEL": "Export to Excel",
     "EDIT": "Edit",
     "DELETE": "Delete",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "CLOSE": "Close",
+    "VIEW": "View"
   },
   "ACTION": "Action",
   "FILTER": "Filter"
