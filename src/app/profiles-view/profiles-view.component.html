@@ -1,9 +1,9 @@
 
 <h1 *ngIf="userdata.role=='Student'">{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
 <h1 *ngIf="userdata.role=='Teacher'">{{ 'PROFILES.TEACHER_PROFILE' | translate }}</h1>
-
-
-
+<!--
+--{{ userdata.id }} --- {{currentUser.id}} ---
+-->
 
 <div class="container">
 
@@ -69,15 +69,22 @@
 
               
                 <div class="col col-lg-2">
-                  <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCV" href="#">	<span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}</a>
-                  <!--
-                  <button class="btn btn-primary" type="button">                  
-                    <span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#myModalCV">  
+                    <i _ngcontent-axy-c0="" class="material-icons"> account_box </i> {{ 'PROFILES.CV' | translate }}
                   </button>
+                  <!--
+                      <a class="btn btn-primary" data-toggle="modal" data-target="#myModalCV" href="#">	<span class="glyphicon glyphicon-list-alt"></span> {{ 'PROFILES.CV' | translate }}</a>
                   -->
-              </div>
+                </div>
                 
-                <div class="col col-lg-2"><a [routerLink]="['/profiles', userdata.id,'best-carrer-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}</a> </div>
+                <div class="col col-lg-2">
+                  <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-carrer-options']">  
+                    <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}
+                  </button>
+                  <!--
+                  <a [routerLink]="['/profiles', userdata.id,'best-carrer-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}</a> 
+                  -->
+                </div>
 
             </div>
         </div>
@@ -132,7 +139,7 @@
                                             <div *ngIf="selectedCourse.id" class="col-lg-4 completeCourseSectiontab">
                                               <div class=""><h3>{{selectedCourse.title}}</h3></div>
                                               <div class="">{{selectedCourse.description}}</div>
-                                              <div class="row"><a class="button" [routerLink]="" (click)="selectedCourse={}">Close</a></div>
+                                              <div class=""><br/><a class="btn btn-success" [routerLink]="" (click)="selectedCourse={}">{{ 'BUTTON.CLOSE' | translate }}</a></div>
                                             </div>
 
                                       </ng-template>
@@ -181,11 +188,21 @@
                                   <div>&nbsp; </div>                                  
                                   <div *ngIf="userdata.id==currentUser.id" class="courseActions">
                                       <div class="col-lg-6">
-                                          <a [routerLink]="['/courses', course.id,'edit']" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</a>
+                                        <!--
+                                        <a [routerLink]="['/courses', course.id,'edit']" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</a>
+                                        -->
+                                        <button class="btn btn-primary" [routerLink]="['/courses', course.id,'edit']">  
+                                          <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+                                        </button>
+
                                       </div>
                                        <div class="col-lg-6">
-
+                                          <!--
                                           <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-star-empty"></span> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}</button>
+                                          -->
+                                          <button class="btn btn-primary" type="button">  
+                                            <i _ngcontent-axy-c0="" class="material-icons"> star </i> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}
+                                          </button>  
                                       </div>
                                   </div>
                                   <div *ngIf="userdata.id==currentUser.id">&nbsp; </div>
@@ -283,13 +300,29 @@
         <div class="row carreradvisor" *ngIf="userdata.role=='Student'">
             <div class="col col-lg-8"> </div>
             <div class="col col-lg-2">
-                <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a></div>
+              <!--
+              <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a>
+              -->                
+              <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'carrer-advisor']">  
+                <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CARRER_ADVISOR' | translate }}
+              </button>
+            </div>
+            
         </div>
 
         <div class="row cv_gap_analysis" *ngIf="userdata.role=='Teacher'">
           <div class="col col-lg-8"> </div>
           <div class="col col-lg-2">
-              <a [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}</a></div>
+            <!--
+            <a [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}</a>
+            -->
+            <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']">  
+              <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}
+            </button>
+
+          </div>
+
+          
       </div>
 
     </div>
