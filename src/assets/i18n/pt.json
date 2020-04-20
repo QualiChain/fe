@@ -172,6 +172,11 @@
       "SEARCH": "Search"
     }
   },
+  "AWARD_SMART_BADGE" : {
+    "TITLE": "Award Smart Badge",
+    "NO_SMART_BADGES_AVAILABE" : "No smart awards available",
+    "SELECTED_BADGES": "Selected Badges"
+  },
   "ACCESS_DENIED": {
     "TITLE": "ACESSO NEGADO",
     "BODY": "Alguns conteúdos deste site são restritos e você não tem permissões suficientes para acessá-lo."
@@ -189,7 +194,8 @@
     "DELETE": "Delete",
     "CANCEL": "Cancel",
     "CLOSE": "Close",
-    "VIEW": "View"
+    "VIEW": "View",
+    "SAVE": "Save"
   },
   "ACTION": "Action",
   "FILTER": "Filter"
