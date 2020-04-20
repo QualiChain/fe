@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { JobsComponent } from './jobs/jobs.component';
+import { AwardSmartBadgeComponent } from './award-smart-badge/award-smart-badge.component';
 import { HomeComponent } from './home/home.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -67,6 +68,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent,
     FooterComponent,
     JobsComponent,
+    AwardSmartBadgeComponent,
     HomeComponent,
     AccessDeniedComponent,
     CvsComponent,
