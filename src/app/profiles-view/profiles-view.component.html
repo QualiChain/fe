@@ -96,6 +96,17 @@
     <div class="row">
 
         <ngb-accordion *ngIf="userdata.role!='Recruiter'" #acc="ngbAccordion">
+
+          
+                <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role=='Student'">
+                  <ng-template ngbPanelContent>
+                    <div class="">
+                      Mockup chart<br/>
+                      <svg id="sankey" width="600" height="350"></svg>
+                    </div>
+                  </ng-template>
+                </ngb-panel>
+
                 <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role=='Student'">
                   <ng-template ngbPanelContent>
                       <div class="">
