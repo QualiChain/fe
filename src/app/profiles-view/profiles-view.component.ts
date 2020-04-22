@@ -238,7 +238,8 @@ export class ProfilesViewComponent implements OnInit {
       //d3.json("./energy.json", function (error, energy: any) {
           //if (error) throw error;
 
-      const energy: DAG = {
+      const jobposition: DAG = {
+      //var JOBPOSITIONS = {
           nodes: [{
               nodeId: 0,
               name: "Programmer"
@@ -309,10 +310,10 @@ export class ProfilesViewComponent implements OnInit {
       };
 
 
-          sankey(energy);
+          sankey(jobposition);
 
           link = link
-              .data(energy.links)
+              .data(jobposition.links)
               .enter().append("path")
               .attr("d", d3Sankey.sankeyLinkHorizontal())
               .attr("stroke-width", function (d: any) { return Math.max(1, d.width); });
@@ -321,7 +322,7 @@ export class ProfilesViewComponent implements OnInit {
               .text(function (d: any) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
 
           node = node
-              .data(energy.nodes)
+              .data(jobposition.nodes)
               .enter().append("g");
 
           node.append("rect")
@@ -591,4 +592,23 @@ async generatePdf(action = 'open') {
 }
 
 
+}
+
+interface SNodeExtra {
+  nodeId: number;
+  name: string;
+}
+
+interface SLinkExtra {
+  source: number;
+  target: number;
+  value: number;
+  uom: string;
+}
+type SNode = d3Sankey.SankeyNode<SNodeExtra, SLinkExtra>;
+type SLink = d3Sankey.SankeyLink<SNodeExtra, SLinkExtra>;
+
+interface DAG {
+  nodes: SNode[];
+  links: SLink[];
 }
