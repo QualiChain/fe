@@ -208,6 +208,8 @@ export class ProfilesViewComponent implements OnInit {
   private DrawChart() {
     var elementExists = document.getElementById("sankey");
     if (elementExists) {
+      document.getElementById("sankey").innerHTML = "";
+
       var svg = d3.select("#sankey"),
           width = +svg.attr("width"),
           height = +svg.attr("height");
