@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-award-smart-badge',
   templateUrl: './award-smart-badge.component.html',
@@ -41,24 +42,42 @@ export class AwardSmartBadgeComponent implements OnInit {
   
   onSubmitAwards() {
 
+
     ELEMENT_DATA.forEach((element, index) => {
      
       if (element.id==this.selectedUSer) {
+        this.selectedUserAwards.sort();
         element.aqcuired_badges = this.selectedUserAwards;
+        element.aqcuired_badges;
         ELEMENT_DATA[index]=element;
       }    
+      
     });
+
+    document.getElementById("closeAwardModal").click();
+    
+
+//    this.dataSource.data = ELEMENT_DATA;
 
     //this.closebutton.nativeElement.click();
     
   }
+
+  
 
   awardUser(userId, userData): void {
     //const message = `Are you sure you want to do this?`;
     //console.log(userId);
     //console.log(userData);
     this.selectedUSer = userId;
-    this.selectedUserAwards = userData.aqcuired_badges;
+
+    this.selectedUserAwards = [];
+    userData.aqcuired_badges.forEach((element, index) => {      
+      //console.log("index:"+index+"---element:"+element);
+      this.selectedUserAwards.push(element);      
+    });
+
+    //this.selectedUserAwards = userData.aqcuired_badges;
   }
   
   onSelectItem(item: []) {
@@ -80,6 +99,7 @@ export class AwardSmartBadgeComponent implements OnInit {
   displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  //dataSource = new MatTableDataSource<listOfStudents>([]);
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
@@ -91,6 +111,7 @@ export class AwardSmartBadgeComponent implements OnInit {
   }
   
   ngOnInit() {
+    //this.dataSource.data = ELEMENT_DATA;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     //this.userAwards.push(0);
@@ -121,7 +142,3 @@ const ELEMENT_DATA: listOfStudents[] = [
   {id: 3 , student: 'Ratbert Adams', semester: '6', grade: '8', aqcuired_badges: [1,4]},
   {id: 4 , student: 'student X', semester: '3', grade: '2', aqcuired_badges: [2]}
 ];
-
-
-
-
