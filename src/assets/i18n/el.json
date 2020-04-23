@@ -182,8 +182,10 @@
     "BODY": "Ορισμένα περιεχόμενα αυτού του ιστότοπου είναι περιορισμένα και δεν έχετε αρκετά δικαιώματα πρόσβασης."
   },
   "RECOMENDED_COURSES": {
-    "TITLE": "Recommended courses",
-    "LEARN_MORE": "Learn more"
+    "TITLE": "Recommended courses"
+  },
+  "RECOMENDED_JOBS": {
+    "TITLE": "Recommended jobs"
   },
   "BUTTON": {
     "OPEN_PDF": "Open PDF",
@@ -195,7 +197,8 @@
     "CANCEL": "Cancel",
     "CLOSE": "Close",
     "VIEW": "View",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "LEARN_MORE": "Learn more"
   },
   "ACTION": "Action",
   "FILTER": "Filter"

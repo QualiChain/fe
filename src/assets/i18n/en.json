@@ -182,8 +182,10 @@
     "BODY": "Some contents of this site is restricted and you don't have enough permissions to access it."
   },
   "RECOMENDED_COURSES": {
-    "TITLE": "Recommended courses",
-    "LEARN_MORE": "Learn more"
+    "TITLE": "Recommended courses"
+  },
+  "RECOMENDED_JOBS": {
+    "TITLE": "Recommended jobs"
   },
   "BUTTON": {
     "OPEN_PDF": "Open PDF",
@@ -195,7 +197,8 @@
     "CANCEL": "Cancel",
     "CLOSE": "Close",
     "VIEW": "View",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "LEARN_MORE": "Learn more"
   },
   "ACTION": "Action",
   "FILTER": "Filter"

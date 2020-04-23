@@ -339,7 +339,9 @@
     </div>
       
     </div>
-    <div class="col col-lg-4" *ngIf="userdata.role=='Student'">
+    <div class="col col-lg-4" *ngIf="userdata.role=='Student'">      
+      <app-recomended-jobs></app-recomended-jobs>
+      <br/>
       <app-recomended-courses></app-recomended-courses>
     </div>
   </div>
