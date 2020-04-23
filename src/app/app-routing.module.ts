@@ -19,6 +19,8 @@ import { LoginComponent } from './login/login.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { CoursesEditComponent } from './courses-edit/courses-edit.component';
 import { AwardSmartBadgeComponent } from './award-smart-badge/award-smart-badge.component';
+import { RecomendedCoursesComponent } from './recomended-courses/recomended-courses.component';
+import { RecomendedJobsComponent } from './recomended-jobs/recomended-jobs.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
@@ -98,6 +100,18 @@ const routes: Routes = [
     component: AwardSmartBadgeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.teacher, Role.admin] }    
+  },  
+  {
+    path: 'profiles/:id/recomended/courses',
+    component: RecomendedCoursesComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.student, Role.admin] }    
+  },
+  {
+    path: 'profiles/:id/recomended/jobs',
+    component: RecomendedJobsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.student, Role.admin] }    
   },
   {
     path: 'access_denied',
