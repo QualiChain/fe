@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-body">
+        <h3>{{ 'RECOMENDED_JOBS.TITLE' | translate }}</h3>
+        
+        <ngb-accordion [closeOthers]="true" #acc="ngbAccordion" activeIds="job-1">
+           
+            <ngb-panel id="job-1">
+              <ng-template ngbPanelTitle>
+                <span>&#9733; <b>Technical Application Administrator</b> &#9733;</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="card">                    
+                    <div class="card-body">                      
+                      <p class="card-text">
+                        Skills Required: Computer Science
+                        <br/>
+                        Match: 
+                      </p>
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                      </div>
+                      <!-- 
+                        <a [routerLink]="['/jobs','1']" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
+                      -->
+                      <a [routerLink]="" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
+                    </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            
+            <ngb-panel id="job-2">
+                <ng-template ngbPanelTitle>
+                  <span>&#9733; <b>Oracle database administrator</b> &#9733;</span>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="card">                        
+                        <div class="card-body">                      
+                          <p class="card-text">
+                            Skills Required: Oracle
+                            <br/>
+                            Match: 
+                          </p>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 83%" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100">83%</div>
+                          </div>
+                          <!--
+                            <a [routerLink]="['/jobs','2']" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
+                           -->
+                          <a [routerLink]="" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
+                        </div>
+                    </div>
+                    
+                </ng-template>
+              </ngb-panel>
+  
+        </ngb-accordion>
+
+    </div>
+</div>
+
+    

@@ -52,6 +52,7 @@ import { RecruitmentViewComponent } from './recruitment-view/recruitment-view.co
 import { BestCarrerOptionsComponent } from './best-carrer-options/best-carrer-options.component';
 import { CarrerAdvisorComponent } from './carrer-advisor/carrer-advisor.component';
 import { RecomendedCoursesComponent } from './recomended-courses/recomended-courses.component';
+import { RecomendedJobsComponent } from './recomended-jobs/recomended-jobs.component';
 import { CoursesEditComponent } from './courses-edit/courses-edit.component';
 import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
@@ -85,6 +86,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BestCarrerOptionsComponent,
     CarrerAdvisorComponent,
     RecomendedCoursesComponent,
+    RecomendedJobsComponent,
     CoursesEditComponent,
     EmploymentTypePipe,
     LevelTypePipe
