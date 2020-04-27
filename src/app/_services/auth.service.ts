@@ -50,7 +50,7 @@ export class AuthService {
       
       myAuthObj = {authenticated: true,  password:'*****', name: 'Dilbert', 
       surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', 
-      username: 'dilbert.adams', id: 1 , 'avatar_path': 'assets/img/dilbert.jpg', 'role': 'student'};
+      username: 'dilbert.adams', id: 11 , 'avatar_path': 'assets/img/dilbert.jpg', 'role': 'student'};
       
       localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
       this.currentUserSubject.next(myAuthObj);
@@ -60,7 +60,7 @@ export class AuthService {
       
       myAuthObj = { authenticated: true,  password:'******', name: 'Recruiter', 
       surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', 
-      username: 'recruiter.demo', id: 5 , 'avatar_path': 'assets/img/recruiter.png', 'role': 'recruiter'};
+      username: 'recruiter.demo', id: 55 , 'avatar_path': 'assets/img/recruiter.png', 'role': 'recruiter'};
       
       localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
       
@@ -71,7 +71,7 @@ export class AuthService {
 
       myAuthObj = { authenticated: true,  password:'******', name: 'Pointy-Haired Boss', 
       surname: 'Adams', email: 'phb@qualichain-project.euu', 
-      username: 'phb', id: 2 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', 'role': 'teacher'};
+      username: 'phb', id: 22 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', 'role': 'teacher'};
       
       localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
       

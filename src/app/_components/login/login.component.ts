@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit {
     this.invalidCredentials = false;   
        
     if (this.name=="student") {
-       myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 1 , 'avatar_path': 'assets/img/dilbert.jpg', role: 'student'};
+       myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 11 , 'avatar_path': 'assets/img/dilbert.jpg', role: 'student'};
     }
     else if (this.name=="recruiter") {
-      myObj = { authenticated: true, name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', username: 'recruiter.demo', id: 5 , 'avatar_path': 'assets/img/recruiter.png', role: 'recruiter'};      
+      myObj = { authenticated: true, name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', username: 'recruiter.demo', id: 55 , 'avatar_path': 'assets/img/recruiter.png', role: 'recruiter'};      
     }
     else if (this.name=="teacher") {
-      myObj = { authenticated: true, name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.euu', username: 'phb', id: 2 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', role: 'teacher'};
+      myObj = { authenticated: true, name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.euu', username: 'phb', id: 22 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', role: 'teacher'};
     }
     localStorage.setItem('userdata', JSON.stringify(myObj));
     window.location.href="/";

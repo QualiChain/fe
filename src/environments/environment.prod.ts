@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  authUrl : 'https://localhost:4000/auth',
+  authUrl : 'http://qualichain.epu.ntua.gr:5000/auth',
+  usersUrl : 'http://qualichain.epu.ntua.gr:5000/users',
   smartBadgesManagementUrl : 'https://localhost:4000/smartBadgesManagement',
   verificationAndEquivalenceUrl : 'https://localhost:4000/verificationAndEquivalence',
   profileUrl : 'https://localhost:4000/profile',
