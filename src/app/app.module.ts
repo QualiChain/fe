@@ -46,7 +46,9 @@ import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
 
+import { UsersService } from './_services/users.service';
 import { JobsService } from './_services/jobs.service';
+
 import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCarrerOptionsComponent } from './_components/best-carrer-options/best-carrer-options.component';
@@ -122,7 +124,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     CustomMaterialModule
   ],
-  providers: [JobsService],
+  providers: [UsersService, JobsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

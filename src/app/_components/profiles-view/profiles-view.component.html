@@ -2,8 +2,10 @@
 <h1 *ngIf="userdata.role=='Student'">{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
 <h1 *ngIf="userdata.role=='Teacher'">{{ 'PROFILES.TEACHER_PROFILE' | translate }}</h1>
 <!--
---{{ userdata.id }} --- {{currentUser.id}} ---
+--{{ userdata.id }} --- {{currentUser.id}} --- {{userdata.role}} --- {{userdata.avatar_path}} --
 -->
+
+
 
 <div class="container">
 
@@ -89,7 +91,11 @@
             </div>
         </div>
         <div class="col col-lg-2">
-            <div><img [src]="userdata.avatar_path"></div>
+            <div>
+              <img *ngIf="userdata.avatar_path" [src]="userdata.avatar_path">
+              <img *ngIf="!userdata.avatar_path" src="assets/img/no_avatar.jpg">
+            </div>
+            
         </div>
     </div>
     <div class="row"><br></div>

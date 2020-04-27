@@ -16,9 +16,11 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import {TranslateService} from '@ngx-translate/core';
 import { AuthService } from '../../_services';
-import { User } from '../../_models/user';
+
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
+import { UsersService } from '../../_services/users.service';
+import User from '../../_models/User';
 
 @Component({
   selector: 'app-profiles-view',
@@ -38,6 +40,8 @@ export class ProfilesViewComponent implements OnInit {
   /*
   userdata: {name: '', surname: '', email: '', username: '', id: 0 , avatar_path: '', university:'', role:''};
   */
+ userdata: User;
+/* 
   userdata: {
     id: number;
     name: string;
@@ -48,7 +52,7 @@ export class ProfilesViewComponent implements OnInit {
     university?: string;
     role?: string
 };
-
+*/
   years: {};
   currentJustify: string;
   listOfCoursesByUser: {};
@@ -75,7 +79,7 @@ export class ProfilesViewComponent implements OnInit {
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+  constructor(private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -129,13 +133,23 @@ export class ProfilesViewComponent implements OnInit {
   ngOnInit() {
     
 
-    this.route.params.subscribe(params => {
-      const id = +params.id;
-      if (id && id > 0) {
-        this.userId=String(id);
-      }
-    });
+    this.userdata= {
+      id: 0,
+      name: '',
+      surname: '',
+      email: '',
+      username: '',
+      avatar_path: 'assets/img/no_avatar.jpg',
+      university: '',
+      role: ''
+  };
 
+  
+/*
+    this.route.params.subscribe(params => {
+      
+    });
+*/
     this.dynamicForm = this.formBuilder.group({
       Skills: new FormArray([])
     });
@@ -152,11 +166,11 @@ export class ProfilesViewComponent implements OnInit {
       //console.log(params['id']);
       let listOfUsers = 
       [
-        {name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 1 , avatar_path: 'assets/img/dilbert.jpg', university:'National University of Athens', role:'Student'},
-        {name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.eu', username: 'phb'         , id: 2 , avatar_path: 'assets/img/pointy-haired_boss.jpg', university: 'University of Vic', role:'Teacher'},
-        {name: 'Dogbert', surname: 'Adams', email: 'dogbert.adams@qualichain-project.eu', username: 'dogbert.adams', id: 3 , avatar_path: 'assets/img/dogbert.png', university:'University of Barcelona', role:'Student'},
-        {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', username: 'ratbert.adams', id: 4 , avatar_path: '', university:'UPC', role:'Student'},
-        {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', username: 'recruiter.demo', id: 5 , avatar_path: 'assets/img/recruiter.png', university:'', role:'Recruiter'}
+        {name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', userName: 'dilbert.adams', id: 11 , avatar_path: 'assets/img/dilbert.jpg', university:'National University of Athens', role:'Student'},
+        {name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.eu', userName: 'phb'         , id: 22 , avatar_path: 'assets/img/pointy-haired_boss.jpg', university: 'University of Vic', role:'Teacher'},
+        {name: 'Dogbert', surname: 'Adams', email: 'dogbert.adams@qualichain-project.eu', userName: 'dogbert.adams', id: 33 , avatar_path: 'assets/img/dogbert.png', university:'University of Barcelona', role:'Student'},
+        {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', userName: 'ratbert.adams', id: 44 , avatar_path: '', university:'UPC', role:'Student'},
+        {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', university:'', role:'Recruiter'}
       ];
 
       let listOfCoursesByUser = [
@@ -167,14 +181,7 @@ export class ProfilesViewComponent implements OnInit {
         {id: 5, title: "Introduction to Linux", description: "Develop a good working knowledge of Linux using both the graphical interface and command line, covering the major Linux distribution families.", related_skills: ['Linux'], course_badges: ['b3', 'b5', 'b7'] },
         {id: 6, title: "How to Use Git and GitHub", description: "Effective use of version control is an important and useful skill for any developer working on long-lived (or even medium-lived) projects, especially if more than one developer is involved. This course, built with input from GitHub, will introduce the basics of using version control by focusing on a particular version control system called Git and a collaboration platform called GitHub.", related_skills: ['Linux','SVN'], course_badges: ['b4', 'b5', 'b6']}
       ]
-
-      this.userdata = listOfUsers[params['id']-1];
-      if (this.userdata.avatar_path=='') {
-        this.userdata.avatar_path = 'assets/img/no_avatar.jpg';
-        
-      }
-
-            
+      
 
       this.years = [1,2,3,4,5];
       this.currentJustify = 'fill';
@@ -186,6 +193,47 @@ export class ProfilesViewComponent implements OnInit {
         related_skills: [], 
         course_badges: []
       };
+
+      const id = +params.id;
+      if (id && id > 0) {
+        this.userId=String(id);
+
+        this.us
+        .getUser(id).subscribe(
+          data => {
+            console.log("user in db");
+            this.userdata = data;
+
+            if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
+              this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
+            } 
+          },
+          error => {
+            console.log("user not found in db");
+            listOfUsers.forEach(element => {
+              //console.log(element.id+"--"+params['id']);
+              if (element.id==params['id']) {
+                this.userdata = element;
+              }
+            });
+            //this.userdata = listOfUsers[params['id']-1];
+            if (this.userdata.avatar_path=='') {
+              this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
+            }
+            
+          }
+        );
+
+        this.us
+        .getUser(id)
+        .subscribe((data: User[]) => {
+          console.log(data);
+            this.userdata = data;
+  
+        });
+
+
+      }
 
     });
     /*
@@ -380,6 +428,12 @@ export class ProfilesViewComponent implements OnInit {
 
  
 async generatePdf(action = 'open') {
+  console.log(this.userdata.avatar_path);
+  if (!this.userdata.avatar_path) {
+    this.userdata.avatar_path = 'assets/img/no_avatar.jpg';
+  }
+  console.log(this.userdata.avatar_path);
+  
   let docDefinition = {
     footer: function(currentPage, pageCount) {
       return {
