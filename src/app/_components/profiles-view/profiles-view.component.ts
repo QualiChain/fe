@@ -20,7 +20,7 @@ import { AuthService } from '../../_services';
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
 import { UsersService } from '../../_services/users.service';
-import User from '../../_models/User';
+import User from '../../_models/user';
 
 @Component({
   selector: 'app-profiles-view',
@@ -36,11 +36,10 @@ export class ProfilesViewComponent implements OnInit {
 
   submitted = false;
 
-  //userdata: {};
-  /*
-  userdata: {name: '', surname: '', email: '', username: '', id: 0 , avatar_path: '', university:'', role:''};
-  */
- userdata: User;
+
+  //userdata: User;
+  userdata: any;
+
 /* 
   userdata: {
     id: number;
@@ -138,7 +137,7 @@ export class ProfilesViewComponent implements OnInit {
       name: '',
       surname: '',
       email: '',
-      username: '',
+      userName: '',
       avatar_path: 'assets/img/no_avatar.jpg',
       university: '',
       role: ''
@@ -506,7 +505,7 @@ async generatePdf(action = 'open') {
               text: " "
            },
           {
-            text: this.translate.instant('PROFILES.USERNAME')+' : ' + this.userdata.username, color: '#0e3664'
+            text: this.translate.instant('PROFILES.USERNAME')+' : ' + this.userdata.userName, color: '#0e3664'
           },
           {
             text: this.translate.instant('PROFILES.NAME')+': ' + this.userdata.name, color: '#0e3664'

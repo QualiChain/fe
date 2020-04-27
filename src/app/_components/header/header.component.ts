@@ -12,7 +12,7 @@ import { MessageService } from '../../_services/index';
 import { AppComponent } from '../../app.component';
 
 import { AuthService } from '../../_services';
-import { User } from '../../_models/user';
+import User from '../../_models/user';
 import { Role } from '../../_models/role';
 //import { isAdmin } from '../_services/auth.service.isA';
 

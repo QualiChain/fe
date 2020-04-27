@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 //import * as $ from 'node_modules/jquery';
 
 import { AuthService } from '../app/_services';
-import { User } from './_models/user';
+import User from './_models/user';
 import { Role } from './_models/role';
 
 declare var $: any;
