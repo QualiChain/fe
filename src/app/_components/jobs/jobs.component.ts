@@ -3,9 +3,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
-import Job from '../_models/Job';
-import { JobsService } from '../_services/jobs.service';
-import { ExcelServiceService } from '../_services/excel/excel-service.service';
+import Job from '../../_models/Job';
+import { JobsService } from '../../_services/jobs.service';
+import { ExcelServiceService } from '../../_services/excel/excel-service.service';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material';

@@ -2,25 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { JobsComponent } from './jobs/jobs.component';
+import { HomeComponent } from './_components/home/home.component';
+import { JobsComponent } from './_components/jobs/jobs.component';
 
-import { JobsAddComponent } from './jobs-add/jobs-add.component';
-//import { JobsEditComponent } from './jobs-edit/jobs-edit.component';
+import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
+//import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
 
 //import { CvsComponent } from './cvs/cvs.component';
-import { ProfilesComponent } from './profiles/profiles.component';
-import { RecruitmentComponent } from './recruitment/recruitment.component';
-import {ProfilesViewComponent} from './profiles-view/profiles-view.component';
-import {RecruitmentViewComponent} from './recruitment-view/recruitment-view.component';
-import {BestCarrerOptionsComponent} from './best-carrer-options/best-carrer-options.component';
-import {CarrerAdvisorComponent} from './carrer-advisor/carrer-advisor.component';
-import { LoginComponent } from './login/login.component';
-import { AccessDeniedComponent } from './access-denied/access-denied.component';
-import { CoursesEditComponent } from './courses-edit/courses-edit.component';
-import { AwardSmartBadgeComponent } from './award-smart-badge/award-smart-badge.component';
-import { RecomendedCoursesComponent } from './recomended-courses/recomended-courses.component';
-import { RecomendedJobsComponent } from './recomended-jobs/recomended-jobs.component';
+import { ProfilesComponent } from './_components/profiles/profiles.component';
+import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
+import {ProfilesViewComponent} from './_components/profiles-view/profiles-view.component';
+import {RecruitmentViewComponent} from './_components/recruitment-view/recruitment-view.component';
+import {BestCarrerOptionsComponent} from './_components/best-carrer-options/best-carrer-options.component';
+import {CarrerAdvisorComponent} from './_components/carrer-advisor/carrer-advisor.component';
+import { LoginComponent } from './_components/login/login.component';
+import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
+import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
+import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
+import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
+import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';

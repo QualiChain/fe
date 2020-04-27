@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../_services/index';
+import { MessageService } from '../../_services/index';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './access-denied.component.html',
+  styleUrls: ['./access-denied.component.css']
 })
-export class HomeComponent implements OnInit {
+export class AccessDeniedComponent implements OnInit {
   userdata: {};
 
   constructor(private messageService: MessageService) { }
