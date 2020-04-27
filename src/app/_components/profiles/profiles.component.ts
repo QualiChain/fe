@@ -3,7 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { UsersService } from '../../_services/users.service';
-import User from '../../_models/User';
+import User from '../../_models/user';
 
 @Component({
   selector: 'app-profiles',
@@ -87,6 +87,3 @@ const ELEMENT_DATA: User[] = [
   {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', userName: 'ratbert.adams', id: 44 , avatar_path: '',  role:'Student'},
   {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', role:'Recruiter'}
 ];
-
-
-//const ELEMENT_DATA: User[] = [];
