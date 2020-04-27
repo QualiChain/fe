@@ -9,14 +9,14 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { CVService } from '../_services/cv.service';
+import { CVService } from '../../_services/cv.service';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import {TranslateService} from '@ngx-translate/core';
-import { AuthService } from '../_services';
-import { User } from '../_models/user';
+import { AuthService } from '../../_services';
+import { User } from '../../_models/user';
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
 

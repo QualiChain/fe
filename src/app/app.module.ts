@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { ModalModule } from './_modal';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { JobsComponent } from './jobs/jobs.component';
-import { AwardSmartBadgeComponent } from './award-smart-badge/award-smart-badge.component';
-import { HomeComponent } from './home/home.component';
-import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { HeaderComponent } from './_components/header/header.component';
+import { FooterComponent } from './_components/footer/footer.component';
+import { JobsComponent } from './_components/jobs/jobs.component';
+import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
+import { HomeComponent } from './_components/home/home.component';
+import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CvsComponent } from './cvs/cvs.component';
-import { ProfilesComponent } from './profiles/profiles.component';
-import { RecruitmentComponent } from './recruitment/recruitment.component';
+import { CvsComponent } from './_components/cvs/cvs.component';
+import { ProfilesComponent } from './_components/profiles/profiles.component';
+import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -26,14 +26,14 @@ import { MatChipsModule} from '@angular/material/chips';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './_components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { NbSecurityModule } from '@nebular/security';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { CustomMaterialModule } from './custom-material/custom-material.module';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
+import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
 
 
 // for HttpClient import:
@@ -42,18 +42,18 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 // for Core import:
 import { LoadingBarModule } from '@ngx-loading-bar/core';
-import { JobsAddComponent } from './jobs-add/jobs-add.component';
-import { JobsGetComponent } from './jobs-get/jobs-get.component';
-import { JobsEditComponent } from './jobs-edit/jobs-edit.component';
+import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
+import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
+import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
 
 import { JobsService } from './_services/jobs.service';
-import { ProfilesViewComponent } from './profiles-view/profiles-view.component';
-import { RecruitmentViewComponent } from './recruitment-view/recruitment-view.component';
-import { BestCarrerOptionsComponent } from './best-carrer-options/best-carrer-options.component';
-import { CarrerAdvisorComponent } from './carrer-advisor/carrer-advisor.component';
-import { RecomendedCoursesComponent } from './recomended-courses/recomended-courses.component';
-import { RecomendedJobsComponent } from './recomended-jobs/recomended-jobs.component';
-import { CoursesEditComponent } from './courses-edit/courses-edit.component';
+import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
+import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
+import { BestCarrerOptionsComponent } from './_components/best-carrer-options/best-carrer-options.component';
+import { CarrerAdvisorComponent } from './_components/carrer-advisor/carrer-advisor.component';
+import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
+import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
+import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
 import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 

@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ModalService } from '../_modal';
+import { ModalService } from '../../_modal';
 import { Router } from '@angular/router';
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../../_services/auth.service';
 
 
 @Component({

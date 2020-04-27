@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import { MatchingService } from '../_services/matching.service';
-import { ExcelServiceService } from '../_services/excel/excel-service.service';
+import { MatchingService } from '../../_services/matching.service';
+import { ExcelServiceService } from '../../_services/excel/excel-service.service';
 
 @Component({
   selector: 'app-recruitment',
