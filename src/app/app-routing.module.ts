@@ -12,6 +12,8 @@ import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { ProfilesComponent } from './_components/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
 import {ProfilesViewComponent} from './_components/profiles-view/profiles-view.component';
+import {ProfilesAddComponent} from './_components/profiles-add/profiles-add.component';
+
 import {RecruitmentViewComponent} from './_components/recruitment-view/recruitment-view.component';
 import {BestCarrerOptionsComponent} from './_components/best-carrer-options/best-carrer-options.component';
 import {CarrerAdvisorComponent} from './_components/carrer-advisor/carrer-advisor.component';
@@ -61,6 +63,11 @@ const routes: Routes = [
    path: 'profiles',
    component: ProfilesComponent,
    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profiles/add',
+    component: ProfilesAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profiles/:id',

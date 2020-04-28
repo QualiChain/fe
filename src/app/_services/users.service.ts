@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
+import { throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +25,17 @@ export class UsersService {
       .http
       .get(`${this.uriUsers}/${userId}`);
     }  
+
+
+  addUser(obj: Object) {
+    return this.http.post(`${this.uriUsers}`, obj).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
   }
 
+}
