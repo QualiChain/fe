@@ -1,0 +1,136 @@
+<h1>{{ 'PROFILE.CREATE_PROFILE.TITLE' | translate }}</h1>
+
+<div class="container">
+  <div class="row">
+
+    <form #formLogin="ngForm" (ngSubmit)="processForm()">
+
+      <!-- pilot -->
+      <div class="form-group field" >
+        <label>{{ 'PROFILE.PILOT.LABEL' | translate }}</label>
+        <select name="pilotId" matNativeControl required [(ngModel)]="pilotId">
+          <option value="">Select One</option>
+          <option value="1">Pilot 1</option>
+          <option value="2">Pilot 2</option>
+          <option value="3">Pilot 3</option>
+          <option value="4">Pilot 4</option>
+        </select>
+      </div>
+      <!-- role -->
+      <div class="form-group field" >
+        <label>{{ 'PROFILE.ROLE.LABEL' | translate }}</label>
+        <select name="pilotId" matNativeControl required [(ngModel)]="role">
+          <option value="">Select One</option>
+          <option value="administrator">Administrator</option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+          <option value="recruiter">Recruiter</option>
+          <option value="employee">Employee</option>
+        </select>
+      </div>      
+      <!-- userName -->
+      <div class="form-group field" [class.has-error]="usernameInput.invalid">
+          <label>{{ 'PROFILE.USERNAME.LABEL' | translate }}</label>
+        <input type="text" name="userName" class="form-control input" placeholder="{{ 'PROFILE.USERNAME.PLACEHOLDER' | translate }}"
+          [(ngModel)]="userName" required minlength="3" #usernameInput="ngModel">        
+      </div>
+      <!-- fullName -->
+      <div class="form-group field" [class.has-error]="fullnameInput.invalid">
+        <label>{{ 'PROFILE.FULLNAME.LABEL' | translate }}</label>
+        <input type="text" name="fullName" class="form-control input" placeholder="{{ 'PROFILE.FULLNAME.PLACEHOLDER' | translate }}"
+          [(ngModel)]="fullName" required minlength="3" #fullnameInput="ngModel">
+      </div>
+      <!-- name -->
+      <div class="form-group field" [class.has-error]="nameInput.invalid">
+        <label>{{ 'PROFILE.NAME.LABEL' | translate }}</label>
+        <input 
+          type="text" name="name" class="form-control input" placeholder="{{ 'PROFILE.NAME.PLACEHOLDER' | translate }}"
+          [(ngModel)]="name" required minlength="3" #nameInput="ngModel">
+      </div>
+      <!-- surname -->
+      <div class="form-group field" [class.has-error]="surnameInput.invalid">
+        <label>{{ 'PROFILE.SURNAME.LABEL' | translate }}</label>
+        <input type="text" name="surname" class="form-control input" placeholder="{{ 'PROFILE.SURNAME.PLACEHOLDER' | translate }}"
+          [(ngModel)]="surname" required minlength="3" #surnameInput="ngModel">
+      </div>
+
+      <!-- email -->
+      <div class="form-group field" [class.has-error]="emailInput.invalid">
+        <label>{{ 'PROFILE.EMAIL.LABEL' | translate }}</label>
+        <input type="email" name="email" class="form-control input" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}"
+          [(ngModel)]="email" required minlength="3" #emailInput="ngModel">
+      </div>
+
+      <!-- gender -->
+      <div class="form-group field" [class.has-error]="genderInput.invalid">
+        <label>{{ 'PROFILE.GENDER.LABEL' | translate }}</label>
+        <input required #genderInput="ngModel" type="radio" name="gender" value='male' [(ngModel)]='gender'>{{ 'PROFILE.GENDER.TYPE.MALE' | translate }}
+        <input required #genderInput="ngModel" type="radio" name='gender' value='female' [(ngModel)]='gender'>{{ 'PROFILE.GENDER.TYPE.FEMALE' | translate }}
+      </div>
+      
+      <!-- birthDate -->            
+      <div class="form-group field" [class.has-error]="birthDateInput.invalid">
+        <label>{{ 'PROFILE.BIRTHDATE.LABEL' | translate }}</label>
+        <input type="date" name="birthdate" class="form-control input" 
+          [(ngModel)]="birthDate" required minlength="3" #birthDateInput="ngModel">
+      </div>      
+
+      <!-- country -->
+      <div class="form-group field" [class.has-error]="countryInput.invalid">
+        <label>{{ 'PROFILE.COUNTRY.LABEL' | translate }}</label>
+        <input type="text" name="country" class="form-control input" placeholder="{{ 'PROFILE.COUNTRY.PLACEHOLDER' | translate }}"
+          [(ngModel)]="country" required minlength="3" #countryInput="ngModel">
+      </div>
+
+      <!-- city -->
+      <div class="form-group field" [class.has-error]="cityInput.invalid">
+        <label>{{ 'PROFILE.CITY.LABEL' | translate }}</label>
+        <input type="text" name="city" class="form-control input" placeholder="{{ 'PROFILE.CITY.PLACEHOLDER' | translate }}"
+          [(ngModel)]="city" required minlength="3" #cityInput="ngModel">
+      </div>
+
+      <!-- address -->
+      <div class="form-group field" [class.has-error]="addressInput.invalid">
+        <label>{{ 'PROFILE.ADDRESS.LABEL' | translate }}</label>
+        <input type="text" name="address" class="form-control input" placeholder="{{ 'PROFILE.ADDRESS.PLACEHOLDER' | translate }}"
+          [(ngModel)]="address" required minlength="3" #addressInput="ngModel">
+      </div>
+
+      <!-- zipCode -->
+      <div class="form-group field" [class.has-error]="zipCodeInput.invalid">
+        <label>{{ 'PROFILE.ZIPCODE.LABEL' | translate }}</label>
+        <input type="text" name="zipCode" class="form-control input" placeholder="{{ 'PROFILE.ZIPCODE.PLACEHOLDER' | translate }}"
+          [(ngModel)]="zipCode" required minlength="3" #zipCodeInput="ngModel">
+      </div>
+
+      <!-- mobilePhone -->
+      <div class="form-group field" [class.has-error]="mobilePhoneInput.invalid">
+        <label>{{ 'PROFILE.MOBILEPHONE.LABEL' | translate }}</label>
+        <input type="text" name="mobilePhone" class="form-control input" placeholder="{{ 'PROFILE.MOBILEPHONE.PLACEHOLDER' | translate }}"
+          [(ngModel)]="mobilePhone" required minlength="3" #mobilePhoneInput="ngModel">
+      </div>
+
+      <!-- homePhone -->
+      <div class="form-group field" [class.has-error]="homePhoneInput.invalid">
+        <label>{{ 'PROFILE.HOMEPHONE.LABEL' | translate }}</label>
+        <input type="text" name="homePhone" class="form-control input" placeholder="{{ 'PROFILE.HOMEPHONE.PLACEHOLDER' | translate }}"
+          [(ngModel)]="homePhone" required minlength="3" #homePhoneInput="ngModel">
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="formLogin.invalid">
+        <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }}
+      </button>
+
+      <button type="submit" class="btn btn-success" >
+        <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }}
+      </button>
+
+      <button class="btn btn-danger" [routerLink]="['/profiles']">
+        <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'BUTTON.CANCEL' | translate }}
+      </button>
+
+    </form> 
+
+
+  </div>
+</div>

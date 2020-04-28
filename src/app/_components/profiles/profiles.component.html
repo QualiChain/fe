@@ -1,6 +1,13 @@
 <h1>{{ 'PROFILES.TITLE' | translate }}</h1>
 
 
+<div class="">
+  <button class="btn btn-primary" [routerLink]="['/profiles/add']">
+    <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'BUTTON.CREATE' | translate }}
+  </button>
+  &nbsp;     
+</div>
+
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>

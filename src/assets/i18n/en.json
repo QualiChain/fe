@@ -124,6 +124,73 @@
   "CVS": {
     "TITLE": "CVs"
   },
+  "PROFILE": {
+    "CREATE_PROFILE": {
+      "TITLE" : "Create new profile"
+    },
+    "PILOT": {
+      "LABEL": "Pilot"
+    },
+    "ROLE": {
+      "LABEL": "Role"
+    },    
+    "USERNAME": {
+      "LABEL": "Username",
+      "PLACEHOLDER": "Write your username"
+    },
+    "FULLNAME": {
+      "LABEL": "Full name",
+      "PLACEHOLDER": "full name"
+    },
+    "NAME": {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Name"
+    },
+    "SURNAME": {
+      "LABEL": "Surname",
+      "PLACEHOLDER": "Surname"
+    },
+    "EMAIL": {
+      "LABEL": "Email",
+      "PLACEHOLDER": "Email"
+    },
+    "GENDER": {
+      "LABEL": "Gender",
+      "PLACEHOLDER": "Gender",
+      "TYPE": {
+        "MALE": "Male",
+        "FEMALE": "Female"
+      }
+    },
+    "BIRTHDATE": {
+      "LABEL": "Birthdate",
+      "PLACEHOLDER": "Birthdate"
+    },
+    "COUNTRY": {
+      "LABEL": "Country",
+      "PLACEHOLDER": "Country"
+    },
+    "CITY": {
+      "LABEL": "City",
+      "PLACEHOLDER": "City"
+    },
+    "ADDRESS": {
+      "LABEL": "Address",
+      "PLACEHOLDER": "Address"
+    },
+    "ZIPCODE": {
+      "LABEL": "Zip code",
+      "PLACEHOLDER": "Zip code"
+    },
+    "MOBILEPHONE": {
+      "LABEL": "Mobile Phone",
+      "PLACEHOLDER": "666666666"
+    },
+    "HOMEPHONE": {
+      "LABEL": "Mobile Phone",
+      "PLACEHOLDER": "999999999"
+    }
+  },
   "PROFILES": {
     "TITLE": "Profiles",
     "STUDENT_PROFILE": "Student Profile",
@@ -192,6 +259,7 @@
     "DOWNLOAD_PDF": "Download PDF",
     "PRINT_PDF": "Print PDF",
     "EXPORT_TO_EXCEL": "Export to Excel",
+    "CREATE": "Create",
     "EDIT": "Edit",
     "DELETE": "Delete",
     "CANCEL": "Cancel",

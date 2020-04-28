@@ -50,6 +50,7 @@ import { UsersService } from './_services/users.service';
 import { JobsService } from './_services/jobs.service';
 
 import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
+import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCarrerOptionsComponent } from './_components/best-carrer-options/best-carrer-options.component';
 import { CarrerAdvisorComponent } from './_components/carrer-advisor/carrer-advisor.component';
@@ -84,6 +85,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     JobsEditComponent,
     ConfirmDialogComponent,
     ProfilesViewComponent,
+    ProfilesAddComponent,
     RecruitmentViewComponent,
     BestCarrerOptionsComponent,
     CarrerAdvisorComponent,
