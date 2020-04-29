@@ -1,6 +1,7 @@
 
 <h1 *ngIf="userdata.role=='Student'">{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
 <h1 *ngIf="userdata.role=='Teacher'">{{ 'PROFILES.TEACHER_PROFILE' | translate }}</h1>
+<h1 *ngIf="userdata.role=='employee'">{{ 'PROFILES.EMPLOYEE_PROFILE' | translate }}</h1>
 <!--
 --{{ userdata.id }} --- {{currentUser.id}} --- {{userdata.role}} --- {{userdata.avatar_path}} --
 -->
@@ -25,7 +26,7 @@
   <div class="row"><br></div>
   
   <div class="row">
-    <div class="col" [ngClass]="{'col-lg-8': userdata.role=='Student'}">
+    <div class="col" [ngClass]="{'col-lg-8': userdata.role=='Student' || userdata.role=='employee'}">
 
       <div class="row">
         <div class="col col-lg-8">
@@ -67,7 +68,7 @@
             </div>
             -->
             <div class="row"><br></div>
-            <div class="row" *ngIf="userdata.role=='Student'">
+            <div class="row" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
 
               
                 <div class="col col-lg-2">
@@ -104,7 +105,7 @@
         <ngb-accordion *ngIf="userdata.role!='Recruiter'" #acc="ngbAccordion">
 
           
-                <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role=='Student'">
+                <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
                   <ng-template ngbPanelContent>
                     <div class="">
                       Mockup chart<br/>
@@ -113,7 +114,7 @@
                   </ng-template>
                 </ngb-panel>
 
-                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role=='Student'">
+                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
                   <ng-template ngbPanelContent>
                       <div class="">
                             
@@ -314,7 +315,7 @@
 
         </ngb-accordion>
 
-        <div class="row carreradvisor" *ngIf="userdata.role=='Student'">
+        <div class="row carreradvisor" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
             <div class="col col-lg-8"> </div>
             <div class="col col-lg-2">
               <!--
@@ -345,7 +346,7 @@
     </div>
       
     </div>
-    <div class="col col-lg-4" *ngIf="userdata.role=='Student'">      
+    <div class="col col-lg-4" *ngIf="userdata.role=='Student' || userdata.role=='employee'">      
       <app-recomended-jobs></app-recomended-jobs>
       <br/>
       <app-recomended-courses></app-recomended-courses>
