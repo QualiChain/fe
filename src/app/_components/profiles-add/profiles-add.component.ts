@@ -21,6 +21,7 @@ import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
 import { UsersService } from '../../_services/users.service';
 import User from '../../_models/user';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profiles-add',
@@ -29,14 +30,31 @@ import User from '../../_models/user';
 })
 export class ProfilesAddComponent implements OnInit {
 
+  pilots: Pilot[] = [
+    {value: '1', viewValue: 'Pilot 1'},
+    {value: '2', viewValue: 'Pilot 2'},
+    {value: '3', viewValue: 'Pilot 3'},
+    {value: '3', viewValue: 'Pilot 4'}
+  ];
+
+  roles: Role[] = [
+    {value: 'student', viewValue: 'Student'},
+    {value: 'administrator', viewValue: 'Administrator'},
+    {value: 'teacher', viewValue: 'Teacher'},
+    {value: 'recruiter', viewValue: 'Recruiter'}
+  ];
+
+  public currentValue: string = null;
+
   pilotId: string ="";
   role: string ="";
   userName: string;
   fullName: string;
   name: string;
   surname: string;
-  gender: string;
+  gender: string = "";
   birthDate: string;
+  //birthDate: Date;
   country: string;
   city: string;
   address: string;
@@ -45,7 +63,7 @@ export class ProfilesAddComponent implements OnInit {
   homePhone: string;
   email: string;
 
-  constructor(private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+  constructor(public datepipe: DatePipe, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
   }
  
@@ -58,6 +76,8 @@ export class ProfilesAddComponent implements OnInit {
   
   processForm() {
 
+    let birth_date_transform =this.datepipe.transform(this.birthDate, 'dd-MM-yyyy');
+
     const obj = {
       "userPath": "",
       "role": this.role,
@@ -67,7 +87,7 @@ export class ProfilesAddComponent implements OnInit {
       "name": this.name,
       "surname": this.surname,
       "gender": this.gender,
-      "birthDate": this.birthDate,
+      "birthDate": birth_date_transform,
       "country": this.country,
       "city": this.city,
       "address": this.address,
@@ -92,6 +112,14 @@ export class ProfilesAddComponent implements OnInit {
   
 
 
+}
 
+interface Pilot {
+  value: string;
+  viewValue: string;
+}
 
+interface Role {
+  value: string;
+  viewValue: string;
 }

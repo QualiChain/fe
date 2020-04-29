@@ -26,7 +26,7 @@ export class ProfilesComponent implements OnInit {
   isLoadingResults = false;
   constructor(private us: UsersService) { }
 
-  displayedColumns: string[] = ['id', 'username', 'name', 'surname', 'role', 'action'];
+  displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource();
