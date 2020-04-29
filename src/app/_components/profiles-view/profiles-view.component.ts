@@ -196,7 +196,7 @@ export class ProfilesViewComponent implements OnInit {
       const id = +params.id;
       if (id && id > 0) {
         this.userId=String(id);
-
+        
         this.us
         .getUser(id).subscribe(
           data => {
@@ -222,7 +222,7 @@ export class ProfilesViewComponent implements OnInit {
             
           }
         );
-
+/*
         this.us
         .getUser(id)
         .subscribe((data: User[]) => {
@@ -230,8 +230,44 @@ export class ProfilesViewComponent implements OnInit {
             this.userdata = data;
   
         });
+*/
+        
+        this.cvs
+        .getCV(id)
+        .subscribe((data) => {
 
-
+            this.label = data[0].label;
+            this.description = data[0].description;
+            this.targetSector = data[0].target_sector;
+            this.expectedSalary = data[0].expected_salary;
+            this.JobDescription = data[0].description;
+            data[0].skills.forEach(element => {
+              this.t.push(this.formBuilder.group({
+                SkillLabel: [element.SkillLabel, [Validators.required]],
+                proficiencyLevel: [element.proficiencyLevel, Validators.required],
+                SkillComment: [element.SkillComment, [Validators.required]],      
+              }));
+            });
+            data[0].work_history
+            .forEach(element => {
+              this.w.push(this.formBuilder.group({
+                position: [element.position, Validators.required],
+                from: [element.from, [Validators.required]],
+                to: [element.to, [Validators.required]],
+                employer: [element.employer, [Validators.required]],
+              }));
+            });
+            data[0].education
+            .forEach(element => {
+              this.e.push(this.formBuilder.group({
+                title: [element.title, Validators.required],
+                from: [element.from, [Validators.required]],
+                to: [element.to, [Validators.required]],
+                organisation: [element.organisation, [Validators.required]],
+                description: [element.description, [Validators.required]],
+              }));
+            });            
+        });
       }
 
     });
@@ -596,15 +632,17 @@ async generatePdf(action = 'open') {
 
   PersonURI: string;
   title: string;
+  label: string;
   description: string;
   targetSector: string;
   expectedSalary: string;
   JobDescription: string;
   onSubmit() {
-    //console.log("onSubmit");
-    this.submitted = true;
+    console.log("onSubmit");
+    //this.submitted = true;
 
     // stop here if form is invalid
+    /*
     if (this.dynamicForm.invalid) {
         return;
     }
@@ -616,22 +654,23 @@ async generatePdf(action = 'open') {
     if (this.dynamicFormEducations.invalid) {
       return;
     }
-    
+    */
+    //'JobDescription': this.JobDescription,
+
     var dataToSend = {
-      'PersonURI': this.userId,
-      'title':this.title,
-      'description': this.description,
+      'PersonURI': "http://somewhere/JohnSmith",
+      'Label':this.label,
       'targetSector': this.targetSector,
       'expectedSalary': this.expectedSalary,
-      'JobDescription': this.JobDescription,
+      'Description': this.description,
       'Skills': this.dynamicForm.value.Skills,
       'workHistory': this.dynamicFormWorks.value.workHistory,
-      'Education': this.dynamicFormEducations.value.Education,
+      'Education': this.dynamicFormEducations.value.Education
     };
-    
+
     //console.log(JSON.stringify(dataToSend, null, 4));
 
-    this.cvs.sendCV(dataToSend).subscribe(
+    this.cvs.postCV(this.userId, dataToSend).subscribe(
       res => {
         console.log("CV sended correctly");
         alert('Success!!');
