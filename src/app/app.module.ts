@@ -16,6 +16,7 @@ import { ProfilesComponent } from './_components/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/*
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
@@ -23,6 +24,43 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule} from '@angular/material/input';
 import { MatChipsModule} from '@angular/material/chips';
+*/
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatListModule} from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTreeModule} from '@angular/material/tree';
+
+
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -59,6 +97,7 @@ import { RecomendedJobsComponent } from './_components/recomended-jobs/recomende
 import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
 import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
+import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -102,12 +141,40 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppRoutingModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
-    MatSliderModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatInputModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
     MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -126,7 +193,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     CustomMaterialModule
   ],
-  providers: [UsersService, JobsService],
+  providers: [DatePipe, UsersService, JobsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -129,10 +129,12 @@
       "TITLE" : "Create new profile"
     },
     "PILOT": {
-      "LABEL": "Pilot"
+      "LABEL": "Pilot",
+      "SELECT_ONE": "Select one pilot"
     },
     "ROLE": {
-      "LABEL": "Role"
+      "LABEL": "Role",
+      "SELECT_ONE": "Select one role"
     },
     "USERNAME": {
       "LABEL": "Username",
@@ -157,6 +159,7 @@
     "GENDER": {
       "LABEL": "Gender",
       "PLACEHOLDER": "Gender",
+      "SELECT_ONE": "Select one gender",
       "TYPE": {
         "MALE": "Male",
         "FEMALE": "Female"
@@ -164,7 +167,7 @@
     },
     "BIRTHDATE": {
       "LABEL": "Birthdate",
-      "PLACEHOLDER": "Birthdate"
+      "PLACEHOLDER": "Choose a birthdate date"
     },
     "COUNTRY": {
       "LABEL": "Country",
@@ -187,7 +190,7 @@
       "PLACEHOLDER": "666666666"
     },
     "HOMEPHONE": {
-      "LABEL": "Mobile Phone",
+      "LABEL": "Home Phone",
       "PLACEHOLDER": "999999999"
     }
   },
