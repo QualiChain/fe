@@ -21,11 +21,16 @@ export class CVService {
   constructor(private httpClient: HttpClient) {
   }
 
+  getCV(userId: Number) {
+    return this
+      .httpClient
+      .get(`${this.uri}/${userId}`);
+    }   
   
-  sendCV(dataIn) {
+  postCV(userId, dataIn) {
     const obj = dataIn;
-
-    return this.httpClient.post(`${this.uri}`, obj).
+    
+    return this.httpClient.post(`${this.uri}/${userId}`, obj).
     pipe(
        map((data: any) => {
            console.log("post OK");
