@@ -245,6 +245,7 @@
   },
   "AWARD_SMART_BADGE" : {
     "TITLE": "Award Smart Badge",
+    "CREATE_BADGE": "Create new badge",
     "NO_SMART_BADGES_AVAILABE" : "No smart awards available",
     "SELECTED_BADGES": "Selected Badges"
   },

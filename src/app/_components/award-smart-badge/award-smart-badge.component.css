@@ -5,3 +5,12 @@
   border-radius: 4px;
 }
 
+.create-award-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.create-award-full-width {
+  width: 100%;
+}

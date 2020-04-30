@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>{{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}</h1>
+<div mat-dialog-content>
+    
+    <form #formAddAward="ngForm" class="create-award-form" (ngSubmit)="onSubmitCreateAwardsModal()">
+        <!-- badge label -->
+        <mat-form-field class="create-award-full-width">
+            <mat-label>Badge label</mat-label>
+            <input matInput required [(ngModel)]="badgelabel" name="badgelabel" value="badgelabel" placeholder="Badge label">
+        </mat-form-field>        
+        <br/>
+        <!-- badge description -->
+        <mat-form-field class="create-award-full-width">
+            <mat-label>Badge description</mat-label>
+            <textarea matInput required [(ngModel)]="badgedescription" name="badgedescription" value="badgedescription" placeholder="Badge description..."></textarea>
+          </mat-form-field>
+
+    </form>
+
+</div>
+<mat-dialog-actions align="end">
+    <!--
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+    -->
+    <div class="modal-footer">
+
+        <button (click)="onSubmitCreateAwardsModal()" type="button" class="btn btn-success" [disabled]="formAddAward.invalid" id="saveCreateAwardModal">
+            <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }}
+        </button>
+    
+        <button type="button" class="btn btn-danger" [mat-dialog-close]="true" id="closeCreateAwardModalWindow">
+            <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'BUTTON.CANCEL' | translate }}
+        </button>
+
+<!-- 
+        <button type="button" [disabled]="!badgelabel" class="btn btn-success" id="saveCreateAwardModal" mat-button (click)="onSubmitCreateAwardsModal()">{{ 'BUTTON.SAVE' | translate }}</button>
+        <button type="button" class="btn btn-danger" id="closeCreateAwardModalWindow" mat-button [mat-dialog-close]="true" >{{ 'BUTTON.CLOSE' | translate }}</button>
+-->
+    </div>
+
+</mat-dialog-actions>

@@ -297,7 +297,7 @@ input, textarea{font-size:17px;min-height:40px;border-radius:none;line-height:20
 .nav-toggle{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-decoration:none;text-indent:-300px;position:relative;overflow:hidden;width:60px;height:55px;float:right;}
 .nav-toggle:before{color:#fff;font-family:"ionicons";font-size:30px;text-transform:none;text-align:right;position:absolute;content:"\f20d";text-indent:0;speak:none;width:100%;right:25px;top:20px;}
 .nav-toggle.active:before{font-family:"ionicons";content:"\f129";font-size:30px;color:#fbbf11;} */
-.navbar-default{background:#2b69b1;border:none;width:100%;border-radius:0;z-index:9999;position:fixed;height:65px}
+.navbar-default{background:#2b69b1;border:none;width:100%;border-radius:0;z-index:999;position:fixed;height:65px}
 
 .qc-icon{height:60px;}
 .qc-icon a{border:none;margin:0;padding:0;}

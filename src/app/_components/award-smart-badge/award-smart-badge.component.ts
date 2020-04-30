@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { UsersService } from '../../_services/users.service';
 
 @Component({
   selector: 'app-award-smart-badge',
@@ -26,6 +27,7 @@ export class AwardSmartBadgeComponent implements OnInit {
   //@ViewChild('closebutton') closebutton;
  
   form: FormGroup;
+  /*
   listOfSmartAwards = [
     {id: 1 , title: 'Operating System-Laboratory Exercise'},
     {id: 2 , title: 'Operating Systems-Written Reports'},
@@ -33,68 +35,15 @@ export class AwardSmartBadgeComponent implements OnInit {
     {id: 4 , title: 'Operating Systems-Begginer'},
     {id: 5 , title: 'Operating Systems-Master'}
   ];
+  */
+  listOfSmartAwards = fulListOfSmartAwards;
 
   selectedUserAwards: any = [];
   selectedUSer: number;
   courseId: number;
   
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) { }
-  
-  onSubmitAwards() {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, public awardDialog: MatDialog, public createAwardDialog: MatDialog) { }
 
-
-    ELEMENT_DATA.forEach((element, index) => {
-     
-      if (element.id==this.selectedUSer) {
-        this.selectedUserAwards.sort();
-        element.aqcuired_badges = this.selectedUserAwards;
-        element.aqcuired_badges;
-        ELEMENT_DATA[index]=element;
-      }    
-      
-    });
-
-    document.getElementById("closeAwardModal").click();
-    
-
-//    this.dataSource.data = ELEMENT_DATA;
-
-    //this.closebutton.nativeElement.click();
-    
-  }
-
-  
-
-  awardUser(userId, userData): void {
-    //const message = `Are you sure you want to do this?`;
-    //console.log(userId);
-    //console.log(userData);
-    this.selectedUSer = userId;
-
-    this.selectedUserAwards = [];
-    userData.aqcuired_badges.forEach((element, index) => {      
-      //console.log("index:"+index+"---element:"+element);
-      this.selectedUserAwards.push(element);      
-    });
-
-    //this.selectedUserAwards = userData.aqcuired_badges;
-  }
-  
-  onSelectItem(item: []) {
-    //console.log(item['id']);
-    //this.userAwards = item['id'];
-    //console.log(this.selectedUserAwards.indexOf(item['id']) > -1);
-
-    if (this.selectedUserAwards.indexOf(item['id']) > -1) {
-      this.selectedUserAwards.splice(this.selectedUserAwards.indexOf(item['id']), 1);
-    }
-    else {
-      //this.selectedUserAwards[item['id']] = item['id'];
-      this.selectedUserAwards.push(item['id']);
-    }
-    
-    //console.log(this.selectedUserAwards);
-  }
 
   displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
 
@@ -125,6 +74,32 @@ export class AwardSmartBadgeComponent implements OnInit {
 
   }
  
+  openAwardDialog(userId: number, element: any) {
+    //console.log(userId)
+    
+   // const dialogRef = this.awardDialog.open(awardDialog_modal);
+
+    const dialogRef = this.awardDialog.open(awardDialog_modal, {
+      width: '550px',
+      data: {userId: userId, element: element}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  }
+
+  openCreateAwardDialog() {
+
+    const dialogRef = this.createAwardDialog.open(createAwardDialog_modal, {
+      width: '550px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  }  
 
 }
 
@@ -142,3 +117,146 @@ const ELEMENT_DATA: listOfStudents[] = [
   {id: 3 , student: 'Ratbert Adams', semester: '6', grade: '8', aqcuired_badges: [1,4]},
   {id: 4 , student: 'student X', semester: '3', grade: '2', aqcuired_badges: [2]}
 ];
+
+@Component({
+  selector: 'createAwardDialog',
+  templateUrl: './createAwardDialog.html',
+  styleUrls: ['./award-smart-badge.component.css']
+})
+export class createAwardDialog_modal implements OnInit {
+  badgelabel: string;
+  badgedescription: string;
+
+  constructor() {}
+
+
+  ngOnInit() {
+    
+  }
+
+  onSubmitCreateAwardsModal() {
+    
+    fulListOfSmartAwards.push({id: fulListOfSmartAwards.length+1 , title: this.badgelabel, description: this.badgedescription });
+    document.getElementById("closeCreateAwardModalWindow").click();
+
+  }
+}
+
+@Component({
+  selector: 'awardDialog',
+  templateUrl: './awardDialog.html',
+})
+
+export class awardDialog_modal implements OnInit {
+
+  listOfSmartAwards = fulListOfSmartAwards;
+  selectedUserAwards: any = [];
+
+  constructor(
+    public createAwardDialog: MatDialog,
+    private us: UsersService,
+    public dialogRef: MatDialogRef<awardDialog_modal>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+
+  ngOnInit() {
+
+    this.selectedUserAwards = [];
+    this.data.element.aqcuired_badges.forEach((element, index) => {      
+      //console.log("index:"+index+"---element:"+element);
+      this.selectedUserAwards.push(element);      
+    });
+
+    this.us
+        .getUser(this.data.userId).subscribe(
+          data => {
+            console.log("user in db");            
+          },
+          error => {
+            console.log("user not found in db");
+            
+            
+          }
+        );
+
+  }
+
+  openCreateAwardDialog() {
+
+    const dialogRef = this.createAwardDialog.open(createAwardDialog_modal, {
+      width: '550px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  } 
+
+  onSelectItemModalWindow(item: []) {
+    //console.log(item['id']);
+    //this.userAwards = item['id'];
+    //console.log(this.selectedUserAwards.indexOf(item['id']) > -1);
+
+    if (this.selectedUserAwards.indexOf(item['id']) > -1) {
+      this.selectedUserAwards.splice(this.selectedUserAwards.indexOf(item['id']), 1);
+    }
+    else {
+      //this.selectedUserAwards[item['id']] = item['id'];
+      this.selectedUserAwards.push(item['id']);
+    }
+    
+    //console.log(this.selectedUserAwards);
+  }
+
+  onSubmitAwardsModal() {
+
+    //console.log(this.data.userId);
+    /*
+    ELEMENT_DATA.forEach((element, index) => {
+     
+      if (element.id==this.selectedUSer) {
+        this.selectedUserAwards.sort();
+        element.aqcuired_badges = this.selectedUserAwards;
+        element.aqcuired_badges;
+        ELEMENT_DATA[index]=element;
+      }    
+      
+    });
+    */
+
+   ELEMENT_DATA.forEach((element, index) => {
+     
+    if (element.id==this.data.userId) {
+      this.selectedUserAwards.sort();
+      element.aqcuired_badges = this.selectedUserAwards;
+      element.aqcuired_badges;
+      ELEMENT_DATA[index]=element;
+    }    
+    
+  });
+
+    document.getElementById("closeAwardModalWindow").click();
+    
+    
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+export interface DialogData {
+  userId: number;
+  element: any;
+}
+
+const fulListOfSmartAwards = [
+  {id: 1 , title: 'Operating System-Laboratory Exercise', description:'test 1'},
+  {id: 2 , title: 'Operating Systems-Written Reports', description:'test 2'},
+  {id: 3 , title: 'Operating Systems-Hackathon', description:'test 3'},
+  {id: 4 , title: 'Operating Systems-Begginer', description:'test 4'},
+  {id: 5 , title: 'Operating Systems-Master', description:'test 5'}
+];
+
