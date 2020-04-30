@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>{{ 'AWARD_SMART_BADGE.SELECTED_BADGES' | translate }}</h1>
+
+<mat-dialog-content class="mat-typography">
+
+<div *ngFor="let item of listOfSmartAwards; let i = index" 
+      class="alert alert-sm alert-info"       
+      [ngClass]="{'selected': selectedUserAwards.indexOf(item.id)!==-1}"
+      >
+      
+      <a href="javascript:;"  (click)="onSelectItemModalWindow(item)">
+        <span *ngIf="selectedUserAwards.indexOf(item.id)===-1"><i _ngcontent-axy-c0="" class="material-icons"> check_box_outline_blank </i></span>
+        <span *ngIf="selectedUserAwards.indexOf(item.id)!==-1"><i _ngcontent-axy-c0="" class="material-icons"> check_box </i></span>
+        {{item.title}}
+      </a>    
+      <br/>
+      <br/>
+      {{item.description}}     
+        
+</div>  
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <!--
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+    -->
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="openCreateAwardDialog()">
+        <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
+      </button>
+
+      <button (click)="onSubmitAwardsModal()" type="button" class="btn btn-success" id="saveAwardModal">
+        <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }}
+      </button>
+
+      <button type="button" class="btn btn-danger" [mat-dialog-close]="true" id="closeAwardModalWindow">
+        <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'BUTTON.CANCEL' | translate }}
+      </button>
+<!-- 
+        <button type="button" class="btn btn-success" id="saveAwardModal" mat-button (click)="onSubmitAwardsModal()">{{ 'BUTTON.SAVE' | translate }}</button>
+        <button type="button" class="btn btn-danger" id="closeAwardModalWindow" mat-button [mat-dialog-close]="true" >{{ 'BUTTON.CANCEL' | translate }}</button>
+-->
+
+    </div>
+
+</mat-dialog-actions>

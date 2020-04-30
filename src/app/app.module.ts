@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './_components/header/header.component';
 import { FooterComponent } from './_components/footer/footer.component';
 import { JobsComponent } from './_components/jobs/jobs.component';
-import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
+import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
 import { HomeComponent } from './_components/home/home.component';
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -59,7 +59,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -105,13 +105,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 
 @NgModule({
-  entryComponents: [ConfirmDialogComponent],
+  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal],
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     JobsComponent,
     AwardSmartBadgeComponent,
+    awardDialog_modal,
+    createAwardDialog_modal,
     HomeComponent,
     AccessDeniedComponent,
     CvsComponent,
@@ -193,7 +195,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     CustomMaterialModule
   ],
-  providers: [DatePipe, UsersService, JobsService],
+  providers: [DatePipe, UsersService, JobsService, { provide: MAT_DIALOG_DATA, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
