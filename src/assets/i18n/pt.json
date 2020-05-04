@@ -119,6 +119,12 @@
           "HIGH": "High"
         }
       }
+    },
+    "APPLY" : {
+      "TITLE" : "Apply for this job",
+      "BUTTON" : {
+        "APPLY": "Apply"
+      }
     }
   },
   "CVS": {
@@ -276,7 +282,8 @@
     "CLOSE": "Close",
     "VIEW": "View",
     "SAVE": "Save",
-    "LEARN_MORE": "Learn more"
+    "LEARN_MORE": "Learn more",
+    "APPLY_JOB": "Apply for this job"
   },
   "ACTION": "Action",
   "FILTER": "Filter"

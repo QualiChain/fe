@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Inject} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -8,7 +8,9 @@ import { JobsService } from '../../_services/jobs.service';
 import { ExcelServiceService } from '../../_services/excel/excel-service.service';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AuthService } from '../../_services';
+import User from '../../_models/user';
 
 export interface AvailableJobs {
   id: number;
@@ -78,7 +80,8 @@ export class JobsComponent implements OnInit {
   }
 
   jobs: Job[];
-  constructor(private js: JobsService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { }
+  constructor(private js: JobsService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
+    public applyForAJobDialog: MatDialog) { }
 
   confirmDialog(id, title): void {
     //const message = `Are you sure you want to do this?`;
@@ -98,6 +101,19 @@ export class JobsComponent implements OnInit {
          console.log("Under construction");
       }
     });
+  }
+  
+
+  openApllyJobDialog(jobId: number, element: any): void {
+
+    const dialogRef = this.applyForAJobDialog.open(applyJobDialog_modal, {
+      width: '550px',
+      data: {jobId: jobId, element: element}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });    
+
   }
 
   jobsList = [];
@@ -122,3 +138,70 @@ export class JobsComponent implements OnInit {
   }
 
 }
+
+
+@Component({
+  selector: 'applyJobDialog',
+  templateUrl: './applyJobDialog.html',
+  styleUrls: ['./jobs.component.css']
+})
+
+
+export class applyJobDialog_modal implements OnInit {
+
+  currentUser: User;
+
+  role: string;
+  available: string;
+  expsalary: string;
+  score: string;
+
+  constructor(
+    private js: JobsService,
+    private authservice: AuthService,
+    public dialogRef: MatDialogRef<applyJobDialog_modal>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogApplyJobData) {}
+
+  //
+
+  ngOnInit() {
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    //console.log(this.data.jobId);
+    //console.log(this.currentUser.id);
+
+  }
+
+  onSubmitApplyJobModal() {
+    let objectToSend = {
+      "role": this.role,
+      "available": this.available,
+      "expsalary": this.expsalary,
+      "score": this.score
+    };
+
+    
+    this.js
+        .applyJob(this.data.jobId, this.currentUser.id, objectToSend).subscribe(
+          data => {
+            console.log("Apply done!!");
+            document.getElementById("closeApplyJobModalWindow").click();
+            
+          },
+          error => {
+            alert("Error appling for the job");                      
+          }
+        );
+    
+    
+
+  }
+  
+
+}
+
+  export interface DialogApplyJobData {
+    jobId: number;
+    element: any;
+  }
