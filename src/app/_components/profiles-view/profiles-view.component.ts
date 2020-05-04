@@ -234,7 +234,7 @@ export class ProfilesViewComponent implements OnInit {
         
         this.cvs
         .getCV(id)
-        .subscribe((data) => {
+        .subscribe((data: any) => {
 
           if (data.length>0) {
             let posCV = data.length-1;
