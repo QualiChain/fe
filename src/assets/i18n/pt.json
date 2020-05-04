@@ -144,6 +144,10 @@
       "LABEL": "Full name",
       "PLACEHOLDER": "full name"
     },
+    "PASSWORD": {
+      "LABEL": "Password",
+      "PLACEHOLDER": "Write your password"
+    },
     "NAME": {
       "LABEL": "Name",
       "PLACEHOLDER": "Name"
@@ -205,6 +209,7 @@
     "SURNAME": "Surname",
     "UNIVERSITY": "Universidade",
     "EMAIL": "Email",
+    "ROLE": "Role",
     "COMPLETED_COURSES": "Cursos concluídos",
     "TEACHING_COURSES": "Cursos de Ensino",
     "SMART_BADGES": "Selos inteligentes",

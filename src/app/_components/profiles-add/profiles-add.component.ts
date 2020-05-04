@@ -45,7 +45,8 @@ export class ProfilesAddComponent implements OnInit {
   ];
 
   public currentValue: string = null;
-
+  
+  hide = true;
   pilotId: string ="";
   role: string ="";
   userName: string;
@@ -62,6 +63,7 @@ export class ProfilesAddComponent implements OnInit {
   mobilePhone: string;
   homePhone: string;
   email: string;
+  password: string;
 
   constructor(public datepipe: DatePipe, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
@@ -79,7 +81,7 @@ export class ProfilesAddComponent implements OnInit {
     let birth_date_transform =this.datepipe.transform(this.birthDate, 'dd-MM-yyyy');
 
     const obj = {
-      "userPath": "",
+      "userPath": "/home/"+this.userName,
       "role": this.role,
       "pilotId": this.pilotId,
       "userName": this.userName,
@@ -101,7 +103,25 @@ export class ProfilesAddComponent implements OnInit {
     this.us.addUser(obj).subscribe(
         res => {
           //console.log("User created");
-          window.location.href="/profiles";
+          console.log(res);
+          var splitted = res.split("=", 2); 
+          console.log(splitted[1]);
+          let password = this.password;
+          
+          this.us.requestNewPassword(splitted[1], password).subscribe(
+            resPassword => {
+              console.log("Password created");
+              //console.log(resPassword);              
+              //after create the user 
+              window.location.href="/profiles";
+            },
+            error => {
+              alert("Error setting user password!!");
+            }
+          );
+
+          //after create the user 
+          //window.location.href="/profiles";
         },
         error => {
           alert("Error creating user!!");

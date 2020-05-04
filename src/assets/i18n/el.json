@@ -140,6 +140,10 @@
       "LABEL": "Username",
       "PLACEHOLDER": "Write your username"
     },
+    "PASSWORD": {
+      "LABEL": "Password",
+      "PLACEHOLDER": "Write your password"
+    },
     "FULLNAME": {
       "LABEL": "Full name",
       "PLACEHOLDER": "full name"
@@ -205,6 +209,7 @@
     "SURNAME": "Πανεπιστήμιο",
     "UNIVERSITY": "University",
     "EMAIL": "Email",
+    "ROLE": "Role",
     "COMPLETED_COURSES": "Ολοκληρωμένα μαθήματα",
     "TEACHING_COURSES": "Εκπαιδευτικά μαθήματα",
     "SMART_BADGES": "Έξυπνες ετικέτες",

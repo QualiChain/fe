@@ -38,4 +38,32 @@ export class UsersService {
     )
   }
 
+  requestNewPassword(userId: Number, password: String) {
+    
+    let obj = {"password": password};
+    
+    return this.http.post(`${this.uriUsers}/${userId}/requestnewpassword`, obj).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
+
+  changePassword(userId: Number, password: String) {
+    
+    let obj = {"new_password": password};
+    
+    return this.http.post(`${this.uriUsers}/${userId}/updatePassword`, obj).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }  
+
 }
