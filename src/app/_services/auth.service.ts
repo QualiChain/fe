@@ -82,6 +82,13 @@ export class AuthService {
     return this.httpClient.post(`${this.uri}`, obj).
     pipe(
        map((data: any) => {
+
+        myAuthObj = { authenticated: true,  password:'******', name: data.name, 
+        surname: data.surname, email: data.email, 
+        userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role};
+      
+        localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
+
          return data;
        }), catchError( error => {
          return throwError( 'Something went wrong!' );

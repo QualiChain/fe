@@ -44,6 +44,13 @@ export class LoginComponent implements OnInit {
     else if (this.name=="teacher") {
       myObj = { authenticated: true, name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.euu', username: 'phb', id: 22 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', role: 'teacher'};
     }
+    else {
+      //console.log("else");
+      if (data) {
+        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role};
+      }
+    }
+    //console.log(myObj);
     localStorage.setItem('userdata', JSON.stringify(myObj));
     window.location.href="/";
   }
@@ -84,6 +91,7 @@ export class LoginComponent implements OnInit {
     this.ls.login(this.name, this.password).subscribe(
         res => {
           console.log("Valid credentials for the auth service");
+          this.invalidCredentials = false;
           this.validCredentials(res);
         },
         error => {

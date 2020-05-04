@@ -236,19 +236,21 @@ export class ProfilesViewComponent implements OnInit {
         .getCV(id)
         .subscribe((data) => {
 
-            this.label = data[0].label;
-            this.description = data[0].description;
-            this.targetSector = data[0].target_sector;
-            this.expectedSalary = data[0].expected_salary;
-            this.JobDescription = data[0].description;
-            data[0].skills.forEach(element => {
+          if (data.length>0) {
+            let posCV = data.length-1;
+            this.label = data[posCV].label;
+            this.description = data[posCV].description;
+            this.targetSector = data[posCV].target_sector;
+            this.expectedSalary = data[posCV].expected_salary;
+            this.JobDescription = data[posCV].description;
+            data[posCV].skills.forEach(element => {
               this.t.push(this.formBuilder.group({
                 SkillLabel: [element.SkillLabel, [Validators.required]],
                 proficiencyLevel: [element.proficiencyLevel, Validators.required],
                 SkillComment: [element.SkillComment, [Validators.required]],      
               }));
             });
-            data[0].work_history
+            data[posCV].work_history
             .forEach(element => {
               this.w.push(this.formBuilder.group({
                 position: [element.position, Validators.required],
@@ -257,7 +259,7 @@ export class ProfilesViewComponent implements OnInit {
                 employer: [element.employer, [Validators.required]],
               }));
             });
-            data[0].education
+            data[posCV].education
             .forEach(element => {
               this.e.push(this.formBuilder.group({
                 title: [element.title, Validators.required],
@@ -266,7 +268,8 @@ export class ProfilesViewComponent implements OnInit {
                 organisation: [element.organisation, [Validators.required]],
                 description: [element.description, [Validators.required]],
               }));
-            });            
+            });      
+          }      
         });
       }
 

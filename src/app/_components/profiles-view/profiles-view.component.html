@@ -1,11 +1,7 @@
-
-<h1 *ngIf="userdata.role=='Student'">{{ 'PROFILES.STUDENT_PROFILE' | translate }}</h1>
-<h1 *ngIf="userdata.role=='Teacher'">{{ 'PROFILES.TEACHER_PROFILE' | translate }}</h1>
-<h1 *ngIf="userdata.role=='employee'">{{ 'PROFILES.EMPLOYEE_PROFILE' | translate }}</h1>
+<h1 >{{ 'PROFILES.PROFILE' | translate }}</h1>
 <!--
 --{{ userdata.id }} --- {{currentUser.id}} --- {{userdata.role}} --- {{userdata.avatar_path}} --
 -->
-
 
 
 <div class="container">
@@ -26,7 +22,7 @@
   <div class="row"><br></div>
   
   <div class="row">
-    <div class="col" [ngClass]="{'col-lg-8': userdata.role=='Student' || userdata.role=='employee'}">
+    <div class="col" [ngClass]="{'col-lg-8': userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'}">
 
       <div class="row">
         <div class="col col-lg-8">
@@ -34,9 +30,10 @@
             <div class="fullname"><span>{{ 'PROFILES.NAME' | translate }}:</span> {{userdata.name}}</div>
             <div class="fullname"><span>{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
             <div class="fullname"><span>{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
-            
+            <div class="fullname"><span>{{ 'PROFILES.ROLE' | translate }}:</span>  {{userdata.role}}</div>
+            <!--
             <div *ngIf="userdata.role!='Recruiter'" class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
-
+            -->
             <!--
             <div *ngIf="userdata.role!='Recruiter'" class="skills"><span>Skills:</span>
               <mat-form-field class="example-chip-list">
@@ -68,7 +65,7 @@
             </div>
             -->
             <div class="row"><br></div>
-            <div class="row" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
+            <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
 
               
                 <div class="col col-lg-2">
@@ -102,10 +99,10 @@
     <div class="row"><br></div>
     <div class="row">
 
-        <ngb-accordion *ngIf="userdata.role!='Recruiter'" #acc="ngbAccordion">
+        <ngb-accordion *ngIf="userdata.role.toLowerCase()!='recruiter'" #acc="ngbAccordion">
 
           
-                <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
+                <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
                   <ng-template ngbPanelContent>
                     <div class="">
                       Mockup chart<br/>
@@ -114,7 +111,7 @@
                   </ng-template>
                 </ngb-panel>
 
-                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
+                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
                   <ng-template ngbPanelContent>
                       <div class="">
                             
@@ -169,7 +166,7 @@
                   </ng-template>
                 </ngb-panel>
                 
-                <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" *ngIf="userdata.role=='Teacher'">
+                <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='teacher'">
                   <ng-template ngbPanelContent>
                       <div class="">
                             
@@ -315,7 +312,7 @@
 
         </ngb-accordion>
 
-        <div class="row carreradvisor" *ngIf="userdata.role=='Student' || userdata.role=='employee'">
+        <div class="row carreradvisor" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
             <div class="col col-lg-8"> </div>
             <div class="col col-lg-2">
               <!--
@@ -328,7 +325,7 @@
             
         </div>
 
-        <div class="row cv_gap_analysis" *ngIf="userdata.role=='Teacher'">
+        <div class="row cv_gap_analysis" *ngIf="userdata.role.toLowerCase()=='teacher'">
           <div class="col col-lg-8"> </div>
           <div class="col col-lg-2">
             <!--
@@ -346,7 +343,7 @@
     </div>
       
     </div>
-    <div class="col col-lg-4" *ngIf="userdata.role=='Student' || userdata.role=='employee'">      
+    <div class="col col-lg-4" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">      
       <app-recomended-jobs></app-recomended-jobs>
       <br/>
       <app-recomended-courses></app-recomended-courses>
