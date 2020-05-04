@@ -6,7 +6,7 @@ import { ModalModule } from './_modal';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './_components/header/header.component';
 import { FooterComponent } from './_components/footer/footer.component';
-import { JobsComponent } from './_components/jobs/jobs.component';
+import { JobsComponent, applyJobDialog_modal } from './_components/jobs/jobs.component';
 import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
 import { HomeComponent } from './_components/home/home.component';
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
@@ -105,12 +105,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 
 @NgModule({
-  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal],
+  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal],
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     JobsComponent,
+    applyJobDialog_modal,
     AwardSmartBadgeComponent,
     awardDialog_modal,
     createAwardDialog_modal,

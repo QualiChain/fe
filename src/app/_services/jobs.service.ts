@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
+import { throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,7 @@ import { environment } from './../../environments/environment';
 export class JobsService {
 
   //uri = 'http://localhost:4000/jobs';
+  private jobsURL = environment.jobsUrl;
   private uriGet = environment.jobpostGet;
   private uriPost = environment.jobpostUrl;
 
@@ -81,4 +84,19 @@ export class JobsService {
           .post(`${this.uriPost}/${id}`, obj)
           .subscribe(res => console.log('Done'));
     }
+
+
+    applyJob(jobId: number, userId: number, dataIn: object) {      
+      return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, dataIn).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }
+
+    
+
 }

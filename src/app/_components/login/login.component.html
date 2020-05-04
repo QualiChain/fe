@@ -34,7 +34,7 @@
                 placeholder="{{ 'LOGIN.USERNAME' | translate }}"
                 [(ngModel)]="name"
                 required
-                minlength="3"
+                minlength="2"
                 #usernameInput="ngModel">
               <div class="help is-error alert-warning" *ngIf="(usernameInput.invalid && usernameInput.dirty)  || (!name)">
                 {{ 'LOGIN.USERNAME_HELP' | translate }}
