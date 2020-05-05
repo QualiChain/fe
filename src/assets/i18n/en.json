@@ -83,6 +83,7 @@
         "ENTITY_LEVEL": "Entry level",
         "ASSOCIATE": "Associate",
         "MID_SENIOR_LEVEL": "Mid-Senior level",
+        "EXPERT": "Expert",
         "DIRECTOR": "Director",
         "EXECUTIVE": "Executive",
         "NOT_APPLICABLE": "Not Applicable"
@@ -95,19 +96,32 @@
     "REQUIRED_SKILLS": {
       "LABEL": "Required Skills"
     },
+    "START_DATE" : {
+      "LABEL": "Start date",
+      "PLACEHOLDER": "Start date"
+    },
+    "END_DATE" : {
+      "LABEL": "End date",
+      "PLACEHOLDER": "End date"
+    },
     "SKILL": {
       "TITLE": "Skill",
       "NAME" : {
         "LABEL": "Name",
         "PLACEHOLDER": "Skill name"
       },
+      "ASSIGN" : {
+        "LABEL": "Assign",
+        "PLACEHOLDER": "Assign"
+      },      
       "LEVEL" : {
         "LABEL": "Level",
         "PLACEHOLDER": "Select one",
         "OPTIONS": {
           "BASIC": "Basic",
           "INTERMEDIATE": "Intermediate",
-          "ADVANCED": "Advanced"
+          "ADVANCED": "Advanced",
+          "EXPERT": "Expert"
         }
       },
       "PRIORITY" : {

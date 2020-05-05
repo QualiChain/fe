@@ -1,131 +1,149 @@
 <h1>{{ 'JOBS.TITLE' | translate }} - <span *ngIf="mode=='Create'">Create</span><span *ngIf="mode=='Edit'">Edit</span></h1>
 
-<div class="card">
-        <div class="card-body">
-          <form [formGroup]="angForm" novalidate>
-            <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.TITLE.LABEL' | translate }}</label>
-              <input formControlName="Label" class="form-control" type=text #Label placeholder="{{ 'JOB.TITLE.PLACEHOLDER' | translate }}">
-            </div>
-            
-            <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.DEPARTMENT.LABEL' | translate }}</label>
-              <input formControlName="department" class="form-control" type=text #Department placeholder="{{ 'JOB.DEPARTMENT.PLACEHOLDER' | translate }}">
-            </div>
+<div class="container">
+  <div class="row">
 
-            <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}</label>
-              <select formControlName="employmentType" class="browser-default custom-select" #EmploymentType placeholder="Select Type">
-                <option value="" selected>{{ 'JOB.EMPLOYMENT_TYPE.PLACEHOLDER' | translate }}</option>
-                <option value="1">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</option>
-                <option value="2">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</option>
-                <option value="3">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</option>
-                <option value="4">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.TEMPORARY' | translate }}</option>
-                <option value="5">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.VOLUNTEER' | translate }}</option>
-                <option value="6">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.INTERNSHIP' | translate }}</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</label>
-              <select formControlName="level" #Level class="browser-default custom-select">
-                <option value="" selected>{{ 'JOB.EMPLOYMENT_LEVEL.PLACEHOLDER' | translate }}</option>
-                <option value="1">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</option>
-                <option value="2">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</option>
-                <option value="3">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</option>
-                <option value="4">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</option>
-                <option value="5">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.DIRECTOR' | translate }}</option>
-                <option value="6">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.EXECUTIVE' | translate }}</option>
-                <option value="7">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.NOT_APPLICABLE' | translate }}</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-4">{{ 'JOB.EMPLOYMENT_DESCRIPTION.LABEL' | translate }}</label>
-              <textarea class="form-control" rows = "10" cols = "40"
-              formControlName="JobDescription" 
-              #JobDescription></textarea>
-            </div>
-            <div>{{ 'JOB.EMPLOYMENT_DESCRIPTION.PLACEHOLDER' | translate }}</div>
+          <form  #formEditJob="ngForm" class="create-job-form" novalidate>
             
 
-            <!--skills-->
-            <div class="form-group">
+              <!-- title -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>{{ 'JOB.TITLE.LABEL' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="dataIn.title" name="title" value="title" placeholder="{{ 'JOB.TITLE.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
+              </mat-form-field>
               <br/>
-        
-              <div class="card mb-3">
-                <div class="card-header">
-                  <span>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</span>
-                </div>
-                <div class="card-body">
+              <!-- description -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput required [(ngModel)]="dataIn.job_description" name="job_description" value="job_description" placeholder="Description..."></textarea>
+              </mat-form-field>
+              <br/>
+              <!-- start_date -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>{{ 'JOB.START_DATE.PLACEHOLDER' | translate }}</mat-label>
+                <input matInput [matDatepicker]="pickerStartDate" name="start_date" [(ngModel)]="dataIn.start_date" #startDateInput="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartDate startView="year" [startAt]="dataIn.start_date" format="DD-MM-YYYY"></mat-datepicker>
+              </mat-form-field>
+              <br/>
+              <!-- end_date -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>{{ 'JOB.END_DATE.PLACEHOLDER' | translate }}</mat-label>
+                <input matInput [matDatepicker]="pickerEndDate" name="end_date" [(ngModel)]="dataIn.end_date" #endDateInput="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEndDate startView="year" [startAt]="dataIn.end_date"></mat-datepicker>
+              </mat-form-field>
+              <br/>
+              <!-- employment_type -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}</mat-label>
+                <mat-select  [(ngModel)]="dataIn.employment_type" name="employment_type" required>
+                  <mat-option value="full-time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</mat-option>
+                  <mat-option value="part-time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</mat-option>
+                  <mat-option value="contract">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</mat-option>
+                  <mat-option value="temporary">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.TEMPORARY' | translate }}</mat-option>
+                  <mat-option value="volunteer">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.VOLUNTEER' | translate }}</mat-option>
+                  <mat-option value="internship">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.INTERNSHIP' | translate }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br/>
+              <!-- level -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</mat-label>
+                <mat-select  [(ngModel)]="dataIn.level" name="level" required>
+                  <mat-option value="internership">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</mat-option>
+                  <mat-option value="entity-level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</mat-option>
+                  <mat-option value="associate">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</mat-option>
+                  <mat-option value="senior_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</mat-option>
+                  <mat-option value="director">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.DIRECTOR' | translate }}</mat-option>
+                  <mat-option value="executive">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.EXECUTIVE' | translate }}</mat-option>
+                  <mat-option value="expert">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.EXPERT' | translate }}</mat-option>
+                  <mat-option value="not-applicable">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.NOT_APPLICABLE' | translate }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br/>
+              <!-- skills -->
+              <div class="form-group">
+                <br/>          
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <span>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</span>
+                  </div>
+                  <div class="card-body">
+  
+                    <div>
 
-                  <div formArrayName="SkillReq">
-                    <div *ngFor="let skill of angForm.controls.SkillReq.controls; let i=index" class="panel panel-default">
-                    <div class="card-subtitle">      
-                        <h3>{{ 'JOB.SKILL.TITLE' | translate }} {{i + 1}}</h3>                        
-                    </div>
-                    <div class="card-text" [formGroupName]="i">
-
-                      <div class="row mb-3">
-                                          
-                        <div class="col-md-3">
-                          <label class="text-primary">{{ 'JOB.SKILL.NAME.LABEL' | translate }}</label><br/>
-                          <input type="text" class="form-control" formControlName="SkillLabel" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}">                      
+                      <div *ngFor="let skill of dataIn.skills; let i=index" class="panel panel-default">
+                        <div class="card-subtitle">      
+                          <h3>{{ 'JOB.SKILL.TITLE' | translate }} {{i + 1}}</h3>                        
                         </div>
-                        <div class="col-md-3">
-                          <label class="text-primary">{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</label><br/>
-                          <select formControlName="proficiencyLevel" class="form-control browser-default custom-select">
-                            <option value="" selected>{{ 'JOB.SKILL.LEVEL.PLACEHOLDER' | translate }}</option>
-                            <option value="1">{{ 'JOB.SKILL.LEVEL.OPTIONS.BASIC' | translate }}</option>
-                            <option value="2">{{ 'JOB.SKILL.LEVEL.OPTIONS.INTERMEDIATE' | translate }}</option>
-                            <option value="3">{{ 'JOB.SKILL.LEVEL.OPTIONS.ADVANCED' | translate }}</option>
-                          </select>
-                        </div>                            
-                        <div class="col-md-3">
-                          <label class="text-primary">{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</label><br/>
-                          <select formControlName="skillPriority" class="form-control browser-default custom-select">
-                            <option value="" selected>{{ 'JOB.SKILL.PRIORITY.PLACEHOLDER' | translate }}</option>
-                            <option value="1">{{ 'JOB.SKILL.PRIORITY.OPTIONS.LOW' | translate }}</option>
-                            <option value="2">{{ 'JOB.SKILL.PRIORITY.OPTIONS.MEDIUM' | translate }}</option>
-                            <option value="3">{{ 'JOB.SKILL.PRIORITY.OPTIONS.HIGH' | translate }}</option>
-                          </select>
-                        </div>
-
-                        <div class="col-md-3">
-                          <br/>
-                          <button *ngIf="i>0" class="btn btn-danger" (click) = "removeSkill(i)">{{ 'JOBS.BUTTON.DELETE_SKILL' | translate }}</button>
-                        </div>
+                      
+                        <!-- SkillLabel -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.SKILL.NAME.LABEL' | translate }}</mat-label>
+                            <input matInput required [(ngModel)]="skill.SkillLabel" name="SkillLabel_{{i}}" value="SkillLabel" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
+                        </mat-form-field>
+                        <br/>
+                        <!-- proficiencyLevel -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</mat-label>
+                          <mat-select  [(ngModel)]="skill.proficiencyLevel" name="skillproficiencyLevel_{{i}}" required>
+                            <mat-option value="basic">{{ 'JOB.SKILL.LEVEL.OPTIONS.BASIC' | translate }}</mat-option>
+                            <mat-option value="intermediate">{{ 'JOB.SKILL.LEVEL.OPTIONS.INTERMEDIATE' | translate }}</mat-option>
+                            <mat-option value="advanced">{{ 'JOB.SKILL.LEVEL.OPTIONS.ADVANCED' | translate }}</mat-option>
+                            <mat-option value="expert">{{ 'JOB.SKILL.LEVEL.OPTIONS.EXPERT' | translate }}</mat-option>          
+                          </mat-select>
+                        </mat-form-field>                        
+                        <br/>
+                        <!-- assign -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.SKILL.ASSIGN.LABEL' | translate }}</mat-label>
+                            <input matInput required [(ngModel)]="skill.assign" name="SkillAssign_{{i}}" value="SkillAssign" placeholder="{{ 'JOB.SKILL.ASSIGN.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
+                        </mat-form-field>
+                        <br/>
+                        <!-- priority -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</mat-label>
+                          <mat-select  [(ngModel)]="skill.priority" name="priority_{{i}}" required>
+                            <mat-option value="low">{{ 'JOB.SKILL.PRIORITY.OPTIONS.LOW' | translate }}</mat-option>
+                            <mat-option value="medium">{{ 'JOB.SKILL.PRIORITY.OPTIONS.MEDIUM' | translate }}</mat-option>
+                            <mat-option value="high">{{ 'JOB.SKILL.PRIORITY.OPTIONS.HIGH' | translate }}</mat-option>
+                          </mat-select>
+                        </mat-form-field> 
+                        
+                        
+                        <br/>
+                        <button *ngIf="i>0" class="btn btn-danger" (click) = "removeSkill(i)">{{ 'JOBS.BUTTON.DELETE_SKILL' | translate }}</button>
+                        
 
                       </div>
-
                     </div>
+
+                  <div>
+                    <span class="table-add float-right mb-3 mr-2">
+                      <button class="btn btn-primary" (click) = "addSkill()">{{ 'JOBS.BUTTON.ADD_SKILL' | translate }}</button>
+                    </span>
                   </div>
-                </div>
-                <div>
-                  <span class="table-add float-right mb-3 mr-2">
-                    <button class="btn btn-primary" (click) = "addSkill()">{{ 'JOBS.BUTTON.ADD_SKILL' | translate }}</button>
-                  </span>
-                </div>
-
-                 </div>
-              </div>
   
-            </div>
+                   </div>
+                </div>
+    
+              </div>
 
+      
               <div class="form-group">
-                <button *ngIf="mode=='Create'" (click) = "addJob(Label.value, Department.value, EmploymentType.value, Level.value, JobDescription.value, this.angForm.controls['SkillReq'].value)" type="submit" class="btn btn-primary"
-                    [disabled]="angForm.invalid" >
+                <button [disabled]="formEditJob.invalid" *ngIf="mode=='Create'" (click) = "addJob()" type="submit" class="btn btn-primary"
+                     >
                     {{ 'JOBS.BUTTON.CREATE_JOB' | translate }}
                 </button>
-                <button *ngIf="mode=='Edit'" (click) = "updateJob(Label.value, Department.value, EmploymentType.value, Level.value, JobDescription.value, this.angForm.controls['SkillReq'].value)" type="submit" class="btn btn-primary"
-                    [disabled]="angForm.invalid" >
+                <button [disabled]="formEditJob.invalid" *ngIf="mode=='Edit'" (click) = "updateJob(dataIn.id)" type="submit" class="btn btn-primary"
+                     >
                     {{ 'JOBS.BUTTON.UPDATE_JOB' | translate }}
                 </button>
                 <button class="btn btn-danger" (click)="confirmDialog()">{{ 'BUTTON.CANCEL' | translate }}</button>
-
-            </div>
-
-
+              </div>
           </form>
+            
+
         </div>
       </div>

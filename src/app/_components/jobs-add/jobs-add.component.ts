@@ -5,6 +5,7 @@ import { JobsService } from '../../_services/jobs.service';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
+import { Job, JobSkill } from '../../_models/Job';
 
 //import { tap } from 'rxjs/operators';
 
@@ -20,6 +21,7 @@ export class JobsAddComponent implements OnInit {
     control: FormArray;
     jobId: string = '';
     mode: string = '';
+    dataIn : Job;
 
     constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private js: JobsService, public dialog: MatDialog, private translate: TranslateService) {
       this.createForm();      
@@ -47,15 +49,17 @@ export class JobsAddComponent implements OnInit {
     }
 
     createForm() {
-      
+      /*
       this.angForm = this.fb.group({
-        Label: ['', Validators.required ],
+        title: ['', Validators.required ],
         department: ['', Validators.required ],
         employmentType: ['', Validators.required ],
         level: ['', Validators.required ],
         JobDescription: ['', Validators.required ],
         SkillReq: this.fb.array([ this.initSkill() ])
       });
+      */
+    
     }
 
     initSkill(): FormGroup {
@@ -68,59 +72,107 @@ export class JobsAddComponent implements OnInit {
 
     addSkill() {
       // add skill to the skills list
-      this.control = <FormArray>this.angForm.controls['SkillReq'];
-      this.control.push(this.initSkill());
+      //this.control = <FormArray>this.angForm.controls['SkillReq'];
+      //this.control.push(this.initSkill());
+      let newJobSkill = {} as JobSkill;
+      newJobSkill.SkillLabel = "";
+      newJobSkill.assign = "";
+      newJobSkill.priority = "";
+      newJobSkill.proficiencyLevel = ""; 
+      if (!this.dataIn.skills)  {
+        this.dataIn.skills = [newJobSkill];
+      } else {
+        this.dataIn.skills.push(newJobSkill);
+      }
+      
+      
     }
 
     removeSkill(i: number) {
       // remove address from the list
-      this.control = <FormArray>this.angForm.controls['SkillReq'];
-      this.control.removeAt(i);
+      //this.control = <FormArray>this.angForm.controls['SkillReq'];
+      //this.control.removeAt(i);
+      this.dataIn.skills.splice(i, 1);
     }
 
-    addJob(Label, department, employmentType, level, JobDescription, SkillReq) {
-      this.js.addJob(Label, department, employmentType, level, JobDescription, SkillReq);
+    addJob() {
+      this.dataIn.creator_id = 1;
+      this.dataIn.date = "24-4-2020";
+      let dataToSend = this.dataIn;
+      delete dataToSend.id;
+
+      this.js.addJob(dataToSend).subscribe(
+        res => {
+          //console.log("Job created");
+          //console.log(res);
+          //after update the job
+          window.location.href="/jobs";
+        },
+        error => {
+          alert("Error creating the job!!");
+        }
+      );
+
     }
     
-    updateJob(Label, department, employmentType, level, JobDescription, SkillReq) {
-      this.js.updateJob(Label, department, employmentType, level, JobDescription, SkillReq, this.jobId);
+    updateJob(jobId: number) {
+
+      this.js.updateJob(jobId, this.dataIn).subscribe(
+        res => {
+          //console.log("Job updated");
+          //console.log(res);
+          //after update the job
+          window.location.href="/jobs";
+        },
+        error => {
+          alert("Error updating the job!!");
+        }
+      );
+
     }
 
-    loadDataJob() {
+    loadDataJob(dataObject) {
       console.log("loadDataJob");
-      let dataIn = {"Label":"Job1","department":"department1","employmentType":"4","level":"5","JobDescription":"This is the main description of the job","SkillReq":[{"SkillLabel":"skill1","proficiencyLevel":"2","skillPriority":"3"},{"SkillLabel":"skill2","proficiencyLevel":"1","skillPriority":"2"}]};
+      
+      if (!dataObject) {
+        this.dataIn = {id: 111, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer", job_description:"department1", employment_type:"4", level:"5", skills: [{SkillLabel: "skillA", assign: "True", priority: "high", proficiencyLevel: "expert"}]};
+      }
+      else {
+        this.dataIn = dataObject;
+      }
 
-      console.log(dataIn.SkillReq.length);
 
-      for (let i=1; i<dataIn.SkillReq.length;i++) {
+/*
+      for (let i=1; i<dataIn.skills.length;i++) {
         console.log(i);
         this.control = <FormArray>this.angForm.controls['SkillReq'];
         this.control.push(this.initSkill());
       }
-
-      this.angForm.setValue(dataIn);
+*/
+      //this.angForm.setValue(dataIn);
 
     }
 
 
   ngOnInit() {
-
+    
+    this.dataIn = {id: null, creator_id: null, date: "", start_date: "", end_date: "", title:"", job_description:"", employment_type:"", level:"" };
     this.route.params.subscribe(params => {
       const id = +params.id;
       this.mode = "";
       if (id && id > 0) {
         this.mode = "Edit";
         this.jobId=String(id);
-        console.log(this.jobId);  
+        //console.log(this.jobId);  
 
         this.js.getJob(this.jobId).subscribe(
           res => {
-            console.log("Request OK");
-            this.loadDataJob();
+            //console.log("Request OK");
+            this.loadDataJob(res);
           },
           error => {
-            console.log("Error getting data");
-            this.loadDataJob();
+            //console.log("Error getting data");
+            this.loadDataJob(null);
           }
         );        
       }

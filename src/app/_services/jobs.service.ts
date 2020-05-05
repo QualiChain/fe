@@ -16,24 +16,21 @@ export class JobsService {
 
   constructor(private http: HttpClient) { }
 
-  addJob(Label, department, employmentType, level, JobDescription, SkillReq) {
-    const obj = {
-      Label,
-      department,
-      employmentType,
-      level,
-      JobDescription,
-      SkillReq
-    };
-    //console.log(obj);
-    this.http.post(`${this.uriPost}`, obj)
-        .subscribe(res => console.log('Done'));
-  }
+  addJob(dataIn: any) {
+    return this.http.post(`${this.jobsURL}`, dataIn).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }  
 
   getJobs() {
     return this
            .http
-           .get(`${this.uriGet}`);
+           .get(`${this.jobsURL}`);
   }
   
     getJobs2() {
@@ -63,7 +60,7 @@ export class JobsService {
     getJob(jobId) {
       return this
              .http
-             .get(`${this.uriGet}/${jobId}`);
+             .get(`${this.jobsURL}/${jobId}`);
     }
 
     editJob(id) {
@@ -75,14 +72,17 @@ export class JobsService {
              return({'id':id,'JobName':'Job name','JobDescription':'Job description','JobPrice':'22'})
     }
 
-      updateJob(Label, department, employmentType, level, JobDescription, SkillReq, id) {
-        const obj = {
-          Label, department, employmentType, level, JobDescription, SkillReq
-        };
-        this
-          .http
-          .post(`${this.uriPost}/${id}`, obj)
-          .subscribe(res => console.log('Done'));
+
+
+    updateJob(jobId: number, dataIn: any) {
+      return this.http.put(`${this.jobsURL}/${jobId}`, dataIn).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
     }
 
 

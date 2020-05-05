@@ -60,21 +60,16 @@
     </ng-container>
   
     <!-- Label Column -->
-    <ng-container matColumnDef="Label">
+    <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.TITLE.LABEL' | translate }} </th>
-      <td mat-cell *matCellDef="let element"> {{element.Label}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
     </ng-container>
   
-    <!-- department Column -->
-    <ng-container matColumnDef="department">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'JOB.DEPARTMENT.LABEL' | translate }} </th>
-      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
-    </ng-container>
   
     <!-- employmentType Column -->
-    <ng-container matColumnDef="employmentType">
+    <ng-container matColumnDef="employment_type">
       <th mat-header-cell *matHeaderCellDef > {{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }} </th>
-      <td mat-cell *matCellDef="let element"> {{ element.employmentType | employmentType | translate }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.employment_type | employmentType | translate }} </td>
     </ng-container>
 
     <!-- level Column -->
