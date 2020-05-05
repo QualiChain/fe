@@ -30,11 +30,11 @@ export class AppComponent {
   }
 
   get isAdmin() {
-    return this.currentUser && this.currentUser.role === Role.admin ;
+    return this.currentUser && this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() ;
   }
 
   get isRecruiter() {
-    return this.currentUser && ((this.currentUser.role === Role.recruiter) || (this.currentUser.role === Role.admin)) ;
+    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase())) ;
   }
 
   logout() {
