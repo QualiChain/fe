@@ -3,7 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
-import Job from '../../_models/Job';
+import { Job } from '../../_models/Job';
 import { JobsService } from '../../_services/jobs.service';
 import { ExcelServiceService } from '../../_services/excel/excel-service.service';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
@@ -21,14 +21,23 @@ export interface AvailableJobs {
   JobDescription: string;
   SkillReq: any
 }
-
+/*
 const ELEMENT_DATA: AvailableJobs[] = [
-  {id: 1, Label:"FE developer",department:"department1",employmentType:"4",level:"5",JobDescription:"This is the main description of the job",SkillReq:[{SkillLabel:"Angular",proficiencyLevel:"2",skillPriority:"3"},{SkillLabel:"css",proficiencyLevel:"1",skillPriority:"2"}]},
-  {id: 2, Label:"BE developer",department:"department2",employmentType:"3",level:"2",JobDescription:"description of the job",SkillReq:[{SkillLabel:"Java",proficiencyLevel:"3",skillPriority:"1"}]},
-  {id: 3, Label:"FE developer 2",department:"department3",employmentType:"2",level:"1",JobDescription:"Another description test",SkillReq:[{SkillLabel:"SASS",proficiencyLevel:"3",skillPriority:"1"},{SkillLabel:"Javascript",proficiencyLevel:"1",skillPriority:"1"}]},
-  {id: 4, Label:"BE developer 2",department:"department4",employmentType:"1",level:"4",JobDescription:"Another description",SkillReq:[{SkillLabel:"Python3",proficiencyLevel:"3",skillPriority:"1"},{SkillLabel:"Python2",proficiencyLevel:"1",skillPriority:"1"}]},  
-  {id: 5, Label:"FE developer 3",department:"department5",employmentType:"3",level:"3",JobDescription:"Drupal developer",SkillReq:[{SkillLabel:"Drupal 8",proficiencyLevel:"4",skillPriority:"4"},{SkillLabel:"Drupal 9",proficiencyLevel:"2",skillPriority:"2"}]},
-  {id: 6, Label:"Javascript developer",department:"department6",employmentType:"2",level:"1",JobDescription:"JS developer",SkillReq:[{SkillLabel:"JS",proficiencyLevel:"2",skillPriority:"1"},{SkillLabel:"HTML",proficiencyLevel:"3",skillPriority:"3"}]}
+  {id: 111, Label:"FE developer",department:"department1",employmentType:"4",level:"5",JobDescription:"This is the main description of the job",SkillReq:[{SkillLabel:"Angular",proficiencyLevel:"2",skillPriority:"3"},{SkillLabel:"css",proficiencyLevel:"1",skillPriority:"2"}]},
+  {id: 222, Label:"BE developer",department:"department2",employmentType:"3",level:"2",JobDescription:"description of the job",SkillReq:[{SkillLabel:"Java",proficiencyLevel:"3",skillPriority:"1"}]},
+  {id: 333, Label:"FE developer 2",department:"department3",employmentType:"2",level:"1",JobDescription:"Another description test",SkillReq:[{SkillLabel:"SASS",proficiencyLevel:"3",skillPriority:"1"},{SkillLabel:"Javascript",proficiencyLevel:"1",skillPriority:"1"}]},
+  {id: 444, Label:"BE developer 2",department:"department4",employmentType:"1",level:"4",JobDescription:"Another description",SkillReq:[{SkillLabel:"Python3",proficiencyLevel:"3",skillPriority:"1"},{SkillLabel:"Python2",proficiencyLevel:"1",skillPriority:"1"}]},  
+  {id: 555, Label:"FE developer 3",department:"department5",employmentType:"3",level:"3",JobDescription:"Drupal developer",SkillReq:[{SkillLabel:"Drupal 8",proficiencyLevel:"4",skillPriority:"4"},{SkillLabel:"Drupal 9",proficiencyLevel:"2",skillPriority:"2"}]},
+  {id: 666, Label:"Javascript developer",department:"department6",employmentType:"2",level:"1",JobDescription:"JS developer",SkillReq:[{SkillLabel:"JS",proficiencyLevel:"2",skillPriority:"1"},{SkillLabel:"HTML",proficiencyLevel:"3",skillPriority:"3"}]}
+];
+*/
+const ELEMENT_DATA: Job[] = [
+  {id: 111, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer", job_description:"department1", employment_type:"4", level:"5", skills: [{SkillLabel: "skillA", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
+  {id: 222, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO BE developer", job_description:"department2", employment_type:"3", level:"2", skills: [{SkillLabel: "skillB", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
+  {id: 333, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer 2", job_description:"department3", employment_type:"2", level:"1", skills: [{SkillLabel: "skillC", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
+  {id: 444, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO BE developer 2", job_description:"department4", employment_type:"1", level:"4", skills: [{SkillLabel: "skillD", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
+  {id: 555, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer 3", job_description:"department5", employment_type:"3", level:"3", skills: [{SkillLabel: "skillF", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
+  {id: 666, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO Javascript developer", job_description:"department6", employment_type:"2", level:"1", skills: [{SkillLabel: "skillD", assign: "True", priority: "high", proficiencyLevel: "expert"}]}
 ];
 
 /*
@@ -65,7 +74,7 @@ export class JobsComponent implements OnInit {
 */
 
 export class JobsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'Label', 'department', 'employmentType', 'level', 'action'];
+  displayedColumns: string[] = ['id', 'title', 'employment_type', 'level', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -127,7 +136,14 @@ export class JobsComponent implements OnInit {
       .getJobs()
       .subscribe((data: Job[]) => {
         this.jobs = data;
-        
+        console.log(data);
+
+        ELEMENT_DATA.forEach(element => {
+          data.push(element);
+          //console.log(element);
+        });
+        this.dataSource.data = data;
+
     });
    
 
