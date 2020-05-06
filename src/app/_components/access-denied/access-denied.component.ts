@@ -14,7 +14,7 @@ export class AccessDeniedComponent implements OnInit {
   sendMessage(): void {
     // send message to subscribers via observable subject
     let currentdate = new Date();
-    this.messageService.sendMessage('This is a test message ! Date:'+currentdate);
+    this.messageService.sendMessage(0,'This is a test message ! Date:'+currentdate, false);
   }
 
   clearMessages(): void {

@@ -33,7 +33,7 @@
 							
 							
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
-								<a data-toggle="modal" data-target="#myModal" href="#">									
+								<a data-toggle="modal" data-target="#myModal" href="#">
 									<span [hidden]="(messages.length<=0)" class="nav-item__badge">
 										<span aria-hidden="true" class="nav-item__badge-count">{{messages.length}}</span>
 										<span class="visually-hidden">{{messages.length}} notificaciones nuevas.</span>
@@ -152,10 +152,18 @@
 			<div class="modal-body">
 				<span *ngIf="messages.length<=0">No notifications available</span>
 				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info">
-					{{message.text}}
+					{{message.message}}
+					<!-- 					
+					<span *ngIf="message.readed" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-open">Readed</span>
+					<span *ngIf="!message.readed" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-close">Unreaded</span>
+					-->
 					<!--
 					<button class="btn btn-danger" (click)="deleteItemMessages(message.id)">Delete</button>
 					-->
+					<button class="btn btn-danger" (click)="changeItemStatus(message)">
+						<span *ngIf="message.readed">Set as unreaded</span>
+						<span *ngIf="!message.readed">Set as readed</span>
+					</button>
 				</div>  
 			</div>
 			<div class="modal-footer">

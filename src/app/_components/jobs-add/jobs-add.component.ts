@@ -98,8 +98,20 @@ export class JobsAddComponent implements OnInit {
     addJob() {
       this.dataIn.creator_id = 1;
       this.dataIn.date = "24-4-2020";
-      let dataToSend = this.dataIn;
-      delete dataToSend.id;
+      //let dataToSend = this.dataIn;
+      //delete dataToSend.id;
+
+     let dataToSend = {
+        "title": this.dataIn.title,
+        "jobDescription": this.dataIn.job_description,
+        "level": this.dataIn.level,
+        "date": "24-4-2020",
+        "startDate": this.dataIn.start_date,
+        "endDate": this.dataIn.end_date,
+        "creatorId": 1,
+        "employmentType": this.dataIn.employment_type,
+        "skills": this.dataIn.skills
+    };
 
       this.js.addJob(dataToSend).subscribe(
         res => {
