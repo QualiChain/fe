@@ -15,7 +15,7 @@ import { AuthService } from '../../_services';
 import User from '../../_models/user';
 import { Role } from '../../_models/role';
 //import { isAdmin } from '../_services/auth.service.isA';
-
+import { interval } from 'rxjs';
 
 export interface OPTIONS_MENU {
   id: number;
@@ -40,12 +40,19 @@ const ELEMENT_DATA: OPTIONS_MENU[] =[
   styleUrls: ['./header.component.css']
 })
 
+
+
+
 export class HeaderComponent implements OnInit, OnDestroy {
   
   currentUser: User;
   route: string;
   userdata: {};
-  messages: any[] = [];
+  //messages: any[] = [];
+
+  ;
+
+  messages: messageType[]=[];
   subscription: Subscription;
 
   menuOptions =ELEMENT_DATA;
@@ -80,17 +87,67 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteItemMessages(index): void {
+  deleteItemMessages(index: number): void {
     // clear messages
     this.messageService.deleteItemMessages(index);
   } 
+
+  changeItemStatus(item: any): void {
+    // change messages staus
+    //console.log(item);
+    this.messageService.changeNotificationStatus(item.id, item).subscribe(
+      res => {
+        console.log("Notification status changed");
+        item.readed = !item.readed;
+        //after create the user 
+        //window.location.href="/profiles";
+      },
+      error => {
+        alert("Error changing notification status!!");
+      }
+    );    
+  }   
+
+
+  reloadNotifications(userdataId: number): void  {
+    this.messageService.getNotificationsByUserId(userdataId).subscribe(
+      data => {
+        //console.log("user notifications");
+        //console.log(data);
+        this.messages = [];
+        for (let key in data) {
+          let value = data[key];
+          if (value.user_id==userdataId) {
+            this.messageService.sendMessage(value.id, value.message, value.readed);
+          }          
+        }        
+      },
+      error => {
+        //console.log("no notification for this user in db");        
+      }
+    );
+  }
 
   ngOnInit() {
 
     // Read item:
     let userdata = JSON.parse(localStorage.getItem('userdata'));
     if (userdata) {
+
+      if (this.currentUser.avatar_path=='') {
+        this.currentUser.avatar_path = 'assets/img/no_avatar.jpg';              
+      }
+
       this.userdata = userdata;
+
+      this.reloadNotifications(userdata.id);
+
+      interval(60000).subscribe(x => {
+        // something
+        this.reloadNotifications(userdata.id);
+      });
+
+      
     }
     else {
       this.userdata = {'authenticated': false};
@@ -132,3 +189,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 }
 
+
+interface messageType {
+  id: number;
+  message: string;
+  readed: boolean;
+  user_id: number
+}
