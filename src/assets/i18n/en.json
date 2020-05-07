@@ -59,6 +59,8 @@
       "LABEL": "Title",
       "PLACEHOLDER": "Position"
     },
+    "Description":"Description"
+    ,
     "DEPARTMENT": {
       "LABEL": "Deparment",
       "PLACEHOLDER": "Deparment"

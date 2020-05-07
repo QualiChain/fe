@@ -60,23 +60,35 @@
     </ng-container>
   
     <!-- Label Column -->
-    <ng-container matColumnDef="title">
+    <ng-container matColumnDef="label">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.TITLE.LABEL' | translate }} </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.label}} </td>
     </ng-container>
+
+    <!-- jobDescription Column --> 
+    <ng-container matColumnDef="jobDescription">
+      <th mat-header-cell *matHeaderCellDef > {{ 'JOB.Description' | translate }} </th>
+      <td mat-cell *matCellDef="let element"> {{ element.jobDescription | translate }} </td>
+    </ng-container>
+
   
-  
-    <!-- employmentType Column -->
+    <!-- employmentType Column 
     <ng-container matColumnDef="employment_type">
       <th mat-header-cell *matHeaderCellDef > {{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }} </th>
       <td mat-cell *matCellDef="let element"> {{ element.employment_type | employmentType | translate }} </td>
-    </ng-container>
+    </ng-container>-->
 
-    <!-- level Column -->
+    <!-- level Column 
     <ng-container matColumnDef="level">
       <th mat-header-cell *matHeaderCellDef > {{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }} </th>
       <td mat-cell *matCellDef="let element"> {{ element.level | levelType | translate }} </td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="jobLocation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+      <td mat-cell *matCellDef="let element"> {{element.jobLocation}} </td>
     </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

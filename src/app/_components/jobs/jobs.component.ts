@@ -31,7 +31,9 @@ const ELEMENT_DATA: AvailableJobs[] = [
   {id: 666, Label:"Javascript developer",department:"department6",employmentType:"2",level:"1",JobDescription:"JS developer",SkillReq:[{SkillLabel:"JS",proficiencyLevel:"2",skillPriority:"1"},{SkillLabel:"HTML",proficiencyLevel:"3",skillPriority:"3"}]}
 ];
 */
-const ELEMENT_DATA: Job[] = [
+const ELEMENT_DATA: Job[] = [];
+/*
+[
   {id: 111, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer", job_description:"department1", employment_type:"4", level:"5", skills: [{SkillLabel: "skillA", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
   {id: 222, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO BE developer", job_description:"department2", employment_type:"3", level:"2", skills: [{SkillLabel: "skillB", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
   {id: 333, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer 2", job_description:"department3", employment_type:"2", level:"1", skills: [{SkillLabel: "skillC", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
@@ -39,7 +41,7 @@ const ELEMENT_DATA: Job[] = [
   {id: 555, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer 3", job_description:"department5", employment_type:"3", level:"3", skills: [{SkillLabel: "skillF", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
   {id: 666, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO Javascript developer", job_description:"department6", employment_type:"2", level:"1", skills: [{SkillLabel: "skillD", assign: "True", priority: "high", proficiencyLevel: "expert"}]}
 ];
-
+*/
 /*
 const ELEMENT_DATA: AvailableJobs[] = [
   {id: 1, skill: 'Angular', required_level: 'req. level 1', priority: '1'},
@@ -74,7 +76,7 @@ export class JobsComponent implements OnInit {
 */
 
 export class JobsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'title', 'employment_type', 'level', 'action'];
+  displayedColumns: string[] = ['id', 'label' , 'jobDescription', 'jobLocation', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -128,25 +130,22 @@ export class JobsComponent implements OnInit {
   jobsList = [];
 
   ngOnInit() {
+    this.getJobList();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
 
-
+  getJobList() {
     this.js
       .getJobs()
       .subscribe((data: Job[]) => {
         this.jobs = data;
         console.log(data);
-
-        ELEMENT_DATA.forEach(element => {
-          data.push(element);
-          //console.log(element);
-        });
         this.dataSource.data = data;
-
+    },
+    err => {
+      console.log(err);
     });
-   
-
   }
 
   exportExcel(){    
