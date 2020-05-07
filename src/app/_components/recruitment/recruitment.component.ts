@@ -44,7 +44,7 @@ export class RecruitmentComponent implements OnInit {
   ];
     //listOfCandidates = [];
 
-  recruits = this.listOfCandidates;
+  recruits = [];//this.listOfCandidates;
   canvas: any;
   ctx: any;
   seachJobTextInput: string;
@@ -125,15 +125,11 @@ export class RecruitmentComponent implements OnInit {
     this.matchingService.matchJob(jobID)
     .subscribe(
         CVs => {
-            console.log(CVs);
-             for (const CV of CVs) {
-                console.log(CV);
-                const data = this.dataSource.data;
-                data.push(CV);
-                this.dataSource.data = data;
-             }
-          
-          
+            this.recruits = CVs;
+            this.recruits.sort((a, b) => b.score - a.score);
+
+            this.dataSource.data = this.recruits;
+
         },
         err => {
           console.log(err);

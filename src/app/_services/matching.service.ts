@@ -14,18 +14,10 @@ export class MatchingService {
 
   public matchJob (jobID): Observable<any> {
 
+    // const  params = new  HttpParams().set('jobid', jobID);
+    // return this.httpClient.get(this.serverurl, {responseType: 'json', params});
+    return this.httpClient.get(`${this.serverurl}/${jobID}/candidates`, {responseType: 'json'});
 
-    /*
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
-      params:  new  HttpParams().set('jobid', jobID)
-    };
-    */
-console.log(jobID)
-    const  params = new  HttpParams().set('jobid', jobID);
-    console.log(params);
-    console.log(this.serverurl);
-    return this.httpClient.get(this.serverurl, {responseType: 'json', params});
   }
 
 }
