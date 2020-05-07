@@ -6,6 +6,7 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/co
 import { MatDialog } from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import { Job, JobSkill } from '../../_models/Job';
+import {formatDate} from '@angular/common';
 
 //import { tap } from 'rxjs/operators';
 
@@ -96,19 +97,17 @@ export class JobsAddComponent implements OnInit {
     }
 
     addJob() {
-      this.dataIn.creator_id = 1;
-      this.dataIn.date = "24-4-2020";
-      //let dataToSend = this.dataIn;
-      //delete dataToSend.id;
-
+      let userdata = JSON.parse(localStorage.getItem('userdata'));
+      let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en');
+      
      let dataToSend = {
         "title": this.dataIn.title,
         "jobDescription": this.dataIn.job_description,
         "level": this.dataIn.level,
-        "date": "24-4-2020",
+        "date": dateToday,
         "startDate": this.dataIn.start_date,
         "endDate": this.dataIn.end_date,
-        "creatorId": 1,
+        "creatorId": userdata.id,
         "employmentType": this.dataIn.employment_type,
         "skills": this.dataIn.skills
     };
@@ -167,8 +166,9 @@ export class JobsAddComponent implements OnInit {
 
 
   ngOnInit() {
-    
-    this.dataIn = {id: null, creator_id: null, date: "", start_date: "", end_date: "", title:"", job_description:"", employment_type:"", level:"" };
+
+    this.dataIn = {id: null, creator_id: null, date: "", start_date: "", end_date: "", title:"", job_description:"", employment_type:"", level:"",
+    skills: [{SkillLabel: "", assign: "", priority: "", proficiencyLevel: ""}] };
     this.route.params.subscribe(params => {
       const id = +params.id;
       this.mode = "";
