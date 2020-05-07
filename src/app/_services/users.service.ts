@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import User from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +14,55 @@ export class UsersService {
   private uriUsers = environment.usersUrl;
 
   constructor(private http: HttpClient) { }
-
+/*
   getUsers() {
     return this
       .http
       .get(`${this.uriUsers}`);
   }
+*/
+  getUsers() {
+    return this.http.get(`${this.uriUsers}`).
+    pipe(
+       map((data: [User]) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
 
+/*
   getUser(userId: Number) {
     return this
       .http
       .get(`${this.uriUsers}/${userId}`);
     }  
-
+*/
+    getUser(userId: Number) {
+      return this.http.get(`${this.uriUsers}/${userId}`).
+      pipe(
+         map((data: User) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }
 
   addUser(obj: Object) {
     return this.http.post(`${this.uriUsers}`, obj).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
+
+  updateUser(userId: number, obj: Object) {
+    return this.http.put(`${this.uriUsers}/${userId}`, obj).
     pipe(
        map((data: any) => {
          return data;

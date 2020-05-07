@@ -200,7 +200,7 @@ export class ProfilesViewComponent implements OnInit {
         this.us
         .getUser(id).subscribe(
           data => {
-            console.log("user in db");
+            //console.log("user in db");
             this.userdata = data;
 
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
@@ -208,7 +208,7 @@ export class ProfilesViewComponent implements OnInit {
             } 
           },
           error => {
-            console.log("user not found in db");
+            //console.log("user not found in db");
             listOfUsers.forEach(element => {
               //console.log(element.id+"--"+params['id']);
               if (element.id==params['id']) {

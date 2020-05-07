@@ -1,4 +1,5 @@
-<h1>{{ 'PROFILE.CREATE_PROFILE.TITLE' | translate }}</h1>
+<h1 *ngIf="mode=='Create'">{{ 'PROFILE.CREATE_PROFILE.TITLE' | translate }}</h1>
+<h1 *ngIf="mode=='Edit'">{{ 'PROFILE.EDIT_PROFILE.TITLE' | translate }}</h1>
 
 <div class="container">
   <div class="row">
@@ -51,7 +52,7 @@
 
 
       <!-- password -->
-      <div class="form-group field" [class.has-error]="passwordInput.invalid">
+      <div *ngIf="mode=='Create'" class="form-group field" [class.has-error]="passwordInput.invalid">
 
         <mat-form-field class="create-profile-full-width">
           <mat-label>{{ 'PROFILE.PASSWORD.LABEL' | translate }}</mat-label>
@@ -147,7 +148,7 @@
         <mat-label>{{ 'PROFILE.BIRTHDATE.PLACEHOLDER' | translate }}</mat-label>
         <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="birthDate" #birthDateInput="ngModel" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker startView="year" [startAt]="birthDate"></mat-datepicker>
+        <mat-datepicker #picker startView="year" [startAt]="birthDate" format="DD-MM-YYYY"></mat-datepicker>
       </mat-form-field>
 
       </div>      
@@ -236,8 +237,12 @@
 
       </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="formLogin.invalid">
-        <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }}
+      <button *ngIf="mode=='Create'" type="submit" class="btn btn-success" [disabled]="formLogin.invalid">
+        <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }} 
+      </button>
+
+      <button *ngIf="mode=='Edit'" type="submit" class="btn btn-success" [disabled]="formLogin.invalid">
+        <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.UPDATE' | translate }} 
       </button>
 
       <button class="btn btn-danger" [routerLink]="['/profiles']">
