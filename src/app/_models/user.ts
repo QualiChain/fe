@@ -11,6 +11,16 @@ export default class User {
     role: string;
     token?: string;
     avatar_path?: string;
-    university?: string
+    university?: string;
+    pilotId?: number;
+    fullName?: string;
+    gender?: string;
+    birthDate?: string;
+    country?: string;
+    city?: string;
+    address?: string;
+    zipCode?: string;
+    mobilePhone?: string;
+    homePhone?: string
 }
 

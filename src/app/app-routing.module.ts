@@ -75,6 +75,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'profiles/:id/edit',
+    component: ProfilesAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'profiles/:id/best-carrer-options',
     component: BestCarrerOptionsComponent,
     canActivate: [AuthGuard]

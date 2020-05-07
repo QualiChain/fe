@@ -148,6 +148,9 @@
     "CREATE_PROFILE": {
       "TITLE" : "Create new profile"
     },
+    "EDIT_PROFILE": {
+      "TITLE" : "Edit profile"
+    },
     "PILOT": {
       "LABEL": "Pilot",
       "SELECT_ONE": "Select one pilot"
@@ -230,6 +233,7 @@
     "UNIVERSITY": "University",
     "EMAIL": "Email",
     "ROLE": "Role",
+    "GENDER": "Gender",
     "COMPLETED_COURSES": "Ολοκληρωμένα μαθήματα",
     "TEACHING_COURSES": "Εκπαιδευτικά μαθήματα",
     "SMART_BADGES": "Έξυπνες ετικέτες",
@@ -296,6 +300,7 @@
     "CLOSE": "Close",
     "VIEW": "View",
     "SAVE": "Save",
+    "UPDATE": "Update",
     "LEARN_MORE": "Learn more",
     "APPLY_JOB": "Apply for this job"
   },

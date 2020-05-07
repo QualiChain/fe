@@ -18,6 +18,10 @@
       <i _ngcontent-axy-c0="" class="material-icons"> print </i>
       {{ 'BUTTON.PRINT_PDF' | translate }}
     </button>
+    <a *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
+      <i _ngcontent-axy-c0="" class="material-icons"> edit </i>
+      {{ 'BUTTON.EDIT' | translate }}
+    </a>
   </div>
   <div class="row"><br></div>
   
@@ -31,6 +35,7 @@
             <div class="fullname"><span>{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
             <div class="fullname"><span>{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
             <div class="fullname"><span>{{ 'PROFILES.ROLE' | translate }}:</span>  {{userdata.role}}</div>
+            <div class="fullname"><span>{{ 'PROFILES.GENDER' | translate }}:</span>  {{userdata.gender}}</div>
             <!--
             <div *ngIf="userdata.role!='Recruiter'" class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
             -->

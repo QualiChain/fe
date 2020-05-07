@@ -117,7 +117,8 @@ export class JobsAddComponent implements OnInit {
           //console.log("Job created");
           //console.log(res);
           //after update the job
-          window.location.href="/jobs";
+          //window.location.href="/jobs";
+          this.router.navigate(["/jobs"]);
         },
         error => {
           alert("Error creating the job!!");
@@ -133,7 +134,8 @@ export class JobsAddComponent implements OnInit {
           //console.log("Job updated");
           //console.log(res);
           //after update the job
-          window.location.href="/jobs";
+          //window.location.href="/jobs";
+          this.router.navigate(["/jobs"]);
         },
         error => {
           alert("Error updating the job!!");
