@@ -4,6 +4,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { MatchingService } from '../../_services/matching.service';
 import { ExcelServiceService } from '../../_services/excel/excel-service.service';
+import { Job } from '../../_models/Job';
+import { JobsService } from '../../_services/jobs.service';
 
 @Component({
   selector: 'app-recruitment',
@@ -44,6 +46,7 @@ export class RecruitmentComponent implements OnInit {
   ];
     //listOfCandidates = [];
 
+  jobs: Job[];
   recruits = [];//this.listOfCandidates;
   canvas: any;
   ctx: any;
@@ -89,7 +92,7 @@ export class RecruitmentComponent implements OnInit {
   public ChartType = 'pie';
   
   
-  constructor(private matchingService: MatchingService, private excelService:ExcelServiceService) { }
+  constructor(private jobService: JobsService, private matchingService: MatchingService, private excelService:ExcelServiceService) { }
 
   //displayedColumns: string[] = ['id', 'title', 'action'];
   displayedColumns: string[] = ['id', 'name', 'role', 'available', 'expsalary', 'score', 'action'];
@@ -111,8 +114,8 @@ export class RecruitmentComponent implements OnInit {
     console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.getMatchedCVs('Job1');
-    
+    //this.getMatchedCVs('Job1');
+    this.getAvailableJobs();
   }
  
   processSeacrhJobForm() {
@@ -155,6 +158,17 @@ export class RecruitmentComponent implements OnInit {
         }
       );
       
+}
+
+  getAvailableJobs() {
+    this.jobService.getJobs()
+    .subscribe((data: Job[]) => {
+      this.jobs = data;
+      console.log(data);
+    },
+    err => {
+      console.log(err);
+    });
 }
 
 exportExcel(){    
