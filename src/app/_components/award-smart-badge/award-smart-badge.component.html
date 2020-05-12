@@ -50,16 +50,18 @@
   </ng-container>
 
     <!-- Acquired Badges Column -->
+  <!--
     <ng-container matColumnDef="aqcuired_badges">
       <th mat-header-cell *matHeaderCellDef > Acquired Badges </th>
       <td mat-cell *matCellDef="let element">
         <ul>
-          <li *ngFor="let element of element.aqcuired_badges; index as i; trackBy: trackByFn">
-            {{listOfSmartAwards[i+1].title}}
+          <li *ngFor="let element_badge of element.aqcuired_badges; index as i; trackBy: trackByFn">
+            {{element_badge.name}}
           </li>
         </ul>
       </td>
     </ng-container>
+  -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
