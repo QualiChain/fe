@@ -160,10 +160,15 @@
 					<!--
 					<button class="btn btn-danger" (click)="deleteItemMessages(message.id)">Delete</button>
 					-->
-					<button class="btn btn-danger" (click)="changeItemStatus(message)">
-						<span *ngIf="message.readed">Set as unreaded</span>
-						<span *ngIf="!message.readed">Set as readed</span>
-					</button>
+					<div>
+						<mat-spinner diameter="20" color="warn" *ngIf="loadingNotificationSpinnerid==message.id"></mat-spinner>
+
+						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="changeItemStatus(message)">
+							<span *ngIf="message.readed">Set as unreaded</span>
+							<span *ngIf="!message.readed">Set as readed</span>
+						</button>
+					</div>
+					
 				</div>  
 			</div>
 			<div class="modal-footer">

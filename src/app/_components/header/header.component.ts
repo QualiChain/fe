@@ -48,6 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: User;
   route: string;
   userdata: {};
+  loadingNotificationSpinnerid: number = null;
   //messages: any[] = [];
 
   ;
@@ -95,15 +96,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   changeItemStatus(item: any): void {
     // change messages staus
     //console.log(item);
+    this.loadingNotificationSpinnerid = item.id;
     this.messageService.changeNotificationStatus(item.id, item).subscribe(
       res => {
         console.log("Notification status changed");
         item.readed = !item.readed;
+        this.loadingNotificationSpinnerid = null;
         //after create the user 
         //window.location.href="/profiles";
       },
       error => {
         alert("Error changing notification status!!");
+        this.loadingNotificationSpinnerid = null;
       }
     );    
   }   

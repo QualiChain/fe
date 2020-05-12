@@ -6,6 +6,9 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UsersService } from '../../_services/users.service';
+import { BadgesService } from '../../_services/badges.service';
+
+//import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-award-smart-badge',
@@ -42,10 +45,14 @@ export class AwardSmartBadgeComponent implements OnInit {
   selectedUSer: number;
   courseId: number;
   
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, public awardDialog: MatDialog, public createAwardDialog: MatDialog) { }
+  constructor(
+    private us: UsersService,
+    private bs: BadgesService,
+    private fb: FormBuilder, private route: ActivatedRoute, public awardDialog: MatDialog, public createAwardDialog: MatDialog) { }
 
 
-  displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
+  //displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
+  displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource<listOfStudents>([]);
@@ -71,6 +78,28 @@ export class AwardSmartBadgeComponent implements OnInit {
       this.courseId = id;
     });
 
+    this.us
+      .getUsers()
+      .subscribe((data: any) => {
+        //this.jobs = data;
+        let dataListUsers = [];
+        data.forEach(element => {
+          //console.log(element);
+          let aqcuired_badges_by_user = [];
+          this.bs
+          .getBadgesByUser(element.id)
+          .subscribe((data: any) => {
+            data.forEach(elementB => {
+              aqcuired_badges_by_user.push(elementB.badge);
+            });
+            dataListUsers.push({id: element.id , student: element.userName, semester: '-', grade: '-', aqcuired_badges: aqcuired_badges_by_user});
+            ELEMENT_DATA.push({id: element.id , student: element.userName, semester: '-', grade: '-', aqcuired_badges: aqcuired_badges_by_user});
+            this.dataSource.data = dataListUsers;
+          });
+        });
+
+        //this.dataSource.data = dataListUsers;
+    });    
 
   }
  
@@ -111,13 +140,15 @@ export interface listOfStudents {
   aqcuired_badges: any
 }
 
+const ELEMENT_DATA: listOfStudents[] = [];
+/*
 const ELEMENT_DATA: listOfStudents[] = [
   {id: 1 , student: 'Dilbert Adams', semester: '6', grade: '-', aqcuired_badges: []},
   {id: 2 , student: 'Dogbert Adams', semester: '8', grade: '9', aqcuired_badges: [1,2,3,4]},
   {id: 3 , student: 'Ratbert Adams', semester: '6', grade: '8', aqcuired_badges: [1,4]},
   {id: 4 , student: 'student X', semester: '3', grade: '2', aqcuired_badges: [2]}
 ];
-
+*/
 @Component({
   selector: 'createAwardDialog',
   templateUrl: './createAwardDialog.html',
@@ -126,8 +157,9 @@ const ELEMENT_DATA: listOfStudents[] = [
 export class createAwardDialog_modal implements OnInit {
   badgelabel: string;
   badgedescription: string;
+  badgeissuer: string;
 
-  constructor() {}
+  constructor(private us: UsersService, private bs: BadgesService) {}
 
 
   ngOnInit() {
@@ -135,9 +167,29 @@ export class createAwardDialog_modal implements OnInit {
   }
 
   onSubmitCreateAwardsModal() {
+
+    let dataToSend  = {
+      "name": this.badgelabel, 
+      "issuer": this.badgeissuer,
+      "description": this.badgedescription
+    };
+  
     
-    fulListOfSmartAwards.push({id: fulListOfSmartAwards.length+1 , title: this.badgelabel, description: this.badgedescription });
-    document.getElementById("closeCreateAwardModalWindow").click();
+    this.bs.addBadge(dataToSend).subscribe(
+      res => {
+        console.log("Badge created");
+        var splitted = res.split("=", 2); 
+        var splitted2 = splitted[1].split(" ", 2); 
+
+        fulListOfSmartAwards.push({id: splitted2[0] , name: this.badgelabel, description: this.badgedescription, issuer: this.badgeissuer});
+        document.getElementById("closeCreateAwardModalWindow").click();
+      },
+      error => {
+        alert("Error creating the Badge!!");
+      }
+    );
+
+    
 
   }
 }
@@ -151,35 +203,125 @@ export class awardDialog_modal implements OnInit {
 
   listOfSmartAwards = fulListOfSmartAwards;
   selectedUserAwards: any = [];
+  listOfSmartBadgesByUser = [];
+  fullDataSmartBadgesByUser = [];
+  lodingspinnerid: number = null;
+  userDataRec: any = [];
 
   constructor(
+    private router: Router,
     public createAwardDialog: MatDialog,
     private us: UsersService,
+    private bs: BadgesService,
     public dialogRef: MatDialogRef<awardDialog_modal>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
 
   ngOnInit() {
 
-    this.selectedUserAwards = [];
-    this.data.element.aqcuired_badges.forEach((element, index) => {      
-      //console.log("index:"+index+"---element:"+element);
-      this.selectedUserAwards.push(element);      
+    this.selectedUserAwards=[];
+    
+
+    this.bs
+      .getBadges()
+      .subscribe((dataFull: any) => {
+        //this.jobs = data;
+        //console.log("full badges list");
+        //console.log(dataFull);
+        this.listOfSmartAwards = dataFull;
+
+        this.bs
+        .getBadgesByUser(this.data.userId)
+        .subscribe((data: any) => {
+          //this.jobs = data;
+          //console.log(dataFull);
+          //console.log(data);
+          this.fullDataSmartBadgesByUser = data;
+
+          data.forEach(element => {
+            let o = dataFull.find((o, i) => {
+              if (o.id === element.badge.id) {                
+                //console.log(o);
+                //console.log(i);
+                //console.log(dataFull[i]);
+                dataFull[i].assigned =true;
+                dataFull[i].item_id=element.id;
+                //console.log(dataFull[i]);
+               // dataFull.splice(i, 1);
+              }
+            });
+
+            //console.log(element.badge.id);
+            //console.log(element.badge.name);
+            //this.selectedUserAwards.push(element);
+            //console.log(element.badge.id+"---"+element.badge.name);
+            this.selectedUserAwards[element.badge.id]=element.badge;
+            this.listOfSmartBadgesByUser.push(element.badge.id);
+          });
+          //console.log(this.selectedUserAwards);
+      });
+
+
     });
 
+    
     this.us
         .getUser(this.data.userId).subscribe(
           data => {
-            console.log("user in db");            
+            console.log("user in db");      
+            this.userDataRec = data;
           },
           error => {
-            console.log("user not found in db");
-            
-            
+            console.log("user not found in db");                        
           }
         );
+    
+  }
+
+  
+  
+
+  updateSmartAwardStatus(smartBadgeId, posI, smartAwardBadgeData, action) {
+
+    this.lodingspinnerid = smartBadgeId;
+    if (action=='delete') {
+      
+      console.log(smartAwardBadgeData.item_id);
+      this.bs.deleteBadgeOfUser(smartAwardBadgeData.item_id).subscribe(
+        res => {
+          console.log("Badge deleted");
+          smartAwardBadgeData.assigned = false;
+          this.lodingspinnerid = null;
+        },
+        error => {
+          alert("Error deleting badges per user!!");
+          this.lodingspinnerid = null;
+        }
+      );
+    }
+    else if (action=='add') {
+      
+      let dataToSend = {"user_id": this.data.userId, "badge_id": smartBadgeId};
+      console.log(dataToSend);
+ 
+      this.bs.addBadgeToUser(dataToSend).subscribe(
+       res => {
+         console.log("Badge added to user");
+         //console.log(res);
+         smartAwardBadgeData.assigned = true;
+         this.lodingspinnerid = null;
+       },
+       error => {
+         alert("Error assigning badges to user!!");
+         this.lodingspinnerid = null;
+       }
+     );      
+
+    }
+    
 
   }
+
 
   openCreateAwardDialog() {
 
@@ -194,19 +336,14 @@ export class awardDialog_modal implements OnInit {
   } 
 
   onSelectItemModalWindow(item: []) {
-    //console.log(item['id']);
-    //this.userAwards = item['id'];
-    //console.log(this.selectedUserAwards.indexOf(item['id']) > -1);
 
-    if (this.selectedUserAwards.indexOf(item['id']) > -1) {
-      this.selectedUserAwards.splice(this.selectedUserAwards.indexOf(item['id']), 1);
+    if (this.listOfSmartBadgesByUser.indexOf(item['id']) > -1) {
+      this.listOfSmartBadgesByUser.splice(this.listOfSmartBadgesByUser.indexOf(item['id']), 1);
     }
     else {
-      //this.selectedUserAwards[item['id']] = item['id'];
-      this.selectedUserAwards.push(item['id']);
+      this.listOfSmartBadgesByUser.push(item['id']);
     }
-    
-    //console.log(this.selectedUserAwards);
+
   }
 
   onSubmitAwardsModal() {
@@ -225,19 +362,54 @@ export class awardDialog_modal implements OnInit {
     });
     */
 
+
+   this.listOfSmartBadgesByUser.forEach(element => {
+     console.log(element);
+     let dataToSend = {"user_id": this.data.userId, "badge_id": element};
+     console.log(dataToSend);
+
+     this.bs.addBadgeToUser(dataToSend).subscribe(
+      res => {
+        console.log("Badge added to user");
+        //console.log(res);
+      },
+      error => {
+        alert("Error assigning badges to user!!");
+      }
+    );
+   });
+
+/*
    ELEMENT_DATA.forEach((element, index) => {
      
     if (element.id==this.data.userId) {
       this.selectedUserAwards.sort();
-      element.aqcuired_badges = this.selectedUserAwards;
-      element.aqcuired_badges;
-      ELEMENT_DATA[index]=element;
+      let seletedBadgesData = [];
+      this.listOfSmartAwards.forEach(elementSA => {
+        
+        if (this.selectedUserAwards.indexOf(elementSA.id)!==-1)
+        {
+          console.log(elementSA);
+          seletedBadgesData.push(elementSA);
+
+          element.aqcuired_badges = seletedBadgesData;
+
+          element.aqcuired_badges;
+          ELEMENT_DATA[index]=element;
+          console.log(ELEMENT_DATA)
+        }
+
+      });
+      console.log(this.selectedUserAwards);
+
+      //element.aqcuired_badges = this.selectedUserAwards;
+      
     }    
     
   });
-
-    document.getElementById("closeAwardModalWindow").click();
-    
+*/
+   // document.getElementById("closeAwardModalWindow").click();
+   // this.router.navigate(["/courses",1,"award"]);
     
   }
 
@@ -251,12 +423,13 @@ export interface DialogData {
   userId: number;
   element: any;
 }
-
+/*
 const fulListOfSmartAwards = [
-  {id: 1 , title: 'Operating System-Laboratory Exercise', description:'test 1'},
-  {id: 2 , title: 'Operating Systems-Written Reports', description:'test 2'},
-  {id: 3 , title: 'Operating Systems-Hackathon', description:'test 3'},
-  {id: 4 , title: 'Operating Systems-Begginer', description:'test 4'},
-  {id: 5 , title: 'Operating Systems-Master', description:'test 5'}
+  {id: 1 , name: 'Operating System-Laboratory Exercise', description:'test 1', issuer: 'issuer1'},
+  {id: 2 , name: 'Operating Systems-Written Reports', description:'test 2', issuer: 'issuer2'},
+  {id: 3 , name: 'Operating Systems-Hackathon', description:'test 3', issuer: 'issuer3'},
+  {id: 4 , name: 'Operating Systems-Begginer', description:'test 4', issuer: 'issuer4'},
+  {id: 5 , name: 'Operating Systems-Master', description:'test 5', issuer: 'issuer5'}
 ];
-
+*/
+const fulListOfSmartAwards = [];
