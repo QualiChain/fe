@@ -6,7 +6,7 @@
 
         <div class="row">
           <div class="col col-lg-8">
-            {{itemBadgeData.name}}<br/>
+            <h2>{{itemBadgeData.name}}</h2><br/>
             Issuer: {{itemBadgeData.issuer}} <br/>
             Description: {{itemBadgeData.description}}<br/>
           </div>
@@ -52,11 +52,11 @@
     <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
     -->
     <div class="modal-footer">
-      <!--
-      <button class="btn btn-primary" (click)="openCreateAwardDialog()">
+      
+      <button class="btn btn-primary" (click)="openCreateAwardDialogInModal()">
         <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
       </button>
-      -->
+      
       <!--
       <button (click)="onSubmitAwardsModal()" type="button" class="btn btn-success" id="saveAwardModal">
         <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }}

@@ -20,7 +20,11 @@ import { AuthService } from '../../_services';
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
 import { UsersService } from '../../_services/users.service';
+import { BadgesService } from '../../_services/badges.service';
+
 import User from '../../_models/user';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { awardDialog_modal } from '../../_components/award-smart-badge/award-smart-badge.component';
 
 @Component({
   selector: 'app-profiles-view',
@@ -29,6 +33,7 @@ import User from '../../_models/user';
 })
 export class ProfilesViewComponent implements OnInit {
 
+  smartBadgesByUser: any[];
   currentUser: User;
   dynamicForm: FormGroup;
   dynamicFormWorks: FormGroup;
@@ -78,7 +83,7 @@ export class ProfilesViewComponent implements OnInit {
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+  constructor(public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -87,6 +92,19 @@ export class ProfilesViewComponent implements OnInit {
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
 
   }
+
+  openAwardDialogInUserProfile(userId: number, element: any) {
+     
+    const dialogRef = this.awardDialog.open(awardDialog_modal, {
+      width: '550px',
+      data: {userId: userId, element: element, source: 'profile'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  }
+
 
   add(event: MatChipInputEvent): void {
     // Add fruit only when MatAutocomplete is not open
@@ -163,6 +181,17 @@ export class ProfilesViewComponent implements OnInit {
     this.route.params.subscribe(params => {
       
       //console.log(params['id']);
+
+      this.bs
+      .getBadgesByUser(params['id'])
+      .subscribe((data: any) => {
+        //this.jobs = data;
+        //console.log(dataFull);
+        //console.log(data);
+        this.smartBadgesByUser = data;
+
+      });
+
       let listOfUsers = 
       [
         {name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', userName: 'dilbert.adams', id: 11 , avatar_path: 'assets/img/dilbert.jpg', university:'National University of Athens', role:'Student'},
