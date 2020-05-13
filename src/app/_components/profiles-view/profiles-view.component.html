@@ -241,74 +241,28 @@
                 <ngb-panel id="toggle-3" title="{{ 'PROFILES.SMART_BADGES' | translate }}">
                         <ng-template ngbPanelContent>
                             <div class="row smartBudgesBody">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                        <br/>
-                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                        <br/>
-                                        C++ Programming Language Intermediate
-                                        <br/>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                        <br/>
-                                        <span class="glyphicon glyphicon-flash"></span>
-                                        <br/>
-                                        Calculus Beginner
-                                        <br/>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                        <br/>
-                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                        <br/>
-                                        Electrical Floor Planning Beginner
-                                        <br/>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                        <br/>
-                                        <span class="glyphicon glyphicon-flash"></span>
-                                        <br/>
-                                        Biomedical Beginer
-                                        <br/>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                        <br/>
-                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                        <br/>
-                                        Java Programming Language Intermidiate
-                                        <br/>
-                                </div>
-                                
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                    <br/>
-                                  <span class="glyphicon glyphicon-star-empty"></span>
-                                  <br/>
-                                  PHP Intermidiate
-                                  <br/>
-                                </div>
 
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                    <br/>
-                                  <span class="glyphicon glyphicon-star-empty"></span>
-                                  <br/>
-                                  Angular Beginer
-                                  <br/>
-                                </div>
+                              
+                              <div *ngIf="smartBadgesByUser.length==0" class="col-lg-8  smartBudge">
+                                This user does not have any smart badge yet. 
+                              </div>
+                              <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                                <br/>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <br/>
+                                <span matTooltip="{{smartBadge.badge.description}}">{{smartBadge.badge.name}}</span> 
 
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                    <br/>
-                                  <span class="glyphicon glyphicon-flash"></span>
-                                  <br/>
-                                  Drupal 8 Beginner
-                                  <br/>
-                                </div>
 
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
-                                    <br/>
-                                  <span class="glyphicon glyphicon-flash"></span>
-                                  <br/>
-                                  Python 3 Beginner
-                                  <br/>
-                                </div>
+                                <br/>
+                              </div>
+                            </div>
 
+                            <div class="row smartBudgesBody">
+                              <div class="col-lg-12  smartBudge">
+                                <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(userdata.id, smartBadgesByUser)">
+                                  <i _ngcontent-axy-c0="" class="material-icons"> emoji_events </i> Award
+                                </button>
+                              </div>
                             </div>
 
 
