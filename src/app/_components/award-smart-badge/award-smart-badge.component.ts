@@ -82,9 +82,15 @@ export class AwardSmartBadgeComponent implements OnInit {
       .getUsers()
       .subscribe((data: any) => {
         //this.jobs = data;
+        
         let dataListUsers = [];
         data.forEach(element => {
-          //console.log(element);
+          //console.log(element);          
+
+          //dataListUsers.push({id: element.id , student: element.userName, semester: '-', grade: '-', aqcuired_badges: []});
+          //this.dataSource.data = dataListUsers;
+
+          
           let aqcuired_badges_by_user = [];
           this.bs
           .getBadgesByUser(element.id)
@@ -95,8 +101,10 @@ export class AwardSmartBadgeComponent implements OnInit {
             dataListUsers.push({id: element.id , student: element.userName, semester: '-', grade: '-', aqcuired_badges: aqcuired_badges_by_user});
             ELEMENT_DATA.push({id: element.id , student: element.userName, semester: '-', grade: '-', aqcuired_badges: aqcuired_badges_by_user});
             this.dataSource.data = dataListUsers;
-          });
+          });          
+          
         });
+        
 
         //this.dataSource.data = dataListUsers;
     });    
@@ -286,8 +294,8 @@ export class awardDialog_modal implements OnInit {
     this.lodingspinnerid = smartBadgeId;
     if (action=='delete') {
       
-      console.log(smartAwardBadgeData.item_id);
-      this.bs.deleteBadgeOfUser(smartAwardBadgeData.item_id).subscribe(
+      //console.log(smartAwardBadgeData.item_id);
+      this.bs.deleteBadgeOfUser(this.data.userId, smartBadgeId).subscribe(
         res => {
           console.log("Badge deleted");
           smartAwardBadgeData.assigned = false;

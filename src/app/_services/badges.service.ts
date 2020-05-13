@@ -73,8 +73,8 @@ export class BadgesService {
     )
   }
  
-  deleteBadgeOfUser(badgeId: Number) {
-    return this.http.delete(`${this.uriUser}/badges/${badgeId}`)    
+  deleteBadgeOfUser(userId: Number, badgeId: Number) {
+    return this.http.delete(`${this.uriUser}/badges?badgeid=${badgeId}&userid=${userId}`)    
     .pipe(
        map((data: any) => {
          return data;
