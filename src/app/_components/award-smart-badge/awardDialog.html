@@ -3,20 +3,25 @@
 <mat-dialog-content class="mat-typography">
 
       <div *ngFor="let itemBadgeData of listOfSmartAwards; let i = index" class="alert alert-sm alert-info">
-       {{itemBadgeData.name}}<br/>
-       Issuer: {{itemBadgeData.issuer}} <br/>
-       Description: {{itemBadgeData.description}}<br/>
-       <div>
-        <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==itemBadgeData.id"></mat-spinner>
 
-        <button *ngIf="itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
-          <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
-        </button>
+        <div class="row">
+          <div class="col col-lg-8">
+            {{itemBadgeData.name}}<br/>
+            Issuer: {{itemBadgeData.issuer}} <br/>
+            Description: {{itemBadgeData.description}}<br/>
+          </div>
+          <div class="col col-lg-2">
+            <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==itemBadgeData.id"></mat-spinner>
 
-        <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'add')" type="button" class="btn btn-primary">
-          <i _ngcontent-axy-c0="" class="material-icons">  emoji_events  </i> Award
-        </button>
-       </div>
+            <button *ngIf="itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
+              <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+            </button>
+
+            <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'add')" type="button" class="btn btn-primary">
+              <i _ngcontent-axy-c0="" class="material-icons">  emoji_events  </i> Award
+            </button>
+          </div>
+        </div>
        
         
       </div>
