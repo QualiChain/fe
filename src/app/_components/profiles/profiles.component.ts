@@ -1,15 +1,19 @@
-import {Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { UsersService } from '../../_services/users.service';
 import User from '../../_models/user';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-profiles',
   templateUrl: './profiles.component.html',
   styleUrls: ['./profiles.component.css']
 })
+
+
+
 /*
 export class ProfilesComponent implements OnInit {
 
@@ -24,7 +28,7 @@ export class ProfilesComponent implements OnInit {
 
   users: User[];
   isLoadingResults = false;
-  constructor(private us: UsersService) { }
+  constructor(private us: UsersService, public createChangePasswordDialog: MatDialog) { }
 
   displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
 
@@ -59,6 +63,18 @@ export class ProfilesComponent implements OnInit {
   }
 
 
+  openChangePasswordDialog(userId: Number) {
+
+    const dialogRef = this.createChangePasswordDialog.open(createChangePasswordDialog_modal, {
+      width: '550px',
+      data: {userId: userId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  } 
+
 }
 
 export interface listOfUsers {
@@ -87,3 +103,61 @@ const ELEMENT_DATA: User[] = [
   {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', userName: 'ratbert.adams', id: 44 , avatar_path: '',  role:'Student'},
   {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', role:'Recruiter'}
 ];
+
+
+@Component({
+  selector: 'createChangePasswordDialog',
+  templateUrl: './changeUserPasswordForm.html',
+  styleUrls: ['./profiles.component.css']
+})
+export class createChangePasswordDialog_modal implements OnInit {
+  password: string = "";
+  repeatPassword: string = "";
+  userDataRec: User;
+  userName: string = ""
+  hidePassword: boolean = true;
+  hideRepeatPassword: boolean = true;
+
+  constructor(private us: UsersService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+
+  ngOnInit() {
+    
+    //console.log(this.data.userId);
+        
+    this.us
+        .getUser(this.data.userId).subscribe(
+          data => {
+            //console.log("user in db");      
+            this.userDataRec = data;
+            this.userName = data.userName;
+          },
+          error => {
+            console.log("user not found in db");                        
+          }
+        );
+
+  }
+
+  onSubmitChangePasswordModal() {
+
+    //console.log(this.data.userId+"---"+this.password);
+
+    this.us.changePassword( this.data.userId, this.password).subscribe(
+      res => {
+        console.log("Password updated");
+        
+        document.getElementById("closeChangePasswordModalWindow").click();
+      },
+      error => {
+        alert("Error changing user pasword!!");
+      }
+    );   
+
+  }
+}
+
+export interface DialogData {
+  userId: number;
+}

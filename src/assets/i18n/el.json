@@ -221,6 +221,21 @@
       "PLACEHOLDER": "999999999"
     }
   },
+  "CHANGE_PASSWORD": {
+    "TITLE": "Change user password",
+    "WARNING_MESSAGE" : {
+      "PASSWORD_MATCH" : "Passwords match: To change the current user password, enter the new password in both fields.",
+      "PASSWORD_LENGTH" : "Passwords length: 8 characters minimum."
+    },
+    "NEW_PASSWORD": {
+      "LABEL": "New password",
+      "PLACEHOLDER": "New password"
+    },
+    "REPEAT_PASSWORD":  {
+      "LABEL": "Repeat new password",
+      "PLACEHOLDER": "Repeat new password"
+    }
+  },
   "PROFILES": {
     "TITLE": "Προφίλ",
     "STUDENT_PROFILE": "Προφίλ σπουδαστών",
@@ -302,7 +317,8 @@
     "SAVE": "Save",
     "UPDATE": "Update",
     "LEARN_MORE": "Learn more",
-    "APPLY_JOB": "Apply for this job"
+    "APPLY_JOB": "Apply for this job",
+    "CHANGE_PASSWORD": "Change password"
   },
   "ACTION": "Action",
   "FILTER": "Filter"
