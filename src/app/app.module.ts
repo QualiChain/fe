@@ -12,7 +12,7 @@ import { HomeComponent } from './_components/home/home.component';
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CvsComponent } from './_components/cvs/cvs.component';
-import { ProfilesComponent } from './_components/profiles/profiles.component';
+import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -105,7 +105,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 
 @NgModule({
-  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal],
+  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -127,6 +127,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     JobsEditComponent,
     ConfirmDialogComponent,
     ProfilesViewComponent,
+    createChangePasswordDialog_modal,
     ProfilesAddComponent,
     RecruitmentViewComponent,
     BestCarrerOptionsComponent,

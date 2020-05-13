@@ -16,6 +16,9 @@ import User from '../../_models/user';
 import { Role } from '../../_models/role';
 //import { isAdmin } from '../_services/auth.service.isA';
 import { interval } from 'rxjs';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { createChangePasswordDialog_modal } from '../../_components/profiles/profiles.component';
+
 
 export interface OPTIONS_MENU {
   id: number;
@@ -59,6 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   menuOptions =ELEMENT_DATA;
 
   constructor(
+    public createChangePasswordDialog: MatDialog,
     private appcomponent: AppComponent,
     private authservice: AuthService,
     location: Location, router: Router, public translate: TranslateService, private messageService: MessageService) {
@@ -162,7 +166,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
-}
+  }
+
+
+
+  openChangePasswordDialogFromHeader(userId: Number) {
+
+    const dialogRef = this.createChangePasswordDialog.open(createChangePasswordDialog_modal, {
+      width: '550px',
+      data: {userId: userId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+    
+  } 
+
   isLogged = this.appcomponent.isLogged;
   isAdmin = this.appcomponent.isAdmin;
   isRecruiter = this.appcomponent.isRecruiter;
