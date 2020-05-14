@@ -97,6 +97,7 @@ import { RecomendedJobsComponent } from './_components/recomended-jobs/recomende
 import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
 import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
+import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
 import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -136,7 +137,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RecomendedJobsComponent,
     CoursesEditComponent,
     EmploymentTypePipe,
-    LevelTypePipe
+    LevelTypePipe,
+    FilterArrayByValuePipe
   ],
   imports: [
     BrowserModule,
