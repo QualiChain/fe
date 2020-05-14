@@ -34,24 +34,26 @@
 							
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" data-target="#myModal" href="#">
-									<span [hidden]="(messages.length<=0)" class="nav-item__badge">
-										<span aria-hidden="true" class="nav-item__badge-count">{{messages.length}}</span>
-										<span class="visually-hidden">{{messages.length}} notificaciones nuevas.</span>
+									<span [hidden]="( (messages | FilterArrayByValue : 'readed' : 'false') <=0)" class="nav-item__badge">
+										<span aria-hidden="true" class="nav-item__badge-count">
+											{{ messages | FilterArrayByValue : 'readed' : 'false'}}
+										</span>
+										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'readed' : 'false'}} notificaciones nuevas.</span>
 									</span>
 									<span class="glyphicon glyphicon-bell"></span>
 								</a>
 							</li>
-
+							<!--
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" data-target="#myModal" href="#">
-									<span [hidden]="(messages.length<=0)" class="nav-item__badge">
-										<span aria-hidden="true" class="nav-item__badge-count">{{messages.length}}</span>
-										<span class="visually-hidden">{{messages.length}} notificaciones nuevas.</span>
+									<span [hidden]="( (messages | FilterArrayByValue : 'readed' : 'false') <=0)" class="nav-item__badge">
+										<span aria-hidden="true" class="nav-item__badge-count">{{ messages | FilterArrayByValue : 'readed' : 'false'}}</span>
+										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'readed' : 'false'}} notificaciones nuevas.</span>
 									</span>
 									<span class="glyphicon glyphicon-envelope"></span>
 								</a>
 							</li>
-
+							-->
 							
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 									<div class="dropdown">
