@@ -9,35 +9,43 @@
               <!-- title -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.TITLE.LABEL' | translate }}</mat-label>
-                <input matInput required [(ngModel)]="dataIn.title" name="title" value="title" placeholder="{{ 'JOB.TITLE.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
+                <input matInput required [(ngModel)]="dataIn.Label" name="title" value="title" placeholder="{{ 'JOB.TITLE.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
               </mat-form-field>
               <br/>
               <!-- description -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>Description</mat-label>
-                <textarea matInput required [(ngModel)]="dataIn.job_description" name="job_description" value="job_description" placeholder="Description..."></textarea>
+                <textarea matInput required [(ngModel)]="dataIn.JobDescription" name="job_description" value="job_description" placeholder="Description..."></textarea>
               </mat-form-field>
               <br/>
+              <!-- location -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>Location</mat-label>
+                <input matInput required [(ngModel)]="dataIn.JobLocation" name="job_Location" value="job_Location" placeholder="Location...">
+              </mat-form-field>
+              <br/>
+
+              
               <!-- start_date -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.START_DATE.PLACEHOLDER' | translate }}</mat-label>
-                <input matInput [matDatepicker]="pickerStartDate" name="start_date" [(ngModel)]="dataIn.start_date" #startDateInput="ngModel" required>
+                <input matInput [matDatepicker]="pickerStartDate" name="start_date" [(ngModel)]="dataIn.startDate" #startDateInput="ngModel" required>
                 <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
-                <mat-datepicker #pickerStartDate startView="year" [startAt]="dataIn.start_date" format="DD-MM-YYYY"></mat-datepicker>
+                <mat-datepicker #pickerStartDate startView="year" [startAt]="dataIn.startDate" format="DD-MM-YYYY"></mat-datepicker>
               </mat-form-field>
               <br/>
               <!-- end_date -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.END_DATE.PLACEHOLDER' | translate }}</mat-label>
-                <input matInput [matDatepicker]="pickerEndDate" name="end_date" [(ngModel)]="dataIn.end_date" #endDateInput="ngModel" required>
+                <input matInput [matDatepicker]="pickerEndDate" name="end_date" [(ngModel)]="dataIn.endDate" #endDateInput="ngModel" required>
                 <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
-                <mat-datepicker #pickerEndDate startView="year" [startAt]="dataIn.end_date"></mat-datepicker>
+                <mat-datepicker #pickerEndDate startView="year" [startAt]="dataIn.endDate"></mat-datepicker>
               </mat-form-field>
               <br/>
               <!-- employment_type -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}</mat-label>
-                <mat-select  [(ngModel)]="dataIn.employment_type" name="employment_type" required>
+                <mat-select  [(ngModel)]="dataIn.employmentType" name="employment_type" required>
                   <mat-option value="full-time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</mat-option>
                   <mat-option value="part-time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</mat-option>
                   <mat-option value="contract">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</mat-option>
@@ -73,7 +81,7 @@
   
                     <div>
 
-                      <div *ngFor="let skill of dataIn.skills; let i=index" class="panel panel-default">
+                      <div *ngFor="let skill of dataIn.SkillReq; let i=index" class="panel panel-default">
                         <div class="card-subtitle">      
                           <h3>{{ 'JOB.SKILL.TITLE' | translate }} {{i + 1}}</h3>                        
                         </div>

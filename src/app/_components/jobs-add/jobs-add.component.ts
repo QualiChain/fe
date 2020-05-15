@@ -76,13 +76,13 @@ export class JobsAddComponent implements OnInit {
       //this.control.push(this.initSkill());
       let newJobSkill = {} as JobSkill;
       newJobSkill.SkillLabel = "";
-      newJobSkill.assign = "";
-      newJobSkill.priority = "";
+      //newJobSkill.assign = "";
+      //newJobSkill.priority = "";
       newJobSkill.proficiencyLevel = ""; 
-      if (!this.dataIn.skills)  {
-        this.dataIn.skills = [newJobSkill];
+      if (!this.dataIn.SkillReq)  {
+        this.dataIn.SkillReq = [newJobSkill];
       } else {
-        this.dataIn.skills.push(newJobSkill);
+        this.dataIn.SkillReq.push(newJobSkill);
       }
       
       
@@ -92,12 +92,12 @@ export class JobsAddComponent implements OnInit {
       // remove address from the list
       //this.control = <FormArray>this.angForm.controls['SkillReq'];
       //this.control.removeAt(i);
-      this.dataIn.skills.splice(i, 1);
+      this.dataIn.SkillReq.splice(i, 1);
     }
 
     addJob() {
-      this.dataIn.creator_id = 1;
-      this.dataIn.date = "24-4-2020";
+      //this.dataIn.creator_id = 1;
+      //this.dataIn.date = "24-4-2020";
       let dataToSend = this.dataIn;
       delete dataToSend.id;
 
@@ -135,7 +135,8 @@ export class JobsAddComponent implements OnInit {
       console.log("loadDataJob");
       
       if (!dataObject) {
-        this.dataIn = {id: 111, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer", job_description:"department1", employment_type:"4", level:"5", skills: [{SkillLabel: "skillA", assign: "True", priority: "high", proficiencyLevel: "expert"}]};
+        this.dataIn = {id: null, Label: "DEMO FE developer", JobLocation: "department1", employmentType:"", level:"",JobDescription:"",startDate: "",endDate: "",SkillReq:[]};
+
       }
       else {
         this.dataIn = dataObject;
@@ -156,7 +157,7 @@ export class JobsAddComponent implements OnInit {
 
   ngOnInit() {
     
-    this.dataIn = {id: null, creator_id: null, date: "", start_date: "", end_date: "", title:"", job_description:"", employment_type:"", level:"" };
+    this.dataIn = {id: null, Label: null, employmentType:"", level:"",JobDescription:"",JobLocation:"",startDate: "",endDate: "",SkillReq:[]};
     this.route.params.subscribe(params => {
       const id = +params.id;
       this.mode = "";
