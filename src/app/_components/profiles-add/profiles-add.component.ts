@@ -67,7 +67,8 @@ export class ProfilesAddComponent implements OnInit {
 
   profileId: string = '';
   mode: string = '';
-
+  files: any[] = [];
+  
   constructor(
     private router: Router,
     public datepipe: DatePipe, private us: UsersService, private authservice: AuthService, 
@@ -137,7 +138,8 @@ export class ProfilesAddComponent implements OnInit {
 
   
   processForm() {
-
+console.log(this);
+/*
     let birth_date_transform =this.datepipe.transform(this.birthDate, 'dd-MM-yyyy');
 
     const obj = {
@@ -208,7 +210,7 @@ export class ProfilesAddComponent implements OnInit {
       
 
     }
-    
+    */
     
 
   }
