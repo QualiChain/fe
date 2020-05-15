@@ -257,7 +257,7 @@
                               </div>
                             </div>
 
-                            <div class="row smartBudgesBody">
+                            <div *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="row smartBudgesBody">
                               <div class="col-lg-12  smartBudge">
                                 <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(userdata.id, smartBadgesByUser)">
                                   <i _ngcontent-axy-c0="" class="material-icons"> emoji_events </i> Award

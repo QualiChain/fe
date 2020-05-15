@@ -86,6 +86,7 @@ import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
 
 import { UsersService } from './_services/users.service';
 import { JobsService } from './_services/jobs.service';
+import { UploadService } from './_services/upload.service';
 
 import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
 import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
@@ -99,6 +100,11 @@ import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pip
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
 import { DatePipe } from '@angular/common';
+
+
+import { DndDirective } from './_directives/dnd/dnd.directive';
+import { ProgressComponent } from './_components/progress/progress.component';
+import { UploadFilesComponent } from './_components/upload-files/upload-files.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -138,7 +144,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CoursesEditComponent,
     EmploymentTypePipe,
     LevelTypePipe,
-    FilterArrayByValuePipe
+    FilterArrayByValuePipe,
+    DndDirective,
+    ProgressComponent,
+    UploadFilesComponent
   ],
   imports: [
     BrowserModule,
@@ -199,7 +208,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     CustomMaterialModule
   ],
-  providers: [DatePipe, UsersService, JobsService, { provide: MAT_DIALOG_DATA, useValue: {} }],
+  providers: [DatePipe, UsersService, JobsService, UploadService, { provide: MAT_DIALOG_DATA, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
