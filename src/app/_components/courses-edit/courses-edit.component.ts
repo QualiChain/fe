@@ -1,7 +1,19 @@
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CoursesService } from '../../_services/courses.service';
+import Course from '../../_models/course';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {formatDate} from '@angular/common';
+
+export interface Skill {
+  name: string;
+}
+
+export interface Event {
+  name: string;
+}
 
 @Component({
   selector: 'app-courses-edit',
@@ -11,7 +23,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesEditComponent implements OnInit {
 
   courseForm: FormGroup;
-  course: any = {id: 0, title: "", description: "", related_skills: [], course_badges: []};
+  //course: any = {id: 0, name: "", description: "", endDate:"", events: [], semester:"", skills:[], startDate:"", updatedDate:""};
+  course: Course;
+
+  /*
   listOfCourses = [
     {id: 0, title: "", description: "", related_skills: [], course_badges: []},
     {id: 1, title: "An Introduction to Interactive Programming in Python (Part 1)", description: "This two-part course is designed to help students with very little or no computing background learn the basics of building simple interactive applications. Our language of choice, Python, is an easy-to learn, high-level computer language that is used in many of the computational courses offered on Coursera. To make learning Python easy, we have developed a new browser-based programming environment that makes developing interactive applications in Python simple. These applications will involve windows whose contents are graphical and respond to buttons, the keyboard and the mouse.", related_skills: ['Linux', 'Python 2', 'P3'], course_badges: ['b1', 'b2', 'b3']},
@@ -21,8 +36,27 @@ export class CoursesEditComponent implements OnInit {
     {id: 5, title: "Introduction to Linux", description: "Develop a good working knowledge of Linux using both the graphical interface and command line, covering the major Linux distribution families.", related_skills: ['Linux'], course_badges: ['b3', 'b5', 'b7'] },
     {id: 6, title: "How to Use Git and GitHub", description: "Effective use of version control is an important and useful skill for any developer working on long-lived (or even medium-lived) projects, especially if more than one developer is involved. This course, built with input from GitHub, will introduce the basics of using version control by focusing on a particular version control system called Git and a collaboration platform called GitHub.", related_skills: ['Linux','SVN'], course_badges: ['b4', 'b5', 'b6']}
   ]
+  */
+  mode: string = '';
+  courseName: string = '';
+  courseDescription: string = '';
+  courseSemester: string = '';
+  startDate: string = '';
+  endDate: string = '';
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  skills: Skill[] = [];
+  visible = true;
+  selectableSkill = true;
+  selectableEvent = true;
+  removableSkill = true;
+  removableEvent = true;
+  addOnBlurSkill = true;
+  addOnBlurEvent = true;
+  courseId: number = null;
+  events: Event[] = [];
+  userdata = JSON.parse(localStorage.getItem('userdata'));
 
-  constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private cs: CoursesService) {
     //this.createForm();
     this.courseForm = this.fb.group({
       title: ['', Validators.required],
@@ -38,9 +72,42 @@ export class CoursesEditComponent implements OnInit {
   }
 */
   ngOnInit() {
+    
+    //console.log(this.userdata.id);
     this.route.params.subscribe(params => {
 
-      this.course = this.listOfCourses[(params['id'])];
+      this.mode = "Create";
+      const id = +params.id;
+      if (id && id > 0) {
+        this.mode = "Edit";
+        this.courseId = id;
+        //this.course = this.listOfCourses[(params['id'])];
+
+        this.cs.getCourse(+id).subscribe(
+          res => {
+            console.log("Request OK");
+            //console.log(res);
+            this.course = res;
+            this.courseName = res.name;
+            this.courseDescription = res.description;
+            this.courseSemester = res.semester;
+            this.startDate = res.startDate;
+            this.endDate = res.endDate;
+            this.skills = res.skills;
+            this.events = res.events;
+            
+          },
+          error => {
+            console.log("Error getting data");
+            
+          }
+        );
+
+      }
+      else {
+        this.mode = "Create";
+      }
+      
       //this.course = {'id': params['id'], 'courseTitle':"tesjob name item "+params['id'], 'courseDescription':"Job Description item "+params['id'], 'JobPrice':params['id']};
       /*
       this.js.editJob(params['id']).subscribe(res => {
@@ -49,5 +116,117 @@ export class CoursesEditComponent implements OnInit {
     */
   });
   }
+
+
+
+  addEvent(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add the new skill
+    if ((value || '').trim()) {
+      this.events.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  removeEvent(event: Event): void {
+    const index = this.events.indexOf(event);
+
+    if (index >= 0) {
+      this.events.splice(index, 1);
+    }
+  }
+
+
+  addSkill(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add the new skill
+    if ((value || '').trim()) {
+      this.skills.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  removeSkill(skill: Skill): void {
+    const index = this.skills.indexOf(skill);
+
+    if (index >= 0) {
+      this.skills.splice(index, 1);
+    }
+  }
+
+  processForm() {
+    
+    //console.log(this);
+    let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en')
+
+        const obj = {
+          "name": this.courseName,
+          "description": this.courseDescription,
+          "semester": this.courseSemester,
+          "endDate": this.endDate,
+          "startDate": this.startDate,
+          "updatedDate": dateToday,
+          //"skills": this.skills,
+          "events": this.events
+        };
+        //console.log(obj);
+        
+        if (this.mode=='Create') {
+    
+          this.cs.addCourse(obj).subscribe(
+            res => {
+              //console.log("User created");
+              //console.log(res);
+              var splitted = res.split("=", 2); 
+              //console.log(splitted[1]);
+              //after create the user 
+              //window.location.href="/profiles";
+              this.router.navigate(["/profiles/"+this.userdata.id]);
+            },
+            error => {
+              alert("Error creating course!!");
+            }
+          );
+    
+        }
+        else {
+          //console.log(this.courseId);
+          this.cs.updateCourse(+this.courseId, obj).subscribe(
+            res => {
+              console.log("course updated");
+              //console.log(res);
+              //after update the user 
+              //window.location.href="/profiles/"+this.profileId;
+              this.router.navigate(["/profiles/"+this.userdata.id]);
+            },
+            error => {
+              alert("Error updating user!!");
+            }
+          );
+          
+        }
+        
+
+    
+      }
+      
+    
+    
+    
+    
+
+
 
 }

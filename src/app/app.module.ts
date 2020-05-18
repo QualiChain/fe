@@ -87,6 +87,7 @@ import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
 import { UsersService } from './_services/users.service';
 import { JobsService } from './_services/jobs.service';
 import { UploadService } from './_services/upload.service';
+import { CoursesService } from './_services/courses.service';
 
 import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
 import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
@@ -208,7 +209,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     CustomMaterialModule
   ],
-  providers: [DatePipe, UsersService, JobsService, UploadService, { provide: MAT_DIALOG_DATA, useValue: {} }],
+  providers: [DatePipe, UsersService, JobsService, UploadService, CoursesService, { provide: MAT_DIALOG_DATA, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -174,8 +174,14 @@
                 <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='teacher'">
                   <ng-template ngbPanelContent>
                       <div class="">
-                            
-            
+                        <div class="row cv_add_course">
+                          <div class="col col-lg-12">
+                            <button class="btn btn-primary" [routerLink]="['/courses', 'add']">
+                              <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'BUTTON.CREATE' | translate }}
+                            </button><br/>
+                          </div>
+                        </div>
+                        
 
                         <div class="accordion" id="accordionTeacherCourses">
                           <div class="card" *ngFor="let course of listOfCoursesByUser">
@@ -190,7 +196,7 @@
                             <div [attr.id]="'course_' + course.id" class="collapse" aria-labelledby="headingOne" data-parent="#accordionTeacherCourses">
                               <div class="card-body">
                                   <div class="courseDescription">
-                                      <div><h4>{{ 'COURSE.DESCRIPTION' | translate }}</h4></div>
+                                      <div><h4>{{ 'COURSE.DESCRIPTION.LABEL' | translate }}</h4></div>
                                       <div>{{course.description}}</div>
                                   </div>
                                   <div>&nbsp; </div>
