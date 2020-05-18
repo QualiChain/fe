@@ -156,7 +156,7 @@
 			</div>
 			<div class="modal-body">
 				<span *ngIf="messages.length<=0">No notifications available</span>
-				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info">
+				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info view-layout-custom" [ngClass]="{'readed-class': message.readed, 'unreaded-class': !message.readed }">
 					{{message.message}}
 					<!-- 					
 					<span *ngIf="message.readed" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-open">Readed</span>
