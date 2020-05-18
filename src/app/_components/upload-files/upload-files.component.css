@@ -1,3 +1,9 @@
+#preloadImg {
+  max-height: 200px;
+  max-width: 300px;
+  width: auto;
+}
+
 .upladfilesdnd {
     border: dashed 1px #979797;
     padding: 2rem;

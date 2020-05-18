@@ -13,6 +13,7 @@ export class UploadFilesComponent implements OnInit {
   @Input() validFiles: string[] = [];
   @Input() maxNumberOfFiles: number = null;
 
+  imgURL = [];
   ngOnInit() {
   }
 
@@ -48,9 +49,11 @@ export class UploadFilesComponent implements OnInit {
     if (this.files[index].uploaded) {
       console.log("Pending delete it from the cloud");
       this.files.splice(index, 1);
+      this.imgURL.splice(index, 1);
     }
     else {
       this.files.splice(index, 1);
+      this.imgURL.splice(index, 1);
     }
 
     
@@ -107,6 +110,7 @@ export class UploadFilesComponent implements OnInit {
     }
 
     if (acceptFile) {
+      let cntFiles = 0;
       for (const item of files) {
         //console.log(item);
         //console.log(this.validFiles);
@@ -124,6 +128,17 @@ export class UploadFilesComponent implements OnInit {
           //console.log(existInArray);
         }
         
+        if (item.type.match(/image\/*/) == null) {
+          this.imgURL.push("");
+        }
+        else {
+          var reader = new FileReader();          
+          reader.readAsDataURL(item); 
+          reader.onload = (_event) => { 
+            this.imgURL.push(reader.result); 
+          }
+        }
+        
         /*
         if (item.type=="image/png") {
           item.validfile = true;
@@ -138,6 +153,7 @@ export class UploadFilesComponent implements OnInit {
         
   
         this.files.push(item);
+        cntFiles = cntFiles +1;
       }
       this.fileDropEl.nativeElement.value = "";
       this.uploadFilesSimulator(0);

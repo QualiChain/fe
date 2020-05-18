@@ -38,13 +38,14 @@
               <br/>
             </div>
           </div>
-          <div class="row">             
+          <div class="row">
             <div class="col col-lg-10">
                 <i _ngcontent-axy-c0="" class="material-icons" > description </i>
                 <div class="info">
-                    <h4 class="name">{{ file?.name }} </h4>
-                    <p class="size">Size: {{ formatBytes(file?.size) }}</p>                    
-                </div>            
+                    <h4 class="name">{{ file?.name }}</h4>
+                    <p class="size">Size: {{ formatBytes(file?.size) }} </p>
+                    <p><img [src]="imgURL[i]" id="preloadImg" *ngIf="imgURL[i]"></p>
+                </div>
             </div>
     
             <div class="col col-lg-2">
