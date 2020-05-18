@@ -26,3 +26,32 @@
     padding: 1px 0;
     margin-top: 65px;
 }
+
+.view-layout-custom {
+    margin: 1.5rem 0;
+    background: white;
+    border: 1px solid #cccccc;
+    padding: 5px 15px;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    border-color: #b3b3b3;
+    position: relative;
+}
+
+.readed-class {    
+    color: #000;
+    border-color: #86a080;
+    background-color: #e6f1e4;
+}
+
+.unreaded-class {
+    color: #000;
+    border-color: #936b6a;
+    background-color: #e6a4a2;
+}
+
+
+
+
+
