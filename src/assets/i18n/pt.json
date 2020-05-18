@@ -264,12 +264,36 @@
     "TITLE": "Carrer Advisor"
   },
   "COURSE"  : {
-    "TITLE": "Título",
-    "DESCRIPTION": "Descrição",
-    "RELATED_SKILLS": "Habilidades relacionadas",
-    "COURSE_BADGES": "Emblemas do Curso",
-    "UPDATE": "Atualizar",
-    "AWARD_SMART_BADGE": "Prêmio Smart Badge",
+    "NAME" : {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Name"
+    },
+    "DESCRIPTION": {
+      "LABEL": "Description",
+      "PLACEHOLDER": "Description"
+    },
+    "SKILLS": {
+      "LABEL": "Related Skills",
+      "PLACEHOLDER": "Skill name"
+    },
+    "EVENTS": {
+      "LABEL": "Related Events",
+      "PLACEHOLDER": "Event name"
+    },
+    "SEMESTER": {
+      "LABEL": "Semester",
+      "PLACEHOLDER": "Semester"
+    },
+    "STARTDATE": {
+      "LABEL": "Start date"
+    },
+    "ENDDATE": {
+      "LABEL": "End date"
+    },        
+    "RELATED_SKILLS": "Related Skills",
+    "COURSE_BADGES": "Course Badges",
+    "UPDATE": "Update",
+    "AWARD_SMART_BADGE": "Award Smart Badge",
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"
   },
   "RECRUITMENT"  : {

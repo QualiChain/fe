@@ -264,12 +264,36 @@
     "TITLE": "Carrer Advisor"
   },
   "COURSE"  : {
-    "TITLE": "Τίτλος",
-    "DESCRIPTION": "Περιγραφή",
-    "RELATED_SKILLS": "Σχετικές δεξιότητες",
-    "COURSE_BADGES": "Διακριτικά μαθήματος",
-    "UPDATE": "Εκσυγχρονίζω",
-    "AWARD_SMART_BADGE": "Βραβείο Έξυπνο Σήμα",
+    "NAME" : {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Name"
+    },
+    "DESCRIPTION": {
+      "LABEL": "Description",
+      "PLACEHOLDER": "Description"
+    },
+    "SKILLS": {
+      "LABEL": "Related Skills",
+      "PLACEHOLDER": "Skill name"
+    },
+    "EVENTS": {
+      "LABEL": "Related Events",
+      "PLACEHOLDER": "Event name"
+    },
+    "SEMESTER": {
+      "LABEL": "Semester",
+      "PLACEHOLDER": "Semester"
+    },
+    "STARTDATE": {
+      "LABEL": "Start date"
+    },
+    "ENDDATE": {
+      "LABEL": "End date"
+    },        
+    "RELATED_SKILLS": "Related Skills",
+    "COURSE_BADGES": "Course Badges",
+    "UPDATE": "Update",
+    "AWARD_SMART_BADGE": "Award Smart Badge",
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"
   },
   "RECRUITMENT"  : {

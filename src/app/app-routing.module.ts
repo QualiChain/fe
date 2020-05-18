@@ -102,6 +102,12 @@ const routes: Routes = [
     data: { roles: [Role.recruiter, Role.admin] }    
   },
   {
+    path: 'courses/add',
+    component: CoursesEditComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.teacher, Role.admin] }    
+  }, 
+  {
     path: 'courses/:id/edit',
     component: CoursesEditComponent,
     canActivate: [AuthGuard],
