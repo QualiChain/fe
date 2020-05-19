@@ -345,5 +345,11 @@
     "CHANGE_PASSWORD": "Change password"
   },
   "ACTION": "Action",
-  "FILTER": "Filter"
+  "FILTER": "Filter",
+  "NOTIFICATIONS": {
+    "NOTIFICATIONS": "Notifications",
+    "NO_NOTIFICATIONS_AVAILABLE" : "There are not notifications available",
+    "SET_AS_READED" : "Set as readed",
+    "SET_AS_UNREADED" : "Set as unreaded"
+  }
 }

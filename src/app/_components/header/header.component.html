@@ -152,10 +152,10 @@
 		  <div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Notifications</h4>
+			  <h4 class="modal-title">{{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }}</h4>
 			</div>
 			<div class="modal-body">
-				<span *ngIf="messages.length<=0">No notifications available</span>
+				<span *ngIf="messages.length<=0">{{ 'NOTIFICATIONS.NO_NOTIFICATIONS_AVAILABLE' | translate }} </span>
 				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info view-layout-custom" [ngClass]="{'readed-class': message.readed, 'unreaded-class': !message.readed }">
 					{{message.message}}
 					<!-- 					
@@ -168,16 +168,26 @@
 					<div>
 						<mat-spinner diameter="20" color="warn" *ngIf="loadingNotificationSpinnerid==message.id"></mat-spinner>
 
-						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="changeItemStatus(message)">
-							<span *ngIf="message.readed">Set as unreaded</span>
-							<span *ngIf="!message.readed">Set as readed</span>
+						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn" 
+						[ngClass]="{'btn-primary': message.readed, 'btn-secondary': !message.readed}"
+						(click)="changeItemStatus(message, i)">
+						    <span *ngIf="message.readed"> <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'NOTIFICATIONS.SET_AS_UNREADED' | translate }}</span>
+							<span *ngIf="!message.readed"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READED' | translate }}</span>
 						</button>
+
+						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="deleteNotificationItem(message)">
+							<i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+						</button>
+
+
 					</div>
 					
 				</div>  
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">
+				<i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
+			</button>
 			</div>
 		  </div>
 		  
