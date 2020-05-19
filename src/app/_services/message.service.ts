@@ -35,6 +35,17 @@ export class MessageService {
         )
       }
 
+      deleteNotification(notificationId: number) {
+        return this.http.delete(`${this.uriNotifications}/${notificationId}`).
+        pipe(
+           map((data: any) => {
+             return data;
+           }), catchError( error => {
+             return throwError( 'Something went wrong!' );
+           })
+        )
+      }
+
     getNotificationsByUserId(userId: Number) {
         return this
         .http

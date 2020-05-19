@@ -116,6 +116,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
     );    
   }   
 
+  deleteNotificationItem(item: any, posI: number): void {
+    // delete message
+    //console.log(item);
+    //console.log(posI);   
+    
+    this.loadingNotificationSpinnerid = item.id;
+    this.messageService.deleteNotification(item.id).subscribe(
+      res => {
+        console.log("Notification deleted");
+        this.loadingNotificationSpinnerid = null;
+        //after create the user         
+        //window.location.href="/profiles";
+        this.messages.splice(posI, 1);
+      },
+      error => {
+        alert("Error deletring notification!!");
+        this.loadingNotificationSpinnerid = null;
+      }
+    );
+  }   
 
   reloadNotifications(userdataId: number): void  {
     this.messageService.getNotificationsByUserId(userdataId).subscribe(
