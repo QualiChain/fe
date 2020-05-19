@@ -175,7 +175,7 @@
 							<span *ngIf="!message.readed"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READED' | translate }}</span>
 						</button>
 
-						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="deleteNotificationItem(message)">
+						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="deleteNotificationItem(message, i)">
 							<i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
 						</button>
 
