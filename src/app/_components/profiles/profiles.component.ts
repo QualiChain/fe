@@ -48,12 +48,17 @@ export class ProfilesComponent implements OnInit {
     this.us
       .getUsers()
       .subscribe((data: User[]) => {
-        
+        /*
         ELEMENT_DATA.forEach(element => {
           data.push(element);
         });
+      */
+        //this.users = data;
+        console.log(data);
         this.dataSource.data = data;
 
+    }, err => {
+      console.log(err);
     });
 
   }

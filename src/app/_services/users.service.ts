@@ -9,7 +9,6 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class UsersService {
 
-  //uri = 'http://localhost:4000/users';
   private uriUsers = environment.usersUrl;
 
   constructor(private http: HttpClient) { }
