@@ -170,7 +170,7 @@
 
 						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn" 
 						[ngClass]="{'btn-primary': message.readed, 'btn-secondary': !message.readed}"
-						(click)="changeItemStatus(message, i)">
+						(click)="changeItemStatus(message)">
 						    <span *ngIf="message.readed"> <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'NOTIFICATIONS.SET_AS_UNREADED' | translate }}</span>
 							<span *ngIf="!message.readed"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READED' | translate }}</span>
 						</button>

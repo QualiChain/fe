@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CarrerAdvisorComponent } from './carrer-advisor.component';
+import { TranslateModule } from "@ngx-translate/core";
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import {MatDatepickerModule} from '@angular/material/datepicker';
+//import {MatNativeDateModule} from '@angular/material/core';
+import { RouterTestingModule } from '@angular/router/testing';
+//import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CarrerAdvisorComponent', () => {
   let component: CarrerAdvisorComponent;
@@ -8,7 +15,13 @@ describe('CarrerAdvisorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarrerAdvisorComponent ]
+      declarations: [ CarrerAdvisorComponent ],
+      imports: [
+        TranslateModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        RouterTestingModule
+        ]      
     })
     .compileComponents();
   }));

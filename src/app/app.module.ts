@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from './_modal';
 
@@ -25,6 +25,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule} from '@angular/material/input';
 import { MatChipsModule} from '@angular/material/chips';
 */
+import {MatFormFieldModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
@@ -78,11 +79,11 @@ import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dia
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 // for Router import:
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+
 // for Core import:
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
-import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
 
 import { UsersService } from './_services/users.service';
 import { JobsService } from './_services/jobs.service';
@@ -111,51 +112,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
-
-@NgModule({
-  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal],
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    JobsComponent,
-    applyJobDialog_modal,
-    AwardSmartBadgeComponent,
-    awardDialog_modal,
-    createAwardDialog_modal,
-    HomeComponent,
-    AccessDeniedComponent,
-    CvsComponent,
-    ProfilesComponent,
-    RecruitmentComponent,
-    NotFoundComponent,
-    LoginComponent,
-    JobsAddComponent,
-    JobsGetComponent,
-    JobsEditComponent,
-    ConfirmDialogComponent,
-    ProfilesViewComponent,
-    createChangePasswordDialog_modal,
-    ProfilesAddComponent,
-    RecruitmentViewComponent,
-    BestCarrerOptionsComponent,
-    CarrerAdvisorComponent,
-    RecomendedCoursesComponent,
-    RecomendedJobsComponent,
-    CoursesEditComponent,
-    EmploymentTypePipe,
-    LevelTypePipe,
-    FilterArrayByValuePipe,
-    DndDirective,
-    ProgressComponent,
-    UploadFilesComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ModalModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
+const materialModules = [
+    MatFormFieldModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -190,7 +148,54 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule,
+    MatTreeModule
+];
+
+
+@NgModule({
+  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    JobsComponent,
+    applyJobDialog_modal,
+    AwardSmartBadgeComponent,
+    awardDialog_modal,
+    createAwardDialog_modal,
+    HomeComponent,
+    AccessDeniedComponent,
+    CvsComponent,
+    ProfilesComponent,
+    RecruitmentComponent,
+    NotFoundComponent,
+    LoginComponent,
+    JobsAddComponent,
+    JobsGetComponent,
+    ConfirmDialogComponent,
+    ProfilesViewComponent,
+    createChangePasswordDialog_modal,
+    ProfilesAddComponent,
+    RecruitmentViewComponent,
+    BestCarrerOptionsComponent,
+    CarrerAdvisorComponent,
+    RecomendedCoursesComponent,
+    RecomendedJobsComponent,
+    CoursesEditComponent,
+    EmploymentTypePipe,
+    LevelTypePipe,
+    FilterArrayByValuePipe,
+    DndDirective,
+    ProgressComponent,
+    UploadFilesComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ModalModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    materialModules,
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -209,7 +214,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     CustomMaterialModule
   ],
+  exports: [materialModules],
   providers: [DatePipe, UsersService, JobsService, UploadService, CoursesService, { provide: MAT_DIALOG_DATA, useValue: {} }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

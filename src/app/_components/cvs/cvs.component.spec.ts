@@ -1,6 +1,10 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CvsComponent } from './cvs.component';
+import { TranslateModule } from "@ngx-translate/core";
+import { MatTableModule } from '@angular/material';
+import { ChartsModule } from 'ng2-charts';
 
 describe('CvsComponent', () => {
   let component: CvsComponent;
@@ -8,7 +12,15 @@ describe('CvsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CvsComponent ]
+      declarations: [ CvsComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      imports: [
+        TranslateModule.forRoot(),
+        MatTableModule,
+        ChartsModule
+        ]
     })
     .compileComponents();
   }));

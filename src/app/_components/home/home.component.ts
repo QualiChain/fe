@@ -7,8 +7,8 @@ import { MessageService } from '../../_services/index';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userdata: {id:''};
-  
+  userdata: {id:'', authenticated: false};
+  isauthenticated: boolean = false;
   constructor(private messageService: MessageService) { }
 
   sendMessage(): void {
@@ -41,9 +41,16 @@ export class HomeComponent implements OnInit {
     let userdata = JSON.parse(localStorage.getItem('userdata'));
     if (userdata) {
       this.userdata = userdata;
+
+      if(userdata.hasOwnProperty('authenticated')){
+        this.isauthenticated = userdata.authenticated;
+      }
     }
     else {
-      userdata.authenticated=false;
+      //if(userdata.hasOwnProperty('authenticated')){
+        userdata = {id:0, authenticated:false};
+        //userdata.authenticated=false;
+      //}
       //this.userdata = {'authenticated': false};
       this.userdata = userdata;
     }

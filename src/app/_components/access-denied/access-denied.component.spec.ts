@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccessDeniedComponent } from './access-denied.component';
-
-
+import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeCAccessDeniedComponentomponent', () => {
   let component: AccessDeniedComponent;
@@ -10,7 +10,11 @@ describe('HomeCAccessDeniedComponentomponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccessDeniedComponent ]
+      declarations: [ AccessDeniedComponent ],
+      imports: [
+        TranslateModule.forRoot(),
+        HttpClientTestingModule 
+        ]
     })
     .compileComponents();
   }));

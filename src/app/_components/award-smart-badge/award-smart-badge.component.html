@@ -55,7 +55,7 @@
       <th mat-header-cell *matHeaderCellDef > Acquired Badges </th>
       <td mat-cell *matCellDef="let element">
         <ul>
-          <li *ngFor="let element_badge of element.aqcuired_badges; index as i; trackBy: trackByFn">
+          <li *ngFor="let element_badge of element.aqcuired_badges; index as i">
             {{element_badge.name}}
           </li>
         </ul>

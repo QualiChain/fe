@@ -56,6 +56,7 @@ export class CoursesEditComponent implements OnInit {
   events: Event[] = [];
   userdata = JSON.parse(localStorage.getItem('userdata'));
 
+
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private cs: CoursesService) {
     //this.createForm();
     this.courseForm = this.fb.group({
@@ -72,12 +73,26 @@ export class CoursesEditComponent implements OnInit {
   }
 */
   ngOnInit() {
+        
+    if (!this.userdata) {
+      this.userdata = {id:0};
+    }
     
+
     //console.log(this.userdata.id);
     this.route.params.subscribe(params => {
 
       this.mode = "Create";
-      const id = +params.id;
+      let id : number;
+
+      if(params.hasOwnProperty('id')){
+        id = +params.id;
+      }
+      else {
+        id = 0;
+      }
+
+
       if (id && id > 0) {
         this.mode = "Edit";
         this.courseId = id;

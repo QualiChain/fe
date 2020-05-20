@@ -1,6 +1,10 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BestCarrerOptionsComponent } from './best-carrer-options.component';
+import { TranslateModule } from "@ngx-translate/core";
+import { RouterTestingModule } from '@angular/router/testing';
+import { ChartsModule } from 'ng2-charts';
 
 describe('BestCarrerOptionsComponent', () => {
   let component: BestCarrerOptionsComponent;
@@ -8,7 +12,15 @@ describe('BestCarrerOptionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BestCarrerOptionsComponent ]
+      declarations: [ BestCarrerOptionsComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      imports: [
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        ChartsModule
+        ]
     })
     .compileComponents();
   }));

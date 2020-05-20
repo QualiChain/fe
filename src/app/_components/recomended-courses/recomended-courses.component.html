@@ -1,8 +1,10 @@
 <div class="card">
     <div class="card-body">
         <h3>{{ 'RECOMENDED_COURSES.TITLE' | translate }}</h3>
-        
-        <ngb-accordion [closeOthers]="true" #acc="ngbAccordion" activeIds="course-1">
+        <!--
+          #acc="ngbAccordion"
+        -->
+        <ngb-accordion activeIds="course-1">
            
             <ngb-panel id="course-1">
               <ng-template ngbPanelTitle>

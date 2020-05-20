@@ -1,6 +1,14 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesEditComponent } from './courses-edit.component';
+import { TranslateModule } from "@ngx-translate/core";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatNativeDateModule} from '@angular/material/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CoursesEditComponent', () => {
   let component: CoursesEditComponent;
@@ -8,7 +16,20 @@ describe('CoursesEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesEditComponent ]
+      declarations: [ CoursesEditComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      imports: [
+        TranslateModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatChipsModule,
+        MatNativeDateModule,
+        RouterTestingModule,
+        HttpClientTestingModule
+        ]
     })
     .compileComponents();
   }));
