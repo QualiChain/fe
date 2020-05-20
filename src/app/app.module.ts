@@ -11,7 +11,7 @@ import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } 
 import { HomeComponent } from './_components/home/home.component';
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CvsComponent } from './_components/cvs/cvs.component';
+//import { CvsComponent } from './_components/cvs/cvs.component';
 import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
@@ -165,7 +165,6 @@ const materialModules = [
     createAwardDialog_modal,
     HomeComponent,
     AccessDeniedComponent,
-    CvsComponent,
     ProfilesComponent,
     RecruitmentComponent,
     NotFoundComponent,
