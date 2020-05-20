@@ -99,6 +99,9 @@ export class JobsService {
       )
     }
 
+    deleteJob(jobId){
+      return this.http.delete(`${this.jobsURL}/${jobId}`);
+    }
     
 
 }

@@ -109,7 +109,9 @@ export class JobsComponent implements OnInit {
       //this.result = dialogResult;
 
       if (dialogResult) {
-         console.log("Under construction");
+         this.js.deleteJob(id).subscribe(data => {
+          window.location.reload();
+        });
       }
     });
   }
