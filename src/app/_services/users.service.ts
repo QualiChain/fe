@@ -19,7 +19,8 @@ export class UsersService {
       .get(`${this.uriUsers}`);
   }
 
-  getUser(userId: Number) {
+  getUser(userId: String) {
+    console.log("load data");
     return this
       .http
       .get(`${this.uriUsers}/${userId}`);

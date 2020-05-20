@@ -14,14 +14,12 @@ import { environment } from './../../environments/environment';
 export class CVService {
  
   uri = environment.cvUrl;
-  //uri = 'http://localhost:4000/cvs';
-
  
 
   constructor(private httpClient: HttpClient) {
   }
 
-  getCV(userId: Number) {
+  getCV(userId: String) {
     return this
       .httpClient
       .get(`${this.uri}/${userId}`);

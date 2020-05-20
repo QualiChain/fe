@@ -193,19 +193,67 @@ export class ProfilesViewComponent implements OnInit {
         course_badges: []
       };
 
-      const id = +params.id;
-      if (id && id > 0) {
+      const id = params.id;
+
+      if (id ) {
         this.userId=String(id);
-        
+
         this.us
-        .getUser(id).subscribe(
+        .getUser(this.userId).subscribe(
           data => {
             console.log("user in db");
+            
             this.userdata = data;
 
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
-            } 
+            }
+            
+            if (!this.userdata.role){
+              this.userdata.role = 'student';              
+            }  
+
+            // loading user's CV        
+        this.cvs
+        .getCV(this.userdata.cvuri)
+        .subscribe((data: any) => {
+          console.log(data);
+          //if (data.length>0) {
+            //let posCV = data.length-1;
+            this.label = data.label;
+            this.description = data.description;
+            this.targetSector = data.target_sector;
+            this.expectedSalary = data.expected_salary;
+            this.JobDescription = data.description;
+            data.skills.forEach(element => {
+              this.t.push(this.formBuilder.group({
+                SkillLabel: [element.label, [Validators.required]],
+                proficiencyLevel: [element.proficiencyLevel, Validators.required],
+                SkillComment: [element.comment, [Validators.required]],      
+              }));
+            });
+            data.workHistory
+            .forEach(element => {
+              this.w.push(this.formBuilder.group({
+                position: [element.position, Validators.required],
+                from: [element.from, [Validators.required]],
+                to: [element.to, [Validators.required]],
+                employer: [element.employer, [Validators.required]],
+              }));
+            });
+            data.education
+            .forEach(element => {
+              this.e.push(this.formBuilder.group({
+                title: [element.title, Validators.required],
+                from: [element.from, [Validators.required]],
+                to: [element.to, [Validators.required]],
+                organisation: [element.organisation, [Validators.required]],
+                description: [element.description, [Validators.required]],
+              }));
+            });      
+          //}      
+        });
+            ////////////////////
           },
           error => {
             console.log("user not found in db");
@@ -231,46 +279,7 @@ export class ProfilesViewComponent implements OnInit {
   
         });
 */
-        
-        this.cvs
-        .getCV(id)
-        .subscribe((data: any) => {
 
-          if (data.length>0) {
-            let posCV = data.length-1;
-            this.label = data[posCV].label;
-            this.description = data[posCV].description;
-            this.targetSector = data[posCV].target_sector;
-            this.expectedSalary = data[posCV].expected_salary;
-            this.JobDescription = data[posCV].description;
-            data[posCV].skills.forEach(element => {
-              this.t.push(this.formBuilder.group({
-                SkillLabel: [element.SkillLabel, [Validators.required]],
-                proficiencyLevel: [element.proficiencyLevel, Validators.required],
-                SkillComment: [element.SkillComment, [Validators.required]],      
-              }));
-            });
-            data[posCV].work_history
-            .forEach(element => {
-              this.w.push(this.formBuilder.group({
-                position: [element.position, Validators.required],
-                from: [element.from, [Validators.required]],
-                to: [element.to, [Validators.required]],
-                employer: [element.employer, [Validators.required]],
-              }));
-            });
-            data[posCV].education
-            .forEach(element => {
-              this.e.push(this.formBuilder.group({
-                title: [element.title, Validators.required],
-                from: [element.from, [Validators.required]],
-                to: [element.to, [Validators.required]],
-                organisation: [element.organisation, [Validators.required]],
-                description: [element.description, [Validators.required]],
-              }));
-            });      
-          }      
-        });
       }
 
     });
