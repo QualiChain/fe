@@ -61,6 +61,14 @@ export class ProfilesViewComponent implements OnInit {
   currentJustify: string;
   listOfCoursesByUser: {};
   //selectedCourse: {};
+  emptyCourseSelected: {
+    id: number, 
+    title: string, 
+    description: string, 
+    related_skills: object, 
+    course_badges: object
+  };
+  
   selectedCourse: {
     id: number, 
     title: string, 
@@ -149,6 +157,10 @@ export class ProfilesViewComponent implements OnInit {
 
   ngOnInit() {
     
+    if(!this.currentUser) {
+    //if(!this.currentUser.hasOwnProperty('id')){
+      this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+    }
 
     this.userdata= {
       id: 0,
@@ -182,15 +194,22 @@ export class ProfilesViewComponent implements OnInit {
       
       //console.log(params['id']);
 
-      this.bs
-      .getBadgesByUser(params['id'])
-      .subscribe((data: any) => {
-        //this.jobs = data;
-        //console.log(dataFull);
-        //console.log(data);
-        this.smartBadgesByUser = data;
+      let id:number = 0;      
+      if(params.hasOwnProperty('id')){
+        id = +params.id;
+      }
 
-      });
+      if (id>0) {
+        this.bs
+        .getBadgesByUser(id)
+        .subscribe((data: any) => {
+          //this.jobs = data;
+          //console.log(dataFull);
+          //console.log(data);
+          this.smartBadgesByUser = data;
+
+        });
+      }
 
       let listOfUsers = 
       [
@@ -214,6 +233,15 @@ export class ProfilesViewComponent implements OnInit {
       this.years = [1,2,3,4,5];
       this.currentJustify = 'fill';
       this.listOfCoursesByUser = listOfCoursesByUser;
+
+      this.emptyCourseSelected = {
+        id: 0, 
+        title: '', 
+        description: '', 
+        related_skills: [], 
+        course_badges: []
+      };
+
       this.selectedCourse = {
         id: 0, 
         title: '', 
@@ -222,7 +250,9 @@ export class ProfilesViewComponent implements OnInit {
         course_badges: []
       };
 
-      const id = +params.id;
+
+
+      //const id = +params.id;
       if (id && id > 0) {
         this.userId=String(id);
         
@@ -240,9 +270,14 @@ export class ProfilesViewComponent implements OnInit {
             //console.log("user not found in db");
             listOfUsers.forEach(element => {
               //console.log(element.id+"--"+params['id']);
-              if (element.id==params['id']) {
-                this.userdata = element;
+              /*mmp
+              if ((element.hasOwnProperty('id')) && (params.hasOwnProperty('id'))){
+                if (element.id==params['id']) {
+                  this.userdata = element;
+                }
               }
+              */
+              
             });
             //this.userdata = listOfUsers[params['id']-1];
             if (this.userdata.avatar_path=='') {

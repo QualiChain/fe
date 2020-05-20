@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-//import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 //import * as $ from 'node_modules/jquery';
 
 import { AuthService } from '../app/_services';
@@ -20,8 +20,13 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private readonly translate: TranslateService
   ) {
+
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
   }
 

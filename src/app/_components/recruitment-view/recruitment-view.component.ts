@@ -16,7 +16,7 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class RecruitmentViewComponent implements OnInit {
 
-  jobdata: {};
+  jobdata: any = {};
   listOfCandidatesByJobs: {};
 
   constructor(private route: ActivatedRoute) { 
@@ -67,10 +67,14 @@ export class RecruitmentViewComponent implements OnInit {
       }
       ;
     
-
-      this.jobdata = listOfJobs[params['id']-1];
-      this.listOfCandidatesByJobs = listOfCandidatesByJobs;
-      
+      const id = +params.id;
+      if (id && id > 0) {
+        this.jobdata = listOfJobs[id-1];
+        this.listOfCandidatesByJobs = listOfCandidatesByJobs;
+      }
+      else {
+        this.listOfCandidatesByJobs = {};
+      }
 
     });
 

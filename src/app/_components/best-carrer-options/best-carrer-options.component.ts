@@ -11,7 +11,7 @@ import { Color, Label } from 'ng2-charts';
 })
 export class BestCarrerOptionsComponent implements OnInit {
 
-  best_carrer_options: {};
+  best_carrer_options: any = [];
   cardToDisplay: number;
   userid: number;
 

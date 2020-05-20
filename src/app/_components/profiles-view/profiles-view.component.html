@@ -103,8 +103,10 @@
     </div>
     <div class="row"><br></div>
     <div class="row">
-
-        <ngb-accordion *ngIf="userdata.role.toLowerCase()!='recruiter'" #acc="ngbAccordion">
+<!-- 
+   #acc="ngbAccordion"
+-->
+        <ngb-accordion *ngIf="userdata.role.toLowerCase()!='recruiter'">
 
           
                 <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
@@ -159,7 +161,7 @@
                                             <div *ngIf="selectedCourse.id" class="col-lg-4 completeCourseSectiontab">
                                               <div class=""><h3>{{selectedCourse.title}}</h3></div>
                                               <div class="">{{selectedCourse.description}}</div>
-                                              <div class=""><br/><a class="btn btn-success" [routerLink]="" (click)="selectedCourse={}">{{ 'BUTTON.CLOSE' | translate }}</a></div>
+                                              <div class=""><br/><a class="btn btn-success" [routerLink]="" (click)="selectedCourse=emptyCourseSelected">{{ 'BUTTON.CLOSE' | translate }}</a></div>
                                             </div>
 
                                       </ng-template>

@@ -26,7 +26,8 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-profiles-add',
   templateUrl: './profiles-add.component.html',
-  styleUrls: ['./profiles-add.component.css']
+  styleUrls: ['./profiles-add.component.css'],
+  providers: [DatePipe]
 })
 export class ProfilesAddComponent implements OnInit {
 
