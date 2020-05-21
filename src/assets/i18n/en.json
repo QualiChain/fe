@@ -315,7 +315,11 @@
     "TITLE": "Award Smart Badge",
     "CREATE_BADGE": "Create new badge",
     "NO_SMART_BADGES_AVAILABE" : "No smart awards available",
-    "SELECTED_BADGES": "Selected Badges"
+    "SELECTED_BADGES": "Selected Badges",
+    "BUTTON" : {
+      "UNASSIGN_AWARD": "Unassing",
+      "ASSIGN_AWARD": "Assign"
+    }
   },
   "ACCESS_DENIED": {
     "TITLE": "ACCESS DENIED",

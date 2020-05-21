@@ -14,11 +14,11 @@
             <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==itemBadgeData.id"></mat-spinner>
 
             <button *ngIf="itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
-              <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+              <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.UNASSIGN_AWARD' | translate }}
             </button>
 
             <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'add')" type="button" class="btn btn-primary">
-              <i _ngcontent-axy-c0="" class="material-icons">  emoji_events  </i> Award
+              <i _ngcontent-axy-c0="" class="material-icons">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}
             </button>
           </div>
         </div>

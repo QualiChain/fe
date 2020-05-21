@@ -270,13 +270,12 @@ export class ProfilesViewComponent implements OnInit {
             //console.log("user not found in db");
             listOfUsers.forEach(element => {
               //console.log(element.id+"--"+params['id']);
-              /*mmp
+              
               if ((element.hasOwnProperty('id')) && (params.hasOwnProperty('id'))){
                 if (element.id==params['id']) {
                   this.userdata = element;
                 }
               }
-              */
               
             });
             //this.userdata = listOfUsers[params['id']-1];
