@@ -168,7 +168,7 @@ export class awardDialog_modal implements OnInit {
     });
 
     this.us
-        .getUser(this.data.userId).subscribe(
+        .getUser(String(this.data.userId)).subscribe(
           data => {
             console.log("user in db");            
           },
