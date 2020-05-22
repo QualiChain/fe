@@ -34,6 +34,8 @@ export class AuthService {
       "username" : this.cs.configData.OU_API_DATA.authentication.username,
       "password" :  this.cs.configData.OU_API_DATA.authentication.password
     };
+    obj = {"username" : "niaz.chowdhury@open.ac.uk", "password" : "qualichain123"};
+
     //console.log(obj);
     return this.httpClient.post(`${this.cs.configData.OU_API_DATA.authentication.endPoint}`, obj).
     pipe(

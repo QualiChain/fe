@@ -1,0 +1,8 @@
+{
+    "/qualichain/*": {
+        "target": "https://blockchain21.kmi.open.ac.uk",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}
