@@ -20,11 +20,11 @@ export class JobSkill {
 
   export class Job {
     id: string;
-    Label: string; // Position
+    label: string; // Position
     employmentType: string;
     level: string; // Seniority Level
-    JobDescription: String;
-    JobLocation: String;
+    jobDescription: String;
+    jobLocation: String;
     // SkillReq?: string [];
     skillReq: JobSkill [];
     startDate: string;

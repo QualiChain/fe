@@ -103,7 +103,7 @@ export class JobsAddComponent implements OnInit {
 
       this.js.addJob(dataToSend).subscribe(
         res => {
-          //console.log("Job created");
+          console.log("Job created");
           //console.log(res);
           //after update the job
           window.location.href="/jobs";
@@ -135,7 +135,7 @@ export class JobsAddComponent implements OnInit {
       console.log("loadDataJob");
       
       if (!dataObject) {
-        this.dataIn = {id: null, Label: "DEMO FE developer", JobLocation: "department1", employmentType:"", level:"",JobDescription:"",startDate: "",endDate: "",skillReq:[]};
+        this.dataIn = {id: null, label: "DEMO FE developer", jobLocation: "department1", employmentType:"", level:"",jobDescription:"",startDate: "",endDate: "",skillReq:[]};
 
       }
       else {
@@ -158,7 +158,7 @@ export class JobsAddComponent implements OnInit {
 
   ngOnInit() {
     
-    this.dataIn = {id: null, Label: null, employmentType:"", level:"",JobDescription:"",JobLocation:"",startDate: "",endDate: "",skillReq:[]};
+    this.dataIn = {id: null, label: null, employmentType:"", level:"",jobDescription:"",jobLocation:"",startDate: "",endDate: "",skillReq:[]};
     this.route.params.subscribe(params => {
       const id = params.id;
       this.mode = "";
