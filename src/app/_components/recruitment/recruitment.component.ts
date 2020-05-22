@@ -163,6 +163,7 @@ export class RecruitmentComponent implements OnInit {
   getAvailableJobs() {
     this.jobService.getJobs()
     .subscribe((data: Job[]) => {
+      console.log("sssssssssssssssssssssssssss");
       this.jobs = data;
       console.log(data);
     },

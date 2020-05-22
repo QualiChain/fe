@@ -26,7 +26,7 @@ export class JobSkill {
     JobDescription: String;
     JobLocation: String;
     // SkillReq?: string [];
-    SkillReq: JobSkill [];
+    skillReq: JobSkill [];
     startDate: string;
     endDate: string;
    /* id: number;

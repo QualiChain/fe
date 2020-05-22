@@ -56,7 +56,7 @@ export class JobsAddComponent implements OnInit {
         employmentType: ['', Validators.required ],
         level: ['', Validators.required ],
         JobDescription: ['', Validators.required ],
-        SkillReq: this.fb.array([ this.initSkill() ])
+        skillReq: this.fb.array([ this.initSkill() ])
       });
       */
     
@@ -72,17 +72,17 @@ export class JobsAddComponent implements OnInit {
 
     addSkill() {
       // add skill to the skills list
-      //this.control = <FormArray>this.angForm.controls['SkillReq'];
+      //this.control = <FormArray>this.angForm.controls['skillReq'];
       //this.control.push(this.initSkill());
       let newJobSkill = {} as JobSkill;
       newJobSkill.SkillLabel = "";
       //newJobSkill.assign = "";
       //newJobSkill.priority = "";
       newJobSkill.proficiencyLevel = ""; 
-      if (!this.dataIn.SkillReq)  {
-        this.dataIn.SkillReq = [newJobSkill];
+      if (!this.dataIn.skillReq)  {
+        this.dataIn.skillReq = [newJobSkill];
       } else {
-        this.dataIn.SkillReq.push(newJobSkill);
+        this.dataIn.skillReq.push(newJobSkill);
       }
       
       
@@ -90,9 +90,9 @@ export class JobsAddComponent implements OnInit {
 
     removeSkill(i: number) {
       // remove address from the list
-      //this.control = <FormArray>this.angForm.controls['SkillReq'];
+      //this.control = <FormArray>this.angForm.controls['skillReq'];
       //this.control.removeAt(i);
-      this.dataIn.SkillReq.splice(i, 1);
+      this.dataIn.skillReq.splice(i, 1);
     }
 
     addJob() {
@@ -135,7 +135,7 @@ export class JobsAddComponent implements OnInit {
       console.log("loadDataJob");
       
       if (!dataObject) {
-        this.dataIn = {id: null, Label: "DEMO FE developer", JobLocation: "department1", employmentType:"", level:"",JobDescription:"",startDate: "",endDate: "",SkillReq:[]};
+        this.dataIn = {id: null, Label: "DEMO FE developer", JobLocation: "department1", employmentType:"", level:"",JobDescription:"",startDate: "",endDate: "",skillReq:[]};
 
       }
       else {
@@ -146,7 +146,7 @@ export class JobsAddComponent implements OnInit {
 /*
       for (let i=1; i<dataIn.skills.length;i++) {
         console.log(i);
-        this.control = <FormArray>this.angForm.controls['SkillReq'];
+        this.control = <FormArray>this.angForm.controls['skillReq'];
         this.control.push(this.initSkill());
       }
 */
@@ -157,7 +157,7 @@ export class JobsAddComponent implements OnInit {
 
   ngOnInit() {
     
-    this.dataIn = {id: null, Label: null, employmentType:"", level:"",JobDescription:"",JobLocation:"",startDate: "",endDate: "",SkillReq:[]};
+    this.dataIn = {id: null, Label: null, employmentType:"", level:"",JobDescription:"",JobLocation:"",startDate: "",endDate: "",skillReq:[]};
     this.route.params.subscribe(params => {
       const id = +params.id;
       this.mode = "";

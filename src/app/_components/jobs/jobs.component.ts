@@ -19,7 +19,7 @@ export interface AvailableJobs {
   employmentType: string;
   level: string;
   JobDescription: string;
-  SkillReq: any
+  skillReq: any
 }
 /*
 const ELEMENT_DATA: AvailableJobs[] = [
