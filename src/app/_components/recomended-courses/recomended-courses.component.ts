@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RecomendationsService } from '../../_services/recomendations.service';
 
 @Component({
   selector: 'app-recomended-courses',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecomendedCoursesComponent implements OnInit {
 
-  constructor() { }
+  @Input() userId: number = null;
+
+  recomendedCourses = [];
+
+  constructor( private rs: RecomendationsService ) { }
 
   ngOnInit() {
+
+    if (this.userId) {
+      this.rs
+      .getRecomendationsCourses(this.userId).subscribe(
+        data => {
+          //console.log("list of recomended courses");
+          //console.log(data);
+          this.recomendedCourses = data;
+        },
+        error => {
+          console.log("recomended courses not found in db");                        
+        }
+      );
+    }    
+
   }
 
 }

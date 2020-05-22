@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UsersService } from '../../_services/users.service';
 import { BadgesService } from '../../_services/badges.service';
+import { AuthService } from '../../_services/auth.service';
 
 //import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
@@ -224,6 +225,7 @@ export class awardDialog_modal implements OnInit {
     public createAwardDialog: MatDialog,
     private us: UsersService,
     private bs: BadgesService,
+    private as: AuthService,
     public dialogRef: MatDialogRef<awardDialog_modal>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
@@ -231,9 +233,23 @@ export class awardDialog_modal implements OnInit {
   ngOnInit() {
 
     this.selectedUserAwards=[];
-        
-    //console.log(this.data.userId);
-
+    /*
+    this.as
+    .getOUToken()
+    .subscribe((
+      dataOU: any) => {
+      //this.jobs = data;
+      //console.log("full badges list");
+      console.log(dataOU);
+      console.log(dataOU.token);
+      //console.log(this.selectedUserAwards);
+    },
+    error => {
+      console.log("error recovering token");
+    }
+    );
+    */
+   
     this.bs
       .getBadges()
       .subscribe((dataFull: any) => {

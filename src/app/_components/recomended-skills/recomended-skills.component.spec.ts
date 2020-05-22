@@ -1,18 +1,18 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecomendedJobsComponent } from './recomended-jobs.component';
+import { RecomendedSkillsComponent } from './recomended-skills.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('RecomendedJobsComponent', () => {
-  let component: RecomendedJobsComponent;
-  let fixture: ComponentFixture<RecomendedJobsComponent>;
+describe('RecomendedSkillsComponent', () => {
+  let component: RecomendedSkillsComponent;
+  let fixture: ComponentFixture<RecomendedSkillsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecomendedJobsComponent ],
+      declarations: [ RecomendedSkillsComponent ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
       ],
@@ -26,7 +26,7 @@ describe('RecomendedJobsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecomendedJobsComponent);
+    fixture = TestBed.createComponent(RecomendedSkillsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

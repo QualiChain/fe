@@ -7,6 +7,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     - Access to the main folder: cd qualichain
     - Install dependecies: npm i
 
+## Update custom config file
+
+You must edit the file /src/assets/config.json and introduce valid credentials
+
+{
+    "OU_API_DATA" : {
+        "baseUrl": "https://blockchain21.kmi.open.ac.uk",
+        "authentication": {
+            "endPoint": "https://blockchain21.kmi.open.ac.uk/qualichain/users/signin",
+            "username" : "<username>", 
+            "password" : "<password>"
+        },
+        "apis": {}
+    }
+}
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

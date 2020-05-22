@@ -311,9 +311,11 @@
       
     </div>
     <div class="col col-lg-4" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">      
-      <app-recomended-jobs></app-recomended-jobs>
+      <app-recomended-jobs userId="{{userdata.id}}"></app-recomended-jobs>
       <br/>
-      <app-recomended-courses></app-recomended-courses>
+      <app-recomended-courses userId="{{userdata.id}}"></app-recomended-courses>
+      <br/>
+      <app-recomended-skills userId="{{userdata.id}}"></app-recomended-skills>
     </div>
   </div>
 
