@@ -139,6 +139,7 @@ export class JobsAddComponent implements OnInit {
 
       }
       else {
+        console.log(dataObject);
         this.dataIn = dataObject;
       }
 
@@ -159,9 +160,9 @@ export class JobsAddComponent implements OnInit {
     
     this.dataIn = {id: null, Label: null, employmentType:"", level:"",JobDescription:"",JobLocation:"",startDate: "",endDate: "",skillReq:[]};
     this.route.params.subscribe(params => {
-      const id = +params.id;
+      const id = params.id;
       this.mode = "";
-      if (id && id > 0) {
+      if (id ) {
         this.mode = "Edit";
         this.jobId=String(id);
         //console.log(this.jobId);  
