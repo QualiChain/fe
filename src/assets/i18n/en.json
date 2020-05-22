@@ -326,10 +326,16 @@
     "BODY": "Some contents of this site is restricted and you don't have enough permissions to access it."
   },
   "RECOMENDED_COURSES": {
-    "TITLE": "Recommended courses"
+    "TITLE": "Recommended courses",
+    "NO_DATA": "This user does not have any recomended course yet."
   },
   "RECOMENDED_JOBS": {
-    "TITLE": "Recommended jobs"
+    "TITLE": "Recommended jobs",
+    "NO_DATA": "This user does not have any recomended job yet."    
+  },
+  "RECOMENDED_SKILLS": {
+    "TITLE": "Recommended skills",
+    "NO_DATA": "This user does not have any recomended skill yet."
   },
   "BUTTON": {
     "OPEN_PDF": "Open PDF",

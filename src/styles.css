@@ -90,13 +90,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     white-space: nowrap!important;
     width: 1px!important;
 }
-
+/*
 .accordion>.card:first-of-type {
     border-bottom: 0;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-
+*/
 .accordion>.card {
     overflow: hidden;
 }

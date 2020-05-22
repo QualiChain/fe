@@ -1,19 +1,11 @@
+import { APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ModalModule } from './_modal';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './_components/header/header.component';
-import { FooterComponent } from './_components/footer/footer.component';
-import { JobsComponent, applyJobDialog_modal } from './_components/jobs/jobs.component';
-import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
-import { HomeComponent } from './_components/home/home.component';
-import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { AppRoutingModule } from './app-routing.module';
-//import { CvsComponent } from './_components/cvs/cvs.component';
-import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles.component';
-import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
+
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /*
@@ -65,15 +57,10 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LoginComponent } from './_components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { NbSecurityModule } from '@nebular/security';
 import { ReactiveFormsModule } from '@angular/forms';
-
-import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
-import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
-
 
 // for HttpClient import:
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -82,14 +69,34 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 // for Core import:
 import { LoadingBarModule } from '@ngx-loading-bar/core';
-import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
-import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 
+import { ModalModule } from './_modal';
+/*custom services*/
 import { UsersService } from './_services/users.service';
 import { JobsService } from './_services/jobs.service';
 import { UploadService } from './_services/upload.service';
 import { CoursesService } from './_services/courses.service';
-
+import { RecomendationsService } from './_services/recomendations.service';
+import { CustomConfigEnvironmentDataService } from './_services/customConfigEnvironmentData.service';
+/*custom pipes*/
+import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
+import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
+import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
+/*custom components*/
+//import { CvsComponent } from './_components/cvs/cvs.component';
+import { LoginComponent } from './_components/login/login.component';
+import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles.component';
+import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
+import { HeaderComponent } from './_components/header/header.component';
+import { FooterComponent } from './_components/footer/footer.component';
+import { JobsComponent, applyJobDialog_modal } from './_components/jobs/jobs.component';
+import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
+import { HomeComponent } from './_components/home/home.component';
+import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
+import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
+import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
+import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
+import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
 import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
@@ -97,16 +104,19 @@ import { BestCarrerOptionsComponent } from './_components/best-carrer-options/be
 import { CarrerAdvisorComponent } from './_components/carrer-advisor/carrer-advisor.component';
 import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
+import { RecomendedSkillsComponent } from './_components/recomended-skills/recomended-skills.component';
 import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
-import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
-import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
-import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
+import { ProgressComponent } from './_components/progress/progress.component';
+import { UploadFilesComponent } from './_components/upload-files/upload-files.component';
+/*custom directives*/
+import { DndDirective } from './_directives/dnd/dnd.directive';
+
+
 import { DatePipe } from '@angular/common';
 
 
-import { DndDirective } from './_directives/dnd/dnd.directive';
-import { ProgressComponent } from './_components/progress/progress.component';
-import { UploadFilesComponent } from './_components/upload-files/upload-files.component';
+import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -151,6 +161,31 @@ const materialModules = [
     MatTreeModule
 ];
 
+export function load(http: HttpClient, config: CustomConfigEnvironmentDataService): (() => Promise<boolean>) {
+  return (): Promise<boolean> => {
+    return new Promise<boolean>((resolve: (a: boolean) => void): void => {     
+       http.get('../../assets/config.json')
+         .pipe(
+           map((x: CustomConfigEnvironmentDataService) => {
+             //config.baseUrl = x.baseUrl;
+             //console.log(x);
+             config.configData = x;
+             resolve(true);
+           }),
+           catchError((x: { status: number }, caught: Observable<void>): ObservableInput<{}> => {
+             if (x.status !== 404) {
+               resolve(false);
+             }
+             config.configData = {};
+             resolve(true);
+             return of({});
+           })
+         ).subscribe();
+         
+    });
+  };
+}
+
 
 @NgModule({
   entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal],
@@ -180,6 +215,7 @@ const materialModules = [
     CarrerAdvisorComponent,
     RecomendedCoursesComponent,
     RecomendedJobsComponent,
+    RecomendedSkillsComponent,
     CoursesEditComponent,
     EmploymentTypePipe,
     LevelTypePipe,
@@ -214,7 +250,17 @@ const materialModules = [
     CustomMaterialModule
   ],
   exports: [materialModules],
-  providers: [DatePipe, UsersService, JobsService, UploadService, CoursesService, { provide: MAT_DIALOG_DATA, useValue: {} }],
+  providers: [ DatePipe, UsersService, JobsService, UploadService, CoursesService, RecomendationsService, 
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: load,
+      deps: [
+        HttpClient,
+        CustomConfigEnvironmentDataService
+      ],
+      multi: true
+    }],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

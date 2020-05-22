@@ -1,0 +1,11 @@
+{
+    "OU_API_DATA" : {
+        "baseUrl": "https://blockchain21.kmi.open.ac.uk",
+        "authentication": {
+            "endPoint": "https://blockchain21.kmi.open.ac.uk/qualichain/users/signin",
+            "username" : "<username>", 
+            "password" : "<password>"
+        },
+        "apis": {}
+    }
+}
