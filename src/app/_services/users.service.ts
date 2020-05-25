@@ -28,7 +28,7 @@ export class UsersService {
 
 
   addUser(obj: Object) {
-    return this.http.post(`${this.uriUsers}`, obj).
+    return this.http.post(`${this.uriUsers}`, JSON.stringify(obj)).
     pipe(
        map((data: any) => {
          return data;
