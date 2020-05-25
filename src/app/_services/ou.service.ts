@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { from, Observable, BehaviorSubject, throwError } from 'rxjs';
+import { from, Observable, BehaviorSubject, throwError, fromEventPattern } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 
@@ -18,19 +18,51 @@ export class OUService {
   uri = environment.authUrl;
   //uri = 'http://localhost:4000/auth';
 
+  /*
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-
+*/
   constructor(private httpClient: HttpClient, private cs: CustomConfigEnvironmentDataService) {      
-      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-      this.currentUser = this.currentUserSubject.asObservable();
+     // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+     // this.currentUser = this.currentUserSubject.asObservable();
   }
-
+/*
   public get currentUserValue(): User {
       return this.currentUserSubject.value;
   }
-  
+ */ 
+
+  //funtion used just to avoid testing errors as this is just a temporal service 
+  getDefaultData() {
+
+    return {
+      "OU_API_DATA" : {
+          "baseUrl": "http://localhost:4200",
+          "authentication": {
+              "endPoint": "qualichain/users/signin",
+              "username" : "<username>", 
+              "password" : "<password>"
+          },
+          "apis": {
+              "createBadge": "qualichain/badges/create",
+              "createNewBadgeIssuance": "qualichain/assertions/create",
+              "confirmBadgeIssuance": "qualichain/assertions/issue",
+              "revokeBadgeIssuance": "qualichain/assertions/revoke",
+              "getRecipients": "qualichain/recipients/list",
+              "getBagdes": "qualichain/badges/list"
+          }
+      }
+    }
+  }
+
   getOUToken() {
+
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
     let obj = {
       "username" : this.cs.configData.OU_API_DATA.authentication.username,
       "password" :  this.cs.configData.OU_API_DATA.authentication.password
@@ -59,6 +91,13 @@ export class OUService {
   }
 
   getRecipientsList(token: string) {    
+
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
     let endPoint = "/"+this.cs.configData.OU_API_DATA.apis.getRecipients;
     return this.httpClient.get(`${endPoint}`,{headers: this.createOUAuthorizationHeader(token)}).
     pipe(
@@ -72,6 +111,13 @@ export class OUService {
   }
 
   createBadge(token: string, obj: {}) {    
+
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
     let endPoint = "/"+this.cs.configData.OU_API_DATA.apis.createBadge;
     //console.log(endPoint);    
     return this.httpClient.post(`${endPoint}`, obj, {headers: this.createOUAuthorizationHeader(token)}).
@@ -85,7 +131,14 @@ export class OUService {
     )
   }
 
-  createBadgeIssuance(token: string, obj: {}) {    
+  createBadgeIssuance(token: string, obj: {}) {   
+    
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
     let endPoint = "/"+this.cs.configData.OU_API_DATA.apis.createNewBadgeIssuance;
     //console.log(endPoint);    
     return this.httpClient.post(`${endPoint}`, obj, {headers: this.createOUAuthorizationHeader(token)}).
@@ -99,7 +152,14 @@ export class OUService {
     )
   }
 
-  confirmBadgeIssuance(token: string, obj: {}) {    
+  confirmBadgeIssuance(token: string, obj: {}) {  
+    
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
     let endPoint = "/"+this.cs.configData.OU_API_DATA.apis.confirmBadgeIssuance;
     //console.log(endPoint);    
     return this.httpClient.post(`${endPoint}`, obj, {headers: this.createOUAuthorizationHeader(token)}).
@@ -114,6 +174,13 @@ export class OUService {
   }
 
   revokeBadgeIssuance(token: string, obj: {}) {    
+
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
     let endPoint = "/"+this.cs.configData.OU_API_DATA.apis.revokeBadgeIssuance;
     //console.log(endPoint);    
     return this.httpClient.post(`${endPoint}`, obj, {headers: this.createOUAuthorizationHeader(token)}).
@@ -127,7 +194,14 @@ export class OUService {
     )
   }  
 
-  getBadgesList(token: string) {    
+  getBadgesList(token: string) {
+    
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
     let endPoint = "/"+this.cs.configData.OU_API_DATA.apis.getBagdes;
     return this.httpClient.get(`${endPoint}`,{headers: this.createOUAuthorizationHeader(token)}).
     pipe(
