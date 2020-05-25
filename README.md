@@ -10,18 +10,34 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Update custom config file
 
 You must edit the file /src/assets/config.json and introduce valid credentials
-
+```
 {
     "OU_API_DATA" : {
-        "baseUrl": "https://blockchain21.kmi.open.ac.uk",
+        "baseUrl": "http://localhost:4200",
         "authentication": {
-            "endPoint": "https://blockchain21.kmi.open.ac.uk/qualichain/users/signin",
+            "endPoint": "qualichain/users/signin",
             "username" : "<username>", 
             "password" : "<password>"
         },
-        "apis": {}
+        "apis": {
+            "createBadge": "qualichain/badges/create",
+            "createNewBadgeIssuance": "qualichain/assertions/create",
+            "confirmBadgeIssuance": "qualichain/assertions/issue",
+            "revokeBadgeIssuance": "qualichain/assertions/revoke",
+            "getRecipients": "qualichain/recipients/list",
+            "getBagdes": "qualichain/badges/list"
+        }
     }
 }
+```
+
+## Proxy configuration
+
+To be able to avoid CORS problems and consum the OU APIs there is a proxy.
+
+In case we need to change the proxy configuration, because we must use another target, we need to update the file 'src/proxy.conf.json'
+
+
 
 ## Development server
 

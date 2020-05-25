@@ -23,6 +23,7 @@ import { CoursesEditComponent } from './_components/courses-edit/courses-edit.co
 import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
 import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
+import { NotFoundComponent } from './_components/not-found/not-found.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
@@ -135,6 +136,10 @@ const routes: Routes = [
     path: 'access_denied',
     component: AccessDeniedComponent
   },
+  { 
+    path: '**', 
+    component: NotFoundComponent
+  } ,
   { path: '**', redirectTo: '' }
   ];
 

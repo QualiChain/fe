@@ -8,6 +8,7 @@ import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/
 import { UsersService } from '../../_services/users.service';
 import { BadgesService } from '../../_services/badges.service';
 import { AuthService } from '../../_services/auth.service';
+import {OUService } from '../../_services/ou.service'
 
 //import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
@@ -47,6 +48,7 @@ export class AwardSmartBadgeComponent implements OnInit {
   courseId: number;
   
   constructor(
+    private ous: OUService,
     private us: UsersService,
     private bs: BadgesService,
     private fb: FormBuilder, private route: ActivatedRoute, public awardDialog: MatDialog, public createAwardDialog: MatDialog) { }
@@ -79,12 +81,46 @@ export class AwardSmartBadgeComponent implements OnInit {
       this.courseId = id;
     });
 
+    let dataListUsers = [];
+
+    this.ous
+    .getOUToken()
+    .subscribe((
+      dataOU: any) => {
+      if (dataOU.token) {
+        this.ous
+        .getRecipientsList(dataOU.token)
+        .subscribe((dataSBOU: any) => {
+          
+          //console.log(dataSBOU);
+          //this.listOfSmartAwards = dataSBOU.badges;
+          dataSBOU.recipients.forEach(element => {
+            //console.log(element);
+            let aqcuired_badges_by_user = [];
+            dataListUsers.push({id: element.id , student: element.name, semester: '-', grade: '-', origin: 'external', aqcuired_badges: aqcuired_badges_by_user});
+            ELEMENT_DATA.push({id: element.id , student: element.userName, semester: '-', grade: '-', origin: 'external', aqcuired_badges: aqcuired_badges_by_user});
+            this.dataSource.data = dataListUsers;
+            
+          });
+
+      });
+
+      }
+      
+      //console.log(this.selectedUserAwards);
+    },
+    error => {
+      console.log("error recovering token");
+    }
+    );    
+
+    /*
     this.us
       .getUsers()
       .subscribe((data: any) => {
         //this.jobs = data;
         
-        let dataListUsers = [];
+        
         data.forEach(element => {
           //console.log(element);          
 
@@ -99,17 +135,16 @@ export class AwardSmartBadgeComponent implements OnInit {
             data.forEach(elementB => {
               aqcuired_badges_by_user.push(elementB.badge);
             });
-            dataListUsers.push({id: element.id , student: element.userName, semester: '-', grade: '-', aqcuired_badges: aqcuired_badges_by_user});
-            ELEMENT_DATA.push({id: element.id , student: element.userName, semester: '-', grade: '-', aqcuired_badges: aqcuired_badges_by_user});
+            dataListUsers.push({id: element.id , student: element.userName, semester: '-', grade: '-', origin: 'internal', aqcuired_badges: aqcuired_badges_by_user});
+            ELEMENT_DATA.push({id: element.id , student: element.userName, semester: '-', grade: '-', origin: 'internal', aqcuired_badges: aqcuired_badges_by_user});
             this.dataSource.data = dataListUsers;
           });          
           
         });
-        
-
         //this.dataSource.data = dataListUsers;
-    });    
-
+    });
+    */
+    
   }
  
   openAwardDialog(userId: number, element: any) {
@@ -146,6 +181,7 @@ export interface listOfStudents {
   student: string;
   semester: string,
   grade: string,
+  origin: string,
   aqcuired_badges: any
 }
 
@@ -168,7 +204,13 @@ export class createAwardDialog_modal implements OnInit {
   badgedescription: string;
   badgeissuer: string;
 
-  constructor(private us: UsersService, private bs: BadgesService,
+  badgecriterianarrative: string;
+  badgeimageurl: string;
+  badgeversion: string;
+
+  constructor(
+    private ous: OUService,
+    private us: UsersService, private bs: BadgesService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
 
@@ -184,7 +226,45 @@ export class createAwardDialog_modal implements OnInit {
       "description": this.badgedescription
     };
   
+    this.ous
+    .getOUToken()
+    .subscribe((
+      dataOU: any) => {
+      //console.log(dataOU);
+      //console.log(dataOU.token);
+      if (dataOU.token) {       
+
+        let dataToSendOU  = {
+          "title": this.badgelabel, 
+          "issuerid": this.badgeissuer,
+          "description": this.badgedescription,
+          "criterianarrative": this.badgecriterianarrative,
+          "imageurl": this.badgeimageurl,
+          "version": this.badgeversion
+        };
+
+        this.ous
+        .createBadge(dataOU.token, dataToSendOU).subscribe(
+          res => {
+            console.log("Badge created");
+            console.log(res);
+                
+            fulListOfSmartAwards.push({id: res.id , name: this.badgelabel, description: this.badgedescription, issuer: this.badgeissuer});
+            this.data.badgesList.push({id: res.id , name: this.badgelabel, description: this.badgedescription, issuer: this.badgeissuer});
+            
+            document.getElementById("closeCreateAwardModalWindow").click();
+          },
+          error => {
+            alert("Error creating the Badge!!");
+          }
+        );
+
+        
+      }
+    }
+    );
     
+    /*
     this.bs.addBadge(dataToSend).subscribe(
       res => {
         console.log("Badge created");
@@ -200,7 +280,7 @@ export class createAwardDialog_modal implements OnInit {
         alert("Error creating the Badge!!");
       }
     );
-
+      */
     
 
   }
@@ -226,6 +306,7 @@ export class awardDialog_modal implements OnInit {
     private us: UsersService,
     private bs: BadgesService,
     private as: AuthService,
+    private ous: OUService,
     public dialogRef: MatDialogRef<awardDialog_modal>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
@@ -233,29 +314,52 @@ export class awardDialog_modal implements OnInit {
   ngOnInit() {
 
     this.selectedUserAwards=[];
-    /*
-    this.as
+    
+    
+    this.listOfSmartAwards=[];
+
+    this.ous
     .getOUToken()
     .subscribe((
       dataOU: any) => {
-      //this.jobs = data;
-      //console.log("full badges list");
-      console.log(dataOU);
-      console.log(dataOU.token);
+
+      if (dataOU.token) {
+        this.ous
+        .getBadgesList(dataOU.token)
+        .subscribe((dataSBOU: any) => {          
+          //console.log(dataSBOU);
+          //this.listOfSmartAwards = dataSBOU.badges;
+          dataSBOU.badges.forEach(element => {
+
+            this.listOfSmartAwards.push(
+              {
+              id: element.id,
+              name: element.title,
+              description: element.description,
+              issuer: element.issuerid,
+              imageurl: element.imageurl
+              }
+            );
+          });
+
+      });
+
+      }
+      
       //console.log(this.selectedUserAwards);
     },
     error => {
       console.log("error recovering token");
     }
     );
-    */
-   
+    
+   /*
     this.bs
       .getBadges()
       .subscribe((dataFull: any) => {
         //this.jobs = data;
         //console.log("full badges list");
-        //console.log(dataFull);
+        console.log(dataFull);
         this.listOfSmartAwards = dataFull;
 
         this.bs
@@ -288,15 +392,20 @@ export class awardDialog_modal implements OnInit {
           });
           //console.log(this.selectedUserAwards);
       });
-
-
     });
+    */
 
     
-    this.us
+    //console.log(this.data);
+    if (this.data.element.student) {
+      this.userDataRec.userName = this.data.element.student;
+    }
+    else {
+    
+      this.us
         .getUser(this.data.userId).subscribe(
           data => {
-            console.log("user in db");      
+            //console.log("user in db");      
             this.userDataRec = data;
           },
           error => {
@@ -304,13 +413,101 @@ export class awardDialog_modal implements OnInit {
           }
         );
     
+    }
+
   }
 
   
+  updateSmartAwardStatusOU(smartBadgeId, posI, smartAwardBadgeData, action) {
+    console.log(smartAwardBadgeData);
+    console.log(this.data);
+    console.log(action);
+    
+    this.lodingspinnerid = smartBadgeId;
+    if (action=='delete') {
+
+      let dataToSendRevoke = {'id': 17};
+
+      this.ous
+      .getOUToken()
+      .subscribe((
+        dataOU: any) => {
+        if (dataOU.token) {
+          this.ous
+          .revokeBadgeIssuance(dataOU.token, dataToSendRevoke)
+          .subscribe((dataSBOU: any) => {
+            
+            console.log(dataSBOU);
+            
+            //falta revisar como cambiarlo del listado
+            this.lodingspinnerid = null;
+
+            
   
+        });
+  
+        }
+        
+        //console.log(this.selectedUserAwards);
+      },
+      error => {
+        console.log("error recovering token");
+      }
+      );       
+         
+
+    
+      
+    }
+    else if (action=='add') {
+      
+      //let dataToSend = {"user_id": this.data.userId, "badge_id": smartBadgeId};
+      let dataToSend = {"badgeid" : smartBadgeId, "recipientid" : this.data.userId}
+      //console.log(dataToSend);
+
+      this.ous
+      .getOUToken()
+      .subscribe((
+        dataOU: any) => {
+        if (dataOU.token) {
+          this.ous
+          .createBadgeIssuance(dataOU.token, dataToSend)
+          .subscribe((dataSBOU: any) => {
+            
+            console.log(dataSBOU);
+            
+            let dataToSend2 = {"id" : dataSBOU.id}
+
+            this.ous
+            .confirmBadgeIssuance(dataOU.token, dataToSend2)
+            .subscribe((dataSBOU2: any) => {
+              
+              console.log(dataSBOU2);          
+    
+          });
+            
+         
+  
+        });
+  
+        }
+        
+        //console.log(this.selectedUserAwards);
+      },
+      error => {
+        console.log("error recovering token");
+      }
+      );       
+         
+
+    }
+    
+
+  }
 
   updateSmartAwardStatus(smartBadgeId, posI, smartAwardBadgeData, action) {
-
+    //console.log(smartAwardBadgeData);
+    
     this.lodingspinnerid = smartBadgeId;
     if (action=='delete') {
       
@@ -498,6 +695,7 @@ export interface DialogData {
   userId: number;
   element: any;
   source: string;
+  origin: string,
   badgesList: any;
 }
 /*

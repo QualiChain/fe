@@ -6,20 +6,24 @@
 
         <div class="row">
           <div class="col col-lg-8">
+            <img style="width:30px" *ngIf="itemBadgeData.imageurl" [src]="itemBadgeData.imageurl">
             <h2>{{itemBadgeData.name}}</h2><br/>
-            Issuer: {{itemBadgeData.issuer}} <br/>
-            Description: {{itemBadgeData.description}}<br/>
           </div>
           <div class="col col-lg-2">
             <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==itemBadgeData.id"></mat-spinner>
 
-            <button *ngIf="itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
+            <button *ngIf="itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
               <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.UNASSIGN_AWARD' | translate }}
             </button>
 
-            <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatus(itemBadgeData.id, i, itemBadgeData, 'add')" type="button" class="btn btn-primary">
+            <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'add')" type="button" class="btn btn-primary">
               <i _ngcontent-axy-c0="" class="material-icons">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}
             </button>
+          </div>
+
+          <div class="col col-lg-12">            
+            Issuer: {{itemBadgeData.issuer}} <br/>
+            Description: {{itemBadgeData.description}}<br/>
           </div>
         </div>
        

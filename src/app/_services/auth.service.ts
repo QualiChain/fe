@@ -7,7 +7,6 @@ import { environment } from './../../environments/environment';
 //import { User } from '../_models/user';
 import User from '../_models/user';
 //import { exists } from 'fs';
-import { CustomConfigEnvironmentDataService } from './customConfigEnvironmentData.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private httpClient: HttpClient, private cs: CustomConfigEnvironmentDataService) {      
+  constructor(private httpClient: HttpClient) {      
       this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
       this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -29,24 +28,6 @@ export class AuthService {
       return this.currentUserSubject.value;
   }
   
-  getOUToken() {
-    let obj = {
-      "username" : this.cs.configData.OU_API_DATA.authentication.username,
-      "password" :  this.cs.configData.OU_API_DATA.authentication.password
-    };
-    obj = {"username" : "niaz.chowdhury@open.ac.uk", "password" : "qualichain123"};
-
-    //console.log(obj);
-    return this.httpClient.post(`${this.cs.configData.OU_API_DATA.authentication.endPoint}`, obj).
-    pipe(
-       map((data: any) => {
-         console.log(data);
-         return data;
-       }), catchError( error => {
-         return throwError( 'Something went wrong!' );
-       })
-    )
-  }
 
   logout() {
     console.log("logout auth.service.ts")
