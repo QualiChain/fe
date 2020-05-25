@@ -325,6 +325,10 @@
     "TITLE": "ΔΕΝ ΕΠΙΤΡΕΠΕΤΑΙ Η ΠΡΟΣΒΑΣΗ",
     "BODY": "Ορισμένα περιεχόμενα αυτού του ιστότοπου είναι περιορισμένα και δεν έχετε αρκετά δικαιώματα πρόσβασης."
   },
+  "NOT_FOUND": {
+    "TITLE": "404 - Page not found",
+    "BODY": "Unfortunately, the requested page could not be found."
+  },  
   "RECOMENDED_COURSES": {
     "TITLE": "Recommended courses",
     "NO_DATA": "This user does not have any recomended course yet."

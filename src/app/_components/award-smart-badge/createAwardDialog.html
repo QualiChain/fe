@@ -19,6 +19,25 @@
             <mat-label>Badge description</mat-label>
             <textarea matInput required [(ngModel)]="badgedescription" name="badgedescription" value="badgedescription" placeholder="Badge description..."></textarea>
           </mat-form-field>
+          
+          <br/>
+          <!-- badge criterianarrative -->
+          <mat-form-field class="create-award-full-width">
+              <mat-label>Badge criteria narrative</mat-label>
+              <textarea matInput required [(ngModel)]="badgecriterianarrative" name="badgecriterianarrative" value="badgecriterianarrative" placeholder="Badge criteria narrative..."></textarea>
+            </mat-form-field>
+        
+            <!-- badge imageurl -->
+        <mat-form-field class="create-award-full-width">
+            <mat-label>Badge image URL</mat-label>
+            <input matInput required [(ngModel)]="badgeimageurl" name="badgeimageurl" value="badgeimageurl" placeholder="full path, example: 'https://qualichain-project.eu/quali-data/uploads/2019/04/training.png'">
+        </mat-form-field>        
+        <br/>
+        <!-- badge version -->
+        <mat-form-field class="create-award-full-width">
+            <mat-label>Badge version</mat-label>
+            <input matInput required [(ngModel)]="badgeversion" name="badgeversion" value="badgeversion" placeholder="Badge version">
+        </mat-form-field>     
 
     </form>
 

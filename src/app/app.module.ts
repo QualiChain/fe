@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { NotFoundComponent } from './core/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /*
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -84,6 +83,7 @@ import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
 /*custom components*/
 //import { CvsComponent } from './_components/cvs/cvs.component';
+import { NotFoundComponent } from './_components/not-found/not-found.component';
 import { LoginComponent } from './_components/login/login.component';
 import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';

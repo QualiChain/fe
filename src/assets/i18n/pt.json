@@ -325,6 +325,10 @@
     "TITLE": "ACESSO NEGADO",
     "BODY": "Alguns conteúdos deste site são restritos e você não tem permissões suficientes para acessá-lo."
   },
+  "NOT_FOUND": {
+    "TITLE": "404 - Página Não Encontrada",
+    "BODY": "Unfortunately, the requested page could not be found."
+  },  
   "RECOMENDED_COURSES": {
     "TITLE": "Recommended courses",
     "NO_DATA": "This user does not have any recomended course yet."

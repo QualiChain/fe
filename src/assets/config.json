@@ -1,11 +1,18 @@
 {
     "OU_API_DATA" : {
-        "baseUrl": "https://blockchain21.kmi.open.ac.uk",
+        "baseUrl": "http://localhost:4200",
         "authentication": {
-            "endPoint": "https://blockchain21.kmi.open.ac.uk/qualichain/users/signin",
+            "endPoint": "qualichain/users/signin",
             "username" : "<username>", 
             "password" : "<password>"
         },
-        "apis": {}
+        "apis": {
+            "createBadge": "qualichain/badges/create",
+            "createNewBadgeIssuance": "qualichain/assertions/create",
+            "confirmBadgeIssuance": "qualichain/assertions/issue",
+            "revokeBadgeIssuance": "qualichain/assertions/revoke",
+            "getRecipients": "qualichain/recipients/list",
+            "getBagdes": "qualichain/badges/list"
+        }
     }
 }
