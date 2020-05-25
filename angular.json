@@ -75,7 +75,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "QualiChain-FE:build"
+            "browserTarget": "QualiChain-FE:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
