@@ -1,5 +1,5 @@
 
-export default class User {
+export default class Course {
     id?: number;
     name: string;
     description: string;
