@@ -26,11 +26,22 @@ export class CoursesService {
         )
     }  
 
-    getCourses() {
+    getCourses_old() {
         return this
            .http
            .get(`${this.coursesURL}`);
     }
+
+    getCourses() {
+        return this.http.get(`${this.coursesURL}`).
+        pipe(
+            map((data: Course[]) => {
+                return data;
+            }), catchError( error => {
+                return throwError( 'Something went wrong!' );
+            })
+        )
+        }
 
 
     getCourse(courseId: Number) {

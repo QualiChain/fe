@@ -31,7 +31,8 @@ const ELEMENT_DATA: AvailableJobs[] = [
   {id: 666, Label:"Javascript developer",department:"department6",employmentType:"2",level:"1",JobDescription:"JS developer",SkillReq:[{SkillLabel:"JS",proficiencyLevel:"2",skillPriority:"1"},{SkillLabel:"HTML",proficiencyLevel:"3",skillPriority:"3"}]}
 ];
 */
-const ELEMENT_DATA: Job[] = [];
+//const ELEMENT_DATA: Job[] = [];
+let ELEMENT_DATA: Job[] = [];
 /*
 const ELEMENT_DATA: Job[] = [
   {id: 111, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer", job_description:"department1", employment_type:"4", level:"5", skills: [{SkillLabel: "skillA", assign: "True", priority: "high", proficiencyLevel: "expert"}]},
@@ -139,12 +140,14 @@ export class JobsComponent implements OnInit {
       .getJobs()
       .subscribe((data: Job[]) => {
         this.jobs = data;
+        ELEMENT_DATA = data;
         //console.log(data);
-
+        /*
         ELEMENT_DATA.forEach(element => {
           data.push(element);
           //console.log(element);
         });
+        */
         this.dataSource.data = data;
 
     });

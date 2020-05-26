@@ -40,6 +40,12 @@
       "SUBMIT": "Submit"
     }
   },  
+  "COURSES": {
+    "TITLE": "Courses",
+    "BUTTON": {
+      "CREATE_COURSE": "Create Course"
+    }
+  },
   "JOBS": {
     "TITLE": "Empregos",
     "REQUIRED_SKILLS": "Required Skills",

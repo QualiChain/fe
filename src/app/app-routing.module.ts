@@ -19,6 +19,7 @@ import {BestCarrerOptionsComponent} from './_components/best-carrer-options/best
 import {CarrerAdvisorComponent} from './_components/carrer-advisor/carrer-advisor.component';
 import { LoginComponent } from './_components/login/login.component';
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
+import { CoursesComponent } from './_components/courses/courses.component';
 import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
 import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
 import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
@@ -101,7 +102,12 @@ const routes: Routes = [
     component: RecruitmentViewComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.recruiter, Role.admin] }    
-  },
+  },  
+  {
+    path: 'courses',
+    component: CoursesComponent,
+    canActivate: [AuthGuard]
+  },   
   {
     path: 'courses/add',
     component: CoursesEditComponent,
