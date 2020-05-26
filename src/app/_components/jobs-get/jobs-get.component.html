@@ -1,1 +1,115 @@
-<p>jobs-get works!</p>
+<h1 >{{ 'JOBS.TITLE' | translate }}</h1>
+
+<div class="container">
+
+    <div class="row">
+        <button class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
+            <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+          </button>
+          <button class="btn btn-inform" (click)="openApllyJobDialog(jobData.id, jobData)">
+            <i _ngcontent-axy-c0="" class="material-icons"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
+          </button>
+      </div>
+      <div class="row"><br></div>
+
+    <div class="row">
+
+        <div class="col col-lg-12">
+
+            <div class="col ">
+                <div class="labeljob"><span>{{ 'JOB.TITLE.LABEL' | translate }}:</span> {{jobData.title}}</div> 
+            </div>
+            <div class="col ">
+                <div class="labeljob"><span>{{ 'JOB.DESCRIPTION.LABEL' | translate }}:</span> {{jobData.job_description}}</div> 
+            </div>
+            <div class="col ">
+                <div class="jobdescription"><span>{{ 'JOB.START_DATE.LABEL' | translate }}:</span> {{jobData.start_date | date }}</div> 
+            </div>
+            <div class="col ">
+                <div class="labeljob"><span>{{ 'JOB.END_DATE.LABEL' | translate }}:</span> {{jobData.end_date | date }}</div> 
+            </div>
+            <div class="col ">
+                <div class="labeljob"><span>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+jobData.employment_type | uppercase | translate }}</div> 
+            </div>
+            <div class="col ">
+                <div class="labeljob"><span>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.SKILL.LEVEL.OPTIONS.'+jobData.level | uppercase | translate }}</div> 
+            </div>
+    
+            <div class="col ">
+                <div class="labeljob"><span>{{ 'JOBS.REQUIRED_SKILLS' | translate }}:</span> 
+
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ 'JOB.SKILL.NAME.LABEL' | translate }}</th>
+                            <th scope="col">{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</th>
+                            <th scope="col">{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</th>
+                            <th scope="col">{{ 'JOB.SKILL.ASSIGN.LABEL' | translate }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let skill of jobData.skills; let i=index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{skill.SkillLabel}}</td>
+                            <td>{{ 'JOB.SKILL.PRIORITY.OPTIONS.'+skill.priority | uppercase | translate }}</td>
+                            <td>{{ 'JOB.SKILL.LEVEL.OPTIONS.'+skill.proficiencyLevel | uppercase | translate }}</td>
+                            <td>{{skill.assign}}</td>
+                          </tr>                  
+                        </tbody>
+                      </table>
+
+                    
+                </div> 
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div *ngIf="jobCandidates.length>0" class="col col-lg-12">
+
+            <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
+
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Available</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Score</th>
+                    <th scope="col"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let candidate of jobCandidates; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{candidate.user.name}}</td>
+                    <td>{{candidate.role}}</td>
+                    <td>{{candidate.available}}</td>
+                    <td>{{candidate.exp_salary}}</td>
+                    <td>{{candidate.score}}</td>
+                    <td>
+                        <button class="btn btn-primary" [routerLink]="['/profiles', candidate.user_id]">
+                            <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                        </button>
+
+                        <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, candidate.user_id, i)">
+                            <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+                        </button>
+                    </td>
+                  </tr>                  
+                </tbody>
+              </table>
+
+            
+        </div>
+
+
+
+        
+    </div>
+
+</div>

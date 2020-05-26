@@ -61,9 +61,15 @@
     "CANCEL_MESSAGE": "Are you sure you want to do this?"
   },
   "JOB": {
+    "CANDIDATES": "Candidates",
+    "DELETE_APPLY_MESSAGE": "Are you sure you want to this apply?",
     "TITLE": {
       "LABEL": "Title",
       "PLACEHOLDER": "Position"
+    },
+    "DESCRIPTION": {
+      "LABEL": "Description",
+      "PLACEHOLDER": "Description"
     },
     "DEPARTMENT": {
       "LABEL": "Deparment",
@@ -86,7 +92,7 @@
       "PLACEHOLDER": "Select one",
       "OPTIONS": {
         "INTERNERSHIP": "Internship",
-        "ENTITY_LEVEL": "Entry level",
+        "ENTITY_LEVEL": "Entity level",
         "ASSOCIATE": "Associate",
         "MID_SENIOR_LEVEL": "Mid-Senior level",
         "EXPERT": "Expert",

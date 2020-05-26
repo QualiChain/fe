@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './_components/home/home.component';
 import { JobsComponent } from './_components/jobs/jobs.component';
+import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 
 import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 //import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
@@ -48,6 +49,11 @@ const routes: Routes = [
   {
     path: 'jobs/add',
     component: JobsAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'jobs/:id',
+    component: JobsGetComponent,
     canActivate: [AuthGuard]
   },
   {
