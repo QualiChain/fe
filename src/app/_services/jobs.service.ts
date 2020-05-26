@@ -97,6 +97,27 @@ export class JobsService {
       )
     }
 
-    
+    deleteJobApply(jobId: number, userId: number) {      
+      return this.http.delete(`${this.jobsURL}/${jobId}/apply/${userId}`).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }
+
+
+    getJobCandidats(jobId: number) {
+      return this.http.get(`${this.jobsURL}/${jobId}/apply`).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }
 
 }

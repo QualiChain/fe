@@ -145,14 +145,16 @@ export class JobsAddComponent implements OnInit {
     }
 
     loadDataJob(dataObject) {
-      console.log("loadDataJob");
-      
+      //console.log("loadDataJob");
+      /*
       if (!dataObject) {
         this.dataIn = {id: 111, creator_id: 1, date: "24-4-2020", start_date: "24-4-2020", end_date: "24-4-2020", title:"DEMO FE developer", job_description:"department1", employment_type:"4", level:"5", skills: [{SkillLabel: "skillA", assign: "True", priority: "high", proficiencyLevel: "expert"}]};
       }
       else {
         this.dataIn = dataObject;
       }
+      */
+      this.dataIn = dataObject;
 
 
 /*

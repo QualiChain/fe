@@ -14,8 +14,8 @@
               <br/>
               <!-- description -->
               <mat-form-field class="create-job-full-width">
-                <mat-label>Description</mat-label>
-                <textarea matInput required [(ngModel)]="dataIn.job_description" name="job_description" value="job_description" placeholder="Description..."></textarea>
+                <mat-label>{{ 'JOB.DESCRIPTION.LABEL' | translate }}</mat-label>
+                <textarea matInput required [(ngModel)]="dataIn.job_description" name="job_description" value="job_description" placeholder="{{ 'JOB.DESCRIPTION.PLACEHOLDER' | translate }}"></textarea>
               </mat-form-field>
               <br/>
               <!-- start_date -->
@@ -38,8 +38,8 @@
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}</mat-label>
                 <mat-select  [(ngModel)]="dataIn.employment_type" name="employment_type" required>
-                  <mat-option value="full-time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</mat-option>
-                  <mat-option value="part-time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</mat-option>
+                  <mat-option value="full_time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</mat-option>
+                  <mat-option value="part_time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</mat-option>
                   <mat-option value="contract">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</mat-option>
                   <mat-option value="temporary">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.TEMPORARY' | translate }}</mat-option>
                   <mat-option value="volunteer">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.VOLUNTEER' | translate }}</mat-option>
@@ -52,13 +52,13 @@
                 <mat-label>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</mat-label>
                 <mat-select  [(ngModel)]="dataIn.level" name="level" required>
                   <mat-option value="internership">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</mat-option>
-                  <mat-option value="entity-level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</mat-option>
+                  <mat-option value="entity_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</mat-option>
                   <mat-option value="associate">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</mat-option>
-                  <mat-option value="senior_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</mat-option>
+                  <mat-option value="mid_senior_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</mat-option>
                   <mat-option value="director">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.DIRECTOR' | translate }}</mat-option>
                   <mat-option value="executive">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.EXECUTIVE' | translate }}</mat-option>
                   <mat-option value="expert">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.EXPERT' | translate }}</mat-option>
-                  <mat-option value="not-applicable">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.NOT_APPLICABLE' | translate }}</mat-option>
+                  <mat-option value="not_applicable">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.NOT_APPLICABLE' | translate }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <br/>
@@ -113,7 +113,10 @@
                         
                         
                         <br/>
-                        <button *ngIf="i>0" class="btn btn-danger" (click) = "removeSkill(i)">{{ 'JOBS.BUTTON.DELETE_SKILL' | translate }}</button>
+                        <button *ngIf="i>0" class="btn btn-danger" (click) = "removeSkill(i)">
+                          <i _ngcontent-axy-c0="" class="material-icons"> delete </i>
+                          {{ 'JOBS.BUTTON.DELETE_SKILL' | translate }}
+                        </button>
                         
 
                       </div>
@@ -121,7 +124,9 @@
 
                   <div>
                     <span class="table-add float-right mb-3 mr-2">
-                      <button class="btn btn-primary" (click) = "addSkill()">{{ 'JOBS.BUTTON.ADD_SKILL' | translate }}</button>
+                      <button class="btn btn-primary" (click) = "addSkill()">
+                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                        {{ 'JOBS.BUTTON.ADD_SKILL' | translate }}</button>
                     </span>
                   </div>
   
@@ -132,15 +137,17 @@
 
       
               <div class="form-group">
-                <button [disabled]="formEditJob.invalid" *ngIf="mode=='Create'" (click) = "addJob()" type="submit" class="btn btn-primary"
-                     >
+                <button [disabled]="formEditJob.invalid" *ngIf="mode=='Create'" (click) = "addJob()" type="submit" class="btn btn-primary">
+                  <i _ngcontent-axy-c0="" class="material-icons"> add </i>
                     {{ 'JOBS.BUTTON.CREATE_JOB' | translate }}
                 </button>
-                <button [disabled]="formEditJob.invalid" *ngIf="mode=='Edit'" (click) = "updateJob(dataIn.id)" type="submit" class="btn btn-primary"
-                     >
+                <button [disabled]="formEditJob.invalid" *ngIf="mode=='Edit'" (click) = "updateJob(dataIn.id)" type="submit" class="btn btn-primary">
+                  <i _ngcontent-axy-c0="" class="material-icons"> add </i>
                     {{ 'JOBS.BUTTON.UPDATE_JOB' | translate }}
                 </button>
-                <button class="btn btn-danger" (click)="confirmDialog()">{{ 'BUTTON.CANCEL' | translate }}</button>
+                <button class="btn btn-danger" (click)="confirmDialog()">
+                  <i _ngcontent-axy-c0="" class="material-icons"> cancel </i>
+                  {{ 'BUTTON.CANCEL' | translate }}</button>
               </div>
           </form>
             
