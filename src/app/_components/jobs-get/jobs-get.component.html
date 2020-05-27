@@ -1,4 +1,4 @@
-<h1 >{{ 'JOBS.TITLE' | translate }}</h1>
+<h1 >{{ 'JOB.HEADER_TITLE' | translate }}: {{jobData.title}}</h1>
 
 <div class="container">
 
@@ -17,13 +17,10 @@
         <div class="col col-lg-12">
 
             <div class="col ">
-                <div class="labeljob"><span>{{ 'JOB.TITLE.LABEL' | translate }}:</span> {{jobData.title}}</div> 
-            </div>
-            <div class="col ">
                 <div class="labeljob"><span>{{ 'JOB.DESCRIPTION.LABEL' | translate }}:</span> {{jobData.job_description}}</div> 
             </div>
             <div class="col ">
-                <div class="jobdescription"><span>{{ 'JOB.START_DATE.LABEL' | translate }}:</span> {{jobData.start_date | date }}</div> 
+                <div class="labeljob"><span>{{ 'JOB.START_DATE.LABEL' | translate }}:</span> {{jobData.start_date | date }}</div> 
             </div>
             <div class="col ">
                 <div class="labeljob"><span>{{ 'JOB.END_DATE.LABEL' | translate }}:</span> {{jobData.end_date | date }}</div> 

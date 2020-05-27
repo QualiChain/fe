@@ -106,6 +106,7 @@ import { RecomendedCoursesComponent } from './_components/recomended-courses/rec
 import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent } from './_components/recomended-skills/recomended-skills.component';
 import { CoursesComponent } from './_components/courses/courses.component';
+import { CoursesGetComponent } from './_components/courses-get/courses-get.component';
 import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
 import { ProgressComponent } from './_components/progress/progress.component';
 import { UploadFilesComponent } from './_components/upload-files/upload-files.component';
@@ -218,6 +219,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     RecomendedJobsComponent,
     RecomendedSkillsComponent,
     CoursesComponent,
+    CoursesGetComponent,
     CoursesEditComponent,
     EmploymentTypePipe,
     LevelTypePipe,

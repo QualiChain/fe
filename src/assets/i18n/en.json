@@ -61,6 +61,7 @@
     "CANCEL_MESSAGE": "Are you sure you want to do this?"
   },
   "JOB": {
+    "HEADER_TITLE": "Job",
     "CANDIDATES": "Candidates",
     "DELETE_APPLY_MESSAGE": "Are you sure you want to this apply?",
     "TITLE": {
@@ -276,6 +277,7 @@
     "TITLE": "Carrer Advisor"
   },
   "COURSE"  : {
+    "TITLE": "Course",
     "NAME" : {
       "LABEL": "Name",
       "PLACEHOLDER": "Name"
