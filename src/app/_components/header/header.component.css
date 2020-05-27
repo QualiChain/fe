@@ -52,6 +52,54 @@
 }
 
 
+#block-languageswitcher .links li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+#block-languageswitcher {
+    padding: 10px;
+}
+
+#block-languageswitcher ul {
+    text-align: left;
+}
+
+#block-languageswitcher .links a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    padding-left: 30px;
+    background-image: url('/assets/img/flags/en.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 24px;
+    color: #fff;
+    font-size: .8125em;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+#block-languageswitcher .links a.is-active {
+    color: #464646;
+}
+
+#block-languageswitcher .links li.current_page_parent a {
+    background-color: #2b69b1;
+    color: #21a959 !important;
+}
 
 
 
+#block-languageswitcher .links .en a {
+    background-image: url('/assets/img/flags/en.png');
+}
+
+#block-languageswitcher .links .pt a {
+    background-image: url('/assets/img/flags/pt.png');
+}
+
+#block-languageswitcher .links .el a {
+    background-image: url('/assets/img/flags/el.png');
+}
