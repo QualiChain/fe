@@ -27,7 +27,7 @@
                     <div class="progress" >
                       <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':course.rating}" attr.aria-valuenow="{{course.rating}}"  aria-valuemin="0" aria-valuemax="100">{{course.rating}}%</div>
                     </div>
-                    <a [routerLink]="['/course',course.id]" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
+                    <a [routerLink]="['/courses',course.id]" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
                   </div>
               </div>
             </ng-template>

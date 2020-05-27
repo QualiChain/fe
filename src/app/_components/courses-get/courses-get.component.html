@@ -1,0 +1,48 @@
+<h1 >{{ 'COURSE.TITLE' | translate }}: {{courseData.name}}</h1>
+
+<div class="container">
+    <div class="row" *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='teacher'">
+      <button class="btn btn-primary" [routerLink]="['/courses', courseData.id, 'edit']">
+        <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+      </button>          
+    </div>
+
+    <div class="row"><br></div>
+
+    <div class="row">
+
+      <div class="col col-lg-12">
+          <div class="col ">
+              <div class="labelcourse"><span>{{ 'COURSE.DESCRIPTION.LABEL' | translate }}:</span> {{courseData.description}}</div> 
+          </div>
+          <div class="col ">
+            <div class="labelcourse"><span>{{ 'COURSE.SEMESTER.LABEL' | translate }}:</span> {{courseData.semester}}</div> 
+          </div>
+          <div class="col ">
+              <div class="labelcourse"><span>{{ 'COURSE.STARTDATE.LABEL' | translate }}:</span> {{courseData.startDate | date }}</div> 
+          </div>
+          <div class="col ">
+              <div class="labelcourse"><span>{{ 'COURSE.ENDDATE.LABEL' | translate }}:</span> {{courseData.endDate | date }}</div> 
+          </div>
+          
+          <div class="col ">
+              <div class="labelcourse"><span>{{ 'COURSE.EVENTS.LABEL' | translate }}:</span> 
+                  <span *ngFor="let event of courseData.events; let i=index">
+                    <span *ngIf="i<0">, </span>{{ event.name }}
+                  </span>
+              </div>
+          </div>
+
+          <div class="col ">
+            <div class="labelcourse"><span>{{ 'COURSE.SKILLS.LABEL' | translate }}:</span> 
+                <span *ngFor="let skill of courseData.skills; let i=index">
+                  <span *ngIf="i<0">, </span>{{ skill.name }}
+                </span>
+            </div> 
+          </div>            
+
+      </div>
+    </div>
+    
+
+</div>

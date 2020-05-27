@@ -12,15 +12,16 @@ import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 //import { CvsComponent } from './cvs/cvs.component';
 import { ProfilesComponent } from './_components/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
-import {ProfilesViewComponent} from './_components/profiles-view/profiles-view.component';
-import {ProfilesAddComponent} from './_components/profiles-add/profiles-add.component';
+import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
+import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
 
-import {RecruitmentViewComponent} from './_components/recruitment-view/recruitment-view.component';
-import {BestCarrerOptionsComponent} from './_components/best-carrer-options/best-carrer-options.component';
-import {CarrerAdvisorComponent} from './_components/carrer-advisor/carrer-advisor.component';
+import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
+import { BestCarrerOptionsComponent } from './_components/best-carrer-options/best-carrer-options.component';
+import { CarrerAdvisorComponent } from './_components/carrer-advisor/carrer-advisor.component';
 import { LoginComponent } from './_components/login/login.component';
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { CoursesComponent } from './_components/courses/courses.component';
+import { CoursesGetComponent } from './_components/courses-get/courses-get.component';
 import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
 import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
 import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
@@ -113,7 +114,12 @@ const routes: Routes = [
     path: 'courses',
     component: CoursesComponent,
     canActivate: [AuthGuard]
-  },   
+  },
+  {
+    path: 'courses/:id',
+    component: CoursesGetComponent,
+    canActivate: [AuthGuard]
+  },    
   {
     path: 'courses/add',
     component: CoursesEditComponent,
