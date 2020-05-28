@@ -28,7 +28,13 @@
                     <!-- 
                       <a [routerLink]="['/jobs','1']" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
                     -->
+                    <!--
                     <a [routerLink]="['/jobs',job.job.id]" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
+                    -->
+                    <button class="btn btn-primary" [routerLink]="['/jobs', job.job.id]">
+                      <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                    </button>
+
                   </div>
               </div>
             </ng-template>

@@ -31,7 +31,7 @@ export class CoursesGetComponent implements OnInit {
   ngOnInit() {
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
-    this.courseData = {id: 0, name: "", description: "", semester: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
+    this.courseData = {courseid: 0, name: "", description: "", semester: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
 
     this.route.params.subscribe(params => {
 

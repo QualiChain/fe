@@ -99,5 +99,16 @@ export class UsersService {
        })
     )
   }  
+  
+  getJobApplisByUser(userId: Number) {
+    return this.http.get(`${this.uriUsers}/${userId}/jobapplies`).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
 
 }

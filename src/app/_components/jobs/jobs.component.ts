@@ -186,6 +186,7 @@ export class applyJobDialog_modal implements OnInit {
   available: string;
   expsalary: string;
   score: string;
+  actionResult: boolean = false;
 
   constructor(
     private js: JobsService,
@@ -203,6 +204,9 @@ export class applyJobDialog_modal implements OnInit {
     //console.log(this.currentUser.id);
 
   }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   onSubmitApplyJobModal() {
     let objectToSend = {
@@ -217,8 +221,8 @@ export class applyJobDialog_modal implements OnInit {
         .applyJob(this.data.jobId, this.currentUser.id, objectToSend).subscribe(
           data => {
             console.log("Apply done!!");
-            document.getElementById("closeApplyJobModalWindow").click();
-            
+            this.actionResult=true;
+            document.getElementById("closeApplyJobModalWindowTrue").click();
           },
           error => {
             alert("Error appling for the job");                      
