@@ -371,6 +371,7 @@
     "UPDATE": "Update",
     "LEARN_MORE": "Learn more",
     "APPLY_JOB": "Apply for this job",
+    "DELETE_APPLY_JOB": "Delete job apply",
     "CHANGE_PASSWORD": "Change password"
   },
   "ACTION": "Action",

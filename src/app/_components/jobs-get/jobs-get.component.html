@@ -6,8 +6,11 @@
         <button class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
             <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
           </button>
-          <button class="btn btn-inform" (click)="openApllyJobDialog(jobData.id, jobData)">
+          <button *ngIf="!userHasAnApply" class="btn btn-inform" (click)="openApllyJobDialog(jobData.id, jobData)">
             <i _ngcontent-axy-c0="" class="material-icons"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
+          </button>
+          <button *ngIf="userHasAnApply" class="btn btn-danger" (click)="deleteThisApply(jobData.id, currentUser.id, -1)">
+            <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
           </button>
       </div>
       <div class="row"><br></div>
@@ -94,7 +97,7 @@
                         </button>
 
                         <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, candidate.user_id, i)">
-                            <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
                         </button>
                     </td>
                   </tr>                  

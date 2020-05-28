@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material';
 
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { UsersService } from 'src/app/_services/users.service';
+import { AuthService } from '../../_services';
+import User from '../../_models/user';
 
 @Component({
   selector: 'app-jobs-get',
@@ -19,11 +22,18 @@ export class JobsGetComponent implements OnInit {
     public dialogModal: MatDialog, 
     private route: ActivatedRoute,
     private js: JobsService,
-    private translate: TranslateService
-  ) { }
+    private us: UsersService,
+    private translate: TranslateService,
+    private authservice: AuthService
+  ) { 
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
 
 
   deleteThisApply(jobId: number, userId: number, posI: number): void {
+  
 
     const message = this.translate.instant('JOB.DELETE_APPLY_MESSAGE');
     
@@ -41,7 +51,14 @@ export class JobsGetComponent implements OnInit {
         this.js.deleteJobApply(jobId, userId).subscribe(
           res => {
             //console.log("Request OK");
-            this.jobCandidates.splice(posI, 1);        
+            if (posI<0) {
+              this.getCandidates(jobId);
+            }
+            else {
+              this.jobCandidates.splice(posI, 1);
+            }
+            
+            this.userHasAnApply = false;
           },
           error => {
             //console.log("Error deletring job apply data");
@@ -54,6 +71,9 @@ export class JobsGetComponent implements OnInit {
 
   jobData: Job;
   jobCandidates: any =[]
+  userHasAnApply: boolean = false;
+  currentUser: User;
+
   //jobData: any;
   //jobData = {};
   
@@ -70,14 +90,23 @@ export class JobsGetComponent implements OnInit {
 
       if (id>0) {
         //console.log(id);
-        this.js
-        .getJobCandidats(id)
-        .subscribe((jobCandidates: any) => {
 
-          //console.log(jobCandidates);  
-          this.jobCandidates = jobCandidates;  
+        this.us
+        .getJobApplisByUser(this.currentUser.id)
+        .subscribe((appliesByuser: any[]) => {
+
+          appliesByuser.forEach(element => {
+            //console.log(element.job.id);
+            if (element.job.id==id) {
+              this.userHasAnApply = true;
+            }
+          });
+          
 
         });
+
+        this.getCandidates(id);
+
 
 
         this.js
@@ -96,8 +125,17 @@ export class JobsGetComponent implements OnInit {
 
   }
 
-  
-  
+  getCandidates(jobId: number): void {
+    this.js
+    .getJobCandidats(jobId)
+    .subscribe((jobCandidates: any) => {
+
+      //console.log(jobCandidates);  
+      this.jobCandidates = jobCandidates;  
+
+    });
+  }
+
   openApllyJobDialog(jobId: number, element: any): void {
     //console.log(jobId);
     
@@ -107,6 +145,12 @@ export class JobsGetComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      //this.userHasAnApply = true;
+      if (result) {
+        this.userHasAnApply = result;
+        this.getCandidates(jobId);
+      }
+      console.log(result);
     });    
     
 
