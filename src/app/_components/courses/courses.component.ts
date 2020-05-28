@@ -10,7 +10,10 @@ import { ExcelServiceService } from '../../_services/excel/excel-service.service
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { AuthService } from '../../_services';
+import { UsersService } from '../../_services/users.service';
+import User from '../../_models/user';
 
 
 export interface AvailableCourses {
@@ -29,12 +32,13 @@ let ELEMENT_DATA: Course[] = [];
   styleUrls: ['./courses.component.css']
 })
 
-             
+
 export class CoursesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'semester', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  currentUser: User;
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
@@ -46,7 +50,13 @@ export class CoursesComponent implements OnInit {
   }
 
   courses: Course[];
-  constructor(private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { }
+  constructor(private us: UsersService, private authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
+    
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
+
+  
 
   confirmDialog(id, title): void {
     //const message = `Are you sure you want to do this?`;
@@ -76,6 +86,10 @@ export class CoursesComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
+    if(!this.currentUser) {
+      //if(!this.currentUser.hasOwnProperty('id')){
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+      }
 
     this.cs
       .getCourses()
