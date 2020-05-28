@@ -14,7 +14,7 @@ import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/
 import { AuthService } from '../../_services';
 import { UsersService } from '../../_services/users.service';
 import User from '../../_models/user';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface AvailableCourses {
   id: number;
@@ -50,7 +50,7 @@ export class CoursesComponent implements OnInit {
   }
 
   courses: Course[];
-  constructor(private us: UsersService, private authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
+  constructor(private router: Router, private us: UsersService, private authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
     
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -74,6 +74,20 @@ export class CoursesComponent implements OnInit {
 
       if (dialogResult) {
          console.log("Under construction");
+
+         this.cs
+         .deleteCourse(id).subscribe(
+           data => {
+             console.log("course deleted!!");
+             this.router.navigate(["/courses"]);
+
+             
+           },
+           error => {
+             alert("Error deleting the course");                      
+           }
+         );
+
       }
     });
   }

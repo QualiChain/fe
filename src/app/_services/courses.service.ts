@@ -66,5 +66,16 @@ export class CoursesService {
                 })
             )
     }
+
+    deleteCourse(courseId: Number) {
+        return this.http.delete(`${this.coursesURL}/${courseId}`).
+        pipe(
+            map((data: Course) => {
+                return data;
+            }), catchError( error => {
+                return throwError( 'Something went wrong!' );
+            })
+        )
+        }
     
 }

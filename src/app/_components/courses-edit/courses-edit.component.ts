@@ -193,7 +193,7 @@ export class CoursesEditComponent implements OnInit {
           "endDate": this.endDate,
           "startDate": this.startDate,
           "updatedDate": dateToday,
-          //"skills": this.skills,
+          "skills": this.skills,
           "events": this.events
         };
         //console.log(obj);
