@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
   requestPasswordError: boolean;
   requestPasswordConfirmation: boolean;
   loginData : {}
+  hidePassword: boolean = true;
+  loadingLoginSpinner: boolean = false;
+  loadingRequestPasswordSpinner: boolean = false;
   
   constructor(private modalService: ModalService, private el: ElementRef, private router: Router, private ls: AuthService) { 
     
@@ -70,16 +73,19 @@ export class LoginComponent implements OnInit {
    */
 
   processFormRequestPassword() {
+    this.loadingRequestPasswordSpinner = true;
     this.requestPasswordError = false;
     this.requestPasswordConfirmation = false;
     this.ls.requestpassword(this.email).subscribe(
       res => {
         console.log("Request OK");
         this.requestPasswordConfirmation = true;
+        this.loadingRequestPasswordSpinner = false;
       },
       error => {
         console.log("Error requesting password");
         this.requestPasswordError = true;
+        this.loadingRequestPasswordSpinner = false;
       }
     );
   }
@@ -87,12 +93,15 @@ export class LoginComponent implements OnInit {
   processForm() {
     //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
     //alert(allInfo); 
+    this.loadingLoginSpinner = true;
+    this.invalidCredentials = false;
 
     this.ls.login(this.name, this.password).subscribe(
         res => {
           console.log("Valid credentials for the auth service");
           this.invalidCredentials = false;
           this.validCredentials(res);
+          this.loadingLoginSpinner = false;
         },
         error => {
           console.log("Invalid Credentials for the aut service, let's check if are the demo ones");
@@ -109,6 +118,7 @@ export class LoginComponent implements OnInit {
             console.log("Demo credentials of a recruiter are valid!!!")
             this.validCredentials(error);
           }
+          this.loadingLoginSpinner = false;
           
         }
       );

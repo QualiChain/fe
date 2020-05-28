@@ -1,0 +1,14 @@
+.requestPasword-form,
+.userlogin-form {
+    min-width: 150px;
+    width: 100%;
+  }
+
+.requestPasword-full-width,
+.userlogin-full-width {
+    width: 100%;
+  }
+
+  #alert-success-request-password {
+      color: #3c763d;
+}
