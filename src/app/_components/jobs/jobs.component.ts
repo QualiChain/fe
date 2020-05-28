@@ -82,6 +82,7 @@ export class JobsComponent implements OnInit {
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  currentUser: User;
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
@@ -93,8 +94,12 @@ export class JobsComponent implements OnInit {
   }
 
   jobs: Job[];
-  constructor(private js: JobsService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
-    public applyForAJobDialog: MatDialog) { }
+  constructor(private js: JobsService, private authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
+    public applyForAJobDialog: MatDialog) { 
+
+      this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    }
 
   confirmDialog(id, title): void {
     //const message = `Are you sure you want to do this?`;
@@ -135,7 +140,11 @@ export class JobsComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
-
+    if(!this.currentUser) {
+      //if(!this.currentUser.hasOwnProperty('id')){
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+      }
+      
     this.js
       .getJobs()
       .subscribe((data: Job[]) => {

@@ -31,9 +31,10 @@ export interface OPTIONS_MENU {
 //{id: 6, label: 'MENU.LOGOUT', route: '/logout', public: false}
 const ELEMENT_DATA: OPTIONS_MENU[] =[
   {id: 1, label: 'MENU.HOME', route: '', public: true},
-  {id: 2, label: 'MENU.JOBS', route: '/jobs', public: false},
-  //{id: 3, label: 'MENU.CVS', route: '/cvs', public: false},
-  {id: 4, label: 'MENU.PROFILES', route: '/profiles', public: false}
+  {id: 2, label: 'MENU.COURSES', route: '/courses', public: false},
+  {id: 3, label: 'MENU.JOBS', route: '/jobs', public: false},  
+  //{id: 4, label: 'MENU.CVS', route: '/cvs', public: false},
+  {id: 5, label: 'MENU.PROFILES', route: '/profiles', public: false}
 ];
 
 
