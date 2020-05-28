@@ -1,6 +1,6 @@
 
 export default class Course {
-    id?: number;
+    courseid: number;
     name: string;
     description: string;
     semester: string;
