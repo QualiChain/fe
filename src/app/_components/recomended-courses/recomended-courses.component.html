@@ -9,10 +9,10 @@
         </div>
 
         <ngb-accordion *ngIf="recomendedCourses.length>=0" activeIds="course-0">
-          
+
           <ngb-panel id="course-{{i}}" *ngFor="let course of recomendedCourses; let i = index" >
             <ng-template ngbPanelTitle>
-              <span>&#9733; <b>{{course.course.name}}</b> &#9733;</span>
+              <span>&#9733; <b>{{course.course_title}}</b> &#9733;</span>
             </ng-template>
             <ng-template ngbPanelContent>
               <div class="course-card">
@@ -20,14 +20,18 @@
                   <img class="card-img-top" src="https://www.php.net/images/logos/php-logo.svg" style="max-width:150px" alt="course image">
                 -->                  
                   <div class="course-card-body">                      
-                    <p class="course-card-text">{{course.course.description}}
+                    <p class="course-card-text">{{course.course_decription}}
+                      <!--
                       <br/>
                       Match: 
+                      -->
                     </p>
+                    <!--
                     <div class="progress" >
                       <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':course.rating}" attr.aria-valuenow="{{course.rating}}"  aria-valuemin="0" aria-valuemax="100">{{course.rating}}%</div>
                     </div>
-                    <a [routerLink]="['/courses',course.id]" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
+                    -->
+                    <a [routerLink]="['/courses',course.course_id]" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
                   </div>
               </div>
             </ng-template>

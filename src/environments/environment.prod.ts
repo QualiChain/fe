@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   recomendationsUrl : 'http://qualichain.epu.ntua.gr:5000/recommendations',
+  recomendationsUrlByCV : 'http://qualichain.epu.ntua.gr:7000/recommend',
   coursesUrl: 'http://qualichain.epu.ntua.gr:5000/courses',
   uploadFilesUrl : 'http://qualichain.epu.ntua.gr:5000/file-upload',
   badgesUrl : 'http://qualichain.epu.ntua.gr:5000/badges',
