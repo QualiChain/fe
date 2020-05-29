@@ -361,6 +361,7 @@
     "DOWNLOAD_PDF": "Download PDF",
     "PRINT_PDF": "Print PDF",
     "EXPORT_TO_EXCEL": "Export to Excel",
+    "ADD": "Add",
     "CREATE": "Create",
     "EDIT": "Edit",
     "DELETE": "Delete",
