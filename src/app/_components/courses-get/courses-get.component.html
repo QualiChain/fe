@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row" *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='teacher'">
-      <button class="btn btn-primary" [routerLink]="['/courses', courseData.id, 'edit']">
+      <button class="btn btn-primary" [routerLink]="['/courses', courseData.courseid, 'edit']">
         <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
       </button>          
     </div>
