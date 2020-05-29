@@ -1,11 +1,19 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../_services/courses.service';
+import { SkillsService } from '../../_services/skills.service';
 import Course from '../../_models/course';
-import {MatChipInputEvent} from '@angular/material/chips';
+
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+
 import {formatDate} from '@angular/common';
+
+import {FormControl} from '@angular/forms'
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 export interface Skill {
   name: string;
@@ -55,15 +63,69 @@ export class CoursesEditComponent implements OnInit {
   courseId: number = null;
   events: Event[] = [];
   userdata = JSON.parse(localStorage.getItem('userdata'));
+  
+  skillCtrl = new FormControl();
+  allSkills: string[];
+  filteredSkills: Observable<string[]>;
+  
+  @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-
-  constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private cs: CoursesService) {
+  constructor(
+    private ss: SkillsService,
+    private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private cs: CoursesService) {
     //this.createForm();
+
+    this.filteredSkills = this.skillCtrl.valueChanges.pipe(
+      startWith(null),
+      map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
+
     this.courseForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
+  
+/********************************** */
+
+add(event: MatChipInputEvent): void {
+  const input = event.input;
+  const value = event.value;
+
+  // Add our fruit
+  if ((value || '').trim()) {
+    this.skills.push({'name':value.trim()});
+  }
+
+  // Reset the input value
+  if (input) {
+    console.log(input);
+    input.value = '';
+  }
+
+  this.skillCtrl.setValue(null);
+}
+
+remove(skill: string): void {
+  const index = this.skills.indexOf({'name':skill});
+
+  if (index >= 0) {
+    this.skills.splice(index, 1);
+  }
+}
+
+selected(event: MatAutocompleteSelectedEvent): void {
+  this.skills.push({'name':event.option.viewValue});
+  this.skillInput.nativeElement.value = '';
+  this.skillCtrl.setValue(null);
+}
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allSkills.filter(skill => skill.toLowerCase().indexOf(filterValue) === 0);
+  }
+/***********************************/
 /*
   createForm() {
     this.courseForm = this.fb.group({
@@ -77,7 +139,27 @@ export class CoursesEditComponent implements OnInit {
     if (!this.userdata) {
       this.userdata = {id:0};
     }
-    
+ 
+
+    this.allSkills = [];
+    this.ss.getSkills().subscribe(
+      resSkills => {
+        //console.log("Request OK");
+        //console.log(resSkills); 
+        resSkills.forEach(element => {
+          //console.log(element.name);
+          if (this.allSkills.indexOf(element.name) == -1) {
+            this.allSkills.push(element.name);
+          }
+        });       
+        
+      },
+      error => {
+        console.log("Error getting data");
+        
+      }
+    );
+
 
     //console.log(this.userdata.id);
     this.route.params.subscribe(params => {
@@ -100,7 +182,7 @@ export class CoursesEditComponent implements OnInit {
 
         this.cs.getCourse(+id).subscribe(
           res => {
-            console.log("Request OK");
+            //console.log("Request OK");
             //console.log(res);
             this.course = res;
             this.courseName = res.name;
@@ -208,7 +290,8 @@ export class CoursesEditComponent implements OnInit {
               //console.log(splitted[1]);
               //after create the user 
               //window.location.href="/profiles";
-              this.router.navigate(["/profiles/"+this.userdata.id]);
+              //this.router.navigate(["/profiles/"+this.userdata.id]);
+              this.router.navigate(["/courses"]);
             },
             error => {
               alert("Error creating course!!");
@@ -224,7 +307,8 @@ export class CoursesEditComponent implements OnInit {
               //console.log(res);
               //after update the user 
               //window.location.href="/profiles/"+this.profileId;
-              this.router.navigate(["/profiles/"+this.userdata.id]);
+              //this.router.navigate(["/profiles/"+this.userdata.id]);
+              this.router.navigate(["/courses"]);
             },
             error => {
               alert("Error updating user!!");

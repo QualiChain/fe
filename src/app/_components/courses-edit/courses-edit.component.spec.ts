@@ -4,9 +4,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesEditComponent } from './courses-edit.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatChipsModule } from '@angular/material/chips';
+//import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+import { MatNativeDateModule } from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
@@ -25,10 +28,11 @@ describe('CoursesEditComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatDatepickerModule,
-        MatChipsModule,
+        MatChipsModule,      
         MatNativeDateModule,
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatAutocompleteModule
         ]
     })
     .compileComponents();

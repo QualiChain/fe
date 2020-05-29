@@ -1,6 +1,6 @@
   <div class="upladfilesdnd">
 
-    <h1>Upload files - UNDER CONSTRUCTION</h1>
+    <h1>Upload files</h1>
     <div *ngIf="validFiles.length>0">
       <p>
         Allowed types:
@@ -9,7 +9,7 @@
     </div>
     <div *ngIf="maxNumberOfFiles">
       <p>
-        You can upload {{maxNumberOfFiles}} files.
+        You can upload {{maxNumberOfFiles}} <span *ngIf="maxNumberOfFiles==1">file</span><span *ngIf="maxNumberOfFiles>1">files</span>.
       </p>
     </div>
 
@@ -43,7 +43,7 @@
                 <i _ngcontent-axy-c0="" class="material-icons" > description </i>
                 <div class="info">
                     <h4 class="name">{{ file?.name }}</h4>
-                    <p class="size">Size: {{ formatBytes(file?.size) }} </p>
+                    <p class="size">Size: {{ formatBytes(file?.size) }} --{{file.type}}--</p>
                     <p><img [src]="imgURL[i]" id="preloadImg" *ngIf="imgURL[i]"></p>
                 </div>
             </div>
