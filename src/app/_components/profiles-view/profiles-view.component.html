@@ -401,13 +401,20 @@
           <div class="card-body">
               <div class="form-row">
                   <div class="form-group">                      
-                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">Add skill</a>                                            
+                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">
+                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                        {{ 'BUTTON.ADD' | translate }}
+                      </a>                                            
                   </div>
               </div>
           </div>          
           <div *ngFor="let skillItem of t.controls; let i = index" class="list-group list-group-flush">
               <div class="list-group-item">
-                  <h5 class="card-title">Skill {{i + 1}}</h5><a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'skillitem')">Delete skill</a> 
+                  <h5 class="card-title">Skill {{i + 1}}</h5>
+                  <a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'skillitem')">
+                    <i _ngcontent-axy-c0="" class="material-icons"> delete </i>
+                    {{ 'BUTTON.DELETE' | translate }}
+                  </a> 
                   <div [formGroup]="skillItem" class="form-row">
                     <div class="form-group col-6">
                       <label>SkillLabel</label>
@@ -432,13 +439,20 @@
           <div class="card-body">
               <div class="form-row">
                   <div class="form-group">                      
-                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'workitem')">Add work</a>                                            
+                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'workitem')">
+                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                        {{ 'BUTTON.ADD' | translate }}
+                      </a>            
                   </div>
               </div>
           </div>          
           <div *ngFor="let workItem of w.controls; let i = index" class="list-group list-group-flush">
               <div class="list-group-item">
-                  <h5 class="card-title">Work {{i + 1}}</h5><a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'workitem')">Delete item</a> 
+                  <h5 class="card-title">Work {{i + 1}}</h5>
+                  <a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'workitem')">
+                    <i _ngcontent-axy-c0="" class="material-icons"> delete </i>                  
+                    {{ 'BUTTON.DELETE' | translate }}
+                  </a> 
                   <div [formGroup]="workItem" class="form-row">
                     <div class="form-group col-6">
                       <label>Position</label>
@@ -466,13 +480,20 @@
           <div class="card-body">
               <div class="form-row">
                   <div class="form-group">                      
-                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">Add education</a>                                            
+                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">
+                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                        {{ 'BUTTON.ADD' | translate }}
+                      </a>
                   </div>
               </div>
           </div>          
           <div *ngFor="let educationItem of e.controls; let i = index" class="list-group list-group-flush">
             <div class="list-group-item">
-                <h5 class="card-title">Education {{i + 1}}</h5><a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'educationitem')">Delete item</a> 
+                <h5 class="card-title">Education {{i + 1}}</h5>
+                <a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'educationitem')">
+                  <i _ngcontent-axy-c0="" class="material-icons"> delete </i>                  
+                  {{ 'BUTTON.DELETE' | translate }}
+                </a> 
                 <div [formGroup]="educationItem" class="form-row">
                   <div class="form-group col-6">
                     <label>Title</label>
@@ -502,8 +523,15 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-success"  (click)="onSubmit()">Save</button>
-      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-success"  (click)="onSubmit()">
+        <i _ngcontent-axy-c0="" class="material-icons"> save </i>
+        {{ 'BUTTON.SAVE' | translate }}
+      </button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">
+        <i _ngcontent-axy-c0="" class="material-icons"> cancel </i>
+        {{ 'BUTTON.CLOSE' | translate }}
+      </button>
+      
     </div>
     </div>
     
