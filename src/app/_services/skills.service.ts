@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class JobsService {
+export class SkillsService {
 
   
   private skillsURL = environment.skillsUrl;
