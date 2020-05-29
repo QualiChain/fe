@@ -11,7 +11,7 @@ export const environment = {
   authUrl : 'http://qualichain.epu.ntua.gr:5000/auth',
   usersUrl : 'http://qualichain.epu.ntua.gr:5000/users',
   userUrl : 'http://qualichain.epu.ntua.gr:5000/user',
-  jobsUrl : 'http://qualichain.epu.ntua.gr:5000/jobs',  
+  jobsUrl : 'http://localhost:8000/jobs',//'http://qualichain.epu.ntua.gr:5000/jobs',  
   skillsUrl : 'http://qualichain.epu.ntua.gr:5000/skills',
   notificationsURL : 'http://qualichain.epu.ntua.gr:5000/notifications',
   smartBadgesManagementUrl : 'https://localhost:4000/smartBadgesManagement',
@@ -19,10 +19,10 @@ export const environment = {
   profileUrl : 'https://localhost:4000/profile',
   educationManagementUrl : 'https://localhost:4000/educationManagement',
   competencyManagementUrl : 'https://localhost:4000/competencyManagement',
-  cvUrl : 'http://qualichain.epu.ntua.gr:5000/CV',
-  jobmatchingUrl : 'http://localhost:8000/jobmatching',
+  cvUrl : 'http://localhost:8000/cv',//'http://qualichain.epu.ntua.gr:5000/CV',
+  jobmatchingUrl : 'http://localhost:8000/jobs',
   jobpostGet : 'https://localhost:8000/jobget',  
-  jobpostUrl : 'https://localhost:8000/jobpost'
+  jobpostUrl : 'https://localhost:8000/jobs'
 };
 
 /*

@@ -1,4 +1,4 @@
-<h1 >{{ 'JOB.HEADER_TITLE' | translate }}: {{jobData.title}}</h1>
+<h1 >{{ 'JOB.HEADER_TITLE' | translate }}: {{jobData.label}}</h1>
 
 <div class="container">
 
@@ -20,19 +20,19 @@
         <div class="col col-lg-12">
 
             <div class="col ">
-                <div class="labeljob"><span>{{ 'JOB.DESCRIPTION.LABEL' | translate }}:</span> {{jobData.job_description}}</div> 
+                <div class="labeljob"><span>{{ 'JOB.DESCRIPTION.LABEL' | translate }}:</span> {{jobData.jobDescription}}</div> 
             </div>
             <div class="col ">
-                <div class="labeljob"><span>{{ 'JOB.START_DATE.LABEL' | translate }}:</span> {{jobData.start_date | date }}</div> 
+                <div class="labeljob"><span>{{ 'JOB.START_DATE.LABEL' | translate }}:</span> {{jobData.startDate | date }}</div> 
             </div>
             <div class="col ">
-                <div class="labeljob"><span>{{ 'JOB.END_DATE.LABEL' | translate }}:</span> {{jobData.end_date | date }}</div> 
+                <div class="labeljob"><span>{{ 'JOB.END_DATE.LABEL' | translate }}:</span> {{jobData.endDate | date }}</div> 
             </div>
             <div class="col ">
-                <div class="labeljob"><span>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+jobData.employment_type | uppercase | translate }}</div> 
+                <div class="labeljob"><span>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+jobData.contractType | uppercase | translate }}</div> 
             </div>
             <div class="col ">
-                <div class="labeljob"><span>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+jobData.level | uppercase | translate }}</div> 
+                <div class="labeljob"><span>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+jobData.seniorityLevel | uppercase | translate }}</div> 
             </div>
     
             <div class="col ">
@@ -49,10 +49,10 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let skill of jobData.skills; let i=index">
+                          <tr *ngFor="let skill of jobData.skillReq; let i=index">
                             <th scope="row">{{i+1}}</th>
-                            <td>{{skill.SkillLabel}}</td>
-                            <td>{{ 'JOB.SKILL.PRIORITY.OPTIONS.'+skill.priority | uppercase | translate }}</td>
+                            <td>{{skill.label}}</td>
+                            <td>{{ 'JOB.SKILL.PRIORITY.OPTIONS.'+skill.priorityLevel | uppercase | translate }}</td>
                             <td>{{ 'JOB.SKILL.LEVEL.OPTIONS.'+skill.proficiencyLevel | uppercase | translate }}</td>
                             <td>{{skill.assign}}</td>
                           </tr>                  

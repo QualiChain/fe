@@ -9,35 +9,35 @@
               <!-- title -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.TITLE.LABEL' | translate }}</mat-label>
-                <input matInput required [(ngModel)]="dataIn.title" name="title" value="title" placeholder="{{ 'JOB.TITLE.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
+                <input matInput required [(ngModel)]="dataIn.label" name="title" value="title" placeholder="{{ 'JOB.TITLE.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
               </mat-form-field>
               <br/>
               <!-- description -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.DESCRIPTION.LABEL' | translate }}</mat-label>
-                <textarea matInput required [(ngModel)]="dataIn.job_description" name="job_description" value="job_description" placeholder="{{ 'JOB.DESCRIPTION.PLACEHOLDER' | translate }}"></textarea>
+                <textarea matInput required [(ngModel)]="dataIn.jobDescription" name="job_description" value="job_description" placeholder="{{ 'JOB.DESCRIPTION.PLACEHOLDER' | translate }}"></textarea>
               </mat-form-field>
               <br/>
               <!-- start_date -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.START_DATE.PLACEHOLDER' | translate }}</mat-label>
-                <input matInput [matDatepicker]="pickerStartDate" name="start_date" [(ngModel)]="dataIn.start_date" #startDateInput="ngModel" required>
+                <input matInput [matDatepicker]="pickerStartDate" name="start_date" [(ngModel)]="dataIn.startDate" #startDateInput="ngModel" required>
                 <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
-                <mat-datepicker #pickerStartDate startView="year" [startAt]="dataIn.start_date" format="DD-MM-YYYY"></mat-datepicker>
+                <mat-datepicker #pickerStartDate startView="year" [startAt]="dataIn.startDate" format="DD-MM-YYYY"></mat-datepicker>
               </mat-form-field>
               <br/>
               <!-- end_date -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.END_DATE.PLACEHOLDER' | translate }}</mat-label>
-                <input matInput [matDatepicker]="pickerEndDate" name="end_date" [(ngModel)]="dataIn.end_date" #endDateInput="ngModel" required>
+                <input matInput [matDatepicker]="pickerEndDate" name="end_date" [(ngModel)]="dataIn.endDate" #endDateInput="ngModel" required>
                 <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
-                <mat-datepicker #pickerEndDate startView="year" [startAt]="dataIn.end_date"></mat-datepicker>
+                <mat-datepicker #pickerEndDate startView="year" [startAt]="dataIn.endDate"></mat-datepicker>
               </mat-form-field>
               <br/>
               <!-- employment_type -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}</mat-label>
-                <mat-select  [(ngModel)]="dataIn.employment_type" name="employment_type" required>
+                <mat-select  [(ngModel)]="dataIn.contractType" name="employment_type" required>
                   <mat-option value="full_time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</mat-option>
                   <mat-option value="part_time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</mat-option>
                   <mat-option value="contract">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</mat-option>
@@ -50,7 +50,7 @@
               <!-- level -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</mat-label>
-                <mat-select  [(ngModel)]="dataIn.level" name="level" required>
+                <mat-select  [(ngModel)]="dataIn.seniorityLevel" name="level" required>
                   <mat-option value="internership">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</mat-option>
                   <mat-option value="entity_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</mat-option>
                   <mat-option value="associate">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</mat-option>
@@ -73,7 +73,7 @@
   
                     <div>
 
-                      <div *ngFor="let skill of dataIn.skills; let i=index" class="panel panel-default">
+                      <div *ngFor="let skill of dataIn.skillReq; let i=index" class="panel panel-default">
                         <div class="card-subtitle">      
                           <h3>{{ 'JOB.SKILL.TITLE' | translate }} {{i + 1}}</h3>                        
                         </div>
@@ -81,7 +81,7 @@
                         <!-- SkillLabel -->
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.SKILL.NAME.LABEL' | translate }}</mat-label>
-                            <input matInput required [(ngModel)]="skill.SkillLabel" name="SkillLabel_{{i}}" value="SkillLabel" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
+                            <input matInput required [(ngModel)]="skill.label" name="SkillLabel_{{i}}" value="SkillLabel" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
                         </mat-form-field>
                         <br/>
                         <!-- proficiencyLevel -->
@@ -104,7 +104,7 @@
                         <!-- priority -->
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</mat-label>
-                          <mat-select  [(ngModel)]="skill.priority" name="priority_{{i}}" required>
+                          <mat-select  [(ngModel)]="skill.priorityLevel" name="priority_{{i}}" required>
                             <mat-option value="low">{{ 'JOB.SKILL.PRIORITY.OPTIONS.LOW' | translate }}</mat-option>
                             <mat-option value="medium">{{ 'JOB.SKILL.PRIORITY.OPTIONS.MEDIUM' | translate }}</mat-option>
                             <mat-option value="high">{{ 'JOB.SKILL.PRIORITY.OPTIONS.HIGH' | translate }}</mat-option>

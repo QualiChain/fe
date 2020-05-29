@@ -17,7 +17,7 @@ export class JobsService {
   constructor(private http: HttpClient) { }
 
   addJob(dataIn: any) {
-    return this.http.post(`${this.jobsURL}`, dataIn).
+    return this.http.post(`${this.jobsURL}`, JSON.stringify(dataIn)).
     pipe(
        map((data: any) => {
          return data;
@@ -118,6 +118,10 @@ export class JobsService {
            return throwError( 'Something went wrong!' );
          })
       )
+    }
+
+    deleteJob(jobId){
+      return this.http.delete(`${this.jobsURL}/${jobId}`);
     }
 
 }

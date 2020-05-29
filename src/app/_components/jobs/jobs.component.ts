@@ -116,7 +116,10 @@ export class JobsComponent implements OnInit {
       //this.result = dialogResult;
 
       if (dialogResult) {
-         console.log("Under construction");
+         //console.log("Under construction");
+         this.js.deleteJob(id).subscribe(data => {
+          window.location.reload();
+        });
       }
     });
   }
@@ -137,14 +140,16 @@ export class JobsComponent implements OnInit {
   jobsList = [];
 
   ngOnInit() {
+    this.getJobList();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
-      }
-      
+      }  
+    }
+    getJobList() {
     this.js
       .getJobs()
       .subscribe((data: Job[]) => {

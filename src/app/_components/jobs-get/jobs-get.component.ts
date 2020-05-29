@@ -32,7 +32,7 @@ export class JobsGetComponent implements OnInit {
   }
 
 
-  deleteThisApply(jobId: number, userId: number, posI: number): void {
+  deleteThisApply(jobId: any, userId: number, posI: number): void {
   
 
     const message = this.translate.instant('JOB.DELETE_APPLY_MESSAGE');
@@ -79,16 +79,16 @@ export class JobsGetComponent implements OnInit {
   
   ngOnInit() {
 
-    this.jobData = {id:0,creator_id: 0,date: "",employment_type: "",end_date: "",job_description: "",level: "",start_date: "",title: ""};
+    this.jobData = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",skillReq: []};
 
     this.route.params.subscribe(params => {
 
       let id:number = 0;      
       if(params.hasOwnProperty('id')){
-        id = +params.id;
+        id = params.id;
       }
 
-      if (id>0) {
+      if (id) {
         //console.log(id);
 
         this.us
@@ -125,7 +125,7 @@ export class JobsGetComponent implements OnInit {
 
   }
 
-  getCandidates(jobId: number): void {
+  getCandidates(jobId: any): void {
     this.js
     .getJobCandidats(jobId)
     .subscribe((jobCandidates: any) => {
@@ -136,7 +136,7 @@ export class JobsGetComponent implements OnInit {
     });
   }
 
-  openApllyJobDialog(jobId: number, element: any): void {
+  openApllyJobDialog(jobId: any, element: any): void {
     //console.log(jobId);
     
     const dialogRef = this.dialogModal.open(applyJobDialog_modal, {
