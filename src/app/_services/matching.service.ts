@@ -21,11 +21,10 @@ export class MatchingService {
       params:  new  HttpParams().set('jobid', jobID)
     };
     */
-console.log(jobID)
-    const  params = new  HttpParams().set('jobid', jobID);
-    console.log(params);
-    console.log(this.serverurl);
-    return this.httpClient.get(this.serverurl, {responseType: 'json', params});
+   // const  params = new  HttpParams().set('jobid', jobID);
+   // return this.httpClient.get(this.serverurl, {responseType: 'json', params});
+    return this.httpClient.get(`${this.serverurl}/${jobID}/candidates`, {responseType: 'json'});
+
   }
 
 }

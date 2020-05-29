@@ -4,6 +4,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { MatchingService } from '../../_services/matching.service';
 import { ExcelServiceService } from '../../_services/excel/excel-service.service';
+import { Job } from '../../_models/Job';
+import { JobsService } from '../../_services/jobs.service';
+
 
 @Component({
   selector: 'app-recruitment',
@@ -33,6 +36,7 @@ const ELEMENT_DATA: listOfCandidates[] = [
 
 export class RecruitmentComponent implements OnInit {
 
+  jobs: Job[];
   //recruits = [];
   listOfCandidates = [    
     {name: 'Candidate01', role: 'Solutions Architect', available: '2020/01/13', expsalary: '31k', score: 33, id:1},
@@ -89,7 +93,7 @@ export class RecruitmentComponent implements OnInit {
   public ChartType = 'pie';
   
   
-  constructor(private matchingService: MatchingService, private excelService:ExcelServiceService) { }
+  constructor(private jobService: JobsService, private matchingService: MatchingService, private excelService:ExcelServiceService) { }
 
   //displayedColumns: string[] = ['id', 'title', 'action'];
   displayedColumns: string[] = ['id', 'name', 'role', 'available', 'expsalary', 'score', 'action'];
@@ -111,6 +115,7 @@ export class RecruitmentComponent implements OnInit {
     console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.getAvailableJobs();//
     this.getMatchedCVs('Job1');
     
   }
@@ -125,6 +130,10 @@ export class RecruitmentComponent implements OnInit {
     this.matchingService.matchJob(jobID)
     .subscribe(
         CVs => {
+          this.recruits = CVs;
+          this.recruits.sort((a, b) => b.score - a.score);
+          this.dataSource.data = this.recruits;
+          /*
             console.log(CVs);
              for (const CV of CVs) {
                 console.log(CV);
@@ -132,7 +141,7 @@ export class RecruitmentComponent implements OnInit {
                 data.push(CV);
                 this.dataSource.data = data;
              }
-          
+          */
           
         },
         err => {
@@ -159,6 +168,17 @@ export class RecruitmentComponent implements OnInit {
         }
       );
       
+}
+
+getAvailableJobs() {
+  this.jobService.getJobs()
+  .subscribe((data: Job[]) => {
+    this.jobs = data;
+    console.log(data);
+  },
+  err => {
+    console.log(err);
+  });
 }
 
 exportExcel(){    
