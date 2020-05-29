@@ -8,6 +8,7 @@ export const environment = {
   usersUrl : 'http://qualichain.epu.ntua.gr:5000/users',
   userUrl : 'http://qualichain.epu.ntua.gr:5000/user',
   jobsUrl : 'http://qualichain.epu.ntua.gr:5000/jobs',
+  skillsUrl : 'http://qualichain.epu.ntua.gr:5000/skills',
   notificationsURL : 'http://qualichain.epu.ntua.gr:5000/notifications',
   smartBadgesManagementUrl : 'https://localhost:4000/smartBadgesManagement',
   verificationAndEquivalenceUrl : 'https://localhost:4000/verificationAndEquivalence',
