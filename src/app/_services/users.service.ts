@@ -39,7 +39,7 @@ export class UsersService {
       .get(`${this.uriUsers}/${userId}`);
     }  
 */
-    getUser(userId: Number) {
+    getUser(userId: any) {
       return this.http.get(`${this.uriUsers}/${userId}`).
       pipe(
          map((data: User) => {
@@ -51,7 +51,7 @@ export class UsersService {
     }
 
   addUser(obj: Object) {
-    return this.http.post(`${this.uriUsers}`, obj).
+    return this.http.post(`${this.uriUsers}`, JSON.stringify(obj)).
     pipe(
        map((data: any) => {
          return data;

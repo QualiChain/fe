@@ -21,7 +21,7 @@ export class CVService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getCV(userId: Number) {
+  getCV(userId: any) {
     return this
       .httpClient
       .get(`${this.uri}/${userId}`);

@@ -52,10 +52,11 @@ export class ProfilesComponent implements OnInit {
     this.us
       .getUsers()
       .subscribe((data: User[]) => {
-        
+        /*
         ELEMENT_DATA.forEach(element => {
           data.push(element);
         });
+        */
         this.dataSource.data = data;
 
     });

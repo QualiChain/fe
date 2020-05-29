@@ -194,9 +194,11 @@ export class ProfilesViewComponent implements OnInit {
       
       //console.log(params['id']);
 
+      let profileid:string = null;  
       let id:number = 0;      
       if(params.hasOwnProperty('id')){
         id = +params.id;
+        profileid = params.id;
       }
 
       if (id>0) {
@@ -253,11 +255,11 @@ export class ProfilesViewComponent implements OnInit {
 
 
       //const id = +params.id;
-      if (id && id > 0) {
-        this.userId=String(id);
+      if (profileid) {
+        //this.userId=String(id);
         
         this.us
-        .getUser(id).subscribe(
+        .getUser(profileid).subscribe(
           data => {
             //console.log("user in db");
             this.userdata = data;
@@ -265,6 +267,7 @@ export class ProfilesViewComponent implements OnInit {
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
             } 
+           this.getUserCV(this.userdata.cvuri);
           },
           error => {
             //console.log("user not found in db");
@@ -294,46 +297,7 @@ export class ProfilesViewComponent implements OnInit {
   
         });
 */
-        
-        this.cvs
-        .getCV(id)
-        .subscribe((data: any) => {
 
-          if (data.length>0) {
-            let posCV = data.length-1;
-            this.label = data[posCV].label;
-            this.description = data[posCV].description;
-            this.targetSector = data[posCV].target_sector;
-            this.expectedSalary = data[posCV].expected_salary;
-            this.JobDescription = data[posCV].description;
-            data[posCV].skills.forEach(element => {
-              this.t.push(this.formBuilder.group({
-                SkillLabel: [element.SkillLabel, [Validators.required]],
-                proficiencyLevel: [element.proficiencyLevel, Validators.required],
-                SkillComment: [element.SkillComment, [Validators.required]],      
-              }));
-            });
-            data[posCV].work_history
-            .forEach(element => {
-              this.w.push(this.formBuilder.group({
-                position: [element.position, Validators.required],
-                from: [element.from, [Validators.required]],
-                to: [element.to, [Validators.required]],
-                employer: [element.employer, [Validators.required]],
-              }));
-            });
-            data[posCV].education
-            .forEach(element => {
-              this.e.push(this.formBuilder.group({
-                title: [element.title, Validators.required],
-                from: [element.from, [Validators.required]],
-                to: [element.to, [Validators.required]],
-                organisation: [element.organisation, [Validators.required]],
-                description: [element.description, [Validators.required]],
-              }));
-            });      
-          }      
-        });
       }
 
     });
@@ -349,7 +313,47 @@ export class ProfilesViewComponent implements OnInit {
 
   }
 
+getUserCV(id) {
+  this.cvs
+  .getCV(id)
+  .subscribe((data: any) => {
 
+    //if (data.length>0) {
+      //let posCV = data.length-1;
+      this.label = data.label;
+      this.description = data.description;
+      this.targetSector = data.target_sector;
+      this.expectedSalary = data.application.expected_salary;
+      this.JobDescription = data.description;
+      data.skills.forEach(element => {
+        this.t.push(this.formBuilder.group({
+          SkillLabel: [element.label, [Validators.required]],
+          proficiencyLevel: [element.proficiencyLevel, Validators.required],
+          SkillComment: [element.comment, [Validators.required]],      
+        }));
+      });
+      data.workHistory
+      .forEach(element => {
+        this.w.push(this.formBuilder.group({
+          position: [element.position, Validators.required],
+          from: [element.from, [Validators.required]],
+          to: [element.to, [Validators.required]],
+          employer: [element.employer, [Validators.required]],
+        }));
+      });
+      data.education
+      .forEach(element => {
+        this.e.push(this.formBuilder.group({
+          title: [element.title, Validators.required],
+          from: [element.from, [Validators.required]],
+          to: [element.to, [Validators.required]],
+          organisation: [element.organisation, [Validators.required]],
+          description: [element.description, [Validators.required]],
+        }));
+      });      
+    //}      
+  });
+}
   ngAfterViewChecked () {
     this.DrawChart();
   }
