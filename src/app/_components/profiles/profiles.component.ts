@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import { UsersService } from '../../_services/users.service';
 import User from '../../_models/user';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AuthService } from '../../_services';
 
 @Component({
   selector: 'app-profiles',
@@ -28,7 +29,14 @@ export class ProfilesComponent implements OnInit {
 
   users: User[];
   isLoadingResults = false;
-  constructor(private us: UsersService, public createChangePasswordDialog: MatDialog) { }
+
+  currentUser: User;
+  
+  constructor(private authservice: AuthService, private us: UsersService, public createChangePasswordDialog: MatDialog) { 
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
 
   displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
 
@@ -46,6 +54,12 @@ export class ProfilesComponent implements OnInit {
   }
   
   ngOnInit() {
+
+    if(!this.currentUser) {
+      //if(!this.currentUser.hasOwnProperty('id')){
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+    }
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 

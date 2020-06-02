@@ -42,7 +42,7 @@ export class AuthService {
     
     //let myAuthObj = {};
     let myAuthObj=  new User;
-
+    /*
     if ((username=="student") && (password=="student")) {
 
       myAuthObj=  new User;
@@ -78,7 +78,7 @@ export class AuthService {
       
       this.currentUserSubject.next(myAuthObj);
     }
-
+    */
     return this.httpClient.post(`${this.uri}`, obj).
     pipe(
        map((data: any) => {

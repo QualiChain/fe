@@ -41,6 +41,7 @@ export class ProfilesAddComponent implements OnInit {
   roles: Role[] = [
     {value: 'student', viewValue: 'Student'},
     {value: 'administrator', viewValue: 'Administrator'},
+    {value: 'employee', viewValue: 'Employee'},
     {value: 'teacher', viewValue: 'Teacher'},
     {value: 'recruiter', viewValue: 'Recruiter'}
   ];
