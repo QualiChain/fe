@@ -207,6 +207,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLogged = this.appcomponent.isLogged;
   isAdmin = this.appcomponent.isAdmin;
   isRecruiter = this.appcomponent.isRecruiter;
+  isTeacher = this.appcomponent.isTeacher;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee;
+  
   /*
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.admin ;
