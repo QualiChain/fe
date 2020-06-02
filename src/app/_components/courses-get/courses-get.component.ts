@@ -18,6 +18,7 @@ export class CoursesGetComponent implements OnInit {
   currentUser: User;
 
   constructor(
+    private router: Router,
     private authservice: AuthService,
     public dialogModal: MatDialog, 
     private route: ActivatedRoute,
@@ -42,12 +43,26 @@ export class CoursesGetComponent implements OnInit {
 
       if (id>0) {
         //console.log(id);
+
+        this.cs
+        .getCourse(id).subscribe(
+          dataCourse => {
+            //console.log("course in db");
+            //console.log(dataCourse);
+            this.courseData = dataCourse;
+          },
+          error => {
+            this.router.navigate(["/not_found"]);            
+          }
+        );            
+        /*
         this.cs
         .getCourse(id)
         .subscribe((dataCourse: Course) => {
           //console.log(dataCourse);
           this.courseData = dataCourse;
         });
+        */
       }
 
     });

@@ -110,6 +110,9 @@ const ELEMENT_DATA: listOfUsers[] = [
   {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', username: 'recruiter.demo', id: 5 , avatar_path: 'assets/img/recruiter.png', university:'', role:'Recruiter'}
 ];
 */
+
+const ELEMENT_DATA: User[] = [];
+/*
 const ELEMENT_DATA: User[] = [
   {name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', userName: 'dilbert.adams', id: 11 , avatar_path: 'assets/img/dilbert.jpg', role:'Student'},
   {name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.eu', userName: 'phb'         , id: 22 , avatar_path: 'assets/img/pointy-haired_boss.jpg', role:'Teacher'},
@@ -117,7 +120,7 @@ const ELEMENT_DATA: User[] = [
   {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', userName: 'ratbert.adams', id: 44 , avatar_path: '',  role:'Student'},
   {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', role:'Recruiter'}
 ];
-
+*/
 
 @Component({
   selector: 'createChangePasswordDialog',
