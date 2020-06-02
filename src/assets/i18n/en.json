@@ -267,15 +267,15 @@
     "TEACHING_COURSES": "Teaching Courses",
     "SMART_BADGES": "Smart Badges",
     "CV": "CV",
-    "BEST_CARRER_OPTIONS": "Best Carrer Options",
-    "CARRER_ADVISOR": "Carrer Advisor",
+    "BEST_CARRER_OPTIONS": "Best Career Options",
+    "CARRER_ADVISOR": "Career Advisor",
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"
   },
   "BCO": {
-    "TITLE": "Best Carrer Options"
+    "TITLE": "Best Career Options"
   },    
   "CARRER_ADVISOR": {
-    "TITLE": "Carrer Advisor"
+    "TITLE": "Career Advisor"
   },
   "COURSE"  : {
     "TITLE": "Course",
