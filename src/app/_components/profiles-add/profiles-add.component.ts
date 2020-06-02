@@ -115,6 +115,7 @@ export class ProfilesAddComponent implements OnInit {
             },
             error => {
               console.log("Error getting data");
+              this.router.navigate(["/not_found"]);
               
             }
           ); 

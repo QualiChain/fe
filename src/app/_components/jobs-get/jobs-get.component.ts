@@ -19,6 +19,7 @@ import User from '../../_models/user';
 export class JobsGetComponent implements OnInit {
 
   constructor(
+    private router: Router,
     public dialogModal: MatDialog, 
     private route: ActivatedRoute,
     private js: JobsService,
@@ -108,7 +109,18 @@ export class JobsGetComponent implements OnInit {
         this.getCandidates(id);
 
 
-
+        this.js
+        .getJob(id).subscribe(
+          (dataJob: Job) => {
+            //console.log("job in db");
+            //console.log(dataCourse);
+            this.jobData = dataJob;
+          },
+          error => {
+            this.router.navigate(["/not_found"]);            
+          }
+        );         
+          /*
         this.js
         .getJob(id)
         .subscribe((dataJob: Job) => {
@@ -117,6 +129,7 @@ export class JobsGetComponent implements OnInit {
           this.jobData = dataJob;
 
         });
+        */
 
 
       }

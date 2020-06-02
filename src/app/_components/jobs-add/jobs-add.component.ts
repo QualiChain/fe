@@ -189,6 +189,7 @@ export class JobsAddComponent implements OnInit {
           error => {
             //console.log("Error getting data");
             this.loadDataJob(null);
+            this.router.navigate(["/not_found"]);  
           }
         );        
       }
