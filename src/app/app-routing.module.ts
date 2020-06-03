@@ -16,8 +16,8 @@ import { ProfilesViewComponent } from './_components/profiles-view/profiles-view
 import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
 
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
-import { BestCarrerOptionsComponent } from './_components/best-carrer-options/best-carrer-options.component';
-import { CarrerAdvisorComponent } from './_components/carrer-advisor/carrer-advisor.component';
+import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
+import { CareerAdvisorComponent } from './_components/career-advisor/career-advisor.component';
 import { LoginComponent } from './_components/login/login.component';
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { CoursesComponent } from './_components/courses/courses.component';
@@ -26,6 +26,7 @@ import { CoursesEditComponent } from './_components/courses-edit/courses-edit.co
 import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
 import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
+import { RecomendedSkillsComponent } from './_components/recomended-skills/recomended-skills.component';
 import { NotFoundComponent } from './_components/not-found/not-found.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
@@ -94,13 +95,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'profiles/:id/best-carrer-options',
-    component: BestCarrerOptionsComponent,
+    path: 'profiles/:id/best-career-options',
+    component: BestCareerOptionsComponent,
     canActivate: [AuthGuard]
   },  
   {
-    path: 'profiles/:id/carrer-advisor',
-    component: CarrerAdvisorComponent,
+    path: 'profiles/:id/career-advisor',
+    component: CareerAdvisorComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -158,9 +159,19 @@ const routes: Routes = [
     data: { roles: [Role.student, Role.admin, Role.administrator] }    
   },
   {
+    path: 'profiles/:id/recomended/skills',
+    component: RecomendedSkillsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.student, Role.admin, Role.administrator] }    
+  },
+  {
     path: 'access_denied',
     component: AccessDeniedComponent
   },
+  { 
+    path: 'not_found', 
+    component: NotFoundComponent
+  } ,
   { 
     path: '**', 
     component: NotFoundComponent

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-carrer-advisor',
-  templateUrl: './carrer-advisor.component.html',
-  styleUrls: ['./carrer-advisor.component.css']
+  selector: 'app-career-advisor',
+  templateUrl: './career-advisor.component.html',
+  styleUrls: ['./career-advisor.component.css']
 })
 
 
 
-export class CarrerAdvisorComponent implements OnInit {
+export class CareerAdvisorComponent implements OnInit {
 
   userid: number;
 

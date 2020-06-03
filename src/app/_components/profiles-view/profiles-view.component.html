@@ -83,11 +83,11 @@
                 </div>
                 
                 <div class="col col-lg-2">
-                  <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-carrer-options']">  
-                    <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}
+                  <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
+                    <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
                   </button>
                   <!--
-                  <a [routerLink]="['/profiles', userdata.id,'best-carrer-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}</a> 
+                  <a [routerLink]="['/profiles', userdata.id,'best-career-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}</a> 
                   -->
                 </div>
 
@@ -109,7 +109,7 @@
         <ngb-accordion *ngIf="userdata.role.toLowerCase()!='recruiter'">
 
           
-                <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+                <ngb-panel  id="toggle-0" title="Career path" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
                   <ng-template ngbPanelContent>
                     <div class="">
                       Mockup chart<br/>
@@ -281,14 +281,14 @@
 
         </ngb-accordion>
 
-        <div class="row carreradvisor" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+        <div class="row careeradvisor" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
             <div class="col col-lg-8"> </div>
             <div class="col col-lg-2">
               <!--
-              <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a>
+              <a [routerLink]="['/profiles', userdata.id,'career-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CAREER_ADVISOR' | translate }}</a>
               -->                
-              <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'carrer-advisor']">  
-                <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CARRER_ADVISOR' | translate }}
+              <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'career-advisor']">  
+                <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CAREER_ADVISOR' | translate }}
               </button>
             </div>
             
