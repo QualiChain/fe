@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecomendationsService } from '../../_services/recomendations.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recomended-skills',
@@ -12,9 +13,24 @@ export class RecomendedSkillsComponent implements OnInit {
   
   recomendedSkills = [];
 
-  constructor( private rs: RecomendationsService ) { }
+  constructor( 
+    private router: Router,
+    private route: ActivatedRoute,
+    private rs: RecomendationsService ) { }
   
   ngOnInit() {
+
+    //console.log(this.userId);
+
+    if (!this.userId) {
+      this.route.params.subscribe(params => {
+      if(params.hasOwnProperty('id')){
+        this.userId = +params.id;
+      }
+    });
+    }
+
+    //console.log(this.userId);     
 
     if (this.userId) {
       this.rs
