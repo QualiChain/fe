@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecomendationsService } from '../../_services/recomendations.service';
 import { CVService } from '../../_services/cv.service';
 import { CoursesService } from '../../_services/courses.service';
@@ -14,9 +15,24 @@ export class RecomendedCoursesComponent implements OnInit {
 
   recomendedCourses = [];
 
-  constructor( private rs: RecomendationsService, private cvss: CVService, private cs: CoursesService ) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private rs: RecomendationsService, private cvss: CVService, private cs: CoursesService ) { }
 
   ngOnInit() {
+
+    //console.log(this.userId);  
+
+    if (!this.userId) {
+      this.route.params.subscribe(params => {
+      if(params.hasOwnProperty('id')){
+        this.userId = +params.id;
+      }
+    });
+    }
+
+    //console.log(this.userId);    
 
     if (this.userId) {
 
