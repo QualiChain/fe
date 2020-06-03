@@ -6,6 +6,8 @@ import { MatchingService } from '../../_services/matching.service';
 import { ExcelServiceService } from '../../_services/excel/excel-service.service';
 import { Job } from '../../_models/Job';
 import { JobsService } from '../../_services/jobs.service';
+import { UsersService } from '../../_services/users.service';
+import User from '../../_models/user';
 
 
 @Component({
@@ -37,6 +39,7 @@ const ELEMENT_DATA: listOfCandidates[] = [
 export class RecruitmentComponent implements OnInit {
 
   jobs: Job[];
+  users: User[];
   //recruits = [];
   listOfCandidates = [    
     {name: 'Candidate01', role: 'Solutions Architect', available: '2020/01/13', expsalary: '31k', score: 33, id:1},
@@ -56,7 +59,7 @@ export class RecruitmentComponent implements OnInit {
   public chartDataList: Array<number> = [];
   public labelList: Array<any> = [];  
   // labels
-  public chartLabels: Array<any> = ['Negative', 'Positive'];
+  public chartLabels: Array<any> = ['Score', ''];
 
   public chartOptions: any = {
     responsive: true,
@@ -93,7 +96,7 @@ export class RecruitmentComponent implements OnInit {
   public ChartType = 'pie';
   
   
-  constructor(private jobService: JobsService, private matchingService: MatchingService, private excelService:ExcelServiceService) { }
+  constructor(private us: UsersService, private jobService: JobsService, private matchingService: MatchingService, private excelService:ExcelServiceService) { }
 
   //displayedColumns: string[] = ['id', 'title', 'action'];
   displayedColumns: string[] = ['id', 'name', 'role', 'available', 'expsalary', 'score', 'action'];
@@ -116,7 +119,19 @@ export class RecruitmentComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.getAvailableJobs();//
-    this.getMatchedCVs('Job1');
+    //this.getMatchedCVs('Job1');
+    
+    this.us
+    .getUsers()
+    .subscribe((data: User[]) => {
+      /*
+      ELEMENT_DATA.forEach(element => {
+        data.push(element);
+      });
+      */
+      this.users = data;
+
+  });
     
   }
  
@@ -130,7 +145,13 @@ export class RecruitmentComponent implements OnInit {
     this.matchingService.matchJob(jobID)
     .subscribe(
         CVs => {
-          this.recruits = CVs;
+          this.recruits=[];
+          for (const CV of CVs) {
+             CV.name=this.users[CV.id].fullName;
+             this.recruits.push(CV);
+          }
+
+          //this.recruits = CVs;
           this.recruits.sort((a, b) => b.score - a.score);
           this.dataSource.data = this.recruits;
           /*

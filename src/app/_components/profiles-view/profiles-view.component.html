@@ -376,7 +376,7 @@
             #targetSectorInput="ngModel"
             >          
         </div>  
-
+<!--
         <div class="form-group field">
           <label>Expected Salary</label>
           <input 
@@ -395,7 +395,7 @@
           <label>Job Description</label>
           <textarea type="text" [(ngModel)]="JobDescription" name="JobDescription"  class="form-control input" placeholder="Job description" required #JobDescriptionInput="ngModel"></textarea>
         </div>
-
+      -->
         <div class="card m-3">
           <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> timeline </i> Skills</h5>
           <div class="card-body">
@@ -418,7 +418,7 @@
                   <div [formGroup]="skillItem" class="form-row">
                     <div class="form-group col-6">
                       <label>SkillLabel</label>
-                      <input type="text" formControlName="SkillLabel" class="form-control" />                          
+                      <input type="text" formControlName="label" class="form-control" />                          
                     </div>
                     <div class="form-group col-6">
                       <label>ProficiencyLevel</label>
@@ -426,7 +426,7 @@
                     </div>
                     <div class="form-group col-6">
                       <label>SkillComment</label>
-                      <input type="text" formControlName="SkillComment" class="form-control" />
+                      <input type="text" formControlName="comment" class="form-control" />
                     </div>
                   </div>
               </div>

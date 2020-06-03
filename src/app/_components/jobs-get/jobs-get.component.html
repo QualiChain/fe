@@ -36,7 +36,7 @@
             </div>
     
             <div class="col ">
-                <div class="labeljob"><span>{{ 'JOBS.REQUIRED_SKILLS' | translate }}:</span> 
+                <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</h2> 
 
                     <table class="table table-striped">
                         <thead>
@@ -75,7 +75,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <!--<th scope="col">Name</th>-->
                     <th scope="col">Role</th>
                     <th scope="col">Available</th>
                     <th scope="col">Salary</th>
@@ -86,17 +86,17 @@
                 <tbody>
                   <tr *ngFor="let candidate of jobCandidates; let i=index">
                     <th scope="row">{{i+1}}</th>
-                    <td>{{candidate.user.name}}</td>
+                    <!--<td>{{candidate.name}}</td>-->
                     <td>{{candidate.role}}</td>
                     <td>{{candidate.available}}</td>
-                    <td>{{candidate.exp_salary}}</td>
+                    <td>{{candidate.expsalary}}</td>
                     <td>{{candidate.score}}</td>
                     <td>
-                        <button class="btn btn-primary" [routerLink]="['/profiles', candidate.user_id]">
+                        <button class="btn btn-primary" [routerLink]="['/profiles', candidate.id]">
                             <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
                         </button>
 
-                        <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, candidate.user_id, i)">
+                        <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, candidate.id, i)">
                             <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
                         </button>
                     </td>

@@ -9,7 +9,7 @@ export const environment = {
   uploadFilesUrl : 'http://qualichain.epu.ntua.gr:5000/file-upload',
   badgesUrl : 'http://qualichain.epu.ntua.gr:5000/badges',
   authUrl : 'http://qualichain.epu.ntua.gr:5000/auth',
-  usersUrl : 'http://localhost:8000/profiles',//'http://qualichain.epu.ntua.gr:5000/users',
+  usersUrl : 'http://qualichain.epu.ntua.gr:5000/users',//'http://localhost:8000/profiles',
   userUrl : 'http://qualichain.epu.ntua.gr:5000/user',
   jobsUrl : 'http://localhost:8000/jobs',//'http://qualichain.epu.ntua.gr:5000/jobs',  
   skillsUrl : 'http://qualichain.epu.ntua.gr:5000/skills',

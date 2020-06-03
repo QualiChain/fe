@@ -27,10 +27,9 @@ export class CVService {
       .get(`${this.uri}/${userId}`);
     }   
   
-  postCV(userId, dataIn) {
+  postCV(userId, dataIn:any) {
     const obj = dataIn;
-    
-    return this.httpClient.post(`${this.uri}/${userId}`, obj).
+    return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn));/*.
     pipe(
        map((data: any) => {
            console.log("post OK");
@@ -40,7 +39,7 @@ export class CVService {
          return throwError( 'Something went wrong!' );
        })
     )
-    
+    */
     }
 
 

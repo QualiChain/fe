@@ -75,7 +75,7 @@ export class JobsService {
 
 
     updateJob(jobId: number, dataIn: any) {
-      return this.http.put(`${this.jobsURL}/${jobId}`, dataIn).
+      return this.http.put(`${this.jobsURL}/${jobId}`, JSON.stringify(dataIn)).
       pipe(
          map((data: any) => {
            return data;
@@ -86,8 +86,12 @@ export class JobsService {
     }
 
 
-    applyJob(jobId: number, userId: number, dataIn: object) {      
-      return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, dataIn).
+    applyJob(jobId: any, userId: any, dataIn: object) {
+      console.log(userId);
+      console.log(jobId);
+
+      
+      return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, JSON.stringify(dataIn)).
       pipe(
          map((data: any) => {
            return data;
@@ -97,7 +101,8 @@ export class JobsService {
       )
     }
 
-    deleteJobApply(jobId: number, userId: number) {      
+    deleteJobApply(jobId: any, userId: any) {   
+      console.log(jobId);console.log(userId);   
       return this.http.delete(`${this.jobsURL}/${jobId}/apply/${userId}`).
       pipe(
          map((data: any) => {
@@ -110,7 +115,7 @@ export class JobsService {
 
 
     getJobCandidats(jobId: number) {
-      return this.http.get(`${this.jobsURL}/${jobId}/apply`).
+      return this.http.get(`${this.jobsURL}/${jobId}/candidates`).
       pipe(
          map((data: any) => {
            return data;

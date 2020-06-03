@@ -193,12 +193,12 @@ export class ProfilesViewComponent implements OnInit {
     this.route.params.subscribe(params => {
       
       //console.log(params['id']);
-
-      let profileid:string = null;  
+ 
       let id:number = 0;      
       if(params.hasOwnProperty('id')){
         id = +params.id;
-        profileid = params.id;
+        this.userId = params.id;
+        
       }
 
       if (id>0) {
@@ -255,11 +255,11 @@ export class ProfilesViewComponent implements OnInit {
 
 
       //const id = +params.id;
-      if (profileid) {
+      if (this.userId) {
         //this.userId=String(id);
         
         this.us
-        .getUser(profileid).subscribe(
+        .getUser(this.userId).subscribe(
           data => {
             //console.log("user in db");
             this.userdata = data;
@@ -267,7 +267,7 @@ export class ProfilesViewComponent implements OnInit {
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
             } 
-           this.getUserCV(this.userdata.cvuri);
+           this.getUserCV(this.userId);
           },
           error => {
             //console.log("user not found in db");
@@ -317,19 +317,20 @@ getUserCV(id) {
   this.cvs
   .getCV(id)
   .subscribe((data: any) => {
-
+    console.log(id);  
+    console.log(data);
     //if (data.length>0) {
       //let posCV = data.length-1;
       this.label = data.label;
       this.description = data.description;
       this.targetSector = data.target_sector;
-      this.expectedSalary = data.application.expected_salary;
-      this.JobDescription = data.description;
+      //this.expectedSalary = data.application.expectedSalary;
+      //this.JobDescription = data.description;
       data.skills.forEach(element => {
         this.t.push(this.formBuilder.group({
-          SkillLabel: [element.label, [Validators.required]],
+          label: [element.label, [Validators.required]],
           proficiencyLevel: [element.proficiencyLevel, Validators.required],
-          SkillComment: [element.comment, [Validators.required]],      
+          comment: [element.comment, [Validators.required]],      
         }));
       });
       data.workHistory
@@ -705,8 +706,8 @@ async generatePdf(action = 'open') {
   label: string;
   description: string;
   targetSector: string;
-  expectedSalary: string;
-  JobDescription: string;
+  //expectedSalary: string;
+  //JobDescription: string;
   onSubmit() {
     console.log("onSubmit");
     //this.submitted = true;
@@ -728,26 +729,27 @@ async generatePdf(action = 'open') {
     //'JobDescription': this.JobDescription,
 
     var dataToSend = {
-      'PersonURI': "http://somewhere/JohnSmith",
-      'Label':this.label,
+      'personURI': this.userId,
+      'label':this.label,
       'targetSector': this.targetSector,
-      'expectedSalary': this.expectedSalary,
-      'Description': this.description,
-      'Skills': this.dynamicForm.value.Skills,
+      //'expectedSalary': this.expectedSalary,
+      'description': this.description,
+      'skills': this.dynamicForm.value.Skills,
       'workHistory': this.dynamicFormWorks.value.workHistory,
-      'Education': this.dynamicFormEducations.value.Education
+      'education': this.dynamicFormEducations.value.Education
     };
 
     //console.log(JSON.stringify(dataToSend, null, 4));
 
     this.cvs.postCV(this.userId, dataToSend).subscribe(
       res => {
+        console.log(res);
         console.log("CV sended correctly");
         alert('Success!!');
       },
       error => {
-        console.log("error sending CV data");
-        alert('Error sending data!!!');
+        //console.log("error sending CV data");
+        //alert('Error sending data!!!');
       }
     );
 
