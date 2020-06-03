@@ -1,18 +1,18 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BestCarrerOptionsComponent } from './best-carrer-options.component';
+import { BestCareerOptionsComponent } from './best-career-options.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChartsModule } from 'ng2-charts';
 
-describe('BestCarrerOptionsComponent', () => {
-  let component: BestCarrerOptionsComponent;
-  let fixture: ComponentFixture<BestCarrerOptionsComponent>;
+describe('BestCareerOptionsComponent', () => {
+  let component: BestCareerOptionsComponent;
+  let fixture: ComponentFixture<BestCareerOptionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BestCarrerOptionsComponent ],
+      declarations: [ BestCareerOptionsComponent ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
       ],
@@ -26,7 +26,7 @@ describe('BestCarrerOptionsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BestCarrerOptionsComponent);
+    fixture = TestBed.createComponent(BestCareerOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
