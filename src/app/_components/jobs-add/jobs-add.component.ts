@@ -142,7 +142,8 @@ export class JobsAddComponent implements OnInit {
           this.router.navigate(["/jobs"]);
         },
         error => {
-          alert("Error updating the job!!");
+          this.router.navigate(["/jobs"]);
+          //alert("Error updating the job!!");
         }
       );
 
