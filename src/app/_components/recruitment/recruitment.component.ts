@@ -140,14 +140,24 @@ export class RecruitmentComponent implements OnInit {
     this.getMatchedCVs(this.seachJobTextInput);
   }
 
+  getBusername(arr, value) {
+
+    for (var i=0, iLen=arr.length; i<iLen; i++) {
+  
+      if (arr[i].b == value) return arr[i];
+    }
+  }
+
   getMatchedCVs(jobID) {
-    
     this.matchingService.matchJob(jobID)
     .subscribe(
         CVs => {
           this.recruits=[];
+          
           for (const CV of CVs) {
-             CV.name=this.users[CV.id].fullName;
+            this.users.find(x => x.id == CV.id);
+            const auser =  this.users.find(x => x.id == CV.id);
+            if (auser) CV.name = auser.fullName;
              this.recruits.push(CV);
           }
 
