@@ -86,7 +86,8 @@ export class ProfilesAddComponent implements OnInit {
 
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){
-        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+        this.pilotId = null;
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:'', pilotId: null};
       }
 
     this.route.params.subscribe(params => {
