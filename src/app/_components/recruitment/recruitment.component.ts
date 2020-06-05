@@ -41,6 +41,7 @@ export class RecruitmentComponent implements OnInit {
   jobs: Job[];
   users: User[];
   //recruits = [];
+  /*
   listOfCandidates = [    
     {name: 'Candidate01', role: 'Solutions Architect', available: '2020/01/13', expsalary: '31k', score: 33, id:1},
     {name: 'Candidate02', role: 'Tech Lead/ Software Architect', available: '2020/02/11', expsalary: '41k', score: 44, id:2},
@@ -49,7 +50,8 @@ export class RecruitmentComponent implements OnInit {
     {name: 'Candidate05', role: 'Backend developer', available: '2020/05/21', expsalary: '55k', score: 76, id:5},
     {name: 'Candidate06', role: 'PHP Senior Developer', available: '2020/05/11', expsalary: '21k', score: 52, id:6}
   ];
-    //listOfCandidates = [];
+  */
+  listOfCandidates = [];
 
   recruits = this.listOfCandidates;
   canvas: any;
