@@ -288,9 +288,9 @@
               <!--
               <a [routerLink]="['/profiles', userdata.id,'career-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CAREER_ADVISOR' | translate }}</a>
               -->                
-              <button *ngIf="(1==2) && ((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'career-advisor']">  
+              <!-- <button *ngIf="(1==2) && ((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'career-advisor']">  
                 <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CAREER_ADVISOR' | translate }}
-              </button>
+              </button> -->
             </div>
             
         </div>
@@ -299,9 +299,9 @@
           <div class="col col-lg-8"> </div>
           <div class="col col-lg-2">
             
-            <button *ngIf="1==2" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']">  
+            <!-- <button *ngIf="1==2" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']">  
               <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}
-            </button>
+            </button> -->
 
           </div>
 
