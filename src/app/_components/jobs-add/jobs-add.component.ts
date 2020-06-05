@@ -57,7 +57,7 @@ export class JobsAddComponent implements OnInit {
         employmentType: ['', Validators.required ],
         level: ['', Validators.required ],
         JobDescription: ['', Validators.required ],
-        SkillReq: this.fb.array([ this.initSkill() ])
+        skillReq: this.fb.array([ this.initSkill() ])
       });
       */
     
@@ -65,25 +65,25 @@ export class JobsAddComponent implements OnInit {
 
     initSkill(): FormGroup {
       return this.fb.group({
-          SkillLabel: ['', Validators.required ],
+          label: ['', Validators.required ],
           proficiencyLevel:  ['', Validators.required ],
-          skillPriority:  ['', Validators.required ]
+          priorityLevel:  ['', Validators.required ]
       });
     }
 
     addSkill() {
       // add skill to the skills list
-      //this.control = <FormArray>this.angForm.controls['SkillReq'];
+      //this.control = <FormArray>this.angForm.controls['skillReq'];
       //this.control.push(this.initSkill());
       let newJobSkill = {} as JobSkill;
-      newJobSkill.SkillLabel = "";
-      newJobSkill.assign = "";
-      newJobSkill.priority = "";
+      newJobSkill.label = "";
+      //newJobSkill.assign = "";
+      //newJobSkill.priority = "";
       newJobSkill.proficiencyLevel = ""; 
-      if (!this.dataIn.skills)  {
-        this.dataIn.skills = [newJobSkill];
+      if (!this.dataIn.skillReq)  {
+        this.dataIn.skillReq = [newJobSkill];
       } else {
-        this.dataIn.skills.push(newJobSkill);
+        this.dataIn.skillReq.push(newJobSkill);
       }
       
       
@@ -91,15 +91,18 @@ export class JobsAddComponent implements OnInit {
 
     removeSkill(i: number) {
       // remove address from the list
-      //this.control = <FormArray>this.angForm.controls['SkillReq'];
+      //this.control = <FormArray>this.angForm.controls['skillReq'];
       //this.control.removeAt(i);
-      this.dataIn.skills.splice(i, 1);
+      this.dataIn.skillReq.splice(i, 1);
     }
 
     addJob() {
       let userdata = JSON.parse(localStorage.getItem('userdata'));
       let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en');
-      
+     
+      let dataToSend = this.dataIn;
+      delete dataToSend.id;
+/*	  
      let dataToSend = {
         "title": this.dataIn.title,
         "jobDescription": this.dataIn.job_description,
@@ -111,7 +114,7 @@ export class JobsAddComponent implements OnInit {
         "employmentType": this.dataIn.employment_type,
         "skills": this.dataIn.skills
     };
-
+*/
       this.js.addJob(dataToSend).subscribe(
         res => {
           //console.log("Job created");
@@ -121,13 +124,14 @@ export class JobsAddComponent implements OnInit {
           this.router.navigate(["/jobs"]);
         },
         error => {
-          alert("Error creating the job!!");
+		      this.router.navigate(["/jobs"]);
+          //alert("Error creating the job!!");
         }
       );
 
     }
     
-    updateJob(jobId: number) {
+    updateJob(jobId: any) {
 
       this.js.updateJob(jobId, this.dataIn).subscribe(
         res => {
@@ -138,7 +142,8 @@ export class JobsAddComponent implements OnInit {
           this.router.navigate(["/jobs"]);
         },
         error => {
-          alert("Error updating the job!!");
+          this.router.navigate(["/jobs"]);
+          //alert("Error updating the job!!");
         }
       );
 
@@ -160,7 +165,7 @@ export class JobsAddComponent implements OnInit {
 /*
       for (let i=1; i<dataIn.skills.length;i++) {
         console.log(i);
-        this.control = <FormArray>this.angForm.controls['SkillReq'];
+        this.control = <FormArray>this.angForm.controls['skillReq'];
         this.control.push(this.initSkill());
       }
 */
@@ -171,12 +176,12 @@ export class JobsAddComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dataIn = {id: null, creator_id: null, date: "", start_date: "", end_date: "", title:"", job_description:"", employment_type:"", level:"",
-    skills: [{SkillLabel: "", assign: "", priority: "", proficiencyLevel: ""}] };
+    this.dataIn = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",
+    skillReq: []};
     this.route.params.subscribe(params => {
-      const id = +params.id;
+      const id = params.id;
       this.mode = "";
-      if (id && id > 0) {
+      if (id) {
         this.mode = "Edit";
         this.jobId=String(id);
         //console.log(this.jobId);  

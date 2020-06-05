@@ -14,7 +14,7 @@
 
 
   <form #formSearch="ngForm" (ngSubmit)="processSeacrhJobForm()">
-    <div class="form-group field col-lg-10" [class.has-error]="seachJobTextInputModel.invalid">
+    <div class="hidden form-group field col-lg-10" [class.has-error]="seachJobTextInputModel.invalid">
         <!--<span>{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}</span>-->
       <input       
         type="text" 
@@ -25,6 +25,17 @@
         required
         minlength="3"
         #seachJobTextInputModel="ngModel">    
+    </div>
+    <!-- Jobs -->
+    <div class="form-group field col-lg-10" >
+      <mat-form-field class="create-profile-full-width">
+        <mat-label>{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}</mat-label>
+        <mat-select [(ngModel)]="seachJobTextInput" name="searchtext" required>
+          <mat-option *ngFor="let job of jobs" [value]="job.id">
+            {{job.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <!-- 
     <button type="submit" class="btn btn-success" [disabled]="formSearch.invalid">{{ 'RECRUITMENT.BUTTON.SEARCH' | translate }}</button>
@@ -98,8 +109,8 @@
       <div class="wrapperbarchart">
         <canvas baseChart
           [datasets]="[{ data: [element.score,(100-element.score)],label: 'Matching Score', backgroundColor: [
-          'rgba(0, 0, 0, 1)',
-          'rgba(30, 144, 255, 1)'
+          'rgba(30, 144, 255, 1)',
+          'rgba(0, 0, 0, 1)'
       ]}]"
           [labels]="chartLabels"
           [options]="chartOptions"

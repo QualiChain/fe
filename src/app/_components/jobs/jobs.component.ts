@@ -116,7 +116,10 @@ export class JobsComponent implements OnInit {
       //this.result = dialogResult;
 
       if (dialogResult) {
-         console.log("Under construction");
+         //console.log("Under construction");
+         this.js.deleteJob(id).subscribe(data => {
+          window.location.reload();
+        });
       }
     });
   }
@@ -137,14 +140,16 @@ export class JobsComponent implements OnInit {
   jobsList = [];
 
   ngOnInit() {
+    this.getJobList();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
-      }
-      
+      }  
+    }
+    getJobList() {
     this.js
       .getJobs()
       .subscribe((data: Job[]) => {
@@ -182,10 +187,10 @@ export class applyJobDialog_modal implements OnInit {
 
   currentUser: User;
 
-  role: string;
+//  role: string;
   available: string;
   expsalary: string;
-  score: string;
+  //score: string;
   actionResult: boolean = false;
 
   constructor(
@@ -210,10 +215,10 @@ export class applyJobDialog_modal implements OnInit {
 
   onSubmitApplyJobModal() {
     let objectToSend = {
-      "role": this.role,
-      "available": this.available,
-      "expsalary": this.expsalary,
-      "score": this.score
+//      "role": this.role,
+      "availableAt": this.available,
+      "expectedSalary": this.expsalary//,
+      //"score": this.score
     };
 
     
@@ -225,7 +230,8 @@ export class applyJobDialog_modal implements OnInit {
             document.getElementById("closeApplyJobModalWindowTrue").click();
           },
           error => {
-            alert("Error appling for the job");                      
+            document.getElementById("closeApplyJobModalWindowTrue").click();
+            //alert("Error appling for the job");                      
           }
         );
     

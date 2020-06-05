@@ -194,10 +194,12 @@ export class ProfilesViewComponent implements OnInit {
     this.route.params.subscribe(params => {
       
       //console.log(params['id']);
-
+ 
       let id:number = 0;      
       if(params.hasOwnProperty('id')){
         id = +params.id;
+        this.userId = params.id;
+        
       }
 
       if (id>0) {
@@ -257,11 +259,11 @@ export class ProfilesViewComponent implements OnInit {
 
 
       //const id = +params.id;
-      if (id && id > 0) {
-        this.userId=String(id);
+      if (this.userId) {
+        //this.userId=String(id);
         
         this.us
-        .getUser(id).subscribe(
+        .getUser(this.userId).subscribe(
           data => {
             //console.log("user in db");
             this.userdata = data;
@@ -269,6 +271,7 @@ export class ProfilesViewComponent implements OnInit {
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
             } 
+           this.getUserCV(this.userId);
           },
           error => {
             //console.log("user not found in db");
@@ -302,46 +305,7 @@ export class ProfilesViewComponent implements OnInit {
   
         });
 */
-        
-        this.cvs
-        .getCV(id)
-        .subscribe((data: any) => {
 
-          if (data.length>0) {
-            let posCV = data.length-1;
-            this.label = data[posCV].label;
-            this.description = data[posCV].description;
-            this.targetSector = data[posCV].target_sector;
-            this.expectedSalary = data[posCV].expected_salary;
-            this.JobDescription = data[posCV].description;
-            data[posCV].skills.forEach(element => {
-              this.t.push(this.formBuilder.group({
-                SkillLabel: [element.SkillLabel, [Validators.required]],
-                proficiencyLevel: [element.proficiencyLevel, Validators.required],
-                SkillComment: [element.SkillComment, [Validators.required]],      
-              }));
-            });
-            data[posCV].work_history
-            .forEach(element => {
-              this.w.push(this.formBuilder.group({
-                position: [element.position, Validators.required],
-                from: [element.from, [Validators.required]],
-                to: [element.to, [Validators.required]],
-                employer: [element.employer, [Validators.required]],
-              }));
-            });
-            data[posCV].education
-            .forEach(element => {
-              this.e.push(this.formBuilder.group({
-                title: [element.title, Validators.required],
-                from: [element.from, [Validators.required]],
-                to: [element.to, [Validators.required]],
-                organisation: [element.organisation, [Validators.required]],
-                description: [element.description, [Validators.required]],
-              }));
-            });      
-          }      
-        });
       }
 
     });
@@ -357,7 +321,48 @@ export class ProfilesViewComponent implements OnInit {
 
   }
 
-
+getUserCV(id) {
+  this.cvs
+  .getCV(id)
+  .subscribe((data: any) => {
+    console.log(id);  
+    console.log(data);
+    //if (data.length>0) {
+      //let posCV = data.length-1;
+      this.label = data.label;
+      this.description = data.description;
+      this.targetSector = data.target_sector;
+      //this.expectedSalary = data.application.expectedSalary;
+      //this.JobDescription = data.description;
+      data.skills.forEach(element => {
+        this.t.push(this.formBuilder.group({
+          label: [element.label, [Validators.required]],
+          proficiencyLevel: [element.proficiencyLevel, Validators.required],
+          comment: [element.comment, [Validators.required]],      
+        }));
+      });
+      data.workHistory
+      .forEach(element => {
+        this.w.push(this.formBuilder.group({
+          position: [element.position, Validators.required],
+          from: [element.from, [Validators.required]],
+          to: [element.to, [Validators.required]],
+          employer: [element.employer, [Validators.required]],
+        }));
+      });
+      data.education
+      .forEach(element => {
+        this.e.push(this.formBuilder.group({
+          title: [element.title, Validators.required],
+          from: [element.from, [Validators.required]],
+          to: [element.to, [Validators.required]],
+          organisation: [element.organisation, [Validators.required]],
+          description: [element.description, [Validators.required]],
+        }));
+      });      
+    //}      
+  });
+}
   ngAfterViewChecked () {
     this.DrawChart();
   }
@@ -709,8 +714,8 @@ async generatePdf(action = 'open') {
   label: string;
   description: string;
   targetSector: string;
-  expectedSalary: string;
-  JobDescription: string;
+  //expectedSalary: string;
+  //JobDescription: string;
   onSubmit() {
     console.log("onSubmit");
     //this.submitted = true;
@@ -732,26 +737,27 @@ async generatePdf(action = 'open') {
     //'JobDescription': this.JobDescription,
 
     var dataToSend = {
-      'PersonURI': "http://somewhere/JohnSmith",
-      'Label':this.label,
+      'personURI': this.userId,
+      'label':this.label,
       'targetSector': this.targetSector,
-      'expectedSalary': this.expectedSalary,
-      'Description': this.description,
-      'Skills': this.dynamicForm.value.Skills,
+      //'expectedSalary': this.expectedSalary,
+      'description': this.description,
+      'skills': this.dynamicForm.value.Skills,
       'workHistory': this.dynamicFormWorks.value.workHistory,
-      'Education': this.dynamicFormEducations.value.Education
+      'education': this.dynamicFormEducations.value.Education
     };
 
     //console.log(JSON.stringify(dataToSend, null, 4));
 
     this.cvs.postCV(this.userId, dataToSend).subscribe(
       res => {
+        console.log(res);
         console.log("CV sended correctly");
         alert('Success!!');
       },
       error => {
-        console.log("error sending CV data");
-        alert('Error sending data!!!');
+        //console.log("error sending CV data");
+        //alert('Error sending data!!!');
       }
     );
 

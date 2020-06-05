@@ -198,9 +198,11 @@ console.log(this);
 
           //after create the user 
           //window.location.href="/profiles";
+          this.router.navigate(["/profiles/"]);
         },
         error => {
-          alert("Error creating user!!");
+          this.router.navigate(["/profiles/"]);
+          //alert("Error creating user!!");
         }
       );
 

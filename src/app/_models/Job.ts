@@ -8,14 +8,24 @@ export default class Product {
 */
 
 export class JobSkill {
-    SkillLabel: string;
+    label: string;
     assign: string;
-    priority: string;
+    priorityLevel: string;
     proficiencyLevel: string;
   }  
 
   export class Job {
-    id: number;
+    id: string;
+    label: string; // Position
+    contractType: string;
+    seniorityLevel: string; // Seniority Level
+    jobDescription: String;
+    jobLocation: String;
+    // SkillReq?: string [];
+    skillReq: JobSkill [];
+    startDate: string;
+    endDate: string;
+   /* id: number;
     creator_id: number;
     date: string;
     employment_type: string;
@@ -25,4 +35,5 @@ export class JobSkill {
     skills?: [JobSkill];
     start_date: string;
     title: string;
+    */
   }  
