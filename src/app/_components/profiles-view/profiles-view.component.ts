@@ -159,7 +159,7 @@ export class ProfilesViewComponent implements OnInit {
     
     if(!this.currentUser) {
     //if(!this.currentUser.hasOwnProperty('id')){
-      this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+      this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:'', gender:''};
     }
 
     this.userdata= {
@@ -170,7 +170,8 @@ export class ProfilesViewComponent implements OnInit {
       userName: '',
       avatar_path: 'assets/img/no_avatar.jpg',
       university: '',
-      role: ''
+      role: '',
+      gender: ''
   };
 
   

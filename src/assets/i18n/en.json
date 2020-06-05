@@ -4,7 +4,17 @@
     "en": "English",
     "pt": "Portuguese",
     "el": "Greek"
-  },    
+  },
+  "ROLES": {
+    "authenticated": "Authenticated",
+    "student": "Student",
+    "employee": "Employee",
+    "teacher": "Professor",
+    "professor": "Professor",
+    "recruiter": "Recruiter",
+    "administrator": "Administrator",
+    "admin": "Administrator"
+  },
   "MENU": {
     "HOME": "Home",
     "JOBS": "Jobs",
@@ -203,7 +213,8 @@
       "SELECT_ONE": "Select one gender",
       "TYPE": {
         "MALE": "Male",
-        "FEMALE": "Female"
+        "FEMALE": "Female",
+        "OTHER": "Other"
       }
     },
     "BIRTHDATE": {
@@ -372,7 +383,7 @@
     "UPDATE": "Update",
     "LEARN_MORE": "Learn more",
     "APPLY_JOB": "Apply for this job",
-    "DELETE_APPLY_JOB": "Delete job apply",
+    "DELETE_APPLY_JOB": "Delete job application",
     "CHANGE_PASSWORD": "Change password"
   },
   "ACTION": "Action",

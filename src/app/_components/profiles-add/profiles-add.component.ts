@@ -70,16 +70,24 @@ export class ProfilesAddComponent implements OnInit {
   profileId: string = '';
   mode: string = '';
   files: any[] = [];
+  currentUser: User;
   
   constructor(
     private router: Router,
     public datepipe: DatePipe, private us: UsersService, private authservice: AuthService, 
     private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
   }
  
 
   ngOnInit() {
+
+    if(!this.currentUser) {
+      //if(!this.currentUser.hasOwnProperty('id')){
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+      }
 
     this.route.params.subscribe(params => {
       const id = +params.id;

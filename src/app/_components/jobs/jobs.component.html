@@ -32,11 +32,11 @@
                     <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
                   </button>    
                   
-                  <button *ngIf="currentUser.role.toLowerCase()=='teacher' || currentUser.role.toLowerCase()=='recruiter' || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
+                  <button *ngIf="(currentUser.role.toLowerCase()=='teacher' && element.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && element.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
                     <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
                   </button>    
                   
-                  <button *ngIf="currentUser.role.toLowerCase()=='teacher' || currentUser.role.toLowerCase()=='recruiter' || currentUser.role.toLowerCase()=='administrator'" class="btn btn-danger" (click)="confirmDialog(element.id, element.Label)">
+                  <button *ngIf="(currentUser.role.toLowerCase()=='teacher' && element.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && element.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-danger" (click)="confirmDialog(element.id, element.Label)">
                     <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
                   </button>
                   <!--
