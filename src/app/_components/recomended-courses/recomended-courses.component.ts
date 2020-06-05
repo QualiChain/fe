@@ -39,8 +39,8 @@ export class RecomendedCoursesComponent implements OnInit {
       this.cvss
       .getCV(this.userId).subscribe(
         dataCVs => {
-          //console.log("list of user CVs");
-          //console.log(dataCVs);
+          console.log("list of user CVs");
+          console.log(dataCVs);
           var size = Object.keys(dataCVs).length;
           if (size>0) {
             let datatCVToSend = dataCVs[size-1];
