@@ -9,7 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Update custom config file
 
-You must edit the file /src/assets/config.json and introduce valid credentials
+You must copy and rename the file /src/assets/config.tempate.json as /src/assets/config.json. Edit the file /src/assets/config.json and introduce valid credentials to be able to use OU APIs
 ```
 {
     "OU_API_DATA" : {
