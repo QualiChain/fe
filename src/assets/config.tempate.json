@@ -1,0 +1,18 @@
+{
+    "OU_API_DATA" : {
+        "baseUrl": "http://localhost:4200",
+        "authentication": {
+            "endPoint": "qualichain/users/signin",
+            "username" : "<username>", 
+            "password" : "<password>"
+        },
+        "apis": {
+            "createBadge": "qualichain/badges/create",
+            "createNewBadgeIssuance": "qualichain/assertions/create",
+            "confirmBadgeIssuance": "qualichain/assertions/issue",
+            "revokeBadgeIssuance": "qualichain/assertions/revoke",
+            "getRecipients": "qualichain/recipients/list",
+            "getBagdes": "qualichain/badges/list"
+        }
+    }
+}
