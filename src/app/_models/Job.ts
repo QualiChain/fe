@@ -16,6 +16,7 @@ export class JobSkill {
 
   export class Job {
     id: string;
+    creator_id?: number;
     label: string; // Position
     contractType: string;
     seniorityLevel: string; // Seniority Level
