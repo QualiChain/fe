@@ -5,13 +5,13 @@ import { Color, Label } from 'ng2-charts';
 
 
 @Component({
-  selector: 'app-best-carrer-options',
-  templateUrl: './best-carrer-options.component.html',
-  styleUrls: ['./best-carrer-options.component.css']
+  selector: 'app-best-career-options',
+  templateUrl: './best-career-options.component.html',
+  styleUrls: ['./best-career-options.component.css']
 })
-export class BestCarrerOptionsComponent implements OnInit {
+export class BestCareerOptionsComponent implements OnInit {
 
-  best_carrer_options: any = [];
+  best_career_options: any = [];
   cardToDisplay: number;
   userid: number;
 
@@ -135,7 +135,7 @@ public pieChartOptions: ChartOptions = {
         {id: 3, title:"Web Designer", description: "A web designer develops and creates websites and associated applications. Web designers work in a variety of industries and often as independent contractors. Education requirements can vary, but web designers can get entry-level work with an associate's degree. Bachelor's degrees provide students with an expanded and advanced skill set that can lead to better job prospects or career advancement."}
       ];
 
-      this.best_carrer_options = options;
+      this.best_career_options = options;
 
       for (let i=0; i<=options.length-1; i++) {
         //progress bar data

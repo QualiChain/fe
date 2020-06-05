@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import { UsersService } from '../../_services/users.service';
 import User from '../../_models/user';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AuthService } from '../../_services';
 
 @Component({
   selector: 'app-profiles',
@@ -28,7 +29,14 @@ export class ProfilesComponent implements OnInit {
 
   users: User[];
   isLoadingResults = false;
-  constructor(private us: UsersService, public createChangePasswordDialog: MatDialog) { }
+
+  currentUser: User;
+  
+  constructor(private authservice: AuthService, private us: UsersService, public createChangePasswordDialog: MatDialog) { 
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
 
   displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
 
@@ -46,6 +54,12 @@ export class ProfilesComponent implements OnInit {
   }
   
   ngOnInit() {
+
+    if(!this.currentUser) {
+      //if(!this.currentUser.hasOwnProperty('id')){
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+    }
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
@@ -97,6 +111,9 @@ const ELEMENT_DATA: listOfUsers[] = [
   {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', username: 'recruiter.demo', id: 5 , avatar_path: 'assets/img/recruiter.png', university:'', role:'Recruiter'}
 ];
 */
+
+const ELEMENT_DATA: User[] = [];
+/*
 const ELEMENT_DATA: User[] = [
   {name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', userName: 'dilbert.adams', id: 11 , avatar_path: 'assets/img/dilbert.jpg', role:'Student'},
   {name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.eu', userName: 'phb'         , id: 22 , avatar_path: 'assets/img/pointy-haired_boss.jpg', role:'Teacher'},
@@ -104,7 +121,7 @@ const ELEMENT_DATA: User[] = [
   {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', userName: 'ratbert.adams', id: 44 , avatar_path: '',  role:'Student'},
   {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', role:'Recruiter'}
 ];
-
+*/
 
 @Component({
   selector: 'createChangePasswordDialog',

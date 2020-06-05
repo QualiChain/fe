@@ -1,7 +1,7 @@
 <h1>{{ 'PROFILES.TITLE' | translate }}</h1>
 
 
-<div class="">
+<div class="" *ngIf="((currentUser.role.toLowerCase()=='administrator'))">
   <button class="btn btn-primary" [routerLink]="['/profiles/add']">
     <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'BUTTON.CREATE' | translate }}
   </button>
@@ -28,7 +28,11 @@
               <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
             </button>
 
-            <button class="btn btn-primary" (click)="openChangePasswordDialog(element.id)">
+            <button *ngIf="((element.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))"class="btn btn-primary" [routerLink]="['/profiles', element.id,'edit']">
+              <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+            </button>
+
+            <button *ngIf="((element.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" (click)="openChangePasswordDialog(element.id)">
               <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.CHANGE_PASSWORD' | translate }}
             </button>
 
@@ -61,8 +65,8 @@
 
     <!-- Role Column -->
     <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
-      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+      <th mat-header-cell *matHeaderCellDef > Role </th>
+      <td mat-cell *matCellDef="let element"> {{ 'ROLES.'+element.role | translate }} </td>
     </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

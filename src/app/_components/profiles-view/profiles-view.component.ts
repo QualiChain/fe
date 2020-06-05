@@ -91,7 +91,7 @@ export class ProfilesViewComponent implements OnInit {
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+  constructor(private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -159,7 +159,7 @@ export class ProfilesViewComponent implements OnInit {
     
     if(!this.currentUser) {
     //if(!this.currentUser.hasOwnProperty('id')){
-      this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+      this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:'', gender:''};
     }
 
     this.userdata= {
@@ -170,7 +170,8 @@ export class ProfilesViewComponent implements OnInit {
       userName: '',
       avatar_path: 'assets/img/no_avatar.jpg',
       university: '',
-      role: ''
+      role: '',
+      gender: ''
   };
 
   
@@ -213,7 +214,9 @@ export class ProfilesViewComponent implements OnInit {
         });
       }
 
-      let listOfUsers = 
+      let listOfUsers = [];
+      /*
+      let listOfUsers =  
       [
         {name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', userName: 'dilbert.adams', id: 11 , avatar_path: 'assets/img/dilbert.jpg', university:'National University of Athens', role:'Student'},
         {name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.eu', userName: 'phb'         , id: 22 , avatar_path: 'assets/img/pointy-haired_boss.jpg', university: 'University of Vic', role:'Teacher'},
@@ -221,6 +224,7 @@ export class ProfilesViewComponent implements OnInit {
         {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', userName: 'ratbert.adams', id: 44 , avatar_path: '', university:'UPC', role:'Student'},
         {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', university:'', role:'Recruiter'}
       ];
+      */
 
       let listOfCoursesByUser = [
         {id: 1, title: "An Introduction to Interactive Programming in Python (Part 1)", description: "This two-part course is designed to help students with very little or no computing background learn the basics of building simple interactive applications. Our language of choice, Python, is an easy-to learn, high-level computer language that is used in many of the computational courses offered on Coursera. To make learning Python easy, we have developed a new browser-based programming environment that makes developing interactive applications in Python simple. These applications will involve windows whose contents are graphical and respond to buttons, the keyboard and the mouse.", related_skills: ['Linux', 'Python 2', 'P3'], course_badges: ['b1', 'b2', 'b3']},
@@ -271,6 +275,7 @@ export class ProfilesViewComponent implements OnInit {
           },
           error => {
             //console.log("user not found in db");
+            /*
             listOfUsers.forEach(element => {
               //console.log(element.id+"--"+params['id']);
               
@@ -281,10 +286,13 @@ export class ProfilesViewComponent implements OnInit {
               }
               
             });
+            
             //this.userdata = listOfUsers[params['id']-1];
             if (this.userdata.avatar_path=='') {
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
             }
+            */
+            this.router.navigate(["/not_found"]);
             
           }
         );

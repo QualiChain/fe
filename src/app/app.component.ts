@@ -35,11 +35,23 @@ export class AppComponent {
   }
 
   get isAdmin() {
-    return this.currentUser && this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() ;
+    return this.currentUser && (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase()) ;
   }
 
   get isRecruiter() {
-    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase())) ;
+    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+  }
+
+  get isTeacher() {
+    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.teacher.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+  }
+
+  get isStudent() {
+    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.student.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+  }
+  
+  get isEmployee() {
+    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.employee.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
   }
 
   logout() {

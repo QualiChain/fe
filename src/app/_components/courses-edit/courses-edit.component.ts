@@ -196,6 +196,7 @@ selected(event: MatAutocompleteSelectedEvent): void {
           },
           error => {
             console.log("Error getting data");
+            this.router.navigate(["/not_found"]);
             
           }
         );

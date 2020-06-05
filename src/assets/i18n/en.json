@@ -4,7 +4,17 @@
     "en": "English",
     "pt": "Portuguese",
     "el": "Greek"
-  },    
+  },
+  "ROLES": {
+    "authenticated": "Authenticated",
+    "student": "Student",
+    "employee": "Employee",
+    "teacher": "Professor",
+    "professor": "Professor",
+    "recruiter": "Recruiter",
+    "administrator": "Administrator",
+    "admin": "Administrator"
+  },
   "MENU": {
     "HOME": "Home",
     "JOBS": "Jobs",
@@ -204,7 +214,8 @@
       "SELECT_ONE": "Select one gender",
       "TYPE": {
         "MALE": "Male",
-        "FEMALE": "Female"
+        "FEMALE": "Female",
+        "OTHER": "Other"
       }
     },
     "BIRTHDATE": {
@@ -268,15 +279,15 @@
     "TEACHING_COURSES": "Teaching Courses",
     "SMART_BADGES": "Smart Badges",
     "CV": "CV",
-    "BEST_CARRER_OPTIONS": "Best Carrer Options",
-    "CARRER_ADVISOR": "Carrer Advisor",
+    "BEST_CAREER_OPTIONS": "Best Career Options",
+    "CAREER_ADVISOR": "Career Advisor",
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"
   },
   "BCO": {
-    "TITLE": "Best Carrer Options"
+    "TITLE": "Best Career Options"
   },    
-  "CARRER_ADVISOR": {
-    "TITLE": "Carrer Advisor"
+  "CAREER_ADVISOR": {
+    "TITLE": "Career Advisor"
   },
   "COURSE"  : {
     "TITLE": "Course",
@@ -373,7 +384,7 @@
     "UPDATE": "Update",
     "LEARN_MORE": "Learn more",
     "APPLY_JOB": "Apply for this job",
-    "DELETE_APPLY_JOB": "Delete job apply",
+    "DELETE_APPLY_JOB": "Delete job application",
     "CHANGE_PASSWORD": "Change password"
   },
   "ACTION": "Action",

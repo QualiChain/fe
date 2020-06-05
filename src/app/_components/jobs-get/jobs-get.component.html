@@ -3,7 +3,7 @@
 <div class="container">
 
     <div class="row">
-        <button class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
+        <button *ngIf="(currentUser.role.toLowerCase()=='teacher' && jobData.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && jobData.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
             <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
           </button>
           <button *ngIf="!userHasAnApply" class="btn btn-inform" (click)="openApllyJobDialog(jobData.id, jobData)">
@@ -66,12 +66,17 @@
 
         </div>
     </div>
-    <div class="row">
+    
+    <div class="row" *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='recruiter'">
+
+      <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
+
+        <div *ngIf="jobCandidates.length==0">There are not candidates for this Job</div>
+
         <div *ngIf="jobCandidates.length>0" class="col col-lg-12">
+      
 
-            <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
-
-            <table class="table table-striped">
+            <table *ngIf="jobCandidates.length>0" class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

@@ -101,11 +101,12 @@ export class LoginComponent implements OnInit {
           console.log("Valid credentials for the auth service");
           this.invalidCredentials = false;
           this.validCredentials(res);
-          this.loadingLoginSpinner = false;
+          //this.loadingLoginSpinner = false;
         },
         error => {
-          console.log("Invalid Credentials for the aut service, let's check if are the demo ones");
           this.invalidCredentials = true;
+          /*
+          console.log("Invalid Credentials for the aut service, let's check if are the demo ones");
           if ((this.name=='student') && (this.password=='student')) {
             console.log("Demo credentials of a student are valid!!!")
             this.validCredentials(error);
@@ -118,6 +119,7 @@ export class LoginComponent implements OnInit {
             console.log("Demo credentials of a recruiter are valid!!!")
             this.validCredentials(error);
           }
+          */
           this.loadingLoginSpinner = false;
           
         }

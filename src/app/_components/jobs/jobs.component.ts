@@ -155,7 +155,7 @@ export class JobsComponent implements OnInit {
       .subscribe((data: Job[]) => {
         this.jobs = data;
         ELEMENT_DATA = data;
-        //console.log(data);
+        console.log(data);
         /*
         ELEMENT_DATA.forEach(element => {
           data.push(element);

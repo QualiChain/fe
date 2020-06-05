@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CarrerAdvisorComponent } from './carrer-advisor.component';
+import { CareerAdvisorComponent } from './career-advisor.component';
 import { TranslateModule } from "@ngx-translate/core";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,13 +9,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 //import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('CarrerAdvisorComponent', () => {
-  let component: CarrerAdvisorComponent;
-  let fixture: ComponentFixture<CarrerAdvisorComponent>;
+describe('CareerAdvisorComponent', () => {
+  let component: CareerAdvisorComponent;
+  let fixture: ComponentFixture<CareerAdvisorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarrerAdvisorComponent ],
+      declarations: [ CareerAdvisorComponent ],
       imports: [
         TranslateModule.forRoot(),
         FormsModule,
@@ -27,7 +27,7 @@ describe('CarrerAdvisorComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarrerAdvisorComponent);
+    fixture = TestBed.createComponent(CareerAdvisorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

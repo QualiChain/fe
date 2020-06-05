@@ -10,6 +10,7 @@
     <button class="btn btn-primary" (click)="generatePdf('open')">  
       <i _ngcontent-axy-c0="" class="material-icons"> picture_as_pdf </i> {{ 'BUTTON.OPEN_PDF' | translate }}
     </button>
+    <!--
     <button class="btn btn-primary" (click)="generatePdf('download')">
       <i _ngcontent-axy-c0="" class="material-icons"> cloud_download </i>
       {{ 'BUTTON.DOWNLOAD_PDF' | translate }}
@@ -18,6 +19,7 @@
       <i _ngcontent-axy-c0="" class="material-icons"> print </i>
       {{ 'BUTTON.PRINT_PDF' | translate }}
     </button>
+    -->
     <a *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
       <i _ngcontent-axy-c0="" class="material-icons"> edit </i>
       {{ 'BUTTON.EDIT' | translate }}
@@ -26,16 +28,15 @@
   <div class="row"><br></div>
   
   <div class="row">
-    <div class="col" [ngClass]="{'col-lg-8': userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'}">
-
+    <div class="col" [ngClass]="{'col-lg-8': ((userdata.id==currentUser.id) && (userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'))}">
       <div class="row">
         <div class="col col-lg-8">
-            <div class="username"><span>{{ 'PROFILES.USERNAME' | translate }}:</span> {{userdata.userName}}</div>            
-            <div class="fullname"><span>{{ 'PROFILES.NAME' | translate }}:</span> {{userdata.name}}</div>
-            <div class="fullname"><span>{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
-            <div class="fullname"><span>{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
-            <div class="fullname"><span>{{ 'PROFILES.ROLE' | translate }}:</span>  {{userdata.role}}</div>
-            <div class="fullname"><span>{{ 'PROFILES.GENDER' | translate }}:</span>  {{userdata.gender}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.USERNAME' | translate }}:</span> {{userdata.userName}}</div>            
+            <div><span class="profileLabel">{{ 'PROFILES.NAME' | translate }}:</span> {{userdata.name}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>  {{ 'ROLES.'+userdata.role | translate}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span>  {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</div>
             <!--
             <div *ngIf="userdata.role!='Recruiter'" class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
             -->
@@ -73,7 +74,7 @@
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
 
               
-                <div class="col col-lg-2">
+                <div *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="col col-lg-2">
                   <button class="btn btn-primary" data-toggle="modal" data-target="#myModalCV">  
                     <i _ngcontent-axy-c0="" class="material-icons"> account_box </i> {{ 'PROFILES.CV' | translate }}
                   </button>
@@ -82,12 +83,12 @@
                   -->
                 </div>
                 
-                <div class="col col-lg-2">
-                  <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-carrer-options']">  
-                    <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}
+                <div *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="col col-lg-2">
+                  <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
+                    <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
                   </button>
                   <!--
-                  <a [routerLink]="['/profiles', userdata.id,'best-carrer-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CARRER_OPTIONS' | translate }}</a> 
+                  <a [routerLink]="['/profiles', userdata.id,'best-career-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}</a> 
                   -->
                 </div>
 
@@ -109,7 +110,7 @@
         <ngb-accordion *ngIf="userdata.role.toLowerCase()!='recruiter'">
 
           
-                <ngb-panel  id="toggle-0" title="Carrer path" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+                <ngb-panel  id="toggle-0" title="Career path" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
                   <ng-template ngbPanelContent>
                     <div class="">
                       Mockup chart<br/>
@@ -281,14 +282,14 @@
 
         </ngb-accordion>
 
-        <div class="row carreradvisor" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+        <div class="row careeradvisor" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
             <div class="col col-lg-8"> </div>
             <div class="col col-lg-2">
               <!--
-              <a [routerLink]="['/profiles', userdata.id,'carrer-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CARRER_ADVISOR' | translate }}</a>
+              <a [routerLink]="['/profiles', userdata.id,'career-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CAREER_ADVISOR' | translate }}</a>
               -->                
-              <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'carrer-advisor']">  
-                <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CARRER_ADVISOR' | translate }}
+              <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'career-advisor']">  
+                <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CAREER_ADVISOR' | translate }}
               </button>
             </div>
             
@@ -312,7 +313,7 @@
     </div>
       
     </div>
-    <div class="col col-lg-4" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">      
+    <div class="col col-lg-4" *ngIf="(userdata.id==currentUser.id) && (userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee')">      
       <app-recomended-jobs userId="{{userdata.id}}"></app-recomended-jobs>
       <br/>
       <app-recomended-courses userId="{{userdata.id}}"></app-recomended-courses>

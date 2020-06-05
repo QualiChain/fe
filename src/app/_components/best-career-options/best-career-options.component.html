@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    <div [hidden]="cardToDisplay!=i" class="bco-card" *ngFor="let bco of best_carrer_options; let i = index">
-        <div class="bco-head">{{bco.title}} ({{i+1}}/{{best_carrer_options.length}})</div>
+    <div [hidden]="cardToDisplay!=i" class="bco-card" *ngFor="let bco of best_career_options; let i = index">
+        <div class="bco-head">{{bco.title}} ({{i+1}}/{{best_career_options.length}})</div>
         <div class="bco-body">
             <div class="bco-body-title">Description</div>
             <div class="bco-body-content"><p>{{bco.description}}</p></div>
@@ -73,14 +73,14 @@
 
             </div>
 
-            <div class="bco-body-title">Recomendations</div>
+            <div class="bco-body-title">Recommendations</div>
             <div  class="bco-body-content">
                 <div class="row">
                     <div class="col col-lg-6">                        
-                    <a [routerLink]="['/profiles',userid,'recomended','courses']" class="btn btn-primary">Course Recomendation (under construction)</a> 
+                    <a [routerLink]="['/profiles',userid,'recomended','courses']" class="btn btn-primary">Course Recommendation (under construction)</a> 
                     </div>
                     <div class="col col-lg-6">
-                    <a [routerLink]="" class="btn btn-primary">Skill Recomendation (under construction)</a> 
+                    <a [routerLink]="['/profiles',userid,'recomended','skills']" class="btn btn-primary">Skill Recommendation (under construction)</a> 
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
     <div class="row">
             <div class="col-xs-10" >
                     <button title="Previous" [hidden]="cardToDisplay==0" (click)="cardToDisplay = cardToDisplay-1" ng-init="count=0">❮  </button>
-                    <button title="Next" [hidden]="cardToDisplay>=(best_carrer_options.length-1)" (click)="cardToDisplay = cardToDisplay+1" ng-init="count=0">  ❯</button>
+                    <button title="Next" [hidden]="cardToDisplay>=(best_career_options.length-1)" (click)="cardToDisplay = cardToDisplay+1" ng-init="count=0">  ❯</button>
             </div>
     </div>
         

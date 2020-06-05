@@ -101,8 +101,8 @@ import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
 import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
-import { BestCarrerOptionsComponent } from './_components/best-carrer-options/best-carrer-options.component';
-import { CarrerAdvisorComponent } from './_components/carrer-advisor/carrer-advisor.component';
+import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
+import { CareerAdvisorComponent } from './_components/career-advisor/career-advisor.component';
 import { RecomendedCoursesComponent } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent } from './_components/recomended-skills/recomended-skills.component';
@@ -214,8 +214,8 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     createChangePasswordDialog_modal,
     ProfilesAddComponent,
     RecruitmentViewComponent,
-    BestCarrerOptionsComponent,
-    CarrerAdvisorComponent,
+    BestCareerOptionsComponent,
+    CareerAdvisorComponent,
     RecomendedCoursesComponent,
     RecomendedJobsComponent,
     RecomendedSkillsComponent,
