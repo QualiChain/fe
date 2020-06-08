@@ -81,7 +81,8 @@
 																		<hr>
 																</div>															
 														</li>
-														<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles/'+currentUser.id}"><a class="navbar-item" routerLink="/profiles/{{currentUser.id}}" >{{ 'MENU.PROFILE' | translate }}</a></li>
+
+														<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles/'+currentUser.id}"><a class="navbar-item" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
 
 														<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
 
