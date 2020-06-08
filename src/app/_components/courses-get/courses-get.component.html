@@ -13,24 +13,24 @@
 
       <div class="col col-lg-12">
           <div class="col ">
-              <div class="labelcourse"><span>{{ 'COURSE.DESCRIPTION.LABEL' | translate }}:</span> {{courseData.description}}</div> 
+              <div><span class="labelcourse">{{ 'COURSE.DESCRIPTION.LABEL' | translate }}:</span> {{courseData.description}}</div> 
           </div>
           <div class="col ">
-            <div class="labelcourse"><span>{{ 'COURSE.SEMESTER.LABEL' | translate }}:</span> {{courseData.semester}}</div> 
+            <div><span class="labelcourse">{{ 'COURSE.SEMESTER.LABEL' | translate }}:</span> {{courseData.semester}}</div> 
           </div>
           <div class="col ">
-              <div class="labelcourse"><span>{{ 'COURSE.STARTDATE.LABEL' | translate }}:</span> {{courseData.startDate }}</div> 
+              <div><span class="labelcourse">{{ 'COURSE.STARTDATE.LABEL' | translate }}:</span> {{courseData.startDate }}</div> 
           </div>
           <div class="col ">
-              <div class="labelcourse"><span>{{ 'COURSE.ENDDATE.LABEL' | translate }}:</span> {{courseData.endDate }}</div> 
+              <div><span class="labelcourse">{{ 'COURSE.ENDDATE.LABEL' | translate }}:</span> {{courseData.endDate }}</div> 
           </div>
           
           
 
           <div class="col ">
-            <div class="labelcourse"><span>{{ 'COURSE.SKILLS.LABEL' | translate }}:</span> 
+            <div><span class="labelcourse">{{ 'COURSE.SKILLS.LABEL' | translate }}:</span> 
                 <span *ngFor="let skill of courseData.skills; let i=index">
-                  <span *ngIf="i>0">, </span>{{ skill.name }}
+                  <span *ngIf="i>0">,</span> {{ skill.name }}
                 </span>
             </div> 
           </div>            

@@ -29,15 +29,15 @@
                 <td mat-cell *matCellDef="let element">
     
                   <button class="btn btn-primary" [routerLink]="['/jobs', element.id]">
-                    <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                    <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                   </button>    
                   
                   <button *ngIf="(currentUser.role.toLowerCase()=='teacher' && element.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && element.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
-                    <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+                    <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
                   </button>    
                   
                   <button *ngIf="(currentUser.role.toLowerCase()=='teacher' && element.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && element.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-danger" (click)="confirmDialog(element.id, element.Label)">
-                    <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+                    <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
                   </button>
                   <!--
                   <button class="btn btn-inform" (click)="openApllyJobDialog(element.id, element.label)">

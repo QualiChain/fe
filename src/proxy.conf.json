@@ -1,4 +1,11 @@
 {
+    "/proxyKBZ/*": {
+        "target": "http://knowledgebizvpn.ddns.net:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/proxyKBZ" : ""}
+    },   
     "/qualichain/*": {
         "target": "https://blockchain21.kmi.open.ac.uk",
         "secure": false,

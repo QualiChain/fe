@@ -39,27 +39,46 @@ export class RecomendedCoursesComponent implements OnInit {
       this.cvss
       .getCV(this.userId).subscribe(
         dataCVs => {
-          //console.log("list of user CVs");
+          //console.log("user CV");
           //console.log(dataCVs);
-          var size = Object.keys(dataCVs).length;
-          if (size>0) {
-            let datatCVToSend = dataCVs[size-1];
+          
+            let datatCVToSend = dataCVs;
             //console.log(datatCVToSend);
+            let skillsCV = [];
+            dataCVs['skills'].forEach(element => {
+              skillsCV.push({"SkillLabel":element.label,"proficiencyLevel":element.proficiencyLevel,"SkillComment":element.comment});
+            });
+            //console.log(skillsCV);
+
+            let educationCV = [];
+            dataCVs['education'].forEach(element => {
+              educationCV.push({"title":element.title,"from":element.from,"to":element.to,"organisation":element.organisation,"description":element.description});
+            });
+            //console.log(educationCV);
+
+            let workHistoryCV = [];
+            dataCVs['workHistory'].forEach(element => {
+              workHistoryCV.push({"title":element.position,"from":element.from,"to":element.to,"organisation":element.employer,"description":""});
+            });
+            //console.log(workHistoryCV);
+
             datatCVToSend = {
               "source":{
-                "PersonURI": dataCVs[size-1]['person_URI'],
-                "Label": dataCVs[size-1]['label'],
-                "targetSector": dataCVs[size-1]['target_sector'],
-                "expectedSalary": dataCVs[size-1]['expected_salary'],
-                "Description": dataCVs[size-1]['description'],
-                "Skills": dataCVs[size-1]['skills'],
-                "workHistory": dataCVs[size-1]['work_history'],
-                "Education": dataCVs[size-1]['education']
+                "PersonURI": dataCVs['personURI'],
+                "Label": dataCVs['label'],
+                "targetSector": dataCVs['targetSector'],
+                "expectedSalary": "",
+                "Description": dataCVs['description'],
+                "Skills": skillsCV,
+                "workHistory": workHistoryCV,
+                "Education": educationCV
               },
               "source_type": "cv",
               "recommendation_type": "courses"
             };
-                        
+            
+            //console.log(datatCVToSend);
+
             this.rs
             .getRecomendationsByCV(datatCVToSend).subscribe(
               dataRecommendationByCV => {
@@ -88,7 +107,7 @@ export class RecomendedCoursesComponent implements OnInit {
                 console.log("recomended courses by CV not found in db");                        
               }
             );
-          }
+          
           
         },
         error => {

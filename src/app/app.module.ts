@@ -120,6 +120,7 @@ import { DatePipe } from '@angular/common';
 
 import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { QcSpinnerComponent } from './_components/qc-spinner/qc-spinner.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -228,6 +229,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     DndDirective,
     ProgressComponent,
     UploadFilesComponent,
+    QcSpinnerComponent,
   ],
   imports: [
     BrowserModule,
