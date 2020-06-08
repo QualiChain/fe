@@ -16,8 +16,14 @@ You must copy and rename the file /src/assets/config.tempate.json as /src/assets
         "baseUrl": "http://localhost:4200",
         "authentication": {
             "endPoint": "qualichain/users/signin",
-            "username" : "<username>", 
-            "password" : "<password>"
+            "adminUser": {
+                "username" : "<username>",
+                "password" : "<password>"
+            },
+            "issuerUser": {
+                "username" : "<username>",
+                "password" : "<password>"
+            }
         },
         "apis": {
             "createBadge": "qualichain/badges/create",

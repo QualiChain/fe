@@ -40,8 +40,14 @@ export class OUService {
           "baseUrl": "http://localhost:4200",
           "authentication": {
               "endPoint": "qualichain/users/signin",
-              "username" : "<username>", 
-              "password" : "<password>"
+              "adminUser": {
+                "username" : "<username>",
+                "password" : "<password>"
+            },
+            "issuerUser": {
+                "username" : "<username>",
+                "password" : "<password>"
+            }
           },
           "apis": {
               "createBadge": "qualichain/badges/create",
@@ -64,8 +70,34 @@ export class OUService {
     }
 
     let obj = {
-      "username" : this.cs.configData.OU_API_DATA.authentication.username,
-      "password" :  this.cs.configData.OU_API_DATA.authentication.password
+      "username" : this.cs.configData.OU_API_DATA.authentication.issuerUser.username,
+      "password" :  this.cs.configData.OU_API_DATA.authentication.issuerUser.password
+    };
+
+    let endPoint = "/"+this.cs.configData.OU_API_DATA.authentication.endPoint;
+    //console.log(endPoint);    
+    return this.httpClient.post(`${endPoint}`, obj).
+    pipe(
+       map((data: any) => {
+         //console.log(data);
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
+
+  getOUAdminToken() {
+
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
+    let obj = {
+      "username" : this.cs.configData.OU_API_DATA.authentication.adminUser.username,
+      "password" :  this.cs.configData.OU_API_DATA.authentication.adminUser.password
     };
 
     let endPoint = "/"+this.cs.configData.OU_API_DATA.authentication.endPoint;

@@ -227,30 +227,34 @@ export class createAwardDialog_modal implements OnInit {
     };
   
     this.ous
-    .getOUToken()
+    .getOUAdminToken()
     .subscribe((
       dataOU: any) => {
       //console.log(dataOU);
       //console.log(dataOU.token);
       if (dataOU.token) {       
-
+        //"issuerid": this.badgeissuer,
+        //"version": this.badgeversion
         let dataToSendOU  = {
           "title": this.badgelabel, 
-          "issuerid": this.badgeissuer,
+          "issuerid": 7,
           "description": this.badgedescription,
           "criterianarrative": this.badgecriterianarrative,
           "imageurl": this.badgeimageurl,
-          "version": this.badgeversion
+          "version": 1
         };
 
         this.ous
         .createBadge(dataOU.token, dataToSendOU).subscribe(
           res => {
-            console.log("Badge created");
-            console.log(res);
+            //console.log("Badge created");
+            //console.log(res);
                 
             fulListOfSmartAwards.push({id: res.id , name: this.badgelabel, description: this.badgedescription, issuer: this.badgeissuer});
-            this.data.badgesList.push({id: res.id , name: this.badgelabel, description: this.badgedescription, issuer: this.badgeissuer});
+            if (this.data.badgesList) {
+              this.data.badgesList.push({id: res.id , name: this.badgelabel, description: this.badgedescription, issuer: this.badgeissuer});
+            }
+            
             
             document.getElementById("closeCreateAwardModalWindow").click();
           },
