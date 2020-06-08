@@ -25,15 +25,15 @@
             <a [routerLink]="['/profiles', element.id]" class="btn btn-primary">View</a> 
             -->
             <button class="btn btn-primary" [routerLink]="['/profiles', element.id]">
-              <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
+              <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
             </button>
 
             <button *ngIf="((element.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))"class="btn btn-primary" [routerLink]="['/profiles', element.id,'edit']">
-              <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+              <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
             </button>
 
             <button *ngIf="((element.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" (click)="openChangePasswordDialog(element.id)">
-              <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.CHANGE_PASSWORD' | translate }}
+              <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.CHANGE_PASSWORD' | translate }}
             </button>
 
           </td>
