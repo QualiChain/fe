@@ -39,7 +39,7 @@
 							
 							
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
-								<a data-toggle="modal" data-target="#myModal" href="#">
+								<a data-toggle="modal" class="btn navbar-item" data-target="#myModal" href="#">
 									<span [hidden]="( (messages | FilterArrayByValue : 'readed' : 'false') <=0)" class="nav-item__badge">
 										<span aria-hidden="true" class="nav-item__badge-count">
 											{{ messages | FilterArrayByValue : 'readed' : 'false'}}
