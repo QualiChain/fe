@@ -16,12 +16,11 @@
       
 
       <mat-card >
+
         <div class="row" *ngIf="loadingLoginSpinner">
-          <div class="col-md-4 col-md-offset-4">          
-            <mat-spinner diameter="200" color="warn"></mat-spinner>
-          </div>
+          <app-qc-spinner></app-qc-spinner>
         </div>
-        
+
         
         <div *ngIf="!loadingLoginSpinner">
           <!--
@@ -48,7 +47,7 @@
               </div>
               
               <!-- password -->
-              <div class="form-group field" [class.has-error]="passwordInput.invalid">  
+              <div class="form-group field" [class.has-error]="passwordInput.invalid" id="loginpasswordQC">  
                 <mat-form-field appearance="fill" class="userlogin-full-width">
                   <mat-label>{{ 'LOGIN.PASSWORD' | translate }}</mat-label>
                   <input  #passwordInput="ngModel" required minlength="3" matInput [(ngModel)]="password" name="password" value="password" [type]="hidePassword ? 'password' : 'text'">
@@ -75,9 +74,7 @@
     <div class="col-md-4 col-md-offset-4">
       <mat-card>
         <div class="row" *ngIf="loadingRequestPasswordSpinner">
-          <div class="col-md-4 col-md-offset-4">          
-            <mat-spinner diameter="200" color="warn"></mat-spinner>
-          </div>
+          <app-qc-spinner></app-qc-spinner>          
         </div>
         <div *ngIf="!loadingRequestPasswordSpinner">
 
