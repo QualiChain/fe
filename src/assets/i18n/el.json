@@ -194,6 +194,16 @@
       }
     }
   },  
+  "JOB_APPLY": {
+    "AVAILABLE": {
+      "TITLE": "Available",
+      "PLACEHOLDER": "Available"
+    },
+    "EXPECTED_SALARY": {
+      "TITLE": "Expected Salary",
+      "PLACEHOLDER": "Expected Salary"
+    }
+  },  
   "CVS": {
     "TITLE": "CVs"
   },
