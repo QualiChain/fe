@@ -5,7 +5,7 @@ import { JobsService } from '../../_services/jobs.service';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
-import { Job, JobSkill } from '../../_models/Job';
+import { Job, JobSkill, Education, WorkHistory } from '../../_models/Job';
 import {formatDate} from '@angular/common';
 
 //import { tap } from 'rxjs/operators';
@@ -96,6 +96,41 @@ export class JobsAddComponent implements OnInit {
       this.dataIn.skillReq.splice(i, 1);
     }
 
+    addEducation() {
+      let newJobEducation = {} as Education;
+      newJobEducation.title = "";
+      newJobEducation.description = ""; 
+      if (!this.dataIn.educationReq)  {
+        this.dataIn.educationReq = [newJobEducation];
+      } else {
+        this.dataIn.educationReq.push(newJobEducation);
+      }
+      
+      
+    }
+
+    removeEducation(i: number) {
+      this.dataIn.educationReq.splice(i, 1);
+    }
+
+    addExperience() {
+      let newExperience = {} as WorkHistory;
+      newExperience.position = "";
+      newExperience.duration = ""; 
+      if (!this.dataIn.workExperienceReq)  {
+        this.dataIn.workExperienceReq = [newExperience];
+      } else {
+        this.dataIn.workExperienceReq.push(newExperience);
+      }
+      
+      
+    }
+
+    removeExperience(i: number) {
+      this.dataIn.workExperienceReq.splice(i, 1);
+    }
+
+
     addJob() {
       let userdata = JSON.parse(localStorage.getItem('userdata'));
       let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en');
@@ -177,7 +212,7 @@ export class JobsAddComponent implements OnInit {
   ngOnInit() {
 
     this.dataIn = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",
-    skillReq: []};
+    skillReq: [], workExperienceReq:[], educationReq:[]};
     this.route.params.subscribe(params => {
       const id = params.id;
       this.mode = "";

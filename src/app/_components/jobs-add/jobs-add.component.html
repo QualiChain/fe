@@ -113,7 +113,7 @@
                         
                         
                         <br/>
-                        <button *ngIf="i>0" class="btn btn-danger" (click) = "removeSkill(i)">
+                        <button *ngIf="i>-1" class="btn btn-danger" (click) = "removeSkill(i)">
                           <i _ngcontent-axy-c0="" class="material-icons"> delete </i>
                           {{ 'JOBS.BUTTON.DELETE_SKILL' | translate }}
                         </button>
@@ -135,7 +135,112 @@
     
               </div>
 
-      
+              <!-- educations -->
+              <div class="form-group">
+                <br/>          
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <span>{{ 'JOBS.REQUIRED_EDUCATIONS' | translate }}</span>
+                  </div>
+                  <div class="card-body">
+  
+                    <div>
+
+                      <div *ngFor="let education of dataIn.educationReq; let i=index" class="panel panel-default">
+                        <div class="card-subtitle">      
+                          <h3>{{ 'JOB.EDUCATION.TITLE' | translate }} {{i + 1}}</h3>                        
+                        </div>
+                      
+                        <!-- title -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.EDUCATION.NAME.LABEL' | translate }}</mat-label>
+                            <input matInput required [(ngModel)]="education.title" name="EducationTitle_{{i}}" value="EducationTitle" placeholder="{{ 'JOB.EDUCATION.NAME.PLACEHOLDER' | translate }}" #educationTitleInput="ngModel">
+                        </mat-form-field>
+                        <br/>
+                        <!-- description -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.EDUCATION.DESCRIPTION.LABEL' | translate }}</mat-label>
+                            <input matInput required [(ngModel)]="education.description" name="EducationDescription_{{i}}" value="EducationDescription" placeholder="{{ 'JOB.EDUCATION.DESCRIPTION.PLACEHOLDER' | translate }}">
+                        </mat-form-field>
+                        <br/>
+                        
+                        
+                        <br/>
+                        <button *ngIf="i>-1" class="btn btn-danger" (click) = "removeEducation(i)">
+                          <i _ngcontent-axy-c0="" class="material-icons"> delete </i>
+                          {{ 'JOBS.BUTTON.DELETE_EDUCATION' | translate }}
+                        </button>
+                        
+
+                      </div>
+                    </div>
+
+                  <div>
+                    <span class="table-add float-right mb-3 mr-2">
+                      <button class="btn btn-primary" (click) = "addEducation()">
+                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                        {{ 'JOBS.BUTTON.ADD_EDUCATION' | translate }}</button>
+                    </span>
+                  </div>
+  
+                   </div>
+                </div>
+    
+              </div>
+
+              <!-- Experience -->
+              <div class="form-group">
+                <br/>          
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <span>{{ 'JOBS.REQUIRED_EXPERIENCES' | translate }}</span>
+                  </div>
+                  <div class="card-body">
+  
+                    <div>
+
+                      <div *ngFor="let experience of dataIn.workExperienceReq; let i=index" class="panel panel-default">
+                        <div class="card-subtitle">      
+                          <h3>{{ 'JOB.EXPERIENCE.TITLE' | translate }} {{i + 1}}</h3>                        
+                        </div>
+                      
+                        <!-- title -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.EXPERIENCE.NAME.LABEL' | translate }}</mat-label>
+                            <input matInput required [(ngModel)]="experience.position" name="ExperiencePosition_{{i}}" value="ExperiencePosition" placeholder="{{ 'JOB.EXPERIENCE.NAME.PLACEHOLDER' | translate }}" #experiencePositionInput="ngModel">
+                        </mat-form-field>
+                        <br/>
+                        <!-- description -->
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.EXPERIENCE.DESCRIPTION.LABEL' | translate }}</mat-label>
+                            <input matInput required [(ngModel)]="experience.comment" name="ExperienceDescription_{{i}}" value="ExperienceDescription" placeholder="{{ 'JOB.EXPERIENCE.DESCRIPTION.PLACEHOLDER' | translate }}">
+                        </mat-form-field>
+                        <br/>
+                        
+                        
+                        <br/>
+                        <button *ngIf="i>-1" class="btn btn-danger" (click) = "removeExperience(i)">
+                          <i _ngcontent-axy-c0="" class="material-icons"> delete </i>
+                          {{ 'JOBS.BUTTON.DELETE_EXPERIENCE' | translate }}
+                        </button>
+                        
+
+                      </div>
+                    </div>
+
+                  <div>
+                    <span class="table-add float-right mb-3 mr-2">
+                      <button class="btn btn-primary" (click) = "addExperience()">
+                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                        {{ 'JOBS.BUTTON.ADD_EXPERIENCE' | translate }}</button>
+                    </span>
+                  </div>
+  
+                   </div>
+                </div>
+    
+              </div>
+              
               <div class="form-group">
                 <button [disabled]="formEditJob.invalid" *ngIf="mode=='Create'" (click) = "addJob()" type="submit" class="btn btn-primary">
                   <i _ngcontent-axy-c0="" class="material-icons"> add </i>

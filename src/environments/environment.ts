@@ -20,7 +20,7 @@ export const environment = {
   profileUrl : 'https://localhost:4000/profile',
   educationManagementUrl : 'https://localhost:4000/educationManagement',
   competencyManagementUrl : 'https://localhost:4000/competencyManagement',
-  cvUrl : 'http://localhost:8000/cv',//'http://qualichain.epu.ntua.gr:5000/CV',
+  cvUrl : 'http://localhost:8000/cv',//'http://knowledgebizvpn.ddns.net:8000/cv',
   jobmatchingUrl : 'http://localhost:8000/jobs',
   jobpostGet : 'https://localhost:8000/jobget',  
   jobpostUrl : 'https://localhost:8000/jobs'

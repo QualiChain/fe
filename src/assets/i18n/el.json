@@ -60,9 +60,15 @@
   "JOBS": {
     "TITLE": "Εργασία",
     "REQUIRED_SKILLS": "Required Skills",
+    "REQUIRED_EDUCATIONS": "Required Degrees",
+    "REQUIRED_EXPERIENCES": "Required Experiences",
     "BUTTON": {
       "ADD_SKILL": "Add Skill",
       "DELETE_SKILL": "Delete Skill",
+      "ADD_EXPERIENCE": "Add Experience",
+      "DELETE_EXPERIENCE": "Delete Experience",
+      "ADD_EDUCATION": "Add Degree",
+      "DELETE_EDUCATION": "Delete Degree",
       "CREATE_JOB": "Create Job",
       "UPDATE_JOB": "Update Job",
       "CANCEL": "Cancel"
@@ -128,6 +134,28 @@
     "END_DATE" : {
       "LABEL": "End date",
       "PLACEHOLDER": "End date"
+    },
+    "EXPERIENCE": {
+      "TITLE": "Work Experience",
+      "NAME" : {
+        "LABEL": "Position",
+        "PLACEHOLDER": "Position title"
+      },
+      "DESCRIPTION" : {
+        "LABEL": "Description",
+        "PLACEHOLDER": "Position description"
+      }
+    },
+    "EDUCATION": {
+      "TITLE": "Degree",
+      "NAME" : {
+        "LABEL": "Title",
+        "PLACEHOLDER": "Degree title"
+      },
+      "DESCRIPTION" : {
+        "LABEL": "Description",
+        "PLACEHOLDER": "Degree description"
+      }
     },
     "SKILL": {
       "TITLE": "Skill",
@@ -325,7 +353,7 @@
   },
   "RECRUITMENT"  : {
     "TITLE": "Προσλήψεις",
-    "SEARCH_LABEL" : "Job name",
+    "SEARCH_LABEL" : "Select a Job",
     "CV-JOB-MATCHING": "CV-JOB Matching",
     "NAME": "Name",
     "ROLE_APPLIED": "Role applied",
