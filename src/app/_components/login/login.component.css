@@ -12,3 +12,11 @@
   #alert-success-request-password {
       color: #3c763d;
 }
+
+::ng-deep #loginpasswordQC .mat-form-field-flex {
+  background-color: white !important;  
+  padding-top: 0.75em;
+  padding-right: 0.75em;
+  padding-bottom: 0px;
+  padding-left: 0em;
+}
