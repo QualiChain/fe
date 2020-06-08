@@ -159,7 +159,10 @@ export class RecruitmentComponent implements OnInit {
           for (const CV of CVs) {
             this.users.find(x => x.id == CV.id);
             const auser =  this.users.find(x => x.id == CV.id);
-            if (auser) CV.name = auser.fullName;
+            if (auser) {
+              CV.name = auser.fullName;
+              //CV.CurrentRole = auser.role;
+            }
              this.recruits.push(CV);
           }
 

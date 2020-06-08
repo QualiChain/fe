@@ -14,6 +14,20 @@ export class JobSkill {
     proficiencyLevel: string;
   }  
 
+  export class WorkHistory {
+    position: string;
+    duration: string;
+    comment: string;
+  }  
+
+  export class Education {
+    title: string;
+    from: string;
+    to: string;
+    organisation: string;
+    description: string;
+  }  
+
   export class Job {
     id: string;
     creator_id?: number;
@@ -24,6 +38,8 @@ export class JobSkill {
     jobLocation: String;
     // SkillReq?: string [];
     skillReq: JobSkill [];
+    workExperienceReq: WorkHistory[];
+    educationReq: Education[];
     startDate: string;
     endDate: string;
    /* id: number;

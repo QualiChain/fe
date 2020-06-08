@@ -80,7 +80,7 @@ export class JobsGetComponent implements OnInit {
   
   ngOnInit() {
 
-    this.jobData = {id: null, creator_id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",skillReq: []};
+    this.jobData = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",skillReq: [],workExperienceReq:[],educationReq:[]};
 
     this.route.params.subscribe(params => {
 

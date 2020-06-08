@@ -26,7 +26,7 @@ export const environment = {
   //jobmatchingUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',//'http://localhost:8000/jobs',
   jobmatchingUrl : 'proxyKBZ/jobs',
   jobpostGet : 'https://localhost:8000/jobget',  
-  jobpostUrl : 'https://localhost:8000/jobs'
+  jobpostUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs'
 };
 
 /*
