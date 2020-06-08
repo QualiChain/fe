@@ -6,7 +6,7 @@
         <button *ngIf="(currentUser.role.toLowerCase()=='teacher' && jobData.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && jobData.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
             <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
           </button>
-          <button *ngIf="!userHasAnApply" class="btn btn-inform" (click)="openApllyJobDialog(jobData.id, jobData)">
+          <button *ngIf="!userHasAnApply" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">
             <i _ngcontent-axy-c0="" class="material-icons"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
           </button>
           <button *ngIf="userHasAnApply" class="btn btn-danger" (click)="deleteThisApply(jobData.id, currentUser.id, -1)">
