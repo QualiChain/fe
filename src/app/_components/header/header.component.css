@@ -103,3 +103,8 @@
 #block-languageswitcher .links .el a {
     background-image: url('/assets/img/flags/el.png');
 }
+
+.topmenubuttonoption button {
+    min-width: 46px;
+    min-height: 34px;
+}
