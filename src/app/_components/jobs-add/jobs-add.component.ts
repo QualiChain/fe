@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import { Job, JobSkill, Education, WorkHistory } from '../../_models/Job';
 import {formatDate} from '@angular/common';
+import { AuthService } from '../../_services';
 
 //import { tap } from 'rxjs/operators';
 
@@ -24,7 +25,9 @@ export class JobsAddComponent implements OnInit {
     mode: string = '';
     dataIn : Job;
 
-    constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private js: JobsService, public dialog: MatDialog, private translate: TranslateService) {
+    constructor(      
+      private authservice: AuthService,
+      private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private js: JobsService, public dialog: MatDialog, private translate: TranslateService) {
       this.createForm();      
     }
 
@@ -136,6 +139,9 @@ export class JobsAddComponent implements OnInit {
       let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en');
      
       let dataToSend = this.dataIn;
+      dataToSend.creator_id =  this.currentUser.id;
+
+
       delete dataToSend.id;
 /*	  
      let dataToSend = {
@@ -210,6 +216,8 @@ export class JobsAddComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
     this.dataIn = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",
     skillReq: [], workExperienceReq:[], educationReq:[]};
