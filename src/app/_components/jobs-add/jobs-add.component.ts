@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import { Job, JobSkill, Education, WorkHistory } from '../../_models/Job';
 import {formatDate} from '@angular/common';
 import { AuthService } from '../../_services';
+import User from '../../_models/user';
 
 //import { tap } from 'rxjs/operators';
 
@@ -18,6 +19,7 @@ import { AuthService } from '../../_services';
 })
 export class JobsAddComponent implements OnInit {
 
+    currentUser: User;  
     angForm: FormGroup;
     result: string = '';
     control: FormArray;
@@ -28,7 +30,9 @@ export class JobsAddComponent implements OnInit {
     constructor(      
       private authservice: AuthService,
       private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private js: JobsService, public dialog: MatDialog, private translate: TranslateService) {
-      this.createForm();      
+
+        this.authservice.currentUser.subscribe(x => this.currentUser = x);
+        this.createForm();      
     }
 
     confirmDialog(): void {
@@ -156,6 +160,7 @@ export class JobsAddComponent implements OnInit {
         "skills": this.dataIn.skills
     };
 */
+
       this.js.addJob(dataToSend).subscribe(
         res => {
           //console.log("Job created");
@@ -217,7 +222,12 @@ export class JobsAddComponent implements OnInit {
 
   ngOnInit() {
 
-    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+    
+    if(!this.currentUser) {
+      //if(!this.currentUser.hasOwnProperty('id')){
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+      }  
+    
 
     this.dataIn = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",
     skillReq: [], workExperienceReq:[], educationReq:[]};
