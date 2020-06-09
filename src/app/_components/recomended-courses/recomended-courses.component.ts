@@ -46,7 +46,14 @@ export class RecomendedCoursesComponent implements OnInit {
             //console.log(datatCVToSend);
             let skillsCV = [];
             dataCVs['skills'].forEach(element => {
-              skillsCV.push({"SkillLabel":element.label,"proficiencyLevel":element.proficiencyLevel,"SkillComment":element.comment});
+              console.log(element);
+              skillsCV.push({
+                "label":element.label,
+                "comment":element.comment,
+                "proficiencyLevel":element.proficiencyLevel, 
+                "priorityLevel": element.priorityLevel,                
+                "uri": element.uri, 
+                "id": element.id});
             });
             //console.log(skillsCV);
 
@@ -69,7 +76,7 @@ export class RecomendedCoursesComponent implements OnInit {
                 "targetSector": dataCVs['targetSector'],
                 "expectedSalary": "",
                 "Description": dataCVs['description'],
-                "Skills": skillsCV,
+                "skills": skillsCV,
                 "workHistory": workHistoryCV,
                 "Education": educationCV
               },

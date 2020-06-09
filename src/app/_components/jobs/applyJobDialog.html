@@ -12,14 +12,14 @@
     -->
     <!-- available label -->
     <mat-form-field class="apply-job-full-width">
-      <mat-label>Available</mat-label>
-      <input matInput required [(ngModel)]="available" name="available" value="available" placeholder="Available">
+      <mat-label>{{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }}</mat-label>
+      <input matInput required [(ngModel)]="available" name="available" value="available" placeholder="{{ 'JOB_APPLY.AVAILABLE.PLACEHOLDER' | translate }}">
     </mat-form-field>        
     <br/>
     <!-- expsalary label -->
     <mat-form-field class="apply-job-full-width">
-      <mat-label>Expsalary</mat-label>
-      <input matInput required [(ngModel)]="expsalary" name="expsalary" value="expsalary" placeholder="Expsalary">
+      <mat-label>{{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }}</mat-label>
+      <input matInput required [(ngModel)]="expsalary" name="expsalary" value="expsalary" placeholder="{{ 'JOB_APPLY.EXPECTED_SALARY.PLACEHOLDER' | translate }}">
     </mat-form-field>        
     <br/>
     <!-- score label 
