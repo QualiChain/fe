@@ -74,7 +74,7 @@
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
 
               
-                <div *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="col col-lg-2">
+                <div *ngIf="canViewCV" class="col col-lg-2">
                   <button class="btn btn-primary" data-toggle="modal" data-target="#myModalCV">  
                     <i _ngcontent-axy-c0="" class="material-icons"> account_box </i> {{ 'PROFILES.CV' | translate }}
                   </button>
@@ -344,8 +344,9 @@
       <form  (ngSubmit)="onSubmit()">
 
         <div class="form-group field">
-          <label>Title</label>
-          <input 
+          <label>Title:</label>
+          <span *ngIf="!canEditCV"> {{label}}</span>
+          <input *ngIf="canEditCV"
             type="text" 
             name="label" 
             [(ngModel)]="label"
@@ -358,13 +359,15 @@
         </div>
       
         <div class="form-group field">
-          <label>Description</label>
-          <textarea type="text" [(ngModel)]="description" name="description"  class="form-control input" placeholder="Description" required #descriptionInput="ngModel"></textarea>
+          <label>Description:</label>
+          <span *ngIf="!canEditCV"> {{description}}</span>
+          <textarea *ngIf="canEditCV" type="text" [(ngModel)]="description" name="description"  class="form-control input" placeholder="Description" required #descriptionInput="ngModel"></textarea>
         </div>
 
         <div class="form-group field">
-          <label>Target Sector</label>
-          <input 
+          <label>Target Sector:</label>
+          <span *ngIf="!canEditCV"> {{targetSector}}</span>
+          <input *ngIf="canEditCV"
             type="text" 
             [(ngModel)]="targetSector"
             name="targetSector" 
@@ -375,144 +378,150 @@
             #targetSectorInput="ngModel"
             >          
         </div>  
-<!--
-        <div class="form-group field">
-          <label>Expected Salary</label>
-          <input 
-            type="number"
-            [(ngModel)]="expectedSalary" 
-            name="expectedSalary" 
-            class="form-control input" 
-            placeholder="Expected Salary"           
-            required
-            minlength="3"
-            #expectedSalaryInput="ngModel"
-            >          
-        </div>
 
-        <div class="form-group field">
-          <label>Job Description</label>
-          <textarea type="text" [(ngModel)]="JobDescription" name="JobDescription"  class="form-control input" placeholder="Job description" required #JobDescriptionInput="ngModel"></textarea>
-        </div>
-      -->
         <div class="card m-3">
-          <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> timeline </i> Skills</h5>
-          <div class="card-body">
+            <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> timeline </i> Skills</h5>
+            <div *ngIf="canEditCV" class="card-body">
               <div class="form-row">
-                  <div class="form-group">                      
-                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">
-                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
-                        {{ 'BUTTON.ADD' | translate }}
-                      </a>                                            
-                  </div>
+                <div class="form-group">                      
+                  <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">
+                    <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                    {{ 'BUTTON.ADD' | translate }}
+                  </a>                                            
+                </div>
               </div>
-          </div>          
-          <div *ngFor="let skillItem of t.controls; let i = index" class="list-group list-group-flush">
+            </div>
+
+          <div *ngFor="let skillItem of t.controls; let i = index" class="list-group list-group-flush card-body">
               <div class="list-group-item">
-                  <h5 class="card-title">Skill {{i + 1}}</h5>
-                  <a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'skillitem')">
-                    <i _ngcontent-axy-c0="" class="material-icons"> delete </i>
-                    {{ 'BUTTON.DELETE' | translate }}
-                  </a> 
-                  <div [formGroup]="skillItem" class="form-row">
+                <div>                  
+                  <h5 class="card-title">Skill {{i + 1}}
+                    <a *ngIf="canEditCV" class="btn btn-danger float-right" ng-href="" (click)="deleteFormGroupItem($event, i, 'skillitem')">
+                      <i _ngcontent-axy-c0="" class="material-icons small"> delete </i>
+                      {{ 'BUTTON.DELETE' | translate }}
+                    </a> 
+                  </h5>
+                </div>  
+
+                <div [formGroup]="skillItem" class="form-row">
                     <div class="form-group col-6">
-                      <label>SkillLabel</label>
-                      <input type="text" formControlName="label" class="form-control" />                          
+                      <label>SkillLabel:</label>
+                      <span *ngIf="!canEditCV"> {{skillsCV[i].label}}</span>
+                      <input *ngIf="canEditCV" type="text" formControlName="label" class="form-control" />                          
                     </div>
                     <div class="form-group col-6">
-                      <label>ProficiencyLevel</label>
-                      <input type="text" formControlName="proficiencyLevel" class="form-control" />
+                      <label>ProficiencyLevel:</label>
+                      <span *ngIf="!canEditCV"> {{skillsCV[i].proficiencyLevel}}</span>
+                      <input *ngIf="canEditCV" type="text" formControlName="proficiencyLevel" class="form-control" />
                     </div>
                     <div class="form-group col-6">
-                      <label>SkillComment</label>
-                      <input type="text" formControlName="comment" class="form-control" />
+                      <label>SkillComment:</label>
+                      <span *ngIf="!canEditCV"> {{skillsCV[i].comment}}</span>
+                      <input *ngIf="canEditCV" type="text" formControlName="comment" class="form-control" />
                     </div>
                   </div>
               </div>
           </div>
-          
         </div> 
-        
+        <br/>
         <div class="card m-3">
           <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> work </i> Work History</h5>
-          <div class="card-body">
+          <div *ngIf="canEditCV" class="card-body">
               <div class="form-row">
                   <div class="form-group">                      
-                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'workitem')">
+                      <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'workitem')">
                         <i _ngcontent-axy-c0="" class="material-icons"> add </i>
                         {{ 'BUTTON.ADD' | translate }}
                       </a>            
                   </div>
               </div>
-          </div>          
-          <div *ngFor="let workItem of w.controls; let i = index" class="list-group list-group-flush">
+          </div> 
+
+          <div *ngFor="let workItem of w.controls; let i = index" class="list-group list-group-flush card-body">
               <div class="list-group-item">
-                  <h5 class="card-title">Work {{i + 1}}</h5>
-                  <a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'workitem')">
-                    <i _ngcontent-axy-c0="" class="material-icons"> delete </i>                  
-                    {{ 'BUTTON.DELETE' | translate }}
-                  </a> 
+                <div>
+                  <h5 class="card-title">Work {{i + 1}}
+                    <a *ngIf="canEditCV" class="btn btn-danger float-right" ng-href="" (click)="deleteFormGroupItem($event, i, 'workitem')">
+                      <i _ngcontent-axy-c0="" class="material-icons small"> delete </i>                  
+                      {{ 'BUTTON.DELETE' | translate }}
+                    </a> 
+                  </h5>
+                </div>
+                  
                   <div [formGroup]="workItem" class="form-row">
                     <div class="form-group col-6">
-                      <label>Position</label>
-                      <input type="text" formControlName="position" class="form-control" />                          
+                      <label>Position:</label>
+                      <span *ngIf="!canEditCV"> {{workHistoryCV[i].position}}</span>
+                      <input *ngIf="canEditCV" type="text" formControlName="position" class="form-control" />                          
                     </div>
                     <div class="form-group col-6">
-                      <label>From</label>                      
-                      <input type="date" formControlName="from" class="form-control" />
+                      <label>From:</label>           
+                      <span *ngIf="!canEditCV"> {{workHistoryCV[i].from}}</span>           
+                      <input *ngIf="canEditCV" type="date" formControlName="from" class="form-control" />
                     </div>
                     <div class="form-group col-6">
-                      <label>To</label>
-                      <input type="date" formControlName="to" class="form-control" />
+                      <label>To:</label>
+                      <span *ngIf="!canEditCV"> {{workHistoryCV[i].to}}</span>           
+                      <input *ngIf="canEditCV" type="date" formControlName="to" class="form-control" />
+                    </div>
+                    <div class="form-group col-6">
+                      <label>Employer:</label>
+                      <span *ngIf="!canEditCV"> {{workHistoryCV[i].employer}}</span>           
+                      <input *ngIf="canEditCV" type="text" formControlName="employer" class="form-control" />
+                    </div>
                   </div>
-                  <div class="form-group col-6">
-                    <label>Employer</label>
-                    <input type="text" formControlName="employer" class="form-control" />
-                </div>
-              </div>
             </div>
           </div>
         </div>          
-
+        <br/>
         <div class="card m-3">
           <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> school </i> Education History</h5>
-          <div class="card-body">
+          <div *ngIf="canEditCV" class="card-body">
               <div class="form-row">
                   <div class="form-group">                      
-                      <a class="btn btn-primary" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">
+                      <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">
                         <i _ngcontent-axy-c0="" class="material-icons"> add </i>
                         {{ 'BUTTON.ADD' | translate }}
                       </a>
                   </div>
               </div>
           </div>          
-          <div *ngFor="let educationItem of e.controls; let i = index" class="list-group list-group-flush">
+          <div *ngFor="let educationItem of e.controls; let i = index" class="list-group list-group-flush card-body">
             <div class="list-group-item">
-                <h5 class="card-title">Education {{i + 1}}</h5>
-                <a class="btn btn-danger" ng-href="" (click)="deleteFormGroupItem($event, i, 'educationitem')">
-                  <i _ngcontent-axy-c0="" class="material-icons"> delete </i>                  
-                  {{ 'BUTTON.DELETE' | translate }}
-                </a> 
+              <div>
+                <h5 class="card-title">Education {{i + 1}}
+                  <a *ngIf="canEditCV" class="btn btn-danger float-right" ng-href="" (click)="deleteFormGroupItem($event, i, 'educationitem')">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> delete </i>
+                    {{ 'BUTTON.DELETE' | translate }}
+                  </a> 
+                </h5>
+              </div>
+                
                 <div [formGroup]="educationItem" class="form-row">
                   <div class="form-group col-6">
-                    <label>Title</label>
-                    <input type="text" formControlName="title" class="form-control" />                          
+                    <label>Title:</label>
+                    <span *ngIf="!canEditCV"> {{educationHistoryCV[i].title}}</span>
+                    <input *ngIf="canEditCV" type="text" formControlName="title" class="form-control" />                          
                   </div>
                   <div class="form-group col-6">
-                    <label>From</label>
-                    <input type="date" formControlName="from" class="form-control" />
+                    <label>From:</label>
+                    <span *ngIf="!canEditCV"> {{educationHistoryCV[i].from}}</span>
+                    <input *ngIf="canEditCV" type="date" formControlName="from" class="form-control" />
                   </div>
                   <div class="form-group col-6">
-                    <label>To</label>
-                    <input type="date" formControlName="to" class="form-control" />
+                    <label>To:</label>
+                    <span *ngIf="!canEditCV"> {{educationHistoryCV[i].to}}</span>
+                    <input *ngIf="canEditCV" type="date" formControlName="to" class="form-control" />
                   </div>
                   <div class="form-group col-6">
-                    <label>Organisation</label>
-                    <input type="text" formControlName="organisation" class="form-control" />
+                    <label>Organisation:</label>
+                    <span *ngIf="!canEditCV"> {{educationHistoryCV[i].organisation}}</span>
+                    <input *ngIf="canEditCV" type="text" formControlName="organisation" class="form-control" />
                   </div>
                   <div class="form-group col-6">
-                    <label>Description</label>
-                    <input type="text" formControlName="description" class="form-control" />
+                    <label>Description:</label>
+                    <span *ngIf="!canEditCV"> {{educationHistoryCV[i].description}}</span>
+                    <input *ngIf="canEditCV" type="text" formControlName="description" class="form-control" />
                   </div>
                 </div>
               </div>
@@ -522,7 +531,7 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-success"  (click)="onSubmit()">
+      <button *ngIf="canEditCV" type="button" class="btn btn-success"  (click)="onSubmit()">
         <i _ngcontent-axy-c0="" class="material-icons"> save </i>
         {{ 'BUTTON.SAVE' | translate }}
       </button>

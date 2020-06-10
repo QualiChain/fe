@@ -33,3 +33,11 @@ div.cv_add_course {
 .profileLabel {
     font-weight: bold;
 }
+
+.float-right {
+    float: right!important;
+}
+
+.card-header {
+    margin-top: 0;
+}
