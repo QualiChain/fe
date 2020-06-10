@@ -46,7 +46,7 @@ export class RecomendedCoursesComponent implements OnInit {
             //console.log(datatCVToSend);
             let skillsCV = [];
             dataCVs['skills'].forEach(element => {
-              console.log(element);
+              //console.log(element);
               skillsCV.push({
                 "label":element.label,
                 "comment":element.comment,

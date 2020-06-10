@@ -87,6 +87,11 @@ export class ProfilesViewComponent implements OnInit {
   filteredSkills: Observable<string[]>;
   skills: string[] = ['Java'];
   allSkills: string[] = ['Angular', 'Java', 'Nodejs', 'Pyhton', 'C#'];
+  canViewCV: boolean = false;
+  canEditCV: boolean = false;
+  skillsCV: any = [];
+  workHistoryCV: any = [];
+  educationHistoryCV: any = [];
 
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
@@ -161,6 +166,7 @@ export class ProfilesViewComponent implements OnInit {
     //if(!this.currentUser.hasOwnProperty('id')){
       this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:'', gender:''};
     }
+
 
     this.userdata= {
       id: 0,
@@ -261,7 +267,17 @@ export class ProfilesViewComponent implements OnInit {
       //const id = +params.id;
       if (this.userId) {
         //this.userId=String(id);
+
+        if ((this.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
+          this.canEditCV = true;
+          this.canViewCV = true;
+        }
+        else if (this.currentUser.role.toLowerCase()=='recruiter') {
+          this.canViewCV = true;
+        }
         
+        
+
         this.us
         .getUser(this.userId).subscribe(
           data => {
@@ -325,16 +341,20 @@ getUserCV(id) {
   this.cvs
   .getCV(id)
   .subscribe((data: any) => {
-    console.log(id);  
-    console.log(data);
+    //console.log(id);  
+    //console.log(data);
     //if (data.length>0) {
       //let posCV = data.length-1;
       this.label = data.label;
       this.description = data.description;
-      this.targetSector = data.target_sector;
+      this.targetSector = data.targetSector;
       //this.expectedSalary = data.application.expectedSalary;
       //this.JobDescription = data.description;
-      data.skills.forEach(element => {
+      this.skillsCV = data.skills;
+      this.workHistoryCV = data.workHistory;
+      this.educationHistoryCV = data.education;
+
+       data.skills.forEach(element => {
         this.t.push(this.formBuilder.group({
           label: [element.label, [Validators.required]],
           proficiencyLevel: [element.proficiencyLevel, Validators.required],
@@ -683,9 +703,9 @@ async generatePdf(action = 'open') {
   addFormGroupItem(e, type) {
     if (type=='skillitem') {
       this.t.push(this.formBuilder.group({
-        SkillLabel: ['', [Validators.required]],
+        label: ['', [Validators.required]],
         proficiencyLevel: ['', Validators.required],
-        SkillComment: ['', [Validators.required]],      
+        comment: ['', [Validators.required]],      
       }));
     }
     else if (type=='workitem') {
@@ -712,12 +732,14 @@ async generatePdf(action = 'open') {
   PersonURI: string;
   title: string;
   label: string;
+  proficiencyLevel: string;
+  comment: string;
   description: string;
   targetSector: string;
   //expectedSalary: string;
   //JobDescription: string;
   onSubmit() {
-    console.log("onSubmit");
+    //console.log("onSubmit");
     //this.submitted = true;
 
     // stop here if form is invalid
