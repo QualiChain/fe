@@ -47,7 +47,7 @@ const routes: Routes = [
    path: 'jobs',
    component: JobsComponent,
    canActivate: [AuthGuard],
-   data: { roles: [Role.student, Role.recruiter, Role.admin, Role.administrator ] }
+   data: { roles: [Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator ] }
   },
   {
     path: 'jobs/add',
@@ -120,7 +120,7 @@ const routes: Routes = [
     path: 'courses',
     component: CoursesComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.teacher, Role.admin, Role.administrator] }    
+    data: { roles: [Role.student, Role.employee, Role.teacher, Role.admin, Role.administrator] }    
   },
   {
     path: 'courses/add',
@@ -132,7 +132,7 @@ const routes: Routes = [
     path: 'courses/:id',
     component: CoursesGetComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.teacher, Role.admin, Role.administrator] }    
+    data: { roles: [Role.student, Role.employee, Role.teacher, Role.admin, Role.administrator] }    
   },       
   {
     path: 'courses/:id/edit',
@@ -150,19 +150,19 @@ const routes: Routes = [
     path: 'profiles/:id/recomended/courses',
     component: RecomendedCoursesComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.admin, Role.administrator] }    
+    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
   },
   {
     path: 'profiles/:id/recomended/jobs',
     component: RecomendedJobsComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.admin, Role.administrator] }    
+    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
   },
   {
     path: 'profiles/:id/recomended/skills',
     component: RecomendedSkillsComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.admin, Role.administrator] }    
+    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
   },
   {
     path: 'access_denied',
