@@ -331,7 +331,7 @@ getUserCV(id) {
       //let posCV = data.length-1;
       this.label = data.label;
       this.description = data.description;
-      this.targetSector = data.target_sector;
+      this.targetSector = data.targetSector;
       //this.expectedSalary = data.application.expectedSalary;
       //this.JobDescription = data.description;
       data.skills.forEach(element => {
