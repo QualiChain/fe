@@ -18,6 +18,7 @@ import { Role } from '../../_models/role';
 import { interval } from 'rxjs';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { createChangePasswordDialog_modal } from '../../_components/profiles/profiles.component';
+import { PilotsService, HEADER_MENU } from '../../_services/pilots.services';
 
 
 export interface OPTIONS_MENU {
@@ -51,18 +52,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
   currentUser: User;
   route: string;
-  userdata: {};
+  userdata: any = {};
   loadingNotificationSpinnerid: number = null;
   //messages: any[] = [];
 
-  ;
+  menuOptionsPerPilot: HEADER_MENU;
 
   messages: messageType[]=[];
   subscription: Subscription;
 
   menuOptions =ELEMENT_DATA;
 
+
   constructor(
+    private ps: PilotsService,
     public createChangePasswordDialog: MatDialog,
     private appcomponent: AppComponent,
     private authservice: AuthService,
@@ -158,6 +161,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    
+    //todo , replace this by the pilotid of the user
+    this.menuOptionsPerPilot = this.ps.getPilot(2);
+    //console.log(this.menuOptionsPerPilot);
 
     // Read item:
     let userdata = JSON.parse(localStorage.getItem('userdata'));
@@ -179,7 +186,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       
     }
     else {
-      this.userdata = {'authenticated': false};
+      this.userdata = {'authenticated': false ,'role': 'anonymous'};
     }
     
   }

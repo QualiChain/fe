@@ -78,6 +78,7 @@ import { UploadService } from './_services/upload.service';
 import { CoursesService } from './_services/courses.service';
 import { RecomendationsService } from './_services/recomendations.service';
 import { CustomConfigEnvironmentDataService } from './_services/customConfigEnvironmentData.service';
+import { PilotsService } from './_services/pilots.services';
 /*custom pipes*/
 import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
@@ -257,7 +258,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     CustomMaterialModule
   ],
   exports: [materialModules],
-  providers: [ DatePipe, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, 
+  providers: [ PilotsService, DatePipe, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, 
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {
       provide: APP_INITIALIZER,
