@@ -382,8 +382,10 @@
     "NO_SMART_BADGES_AVAILABE" : "No smart awards available",
     "SELECTED_BADGES": "Selected Badges",
     "BUTTON" : {
+      "AWARD": "Award",
       "UNASSIGN_AWARD": "Unassing",
-      "ASSIGN_AWARD": "Assign"
+      "ASSIGN_AWARD": "Assign",
+      "VALIDATE_AWARD": "Validate"
     }
   },
   "ACCESS_DENIED": {

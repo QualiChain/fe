@@ -153,6 +153,7 @@ export class AwardSmartBadgeComponent implements OnInit {
    // const dialogRef = this.awardDialog.open(awardDialog_modal);
 
     const dialogRef = this.awardDialog.open(awardDialog_modal, {
+      disableClose: true,
       width: '550px',
       data: {userId: userId, element: element, source: 'award_list'}
     });
@@ -165,6 +166,7 @@ export class AwardSmartBadgeComponent implements OnInit {
   openCreateAwardDialog() {
 
     const dialogRef = this.createAwardDialog.open(createAwardDialog_modal, {
+      disableClose: true,
       width: '550px',
       data: {}
     });
@@ -303,6 +305,7 @@ export class awardDialog_modal implements OnInit {
   fullDataSmartBadgesByUser = [];
   lodingspinnerid: number = null;
   userDataRec: any = [];
+  currentlistOfBadges: any = [];
 
   constructor(
     private router: Router,
@@ -321,6 +324,8 @@ export class awardDialog_modal implements OnInit {
     
     
     this.listOfSmartAwards=[];
+
+    this.currentlistOfBadges = [];
 
     this.ous
     .getOUToken()
@@ -341,12 +346,49 @@ export class awardDialog_modal implements OnInit {
               name: element.title,
               description: element.description,
               issuer: element.issuerid,
-              imageurl: element.imageurl
+              imageurl: element.imageurl,
+              assigned: false,
+              status: '',
+              awardedId: ''
               }
             );
+
           });
 
-      });
+          this.ous
+          .getAssertionsList(dataOU.token)
+          .subscribe((dataAssertions: any) => {          
+            //console.log(dataAssertions);
+            //this.listOfSmartAwards = dataSBOU.badges;
+            dataAssertions.items.forEach((element, index) => {
+              if (element.recipientid==this.data.userId) {
+                //console.log(element);
+                this.currentlistOfBadges.push({'badgeid':element});
+
+                this.listOfSmartAwards.forEach((elementBadge, indexBadge) => {
+                  if (elementBadge.id==element.badgeid) {
+                    //console.log(indexBadge+"--"+elementBadge.id+"--"+element.badgeid+"---"+element.status);
+                    this.listOfSmartAwards[indexBadge].status = element.status;
+                    this.listOfSmartAwards[indexBadge].awardedId = element.id;
+                    if (element.status=='pending') {
+                      this.listOfSmartAwards[indexBadge].assigned = true;
+                    }
+                    
+                  }
+                });
+
+              }
+              
+            });
+            
+            //console.log(this.listOfSmartAwards);
+    
+          });
+
+        });
+
+
+
 
       }
       
@@ -423,14 +465,15 @@ export class awardDialog_modal implements OnInit {
 
   
   updateSmartAwardStatusOU(smartBadgeId, posI, smartAwardBadgeData, action) {
-    console.log(smartAwardBadgeData);
-    console.log(this.data);
-    console.log(action);
+    //console.log(smartAwardBadgeData);
+    //console.log(this.data);
+    //console.log(action);
     
     this.lodingspinnerid = smartBadgeId;
     if (action=='delete') {
 
-      let dataToSendRevoke = {'id': 17};
+      //let dataToSendRevoke = {'id': 17};
+      let dataToSendRevoke = {id: smartAwardBadgeData.awardedId, revokedreason: 'not valid'};
 
       this.ous
       .getOUToken()
@@ -440,15 +483,16 @@ export class awardDialog_modal implements OnInit {
           this.ous
           .revokeBadgeIssuance(dataOU.token, dataToSendRevoke)
           .subscribe((dataSBOU: any) => {
-            
             console.log(dataSBOU);
-            
             //falta revisar como cambiarlo del listado
-            this.lodingspinnerid = null;
-
+            smartAwardBadgeData.status = 'revoked';
             
-  
-        });
+            this.lodingspinnerid = null;
+          },
+          error => {
+            console.log("error revoking badge");
+            this.lodingspinnerid = null;
+          });
   
         }
         
@@ -478,7 +522,8 @@ export class awardDialog_modal implements OnInit {
           .createBadgeIssuance(dataOU.token, dataToSend)
           .subscribe((dataSBOU: any) => {
             
-            console.log(dataSBOU);
+            //console.log(dataSBOU);
+            smartAwardBadgeData.status = 'pending';
             
             let dataToSend2 = {"id" : dataSBOU.id}
 
@@ -486,13 +531,24 @@ export class awardDialog_modal implements OnInit {
             .confirmBadgeIssuance(dataOU.token, dataToSend2)
             .subscribe((dataSBOU2: any) => {
               
-              console.log(dataSBOU2);          
+              console.log(dataSBOU2);     
+              this.lodingspinnerid = null;
+              smartAwardBadgeData.status = 'issued';
     
-          });
+            },
+            error => {
+              console.log("error validating badge");
+              this.lodingspinnerid = null;
+            });
             
          
   
-        });
+        },
+        error => {
+          console.log("error creating bage issuance badge");
+          this.lodingspinnerid = null;
+        }
+        );
   
         }
         
@@ -503,6 +559,41 @@ export class awardDialog_modal implements OnInit {
       }
       );       
          
+
+    }
+    else if (action=='validate') {
+      console.log(smartAwardBadgeData);
+      
+      this.ous
+      .getOUToken()
+      .subscribe((
+        dataOU: any) => {
+        if (dataOU.token) {
+
+
+            let dataToSend2 = {"id" : smartAwardBadgeData.awardedId}
+
+            this.ous
+            .confirmBadgeIssuance(dataOU.token, dataToSend2)
+            .subscribe((dataSBOU2: any) => {
+              
+              //console.log(dataSBOU2);        
+              smartAwardBadgeData.status = 'issued';  
+              this.lodingspinnerid = null;
+
+            },
+            error => {
+              console.log("error validating badge");
+              this.lodingspinnerid = null;
+            });
+
+
+        } 
+      },
+      error => {
+        console.log("error recovering token");
+      }
+      );             
 
     }
     
@@ -599,9 +690,9 @@ export class awardDialog_modal implements OnInit {
 
   //openCreateAwardDialog() {
   openCreateAwardDialogInModal() {
-    //console.log("ssssssssss");
 
     const dialogRef = this.createAwardDialog.open(createAwardDialog_modal, {
+      disableClose: true,
       width: '550px',
       data: {badgesList:this.listOfSmartAwards}
     });
