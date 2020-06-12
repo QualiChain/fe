@@ -30,6 +30,7 @@ You must copy and rename the file /src/assets/config.tempate.json as /src/assets
             "createNewBadgeIssuance": "qualichain/assertions/create",
             "confirmBadgeIssuance": "qualichain/assertions/issue",
             "revokeBadgeIssuance": "qualichain/assertions/revoke",
+            "assertionsList": "qualichain/assertions/list",
             "getRecipients": "qualichain/recipients/list",
             "getBagdes": "qualichain/badges/list"
         }

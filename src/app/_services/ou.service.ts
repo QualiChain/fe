@@ -54,6 +54,7 @@ export class OUService {
               "createNewBadgeIssuance": "qualichain/assertions/create",
               "confirmBadgeIssuance": "qualichain/assertions/issue",
               "revokeBadgeIssuance": "qualichain/assertions/revoke",
+              "assertionsList": "qualichain/assertions/list",
               "getRecipients": "qualichain/recipients/list",
               "getBagdes": "qualichain/badges/list"
           }
@@ -245,7 +246,27 @@ export class OUService {
        })
     )
   }
+
   
+  getAssertionsList(token: string) {    
+
+    //funtion used just to avoid testing errors as this is just a temporal service 
+    if (!this.cs.configData)
+    {
+      this.cs.configData = this.getDefaultData()
+    }
+
+    let endPoint = "/"+this.cs.configData.OU_API_DATA.apis.assertionsList;
+    return this.httpClient.get(`${endPoint}`,{headers: this.createOUAuthorizationHeader(token)}).
+    pipe(
+       map((data: any) => {
+         //console.log(data);
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }  
 
 }
 
