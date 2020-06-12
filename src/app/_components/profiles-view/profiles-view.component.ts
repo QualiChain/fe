@@ -683,9 +683,9 @@ async generatePdf(action = 'open') {
   addFormGroupItem(e, type) {
     if (type=='skillitem') {
       this.t.push(this.formBuilder.group({
-        SkillLabel: ['', [Validators.required]],
+        label: ['', [Validators.required]],
         proficiencyLevel: ['', Validators.required],
-        SkillComment: ['', [Validators.required]],      
+        comment: ['', [Validators.required]],      
       }));
     }
     else if (type=='workitem') {
