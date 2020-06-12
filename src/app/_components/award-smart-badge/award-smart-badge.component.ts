@@ -54,8 +54,8 @@ export class AwardSmartBadgeComponent implements OnInit {
     private fb: FormBuilder, private route: ActivatedRoute, public awardDialog: MatDialog, public createAwardDialog: MatDialog) { }
 
 
-  displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
-  //displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'action'];
+  //displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
+  displayedColumns: string[] = ['id', 'student', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource<listOfStudents>([]);
