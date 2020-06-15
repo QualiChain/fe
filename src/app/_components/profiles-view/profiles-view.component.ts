@@ -26,6 +26,8 @@ import User from '../../_models/user';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { awardDialog_modal } from '../../_components/award-smart-badge/award-smart-badge.component';
 import { OUService } from '../../_services/ou.service';
+import { CoursesService } from '../../_services/courses.service';
+import Course from '../../_models/course';
 
 @Component({
   selector: 'app-profiles-view',
@@ -60,7 +62,9 @@ export class ProfilesViewComponent implements OnInit {
 */
   years: {};
   currentJustify: string;
-  listOfCoursesByUser: {};
+  //listOfCoursesByUser: {};
+  listOfCoursesByUser: Course[]=[];
+
   //selectedCourse: {};
   emptyCourseSelected: {
     id: number, 
@@ -102,6 +106,7 @@ export class ProfilesViewComponent implements OnInit {
   
   constructor(
     private ous: OUService,
+    private cs: CoursesService,
     private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
@@ -238,7 +243,7 @@ export class ProfilesViewComponent implements OnInit {
         {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', university:'', role:'Recruiter'}
       ];
       */
-
+      /*
       let listOfCoursesByUser = [
         {id: 1, title: "An Introduction to Interactive Programming in Python (Part 1)", description: "This two-part course is designed to help students with very little or no computing background learn the basics of building simple interactive applications. Our language of choice, Python, is an easy-to learn, high-level computer language that is used in many of the computational courses offered on Coursera. To make learning Python easy, we have developed a new browser-based programming environment that makes developing interactive applications in Python simple. These applications will involve windows whose contents are graphical and respond to buttons, the keyboard and the mouse.", related_skills: ['Linux', 'Python 2', 'P3'], course_badges: ['b1', 'b2', 'b3']},
         {id: 2, title: "Introduction to Computer Science and Programming Using Python", description: "This course is the first of a two-course sequence: Introduction to Computer Science and Programming Using Python, and Introduction to Computational Thinking and Data Science. Together, they are designed to help people with no prior exposure to computer science or programming learn to think computationally and write programs to tackle useful problems. Some of the people taking the two courses will use them as a stepping stone to more advanced computer science courses, but for many it will be their first and last computer science courses. This run features lecture videos, lecture exercises, and problem sets using Python 3.5. Even if you previously took the course with Python 2.7, you will be able to easily transition to Python 3.5 in future courses, or enroll now to refresh your learning.", related_skills: ['Linux', 'Python 3'], course_badges: ['b1', 'b2', 'b3', 'b4', 'b5']},
@@ -247,11 +252,23 @@ export class ProfilesViewComponent implements OnInit {
         {id: 5, title: "Introduction to Linux", description: "Develop a good working knowledge of Linux using both the graphical interface and command line, covering the major Linux distribution families.", related_skills: ['Linux'], course_badges: ['b3', 'b5', 'b7'] },
         {id: 6, title: "How to Use Git and GitHub", description: "Effective use of version control is an important and useful skill for any developer working on long-lived (or even medium-lived) projects, especially if more than one developer is involved. This course, built with input from GitHub, will introduce the basics of using version control by focusing on a particular version control system called Git and a collaboration platform called GitHub.", related_skills: ['Linux','SVN'], course_badges: ['b4', 'b5', 'b6']}
       ]
-      
+      */
 
       this.years = [1,2,3,4,5];
       this.currentJustify = 'fill';
-      this.listOfCoursesByUser = listOfCoursesByUser;
+      //this.listOfCoursesByUser = listOfCoursesByUser;
+
+      this.cs
+      .getCourses()
+      .subscribe((data: Course[]) => {
+        console.log(data);
+        data.forEach((element, index) => {         
+          if (index<5) {
+            this.listOfCoursesByUser.push(element);
+          }
+          
+        });
+    });
 
       this.emptyCourseSelected = {
         id: 0, 
