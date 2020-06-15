@@ -23,7 +23,7 @@
             <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==itemBadgeData.id"></mat-spinner>
 
             <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=itemBadgeData.id" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
-              <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.UNASSIGN_AWARD' | translate }}
+              <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.REVOKE_AWARD' | translate }}
             </button>
           </div>
           <div class="col col-lg-3">
