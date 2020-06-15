@@ -8,8 +8,10 @@ import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/
 import { UsersService } from '../../_services/users.service';
 import { BadgesService } from '../../_services/badges.service';
 import { AuthService } from '../../_services/auth.service';
-import { OUService } from '../../_services/ou.service';
+import { OUService } from '../../_services/ou.service'
+import { CoursesService } from '../../_services/courses.service';
 
+import Course from '../../_models/course';
 //import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -48,6 +50,8 @@ export class AwardSmartBadgeComponent implements OnInit {
   courseId: number;
   
   constructor(
+    private router: Router,
+    private cs: CoursesService,
     private ous: OUService,
     private us: UsersService,
     private bs: BadgesService,
@@ -69,7 +73,36 @@ export class AwardSmartBadgeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   
+  courseData: Course;
+
   ngOnInit() {
+    this.courseData = {courseid: 0, name: "", description: "", semester: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
+    
+    this.route.params.subscribe(params => {
+
+      let id:number = 0;      
+      if(params.hasOwnProperty('id')){
+        id = +params.id;
+      }
+
+      if (id>0) {
+        //console.log(id);
+
+        this.cs
+        .getCourse(id).subscribe(
+          dataCourse => {
+            //console.log("course in db");
+            //console.log(dataCourse);
+            this.courseData = dataCourse;
+          },
+          error => {
+            this.router.navigate(["/not_found"]);            
+          }
+        );            
+      }
+
+    });
+
     //this.dataSource.data = ELEMENT_DATA;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
