@@ -78,7 +78,8 @@ export class JobsComponent implements OnInit {
 */
 
 export class JobsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'title', 'employment_type', 'level', 'action'];
+  //displayedColumns: string[] = ['id', 'title', 'employment_type', 'level', 'action'];
+  displayedColumns: string[] = ['title', 'employment_type', 'level', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
