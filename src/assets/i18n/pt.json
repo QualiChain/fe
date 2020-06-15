@@ -383,7 +383,8 @@
     "SELECTED_BADGES": "Selected Badges",
     "BUTTON" : {
       "AWARD": "Award",
-      "UNASSIGN_AWARD": "Unassing",
+      "REVOKE_AWARD": "Revoke",
+      "UNASSIGN_AWARD": "Unassign",
       "ASSIGN_AWARD": "Assign",
       "VALIDATE_AWARD": "Validate"
     }
