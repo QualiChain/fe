@@ -399,17 +399,15 @@
         </div>  
 
         <div class="card m-3">
-            <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> timeline </i> Skills</h5>
-            <div *ngIf="canEditCV" class="card-body">
-              <div class="form-row">
-                <div class="form-group">                      
-                  <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">
-                    <i _ngcontent-axy-c0="" class="material-icons"> add </i>
-                    {{ 'BUTTON.ADD' | translate }}
-                  </a>                                            
-                </div>
-              </div>
-            </div>
+          <div class="card-header">
+            <span><i _ngcontent-pqf-c0="" class="material-icons"> timeline </i> Skills</span>
+            <span *ngIf="canEditCV" class="">              
+              <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">
+                <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                {{ 'BUTTON.ADD' | translate }}
+              </a>                           
+            </span>
+          </div>
 
           <div *ngFor="let skillItem of t.controls; let i = index" class="list-group list-group-flush card-body">
               <div class="list-group-item">
@@ -444,18 +442,15 @@
         </div> 
         <br/>
         <div class="card m-3">
-          <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> work </i> Work History</h5>
-          <div *ngIf="canEditCV" class="card-body">
-              <div class="form-row">
-                  <div class="form-group">                      
+          <div class="card-header">
+            <span><i _ngcontent-pqf-c0="" class="material-icons"> work </i> Work History</span>
+            <span *ngIf="canEditCV" class="">              
                       <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'workitem')">
-                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+                        <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
                         {{ 'BUTTON.ADD' | translate }}
-                      </a>            
-                  </div>
-              </div>
-          </div> 
-
+                      </a>                          
+            </span>
+          </div>
           <div *ngFor="let workItem of w.controls; let i = index" class="list-group list-group-flush card-body">
               <div class="list-group-item">
                 <div>
@@ -493,18 +488,18 @@
           </div>
         </div>          
         <br/>
+
         <div class="card m-3">
-          <h5 class="card-header"><i _ngcontent-pqf-c0="" class="material-icons"> school </i> Education History</h5>
-          <div *ngIf="canEditCV" class="card-body">
-              <div class="form-row">
-                  <div class="form-group">                      
-                      <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">
-                        <i _ngcontent-axy-c0="" class="material-icons"> add </i>
-                        {{ 'BUTTON.ADD' | translate }}
-                      </a>
-                  </div>
-              </div>
-          </div>          
+          <div class="card-header">
+            <span><i _ngcontent-pqf-c0="" class="material-icons"> school </i> Education History</span>
+            <span *ngIf="canEditCV" class="">              
+              <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">
+                <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                {{ 'BUTTON.ADD' | translate }}
+              </a>                         
+            </span>
+          </div>
+          
           <div *ngFor="let educationItem of e.controls; let i = index" class="list-group list-group-flush card-body">
             <div class="list-group-item">
               <div>
@@ -545,7 +540,8 @@
                 </div>
               </div>
             </div>
-          </div>          
+          </div>     
+          <br/>     
           
       </form>
     </div>
