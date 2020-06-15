@@ -41,3 +41,22 @@ div.cv_add_course {
 .card-header {
     margin-top: 0;
 }
+
+.card-ou {
+    margin: 3px;
+    background: white;
+    border: 1px solid #cccccc;    
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);    
+    border-color: #b3b3b3;    
+}
+
+.card-ou-status-issued {
+    background-color: rgb(170, 243, 202);;
+}
+.card-ou-status-revoked {
+    background-color: rgb(232, 167, 167)  
+}
+.card-ou-status-pending {
+    background-color: rgb(253, 197, 113);       
+}

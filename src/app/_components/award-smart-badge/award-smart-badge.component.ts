@@ -8,7 +8,7 @@ import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/
 import { UsersService } from '../../_services/users.service';
 import { BadgesService } from '../../_services/badges.service';
 import { AuthService } from '../../_services/auth.service';
-import {OUService } from '../../_services/ou.service'
+import { OUService } from '../../_services/ou.service';
 
 //import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 

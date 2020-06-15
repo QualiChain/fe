@@ -255,15 +255,31 @@
                               <div *ngIf="smartBadgesByUser.length==0" class="col-lg-8  smartBudge">
                                 This user does not have any smart badge yet. 
                               </div>
-                              <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">
+                              <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-12 card-ou" 
+                                [ngClass]="{
+                                  'card-ou-status-issued': smartBadge.badge.status==='issued',
+                                  'card-ou-status-revoked': smartBadge.badge.status==='revoked',
+                                  'card-ou-status-pending': smartBadge.badge.status==='pending'
+                                  }">
+                                  <div class="col-lg-2 ">
+                                    <img style="width:80px" src="{{smartBadge.badge.image}}" alt="{{smartBadge.badge.name}}">
+                                  </div>
+                                  <div class="col-lg-10 ">
+                                    <h5 >{{smartBadge.badge.name}}</h5>
+                                    <p >{{smartBadge.badge.description}}</p>
+                                    <p >Status: {{smartBadge.badge.status}}</p>
+                                  </div>
+                                </div>
+                              <!--
+                              <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">                                
                                 <br/>
                                 <span class="glyphicon glyphicon-star-empty"></span>
                                 <br/>
-                                <span matTooltip="{{smartBadge.badge.description}}">{{smartBadge.badge.name}}</span> 
-
-
+                                <span matTooltip="{{smartBadge.badge.description}}">{{smartBadge.badge.name}}</span>                                 
                                 <br/>
                               </div>
+                              -->
+                              
                             </div>
                             
                             <!--

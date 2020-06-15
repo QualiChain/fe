@@ -25,6 +25,7 @@ import { BadgesService } from '../../_services/badges.service';
 import User from '../../_models/user';
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { awardDialog_modal } from '../../_components/award-smart-badge/award-smart-badge.component';
+import { OUService } from '../../_services/ou.service';
 
 @Component({
   selector: 'app-profiles-view',
@@ -96,7 +97,12 @@ export class ProfilesViewComponent implements OnInit {
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+
+  listOfSmartAwardsOU: any =[];
+  
+  constructor(
+    private ous: OUService,
+    private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -218,6 +224,7 @@ export class ProfilesViewComponent implements OnInit {
           this.smartBadgesByUser = data;
 
         });
+        
       }
 
       let listOfUsers = [];
@@ -288,6 +295,11 @@ export class ProfilesViewComponent implements OnInit {
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
             } 
            this.getUserCV(this.userId);
+
+            //Start OU connexion 
+            this.connectToOU();
+            //End OU connexion 
+
           },
           error => {
             //console.log("user not found in db");
@@ -336,6 +348,116 @@ export class ProfilesViewComponent implements OnInit {
     */
 
   }
+
+connectToOU() {
+  this.ous
+  .getOUToken()
+  .subscribe((
+    dataOU: any) => {
+    if (dataOU.token) {
+      this.ous
+      .getRecipientsList(dataOU.token)
+      .subscribe((dataSBOU: any) => {
+        
+        //console.log(dataSBOU);
+        //this.listOfSmartAwards = dataSBOU.badges;
+        dataSBOU.recipients.forEach(element => {
+          //console.log(element.email+"--"+this.userdata.email);
+          if (element.email.toLowerCase()==this.userdata.email.toLowerCase()) {
+            //console.log(element);
+            
+            this.ous
+            .getOUToken()
+            .subscribe((
+              dataOU: any) => {
+        
+              if (dataOU.token) {
+                this.ous
+                .getBadgesList(dataOU.token)
+                .subscribe((dataSBOU: any) => {          
+                  //console.log(dataSBOU);
+                  //this.listOfSmartAwards = dataSBOU.badges;
+                  dataSBOU.badges.forEach(elementB => {
+  //                  console.log(elementB);
+                    this.listOfSmartAwardsOU.push(
+                      {
+                      id: elementB.id,
+                      name: elementB.title,
+                      description: elementB.description,
+                      issuer: elementB.issuerid,
+                      imageurl: elementB.imageurl,
+                      assigned: false,
+                      status: '',
+                      awardedId: ''
+                      }
+                    );
+        
+                  });
+        
+                  this.ous
+                  .getAssertionsList(dataOU.token)
+                  .subscribe((dataAssertions: any) => {          
+                    //console.log(dataAssertions);
+                    //this.listOfSmartAwards = dataSBOU.badges;
+                    dataAssertions.items.forEach((elementA, index) => {
+                      if (elementA.recipientid==element.id) {
+                        //console.log(elementA);
+                        
+                        this.listOfSmartAwardsOU.forEach((elementBadge, indexBadge) => {
+                          if (elementBadge.id==elementA.badgeid) {
+                            //console.log(indexBadge+"--"+elementBadge.id+"--"+elementA.badgeid+"---"+elementA.status);                            
+                            this.smartBadgesByUser.push(
+                              {
+                                'id': elementBadge.id, 
+                                'badge': {
+                                  'name': elementBadge.name, 
+                                  'description': elementBadge.description, 
+                                  'image': elementBadge.imageurl,
+                                  'status': elementA.status
+                                }
+                              })
+                          }
+                        });
+
+        
+                      }
+                      
+                    });
+                    
+                    //console.log(this.listOfSmartAwards);
+            
+                  });
+        
+                });
+        
+        
+        
+        
+              }
+              
+              //console.log(this.selectedUserAwards);
+            },
+            error => {
+              console.log("error recovering token");
+            }
+            );
+
+            
+
+          }                
+        });
+
+    });
+
+    }
+    
+    //console.log(this.selectedUserAwards);
+  },
+  error => {
+    console.log("error recovering token");
+  }
+  );   
+}
 
 getUserCV(id) {
   this.cvs
