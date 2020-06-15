@@ -67,16 +67,16 @@ export class ProfilesViewComponent implements OnInit {
 
   //selectedCourse: {};
   emptyCourseSelected: {
-    id: number, 
-    title: string, 
+    courseid: number, 
+    name: string, 
     description: string, 
     related_skills: object, 
     course_badges: object
   };
   
   selectedCourse: {
-    id: number, 
-    title: string, 
+    courseid: number, 
+    name: string, 
     description: string, 
     related_skills: object, 
     course_badges: object
@@ -271,16 +271,16 @@ export class ProfilesViewComponent implements OnInit {
     });
 
       this.emptyCourseSelected = {
-        id: 0, 
-        title: '', 
+        courseid: 0, 
+        name: '', 
         description: '', 
         related_skills: [], 
         course_badges: []
       };
 
       this.selectedCourse = {
-        id: 0, 
-        title: '', 
+        courseid: 0, 
+        name: '', 
         description: '', 
         related_skills: [], 
         course_badges: []
