@@ -12,6 +12,7 @@ export class UsersService {
 
   //uri = 'http://localhost:4000/users';
   private uriUsers = environment.usersUrl;
+  private uriJobs = environment.jobsUrl;
 
   constructor(private http: HttpClient) { }
 /*
@@ -101,7 +102,7 @@ export class UsersService {
   }  
   
   getJobApplisByUser(userId: Number) {
-    return this.http.get(`${this.uriUsers}/${userId}/jobapplies`).
+    return this.http.get(`${this.uriJobs}/${userId}/jobapplies`).
     pipe(
        map((data: any) => {
          return data;

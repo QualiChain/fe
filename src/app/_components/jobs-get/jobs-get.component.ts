@@ -97,8 +97,8 @@ export class JobsGetComponent implements OnInit {
         .subscribe((appliesByuser: any[]) => {
 
           appliesByuser.forEach(element => {
-            //console.log(element.job.id);
-            if (element.job.id==id) {
+            //console.log(element.jobURI);
+            if (element.jobURI==id) {
               this.userHasAnApply = true;
             }
           });
