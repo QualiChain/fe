@@ -1,12 +1,12 @@
 {
-    "/proxyKBZ/*": {
+    "/proxyKBZ_tmp/*": {
         "target": "http://109.49.226.254:8000",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug",
         "pathRewrite": {"^/proxyKBZ" : ""}
     },
-    "/proxyKBZ_server/*": {
+    "/proxyKBZ/*": {
         "target": "http://knowledgebizvpn.ddns.net:8000",
         "secure": false,
         "changeOrigin": true,
