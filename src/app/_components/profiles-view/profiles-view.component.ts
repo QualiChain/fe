@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ɵConsole, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -28,6 +28,7 @@ import { awardDialog_modal } from '../../_components/award-smart-badge/award-sma
 import { OUService } from '../../_services/ou.service';
 import { CoursesService } from '../../_services/courses.service';
 import Course from '../../_models/course';
+import { exit } from 'process';
 
 @Component({
   selector: 'app-profiles-view',
@@ -107,10 +108,11 @@ export class ProfilesViewComponent implements OnInit {
   constructor(
     private ous: OUService,
     private cs: CoursesService,
+    public CVDialog: MatDialog,
     private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
-
+    
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
@@ -122,6 +124,20 @@ export class ProfilesViewComponent implements OnInit {
     const dialogRef = this.awardDialog.open(awardDialog_modal, {
       width: '550px',
       data: {userId: userId, element: element, source: 'profile'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  }
+  
+
+  openUserCV(userId: number) {
+     
+    const dialogRef = this.CVDialog.open(CVDialog_modal, {
+      disableClose: true,
+      width: '550px',
+      data: {userId: userId}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -191,12 +207,7 @@ export class ProfilesViewComponent implements OnInit {
       gender: ''
   };
 
-  
-/*
-    this.route.params.subscribe(params => {
-      
-    });
-*/
+
     this.dynamicForm = this.formBuilder.group({
       Skills: new FormArray([])
     });
@@ -232,28 +243,8 @@ export class ProfilesViewComponent implements OnInit {
         
       }
 
-      let listOfUsers = [];
-      /*
-      let listOfUsers =  
-      [
-        {name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', userName: 'dilbert.adams', id: 11 , avatar_path: 'assets/img/dilbert.jpg', university:'National University of Athens', role:'Student'},
-        {name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.eu', userName: 'phb'         , id: 22 , avatar_path: 'assets/img/pointy-haired_boss.jpg', university: 'University of Vic', role:'Teacher'},
-        {name: 'Dogbert', surname: 'Adams', email: 'dogbert.adams@qualichain-project.eu', userName: 'dogbert.adams', id: 33 , avatar_path: 'assets/img/dogbert.png', university:'University of Barcelona', role:'Student'},
-        {name: 'Ratbert', surname: 'Adams', email: 'ratbert.adams@qualichain-project.eu', userName: 'ratbert.adams', id: 44 , avatar_path: '', university:'UPC', role:'Student'},
-        {name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', userName: 'recruiter.demo', id: 55 , avatar_path: 'assets/img/recruiter.png', university:'', role:'Recruiter'}
-      ];
-      */
-      /*
-      let listOfCoursesByUser = [
-        {id: 1, title: "An Introduction to Interactive Programming in Python (Part 1)", description: "This two-part course is designed to help students with very little or no computing background learn the basics of building simple interactive applications. Our language of choice, Python, is an easy-to learn, high-level computer language that is used in many of the computational courses offered on Coursera. To make learning Python easy, we have developed a new browser-based programming environment that makes developing interactive applications in Python simple. These applications will involve windows whose contents are graphical and respond to buttons, the keyboard and the mouse.", related_skills: ['Linux', 'Python 2', 'P3'], course_badges: ['b1', 'b2', 'b3']},
-        {id: 2, title: "Introduction to Computer Science and Programming Using Python", description: "This course is the first of a two-course sequence: Introduction to Computer Science and Programming Using Python, and Introduction to Computational Thinking and Data Science. Together, they are designed to help people with no prior exposure to computer science or programming learn to think computationally and write programs to tackle useful problems. Some of the people taking the two courses will use them as a stepping stone to more advanced computer science courses, but for many it will be their first and last computer science courses. This run features lecture videos, lecture exercises, and problem sets using Python 3.5. Even if you previously took the course with Python 2.7, you will be able to easily transition to Python 3.5 in future courses, or enroll now to refresh your learning.", related_skills: ['Linux', 'Python 3'], course_badges: ['b1', 'b2', 'b3', 'b4', 'b5']},
-        {id: 3, title: "Ruby on Rails: An Introduction", description: "Did you ever want to build a web application? Perhaps you even started down that path in a language like Java or C#, when you realized that there was so much “climbing the mountain” that you had to do? Maybe you have heard about web services being all the rage, but thought they were too complicated to integrate into your web application. Or maybe you wondered how deploying web applications to the cloud works, but there was too much to set up just to get going.", related_skills: ['Linux', 'Windows'], course_badges: ['b2', 'b4', 'b6']},
-        {id: 4, title: "Introduction to HTML5", description: "Thanks to a growing number of software programs, it seems as if anyone can make a webpage. But what if you actually want to understand how the page was created? There are great textbooks and online resources for learning web design, but most of those resources require some background knowledge. This course is designed to help the novice who wants to gain confidence and knowledge. We will explore the theory (what actually happens when you click on a link on a webpage?), the practical (what do I need to know to make my own page?), and the overlooked (I have a page, what do I do now?). Throughout the course there will be a strong emphasis on adhering to syntactic standards for validation and semantic standards to promote wide accessibility for users with disabilities. The textbook we use is available online, “The Missing Link: An Introduction to Web Development and Programming” by Michael Mendez from www.opensuny.org.", related_skills: ['CSS','HTML'], course_badges: ['b7', 'b8', 'b9']},
-        {id: 5, title: "Introduction to Linux", description: "Develop a good working knowledge of Linux using both the graphical interface and command line, covering the major Linux distribution families.", related_skills: ['Linux'], course_badges: ['b3', 'b5', 'b7'] },
-        {id: 6, title: "How to Use Git and GitHub", description: "Effective use of version control is an important and useful skill for any developer working on long-lived (or even medium-lived) projects, especially if more than one developer is involved. This course, built with input from GitHub, will introduce the basics of using version control by focusing on a particular version control system called Git and a collaboration platform called GitHub.", related_skills: ['Linux','SVN'], course_badges: ['b4', 'b5', 'b6']}
-      ]
-      */
-
+      //let listOfUsers = [];
+      
       this.years = [1,2,3,4,5];
       this.currentJustify = 'fill';
       //this.listOfCoursesByUser = listOfCoursesByUser;
@@ -261,7 +252,7 @@ export class ProfilesViewComponent implements OnInit {
       this.cs
       .getCourses()
       .subscribe((data: Course[]) => {
-        console.log(data);
+        //console.log(data);
         data.forEach((element, index) => {         
           if (index<5) {
             this.listOfCoursesByUser.push(element);
@@ -311,58 +302,23 @@ export class ProfilesViewComponent implements OnInit {
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
             } 
-           this.getUserCV(this.userId);
+           
 
             //Start OU connexion 
             this.connectToOU();
             //End OU connexion 
 
           },
-          error => {
-            //console.log("user not found in db");
-            /*
-            listOfUsers.forEach(element => {
-              //console.log(element.id+"--"+params['id']);
-              
-              if ((element.hasOwnProperty('id')) && (params.hasOwnProperty('id'))){
-                if (element.id==params['id']) {
-                  this.userdata = element;
-                }
-              }
-              
-            });
-            
-            //this.userdata = listOfUsers[params['id']-1];
-            if (this.userdata.avatar_path=='') {
-              this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
-            }
-            */
-            this.router.navigate(["/not_found"]);
-            
+          error => {            
+            this.router.navigate(["/not_found"]);            
           }
         );
-/*
-        this.us
-        .getUser(id)
-        .subscribe((data: User[]) => {
-          console.log(data);
-            this.userdata = data;
-  
-        });
-*/
+
 
       }
 
     });
-    /*
-    let userdata = JSON.parse(localStorage.getItem('userdata'));
-    if (userdata) {
-      this.userdata = userdata;
-      this.years = [1,2,3,4,5];
-      this.currentJustify = 'fill';
-      
-    }
-    */
+
 
   }
 
@@ -476,52 +432,7 @@ connectToOU() {
   );   
 }
 
-getUserCV(id) {
-  this.cvs
-  .getCV(id)
-  .subscribe((data: any) => {
-    //console.log(id);  
-    //console.log(data);
-    //if (data.length>0) {
-      //let posCV = data.length-1;
-      this.label = data.label;
-      this.description = data.description;
-      this.targetSector = data.targetSector;
-      //this.expectedSalary = data.application.expectedSalary;
-      //this.JobDescription = data.description;
-      this.skillsCV = data.skills;
-      this.workHistoryCV = data.workHistory;
-      this.educationHistoryCV = data.education;
 
-       data.skills.forEach(element => {
-        this.t.push(this.formBuilder.group({
-          label: [element.label, [Validators.required]],
-          proficiencyLevel: [element.proficiencyLevel, Validators.required],
-          comment: [element.comment, [Validators.required]],      
-        }));
-      });
-      data.workHistory
-      .forEach(element => {
-        this.w.push(this.formBuilder.group({
-          position: [element.position, Validators.required],
-          from: [element.from, [Validators.required]],
-          to: [element.to, [Validators.required]],
-          employer: [element.employer, [Validators.required]],
-        }));
-      });
-      data.education
-      .forEach(element => {
-        this.e.push(this.formBuilder.group({
-          title: [element.title, Validators.required],
-          from: [element.from, [Validators.required]],
-          to: [element.to, [Validators.required]],
-          organisation: [element.organisation, [Validators.required]],
-          description: [element.description, [Validators.required]],
-        }));
-      });      
-    //}      
-  });
-}
   ngAfterViewChecked () {
     this.DrawChart();
   }
@@ -817,116 +728,6 @@ async generatePdf(action = 'open') {
 
 
 
-  // convenience getters for easy access to form fields
-  get fC() { return this.dynamicForm.controls; }  
-  get t() { return this.fC.Skills as FormArray; }
-
-  get wC() { return this.dynamicFormWorks.controls; }
-  get w() { return this.wC.workHistory as FormArray; }
-
-  get eC() { return this.dynamicFormEducations.controls; }
-  get e() { return this.eC.Education as FormArray; }
-
-  deleteFormGroupItem(e, i, type) {
-    if (type=='skillitem') {
-      this.t.removeAt(i);    
-    } 
-    else if (type=='workitem') {
-      this.w.removeAt(i);    
-    }
-    else if (type=='educationitem') {
-      this.e.removeAt(i);    
-    }
-  }
-
-  addFormGroupItem(e, type) {
-    if (type=='skillitem') {
-      this.t.push(this.formBuilder.group({
-        label: ['', [Validators.required]],
-        proficiencyLevel: ['', Validators.required],
-        comment: ['', [Validators.required]],      
-      }));
-    }
-    else if (type=='workitem') {
-      this.w.push(this.formBuilder.group({
-        position: ['', Validators.required],
-        from: ['', [Validators.required]],
-        to: ['', [Validators.required]],
-        employer: ['', [Validators.required]],
-      }));
-    }
-    else if (type=='educationitem') {
-      this.e.push(this.formBuilder.group({
-        title: ['', Validators.required],
-        from: ['', [Validators.required]],
-        to: ['', [Validators.required]],
-        organisation: ['', [Validators.required]],
-        description: ['', [Validators.required]],
-      }));
-    }
-
-
-  }
-
-  PersonURI: string;
-  title: string;
-  label: string;
-  proficiencyLevel: string;
-  comment: string;
-  description: string;
-  targetSector: string;
-  //expectedSalary: string;
-  //JobDescription: string;
-  onSubmit() {
-    //console.log("onSubmit");
-    //this.submitted = true;
-
-    // stop here if form is invalid
-    /*
-    if (this.dynamicForm.invalid) {
-        return;
-    }
-
-    if (this.dynamicFormWorks.invalid) {
-      return;
-    }
-
-    if (this.dynamicFormEducations.invalid) {
-      return;
-    }
-    */
-    //'JobDescription': this.JobDescription,
-
-    var dataToSend = {
-      'personURI': this.userId,
-      'label':this.label,
-      'targetSector': this.targetSector,
-      //'expectedSalary': this.expectedSalary,
-      'description': this.description,
-      'skills': this.dynamicForm.value.Skills,
-      'workHistory': this.dynamicFormWorks.value.workHistory,
-      'education': this.dynamicFormEducations.value.Education
-    };
-
-    //console.log(JSON.stringify(dataToSend, null, 4));
-
-    this.cvs.postCV(this.userId, dataToSend).subscribe(
-      res => {
-        console.log(res);
-        console.log("CV sended correctly");
-        alert('Success!!');
-      },
-      error => {
-        //console.log("error sending CV data");
-        //alert('Error sending data!!!');
-      }
-    );
-
-
-    //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.dynamicForm.value, null, 4) + JSON.stringify(this.dynamicFormWorks.value, null, 4) + JSON.stringify(this.dynamicFormEducations.value, null, 4));
-}
-
-
 }
 
 interface SNodeExtra {
@@ -946,4 +747,237 @@ type SLink = d3Sankey.SankeyLink<SNodeExtra, SLinkExtra>;
 interface DAG {
   nodes: SNode[];
   links: SLink[];
+}
+
+/************************/
+@Component({
+  selector: 'CVDialog',
+  templateUrl: './CVDialog.html',
+  styleUrls: ['./profiles-view.component.css']
+})
+export class CVDialog_modal implements OnInit {
+  
+  loadingSpinner: Boolean= true;
+  currentUser: User;
+  userdata: User;
+  dynamicForm: FormGroup;
+  dynamicFormWorks: FormGroup;
+  dynamicFormEducations: FormGroup;
+
+  label: string;
+  description: string;
+  targetSector: string;
+
+  canViewCV: boolean = false;
+  canEditCV: boolean = false;
+  skillsCV: any = [];
+  workHistoryCV: any = [];
+  educationHistoryCV: any = [];
+
+  constructor(
+    private router: Router,  
+    private us: UsersService, private authservice: AuthService,
+    private cvs: CVService,
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<CVDialog_modal>,
+    @Inject(MAT_DIALOG_DATA) public data: CVDialogData) {
+
+      this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    }
+
+
+    getUserData(id:string) {
+      
+      this.us.getUser(id).subscribe(
+        data => {
+          //console.log("user in db");
+          this.userdata = data;
+        },
+        error => {            
+          this.router.navigate(["/not_found"]);            
+        }
+      );
+    }
+    
+
+    getUserCV(id:string) {
+      this.cvs
+      .getCV(id)
+      .subscribe((data: any) => {
+
+          this.label = data.label;
+          this.description = data.description;
+          this.targetSector = data.targetSector;
+          this.skillsCV = data.skills;
+          this.workHistoryCV = data.workHistory;
+          this.educationHistoryCV = data.education;
+           data.skills.forEach(element => {
+            this.t.push(this.formBuilder.group({
+              label: [element.label, [Validators.required]],
+              proficiencyLevel: [element.proficiencyLevel, Validators.required],
+              comment: [element.comment, [Validators.required]],      
+            }));
+          });
+          data.workHistory
+          .forEach(element => {
+            this.w.push(this.formBuilder.group({
+              position: [element.position, Validators.required],
+              from: [element.from, [Validators.required]],
+              to: [element.to, [Validators.required]],
+              employer: [element.employer, [Validators.required]],
+            }));
+          });
+          data.education
+          .forEach(element => {
+            this.e.push(this.formBuilder.group({
+              title: [element.title, Validators.required],
+              from: [element.from, [Validators.required]],
+              to: [element.to, [Validators.required]],
+              organisation: [element.organisation, [Validators.required]],
+              description: [element.description, [Validators.required]],
+            }));
+          });  
+          
+          this.loadingSpinner = false;
+        //}      
+      });
+    }
+
+  ngOnInit() {
+
+    //console.log(this.data.userId);
+    this.userdata = {id:0,role:'', userName:'', name:'', surname:'', email:'', gender:''}
+
+    if(!this.currentUser) {
+        this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:'', gender:''};
+    }
+
+    this.dynamicForm = this.formBuilder.group({
+      Skills: new FormArray([])
+    });
+    this.dynamicFormWorks = this.formBuilder.group({
+      workHistory: new FormArray([])
+    });
+    this.dynamicFormEducations = this.formBuilder.group({
+      Education: new FormArray([])
+    });
+
+    this.getUserData(this.data.userId.toString());
+    this.getUserCV(this.data.userId.toString());
+
+    //console.log(this.data.userId+"----"+this.currentUser.id)
+    if ((this.data.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
+      this.canEditCV = true;
+      this.canViewCV = true;
+    }
+    else if (this.currentUser.role.toLowerCase()=='recruiter') {
+      this.canViewCV = true;
+    }
+
+  }
+
+  
+  
+  onSubmitAwardsModal() {
+    console.log("bb CV ");
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+
+// convenience getters for easy access to form fields
+get fC() { return this.dynamicForm.controls; }  
+get t() { return this.fC.Skills as FormArray; }
+
+get wC() { return this.dynamicFormWorks.controls; }
+get w() { return this.wC.workHistory as FormArray; }
+
+get eC() { return this.dynamicFormEducations.controls; }
+get e() { return this.eC.Education as FormArray; }
+
+deleteFormGroupItem(e, i, type) {
+  if (type=='skillitem') {
+    this.t.removeAt(i);    
+  } 
+  else if (type=='workitem') {
+    this.w.removeAt(i);    
+  }
+  else if (type=='educationitem') {
+    this.e.removeAt(i);    
+  }
+}
+
+addFormGroupItem(e, type) {
+  if (type=='skillitem') {
+    this.t.push(this.formBuilder.group({
+      label: ['', [Validators.required]],
+      proficiencyLevel: ['', Validators.required],
+      comment: ['', [Validators.required]],      
+    }));
+  }
+  else if (type=='workitem') {
+    this.w.push(this.formBuilder.group({
+      position: ['', Validators.required],
+      from: ['', [Validators.required]],
+      to: ['', [Validators.required]],
+      employer: ['', [Validators.required]],
+    }));
+  }
+  else if (type=='educationitem') {
+    this.e.push(this.formBuilder.group({
+      title: ['', Validators.required],
+      from: ['', [Validators.required]],
+      to: ['', [Validators.required]],
+      organisation: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+    }));
+  }
+
+
+}  
+
+
+onSubmit() {
+
+  this.loadingSpinner = true;
+
+  var dataToSend = {
+    'personURI': this.data.userId,
+    'label':this.label,
+    'targetSector': this.targetSector,
+    'description': this.description,
+    'skills': this.dynamicForm.value.Skills,
+    'workHistory': this.dynamicFormWorks.value.workHistory,
+    'education': this.dynamicFormEducations.value.Education
+  };
+
+  //console.log(this.data.userId);
+
+  this.cvs.postCV(this.data.userId, dataToSend).subscribe(
+    res => {
+      //console.log(res);
+      //console.log("CV sended correctly");
+      //alert('Success!!');
+      this.loadingSpinner = false;
+    },
+    error => {
+      //console.log("error sending CV data");
+      //alert('Error sending data!!!');
+      this.loadingSpinner = false;
+    }
+  );
+
+
+  
+}
+
+
+
+}
+
+export interface CVDialogData {
+  userId: number;
 }

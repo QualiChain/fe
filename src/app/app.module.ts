@@ -99,7 +99,7 @@ import { CustomMaterialModule } from './_components/custom-material/custom-mater
 import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
 import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
-import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
+import { ProfilesViewComponent, CVDialog_modal } from './_components/profiles-view/profiles-view.component';
 import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
@@ -193,7 +193,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
 
 
 @NgModule({
-  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal],
+  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -212,7 +212,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     JobsAddComponent,
     JobsGetComponent,
     ConfirmDialogComponent,
-    ProfilesViewComponent,
+    ProfilesViewComponent, CVDialog_modal,
     createChangePasswordDialog_modal,
     ProfilesAddComponent,
     RecruitmentViewComponent,

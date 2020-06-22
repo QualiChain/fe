@@ -435,5 +435,37 @@
     "NO_NOTIFICATIONS_AVAILABLE" : "There are not notifications available",
     "SET_AS_READED" : "Set as readed",
     "SET_AS_UNREADED" : "Set as unreaded"
+  },
+  "CV": {
+    "TITLE": {
+      "LABEL": "Title",
+      "PLACEHOLDER": "Title"
+    },
+    "DESCRIPTION": {
+      "LABEL": "Description",
+      "PLACEHOLDER": "Description"
+    },
+    "TARGET_SECTOR": {
+      "LABEL": "Tarjet sector",
+      "PLACEHOLDER": "Tarjet sector"
+    },
+    "SKILLS": "Skills",
+    "SKILL": "Skill",
+    "SKILL_LABEL": "Label",
+    "SKILL_PROFIENCY_LEVEL": "Proficiency level",
+    "SKILL_COMMENT": "Comment",
+    "WORK_HISTORY": "Work history",
+    "WORK": "Work",
+    "WORK_POSITION": "Position",
+    "WORK_FROM": "From",
+    "WORK_TO": "To",
+    "WORK_EMPLOYER": "Employer",
+    "EDUCATION_HISTORY": "Education history",
+    "EDUCATION": "Education",
+    "EDUCATION_TITLE": "Title",
+    "EDUCATION_FROM": "From",
+    "EDUCATION_TO": "To",
+    "EDUCATION_ORGANISATION": "Organisation",
+    "EDUCATION_DESCRIPTION": "Description"
   }
 }
