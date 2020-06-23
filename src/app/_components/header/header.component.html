@@ -29,9 +29,9 @@
 							<li class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===''}"><a class="btn navbar-item" routerLink="/" (click)="route='/'">{{ 'MENU.HOME' | translate }}</a></li>
 
 <!--
-							<li *ngIf="(isStudent || isEmployee || isTeacher || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/courses'}"><a class="btn navbar-item" routerLink="/courses" (click)="route='/courses'">{{ 'MENU.COURSES' | translate }}</a></li>						
+							<li *ngIf="(isStudent || isEmployee || isProfessor || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/courses'}"><a class="btn navbar-item" routerLink="/courses" (click)="route='/courses'">{{ 'MENU.COURSES' | translate }}</a></li>						
 							<li *ngIf="(isStudent || isEmployee || isRecruiter || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/jobs'}"><a class="btn navbar-item" routerLink="/jobs" (click)="route='/jobs'">{{ 'MENU.JOBS' | translate }}</a></li>
-							<li *ngIf="(isTeacher || isEmployee || isRecruiter || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles'}"><a class="btn navbar-item" routerLink="/profiles" (click)="route='/profiles'">{{ 'MENU.PROFILES' | translate }}</a></li>						
+							<li *ngIf="(isProfessor || isEmployee || isRecruiter || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles'}"><a class="btn navbar-item" routerLink="/profiles" (click)="route='/profiles'">{{ 'MENU.PROFILES' | translate }}</a></li>						
 							<li *ngIf="isRecruiter || isAdmin" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/recruitment'}"><a class="btn navbar-item" routerLink="/recruitment" (click)="route='/recruitment'">{{ 'MENU.RECRUITMENT' | translate }}</a></li>
 -->
 

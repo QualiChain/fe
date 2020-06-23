@@ -42,43 +42,7 @@ export class AuthService {
     
     //let myAuthObj = {};
     let myAuthObj=  new User;
-    /*
-    if ((username=="student") && (password=="student")) {
-
-      myAuthObj=  new User;
-      //myAuthObj.authenticated = true;
-
-      
-      myAuthObj = {authenticated: true,  password:'*****', name: 'Dilbert', 
-      surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', 
-      userName: 'dilbert.adams', id: 11 , 'avatar_path': 'assets/img/dilbert.jpg', 'role': 'student'};
-      
-      localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
-      this.currentUserSubject.next(myAuthObj);
-    }
-    else if ((username=="recruiter") && (password=="recruiter")) {
-
-      
-      myAuthObj = { authenticated: true,  password:'******', name: 'Recruiter', 
-      surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', 
-      userName: 'recruiter.demo', id: 55 , 'avatar_path': 'assets/img/recruiter.png', 'role': 'recruiter'};
-      
-      localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
-      
-      this.currentUserSubject.next(myAuthObj);
-    }
-    else if ((username=="teacher") && (password=="teacher")) {
-
-
-      myAuthObj = { authenticated: true,  password:'******', name: 'Pointy-Haired Boss', 
-      surname: 'Adams', email: 'phb@qualichain-project.euu', 
-      userName: 'phb', id: 22 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', 'role': 'teacher'};
-      
-      localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
-      
-      this.currentUserSubject.next(myAuthObj);
-    }
-    */
+    
     return this.httpClient.post(`${this.uri}`, obj).
     pipe(
        map((data: any) => {

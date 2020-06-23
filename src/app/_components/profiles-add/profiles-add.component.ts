@@ -42,7 +42,7 @@ export class ProfilesAddComponent implements OnInit {
     {value: 'student', viewValue: 'Student'},
     {value: 'administrator', viewValue: 'Administrator'},
     {value: 'employee', viewValue: 'Employee'},
-    {value: 'teacher', viewValue: 'Teacher'},
+    {value: 'professor', viewValue: 'Professor'},
     {value: 'recruiter', viewValue: 'Recruiter'}
   ];
 

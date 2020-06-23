@@ -38,21 +38,12 @@ export class LoginComponent implements OnInit {
     let myObj = {};
     this.invalidCredentials = false;   
        
-    if (this.name=="student") {
-       myObj = { authenticated: true, name: 'Dilbert', surname: 'Adams', email: 'dilbert.adams@qualichain-project.eu', username: 'dilbert.adams', id: 11 , 'avatar_path': 'assets/img/dilbert.jpg', role: 'student'};
-    }
-    else if (this.name=="recruiter") {
-      myObj = { authenticated: true, name: 'Recruiter', surname: 'demo', email: 'recruiter.demo@qualichain-project.eu', username: 'recruiter.demo', id: 55 , 'avatar_path': 'assets/img/recruiter.png', role: 'recruiter'};      
-    }
-    else if (this.name=="teacher") {
-      myObj = { authenticated: true, name: 'Pointy-Haired Boss', surname: 'Adams', email: 'phb@qualichain-project.euu', username: 'phb', id: 22 , 'avatar_path': 'assets/img/pointy-haired_boss.jpg', role: 'teacher'};
-    }
-    else {
+    
       //console.log("else");
       if (data) {
         myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role};
       }
-    }
+    
     //console.log(myObj);
     localStorage.setItem('userdata', JSON.stringify(myObj));
     window.location.href="/";
@@ -105,21 +96,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.invalidCredentials = true;
-          /*
-          console.log("Invalid Credentials for the aut service, let's check if are the demo ones");
-          if ((this.name=='student') && (this.password=='student')) {
-            console.log("Demo credentials of a student are valid!!!")
-            this.validCredentials(error);
-          }
-          else if ((this.name=='recruiter') && (this.password=='recruiter')) {
-            console.log("Demo credentials of a recruiter are valid!!!")
-            this.validCredentials(error);
-          }
-          else if ((this.name=='teacher') && (this.password=='teacher')) {
-            console.log("Demo credentials of a recruiter are valid!!!")
-            this.validCredentials(error);
-          }
-          */
+          
           this.loadingLoginSpinner = false;
           
         }

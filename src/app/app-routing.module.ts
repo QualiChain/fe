@@ -76,7 +76,7 @@ const routes: Routes = [
    path: 'profiles',
    component: ProfilesComponent,
    canActivate: [AuthGuard],
-   data: { roles: [Role.teacher, Role.recruiter, Role.admin, Role.administrator ] }  
+   data: { roles: [Role.professor, Role.recruiter, Role.admin, Role.administrator ] }  
   },
   {
     path: 'profiles/add',
@@ -120,31 +120,31 @@ const routes: Routes = [
     path: 'courses',
     component: CoursesComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.employee, Role.teacher, Role.admin, Role.administrator] }    
+    data: { roles: [Role.student, Role.employee, Role.professor, Role.admin, Role.administrator] }    
   },
   {
     path: 'courses/add',
     component: CoursesEditComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.teacher, Role.admin, Role.administrator] }    
+    data: { roles: [Role.professor, Role.admin, Role.administrator] }    
   },  
   {
     path: 'courses/:id',
     component: CoursesGetComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.employee, Role.teacher, Role.admin, Role.administrator] }    
+    data: { roles: [Role.student, Role.employee, Role.professor, Role.admin, Role.administrator] }    
   },       
   {
     path: 'courses/:id/edit',
     component: CoursesEditComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.teacher, Role.admin, Role.administrator] }    
+    data: { roles: [Role.professor, Role.admin, Role.administrator] }    
   },  
   {
     path: 'courses/:id/award',
     component: AwardSmartBadgeComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.teacher, Role.admin, Role.administrator] }    
+    data: { roles: [Role.professor, Role.admin, Role.administrator] }    
   },  
   {
     path: 'profiles/:id/recomended/courses',

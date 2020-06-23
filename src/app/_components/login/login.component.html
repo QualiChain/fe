@@ -23,13 +23,7 @@
 
         
         <div *ngIf="!loadingLoginSpinner">
-          <!--
-          <div class="alert alert-info">
-            <strong>Valid demo credentials for a student</strong> - Username: student Password: student<br>
-            <strong>Valid demo credentials for a recruiter</strong> - Username: recruiter Password: recruiter<br>
-            <strong>Valid demo credentials for a teacher</strong> - Username: teacher Password: teacher<br>
-          </div>
-          -->
+
           <div *ngIf="invalidCredentials" class="alert alert-danger" role="alert">
             {{ 'LOGIN.INVALID_CREDENTIALS_MESSAGE' | translate }}<br>
           </div>

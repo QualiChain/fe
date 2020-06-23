@@ -42,8 +42,8 @@ export class AppComponent {
     return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
   }
 
-  get isTeacher() {
-    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.teacher.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+  get isProfessor() {
+    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.professor.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
   }
 
   get isStudent() {
