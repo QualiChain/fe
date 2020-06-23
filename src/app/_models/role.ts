@@ -2,7 +2,7 @@ export enum Role {
     'authenticated' = 'authenticated',
     'student' = 'student',
     'employee' = 'employee',
-    'teacher' = 'teacher',
+    'professor' = 'professor',
     'recruiter' = 'recruiter',
     'administrator' = 'administrator',
     'admin' = 'administrator'

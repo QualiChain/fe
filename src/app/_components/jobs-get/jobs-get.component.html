@@ -3,7 +3,7 @@
 <div class="container">
 
     <div class="row">
-        <button *ngIf="(currentUser.role.toLowerCase()=='teacher' && jobData.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && jobData.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
+        <button *ngIf="(currentUser.role.toLowerCase()=='professor' && jobData.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && jobData.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
             <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
           </button>
           <button *ngIf="!userHasAnApply" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">

@@ -171,7 +171,7 @@
                   </ng-template>
                 </ngb-panel>
                 
-                <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='teacher'">
+                <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='professor'">
                   <ng-template ngbPanelContent>
                       <div class="">
                         <div class="row cv_add_course">
@@ -311,7 +311,7 @@
             
         </div>
 
-        <div class="row cv_gap_analysis" *ngIf="userdata.role.toLowerCase()=='teacher'">
+        <div class="row cv_gap_analysis" *ngIf="userdata.role.toLowerCase()=='professor'">
           <div class="col col-lg-8"> </div>
           <div class="col col-lg-2">
             
