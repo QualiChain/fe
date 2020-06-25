@@ -37,7 +37,7 @@
               <!-- employment_type -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}</mat-label>
-                <mat-select  [(ngModel)]="dataIn.contractType" name="employment_type" required>
+                <mat-select  [(ngModel)]="dataIn.contractType" name="employment_type" required ngDefaultControl>
                   <mat-option value="full_time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.FULL_TIME' | translate }}</mat-option>
                   <mat-option value="part_time">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.PART_TIME' | translate }}</mat-option>
                   <mat-option value="contract">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.CONTRACT' | translate }}</mat-option>
@@ -50,7 +50,7 @@
               <!-- level -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</mat-label>
-                <mat-select  [(ngModel)]="dataIn.seniorityLevel" name="level" required>
+                <mat-select  [(ngModel)]="dataIn.seniorityLevel" name="level" required ngDefaultControl>
                   <mat-option value="internership">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</mat-option>
                   <mat-option value="entity_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</mat-option>
                   <mat-option value="associate">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</mat-option>
@@ -87,7 +87,7 @@
                         <!-- proficiencyLevel -->
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</mat-label>
-                          <mat-select  [(ngModel)]="skill.proficiencyLevel" name="skillproficiencyLevel_{{i}}" required>
+                          <mat-select  [(ngModel)]="skill.proficiencyLevel" name="skillproficiencyLevel_{{i}}" required ngDefaultControl>
                             <mat-option value="basic">{{ 'JOB.SKILL.LEVEL.OPTIONS.BASIC' | translate }}</mat-option>
                             <mat-option value="intermediate">{{ 'JOB.SKILL.LEVEL.OPTIONS.INTERMEDIATE' | translate }}</mat-option>
                             <mat-option value="advanced">{{ 'JOB.SKILL.LEVEL.OPTIONS.ADVANCED' | translate }}</mat-option>
@@ -104,7 +104,7 @@
                         <!-- priority -->
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</mat-label>
-                          <mat-select  [(ngModel)]="skill.priorityLevel" name="priority_{{i}}" required>
+                          <mat-select  [(ngModel)]="skill.priorityLevel" name="priority_{{i}}" required ngDefaultControl>
                             <mat-option value="low">{{ 'JOB.SKILL.PRIORITY.OPTIONS.LOW' | translate }}</mat-option>
                             <mat-option value="medium">{{ 'JOB.SKILL.PRIORITY.OPTIONS.MEDIUM' | translate }}</mat-option>
                             <mat-option value="high">{{ 'JOB.SKILL.PRIORITY.OPTIONS.HIGH' | translate }}</mat-option>

@@ -130,3 +130,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex: 1 1 auto;
     padding: 1.25rem;
 }
+
+
+.material-icons { 
+    vertical-align: middle;
+ }
+
+ .btn,
+ .button {
+    vertical-align: middle;
+    font-size: 16px;
+ }
+
+ .material-icons.small {
+    color: #ffffff;
+ }
+
+ 

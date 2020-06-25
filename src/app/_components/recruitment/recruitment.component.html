@@ -18,7 +18,7 @@
         <!--<span>{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}</span>-->
       <input       
         type="text" 
-        name="searchtext" 
+        name="fieldSearchText" 
         class="form-control input" 
         placeholder="{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}" 
         [(ngModel)]="seachJobTextInput"
@@ -30,7 +30,7 @@
     <div class="form-group field col-lg-10" >
       <mat-form-field class="create-profile-full-width">
         <mat-label>{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}</mat-label>
-        <mat-select [(ngModel)]="seachJobTextInput" name="searchtext" required>
+        <mat-select [(ngModel)]="seachJobTextInput" name="fieldSearchTextSelect" required ngDefaultControl>
           <mat-option *ngFor="let job of jobs" [value]="job.id">
             {{job.label}}
           </mat-option>
