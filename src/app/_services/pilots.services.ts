@@ -56,7 +56,9 @@ export interface HEADER_MENU {
 
 const PILOTS_DATA: HEADER_MENU[] =[]
 
-PILOTS_DATA.push({'id':1, 'label':'ASSET', 'menu':[
+PILOTS_DATA.push({'id':0, 'label':'ANONYMOUS', 'menu':[]});
+
+PILOTS_DATA.push({'id':1, 'label':'OU', 'menu':[
     {'id': 1, 'order': 2, 'label': 'MENU.COURSES', 'route': '/courses', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator]},
     {'id': 2, 'order': 3, 'label': 'MENU.JOBS', 'route': '/jobs', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator]},  
     {'id': 3, 'order': 4, 'label': 'MENU.PROFILES', 'route': '/profiles', 'public': false, 'rolesPermissions':[Role.professor, Role.recruiter, Role.admin, Role.administrator]},
@@ -70,21 +72,21 @@ PILOTS_DATA.push({'id':2, 'label':'NTUA', 'menu':[
       {'id': 4, 'order': 5, 'label': 'MENU.RECRUITMENT', 'route': '/recruitment', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator]}
   ]});
 
-PILOTS_DATA.push({'id':3, 'label':'KBZ1', 'menu':[
+PILOTS_DATA.push({'id':3, 'label':'ASEP', 'menu':[
     {'id': 1, 'order': 2, 'label': 'MENU.COURSES', 'route': '/courses', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator]},
     {'id': 2, 'order': 3, 'label': 'MENU.JOBS', 'route': '/jobs', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator]},  
     {'id': 3, 'order': 4, 'label': 'MENU.PROFILES', 'route': '/profiles', 'public': false, 'rolesPermissions':[Role.professor, Role.recruiter, Role.admin, Role.administrator]},
     {'id': 4, 'order': 5, 'label': 'MENU.RECRUITMENT', 'route': '/recruitment', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator]}
 ]});
 
-PILOTS_DATA.push({'id':4, 'label':'KBZ2', 'menu':[
+PILOTS_DATA.push({'id':4, 'label':'INESC-ID', 'menu':[
     {'id': 1, 'order': 2, 'label': 'MENU.COURSES', 'route': '/courses', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator]},
     {'id': 2, 'order': 3, 'label': 'MENU.JOBS', 'route': '/jobs', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator]},  
     {'id': 3, 'order': 4, 'label': 'MENU.PROFILES', 'route': '/profiles', 'public': false, 'rolesPermissions':[Role.professor, Role.recruiter, Role.admin, Role.administrator]},
     {'id': 4, 'order': 5, 'label': 'MENU.RECRUITMENT', 'route': '/recruitment', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator]}
 ]});
 
-PILOTS_DATA.push({'id':5, 'label':'KBZ3', 'menu':[
+PILOTS_DATA.push({'id':5, 'label':'KBZ', 'menu':[
     {'id': 1, 'order': 2, 'label': 'MENU.COURSES', 'route': '/courses', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator]},
     {'id': 2, 'order': 3, 'label': 'MENU.JOBS', 'route': '/jobs', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator]},  
     {'id': 3, 'order': 4, 'label': 'MENU.PROFILES', 'route': '/profiles', 'public': false, 'rolesPermissions':[Role.professor, Role.recruiter, Role.admin, Role.administrator]},

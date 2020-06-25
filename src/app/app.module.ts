@@ -94,6 +94,9 @@ import { FooterComponent } from './_components/footer/footer.component';
 import { JobsComponent, applyJobDialog_modal } from './_components/jobs/jobs.component';
 import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
 import { HomeComponent } from './_components/home/home.component';
+import { PilotHomeComponent } from './_components/pilot-home/pilot-home.component';
+import { HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilot4Component, HomePilot5Component } from './_components/pilot-home/pilot-home.component';
+
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
 import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
@@ -204,6 +207,8 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     awardDialog_modal,
     createAwardDialog_modal,
     HomeComponent,
+    PilotHomeComponent,
+    HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilot4Component, HomePilot5Component,
     AccessDeniedComponent,
     ProfilesComponent,
     RecruitmentComponent,

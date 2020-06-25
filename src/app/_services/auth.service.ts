@@ -49,7 +49,7 @@ export class AuthService {
 
         myAuthObj = { authenticated: true,  password:'******', name: data.name, 
         surname: data.surname, email: data.email, 
-        userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role};
+        userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, 'pilotId': data.pilotId};
       
         localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
 
