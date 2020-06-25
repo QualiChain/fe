@@ -163,7 +163,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
     //todo , replace this by the pilotid of the user
-    this.menuOptionsPerPilot = this.ps.getPilot(2);
+    //console.log(this.currentUser);
+    if (this.currentUser) {
+      if (this.currentUser.pilotId) {
+        this.menuOptionsPerPilot = this.ps.getPilot(this.currentUser.pilotId);
+      }
+      else {
+        this.menuOptionsPerPilot = this.ps.getPilot(0);  
+      }
+    }
+    else {
+      this.menuOptionsPerPilot = this.ps.getPilot(0);
+    }
+    
     //console.log(this.menuOptionsPerPilot);
 
     // Read item:
