@@ -15,7 +15,7 @@
           -->
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.PILOT.SELECT_ONE' | translate }}</mat-label>
-            <mat-select [(ngModel)]="pilotId" name="pilot" required>
+            <mat-select [(ngModel)]="pilotId" name="pilot" required ngDefaultControl>
               <mat-option *ngFor="let pilot of pilots" [value]="pilot.value">
                 {{pilot.viewValue}}
               </mat-option>
@@ -30,7 +30,7 @@
           -->
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.ROLE.SELECT_ONE' | translate }}</mat-label>
-            <mat-select [(ngModel)]="role" name="role" required>
+            <mat-select [(ngModel)]="role" name="role" required ngDefaultControl>
               <mat-option *ngFor="let role of roles" [value]="role.value">
                 {{'ROLES.'+role.viewValue.toLowerCase() | translate}}
               </mat-option>
@@ -131,7 +131,7 @@
           -->
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.GENDER.SELECT_ONE' | translate }}</mat-label>
-            <mat-select [(ngModel)]="gender" name="gender" required>
+            <mat-select [(ngModel)]="gender" name="gender" required ngDefaultControl>
               <mat-option value="male">{{ 'PROFILE.GENDER.TYPE.MALE' | translate }}</mat-option>
               <mat-option value="female">{{ 'PROFILE.GENDER.TYPE.FEMALE' | translate }}</mat-option>
               <mat-option value="other">{{ 'PROFILE.GENDER.TYPE.OTHER' | translate }}</mat-option>
