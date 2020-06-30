@@ -44,6 +44,23 @@ To be able to avoid CORS problems and consum the OU APIs there is a proxy.
 
 In case we need to change the proxy configuration, because we must use another target, we need to update the file 'src/proxy.conf.json'
 
+## Docker
+
+- Create the docker image:
+```
+docker build -t qualichain-fe-app .
+```
+
+- Run the docker container with:
+```
+docker run --name ng-app-qualichain-fe -d -p 80:80 qualichain-fe-app
+```
+
+- In your browser, navigate to 'http://localhost'
+
+It deploys the FE in an nginx server
+
+The default.conf file is used to configure nginx as proxy to solve CORS problem.
 
 
 ## Development server
