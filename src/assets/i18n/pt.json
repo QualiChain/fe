@@ -426,7 +426,8 @@
     "LEARN_MORE": "Learn more",
     "APPLY_JOB": "Apply for this job",
     "DELETE_APPLY_JOB": "Delete job application",
-    "CHANGE_PASSWORD": "Change password"
+    "CHANGE_PASSWORD": "Change password",
+    "VIEW_MORE": "View more"
   },
   "ACTION": "Action",
   "FILTER": "Filter",
