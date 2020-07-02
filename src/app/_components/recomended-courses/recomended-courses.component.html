@@ -10,9 +10,12 @@
 
         <ngb-accordion *ngIf="recomendedCourses.length>=0" activeIds="course-0">
 
-          <ngb-panel id="course-{{i}}" *ngFor="let course of recomendedCourses; let i = index" >
+          <ngb-panel id="course-{{i}}" *ngFor="let course of recomendedCourses | slice:0:5; let i = index" >
             <ng-template ngbPanelTitle>
+              <!-- 
               <span>&#9733; <b>{{course.course_title}}</b> &#9733;</span>
+              -->
+              <b>{{course.course_title}}</b>
             </ng-template>
             <ng-template ngbPanelContent>
               <div class="course-card">
@@ -69,6 +72,11 @@
               </ngb-panel>
 -->
         </ngb-accordion>
+
+        <div *ngIf="recomendedCourses.length>=5" class="col-lg-8">
+          <br>
+          <a [routerLink]="['/profiles',userId,'recomended','courses']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+        </div>
 
     </div>
 </div>

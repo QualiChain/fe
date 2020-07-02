@@ -1,8 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecomendationsService } from '../../_services/recomendations.service';
 import { CVService } from '../../_services/cv.service';
 import { CoursesService } from '../../_services/courses.service';
+import Course from '../../_models/course';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+
 
 @Component({
   selector: 'app-recomended-courses',
@@ -13,7 +18,22 @@ export class RecomendedCoursesComponent implements OnInit {
 
   @Input() userId: number = null;
 
+  
   recomendedCourses = [];
+
+
+  displayedColumns: string[] = ['course_title', 'course_decription', 'action'];
+  
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  @ViewChild(MatPaginator, {static: true}) 
+  paginator: MatPaginator;  
+  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   constructor(
     private router: Router,
@@ -23,6 +43,11 @@ export class RecomendedCoursesComponent implements OnInit {
   ngOnInit() {
 
     //console.log(this.userId);  
+
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+
+    
 
     if (!this.userId) {
       this.route.params.subscribe(params => {
@@ -92,6 +117,10 @@ export class RecomendedCoursesComponent implements OnInit {
                 //console.log("list of recomended courses by CV");
                 //console.log(dataRecommendationByCV);                   
                 this.recomendedCourses = dataRecommendationByCV['recommended_courses'];
+
+                this.dataSource.data = this.recomendedCourses;
+                //console.log(this.dataSource.data);
+
                 dataRecommendationByCV['recommended_courses'].forEach(element => {
                   //console.log(element.course_id);
                   this.cs
@@ -108,6 +137,7 @@ export class RecomendedCoursesComponent implements OnInit {
 
 
                 });
+                
 
               },
               error => {
@@ -138,5 +168,21 @@ export class RecomendedCoursesComponent implements OnInit {
     }    
 
   }
+
+}
+
+
+let ELEMENT_DATA: any[] = [];
+
+// another component with a different view.
+@Component({
+  selector: 'app-recomended-courses-page',
+  templateUrl: './recomended-courses-page.component.html',
+  styleUrls: ['./recomended-courses.component.css']
+})
+export class RecomendedCoursesComponentPage extends RecomendedCoursesComponent{
+
+
+
 
 }
