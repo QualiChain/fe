@@ -9,10 +9,11 @@
 
         <ngb-accordion *ngIf="recomendedSkills.length>=0" activeIds="skill-0">
           
-          <ngb-panel id="skill-{{i}}" *ngFor="let skill of recomendedSkills; let i = index" >
+          <ngb-panel id="skill-{{i}}" *ngFor="let skill of recomendedSkills | slice:0:5; let i = index" >
 
             <ng-template ngbPanelTitle>
-              <span>&#9733; <b>{{skill.description}}</b> &#9733;</span>
+              <!--<span>&#9733; <b>{{skill.description}}</b> &#9733;</span>-->
+              <b>{{skill.description}}</b>
             </ng-template>
             <ng-template ngbPanelContent>
               <div class="skill-card">                    
@@ -73,6 +74,11 @@
               </ngb-panel>
             -->
         </ngb-accordion>
+
+        <div *ngIf="recomendedSkills.length>5" class="col-lg-8">
+          <br>
+          <a [routerLink]="['/profiles',userId,'recomended','skills']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+        </div>
 
     </div>
 </div>
