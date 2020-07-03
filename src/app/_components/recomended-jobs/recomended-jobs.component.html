@@ -3,16 +3,19 @@
         <h3>{{ 'RECOMENDED_JOBS.TITLE' | translate }}</h3>
         <!-- #acc="ngbAccordion" -->
 
-        <div *ngIf="recomendedJobs.length==0" class="col-lg-8">
-          This user does not have any recomended job yet. 
+        <div *ngIf="recomendedJobs.length==0">
+          {{ 'RECOMENDED_JOBS.NO_DATA' | translate }} 
         </div>
 
         <ngb-accordion *ngIf="recomendedJobs.length>=0" activeIds="job-0">
           
-          <ngb-panel id="job-{{i}}" *ngFor="let job of recomendedJobs; let i = index" >
+          <ngb-panel id="job-{{i}}" *ngFor="let job of recomendedJobs | slice:0:5; let i = index" >
 
             <ng-template ngbPanelTitle>
+              <!--
               <span>&#9733; <b>{{job.job.title}}</b> &#9733;</span>
+              -->
+              <b>{{job.job.title}}</b>
             </ng-template>
             <ng-template ngbPanelContent>
               <div class="job-card">                    
@@ -20,11 +23,15 @@
                     <p class="job-card-text">
                       {{job.job.job_description}}
                       <br/>
-                      Match: 
+                      <!--{{ 'RECOMENDED_JOBS.MATCH' | translate }}:-->
                     </p>
-                    <div class="progress">                      
-                      <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>                      
+                    
+                    <!--
+                    <div class="progress" >
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':job.job.rating}" attr.aria-valuenow="{{job.job.rating}}"  aria-valuemin="0" aria-valuemax="100">{{job.job.rating}}%</div>
                     </div>
+                    -->
+
                     <!-- 
                       <a [routerLink]="['/jobs','1']" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
                     -->
@@ -85,6 +92,11 @@
               </ngb-panel>
             -->
         </ngb-accordion>
+
+        <div *ngIf="recomendedJobs.length>5" class="col-lg-8">
+          <br>
+          <a [routerLink]="['/profiles',userId,'recomended','jobs']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+        </div>
 
     </div>
 </div>

@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecomendationsService } from '../../_services/recomendations.service';
+
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-recomended-jobs',
@@ -10,6 +14,20 @@ import { RecomendationsService } from '../../_services/recomendations.service';
 export class RecomendedJobsComponent implements OnInit {
 
   @Input() userId: number = null;
+
+  //displayedColumns: string[] = ['title', 'job_description', 'rating', 'action'];
+  displayedColumns: string[] = ['title', 'job_description', 'action'];
+  
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  @ViewChild(MatPaginator, {static: true}) 
+  paginator: MatPaginator;  
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   recomendedJobs = [];
 
@@ -21,6 +39,8 @@ export class RecomendedJobsComponent implements OnInit {
   ngOnInit() {
 
     //console.log(this.userId);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;    
 
     if (!this.userId) {
       this.route.params.subscribe(params => {
@@ -30,7 +50,8 @@ export class RecomendedJobsComponent implements OnInit {
     });
     }
 
-    //console.log(this.userId);    
+
+    
 
     if (this.userId) {
       this.rs
@@ -39,6 +60,23 @@ export class RecomendedJobsComponent implements OnInit {
           //console.log("list of recomended jobs");
           //console.log(data);
           this.recomendedJobs = data;
+
+          //console.log(this.userId);    
+          
+          let tmpData = [];
+          /*
+          for (let index = 0; index < 12; index++) {
+            this.recomendedJobs.push({'job':{'id':index,'title': 'title '+index,'job_description': 'description ' +index, 'rating': 70+index}});            
+          }
+          */
+
+          this.recomendedJobs.forEach(element => {
+            tmpData.push(element.job);
+          });
+          this.dataSource.data = tmpData;
+          //console.log(this.recomendedJobs);
+          //console.log(this.dataSource);
+
         },
         error => {
           console.log("recomended jobs not found in db");                        
@@ -47,5 +85,20 @@ export class RecomendedJobsComponent implements OnInit {
     }
 
   }
+
+}
+
+let ELEMENT_DATA: any[] = [];
+
+// another component with a different view.
+@Component({
+  selector: 'app-recomended-jobs-page',
+  templateUrl: './recomended-jobs-page.component.html',
+  styleUrls: ['./recomended-jobs.component.css']
+})
+export class RecomendedJobsComponentPage extends RecomendedJobsComponent{
+
+
+
 
 }

@@ -108,7 +108,7 @@ import { RecruitmentViewComponent } from './_components/recruitment-view/recruit
 import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
 import { CareerAdvisorComponent } from './_components/career-advisor/career-advisor.component';
 import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_components/recomended-courses/recomended-courses.component';
-import { RecomendedJobsComponent } from './_components/recomended-jobs/recomended-jobs.component';
+import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent } from './_components/recomended-skills/recomended-skills.component';
 import { CoursesComponent } from './_components/courses/courses.component';
 import { CoursesGetComponent } from './_components/courses-get/courses-get.component';
@@ -224,7 +224,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     BestCareerOptionsComponent,
     CareerAdvisorComponent,
     RecomendedCoursesComponent, RecomendedCoursesComponentPage,
-    RecomendedJobsComponent,
+    RecomendedJobsComponent, RecomendedJobsComponentPage,
     RecomendedSkillsComponent,
     CoursesComponent,
     CoursesGetComponent,

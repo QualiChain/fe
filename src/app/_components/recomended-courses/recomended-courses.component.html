@@ -4,8 +4,8 @@
         <!--
           #acc="ngbAccordion"
         -->
-        <div *ngIf="recomendedCourses.length==0" class="col-lg-8">
-          This user does not have any recomended course yet. 
+        <div *ngIf="recomendedCourses.length==0">
+          {{ 'RECOMENDED_COURSES.NO_DATA' | translate }}
         </div>
 
         <ngb-accordion *ngIf="recomendedCourses.length>=0" activeIds="course-0">
@@ -73,7 +73,7 @@
 -->
         </ngb-accordion>
 
-        <div *ngIf="recomendedCourses.length>=5" class="col-lg-8">
+        <div *ngIf="recomendedCourses.length>5" class="col-lg-8">
           <br>
           <a [routerLink]="['/profiles',userId,'recomended','courses']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
         </div>
