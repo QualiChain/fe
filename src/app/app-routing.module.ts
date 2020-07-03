@@ -26,7 +26,7 @@ import { CoursesEditComponent } from './_components/courses-edit/courses-edit.co
 import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
 import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
-import { RecomendedSkillsComponent } from './_components/recomended-skills/recomended-skills.component';
+import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_components/recomended-skills/recomended-skills.component';
 import { NotFoundComponent } from './_components/not-found/not-found.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
@@ -160,7 +160,7 @@ const routes: Routes = [
   },
   {
     path: 'profiles/:id/recomended/skills',
-    component: RecomendedSkillsComponent,
+    component: RecomendedSkillsComponentPage,
     canActivate: [AuthGuard],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
   },
