@@ -58,7 +58,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
-import { NbSecurityModule } from '@nebular/security';
+//import { NbSecurityModule } from '@nebular/security';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // for HttpClient import:
@@ -255,7 +255,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     }),
     NgbModule,
     ChartsModule,
-    NbSecurityModule.forRoot(),
+    //NbSecurityModule.forRoot(),
     LoadingBarHttpClientModule,
     LoadingBarRouterModule,
     LoadingBarModule,

@@ -22,7 +22,6 @@
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
-    "@nebular/security": "^4.6.0",
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "@ngx-loading-bar/core": "^4.2.0",
     "@ngx-loading-bar/http-client": "^4.2.0",
