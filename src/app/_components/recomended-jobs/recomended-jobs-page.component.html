@@ -1,7 +1,7 @@
-<h1>{{ 'RECOMENDED_COURSES.TITLE' | translate }}</h1>
+<h1>{{ 'RECOMENDED_JOBS.TITLE' | translate }}</h1>
 <div class="row">
     <div *ngIf="dataSource.data.length==0">
-        {{ 'RECOMENDED_COURSES.NO_DATA' | translate }} 
+        {{ 'RECOMENDED_JOBS.NO_DATA' | translate }} 
     </div>
 
     <div [hidden]="!dataSource.data.length" >  
@@ -19,22 +19,29 @@
                     <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/courses',element.course_id]" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
+                        <a [routerLink]="['/jobs',element.id]" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
                     </td>
                     </ng-container>
-        
-            <!-- Label Column -->
-            <ng-container matColumnDef="course_title">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.NAME.LABEL' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.course_title}} </td>
+
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.TITLE.LABEL' | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
             </ng-container>
 
             <!-- Description Column -->
-            <ng-container matColumnDef="course_decription">
-                <th mat-header-cell *matHeaderCellDef > {{ 'COURSE.DESCRIPTION.LABEL' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.course_decription}} </td>
+            <ng-container matColumnDef="job_description">
+                <th mat-header-cell *matHeaderCellDef > {{ 'JOB.DESCRIPTION.LABEL' | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.job_description}} </td>
             </ng-container>
 
+            <!-- rating Column -->
+            <!--
+            <ng-container matColumnDef="rating">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'RECOMENDED_JOBS.MATCH' | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+            </ng-container>
+            -->
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

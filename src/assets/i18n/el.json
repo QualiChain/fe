@@ -403,7 +403,8 @@
   },
   "RECOMENDED_JOBS": {
     "TITLE": "Recommended jobs",
-    "NO_DATA": "This user does not have any recomended job yet."
+    "NO_DATA": "This user does not have any recomended job yet.",
+    "MATCH": "Match"
   },
   "RECOMENDED_SKILLS": {
     "TITLE": "Recommended skills",
