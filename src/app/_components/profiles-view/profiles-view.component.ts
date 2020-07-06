@@ -23,7 +23,12 @@ import { UsersService } from '../../_services/users.service';
 import { BadgesService } from '../../_services/badges.service';
 
 import User from '../../_models/user';
-import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+//import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { awardDialog_modal } from '../../_components/award-smart-badge/award-smart-badge.component';
 import { OUService } from '../../_services/ou.service';
 import { CoursesService } from '../../_services/courses.service';

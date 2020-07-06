@@ -3,7 +3,9 @@ import { FormGroup,  FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobsService } from '../../_services/jobs.service';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { MatDialog } from '@angular/material';
+//import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+
 import {TranslateService} from '@ngx-translate/core';
 import { Job, JobSkill, Education, WorkHistory } from '../../_models/Job';
 import {formatDate} from '@angular/common';

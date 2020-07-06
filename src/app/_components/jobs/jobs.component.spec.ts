@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { JobsComponent } from './jobs.component';
 import { TranslateModule } from "@ngx-translate/core";
-import { MatTableModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EmploymentTypePipe } from '../../_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from '../../_pipes/level-type/level-type.pipe';

@@ -19,7 +19,7 @@ export const environment = {
   competencyManagementUrl : 'https://localhost:4000/competencyManagement',
   cvUrl : 'http://knowledgebizvpn.ddns.net:8000/cv',//'http://qualichain.epu.ntua.gr:5000/CV',
   //cvUrl : 'proxyKBZ/cv',
-  jobmatchingUrl : 'http://knowledgebizvpn.ddns.net:8000/',//'http://localhost:8000/jobs',
+  jobmatchingUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',//'http://localhost:8000/jobs',
   //jobmatchingUrl : 'proxyKBZ/jobs',
   jobpostGet : 'https://localhost:8000/jobget',  
   jobpostUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs'
