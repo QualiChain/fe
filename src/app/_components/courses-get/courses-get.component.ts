@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../_services/courses.service';
 import Course from '../../_models/course';
 import User from '../../_models/user';
-import { MatDialog } from '@angular/material';
+//import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../_services';

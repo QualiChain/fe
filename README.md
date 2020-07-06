@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
 
+Migrated to version 10.0.1
+
 ## How to install
     - Clone this repository (git clone https://github.com/QualiChain/fe.git)
     - Access to the main folder: cd qualichain

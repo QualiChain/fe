@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JobsService } from '../../_services/jobs.service';
 import { Job, JobSkill } from '../../_models/Job';
 import { applyJobDialog_modal } from '../../_components/jobs/jobs.component'
-import { MatDialog } from '@angular/material';
+//import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';

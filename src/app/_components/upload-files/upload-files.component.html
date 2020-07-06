@@ -43,7 +43,7 @@
                 <i _ngcontent-axy-c0="" class="material-icons" > description </i>
                 <div class="info">
                     <h4 class="name">{{ file?.name }}</h4>
-                    <p class="size">Size: {{ formatBytes(file?.size) }} --{{file.type}}--</p>
+                    <p class="size">Size: {{ formatBytes(file?.size) }} Type: {{file.type}}</p>
                     <p><img [src]="imgURL[i]" id="preloadImg" *ngIf="imgURL[i]"></p>
                 </div>
             </div>
