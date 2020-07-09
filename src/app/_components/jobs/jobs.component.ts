@@ -16,6 +16,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { AuthService } from '../../_services';
 import User from '../../_models/user';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface AvailableJobs {
   id: number;
@@ -84,7 +85,7 @@ export class JobsComponent implements OnInit {
 
 export class JobsComponent implements OnInit {
   //displayedColumns: string[] = ['id', 'title', 'employment_type', 'level', 'action'];
-  displayedColumns: string[] = ['title', 'employment_type', 'level', 'action'];
+  displayedColumns: string[] = ['label', 'employment_type', 'level', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -100,7 +101,9 @@ export class JobsComponent implements OnInit {
   }
 
   jobs: Job[];
-  constructor(private js: JobsService, private authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
+  constructor(
+    private router: Router,
+    private js: JobsService, private authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
     public applyForAJobDialog: MatDialog) { 
 
       this.authservice.currentUser.subscribe(x => this.currentUser = x);
@@ -124,7 +127,16 @@ export class JobsComponent implements OnInit {
       if (dialogResult) {
          //console.log("Under construction");
          this.js.deleteJob(id).subscribe(data => {
-          window.location.reload();
+          //window.location.reload();
+
+          let posI = this.dataSource.data.findIndex(function(job){ return job.id === id })
+             if (posI>0) {
+               this.dataSource.data.splice(posI, 1);
+               this.jobs.splice(posI, 1);
+               this.dataSource._updateChangeSubscription();
+              }
+              this.router.navigate(["/jobs"]);
+
         });
       }
     });
@@ -161,7 +173,7 @@ export class JobsComponent implements OnInit {
       .subscribe((data: Job[]) => {
         this.jobs = data;
         ELEMENT_DATA = data;
-        console.log(data);
+        //console.log(data);
         /*
         ELEMENT_DATA.forEach(element => {
           data.push(element);

@@ -63,6 +63,7 @@ export class CoursesComponent implements OnInit {
   
 
   confirmDialog(id, title): void {
+    
     //const message = `Are you sure you want to do this?`;
     const message = this.translate.instant('JOBS.DELETE_MESSAGE') + " ("+title+")";
     
@@ -83,9 +84,13 @@ export class CoursesComponent implements OnInit {
          .deleteCourse(id).subscribe(
            data => {
              console.log("course deleted!!");
-             this.router.navigate(["/courses"]);
-
-             
+             let posI = this.dataSource.data.findIndex(function(course){ return course.courseid === id })
+             if (posI>0) {
+               this.dataSource.data.splice(posI, 1);
+               this.courses.splice(posI, 1);
+               this.dataSource._updateChangeSubscription();
+              }
+              this.router.navigate(["/courses"]);
            },
            error => {
              alert("Error deleting the course");                      
