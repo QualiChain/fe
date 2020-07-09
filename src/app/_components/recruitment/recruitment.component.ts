@@ -9,7 +9,6 @@ import { JobsService } from '../../_services/jobs.service';
 import { UsersService } from '../../_services/users.service';
 import User from '../../_models/user';
 
-
 @Component({
   selector: 'app-recruitment',
   templateUrl: './recruitment.component.html',
@@ -40,6 +39,7 @@ export class RecruitmentComponent implements OnInit {
 
   jobs: Job[];
   users: User[];
+  displayMessage = false;
   //recruits = [];
   /*
   listOfCandidates = [    
@@ -117,7 +117,7 @@ export class RecruitmentComponent implements OnInit {
   
 
   ngOnInit() {
-    console.log(this.dataSource);
+    //console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.getAvailableJobs();//
@@ -138,8 +138,10 @@ export class RecruitmentComponent implements OnInit {
   }
  
   processSeacrhJobForm() {
+    this.displayMessage = false;
     this.dataSource.data = [];
     this.getMatchedCVs(this.seachJobTextInput);
+    
   }
 
   getBusername(arr, value) {
@@ -178,10 +180,12 @@ export class RecruitmentComponent implements OnInit {
                 this.dataSource.data = data;
              }
           */
-          
+         this.displayMessage = true;
         },
         err => {
+          this.displayMessage = true;
           console.log(err);
+/*
           console.log("Loading demo data. Delete it when it works");
           let newItem =
             {
@@ -199,7 +203,7 @@ export class RecruitmentComponent implements OnInit {
 
           data.push(this.listOfCandidates[Math.floor(Math.random() * Math.floor(5))+1]);
           this.dataSource.data = data;
-
+*/
 
         }
       );
@@ -210,15 +214,19 @@ getAvailableJobs() {
   this.jobService.getJobs()
   .subscribe((data: Job[]) => {
     this.jobs = data;
-    console.log(data);
+    //console.log(data);
   },
   err => {
     console.log(err);
   });
 }
 
+
+
 exportExcel(){    
-  this.excelService.exportAsExcelFile(this.listOfCandidates, 'list_of_candidates');
+  //console.log(this.listOfCandidates);
+  //console.log(this.dataSource.data);
+  this.excelService.exportAsExcelFile(this.dataSource.data, 'list_of_candidates');
 }
 
 

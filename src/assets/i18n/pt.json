@@ -363,6 +363,7 @@
   },
   "RECRUITMENT"  : {
     "TITLE": "Recrutamento",
+    "NO_DATA": "There are not candidates for this job",
     "SEARCH_LABEL" : "Select a Job",
     "CV-JOB-MATCHING": "Correspondência CV-JOB",
     "NAME": "Nome",

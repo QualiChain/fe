@@ -363,6 +363,7 @@
   },
   "RECRUITMENT"  : {
     "TITLE": "Recruitment",
+    "NO_DATA": "There are not candidates for this job",
     "SEARCH_LABEL" : "Select a Job",
     "CV-JOB-MATCHING": "CV-JOB Matching",
     "NAME": "Name",
