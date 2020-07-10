@@ -1,104 +1,53 @@
-<div class="card">
-    <div class="card-body">
-        <h3>{{ 'RECOMENDED_JOBS.TITLE' | translate }}</h3>
-        <!-- #acc="ngbAccordion" -->
+<mat-expansion-panel  [expanded]="recomendedJobs.length>0 ? true : false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ 'RECOMENDED_JOBS.TITLE' | translate }}</mat-panel-title>
+    <mat-panel-description></mat-panel-description>
+  </mat-expansion-panel-header>
 
-        <div *ngIf="recomendedJobs.length==0">
-          {{ 'RECOMENDED_JOBS.NO_DATA' | translate }} 
-        </div>
+  <div *ngIf="recomendedJobs.length==0">{{ 'RECOMENDED_JOBS.NO_DATA' | translate }} </div>
 
-        <ngb-accordion *ngIf="recomendedJobs.length>=0" activeIds="job-0">
+  <mat-accordion *ngIf="recomendedJobs.length>=0" activeIds="job-0">
+    <mat-expansion-panel  id="job-{{i}}" *ngFor="let job of recomendedJobs | slice:0:5; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{job.job.title}}
+        </mat-panel-title>
+        <mat-panel-description>
           
-          <ngb-panel id="job-{{i}}" *ngFor="let job of recomendedJobs | slice:0:5; let i = index" >
-
-            <ng-template ngbPanelTitle>
-              <!--
-              <span>&#9733; <b>{{job.job.title}}</b> &#9733;</span>
-              -->
-              <b>{{job.job.title}}</b>
-            </ng-template>
-            <ng-template ngbPanelContent>
-              <div class="job-card">                    
-                  <div class="job-card-body">                      
-                    <p class="job-card-text">
-                      {{job.job.job_description}}
-                      <br/>
-                      <!--{{ 'RECOMENDED_JOBS.MATCH' | translate }}:-->
-                    </p>
-                    
-                    <!--
-                    <div class="progress" >
-                      <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':job.job.rating}" attr.aria-valuenow="{{job.job.rating}}"  aria-valuemin="0" aria-valuemax="100">{{job.job.rating}}%</div>
-                    </div>
-                    -->
-
-                    <!-- 
-                      <a [routerLink]="['/jobs','1']" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
-                    -->
-                    <!--
-                    <a [routerLink]="['/jobs',job.job.id]" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
-                    -->
-                    <button class="btn btn-primary" [routerLink]="['/jobs', job.job.id]">
-                      <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
-                    </button>
-
-                  </div>
-              </div>
-            </ng-template>
-
-          </ngb-panel>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <div class="job-card">                    
+        <div class="job-card-body">                      
+          <div class="job-card-text">
+            {{job.job.job_description}}
+            <br/>
+            <!--{{ 'RECOMENDED_JOBS.MATCH' | translate }}:-->
+          </div>
+          
           <!--
-            <ngb-panel id="job-1">
-              <ng-template ngbPanelTitle>
-                <span>&#9733; <b>Technical Application Administrator</b> &#9733;</span>
-              </ng-template>
-              <ng-template ngbPanelContent>
-                <div class="card">                    
-                    <div class="card-body">                      
-                      <p class="card-text">
-                        This is just a Hardcoded course for testing propouses. Skills Required: Computer Science
-                        <br/>
-                        Match: 
-                      </p>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
-                      </div>
-                      <a [routerLink]="" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
-                    </div>
-                </div>
-              </ng-template>
-            </ngb-panel>
-            
-            <ngb-panel id="job-2">
-                <ng-template ngbPanelTitle>
-                  <span>&#9733; <b>Oracle database administrator</b> &#9733;</span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="card">                        
-                        <div class="card-body">                      
-                          <p class="card-text">
-                            This is just a Hardcoded course for testing propouses. Skills Required: Oracle
-                            <br/>
-                            Match: 
-                          </p>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 83%" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100">83%</div>
-                          </div>
-                          <a [routerLink]="" class="btn btn-primary">{{ 'BUTTON.VIEW' | translate }}</a>
-                        </div>
-                    </div>
-                    
-                </ng-template>
-              </ngb-panel>
-            -->
-        </ngb-accordion>
+          <div class="progress" >
+            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':job.job.rating}" attr.aria-valuenow="{{job.job.rating}}"  aria-valuemin="0" aria-valuemax="100">{{job.job.rating}}%</div>
+          </div>
+          -->
 
-        <div *ngIf="recomendedJobs.length>5" class="col-lg-8">
-          <br>
-          <a [routerLink]="['/profiles',userId,'recomended','jobs']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+          <br/>
+          <button class="btn btn-primary" [routerLink]="['/jobs', job.job.id]">
+            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+          </button>
+
         </div>
-
     </div>
-</div>
 
+
+    </mat-expansion-panel>
     
+  </mat-accordion>
+
+
+  <div *ngIf="recomendedJobs.length>5" class="col-lg-8">
+    <br>
+    <a [routerLink]="['/profiles',userId,'recomended','jobs']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+  </div>
+
+</mat-expansion-panel>
