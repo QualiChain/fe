@@ -1,84 +1,53 @@
-<div class="card">
-    <div class="card-body">
-        <h3>{{ 'RECOMENDED_COURSES.TITLE' | translate }}</h3>
-        <!--
-          #acc="ngbAccordion"
-        -->
-        <div *ngIf="recomendedCourses.length==0">
-          {{ 'RECOMENDED_COURSES.NO_DATA' | translate }}
-        </div>
+<mat-expansion-panel  [expanded]="recomendedCourses.length>0 ? true : false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ 'RECOMENDED_COURSES.TITLE' | translate }}</mat-panel-title>
+    <mat-panel-description></mat-panel-description>
+  </mat-expansion-panel-header>
 
-        <ngb-accordion *ngIf="recomendedCourses.length>=0" activeIds="course-0">
+  <div *ngIf="recomendedCourses.length==0">{{ 'RECOMENDED_COURSES.NO_DATA' | translate }} </div>
 
-          <ngb-panel id="course-{{i}}" *ngFor="let course of recomendedCourses | slice:0:5; let i = index" >
-            <ng-template ngbPanelTitle>
-              <!-- 
-              <span>&#9733; <b>{{course.course_title}}</b> &#9733;</span>
-              -->
-              <b>{{course.course_title}}</b>
-            </ng-template>
-            <ng-template ngbPanelContent>
-              <div class="course-card">
-                <!--
-                  <img class="card-img-top" src="https://www.php.net/images/logos/php-logo.svg" style="max-width:150px" alt="course image">
-                -->                  
-                  <div class="course-card-body">                      
-                    <p class="course-card-text">{{course.course_decription}}
-                      <!--
-                      <br/>
-                      Match: 
-                      -->
-                    </p>
-                    <!--
+  <mat-accordion *ngIf="recomendedCourses.length>=0" activeIds="course-0">
+    <mat-expansion-panel  id="course-{{i}}" *ngFor="let course of recomendedCourses | slice:0:5; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{course.course_title}}
+        </mat-panel-title>
+        <mat-panel-description>
+          
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <div class="course-card">                    
+        <div class="course-card-body">                      
+          <div class="course-card-text">
+            {{course.course_decription}}
+            <br/>
+            <!--{{ 'RECOMENDED_COURSE.MATCH' | translate }}:-->
+          </div>
+          
+         <!--
                     <div class="progress" >
                       <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':course.rating}" attr.aria-valuenow="{{course.rating}}"  aria-valuemin="0" aria-valuemax="100">{{course.rating}}%</div>
                     </div>
                     -->
-                    <a [routerLink]="['/courses',course.course_id]" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
-                  </div>
-              </div>
-            </ng-template>
-          </ngb-panel>
-<!--
-            <ngb-panel id="course-1">
-              <ng-template ngbPanelTitle>
-                <span>&#9733; <b>The PHP Workshop</b> &#9733;</span>
-              </ng-template>
-              <ng-template ngbPanelContent>
-                <div class="card">
-                    <img class="card-img-top" src="https://www.php.net/images/logos/php-logo.svg" style="max-width:150px" alt="course image">
-                    <div class="card-body">                      
-                      <p class="card-text">Learn how PHP can help you develop cutting-edge, high-performance web applications. It’s ideal if you’re looking to work with an existing application, or even develop your own side project. You'll learn from real examples that lead to real results.</p>
-                      <a [routerLink]="" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
-                    </div>
-                </div>
-              </ng-template>
-            </ngb-panel>
-            
-            <ngb-panel id="course-2">
-                <ng-template ngbPanelTitle>
-                  <span>&#9733; <b>The Python Workshop</b> &#9733;</span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="card">
-                        <img class="card-img-top" src="https://www.python.org/static/img/python-logo.png" style="max-width:150px" alt="course image">
-                        <div class="card-body">                      
-                          <p class="card-text">Learn how Python can help build your skills as a data scientist, write scripts that help automate your life and save you time, or even create your own games and desktop applications.</p>
-                          <a [routerLink]="" class="btn btn-primary">{{ 'BUTTON.LEARN_MORE' | translate }}</a>
-                        </div>
-                    </div>
-                    
-                </ng-template>
-              </ngb-panel>
--->
-        </ngb-accordion>
 
-        <div *ngIf="recomendedCourses.length>5" class="col-lg-8">
-          <br>
-          <a [routerLink]="['/profiles',userId,'recomended','courses']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+          <br/>
+          <button class="btn btn-primary" [routerLink]="['/courses', course.course_id]">
+            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+          </button>
+
         </div>
-
     </div>
-</div>
 
+
+    </mat-expansion-panel>
     
+  </mat-accordion>
+
+
+  <div *ngIf="recomendedCourses.length>5" class="col-lg-8">
+    <br>
+    <a [routerLink]="['/profiles',userId,'recomended','courses']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+  </div>
+
+</mat-expansion-panel>
