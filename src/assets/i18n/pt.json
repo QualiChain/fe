@@ -57,6 +57,13 @@
       "CREATE_COURSE": "Create Course"
     }
   },
+  "JOBS_APPLICATIONS": {
+    "TITLE": "Job applications",
+    "NO_DATA": "There are not job applications",
+    "BUTTON": {
+      "VIEW_JOB": "View job"
+    }
+  },
   "JOBS": {
     "TITLE": "Empregos",
     "REQUIRED_SKILLS": "Required Skills",

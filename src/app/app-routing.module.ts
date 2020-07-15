@@ -28,6 +28,7 @@ import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_c
 import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_components/recomended-skills/recomended-skills.component';
 import { NotFoundComponent } from './_components/not-found/not-found.component';
+import { JobAppliesComponentPage } from './_components/job-applications-by-user/job-applications-by-user.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
@@ -161,6 +162,11 @@ const routes: Routes = [
   {
     path: 'profiles/:id/recomended/skills',
     component: RecomendedSkillsComponentPage,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
+  },{
+    path: 'profiles/:id/jobapplies',
+    component: JobAppliesComponentPage,
     canActivate: [AuthGuard],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
   },

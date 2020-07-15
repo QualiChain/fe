@@ -83,7 +83,12 @@
   </div>
 
   <div class="col col-lg-4" *ngIf="currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee'">
-    <app-recomended-jobs userId="{{currentUser.id}}"></app-recomended-jobs>
+
+    <mat-accordion class="example-headers-align" multi>
+      <app-recomended-jobs userId="{{currentUser.id}}"></app-recomended-jobs>
+      <app-job-applications-by-user userId="{{currentUser.id}}"></app-job-applications-by-user>
+    </mat-accordion>
+    
   </div>
 
 </div>

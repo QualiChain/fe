@@ -129,4 +129,15 @@ export class JobsService {
       return this.http.delete(`${this.jobsURL}/${jobId}`);
     }
 
+    getJobAppliesPerCandidat(userId: number) {
+      return this.http.get(`${this.jobsURL}/${userId}/jobapplies`).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }    
+
 }
