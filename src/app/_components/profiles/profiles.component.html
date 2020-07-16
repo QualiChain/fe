@@ -32,6 +32,10 @@
               <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
             </button>
 
+            <button *ngIf="((currentUser.role.toLowerCase()=='administrator'))"class="btn btn-danger" (click)="confirmDialog(element.id, element.userName)">
+              <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+            </button>
+
             <button *ngIf="((element.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" (click)="openChangePasswordDialog(element.id)">
               <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.CHANGE_PASSWORD' | translate }}
             </button>

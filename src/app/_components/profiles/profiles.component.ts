@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { AuthService } from '../../_services';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profiles',
@@ -36,7 +38,10 @@ export class ProfilesComponent implements OnInit {
 
   currentUser: User;
   
-  constructor(private authservice: AuthService, private us: UsersService, public createChangePasswordDialog: MatDialog) { 
+  constructor(
+    private translate: TranslateService,
+    public dialog: MatDialog,
+    private authservice: AuthService, private us: UsersService, public createChangePasswordDialog: MatDialog) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -93,6 +98,36 @@ export class ProfilesComponent implements OnInit {
     });
     
   } 
+
+  confirmDialog(id, title): void {
+    //const message = `Are you sure you want to do this?`;
+    const message = this.translate.instant('PROFILES.DELETE_MESSAGE') + " ("+title+")";
+    
+    const dialogData = new ConfirmDialogModel(this.translate.instant('PROFILES.CONFIRM_ACTION'), message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      //this.result = dialogResult;
+
+      if (dialogResult) {
+         //console.log("Under construction");
+         this.us.deleteUser(id).subscribe(data => {
+          //window.location.reload();
+
+          let posI = this.dataSource.data.findIndex(function(user){ return user.id === id })
+             if (posI>0) {
+                //console.log(posI);
+                this.dataSource.data.splice(posI, 1);               
+                this.dataSource._updateChangeSubscription();               
+              }
+        });
+      }
+    });
+  }
 
 }
 

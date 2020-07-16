@@ -65,9 +65,9 @@ export class CoursesComponent implements OnInit {
   confirmDialog(id, title): void {
     
     //const message = `Are you sure you want to do this?`;
-    const message = this.translate.instant('JOBS.DELETE_MESSAGE') + " ("+title+")";
+    const message = this.translate.instant('COURSES.DELETE_MESSAGE') + " ("+title+")";
     
-    const dialogData = new ConfirmDialogModel(this.translate.instant('JOBS.CONFIRM_ACTION'), message);
+    const dialogData = new ConfirmDialogModel(this.translate.instant('COURSES.CONFIRM_ACTION'), message);
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -78,19 +78,19 @@ export class CoursesComponent implements OnInit {
       //this.result = dialogResult;
 
       if (dialogResult) {
-         console.log("Under construction");
+         //console.log("Under construction");
 
          this.cs
          .deleteCourse(id).subscribe(
            data => {
-             console.log("course deleted!!");
+             //console.log("course deleted!!");
              let posI = this.dataSource.data.findIndex(function(course){ return course.courseid === id })
              if (posI>0) {
                this.dataSource.data.splice(posI, 1);
                this.courses.splice(posI, 1);
                this.dataSource._updateChangeSubscription();
               }
-              this.router.navigate(["/courses"]);
+              //this.router.navigate(["/courses"]);
            },
            error => {
              alert("Error deleting the course");                      
