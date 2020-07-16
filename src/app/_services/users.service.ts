@@ -112,4 +112,8 @@ export class UsersService {
     )
   }
 
+  deleteUser(userId: Number){
+    return this.http.delete(`${this.uriUsers}/${userId}`);
+  }
+
 }

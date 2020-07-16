@@ -167,8 +167,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //todo , replace this by the pilotid of the user
     //console.log(this.currentUser);
     if (this.currentUser) {
+      //console.log(this.currentUser);
+      /*
       if (this.currentUser.pilotId) {
         this.menuOptionsPerPilot = this.ps.getPilot(this.currentUser.pilotId);
+      }
+      */
+      if (this.currentUser.authenticated) {
+        this.menuOptionsPerPilot = this.ps.getPilot(1);
       }
       else {
         this.menuOptionsPerPilot = this.ps.getPilot(0);  
