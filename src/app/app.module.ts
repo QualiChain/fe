@@ -99,7 +99,7 @@ import { HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilo
 
 import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
 import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
-import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './_components/utils/confirm-dialog/confirm-dialog.component';
 import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 import { ProfilesViewComponent, CVDialog_modal } from './_components/profiles-view/profiles-view.component';

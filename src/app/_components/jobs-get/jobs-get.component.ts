@@ -6,7 +6,7 @@ import { applyJobDialog_modal } from '../../_components/jobs/jobs.component'
 //import { MatDialog } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 
-import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../utils/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { UsersService } from 'src/app/_services/users.service';
 import { AuthService } from '../../_services';
