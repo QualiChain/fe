@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
-import { FilterArrayByValuePipe } from '../../_pipes/filterArrayByValue/filterArrayByValue.pipe';
+import { FilterArrayByValuePipe } from '../../../_pipes/filterArrayByValue/filterArrayByValue.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
 
 describe('HeaderComponent', () => {

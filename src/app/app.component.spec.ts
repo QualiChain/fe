@@ -6,7 +6,7 @@ import {async, TestBed} from '@angular/core/testing';
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {HttpLoaderFactory} from "./app.module";
 import { RouterTestingModule } from '@angular/router/testing';
-import { HeaderComponent } from './_components/header/header.component';
+import { HeaderComponent } from './_components/utils/header/header.component';
 
 const TRANSLATIONS_EN = require('../assets/i18n/en.json');
 const TRANSLATIONS_EL = require('../assets/i18n/el.json');

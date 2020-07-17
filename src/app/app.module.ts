@@ -89,8 +89,8 @@ import { NotFoundComponent } from './_components/not-found/not-found.component';
 import { LoginComponent } from './_components/login/login.component';
 import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
-import { HeaderComponent } from './_components/header/header.component';
-import { FooterComponent } from './_components/footer/footer.component';
+import { HeaderComponent } from './_components/utils/header/header.component';
+import { FooterComponent } from './_components/utils/footer/footer.component';
 import { JobsComponent, applyJobDialog_modal } from './_components/jobs/jobs.component';
 import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
 import { HomeComponent } from './_components/home/home.component';
@@ -113,8 +113,8 @@ import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_com
 import { CoursesComponent } from './_components/courses/courses.component';
 import { CoursesGetComponent } from './_components/courses-get/courses-get.component';
 import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
-import { ProgressComponent } from './_components/progress/progress.component';
-import { UploadFilesComponent } from './_components/upload-files/upload-files.component';
+import { ProgressComponent } from './_components/utils/progress/progress.component';
+import { UploadFilesComponent } from './_components/utils/upload-files/upload-files.component';
 import { JobApplicationsByUserComponent, JobAppliesComponentPage } from './_components/job-applications-by-user/job-applications-by-user.component';
 /*custom directives*/
 import { DndDirective } from './_directives/dnd/dnd.directive';
@@ -125,7 +125,7 @@ import { DatePipe } from '@angular/common';
 
 import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { QcSpinnerComponent } from './_components/qc-spinner/qc-spinner.component';
+import { QcSpinnerComponent } from './_components/utils/qc-spinner/qc-spinner.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);

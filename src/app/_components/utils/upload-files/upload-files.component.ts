@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { UploadService } from '../../_services/upload.service';
+import { UploadService } from '../../../_services/upload.service';
 
 @Component({
   selector: 'app-upload-files',

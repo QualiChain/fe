@@ -2,9 +2,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UploadFilesComponent } from './upload-files.component';
-import { FilterArrayByValuePipe } from '../../_pipes/filterArrayByValue/filterArrayByValue.pipe';
+import { FilterArrayByValuePipe } from '../../../_pipes/filterArrayByValue/filterArrayByValue.pipe';
 import { TranslateModule } from "@ngx-translate/core";
-import { UploadService } from '../../_services/upload.service';
+import { UploadService } from '../../../_services/upload.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('UploadFilesComponent', () => {
