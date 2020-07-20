@@ -1,0 +1,15 @@
+<!-- Resources: https://angular.io/guide/reactive-forms -->
+<form [formGroup]="parentForm">
+    <mat-form-field class="country-field-full-width">
+        <mat-select  [(value)]="defaultValue" [(required)]="requiredValue" placeholder="{{ 'PROFILE.COUNTRY.LABEL' | translate }}" formControlName="{{formInnerControlName}}">
+            <mat-option *ngFor="let opt of countryOptions" [value]="opt.value">
+                {{opt.text}}
+            </mat-option>
+        </mat-select>
+        <!--
+        <mat-error *ngIf="parentForm.get(formInnerControlName).hasError('required')">
+            This field is required.
+        </mat-error>
+        -->
+    </mat-form-field>
+</form>
