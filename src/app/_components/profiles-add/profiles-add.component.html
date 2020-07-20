@@ -7,7 +7,7 @@
   <div class="row">
 
     <div class="col col-lg-6">
-      <form #formLogin="ngForm" class="create-profile-form" (ngSubmit)="processForm()">
+      <form #formLogin="ngForm" class="create-profile-form" (ngSubmit)="processForm()" >
         <!-- pilot -->
         <div class="form-group field" >
           <!--
@@ -158,18 +158,22 @@
   
         <!-- country -->
         <div class="form-group field" [class.has-error]="countryInput.invalid">
-          <!--
-          <label>{{ 'PROFILE.COUNTRY.LABEL' | translate }}</label>
-          <input type="text" name="country" class="form-control input" placeholder="{{ 'PROFILE.COUNTRY.PLACEHOLDER' | translate }}"
-            [(ngModel)]="country" required minlength="3" #countryInput="ngModel">
-        -->
+          <input [hidden]="true" matInput required [(ngModel)]="country" name="country" value="country" #countryInput="ngModel">
+          <!-- Passing parent form, options list and control name to use -->
+          <app-qc-location-country [parentForm]="profileForm" [defaultValue]="country" [requiredValue]="true" formInnerControlName="selectCtrl">
+          </app-qc-location-country>
+        </div>
+        
+        <!--
+        <div class="form-group field" [class.has-error]="countryInput.invalid">
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.COUNTRY.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="country" name="country" value="country" placeholder="{{ 'PROFILE.COUNTRY.PLACEHOLDER' | translate }}" #countryInput="ngModel">
             </mat-form-field>
   
         </div>
-  
+        -->
+        
         <!-- city -->
         <div class="form-group field" [class.has-error]="cityInput.invalid">
           <!-- 

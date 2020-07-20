@@ -31,6 +31,8 @@ import { DatePipe } from '@angular/common';
 })
 export class ProfilesAddComponent implements OnInit {
 
+  public profileForm: FormGroup;
+
   pilots: Pilot[] = [
     {value: 1, viewValue: 'Pilot 1'},
     {value: 2, viewValue: 'Pilot 2'},
@@ -72,12 +74,28 @@ export class ProfilesAddComponent implements OnInit {
   files: any[] = [];
   currentUser: User;
   
+  public selectedOption: any;
+
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     public datepipe: DatePipe, private us: UsersService, private authservice: AuthService, 
     private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    this.profileForm = fb.group({
+      // parent's own input
+      name: [''],
+      // child's component input control, control name is passed via @Input to the child 
+      selectCtrl: ['', Validators.required]
+    });
+    // parent tracks child's input state change
+    this.profileForm.controls.selectCtrl.valueChanges.subscribe( value =>
+      {
+        this.country = value;
+      });
+  
 
   }
  

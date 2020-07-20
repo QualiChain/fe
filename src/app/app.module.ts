@@ -126,6 +126,7 @@ import { DatePipe } from '@angular/common';
 import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { QcSpinnerComponent } from './_components/utils/qc-spinner/qc-spinner.component';
+import { QcLocationCountryComponent } from './_components/utils/qc-location-country/qc-location-country.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -237,7 +238,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     ProgressComponent,
     UploadFilesComponent,
     QcSpinnerComponent,
-    JobApplicationsByUserComponent, JobAppliesComponentPage
+    JobApplicationsByUserComponent, JobAppliesComponentPage, QcLocationCountryComponent
   ],
   imports: [
     BrowserModule,
