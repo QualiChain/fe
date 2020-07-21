@@ -273,6 +273,10 @@
       "LABEL": "Country",
       "PLACEHOLDER": "Country"
     },
+    "STATE": {
+      "LABEL": "State",
+      "PLACEHOLDER": "State"
+    },
     "CITY": {
       "LABEL": "City",
       "PLACEHOLDER": "City"
