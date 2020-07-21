@@ -127,6 +127,7 @@ import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { QcSpinnerComponent } from './_components/utils/qc-spinner/qc-spinner.component';
 import { QcLocationCountryComponent } from './_components/utils/qc-location-country/qc-location-country.component';
+import { QcLocationStateCountryComponent } from './_components/utils/qc-location-state-country/qc-location-state-country.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -238,7 +239,7 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     ProgressComponent,
     UploadFilesComponent,
     QcSpinnerComponent,
-    JobApplicationsByUserComponent, JobAppliesComponentPage, QcLocationCountryComponent
+    JobApplicationsByUserComponent, JobAppliesComponentPage, QcLocationCountryComponent, QcLocationStateCountryComponent
   ],
   imports: [
     BrowserModule,
