@@ -61,6 +61,7 @@ export class ProfilesAddComponent implements OnInit {
   birthDate: string;
   //birthDate: Date;
   country: string;
+  state: string;
   city: string;
   address: string;
   zipCode: string;
@@ -88,14 +89,25 @@ export class ProfilesAddComponent implements OnInit {
       // parent's own input
       name: [''],
       // child's component input control, control name is passed via @Input to the child 
-      selectCtrl: ['', Validators.required]
+      selectCtrl: ['', Validators.required],
+      selectCtrlState: ['', Validators.required],
+      selectCtrlCity: ['', Validators.required]
     });
     // parent tracks child's input state change
     this.profileForm.controls.selectCtrl.valueChanges.subscribe( value =>
       {
         this.country = value;
       });
-  
+    // parent tracks child's input state change  
+    this.profileForm.controls.selectCtrlState.valueChanges.subscribe( value =>
+    {
+      this.state = value;
+    });
+    // parent tracks child's input state change  
+    this.profileForm.controls.selectCtrlCity.valueChanges.subscribe( value =>
+    {
+      this.city = value;
+    });    
 
   }
  
