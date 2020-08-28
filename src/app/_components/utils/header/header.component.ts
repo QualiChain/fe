@@ -65,13 +65,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   menuOptions =ELEMENT_DATA;
 
+  
 
   constructor(
     private ps: PilotsService,
     public createChangePasswordDialog: MatDialog,
     private appcomponent: AppComponent,
     private authservice: AuthService,
-    location: Location, router: Router, public translate: TranslateService, private messageService: MessageService) {
+    location: Location, public router: Router, public translate: TranslateService, private messageService: MessageService) {
   //  constructor(location: Location, router: Router) {
     
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
@@ -86,7 +87,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     });
 
-
+    
     this.route = location.path();
 
 
@@ -209,6 +210,45 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.userdata = {'authenticated': false ,'role': 'anonymous'};
     }
     
+  }
+
+  displayActivenessSubMenuOption(currentRoute: string, subMenuRoute: string, itemType: string) {
+
+   if (this.router.url===subMenuRoute){
+      if (itemType=='a') {
+        return 'selectedItem';
+      }
+      else if (itemType=='li') {
+        return 'current_page_parent';
+      }
+      else {
+        return 'current_page_parent';
+      }     
+    }
+    else {
+     return 'current_page_parent_2';     
+    }
+     
+ }
+
+  displayActivenessMenuOption(currentRoute: string, menuRoute: string, itemType: string) {
+
+    if (this.router.url.split("/")[1]==menuRoute.split("/")[1]){
+      if (itemType=='a') {
+        return 'selectedItem';
+      }
+      else if (itemType=='li') {
+        return 'current_page_parent';
+      }
+      else {
+        return 'current_page_parent';
+      }
+      
+     }
+     else {
+      return '';
+     }
+      
   }
 
   ngOnDestroy() {

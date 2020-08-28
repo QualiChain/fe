@@ -22,5 +22,11 @@ export const environment = {
   jobmatchingUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',//'http://localhost:8000/jobs',
   //jobmatchingUrl : 'proxyKBZ/jobs',
   jobpostGet : 'https://localhost:8000/jobget',  
-  jobpostUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs'
+  jobpostUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',
+  //validateCertificate : 'recruitmentComponent/validateCertificate',
+  validateCertificate : 'https://qualichain.herokuapp.com/qualichain/validateCertificate',
+  JwtModule: {
+    allowedDomains: ['localhost','qualichain.epu.ntua.gr', 'qualichain.herokuapp.com', 'fenix.tecnico.ulisboa.pt/oauth'],
+    disallowedRoutes: ["http://example.com/examplebadroute/"]
+  }
 };

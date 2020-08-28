@@ -18,5 +18,12 @@
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
+    },
+    "/recruitmentComponent/*": {
+        "target": "https://qualichain.herokuapp.com",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/recruitmentComponent" : "qualichain"}
     }
 }

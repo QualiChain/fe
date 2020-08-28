@@ -304,7 +304,7 @@ input, textarea{font-size:17px;min-height:40px;border-radius:none;line-height:20
 .qc-icon a:hover{background-image:none;border:none;margin:0;padding:0;}
 .qc-icon img{height:60px;padding-top:5px;}
 
-.navbar-default li.current-menu-item a, .nav .menu li.current_page_parent a{background:#21a959;color:#fff !important;}
+.navbar-default li.current-menu-item a, .nav .menu li.current_page_parent a.selectedItem{background:#21a959;color:#fff !important;}
 
 .hamburger .line{width:50px;height:5px;background-color:#ecf0f1;display:block;margin:8px auto;-webkit-transition:all 0.3s ease-in-out;-o-transition:all 0.3s ease-in-out;transition:all 0.3s ease-in-out;}
 .hamburger:hover{cursor:pointer;}

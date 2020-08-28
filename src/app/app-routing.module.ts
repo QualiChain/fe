@@ -30,6 +30,8 @@ import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_com
 import { NotFoundComponent } from './_components/not-found/not-found.component';
 import { JobAppliesComponentPage } from './_components/job-applications-by-user/job-applications-by-user.component';
 
+import { RecruitingComponent } from './_components/recruiting/recruiting.component'; 
+
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
 
@@ -105,6 +107,12 @@ const routes: Routes = [
     component: CareerAdvisorComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'recruitment/certificate-validation',
+    component: RecruitingComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.recruiter, Role.admin, Role.administrator] }
+   }, 
   {
     path: 'recruitment',
     component: RecruitmentComponent,

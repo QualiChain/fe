@@ -1,0 +1,87 @@
+<h1>{{ 'RECRUITING.CERTIFICATE_VALIDATION' | translate }}</h1>
+
+<flash-messages></flash-messages>
+
+<!--
+<body class="bg-light">
+-->
+
+<div class="container">
+  <div class="row centered">
+    <div class="col-6 col-md-4 shadow">
+      <form #form="ngForm" class="form-signin" (ngSubmit)="validateCertificate(form)">
+        <!--
+      <br>
+      <br>
+      <img class="mb-4" src="https://web.ist.utl.pt/~ist180970/assets/img/qualichain-logo.png" alt="" width="300" height="72">
+
+      <h1 class="h3 mb-3 font-weight-normal">Recruiting Component</h1>
+      -->
+
+      <label for="inputDID" >{{ 'RECRUITING.INPUTDID.LABEL' | translate }}</label>
+      <input name="inputDID" ngModel type="text" id="inputDID" class="form-control" placeholder="{{ 'RECRUITING.INPUTDID.PLACEHOLDER' | translate }}" required autofocus>
+
+      <label for="inputCivilID" >{{ 'RECRUITING.INPUTCIVILID.LABEL' | translate }}</label>
+      <input name="inputCivilID" ngModel type="text" id="inputCivilID" class="form-control" placeholder="{{ 'RECRUITING.INPUTCIVILID.PLACEHOLDER' | translate }}" required>
+
+
+      <br>
+      <label for="file">{{ 'RECRUITING.CHOOSE_FILE' | translate }}</label>
+      
+      <input name="certificate" ngModel type="file" id="myCertificate" (change)="handleFileInput($event.target.files)">
+      
+        <br>
+        <br>
+
+        <button class="btn btn-primary" type="submit">
+          <i _ngcontent-axy-c0="" class="material-icons"> grading </i> {{ 'RECRUITING.BUTTON.VERIFY_CERTIFICATE' | translate }}
+        </button>
+<!--
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'RECRUITING.BUTTON.VERIFY_CERTIFICATE' | translate }}</button>
+-->        
+        <br>
+        <br>
+          <flash-messages></flash-messages>
+        <br>
+    </form>
+  </div>
+  <div class="col-12 col-md-8">
+    <div *ngIf="showMessage" class="card bg-light mb-3" >
+      <div class="card-body">
+          <h5 class="card-title"><b>{{status}}</b></h5>
+
+          <div class="row" *ngIf="loadingSpinner">
+            <div class="col-md-4 col-md-offset-4">
+              <app-qc-spinner></app-qc-spinner>
+            </div>
+          </div>
+          
+        <h6 class="card-subtitle mb-2 text-muted">{{validationStatus}}</h6>
+        <div id="responseBox" class="alert alert-primary" role="alert">
+            {{response}}
+        </div>
+        <div *ngIf="error" id="responseBoxError" class="alert alert-danger">
+            {{errorBox}}
+        </div>
+      </div>
+    </div>
+
+
+      <div class="card bg-light mb-3" id = "instructions" [ngClass]="{instructions: showMessage}">
+      <div class="card-body">
+
+          <h5 class="card-title"><b>{{ 'RECRUITING.INSTRUCTIONS.TITLE' | translate }}</b></h5>
+          <p>{{ 'RECRUITING.INSTRUCTIONS.STEP_1' | translate }}</p>
+          <p>{{ 'RECRUITING.INSTRUCTIONS.STEP_2' | translate }}</p>
+          <p>{{ 'RECRUITING.INSTRUCTIONS.STEP_3' | translate }}</p>
+
+      </div>
+    </div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+</div>

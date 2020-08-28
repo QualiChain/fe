@@ -1,9 +1,16 @@
 <h1>{{ 'RECRUITMENT.TITLE' | translate }}</h1>
 
-<div class="">
+
+
+<div class="row">
   <!--
   <button class="btn btn-primary" (click)="exportExcel()">{{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}</button>
   -->  
+  <!--
+  <button class="btn btn-primary" [routerLink]="['/recruitment/certificate-validation']">
+    <i _ngcontent-axy-c0="" class="material-icons"> grading </i> {{ 'RECRUITING.CERTIFICATE_VALIDATION' | translate }}
+  </button>
+  -->
   <button [hidden]="!dataSource.data.length" class="btn btn-primary" (click)="exportExcel()">
     <i _ngcontent-axy-c0="" class="material-icons"> import_export </i> {{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}
   </button>

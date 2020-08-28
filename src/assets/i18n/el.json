@@ -25,7 +25,41 @@
     "LOGOUT": "Logout",
     "WELCOME_MESSAGE": "καλως ΗΡΘΑΤΕ",
     "PROFILE": "Προφίλ",
-    "RECRUITMENT": "Προσλήψεις"
+    "RECRUITMENT": "Προσλήψεις",
+    "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού"
+  },
+  "RECRUITING": {
+    "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",
+    "CHOOSE_FILE": "Choose File",
+    "INPUTDID": {
+      "LABEL": "DID",
+      "PLACEHOLDER": "IssuerID (Smart contract address WITHOUT did:ethr:)"
+    },
+    "INPUTCIVILID": {
+      "LABEL": "CivilID",
+      "PLACEHOLDER": "CivilID (e.g., 12345678)"
+    },
+    "BUTTON": {
+      "VERIFY_CERTIFICATE": "Verify Certificate"
+    },
+    "INSTRUCTIONS": {
+      "TITLE": "Οδηγίες",
+      "STEP_1": "1. Input the address of the account used to upload the certificate ('0x2CefB619218825C0c670D8E77f7039e0693E1dDC' by default).",
+      "STEP_2": "2. Input the civil ID. The Civil ID should be the same as the name of the certificate (pdf file) (e.g., 12345678)",
+      "STEP_3": "3. Select the certificate to validate (e.g., 12345678.pdf)"
+    },
+    "STATUS": {
+      "WAITING": "Awaiting validation..",
+      "DONE": "Ολοκληρώθηκε",
+      "SUCCESS": "Επιτυχία",
+      "ERROR": "Λάθος"
+    },
+    "CERTIFICATE_HASH": " - Certificate hash is: ",
+    "WARNING": {
+      "INVALID_ADDRESS": "Please insert a valid address (see examples)",
+      "INVALID_CIVIL_ID": "Please insert a valid Civil ID (integer)",
+      "INVALID_CERTIFICATE": "Please insert a valid certificate (.pdf)"
+    }
   },  
   "HOME": {
     "TITLE": "Home",
