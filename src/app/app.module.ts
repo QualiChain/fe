@@ -130,6 +130,16 @@ import { QcLocationCountryComponent } from './_components/utils/qc-location-coun
 import { QcLocationStateCountryComponent } from './_components/utils/qc-location-state-country/qc-location-state-country.component';
 import { QcLocationCityStateComponent } from './_components/utils/qc-location-city-state/qc-location-city-state.component';
 
+import { RecruitingComponent } from './_components/recruiting/recruiting.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { ValidateService } from './_services/recruiting/validate.service';
+import { AuthService } from './_services/recruiting/auth.service';
+import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+
+
+import { environment } from '../environments/environment';
+
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -198,6 +208,9 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
   };
 }
 
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal],
@@ -240,7 +253,8 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     ProgressComponent,
     UploadFilesComponent,
     QcSpinnerComponent,
-    JobApplicationsByUserComponent, JobAppliesComponentPage, QcLocationCountryComponent, QcLocationStateCountryComponent, QcLocationCityStateComponent
+    JobApplicationsByUserComponent, JobAppliesComponentPage, QcLocationCountryComponent, QcLocationStateCountryComponent, QcLocationCityStateComponent,
+    RecruitingComponent
   ],
   imports: [
     BrowserModule,
@@ -251,6 +265,13 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     materialModules,
     BrowserModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: environment.JwtModule.allowedDomains,
+        disallowedRoutes: environment.JwtModule.disallowedRoutes,
+      },      
+  }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -265,10 +286,11 @@ export function load(http: HttpClient, config: CustomConfigEnvironmentDataServic
     LoadingBarRouterModule,
     LoadingBarModule,
     ReactiveFormsModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    FlashMessagesModule.forRoot()
   ],
   exports: [materialModules],
-  providers: [ PilotsService, DatePipe, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, 
+  providers: [ PilotsService, DatePipe, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, JwtHelperService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {
       provide: APP_INITIALIZER,

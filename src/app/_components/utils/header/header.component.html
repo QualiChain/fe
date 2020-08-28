@@ -37,7 +37,29 @@
 
 							<li 
 							[hidden]="((menuOption.rolesPermissions.indexOf(this.userdata.role.toLowerCase())==-1) && !menuOption.public)"
-							*ngFor="let menuOption of menuOptionsPerPilot.menu" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="btn navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
+							*ngFor="let menuOption of menuOptionsPerPilot.menu" 
+							class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption dynamicmenuoptions" [ngClass]="displayActivenessMenuOption(route, menuOption.route , 'li')">
+								<a *ngIf="menuOption.submenu.length==0" class="btn navbar-item" routerLink="{{ menuOption.route }}" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a>
+								<div *ngIf="menuOption.submenu.length>0" class="dropdown dropdown-menu-right">
+									<a class="btn navbar-item dropdown-toggle" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" id="dropdownMenuButtonRecruitment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuOption.label | translate }}</a>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<ul>
+											<li 
+												[hidden]="((subMenuOption.rolesPermissions.indexOf(this.userdata.role.toLowerCase())==-1) && !subMenuOption.public)"
+												*ngFor="let subMenuOption of menuOption.submenu" 												
+												class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page " [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'li')">
+												<a class="navbar-item" [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'a')" routerLink="{{ subMenuOption.route }}" (click)="route=subMenuOption.route">{{ subMenuOption.label | translate }}</a>												
+											</li>
+										</ul>
+									</div>
+								</div>
+
+							</li>
+
+
+							
+								
+							
 							
 							<!--
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/logout'}"><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
@@ -90,7 +112,7 @@
 													</div>															
 											</li>
 
-											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles/'+currentUser.id}"><a class="navbar-item" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
 
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
 
