@@ -372,7 +372,16 @@
   },
   "BCO": {
     "TITLE": "Best Career Options"
-  },    
+  },   
+  "DSS_CV_RE_DESIGN": {
+    "TITLE": "DSS Curriculum Re-design",
+    "FOOTER_BAR_CHART": "Course Suitability Rating for skill ({{skill_title}})",
+    "MISSING_SKILLS": "Missing Skills",
+    "RECOMMENDED_COURSES": "Recommended Courses",
+    "RELATED_SKILLS": "Related skills",
+    "CURRICULUM_IS_UP_TO_DATE": "Curriculum is {{value}}% up-to-date",
+    "NO_DATA": "No information available"
+  },
   "CAREER_ADVISOR": {
     "TITLE": "Career Advisor"
   },
@@ -478,7 +487,8 @@
     "APPLY_JOB": "Apply for this job",
     "DELETE_APPLY_JOB": "Delete job application",
     "CHANGE_PASSWORD": "Change password",
-    "VIEW_MORE": "View more"
+    "VIEW_MORE": "View more",
+    "BACK_TO_USER_PROFILE": "Back to user profile"
   },
   "ACTION": "Action",
   "FILTER": "Filter",

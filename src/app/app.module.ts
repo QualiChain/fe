@@ -138,6 +138,7 @@ import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 
 
 import { environment } from '../environments/environment';
+import { DSSCurriculumReDesignComponent } from './_components/dss-curriculum-re-design/dss-curriculum-re-design.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -254,7 +255,8 @@ export function tokenGetter() {
     UploadFilesComponent,
     QcSpinnerComponent,
     JobApplicationsByUserComponent, JobAppliesComponentPage, QcLocationCountryComponent, QcLocationStateCountryComponent, QcLocationCityStateComponent,
-    RecruitingComponent
+    RecruitingComponent,
+    DSSCurriculumReDesignComponent
   ],
   imports: [
     BrowserModule,
