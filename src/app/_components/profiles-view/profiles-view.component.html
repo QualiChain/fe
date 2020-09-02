@@ -6,7 +6,7 @@
 
 <div class="container">
 
-  <div class="row">
+  <div class="row">   
     <button class="btn btn-primary" (click)="generatePdf('open')">  
       <i _ngcontent-axy-c0="" class="material-icons"> picture_as_pdf </i> {{ 'BUTTON.OPEN_PDF' | translate }}
     </button>
@@ -20,10 +20,16 @@
       {{ 'BUTTON.PRINT_PDF' | translate }}
     </button>
     -->
-    <a *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
+    <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
       <i _ngcontent-axy-c0="" class="material-icons"> edit </i>
       {{ 'BUTTON.EDIT' | translate }}
-    </a>
+    </button>
+
+    <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'dss-curriculum-re-design']">
+      <i _ngcontent-axy-c0="" class="material-icons"> edit </i>
+      DSS CV Re-design
+    </button>
+
   </div>
   <div class="row"><br></div>
   

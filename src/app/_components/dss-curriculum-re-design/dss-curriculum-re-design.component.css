@@ -1,0 +1,35 @@
+.missing_skills {
+    overflow-y: auto;
+    max-height: 300px;
+    min-height: 300px;
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+
+.selectedMissingSkillRow {
+    background: #21a959;
+    color: #fff !important;
+}
+
+.missing_skills a {
+    padding: 0px 2px 0px 2px;;
+}
+
+.section-preview {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+}
+
+.section-preview .ml-2 {
+    margin-left: .5rem !important;
+}
+
+.missingSkillRow {
+    border: 1px solid #e0e0e0;
+    padding: 5px;    
+    font-family:Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    cursor: pointer;
+      position:relative;
+  }

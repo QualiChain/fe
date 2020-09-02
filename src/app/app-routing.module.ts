@@ -31,6 +31,7 @@ import { NotFoundComponent } from './_components/not-found/not-found.component';
 import { JobAppliesComponentPage } from './_components/job-applications-by-user/job-applications-by-user.component';
 
 import { RecruitingComponent } from './_components/recruiting/recruiting.component'; 
+import { DSSCurriculumReDesignComponent } from './_components/dss-curriculum-re-design/dss-curriculum-re-design.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
@@ -105,6 +106,11 @@ const routes: Routes = [
   {
     path: 'profiles/:id/career-advisor',
     component: CareerAdvisorComponent,
+    canActivate: [AuthGuard]
+  },  
+  {
+    path: 'profiles/:id/dss-curriculum-re-design',
+    component: DSSCurriculumReDesignComponent,
     canActivate: [AuthGuard]
   },
   {

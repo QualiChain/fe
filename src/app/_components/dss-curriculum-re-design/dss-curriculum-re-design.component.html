@@ -1,0 +1,102 @@
+<h1>{{ 'DSS_CV_RE_DESIGN.TITLE' | translate }}</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-2">
+            <a [routerLink]="['/profiles', userId]" class="btn btn-primary"><i _ngcontent-axy-c0="" class="material-icons small"> arrow_back </i>  {{ 'BUTTON.BACK_TO_USER_PROFILE' | translate }}</a> 
+        </div>
+    </div>
+<br>
+    <div class="row " *ngIf="missingSkills.length==0">
+        {{ 'DSS_CV_RE_DESIGN.NO_DATA' | translate }}
+    </div>
+
+    <div class="row " *ngIf="missingSkills.length>0">
+        <div class="col col-lg-6 missing_skills">
+
+            <div class="row"><div class="col col-lg-6">{{ 'DSS_CV_RE_DESIGN.MISSING_SKILLS' | translate }}</div><div class="col col-lg-6">{{ 'DSS_CV_RE_DESIGN.RECOMMENDED_COURSES' | translate }}</div></div>
+            
+            <div class="row missingSkillRow"
+            (click)="selectedSkill=skill" (click)="selectMissingSkill(skill)"
+            [ngClass]="{selectedMissingSkillRow:selectedSkill.skill_title==skill.skill_title}" *ngFor="let skill of missingSkills let i = index">
+                <div class="col col-lg-6" >                    
+                    {{skill.skill_title}}
+                </div>
+                <div class="col col-lg-6">
+                    <div *ngFor="let relevant_skill of skill.relevant_skills let j = index">
+                        <div *ngFor="let related_course of relevant_skill.related_courses let k = index">
+                            
+                            
+                            <span *ngIf="related_course.course_id">
+                                {{related_course.course_title}}
+                                <!--
+                                <a [routerLink]="" (click)="selectedSkill=skill;selectedCourse=related_course" (click)="selectMissingSkill(skill);selectCourseBySkill(related_course)">{{related_course.course_title}}</a>
+                                <a routerLink="/courses/{{related_course.course_id}}">View Course</a>
+                                -->
+                            </span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div *ngIf="selectedSkill.skill_title" class="col col-lg-6">
+            <h3>{{selectedSkill.skill_title}}</h3>
+            <div>{{selectedSkill.skill_description}}</div>
+            <div *ngIf="selectedSkill.relevant_skills.length>0">
+                <section class="section-preview">
+                    {{ 'DSS_CV_RE_DESIGN.RELATED_SKILLS' | translate }}: <span class="badge badge-info ml-2" *ngFor="let skill_list of selectedSkill.relevant_skills let j = index">{{skill_list.skill_title}}</span> 
+                </section>
+            </div>
+            <br *ngIf="selectedSkill.relevant_skills.length>0">
+
+            <div *ngIf="relatedCourses.length>0">
+                <section class="section-preview">
+                    {{ 'DSS_CV_RE_DESIGN.RECOMMENDED_COURSES' | translate }}: <span class="" *ngFor="let rc of relatedCourses let j = index">
+                        <a routerLink="/courses/{{rc.course_id}}">{{rc.course_title}}</a>&nbsp;
+                        </span> 
+                </section>
+            </div>
+            <br *ngIf="relatedCourses.length>0">
+
+            <div *ngIf="barLabels.length>0">
+                
+                <canvas
+                    baseChart
+                    [chartType]="'bar'"
+                    [datasets]="barChartData"
+                    [labels]="barLabels"
+                    [options]="barChartOptions"
+                    [legend]="true"
+                    [colors]="barChartColors"
+                    (chartClick)="onChartClick($event)">
+                </canvas>
+                <!--
+                {{ 'DSS_CV_RE_DESIGN.FOOTER_BAR_CHART' | translate:{ skill_title: selectedSkill.skill_title } }}
+                -->
+            </div>
+        </div>        
+    </div>
+    <br>
+    <div *ngIf="doughnutChartData.length>0" class="row">
+        <div class="col col-lg-6 ">
+            {{ 'DSS_CV_RE_DESIGN.CURRICULUM_IS_UP_TO_DATE' | translate:{ value: doughnutChartData[0][0] } }}
+            <div class="wrapperPieChart">
+                <canvas baseChart 
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [colors]="pieChartColors"
+                    [chartType]="doughnutChartType">
+                </canvas>
+            </div>
+            
+        </div>
+        <div class="col col-lg-6 ">
+            <!--
+            <button class="btn btn-primary" (click)="exportAnalyticalReport()">
+                <i _ngcontent-axy-c0="" class="material-icons"> import_export </i> Export Analytical Report
+            </button>
+            -->
+        </div>
+    </div>        
+</div>
