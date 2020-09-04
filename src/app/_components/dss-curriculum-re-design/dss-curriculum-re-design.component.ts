@@ -26,9 +26,8 @@ export class DSSCurriculumReDesignComponent implements OnInit {
   userId: number = 0;      
 
   // ADD CHART OPTIONS. 
-  barChartOptions = {
-    responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-  }
+  barChartOptions = {};
+  
   barLabels = [];
   barChartData = [];
   barChartColors = [];
@@ -138,8 +137,8 @@ export class DSSCurriculumReDesignComponent implements OnInit {
 
         //var n = labelsToPlot.includes(missingSkill.relevant_skills[i].related_courses[j].course_title);
         //if (!n) {
-          dataToPlot.push(missingSkill.relevant_skills[i].related_courses[j].suitability_score);
-          //dataToPlot.push(missingSkill.relevant_skills[i].related_courses[j].course_id);
+          //dataToPlot.push(missingSkill.relevant_skills[i].related_courses[j].suitability_score);
+          dataToPlot.push(missingSkill.relevant_skills[i].related_courses[j].course_id);
           labelsToPlot.push(missingSkill.relevant_skills[i].related_courses[j].course_title);
 
           this.relatedCourses.push(missingSkill.relevant_skills[i].related_courses[j]);
@@ -148,9 +147,19 @@ export class DSSCurriculumReDesignComponent implements OnInit {
       }
     }
 
+    
     let chartLabel = this.translate.instant('DSS_CV_RE_DESIGN.FOOTER_BAR_CHART', { skill_title: missingSkill.skill_title });
 
-    this.barChartData = [{data: dataToPlot, label: chartLabel}];
+    this.barChartOptions = {
+      title: {
+        text: chartLabel,
+        display: true
+      },
+      responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
+    }    
+    
+    let chartLabel2 = this.translate.instant('COURSES.TITLE');
+    this.barChartData = [{data: dataToPlot, label: chartLabel2}];
     this.barLabels = labelsToPlot;
     /*
     this.barLabels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];

@@ -77,5 +77,17 @@ export class CoursesService {
             })
         )
         }
-    
+       
+
+        getCompletedCourseByUserId(userId: Number) {
+            return this.http.get(`${this.coursesURL}/completedcourses/${userId}`).
+            pipe(
+                map((data: Course[]) => {
+                    return data;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+            }            
+
 }

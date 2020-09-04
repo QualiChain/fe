@@ -383,7 +383,35 @@
     "NO_DATA": "No information available"
   },
   "CAREER_ADVISOR": {
-    "TITLE": "Career Advisor"
+    "TITLE": "Career Advisor",
+    "FOOTER_PIE_CHART": "Accumulative Job Demand",
+    "FOOTER_BAR_CHART": "Comparative between Demand and Actual Employment",
+    "TARGETED_JOB_TITLES": {
+      "TITLE": "Targeted Job Titles",
+      "PLACEHOLDER": "Please, type targeted job titles..."
+    },
+    "COMPLETED_COURSES": {
+      "TITLE": "Completed Courses",
+      "NO_DATA": "No courses completed"
+    },
+    "BUTTON": { 
+      "RECOMMEND": "Recommend",
+      "SHOW_EDUCATION_PLAN": "Show Education Plan"
+    },
+    "TABS": {
+      "COURSES_RECOMMENDATION": {
+        "TITLE": "Courses Recommendation",
+        "HELP_TEXT": "Please select courses that you find interesting (you may choose as many as you like):",
+        "NO_DATA": "No courses recomendations",
+        "SELECTED_CNT": "You have selected {{value}}% courses"
+      },
+      "SKILLS_RECOMMENDATION": {
+        "TITLE": "Skills Recommendation",
+        "HELP_TEXT": "Please select skills that you find interesting (you may choose as many as you like):",
+        "NO_DATA": "No skills recomendations",
+        "SELECTED_CNT": "You have selected {{value}}% skills"
+      }
+    }
   },
   "COURSE"  : {
     "TITLE": "Course",
@@ -488,7 +516,8 @@
     "DELETE_APPLY_JOB": "Delete job application",
     "CHANGE_PASSWORD": "Change password",
     "VIEW_MORE": "View more",
-    "BACK_TO_USER_PROFILE": "Back to user profile"
+    "BACK_TO_USER_PROFILE": "Back to user profile",
+    "BACK": "Back"
   },
   "ACTION": "Action",
   "FILTER": "Filter",
