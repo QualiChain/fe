@@ -1,12 +1,301 @@
 
 <h1>{{ 'CAREER_ADVISOR.TITLE' | translate }}</h1>
+<p>This is a mockup</p>
 
-<div class="container">
+<div class="container" *ngIf="!showRecommend">
+
     <div class="row">
         <div class="col col-lg-2">
             <a [routerLink]="['/profiles', userid]" class="btn btn-primary"><i _ngcontent-axy-c0="" class="material-icons small"> arrow_back </i>  {{ 'BUTTON.BACK_TO_USER_PROFILE' | translate }}</a> 
         </div>
     </div>
 
-        <p>career-advisor works!</p>
+        
+    <div class="row">
+        <div class="col col-lg-6">
+            <div *ngIf="showPieChart" class="wrapperPieChart">
+                <canvas baseChart 
+                    [data]="pieChartData"
+                    [options]="pieChartOptions"
+                    [labels]="pieChartLabels"
+                    [colors]="pieChartColors"
+                    [chartType]="pieChartType">
+                </canvas>
+                <!--
+                <div>{{ 'CAREER_ADVISOR.FOOTER_PIE_CHART' | translate }}</div>
+                -->
+            </div>
+
+        </div>
+        <div class="col col-lg-6">
+            <div *ngIf="showBarChart" class="wrapperBarChart">
+                <canvas
+                    baseChart
+                    [chartType]="barChartType"
+                    [labels]="barChartLabels"
+                    [colors]="barChartColors"
+                    [datasets]="barChartData"                    
+                    [options]="barChartOptions"
+                    [legend]="true"
+                    [colors]="barChartColors"
+                    >
+                </canvas>
+                <!--
+                <div>{{ 'CAREER_ADVISOR.FOOTER_BAR_CHART' | translate }}</div>
+                -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-12">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            <div class="col">
+                {{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.TITLE' | translate }}
+            </div>
+            <div class="col">
+                <input type="text" placeholder="{{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.PLACEHOLDER' | translate }}">
+            </div>
+            
+            <br>
+            
+            <div class="col">{{ 'CAREER_ADVISOR.COMPLETED_COURSES.TITLE' | translate }}</div>
+
+            <div class="col" *ngIf="completedCoursesByUser.length==0">
+                {{ 'CAREER_ADVISOR.COMPLETED_COURSES.NO_DATA' | translate }}
+            </div>
+            <div class="col" *ngIf="completedCoursesByUser.length>0">
+                <ul><li *ngFor="let completedCourse of completedCoursesByUser; let i = index">{{completedCourse.name}}</li></ul>
+            </div>
+            
+        </div>
+        <div class="col col-lg-6">
+
+            <div *ngIf="showLineChart" class="wrapperLineChart">
+                <canvas
+                    baseChart
+                    [chartType]="lineChartType"
+                    [labels]="lineChartLabels"
+                    [colors]="lineChartColors"
+                    [datasets]="lineChartData"                    
+                    [options]="lineChartOptions"
+                    [legend]="true"
+                    [colors]="lineChartColors"
+                    >
+                </canvas>
+                <!--
+                <div>{{ 'CAREER_ADVISOR.FOOTER_BAR_CHART' | translate }}</div>
+                -->
+            </div>
+
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col col-lg-10"></div>
+        <div class="col col-lg-2">
+            <button class="btn btn-success" (click)="showCarrerAdvisorRecommended()" >  
+                <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'CAREER_ADVISOR.BUTTON.RECOMMEND' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="showRecommend">
+    
+    <div class="row">
+        <div class="col col-lg-2">
+            <button class="btn btn-primary" (click)="hideCarrerAdvisorRecommended()" >  
+                <i _ngcontent-axy-c0="" class="material-icons small"> arrow_back </i>  {{ 'BUTTON.BACK' | translate }}
+            </button>            
+        </div>
+    </div>
+
+    <div class="row">
+        <ul class="nav nav-tabs" id="myTab2" role="tablist">
+            <li class="nav-item active">
+              <a class="nav-link active" id="courses-recomendation-tab" data-toggle="tab" href="#courses-recomendation" role="tab" aria-controls="courses-recomendation" aria-selected="true">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.TITLE' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="skills-recomendation-tab" data-toggle="tab" href="#skills-recomendation" role="tab" aria-controls="skills-recomendation" aria-selected="false">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.TITLE' | translate }}</a>
+            </li>
+          </ul>
+            <div class="tab-content carreer_advisor" id="myTabContent2">
+                <div class="tab-pane fade active in" id="courses-recomendation" role="tabpanel" aria-labelledby="courses-recomendation-tab">
+                    <br/>
+                    <div class="row" *ngIf="recommendedCourses.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.NO_DATA' | translate }}</div></div>
+                    
+                    <div class="row" >
+
+                        <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.HELP_TEXT' | translate }}</div>
+                    
+                        <div class="col-sm-12" >
+                            <div class="col-sm-6" *ngFor="let recommendedCourse of pagedListRC; let i = index">
+                                <div class="card" 
+                                [ngClass]="{selectedCard:selectedCourses.indexOf(recommendedCourse.id)>=0}"
+                                style="width: 95%;">
+                                <div class="card-body">
+                                    <div class="col-sm-10">
+                                        <h5 class="card-title">{{recommendedCourse.title}}</h5>  
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <mat-checkbox class="example-margin" 
+                                        [checked]="(selectedCourses.indexOf(recommendedCourse.id)>=0)"
+                                        (change)="changeSelectedCourses($event, recommendedCourse.id)"></mat-checkbox>
+                                        <!--
+                                        <a class="btn btn-primary" [routerLink]="['/courses', recommendedCourse.id]">
+                                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                                        </a>
+                                        -->
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <p class="card-text">{{recommendedCourse.description}}</p>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        Semester: 6
+                                    </div>
+                                    <div class="col-sm-12 relevant_skills">
+                                        Relevant Skills:
+                                        <span class="badge badge-info ml-2" *ngFor="let skill of recommendedCourse.skills let j = index">{{skill}}</span>                                        
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <h5>Statistics</h5>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="progress col-sm-6" >
+                                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':recommendedCourse.rating1}" attr.aria-valuenow="{{recommendedCourse.rating1}}"  aria-valuemin="0" aria-valuemax="100">{{recommendedCourse.rating1}}%</div>
+                                        </div>
+                                        <div class="col-sm-6"> {{recommendedCourse.rating1}}% relation with targetted job titles</div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="progress col-sm-6" >
+                                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':recommendedCourse.rating2}" attr.aria-valuenow="{{recommendedCourse.rating2}}"  aria-valuemin="0" aria-valuemax="100">{{recommendedCourse.rating2}}%</div>
+                                        </div>
+                                        <div class="col-sm-6"> {{recommendedCourse.rating2}}% relation with your interests</div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        17 students with similar profile also find it interesting
+                                    </div>                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            You have selected {{selectedCourses.length}} courses
+                        </div>
+
+                        <div class="col-sm-12">
+                            <mat-paginator 
+                                [length]="lengthRC"
+                                [pageSize]="pageSizeRC"
+                                [pageSizeOptions]="pageSizeOptionsRC"
+                                (page)="OnPageChangeRC($event)">
+                            </mat-paginator>
+                        </div>
+
+                    </div>                         
+                </div>
+                        
+                    
+
+                    
+                </div>
+                <div class="tab-pane fade" id="skills-recomendation" role="tabpanel" aria-labelledby="skills-recomendation-tab">
+                    <br/>                    
+                    <div class="row" *ngIf="recommendedSkills.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.NO_DATA' | translate }}</div></div>
+                    
+                    
+                    <div class="row" *ngIf="recommendedSkills.length>0">
+                        <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.HELP_TEXT' | translate }}</div>
+
+                        <div class="col-sm-12" >
+                            <div class="col-sm-6" *ngFor="let recommendedSkill of pagedListRS; let i = index">
+                                <div class="card" 
+                                [ngClass]="{selectedCard:selectedSkills.indexOf(recommendedSkill.id)>=0}"
+                                style="width: 95%;">
+                                <div class="card-body">
+                                    <div class="col-sm-10">
+                                        <h5 class="card-title">{{recommendedSkill.title}}</h5>
+                                    </div>                                    
+                                    <div class="col-sm-2">
+                                        <mat-checkbox class="example-margin" 
+                                        [checked]="(selectedSkills.indexOf(recommendedSkill.id)>=0)"
+                                        (change)="changeSelectedSkills($event, recommendedSkill.id)"></mat-checkbox>
+                                    </div>
+                                    <div class="col-sm-12">                   
+                                        <p class="card-text">{{recommendedSkill.description}}</p>                                
+                                    </div>
+
+                                    <div class="col-sm-12 relevant_jobs">
+                                        Relevant Job Titles:
+                                        <span class="badge badge-info ml-2" *ngFor="let job of recommendedSkill.jobs let j = index">{{job}}</span>                                        
+                                    </div>
+
+                                    <div class="col-sm-12 relevant_skills">
+                                        Relevant Skills:
+                                        <span class="badge badge-info ml-2" *ngFor="let skill of recommendedSkill.skills let j = index">{{skill}}</span>                                        
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <h5>Statistics</h5>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="progress col-sm-6" >
+                                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':recommendedSkill.rating1}" attr.aria-valuenow="{{recommendedSkill.rating1}}"  aria-valuemin="0" aria-valuemax="100">{{recommendedSkill.rating1}}%</div>                                            
+                                        </div>
+                                        <div class="col-sm-6"> {{recommendedSkill.rating1}}% relation with targetted job titles</div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="progress col-sm-6" >
+                                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':recommendedSkill.rating2}" attr.aria-valuenow="{{recommendedSkill.rating2}}"  aria-valuemin="0" aria-valuemax="100">{{recommendedSkill.rating2}}%</div>                                            
+                                        </div>
+                                        <div class="col-sm-6"> {{recommendedSkill.rating2}}% relation with your interests</div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <h5>Open Courses</h5>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="" *ngFor="let course of recommendedSkill.courses let j = index"><a target="" href="{{course}}">{{course}}</a></div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        14 students with similar profile also find it interesting
+                                    </div>  
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            You have selected {{selectedSkills.length}} skills
+                        </div>
+
+                        <div class="col-sm-12">
+                            <mat-paginator 
+                                [length]="lengthRS"
+                                [pageSize]="pageSizeRS"
+                                [pageSizeOptions]="pageSizeOptionsRS"
+                                (page)="OnPageChangeRS($event)">
+                            </mat-paginator>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <br/>
+    <div class="row">
+        <div class="col col-lg-10"></div>
+        <div class="col col-lg-2">
+            <button class="btn btn-success"  >  
+                <i _ngcontent-axy-c0="" class="material-icons"> menu_book </i> {{ 'CAREER_ADVISOR.BUTTON.SHOW_EDUCATION_PLAN' | translate }}
+            </button>
+        </div>
+    </div>    
+
 </div>

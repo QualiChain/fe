@@ -3,6 +3,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NotFoundComponent } from '../../_components/not-found/not-found.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -16,7 +18,10 @@ describe('HomeComponent', () => {
       ],
       imports: [
         TranslateModule.forRoot(),
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'not_found', component: NotFoundComponent}]
+        )
         ]
     })
     .compileComponents();

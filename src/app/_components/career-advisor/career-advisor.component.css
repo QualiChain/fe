@@ -1,0 +1,13 @@
+.carreer_advisor .card {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.relevant_jobs .ml-2,
+.relevant_skills .ml-2 {
+    margin-left: .5rem !important;
+}
+
+.selectedCard {
+    background-color: #dbe6f3;
+}
