@@ -32,6 +32,7 @@ import { JobAppliesComponentPage } from './_components/job-applications-by-user/
 
 import { RecruitingComponent } from './_components/recruiting/recruiting.component'; 
 import { DSSCurriculumReDesignComponent } from './_components/dss-curriculum-re-design/dss-curriculum-re-design.component';
+import { CurriculumGapAnalysisComponent } from './_components/curriculum-gap-analysis/curriculum-gap-analysis.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
@@ -112,6 +113,12 @@ const routes: Routes = [
     path: 'profiles/:id/dss-curriculum-re-design',
     component: DSSCurriculumReDesignComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'profiles/:id/cv-gap-analysis',
+    component: CurriculumGapAnalysisComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.professor, Role.recruiter, Role.admin, Role.administrator ] }
   },
   {
     path: 'recruitment/certificate-validation',
