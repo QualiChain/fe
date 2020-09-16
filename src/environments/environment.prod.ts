@@ -29,5 +29,6 @@ export const environment = {
     allowedDomains: ['localhost','qualichain.epu.ntua.gr', 'qualichain.herokuapp.com', 'fenix.tecnico.ulisboa.pt/oauth'],
     disallowedRoutes: ["http://example.com/examplebadroute/"]
   },
-  CVRecomendationUrl: 'http://qualichain.epu.ntua.gr:8080/curriculum_recommendation'
+  CVRecomendationUrl: 'http://qualichain.epu.ntua.gr:8080/curriculum_recommendation',
+  mcdssURL: 'http://qualichain.epu.ntua.gr:7070/mcdss'
 };

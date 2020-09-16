@@ -140,6 +140,7 @@ import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { DSSCurriculumReDesignComponent } from './_components/dss-curriculum-re-design/dss-curriculum-re-design.component';
 import { CurriculumGapAnalysisComponent } from './_components/curriculum-gap-analysis/curriculum-gap-analysis.component';
+import { MCDSSComponent } from './_components/mcdss/mcdss.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -258,7 +259,8 @@ export function tokenGetter() {
     JobApplicationsByUserComponent, JobAppliesComponentPage, QcLocationCountryComponent, QcLocationStateCountryComponent, QcLocationCityStateComponent,
     RecruitingComponent,
     DSSCurriculumReDesignComponent,
-    CurriculumGapAnalysisComponent
+    CurriculumGapAnalysisComponent,
+    MCDSSComponent
   ],
   imports: [
     BrowserModule,
