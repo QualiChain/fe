@@ -1,0 +1,12 @@
+.criteria-div {
+    display: inline;
+    padding-right: 10px;
+}
+.withborders
+{
+    border: 1px solid #000;
+}
+
+.withoutborders {
+    border: 0px solid #000;
+}

@@ -26,7 +26,8 @@
     "WELCOME_MESSAGE": "καλως ΗΡΘΑΤΕ",
     "PROFILE": "Προφίλ",
     "RECRUITMENT": "Προσλήψεις",
-    "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού"
+    "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",
+    "MCDSS": "MCDSS"
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",
@@ -558,5 +559,48 @@
     "EDUCATION_TO": "To",
     "EDUCATION_ORGANISATION": "Organisation",
     "EDUCATION_DESCRIPTION": "Description"
+  },
+  "MCDDSS": {
+    "TITLE": "Multicriteria Decision Support System",
+    "BUTTON": {
+      "ADD_CRITERIA": "Add criteria",
+      "ADD_ALTERNATIVE": "Add alternative",
+      "SEND": "Send data"
+    },
+    "METHOD": {
+      "PLACEHOLDER": "Select a method"
+    },
+    "AGREEMENT_THRESHOLD": {
+      "LABEL": "Weight",
+      "PLACEHOLDER": "a number"
+     },
+     "CRITERIAL": {
+      "NAME": {
+        "LABEL": "Criterial name",
+        "PLACEHOLDER": "Criterial name"
+      },
+      "WEIGHT":  {
+        "LABEL": "Weight",
+        "PLACEHOLDER": "a number"
+       },
+      "TYPE":  {
+        "LABEL": "Type",
+        "PLACEHOLDER": "0 or 1"
+       },
+       "VETO":  {
+        "LABEL": "Veto",
+        "PLACEHOLDER": "a number"
+       }
+     },
+     "ALTERNATIVE": {
+      "NAME": {
+        "LABEL": "Alternative name",
+        "PLACEHOLDER": "Alternative name"
+      },
+      "VALUE": {
+        "LABEL": "Value",
+        "PLACEHOLDER": "a number"
+      }
+    }     
   }
 }

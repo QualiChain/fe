@@ -36,6 +36,7 @@ import { CurriculumGapAnalysisComponent } from './_components/curriculum-gap-ana
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
+import { MCDSSComponent } from './_components/mcdss/mcdss.component';
 
 const routes: Routes = [
   {
@@ -191,6 +192,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
   },
+  {
+    path: 'MCDSS',
+    component: MCDSSComponent
+  },  
   {
     path: 'access_denied',
     component: AccessDeniedComponent
