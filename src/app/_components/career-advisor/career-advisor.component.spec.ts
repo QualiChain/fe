@@ -8,7 +8,7 @@ import { TranslateModule } from "@ngx-translate/core";
 //import {MatNativeDateModule} from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NotFoundComponent } from '../../_components/not-found/not-found.component';
+import { NotFoundComponent } from '../../_components/utils/not-found/not-found.component';
 
 describe('CareerAdvisorComponent', () => {
   let component: CareerAdvisorComponent;

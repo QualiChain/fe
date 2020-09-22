@@ -8,25 +8,25 @@
 
   <div class="row">   
     <button class="btn btn-primary" (click)="generatePdf('open')">  
-      <i _ngcontent-axy-c0="" class="material-icons"> picture_as_pdf </i> {{ 'BUTTON.OPEN_PDF' | translate }}
+      <i _ngcontent-axy-c0="" class="material-icons small"> picture_as_pdf </i> {{ 'BUTTON.OPEN_PDF' | translate }}
     </button>
     <!--
     <button class="btn btn-primary" (click)="generatePdf('download')">
-      <i _ngcontent-axy-c0="" class="material-icons"> cloud_download </i>
+      <i _ngcontent-axy-c0="" class="material-icons small"> cloud_download </i>
       {{ 'BUTTON.DOWNLOAD_PDF' | translate }}
     </button>
     <button class="btn btn-primary" (click)="generatePdf('print')">
-      <i _ngcontent-axy-c0="" class="material-icons"> print </i>
+      <i _ngcontent-axy-c0="" class="material-icons small"> print </i>
       {{ 'BUTTON.PRINT_PDF' | translate }}
     </button>
     -->
     <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
-      <i _ngcontent-axy-c0="" class="material-icons"> edit </i>
+      <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       {{ 'BUTTON.EDIT' | translate }}
     </button>
 
     <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'dss-curriculum-re-design']">
-      <i _ngcontent-axy-c0="" class="material-icons"> edit </i>
+      <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       DSS CV Re-design
     </button>
 
@@ -183,7 +183,7 @@
                         <div class="row cv_add_course">
                           <div class="col col-lg-12">
                             <button class="btn btn-primary" [routerLink]="['/courses', 'add']">
-                              <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'BUTTON.CREATE' | translate }}
+                              <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'BUTTON.CREATE' | translate }}
                             </button><br/>
                           </div>
                         </div>
@@ -209,16 +209,16 @@
                                   <div class="row courseRelatedData">
                                       <div class="col-lg-6">
                                           <div><h4>{{ 'COURSE.RELATED_SKILLS' | translate }}</h4></div>
-                                          <div><span *ngFor="let skill of course.skills">{{skill.name}}, </span></div>
-                                       </div>
-                                        <div class="col-lg-6">
-                                            <div><h4>{{ 'COURSE.COURSE_BADGES' | translate }}</h4></div>
-                                            
-                                            <div>
-                                              This course does not have any smart badge yet. &nbsp;                                              
-                                              <!--<span *ngFor="let badge of course.course_badges">{{badge}}, </span>-->
-                                            </div>
-                                        </div>                                        
+                                          <div><span *ngFor="let skill of skillsByCourseInfo[course.courseid]"><a href="/skills/{{skill.skill.id}}">{{skill.skill.name}}</a>, </span></div>
+                                          <div *ngIf="skillsByCourseInfo[course.courseid].length==0">{{ 'COURSE.RELATED_SKILLS_NO_DATA' | translate }}</div>
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <div><h4>{{ 'COURSE.COURSE_BADGES' | translate }}</h4></div>                                            
+                                          <div>                                             
+                                             {{ 'COURSE.COURSE_BADGES_NO_DATA' | translate }}  &nbsp;
+                                             <!--<span *ngFor="let badge of course.course_badges">{{badge}}, </span>-->
+                                          </div>
+                                      </div>                                        
                                   </div>
                                   <div class="row ">&nbsp; </div>                                  
                                   <div *ngIf="userdata.id==currentUser.id" class="row courseActions">
@@ -226,8 +226,12 @@
                                         <!--
                                         <a [routerLink]="['/courses', course.id,'edit']" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</a>
                                         -->
+                                        <button class="btn btn-primary" [routerLink]="['/courses', course.courseid]" type="button">  
+                                          <i _ngcontent-axy-c0="" class="material-icons small">  details  </i> {{ 'BUTTON.VIEW' | translate }}
+                                        </button>
+
                                         <button class="btn btn-primary" [routerLink]="['/courses', course.courseid,'edit']" type="button">  
-                                          <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+                                          <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
                                         </button>
 
                                       </div>
@@ -236,7 +240,7 @@
                                           <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-star-empty"></span> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}</button>
                                           -->
                                           <button class="btn btn-primary" [routerLink]="['/courses', course.courseid,'award']" type="button">  
-                                            <i _ngcontent-axy-c0="" class="material-icons"> star </i> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}
+                                            <i _ngcontent-axy-c0="" class="material-icons small"> star </i> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}
                                           </button>  
                                       </div>
                                   </div>
@@ -258,8 +262,8 @@
                             <div class="row smartBudgesBody">
 
                               
-                              <div *ngIf="smartBadgesByUser.length==0" class="col-lg-8  smartBudge">
-                                This user does not have any smart badge yet. 
+                              <div *ngIf="smartBadgesByUser.length==0" class="col-lg-8  smartBudge">                                
+                                {{ 'PROFILE.NO_SMART_BADGE_YET' | translate }}
                               </div>
                               <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-12 card-ou" 
                                 [ngClass]="{
@@ -311,7 +315,7 @@
               <a [routerLink]="['/profiles', userdata.id,'career-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CAREER_ADVISOR' | translate }}</a>
                               
               <!-- <button *ngIf="(1==2) && ((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'career-advisor']">  
-                <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CAREER_ADVISOR' | translate }}
+                <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.CAREER_ADVISOR' | translate }}
               </button> -->
             </div>
             
@@ -321,7 +325,7 @@
           <div class="col col-lg-8"> </div>
           <div class="col col-lg-2">            
             <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']">  
-              <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}
+              <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}
             </button>
           </div>
         </div>

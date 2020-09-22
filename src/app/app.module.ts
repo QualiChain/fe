@@ -83,11 +83,12 @@ import { PilotsService } from './_services/pilots.services';
 import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
+import { FilterArrayByValueGetListPipe } from './_pipes/FilterArrayByValueGetList/filterArrayByValueGetList.pipe';
 /*custom components*/
 //import { CvsComponent } from './_components/cvs/cvs.component';
-import { NotFoundComponent } from './_components/not-found/not-found.component';
+import { NotFoundComponent } from './_components/utils/not-found/not-found.component';
 import { LoginComponent } from './_components/login/login.component';
-import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles.component';
+import { ProfilesComponent, createChangePasswordDialog_modal } from './_components/profiles/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
 import { HeaderComponent } from './_components/utils/header/header.component';
 import { FooterComponent } from './_components/utils/footer/footer.component';
@@ -97,22 +98,22 @@ import { HomeComponent } from './_components/home/home.component';
 import { PilotHomeComponent } from './_components/pilot-home/pilot-home.component';
 import { HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilot4Component, HomePilot5Component } from './_components/pilot-home/pilot-home.component';
 
-import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
+import { AccessDeniedComponent } from './_components/utils/access-denied/access-denied.component';
 import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
 import { ConfirmDialogComponent } from './_components/utils/confirm-dialog/confirm-dialog.component';
 import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
-import { ProfilesViewComponent, CVDialog_modal } from './_components/profiles-view/profiles-view.component';
-import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
+import { ProfilesViewComponent, CVDialog_modal } from './_components/profiles/profiles-view/profiles-view.component';
+import { ProfilesAddComponent } from './_components/profiles/profiles-add/profiles-add.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
 import { CareerAdvisorComponent } from './_components/career-advisor/career-advisor.component';
 import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_components/recomended-skills/recomended-skills.component';
-import { CoursesComponent } from './_components/courses/courses.component';
-import { CoursesGetComponent } from './_components/courses-get/courses-get.component';
-import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
+import { CoursesComponent } from './_components/courses/courses/courses.component';
+import { CoursesGetComponent } from './_components/courses/courses-get/courses-get.component';
+import { CoursesEditComponent } from './_components/courses/courses-edit/courses-edit.component';
 import { ProgressComponent } from './_components/utils/progress/progress.component';
 import { UploadFilesComponent } from './_components/utils/upload-files/upload-files.component';
 import { JobApplicationsByUserComponent, JobAppliesComponentPage } from './_components/job-applications-by-user/job-applications-by-user.component';
@@ -141,6 +142,9 @@ import { environment } from '../environments/environment';
 import { DSSCurriculumReDesignComponent } from './_components/dss-curriculum-re-design/dss-curriculum-re-design.component';
 import { CurriculumGapAnalysisComponent } from './_components/curriculum-gap-analysis/curriculum-gap-analysis.component';
 import { MCDSSComponent } from './_components/mcdss/mcdss.component';
+import { SkillsComponent } from './_components/skills/skills/skills.component';
+import { SkillsGetComponent } from './_components/skills/skills-get/skills-get.component';
+import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edit.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -252,6 +256,7 @@ export function tokenGetter() {
     EmploymentTypePipe,
     LevelTypePipe,
     FilterArrayByValuePipe,
+    FilterArrayByValueGetListPipe,
     DndDirective,
     ProgressComponent,
     UploadFilesComponent,
@@ -260,7 +265,10 @@ export function tokenGetter() {
     RecruitingComponent,
     DSSCurriculumReDesignComponent,
     CurriculumGapAnalysisComponent,
-    MCDSSComponent
+    MCDSSComponent,
+    SkillsComponent,
+    SkillsGetComponent,
+    SkillsEditComponent
   ],
   imports: [
     BrowserModule,

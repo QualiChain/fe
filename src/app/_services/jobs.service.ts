@@ -11,8 +11,6 @@ export class JobsService {
 
   //uri = 'http://localhost:4000/jobs';
   private jobsURL = environment.jobsUrl;
-  private uriGet = environment.jobpostGet;
-  private uriPost = environment.jobpostUrl;
 
   constructor(private http: HttpClient) { }
 

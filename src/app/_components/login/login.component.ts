@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
     this.loadingRequestPasswordSpinner = true;
     this.requestPasswordError = false;
     this.requestPasswordConfirmation = false;
-    this.ls.requestpassword(this.email).subscribe(
+    this.ls.requestpassword(this.name, this.email).subscribe(
       res => {
         console.log("Request OK");
         this.requestPasswordConfirmation = true;

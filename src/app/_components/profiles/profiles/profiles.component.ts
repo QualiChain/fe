@@ -2,15 +2,15 @@ import {Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import { UsersService } from '../../_services/users.service';
-import User from '../../_models/user';
+import { UsersService } from '../../../_services/users.service';
+import User from '../../../_models/user';
 //import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { AuthService } from '../../_services';
-import { ConfirmDialogModel, ConfirmDialogComponent } from '../utils/confirm-dialog/confirm-dialog.component';
+import { AuthService } from '../../../_services';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

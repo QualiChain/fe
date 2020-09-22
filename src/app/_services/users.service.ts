@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -22,6 +22,13 @@ export class UsersService {
       .get(`${this.uriUsers}`);
   }
 */
+
+  createHeader() {
+      const headers= new HttpHeaders()
+            .set('content-type', 'application/json');    
+       return headers;
+  }
+
   getUsers() {
     return this.http.get(`${this.uriUsers}`).
     pipe(
@@ -52,7 +59,7 @@ export class UsersService {
     }
 
   addUser(obj: Object) {
-    return this.http.post(`${this.uriUsers}`, JSON.stringify(obj)).
+    return this.http.post(`${this.uriUsers}`, JSON.stringify(obj), {headers: this.createHeader()}).
     pipe(
        map((data: any) => {
          return data;
@@ -116,4 +123,16 @@ export class UsersService {
     return this.http.delete(`${this.uriUsers}/${userId}`);
   }
 
+
+
+  getUserAvatar(userId: Number) {
+    return this.http.get(`http://qualichain.epu.ntua.gr:5004/get/user/${userId}/avatar`).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
 }

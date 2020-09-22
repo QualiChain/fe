@@ -25,8 +25,8 @@
                 <input matInput required [(ngModel)]="courseSemester" name="courseSemester" value="courseSemester" placeholder="{{ 'COURSE.SEMESTER.PLACEHOLDER' | translate }}"  #courseSemesterInput="ngModel">
             </mat-form-field>
         </div>
-
-        <!-- startDate -->            
+        <!-- startDate -->      
+        <!--
         <div class="form-group field" [class.has-error]="startDateInput.invalid">         
           <mat-form-field class="create-course-full-width">
             <mat-label>{{ 'COURSE.STARTDATE.LABEL' | translate }}</mat-label>
@@ -35,8 +35,9 @@
             <mat-datepicker #pickerStartDate startView="year" [startAt]="startDate" format="DD-MM-YYYY"></mat-datepicker>
           </mat-form-field>
         </div>
-
-        <!-- endDate -->            
+        -->
+        <!-- endDate -->
+        <!--
         <div class="form-group field" [class.has-error]="endDateInput.invalid">         
             <mat-form-field class="create-course-full-width">
               <mat-label>{{ 'COURSE.ENDDATE.LABEL' | translate }}</mat-label>
@@ -44,16 +45,47 @@
               <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
               <mat-datepicker #pickerEndDate startView="year" [startAt]="endDate" format="DD-MM-YYYY"></mat-datepicker>
             </mat-form-field>
-        </div>        
-
+        </div>
+        -->
         <!--Skills-->
         <div class="form-group field" >
+            <!--
+            <pre>{{skills|json}}</pre>
+            -->
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.SKILLS.LABEL' | translate }}</mat-label>
+                <mat-chip-list #chipListSkills>
+                    <mat-chip *ngFor="let skill of skills;let indx=index;" 
+                    [selectable]="selectableSkill" [removable]="removableSkill" (removed)="removeSkill(skill,indx)">
+                        {{skill.name}}
+                        <mat-icon matChipRemove *ngIf="removableSkill">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="{{ 'COURSE.SKILLS.PLACEHOLDER' | translate }}"
+                    #skillInput
+                    [formControl]="skillCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipListSkills"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur" 
+                    >                    
+                </mat-chip-list>
+                <!-- 
+                    (matChipInputTokenEnd)="addSkill($event)"
+                -->
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                        {{skill.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+<!--
             <mat-form-field class="create-course-full-width">
                 <mat-label>{{ 'COURSE.SKILLS.LABEL' | translate }}</mat-label>
                 <mat-chip-list #chipListSkills aria-label="Skill selection">
-                  <mat-chip *ngFor="let skill of skills" [selectable]="selectableSkill"
-                           [removable]="removableSkill" (removed)="removeSkill(skill)">
-                    {{skill.name}}
+                  <mat-chip *ngFor="let skill of skills;let indx=index;" [selectable]="selectableSkill"
+                           [removable]="removableSkill" (removed)="removeSkill(skill, indx)">
+                           {{skill.id}} -- {{skill.name}}
                     <mat-icon matChipRemove *ngIf="removableSkill">cancel</mat-icon>
                   </mat-chip>
                   <input placeholder="{{ 'COURSE.SKILLS.PLACEHOLDER' | translate }}"
@@ -65,9 +97,6 @@
                          
                          (matChipInputTokenEnd)="addSkill($event)">
                 </mat-chip-list>
-                <!--
-                    [matChipInputAddOnBlur]="addOnBlurSkill"
-                -->
                 
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                     <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
@@ -76,6 +105,7 @@
                   </mat-autocomplete>
 
               </mat-form-field>
+            -->              
         </div>
 
 
@@ -109,8 +139,8 @@
                     <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.UPDATE' | translate }} 
                 </button>
                   
-                <button  class="btn btn-danger" >
-                    <i _ngcontent-axy-c0="" class="material-icons" [routerLink]="['/profiles', userdata.id]"> cancel </i> {{ 'BUTTON.CANCEL' | translate }} 
+                <button type="button" class="btn btn-danger" (click)="redirectToURL('/courses')">
+                    <i _ngcontent-axy-c0="" class="material-icons" > cancel </i> {{ 'BUTTON.CANCEL' | translate }} 
                 </button>
 
             </div>

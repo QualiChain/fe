@@ -32,6 +32,7 @@
           -->
           <div class="row">
             <div class="col col-lg-12">
+              --{{file | json}}--
               <app-progress *ngIf="file?.validfile==true && file?.error===false" [progress]="file?.progress"></app-progress>
               <div *ngIf="file?.error===true"><h4 class="errormessage">Error loading file</h4></div>
               <div *ngIf="file?.validfile===false"><h4 class="errormessage">This file is not valid to be uploaded</h4></div>

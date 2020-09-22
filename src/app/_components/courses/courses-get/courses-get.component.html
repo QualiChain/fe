@@ -1,0 +1,96 @@
+<h1 >{{ 'COURSE.TITLE' | translate }}: {{courseData.name}}</h1>
+
+<div class="container">
+    <div class="row">
+      <button *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor'" class="btn btn-primary" [routerLink]="['/courses', courseData.courseid, 'edit']">
+        <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+      </button>          
+
+      <!--
+      <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner"></mat-spinner>
+
+      <button *ngIf="!loadSpinner" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled')">
+        <i _ngcontent-axy-c0="" class="material-icons small" > assignment_turned_in </i> {{ 'COURSE.BUTTON.ENROLL_TO_COURSE' | translate }}
+      </button>
+
+      <button *ngIf="!loadSpinner" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'taught')">
+        <i _ngcontent-axy-c0="" class="material-icons small" > book </i> {{ 'COURSE.BUTTON.TOUGH_THE_COURSE' | translate }}
+      </button>
+
+      <button *ngIf="!loadSpinner" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'done')">
+        <i _ngcontent-axy-c0="" class="material-icons small" > done </i> {{ 'COURSE.BUTTON.COURSE_DONE' | translate }}
+      </button>      
+      -->
+    </div>
+
+    <div class="row"><br></div>
+
+    <div class="row">
+
+      <div class="col col-lg-12">
+          <div class="col ">
+              <div><span class="labelcourse">{{ 'COURSE.DESCRIPTION.LABEL' | translate }}:</span> {{courseData.description}}</div> 
+          </div>
+          <div class="col ">
+            <div><span class="labelcourse">{{ 'COURSE.SEMESTER.LABEL' | translate }}:</span> {{courseData.semester}}</div> 
+          </div>
+          <!--
+          <div class="col ">
+              <div><span class="labelcourse">{{ 'COURSE.STARTDATE.LABEL' | translate }}:</span> {{courseData.startDate }}</div> 
+          </div>
+          -->
+          <!--
+          <div class="col ">
+              <div><span class="labelcourse">{{ 'COURSE.ENDDATE.LABEL' | translate }}:</span> {{courseData.endDate }}</div> 
+          </div>
+          -->
+          
+          <div *ngIf="courseData.skills.length>0" class="col ">
+            <div><span class="labelcourse">{{ 'COURSE.SKILLS.LABEL' | translate }}:</span> 
+                <span *ngFor="let skill of courseData.skills; let i=index">
+                  <span *ngIf="i>0">,</span> <a href="/skills/{{skill.skill.id}}">{{ skill.skill.name }}</a>
+                </span>
+            </div> 
+          </div>
+
+          <div *ngIf="courseData.events.length>0" class="col ">
+            <div><span class="labelcourse">{{ 'COURSE.EVENTS.LABEL' | translate }}:</span> 
+                <span *ngFor="let event of courseData.events; let i=index">
+                  <span *ngIf="i>0">,</span> {{ event.name }}
+                </span>
+            </div> 
+          </div>
+          
+          <div class="col " *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor'">
+            <div>
+              <span class="labelcourse">{{ 'COURSE.DONE_BY' | translate }}:</span> 
+              <span *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'done' ; let i=index">
+                  <span *ngIf="i>0">,</span> <a href="/profiles/{{enrolledUser.user.id}}">{{enrolledUser.user.fullName}}</a> 
+              </span>
+            </div>
+          </div>
+
+          <div class="col " *ngIf="(currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor')">
+            <div>
+              <span class="labelcourse">{{ 'COURSE.ENROLLED_USERS' | translate }}:</span> 
+              <span *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'enrolled' ; let i=index">
+                <span *ngIf="i>0">,</span> <a href="/profiles/{{enrolledUser.user.id}}">{{enrolledUser.user.fullName}}</a> 
+              </span>
+            </div>
+          </div>
+
+          <div class="col ">
+            <div>
+              <span class="labelcourse">Teachers:</span>
+              <span *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'taught' ; let i=index">
+                <span *ngIf="i>0">,</span> <a href="/profiles/{{enrolledUser.user.id}}">{{enrolledUser.user.fullName}}</a> 
+              </span>
+              <span *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==0" > {{ 'COURSE.NO_TEACHERS_YET' | translate }}</span>
+            </div>
+          </div>
+
+      </div>
+    </div>
+    
+
+</div>

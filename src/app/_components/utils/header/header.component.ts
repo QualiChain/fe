@@ -19,9 +19,11 @@ import { interval } from 'rxjs';
 //import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 
-import { createChangePasswordDialog_modal } from '../../../_components/profiles/profiles.component';
+import { createChangePasswordDialog_modal } from '../../../_components/profiles/profiles/profiles.component';
 import { PilotsService, HEADER_MENU } from '../../../_services/pilots.services';
+import { UsersService } from '../../../_services/users.service';
 
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface OPTIONS_MENU {
   id: number;
@@ -57,6 +59,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userdata: any = {};
   loadingNotificationSpinnerid: number = null;
   //messages: any[] = [];
+  avatarImage: any;
+  imagePath : any;
 
   menuOptionsPerPilot: HEADER_MENU;
 
@@ -68,10 +72,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
 
   constructor(
+    private _sanitizer: DomSanitizer,
     private ps: PilotsService,
     public createChangePasswordDialog: MatDialog,
     private appcomponent: AppComponent,
     private authservice: AuthService,
+    private us: UsersService,
     location: Location, public router: Router, public translate: TranslateService, private messageService: MessageService) {
   //  constructor(location: Location, router: Router) {
     
@@ -111,7 +117,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.messageService.changeNotificationStatus(item.id, item).subscribe(
       res => {
         console.log("Notification status changed");
-        item.readed = !item.readed;
+        item.read = !item.read;
         this.loadingNotificationSpinnerid = null;
         //after create the user 
         //window.location.href="/profiles";
@@ -144,6 +150,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
     );
   }   
 
+
+
+
+  recoverUserAvatar(userdataId: number): void  {
+    this.us.getUserAvatar(1).subscribe(
+      data => {
+        console.log("user avatar ");
+        //console.log(data.avatar_in_bytes);
+        let imageBinary = data.avatar_in_bytes; //image binary data response from api
+        console.log(imageBinary);
+        console.log("----------");
+        //let imageBase64String= btoa(imageBinary);
+        let imageBase64String= btoa(unescape(encodeURIComponent(imageBinary)));
+        this.imagePath = 'data:image/jpeg;base64,' + imageBase64String;
+        console.log(imageBase64String);
+      },
+      error => {
+        console.log("error recovering user avatar image");
+      }
+    );
+  }
+
   reloadNotifications(userdataId: number): void  {
     this.messageService.getNotificationsByUserId(userdataId).subscribe(
       data => {
@@ -153,7 +181,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         for (let key in data) {
           let value = data[key];
           if (value.user_id==userdataId) {
-            this.messageService.sendMessage(value.id, value.message, value.readed);
+            this.messageService.sendMessage(value.id, value.message, value.read);
           }          
         }        
       },
@@ -198,6 +226,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.userdata = userdata;
 
       this.reloadNotifications(userdata.id);
+      //this.recoverUserAvatar(userdata.id);
 
       interval(60000).subscribe(x => {
         // something
@@ -310,6 +339,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 interface messageType {
   id: number;
   message: string;
-  readed: boolean;
+  read: boolean;
   user_id: number
 }

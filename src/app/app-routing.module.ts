@@ -10,29 +10,32 @@ import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 //import { JobsEditComponent } from './_components/jobs-edit/jobs-edit.component';
 
 //import { CvsComponent } from './cvs/cvs.component';
-import { ProfilesComponent } from './_components/profiles/profiles.component';
+import { ProfilesComponent } from './_components/profiles/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
-import { ProfilesViewComponent } from './_components/profiles-view/profiles-view.component';
-import { ProfilesAddComponent } from './_components/profiles-add/profiles-add.component';
+import { ProfilesViewComponent } from './_components/profiles/profiles-view/profiles-view.component';
+import { ProfilesAddComponent } from './_components/profiles/profiles-add/profiles-add.component';
 
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
 import { CareerAdvisorComponent } from './_components/career-advisor/career-advisor.component';
 import { LoginComponent } from './_components/login/login.component';
-import { AccessDeniedComponent } from './_components/access-denied/access-denied.component';
-import { CoursesComponent } from './_components/courses/courses.component';
-import { CoursesGetComponent } from './_components/courses-get/courses-get.component';
-import { CoursesEditComponent } from './_components/courses-edit/courses-edit.component';
+import { AccessDeniedComponent } from './_components/utils/access-denied/access-denied.component';
+import { CoursesComponent } from './_components/courses/courses/courses.component';
+import { CoursesGetComponent } from './_components/courses/courses-get/courses-get.component';
+import { CoursesEditComponent } from './_components/courses/courses-edit/courses-edit.component';
 import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
 import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_components/recomended-skills/recomended-skills.component';
-import { NotFoundComponent } from './_components/not-found/not-found.component';
+import { NotFoundComponent } from './_components/utils/not-found/not-found.component';
 import { JobAppliesComponentPage } from './_components/job-applications-by-user/job-applications-by-user.component';
 
 import { RecruitingComponent } from './_components/recruiting/recruiting.component'; 
 import { DSSCurriculumReDesignComponent } from './_components/dss-curriculum-re-design/dss-curriculum-re-design.component';
 import { CurriculumGapAnalysisComponent } from './_components/curriculum-gap-analysis/curriculum-gap-analysis.component';
+import { SkillsComponent } from './_components/skills/skills/skills.component';
+import { SkillsGetComponent } from './_components/skills/skills-get/skills-get.component';
+import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edit.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
@@ -49,7 +52,31 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
    },
-  {
+   {
+    path: 'skills',
+    component: SkillsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator ] }
+   },
+   {
+    path: 'skills/add',
+    component: SkillsEditComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.recruiter, Role.admin, Role.administrator ] }
+  },   
+   {
+    path: 'skills/:id',
+    component: SkillsGetComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator ] }
+   },
+  // {
+ //   path: 'skills/:id/edit',
+  //  component: SkillsEditComponent,
+  //  canActivate: [AuthGuard],
+  //  data: { roles: [Role.recruiter, Role.admin, Role.administrator ] }
+  //},
+   {
    path: 'jobs',
    component: JobsComponent,
    canActivate: [AuthGuard],

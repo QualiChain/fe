@@ -4,13 +4,13 @@
 
     <div class="row">
         <button *ngIf="(currentUser.role.toLowerCase()=='professor' && jobData.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && jobData.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
-            <i _ngcontent-axy-c0="" class="material-icons"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+            <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
           </button>
           <button *ngIf="!userHasAnApply" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">
-            <i _ngcontent-axy-c0="" class="material-icons"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
+            <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
           </button>
           <button *ngIf="userHasAnApply" class="btn btn-danger" (click)="deleteThisApply(jobData.id, currentUser.id, -1)">
-            <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
+            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
           </button>
       </div>
       <div class="row"><br></div>
@@ -144,11 +144,11 @@
                     <td>{{candidate.score}}</td>
                     <td>
                         <button class="btn btn-primary" [routerLink]="['/profiles', candidate.id]">
-                            <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                         </button>
 
                         <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, candidate.id, i)">
-                            <i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
                         </button>
                     </td>
                   </tr>                  

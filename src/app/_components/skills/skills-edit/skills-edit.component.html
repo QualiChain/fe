@@ -1,0 +1,48 @@
+<h1>{{ 'SKILL.TITLE' | translate }} - {{mode}}</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form #formCreateSkill="ngForm" class="create-skill-form" (ngSubmit)="processForm()">
+            <!-- SkillName -->
+            <div class="form-group field" [class.has-error]="skillNameInput.invalid">
+                <mat-form-field class="create-skill-full-width">
+                    <mat-label>{{ 'SKILL.NAME.LABEL' | translate }}</mat-label>
+                    <input matInput required [(ngModel)]="skill.name" name="skillName" value="skillName" placeholder="{{ 'SKILL.NAME.PLACEHOLDER' | translate }}"  #skillNameInput="ngModel">
+                </mat-form-field>
+            </div>
+
+            <!-- SkillType -->
+            <div class="form-group field" [class.has-error]="skillTypeInput.invalid">
+                <mat-form-field class="create-skill-full-width">
+                    <mat-label>{{ 'SKILL.TYPE.LABEL' | translate }}</mat-label>
+                    <input matInput required [(ngModel)]="skill.type" name="skillType" value="skillType" placeholder="{{ 'SKILL.TYPE.PLACEHOLDER' | translate }}"  #skillTypeInput="ngModel">
+                </mat-form-field>
+            </div>
+
+            <!-- Hard_skill -->
+            
+            <div class="form-group field" [class.has-error]="skillHardSkillInput.invalid">
+                <section class="example-section">                
+                    <mat-checkbox class="example-margin" [(ngModel)]="skill.hard_skill" name="skillHardSkill" value="skillHardSkill" #skillHardSkillInput="ngModel">{{ 'SKILL.HARD_SKILL.LABEL' | translate }}</mat-checkbox>                                    
+                </section>
+            </div>
+            
+            <div class="form-group">
+
+                <button *ngIf="mode=='Create'" type="submit" class="btn btn-success" [disabled]="formCreateSkill.invalid">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> save </i> {{ 'BUTTON.SAVE' | translate }} 
+                </button>
+                
+                <button *ngIf="mode=='Edit'" type="submit" class="btn btn-success" [disabled]="formCreateSkill.invalid">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> save </i> {{ 'BUTTON.UPDATE' | translate }} 
+                </button>
+                  
+                <button type="button" class="btn btn-danger" (click)="redirectToSkillsList()" >
+                    <i _ngcontent-axy-c0="" class="material-icons small" > cancel </i> {{ 'BUTTON.CANCEL' | translate }} 
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
