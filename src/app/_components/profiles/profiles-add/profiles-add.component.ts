@@ -9,18 +9,18 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith, windowWhen} from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { CVService } from '../../_services/cv.service';
+import { CVService } from '../../../_services/cv.service';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import {TranslateService} from '@ngx-translate/core';
-import { AuthService } from '../../_services';
+import { AuthService } from '../../../_services';
 
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
-import { UsersService } from '../../_services/users.service';
-import User from '../../_models/user';
+import { UsersService } from '../../../_services/users.service';
+import User from '../../../_models/user';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -206,6 +206,8 @@ console.log(this);
     
     if (this.mode=='Create') {
 
+      obj['password']=this.password;
+
       this.us.addUser(obj).subscribe(
         res => {
           //console.log("User created");
@@ -214,6 +216,8 @@ console.log(this);
           //console.log(splitted[1]);
           let password = this.password;
           
+          this.router.navigate(["/profiles/"+splitted[1]]);
+          /*
           this.us.requestNewPassword(splitted[1], password).subscribe(
             resPassword => {
               console.log("Password created");
@@ -226,7 +230,7 @@ console.log(this);
               alert("Error setting user password!!");
             }
           );
-
+          */
           //after create the user 
           //window.location.href="/profiles";
           this.router.navigate(["/profiles/"]);

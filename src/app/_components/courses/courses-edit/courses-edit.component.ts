@@ -2,9 +2,9 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoursesService } from '../../_services/courses.service';
-import { SkillsService } from '../../_services/skills.service';
-import Course from '../../_models/course';
+import { CoursesService } from '../../../_services/courses.service';
+import { SkillsService } from '../../../_services/skills.service';
+import Course from '../../../_models/course';
 
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -17,6 +17,7 @@ import {map, startWith} from 'rxjs/operators';
 
 export interface Skill {
   name: string;
+  id: number;
 }
 
 export interface Event {
@@ -54,6 +55,7 @@ export class CoursesEditComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skill[] = [];
   visible = true;
+  addOnBlur = false;
   selectableSkill = true;
   selectableEvent = true;
   removableSkill = true;
@@ -65,7 +67,8 @@ export class CoursesEditComponent implements OnInit {
   userdata = JSON.parse(localStorage.getItem('userdata'));
   
   skillCtrl = new FormControl();
-  allSkills: string[];
+  //allSkills: any = [];
+  allSkills: Skill[] = [];
   filteredSkills: Observable<string[]>;
   
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
@@ -78,7 +81,8 @@ export class CoursesEditComponent implements OnInit {
 
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
-      map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
+      map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice())
+      );
 
     this.courseForm = this.fb.group({
       title: ['', Validators.required],
@@ -89,6 +93,8 @@ export class CoursesEditComponent implements OnInit {
 /********************************** */
 
 add(event: MatChipInputEvent): void {
+  console.log(event);
+  /*
   const input = event.input;
   const value = event.value;
 
@@ -104,26 +110,59 @@ add(event: MatChipInputEvent): void {
   }
 
   this.skillCtrl.setValue(null);
+  */
 }
 
 remove(skill: string): void {
+  console.log(skill);
+  /*
   const index = this.skills.indexOf({'name':skill});
 
   if (index >= 0) {
     this.skills.splice(index, 1);
   }
+  */
 }
 
 selected(event: MatAutocompleteSelectedEvent): void {
-  this.skills.push({'name':event.option.viewValue});
+  this.skills.push(event.option.value);
   this.skillInput.nativeElement.value = '';
-  this.skillCtrl.setValue(null);
+  this.skillCtrl.setValue(null);  
 }
 
-  private _filter(value: string): string[] {
+  /*
+  private _filter_as_string(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.allSkills.filter(skill => skill.toLowerCase().indexOf(filterValue) === 0);
+  }
+*/
+  private _filter(value: any): any[] {   
+    if ( value.hasOwnProperty('name') ) {
+      return this.allSkills;
+    }
+    else {
+      //filter by text
+      let filteredSkills: Skill[] = this.allSkills.filter(skill => skill.name.toLowerCase().includes(value.toLowerCase()));
+
+      //filter skills we have in the selectd list of skills
+      let activeIds = [];
+      this.skills.forEach(element => {
+        activeIds.push(element.id);
+      });
+
+      let arr = filteredSkills;
+
+      if (activeIds.length>0) {
+        arr = arr.filter(function(item){
+          return activeIds.indexOf(item.id) === -1;
+        });
+      }
+      
+      
+      return arr;
+    }
+
   }
 /***********************************/
 /*
@@ -148,9 +187,12 @@ selected(event: MatAutocompleteSelectedEvent): void {
         //console.log(resSkills); 
         resSkills.forEach(element => {
           //console.log(element.name);
+          let data: Skill = {name:element.name, id:element.id};
+          this.allSkills.push(data)
+          /*
           if (this.allSkills.indexOf(element.name) == -1) {
             this.allSkills.push(element.name);
-          }
+          }*/
         });       
         
       },
@@ -193,6 +235,25 @@ selected(event: MatAutocompleteSelectedEvent): void {
             this.skills = res.skills;
             this.events = res.events;
             
+            if (!res.hasOwnProperty("skills")) {
+              this.skills = [];
+              //getSkillsByCourseId
+              
+              this.cs
+              .getSkillsByCourseId(id).subscribe(
+              dataCourseSkills => {
+                
+                dataCourseSkills.forEach(element => {
+                  this.skills.push({id:element.skill.id,name: element.skill.name});
+                });                
+                
+              },
+              error => {
+                console.log("error recovering skills by course id")
+              }
+              );             
+            }
+
           },
           error => {
             console.log("Error getting data");
@@ -242,33 +303,51 @@ selected(event: MatAutocompleteSelectedEvent): void {
 
 
   addSkill(event: MatChipInputEvent): void {
+    console.log(event);
     const input = event.input;
     const value = event.value;
 
+    alert("Skill "+value+" is not a valid skill");
+    /*
     // Add the new skill
     if ((value || '').trim()) {
-      this.skills.push({name: value.trim()});
+      this.skills.push({
+        id:0,
+        name: value.trim()
+      });
     }
-
+    */
     // Reset the input value
     if (input) {
       input.value = '';
     }
+    
   }
 
-  removeSkill(skill: Skill): void {
-    const index = this.skills.indexOf(skill);
+  removeSkill(skill: Skill, indx: number): void {
+    //const index = this.skills.indexOf(skill);
+    const index = indx;
 
     if (index >= 0) {
       this.skills.splice(index, 1);
     }
   }
 
+  redirectToURL(url: string) {
+    this.router.navigate([url]);
+  }
+  
   processForm() {
     
+    
+    let finalSkillList = [];
+
+    this.skills.forEach(element => {
+      finalSkillList.push({id: element.id});
+    });
     //console.log(this);
     let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en')
-
+        /*
         const obj = {
           "name": this.courseName,
           "description": this.courseDescription,
@@ -279,6 +358,15 @@ selected(event: MatAutocompleteSelectedEvent): void {
           "skills": this.skills,
           "events": this.events
         };
+        */
+       const obj = {
+        "name": this.courseName,
+        "description": this.courseDescription,
+        "semester": this.courseSemester,
+        "endDate": this.endDate,
+        "skills": finalSkillList,
+        "events": this.events
+        };       
         //console.log(obj);
         
         if (this.mode=='Create') {

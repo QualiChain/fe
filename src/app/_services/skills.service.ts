@@ -24,7 +24,18 @@ export class SkillsService {
        })
     )
   }  
-  
+
+  updateSkill(skillId: number, dataIn: any) {
+    return this.http.put(`${this.skillsURL}/${skillId}`, dataIn).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }  
+
   getSkills() {
     return this.http.get(`${this.skillsURL}`).
     pipe(

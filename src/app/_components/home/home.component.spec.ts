@@ -4,7 +4,7 @@ import { HomeComponent } from './home.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NotFoundComponent } from '../../_components/not-found/not-found.component';
+import { NotFoundComponent } from '../../_components/utils/not-found/not-found.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

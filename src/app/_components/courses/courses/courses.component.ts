@@ -4,10 +4,10 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
 
-import Course from '../../_models/course';
-import { CoursesService } from '../../_services/courses.service';
-import { ExcelServiceService } from '../../_services/excel/excel-service.service';
-import { ConfirmDialogModel, ConfirmDialogComponent } from '../utils/confirm-dialog/confirm-dialog.component';
+import Course from '../../../_models/course';
+import { CoursesService } from '../../../_services/courses.service';
+import { ExcelServiceService } from '../../../_services/excel/excel-service.service';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 //import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -15,9 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 //import { MatDialogRef } from '@angular/material/dialog';
 //import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { AuthService } from '../../_services';
-import { UsersService } from '../../_services/users.service';
-import User from '../../_models/user';
+import { AuthService } from '../../../_services';
+import { UsersService } from '../../../_services/users.service';
+import User from '../../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 
 export interface AvailableCourses {

@@ -9,30 +9,30 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { CVService } from '../../_services/cv.service';
+import { CVService } from '../../../_services/cv.service';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import {TranslateService} from '@ngx-translate/core';
-import { AuthService } from '../../_services';
+import { AuthService } from '../../../_services';
 
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
-import { UsersService } from '../../_services/users.service';
-import { BadgesService } from '../../_services/badges.service';
+import { UsersService } from '../../../_services/users.service';
+import { BadgesService } from '../../../_services/badges.service';
 
-import User from '../../_models/user';
+import User from '../../../_models/user';
 //import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { awardDialog_modal } from '../../_components/award-smart-badge/award-smart-badge.component';
-import { OUService } from '../../_services/ou.service';
-import { CoursesService } from '../../_services/courses.service';
-import Course from '../../_models/course';
+import { awardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
+import { OUService } from '../../../_services/ou.service';
+import { CoursesService } from '../../../_services/courses.service';
+import Course from '../../../_models/course';
 import { exit } from 'process';
 
 @Component({
@@ -103,6 +103,7 @@ export class ProfilesViewComponent implements OnInit {
   skillsCV: any = [];
   workHistoryCV: any = [];
   educationHistoryCV: any = [];
+  skillsByCourseInfo: any = [];
 
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
@@ -253,7 +254,7 @@ export class ProfilesViewComponent implements OnInit {
       this.years = [1,2,3,4,5];
       this.currentJustify = 'fill';
       //this.listOfCoursesByUser = listOfCoursesByUser;
-
+/*
       this.cs
       .getCourses()
       .subscribe((data: Course[]) => {
@@ -265,6 +266,28 @@ export class ProfilesViewComponent implements OnInit {
           
         });
     });
+*/      
+      if (id>0) {
+        this.cs
+        .getTeachingCourseByUserId(id)
+        .subscribe((data: any[]) => {
+          //console.log(data);
+          data.forEach((element, index) => {         
+            //if (index<5) {              
+              this.listOfCoursesByUser.push(element.course);
+              //getSkillsByCourseId
+              this.cs
+              .getSkillsByCourseId(element.course.courseid)
+              .subscribe((dataSkillsByCourse: any[]) => {
+                console.log(dataSkillsByCourse);
+                this.skillsByCourseInfo[element.course.courseid] = dataSkillsByCourse;
+                
+              });
+            //}
+            
+          });
+        });
+      }
 
       this.emptyCourseSelected = {
         courseid: 0, 

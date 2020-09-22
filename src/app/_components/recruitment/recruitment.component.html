@@ -12,7 +12,7 @@
   </button>
   -->
   <button [hidden]="!dataSource.data.length" class="btn btn-primary" (click)="exportExcel()">
-    <i _ngcontent-axy-c0="" class="material-icons"> import_export </i> {{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}
+    <i _ngcontent-axy-c0="" class="material-icons  small"> import_export </i> {{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}
   </button>
 
 </div>
@@ -49,7 +49,7 @@
     -->  
     <div class="col-lg-2">
       <button class="btn btn-success" type="submit" [disabled]="formSearch.invalid">  
-        <i _ngcontent-axy-c0="" class="material-icons"> search </i> {{ 'RECRUITMENT.BUTTON.SEARCH' | translate }}
+        <i _ngcontent-axy-c0="" class="material-icons small"> search </i> {{ 'RECRUITMENT.BUTTON.SEARCH' | translate }}
       </button>
     </div>  
     
@@ -81,7 +81,7 @@
             <a [routerLink]="['/profiles', element.id]" class="btn btn-primary">View CV</a> 
             -->
             <button class="btn btn-primary" [routerLink]="['/profiles', element.id]">
-              <i _ngcontent-axy-c0="" class="material-icons"> details </i> {{ 'BUTTON.VIEW' | translate }}
+              <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
             </button>
 
           </td>

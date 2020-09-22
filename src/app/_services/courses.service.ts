@@ -12,6 +12,7 @@ export class CoursesService {
 
   
   private coursesURL = environment.coursesUrl;
+  private usersURL = environment.usersUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -88,6 +89,54 @@ export class CoursesService {
                     return throwError( 'Something went wrong!' );
                 })
             )
-            }            
+        }
+        
+
+        getTeachingCourseByUserId(userId: Number) {
+            return this.http.get(`${this.coursesURL}/teachingcourses/${userId}`).
+            pipe(
+                map((data: Course[]) => {
+                    return data;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+        }
+
+        getSkillsByCourseId(courseId: Number) {
+            return this.http.get(`${this.coursesURL}/${courseId}/skills`).
+            pipe(
+                map((data: any[]) => {
+                    return data;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+        }
+
+    
+        
+        enrollUser(userId: Number, dataIn: any) {
+            return this.http.post(`${this.usersURL}/${userId}/courses`, dataIn).
+            pipe(
+                map((data: any) => {
+                    return data;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+        } 
+
+
+        getEnrolledUserByCourseId(courseId: Number) {
+            return this.http.get(`${this.coursesURL}/${courseId}/users`).
+            pipe(
+                map((data: any[]) => {
+                    return data;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+        }
 
 }
