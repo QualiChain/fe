@@ -14,6 +14,7 @@ import User from '../_models/user';
 export class AuthService {
  
   uri = environment.authUrl;
+  userURL = environment.userUrl;
   //uri = 'http://localhost:4000/auth';
 
   private currentUserSubject: BehaviorSubject<User>;
@@ -61,14 +62,14 @@ export class AuthService {
     }
 
 
-    requestpassword(email) {
+    requestpassword(username, email) {
       const obj = { email: email};
       //console.log(obj);
       
       //let myAuthObj = {};
       let myAuthObj=  new User;
          
-      return this.httpClient.post(`${this.uri}`+"/requestpassword", obj).
+      return this.httpClient.post(`${this.userURL}`+"/${username}/resetPassword", obj).
       pipe(
          map((data: any) => {
            return data;

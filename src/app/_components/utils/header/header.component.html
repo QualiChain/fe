@@ -69,11 +69,11 @@
 							
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" class="btn navbar-item" data-target="#myModal" href="#">
-									<span [hidden]="( (messages | FilterArrayByValue : 'readed' : 'false') <=0)" class="nav-item__badge">
+									<span [hidden]="( (messages | FilterArrayByValue : 'read' : 'false') <=0)" class="nav-item__badge">
 										<span aria-hidden="true" class="nav-item__badge-count">
-											{{ messages | FilterArrayByValue : 'readed' : 'false'}}
+											{{ messages | FilterArrayByValue : 'read' : 'false'}}
 										</span>
-										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'readed' : 'false'}} notificaciones nuevas.</span>
+										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'read' : 'false'}} notificaciones nuevas.</span>
 									</span>
 									<span class="glyphicon glyphicon-bell"></span>
 								</a>
@@ -81,9 +81,9 @@
 							<!--
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" data-target="#myModal" href="#">
-									<span [hidden]="( (messages | FilterArrayByValue : 'readed' : 'false') <=0)" class="nav-item__badge">
-										<span aria-hidden="true" class="nav-item__badge-count">{{ messages | FilterArrayByValue : 'readed' : 'false'}}</span>
-										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'readed' : 'false'}} notificaciones nuevas.</span>
+									<span [hidden]="( (messages | FilterArrayByValue : 'read' : 'false') <=0)" class="nav-item__badge">
+										<span aria-hidden="true" class="nav-item__badge-count">{{ messages | FilterArrayByValue : 'read' : 'false'}}</span>
+										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'read' : 'false'}} notificaciones nuevas.</span>
 									</span>
 									<span class="glyphicon glyphicon-envelope"></span>
 								</a>
@@ -95,7 +95,7 @@
 									<button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span >
 											<div class="user-authenticated-container">
-												<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + currentUser.avatar_path + ')'}"> </div>
+												<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + currentUser.avatar_path + ')'}"> </div>												
 											</div>
 										</span>									
 									</button>
@@ -113,7 +113,9 @@
 											</li>
 
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
-
+<!--
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/preferences/{{currentUser.id}}" (click)="route='/preferences/'+currentUser.id" >{{ 'MENU.PREFERENCES' | translate }}</a></li>
+-->
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
 
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
@@ -196,11 +198,11 @@
 			</div>
 			<div class="modal-body">
 				<span *ngIf="messages.length<=0">{{ 'NOTIFICATIONS.NO_NOTIFICATIONS_AVAILABLE' | translate }} </span>
-				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info view-layout-custom" [ngClass]="{'readed-class': message.readed, 'unreaded-class': !message.readed }">
+				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info view-layout-custom" [ngClass]="{'readed-class': message.read, 'unreaded-class': !message.read }">
 					{{message.message}}
 					<!-- 					
-					<span *ngIf="message.readed" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-open">Readed</span>
-					<span *ngIf="!message.readed" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-close">Unreaded</span>
+					<span *ngIf="message.read" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-open">Readed</span>
+					<span *ngIf="!message.read" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-close">Unreaded</span>
 					-->
 					<!--
 					<button class="btn btn-danger" (click)="deleteItemMessages(message.id)">Delete</button>
@@ -209,10 +211,10 @@
 						<mat-spinner diameter="20" color="warn" *ngIf="loadingNotificationSpinnerid==message.id"></mat-spinner>
 
 						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn" 
-						[ngClass]="{'btn-primary': message.readed, 'btn-secondary': !message.readed}"
+						[ngClass]="{'btn-primary': message.read, 'btn-secondary': !message.read}"
 						(click)="changeItemStatus(message)">
-						    <span *ngIf="message.readed"> <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'NOTIFICATIONS.SET_AS_UNREADED' | translate }}</span>
-							<span *ngIf="!message.readed"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READED' | translate }}</span>
+						    <span *ngIf="message.read"> <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'NOTIFICATIONS.SET_AS_UNREADED' | translate }}</span>
+							<span *ngIf="!message.read"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READED' | translate }}</span>
 						</button>
 
 						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="deleteNotificationItem(message, i)">

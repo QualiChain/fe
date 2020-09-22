@@ -53,11 +53,11 @@ export class MessageService {
         //.get(`${this.uriNotifications}`);
     } 
 
-    sendMessage(messageId: number, message: string, readed: boolean) {
+    sendMessage(messageId: number, message: string, read: boolean) {
         let max = 10000;
         let min = 1;
         //let messageId = Math.floor(Math.random() * (max - min)) + min;
-        this.subject.next({ message: message , id: messageId, readed: readed});
+        this.subject.next({ message: message , id: messageId, read: read});
     }
 
     clearMessages() {

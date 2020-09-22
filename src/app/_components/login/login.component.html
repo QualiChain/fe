@@ -84,6 +84,17 @@
           
           <div class="">
             <form #formRequestPassword="ngForm" (ngSubmit)="processFormRequestPassword()" class="requestPasword-form">         
+
+                <!-- name -->
+                <div class="form-group field" [class.has-error]="usernameInput.invalid">
+                  <mat-form-field class="requestPasword-full-width">
+                    <mat-label>{{ 'LOGIN.USERNAME' | translate }}</mat-label>
+                    <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'LOGIN.USERNAME' | translate }}" #usernameInput="ngModel">
+                  </mat-form-field>
+                  <div class="help is-error alert-warning" >
+                    {{ 'LOGIN.USERNAME_HELP' | translate }}
+                  </div>
+                </div>
                 <!-- email -->
                 <div class="form-group field" [class.has-error]="emailInput.invalid">
                   <mat-form-field class="requestPasword-full-width">

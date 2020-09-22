@@ -5,7 +5,7 @@ import { DSSCurriculumReDesignComponent } from './dss-curriculum-re-design.compo
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NotFoundComponent } from '../../_components/not-found/not-found.component';
+import { NotFoundComponent } from '../../_components/utils/not-found/not-found.component';
 
 describe('DSSCurriculumReDesignComponent', () => {
   let component: DSSCurriculumReDesignComponent;

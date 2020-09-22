@@ -1,0 +1,150 @@
+<h1>Course - {{mode}}</h1>
+
+<div class="card">
+    <div class="card-body">
+        
+        <form #formCreateCourse="ngForm" class="create-course-form" (ngSubmit)="processForm()">
+        <!-- CourseName -->
+        <div class="form-group field" [class.has-error]="courseNameInput.invalid">
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.NAME.LABEL' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="courseName" name="courseName" value="courseName" placeholder="{{ 'COURSE.NAME.PLACEHOLDER' | translate }}"  #courseNameInput="ngModel">
+            </mat-form-field>
+        </div>
+        <!-- CourseDescription -->
+        <div class="form-group field" [class.has-error]="courseDescriptionInput.invalid">
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.DESCRIPTION.LABEL' | translate }}</mat-label>
+                <textarea matInput required [(ngModel)]="courseDescription" name="courseDescription" value="courseDescription" placeholder="{{ 'COURSE.DESCRIPTION.PLACEHOLDER' | translate }}" #courseDescriptionInput="ngModel"></textarea>
+            </mat-form-field>
+        </div>
+        <!-- CourseSemester -->
+        <div class="form-group field" [class.has-error]="courseSemesterInput.invalid">
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.SEMESTER.LABEL' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="courseSemester" name="courseSemester" value="courseSemester" placeholder="{{ 'COURSE.SEMESTER.PLACEHOLDER' | translate }}"  #courseSemesterInput="ngModel">
+            </mat-form-field>
+        </div>
+        <!-- startDate -->      
+        <!--
+        <div class="form-group field" [class.has-error]="startDateInput.invalid">         
+          <mat-form-field class="create-course-full-width">
+            <mat-label>{{ 'COURSE.STARTDATE.LABEL' | translate }}</mat-label>
+            <input matInput [matDatepicker]="pickerStartDate" name="startDate" [(ngModel)]="startDate" #birthDateInput="ngModel" required  #startDateInput="ngModel">
+            <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStartDate startView="year" [startAt]="startDate" format="DD-MM-YYYY"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        -->
+        <!-- endDate -->
+        <!--
+        <div class="form-group field" [class.has-error]="endDateInput.invalid">         
+            <mat-form-field class="create-course-full-width">
+              <mat-label>{{ 'COURSE.ENDDATE.LABEL' | translate }}</mat-label>
+              <input matInput [matDatepicker]="pickerEndDate" name="endDate" [(ngModel)]="endDate" #birthDateInput="ngModel" required  #endDateInput="ngModel">
+              <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+              <mat-datepicker #pickerEndDate startView="year" [startAt]="endDate" format="DD-MM-YYYY"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        -->
+        <!--Skills-->
+        <div class="form-group field" >
+            <!--
+            <pre>{{skills|json}}</pre>
+            -->
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.SKILLS.LABEL' | translate }}</mat-label>
+                <mat-chip-list #chipListSkills>
+                    <mat-chip *ngFor="let skill of skills;let indx=index;" 
+                    [selectable]="selectableSkill" [removable]="removableSkill" (removed)="removeSkill(skill,indx)">
+                        {{skill.name}}
+                        <mat-icon matChipRemove *ngIf="removableSkill">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="{{ 'COURSE.SKILLS.PLACEHOLDER' | translate }}"
+                    #skillInput
+                    [formControl]="skillCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipListSkills"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur" 
+                    >                    
+                </mat-chip-list>
+                <!-- 
+                    (matChipInputTokenEnd)="addSkill($event)"
+                -->
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                        {{skill.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+<!--
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.SKILLS.LABEL' | translate }}</mat-label>
+                <mat-chip-list #chipListSkills aria-label="Skill selection">
+                  <mat-chip *ngFor="let skill of skills;let indx=index;" [selectable]="selectableSkill"
+                           [removable]="removableSkill" (removed)="removeSkill(skill, indx)">
+                           {{skill.id}} -- {{skill.name}}
+                    <mat-icon matChipRemove *ngIf="removableSkill">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="{{ 'COURSE.SKILLS.PLACEHOLDER' | translate }}"
+                  #skillInput
+                  [formControl]="skillCtrl"
+                  [matAutocomplete]="auto"
+                         [matChipInputFor]="chipListSkills"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         
+                         (matChipInputTokenEnd)="addSkill($event)">
+                </mat-chip-list>
+                
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                      {{skill}}
+                    </mat-option>
+                  </mat-autocomplete>
+
+              </mat-form-field>
+            -->              
+        </div>
+
+
+        <!--Events-->
+        <div class="form-group field" >
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.EVENTS.LABEL' | translate }}</mat-label>
+                <mat-chip-list #chipListEvents aria-label="Event selection">
+                  <mat-chip *ngFor="let event of events" [selectable]="selectableEvent"
+                           [removable]="removableEvent" (removed)="removeEvent(event)">
+                    {{event.name}}
+                    <mat-icon matChipRemove *ngIf="removableEvent">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="{{ 'COURSE.EVENTS.PLACEHOLDER' | translate }}"
+                         [matChipInputFor]="chipListEvents"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlurEvent"
+                         (matChipInputTokenEnd)="addEvent($event)">
+                </mat-chip-list>
+              </mat-form-field>
+        </div>
+
+
+            <div class="form-group">
+
+                <button *ngIf="mode=='Create'" type="submit" class="btn btn-success" [disabled]="formCreateCourse.invalid">
+                    <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }} 
+                </button>
+                
+                <button *ngIf="mode=='Edit'" type="submit" class="btn btn-success" [disabled]="formCreateCourse.invalid">
+                    <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.UPDATE' | translate }} 
+                </button>
+                  
+                <button type="button" class="btn btn-danger" (click)="redirectToURL('/courses')">
+                    <i _ngcontent-axy-c0="" class="material-icons" > cancel </i> {{ 'BUTTON.CANCEL' | translate }} 
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>

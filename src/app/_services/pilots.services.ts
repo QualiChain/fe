@@ -68,6 +68,7 @@ PILOTS_DATA.push({'id':1, 'label':'AUTHENTICATED', 'menu':[
     {'id': 6, 'order': 2, 'label': 'MENU.CERTIFICATE_VALIDATION', 'route': '/recruitment/certificate-validation', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator]}
   ]},
   {'id': 7, 'order': 8, 'label': 'MENU.MCDSS', 'route': '/MCDSS', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': []},
+  {'id': 8, 'order': 8, 'label': 'MENU.SKILLS', 'route': '/skills', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': []},
 ]});
 
 /*

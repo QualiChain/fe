@@ -27,7 +27,9 @@
     "PROFILE": "Profile",
     "RECRUITMENT": "Recruitment",
     "CERTIFICATE_VALIDATION": "Certificate Validation",
-    "MCDSS": "MCDSS"
+    "MCDSS": "MCDSS",
+    "SKILLS": "Skills",
+    "PREFERENCES": "Preferences"
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Certificate Validation",
@@ -276,7 +278,7 @@
     },
     "FULLNAME": {
       "LABEL": "Full name",
-      "PLACEHOLDER": "full name"
+      "PLACEHOLDER": "Full name"
     },
     "NAME": {
       "LABEL": "Name",
@@ -331,7 +333,8 @@
     "HOMEPHONE": {
       "LABEL": "Home Phone",
       "PLACEHOLDER": "999999999"
-    }
+    },
+    "NO_SMART_BADGE_YET": "This user does not have any smart badge yet."
   },
   "CHANGE_PASSWORD": {
     "TITLE": "Change user password",
@@ -414,6 +417,29 @@
       }
     }
   },
+  "SKILLS": {
+    "TITLE": "Skills",
+    "BUTTON": {
+      "CREATE_SKILL": "Create Skill"
+    },
+    "DELETE_MESSAGE": "Are you sure you want to delete this skill?",
+    "CONFIRM_ACTION": "Confirm Action"
+  },
+  "SKILL": {
+    "TITLE": "Skill",
+    "NAME": {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Name"
+    },
+    "TYPE": {
+      "LABEL": "Type",
+      "PLACEHOLDER": "Type"
+    },
+    "HARD_SKILL": {
+      "LABEL": "Hard skill",
+      "PLACEHOLDER": "Hard skill"
+    }
+  },
   "COURSE"  : {
     "TITLE": "Course",
     "NAME" : {
@@ -443,10 +469,20 @@
       "LABEL": "End date"
     },        
     "RELATED_SKILLS": "Related Skills",
+    "RELATED_SKILLS_NO_DATA": "There are not available skills for this course.",
     "COURSE_BADGES": "Course Badges",
+    "COURSE_BADGES_NO_DATA": "This course does not have any smart badge yet.",
     "UPDATE": "Update",
     "AWARD_SMART_BADGE": "Award Smart Badge",
-    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis"
+    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
+    "BUTTON": {
+      "ENROLL_TO_COURSE" : "Enroll to the course",
+      "TOUGH_THE_COURSE" : "Set me as teacher",
+      "COURSE_DONE" : "Set as done"
+    },
+    "DONE_BY": "Done by",
+    "ENROLLED_USERS": "Enrolled users",
+    "NO_TEACHERS_YET": "No teachers yet"
   },
   "RECRUITMENT"  : {
     "TITLE": "Recruitment",
