@@ -134,7 +134,7 @@ export class AwardSmartBadgeComponent implements OnInit {
           //console.log(dataSBOU);
           //this.listOfSmartAwards = dataSBOU.badges;
           dataSBOU.recipients.forEach(element => {
-            //console.log(element);
+            console.log(element);
             let aqcuired_badges_by_user = [];
             dataListUsers.push({id: element.id , student: element.name, semester: '-', grade: '-', origin: 'external', aqcuired_badges: aqcuired_badges_by_user});
             ELEMENT_DATA.push({id: element.id , student: element.userName, semester: '-', grade: '-', origin: 'external', aqcuired_badges: aqcuired_badges_by_user});
