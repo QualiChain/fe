@@ -4,7 +4,7 @@
         <mat-select
         [(ngModel)]="defaultValue"
         [(value)]="defaultValue" [(required)]="requiredValue" placeholder="{{ 'PROFILE.COUNTRY.LABEL' | translate }}" formControlName="{{formInnerControlName}}">
-            <mat-option *ngFor="let opt of countryOptions | async " [value]="opt.country_name">
+            <mat-option *ngFor="let opt of countryOptions" [value]="opt.country_name">
                 {{opt.country_name}} - ({{opt.country_short_name}})
             </mat-option>
         </mat-select>
