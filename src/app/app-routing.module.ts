@@ -40,6 +40,7 @@ import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edi
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
 import { MCDSSComponent } from './_components/mcdss/mcdss.component';
+import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
 
 const routes: Routes = [
   {
@@ -148,6 +149,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.professor, Role.recruiter, Role.admin, Role.administrator ] }
   },
+  {
+    path: 'profiles/:id/notifications-preferences',
+    component: NotificationPreferencesComponent,
+    canActivate: [AuthGuard]
+  },  
   {
     path: 'recruitment/certificate-validation',
     component: RecruitingComponent,

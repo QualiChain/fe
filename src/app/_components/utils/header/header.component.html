@@ -113,9 +113,7 @@
 											</li>
 
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
-<!--
-											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/preferences/{{currentUser.id}}" (click)="route='/preferences/'+currentUser.id" >{{ 'MENU.PREFERENCES' | translate }}</a></li>
--->
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}//notifications-preferences" (click)="route='/profiles/'+currentUser.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a></li>
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
 
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>

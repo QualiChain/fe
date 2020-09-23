@@ -145,6 +145,7 @@ import { MCDSSComponent } from './_components/mcdss/mcdss.component';
 import { SkillsComponent } from './_components/skills/skills/skills.component';
 import { SkillsGetComponent } from './_components/skills/skills-get/skills-get.component';
 import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edit.component';
+import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -268,7 +269,8 @@ export function tokenGetter() {
     MCDSSComponent,
     SkillsComponent,
     SkillsGetComponent,
-    SkillsEditComponent
+    SkillsEditComponent,
+    NotificationPreferencesComponent
   ],
   imports: [
     BrowserModule,

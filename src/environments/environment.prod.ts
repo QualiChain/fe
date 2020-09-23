@@ -22,5 +22,6 @@ export const environment = {
   CVRecomendationUrl: 'http://qualichain.epu.ntua.gr:8080/curriculum_recommendation',
   mcdssURL: 'http://qualichain.epu.ntua.gr:7070/mcdss',
   uploadUserAvatar: 'http://qualichain.epu.ntua.gr:5004/upload',
-  selectUrl: 'http://qualichain.epu.ntua.gr:5004/select'
+  selectUrl: 'http://qualichain.epu.ntua.gr:5004/select',
+  notificationPreferences: 'http://qualichain.epu.ntua.gr:5004/set',
 };
