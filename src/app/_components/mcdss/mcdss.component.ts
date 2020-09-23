@@ -1,7 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import { McdssService } from '../../_services/mcdss.service';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
+export interface mcdssOutput {
+  Alternative: string;
+  Ranking: number;
+  Score: number;
+}
+/*
+let ELEMENT_DATA: mcdssOutput[] = [ 
+  { Alternative: "alternative 1", Ranking: 1, Score: 1 }, 
+  { Alternative: "alternative 2", Ranking: 2, Score: 0.9706 }, 
+  { Alternative: "alternative 3", Ranking: 3, Score: 0 } 
+];
+*/
+let ELEMENT_DATA: mcdssOutput[] = [];
 
 @Component({
   selector: 'app-mcdss',
@@ -10,28 +26,21 @@ import { McdssService } from '../../_services/mcdss.service';
 })
 export class MCDSSComponent implements OnInit {
 
+  displayResults: boolean = false;
+  displayError: boolean = false;
+  errorMessage: string = "";
+
+  displayedColumns: string[] = ['Alternative', 'Ranking', 'Score'];
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   
   dynamicFormCriterias: FormGroup;
   dynamicForAlternatives: FormGroup;
   criteriaCtrl = new FormControl();
-  /*
-  cntCriterias: number = 0;
-  cntAlternatives: number = 0;
-  arrayValuesAlternative: any[] = [];
-
-  criterriaArray: any[] = [];
-  alternativeArray: any[] = [[]];
-  */
-  /*
-  defaultCriteria = {'name': null, 'weight': null, 'type': null};
-  criterriaArray: any[] = [this.defaultCriteria];
-   
-  defaultAlternativeValue = null;
-  defaultAlternativeValueArray: any[] = [this.defaultAlternativeValue];
-
-  defaultAlternative = {'name': null, 'values': this.defaultAlternativeValueArray};
-  alternativeArray: any[] = [this.defaultAlternative];
-  */
+  
 
  methods: any[] = [
   {id: 'maut', name: 'MAUT'},
@@ -40,7 +49,8 @@ export class MCDSSComponent implements OnInit {
   ];
   selectedMethod: string = "";
   agreement_threshold: number = 1;
-  response = [];
+  
+  response: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,12 +58,9 @@ export class MCDSSComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-/************************** */
-
-/************************/
-
-
+    
+    this.dataSource.sort = this.sort;
+    
     this.dynamicFormCriterias = this.formBuilder.group({
       Criterias: new FormArray([])
     });
@@ -74,6 +81,9 @@ export class MCDSSComponent implements OnInit {
 
 
   save() {
+    this.errorMessage = "";
+    this.displayResults = false;
+    this.displayError = false;
 
     let numAlternatives = this.dynamicForAlternatives.value.Alternatives.length;
     let numCriterias = this.dynamicFormCriterias.value.Criterias.length;
@@ -136,13 +146,21 @@ export class MCDSSComponent implements OnInit {
     this.McdssService.postMCDSS( this.selectedMethod, dataToPost).subscribe(
       res => {
         console.log("McdssServices");
-        console.log(res)        
-        this.response = res;
+        //console.log(res)        
+        //this.response = res;
+        //this.response = new MatTableDataSource(res);
+
+        ELEMENT_DATA = res;
+        this.dataSource.data = res;
+        this.displayResults = true;
+  
       },
       error => {
         console.log("Error McdssServices!!");
-        console.log(error);
-        this.response = error;
+        this.displayError = true;
+        this.errorMessage = error;
+        //console.log(error);
+        //this.response = error;
       }
     );   
 

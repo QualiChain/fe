@@ -1,16 +1,53 @@
 <h1 >{{ 'MCDDSS.TITLE' | translate }}</h1>
 
-<div *ngIf="response.length>0" class="container">
+
+<div [hidden]="!displayError" class="container">
     <div class="row">
-        {{ response | json }}
+        <div class="help is-error alert-danger" >
+            {{errorMessage}}
+        </div>
     </div>
-    <div>
-        <button class="btn btn-danger" (click)="response=[]">
-            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> 
-        </button>
-    </div>
-    
+    <br>
 </div>
+<div [hidden]="!displayResults" class="container">
+    <div class="row">
+        <div class="col col-lg-8">
+            <table mat-table [dataSource]="dataSource" matSort class="table">
+            
+                <!-- Alternative Column -->
+                <ng-container matColumnDef="Alternative">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alternative </th>
+                <td mat-cell *matCellDef="let element"> {{element.Alternative}} </td>
+                </ng-container>
+            
+                <!-- Ranking Column -->
+                <ng-container matColumnDef="Ranking">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ranking </th>
+                <td mat-cell *matCellDef="let element"> {{element.Ranking}} </td>
+                </ng-container>
+            
+                <!-- Score Column -->
+                <ng-container matColumnDef="Score">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+                <td mat-cell *matCellDef="let element"> {{element.Score}} </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+
+        </div>
+        <div class="col col-lg-2">
+            <button class="btn btn-danger" (click)="displayResults=false">
+                <i _ngcontent-axy-c0="" class="material-icons small"> close </i> 
+            </button>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="container">
     <div class="row">
@@ -149,9 +186,7 @@
                 
                 <td *ngFor="let criteria of t.controls; let index_criteria = index" class="withborders">
                     <div class="form-group col-6">
-                        <!--
-                        ---{{index_alternative}}--{{index_criteria}}---
-                        -->
+
                         &nbsp;
                         <mat-form-field class="citeria_field">
                             <mat-label>{{ 'MCDDSS.ALTERNATIVE.VALUE.LABEL' | translate }}</mat-label>
@@ -173,3 +208,4 @@
         </table>
     
     </div>
+</div>
