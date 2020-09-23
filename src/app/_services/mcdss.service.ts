@@ -19,7 +19,8 @@ export class McdssService {
            map((data: any) => {
              return data;
            }), catchError( error => {
-             return throwError( 'Something went wrong!' );
+             //return throwError( 'Something went wrong!' );
+             return throwError(error.message);
            })
         )
       }
