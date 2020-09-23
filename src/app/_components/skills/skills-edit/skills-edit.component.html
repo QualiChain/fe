@@ -23,7 +23,7 @@
             
             <div class="form-group field" [class.has-error]="skillHardSkillInput.invalid">
                 <section class="example-section">                
-                    <mat-checkbox class="example-margin" [(ngModel)]="skill.hard_skill" name="skillHardSkill" value="skillHardSkill" #skillHardSkillInput="ngModel">{{ 'SKILL.HARD_SKILL.LABEL' | translate }}</mat-checkbox>                                    
+                    <mat-checkbox class="example-margin" [(ngModel)]="skill.hard_skill" name="skillHardSkill" value="skillHardSkill" #skillHardSkillInput="ngModel" ngDefaultControl>{{ 'SKILL.HARD_SKILL.LABEL' | translate }}</mat-checkbox>                                    
                 </section>
             </div>
             
