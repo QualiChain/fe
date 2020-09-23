@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QcLocationCountryComponent } from './qc-location-country.component';
 import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('QcLocationCountryComponent', () => {
   let component: QcLocationCountryComponent;
@@ -11,7 +12,8 @@ describe('QcLocationCountryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ QcLocationCountryComponent ],
       imports: [
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        HttpClientTestingModule
         ]
     })
     .compileComponents();
