@@ -180,7 +180,7 @@ export class ProfilesAddComponent implements OnInit {
 
   
   processForm() {
-console.log(this);
+    //console.log(this);
 
     let birth_date_transform =this.birthDate;
     //let birth_date_transform =this.datepipe.transform(this.birthDate, 'dd-MM-yyyy');

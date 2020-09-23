@@ -29,7 +29,7 @@
     "CERTIFICATE_VALIDATION": "Validação de Certificado",
     "MCDSS": "MCDSS",
     "SKILLS": "Skills",
-    "PREFERENCES": "Preferences"
+    "NOTIFICATION_PREFERENCES": "Notification Preferences"
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Validação de Certificado",
@@ -638,5 +638,18 @@
         "PLACEHOLDER": "a number"
       }
     }     
+  },
+  "NOTIFICATION_PREFERENCES": {
+    "TITLE": "Notifications preferences",
+    "ERROR_MESSAGE": "Error saving your preferences",
+    "CONFIRM_MESSAGE": "Your preferences has been saved",
+    "LOCATIONS": {
+      "LABEL": "Locations",
+      "PLACEHOLDER": "Locations"
+    },
+    "SPECIALIZATIONS": {
+      "LABEL": "Specializations",
+      "PLACEHOLDER": "Specializations"
+    }
   }
 }

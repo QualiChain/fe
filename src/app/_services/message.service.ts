@@ -10,6 +10,7 @@ import { map, catchError } from 'rxjs/operators';
 export class MessageService {
     private subject = new Subject<any>();
     private uriNotifications = environment.notificationsURL;
+    private uriNotificationsPreferences = environment.notificationPreferences;
     
     constructor(private http: HttpClient) { }
 
@@ -71,4 +72,32 @@ export class MessageService {
     getMessage(): Observable<any> {
         return this.subject.asObservable();
     }
+
+
+    addUserNotificationsPreferences(obj: Object) {
+      return this.http.post(`${this.uriNotificationsPreferences}/notification/preferences`, obj).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    } 
+
+    getUserNotificationsPreferences(userId: Number) {
+      return this.http.get(`${this.uriNotificationsPreferences}/notification/preferences?user_id=${userId}`);
+    } 
+
+    deleteUserNotificationsPreferences(preferenceId: Number) {
+      return this.http.delete(`${this.uriNotificationsPreferences}/notification/preferences?preference_id=${preferenceId}`).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }    
+
 }

@@ -1,0 +1,60 @@
+<h1 >{{ 'NOTIFICATION_PREFERENCES.TITLE' | translate }}</h1>
+
+<div class="container">
+
+    <div class="row alert alert-danger" *ngIf="displayErrorMessage">
+        {{ 'NOTIFICATION_PREFERENCES.ERROR_MESSAGE' | translate }}
+    </div>
+    <div class="row alert alert-success" *ngIf="displayMessage">
+        {{ 'NOTIFICATION_PREFERENCES.CONFIRM_MESSAGE' | translate }}
+    </div>    
+    <div class="row">
+          <form #formNotPref="ngForm" class="notification-form" (ngSubmit)="processForm()" >
+
+            <!--Locations-->
+            <div class="form-group field" >
+                <mat-form-field class="notification-full-width">
+                    <mat-label>{{ 'NOTIFICATION_PREFERENCES.LOCATIONS.LABEL' | translate }}</mat-label>
+                    <mat-chip-list #chipListLocations aria-label="Event selection">
+                    <mat-chip *ngFor="let location of locations" [selectable]="selectableLocation"
+                            [removable]="removableSpecialization" (removed)="removeLocation(location)">
+                        {{location.name}}
+                        <mat-icon matChipRemove *ngIf="removableSpecialization">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="{{ 'NOTIFICATION_PREFERENCES.LOCATIONS.PLACEHOLDER' | translate }}"
+                            [matChipInputFor]="chipListLocations"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlurSpecialization"
+                            (matChipInputTokenEnd)="addLocation($event)">
+                    </mat-chip-list>
+                </mat-form-field>
+            </div>
+
+            <!--Specializations-->
+            <div class="form-group field" >
+                <mat-form-field class="notification-full-width">
+                    <mat-label>{{ 'NOTIFICATION_PREFERENCES.SPECIALIZATIONS.LABEL' | translate }}</mat-label>
+                    <mat-chip-list #chipListSpecializations aria-label="Event selection">
+                    <mat-chip *ngFor="let specialization of specializations" [selectable]="selectableSpecialization"
+                            [removable]="removableSpecialization" (removed)="removeSpecialization(specialization)">
+                        {{specialization.name}}
+                        <mat-icon matChipRemove *ngIf="removableSpecialization">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="{{ 'NOTIFICATION_PREFERENCES.SPECIALIZATIONS.PLACEHOLDER' | translate }}"
+                            [matChipInputFor]="chipListSpecializations"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlurSpecialization"
+                            (matChipInputTokenEnd)="addSpecialization($event)">
+                    </mat-chip-list>
+                </mat-form-field>
+            </div>
+            
+            <div class="form-group field" >
+                <button type="submit" class="btn btn-success" [disabled]="formNotPref.invalid">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> save </i> {{ 'BUTTON.SAVE' | translate }} 
+                </button>
+            </div>
+          </form>
+
+    </div>
+</div>
