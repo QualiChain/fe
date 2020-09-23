@@ -1,30 +1,37 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-
+import { UtilsService } from '../../../_services/utils.service';
+import {Observable} from 'rxjs';
+/*
 export interface cities {
   id: number;
   name: string;
   city_code: string;
 }
+*/
+export interface cities {
+  city_name: string;
+}
 
+/*
 export interface CityStateOption {
   name: string;
   state_code: string;
   cities: cities[];
 }
-
+*/
 @Component({
   selector: 'app-qc-location-city-state',
   templateUrl: './qc-location-city-state.component.html',
   styleUrls: ['./qc-location-city-state.component.css']
 })
 export class QcLocationCityStateComponent implements OnInit {
-
+  /*
   cityStyateOptions: CityStateOption[] = [
     {"name":"Catalunya","state_code":"Barcelona Province","cities":[{"id":1,"name":"Barcelona","city_code":"Barna"},{"id":2,"name":"Lleida","city_code":"Lleida"},{"id":3,"name":"Girona","city_code":"Girona"},{"id":4,"name":"Tarragona","city_code":"Tarragona"}]},
     {"name":"Madrid","state_code":"Madrid Province","cities":[{"id":3,"name":"Madrid","city_code":"Madrid"}]}
   ];
-
+  */
   filteredListOfCities: cities[];
 
   @Input() defaultValue: string;
@@ -44,11 +51,23 @@ export class QcLocationCityStateComponent implements OnInit {
    */
   @Input() formInnerControlName: string;
 
-  constructor() { }
+  constructor(
+    private us: UtilsService
+  ) { }
 
   ngOnInit(): void {}
 
   ngOnChanges(): void { 
+
+
+    this.us
+    .getCitiesByState(this.stateValue)
+    .subscribe((data: any[]) => {
+      //console.log(data);
+      this.filteredListOfCities = data;
+      
+    }); 
+    /*
     let index = this.cityStyateOptions.findIndex(x => x.state_code === this.stateValue);
     if (index>=0) {
       this.filteredListOfCities = this.cityStyateOptions[index].cities;
@@ -56,6 +75,7 @@ export class QcLocationCityStateComponent implements OnInit {
     else {
       this.filteredListOfCities = [];
     }
+    */
   }
 
 }

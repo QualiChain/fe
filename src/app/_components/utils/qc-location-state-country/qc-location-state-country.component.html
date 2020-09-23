@@ -2,8 +2,8 @@
 <form [formGroup]="parentForm">
     <mat-form-field class="state-country-field-full-width">
         <mat-select  [(value)]="defaultValue" [(required)]="requiredValue" placeholder="{{ 'PROFILE.STATE.LABEL' | translate }}" formControlName="{{formInnerControlName}}">
-            <mat-option *ngFor="let opt of filteredListOfStates" [value]="opt.name">
-                {{opt.name}}
+            <mat-option *ngFor="let opt of stateCountryOptions" [value]="opt.state_name">
+                {{opt.state_name}}
             </mat-option>
         </mat-select>
         <!--

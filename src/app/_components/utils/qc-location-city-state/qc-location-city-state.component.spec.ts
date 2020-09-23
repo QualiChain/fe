@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QcLocationCityStateComponent } from './qc-location-city-state.component';
 import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('QcLocationCityStateComponent', () => {
   let component: QcLocationCityStateComponent;
@@ -11,7 +12,8 @@ describe('QcLocationCityStateComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ QcLocationCityStateComponent ],
       imports: [
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        HttpClientTestingModule
         ]
     })
     .compileComponents();
