@@ -363,7 +363,6 @@ selected(event: MatAutocompleteSelectedEvent): void {
         "name": this.courseName,
         "description": this.courseDescription,
         "semester": this.courseSemester,
-        "endDate": this.endDate,
         "skills": finalSkillList,
         "events": this.events
         };       
