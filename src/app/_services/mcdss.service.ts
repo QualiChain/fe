@@ -21,8 +21,29 @@ export class McdssService {
            }), catchError( error => {
              //return throwError( 'Something went wrong!' );
              return throwError(error.message);
+             //return throwError(error.error);
            })
         )
-      }
+    }
+
+    postMCDSSFile(method: String, formData: any) {
+      //console.log("At Validate, Form Data:");
+      //console.log(formData.get('Decision Matrix'))
+      
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      return this.http.post(`${this.uriMCDSS}/${method}/file`, formData)
+      .pipe(
+        map((res: any) => {
+          return res;
+        }), catchError( error => {
+          return throwError(error.message+": "+error.error );
+          //return throwError( 'Something went wrong!' );
+        })
+      );
+    }
+
+      
 
 }

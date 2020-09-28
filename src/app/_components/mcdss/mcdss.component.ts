@@ -26,6 +26,20 @@ let ELEMENT_DATA: mcdssOutput[] = [];
 })
 export class MCDSSComponent implements OnInit {
 
+  invalidDecisionMatrixFile: boolean = false;
+  messageErrorDecissionMatrixFile: string = null;
+  invalidCriteriaDetailsFile: boolean = false;
+  messageErrorCriteriaDetailsFile: string = null;
+
+  fileToUploadDecisionMatrix: File = null;
+  uploadedDecisionMatrix: boolean = false;
+
+  fileToUploadCriteriaDetails: File = null;
+  uploadedCriteriaDetails: boolean = false;
+  
+  selectedMethodFiles: string = null;
+  /****************************************** */
+
   displayResults: boolean = false;
   displayError: boolean = false;
   errorMessage: string = "";
@@ -145,7 +159,7 @@ export class MCDSSComponent implements OnInit {
 
     this.McdssService.postMCDSS( this.selectedMethod, dataToPost).subscribe(
       res => {
-        console.log("McdssServices");
+        //console.log("McdssServices");
         //console.log(res)        
         //this.response = res;
         //this.response = new MatTableDataSource(res);
@@ -156,7 +170,7 @@ export class MCDSSComponent implements OnInit {
   
       },
       error => {
-        console.log("Error McdssServices!!");
+        //console.log("Error McdssServices!!");
         this.displayError = true;
         this.errorMessage = error;
         //console.log(error);
@@ -249,5 +263,87 @@ export class MCDSSComponent implements OnInit {
     */
 
   }
+
+//invalidDecisionMatrixFile: boolean = false;
+//messageErrorDecissionMatrixFile: string = null;
+//invalidCriteriaDetailsFile: boolean = false;
+//messageErrorCriteriaDetailsFile: string = null;
+
+  handleFileInputDecisionMatrix(files: FileList) {
+    this.invalidDecisionMatrixFile = false;
+    this.messageErrorDecissionMatrixFile = null;
+    this.uploadedDecisionMatrix = false;
+   if (files[0].type=="application/vnd.ms-excel") {
+      this.fileToUploadDecisionMatrix = files.item(0);
+      this.uploadedDecisionMatrix = true;
+    }
+    else {
+      this.invalidDecisionMatrixFile = true;
+      //this.messageErrorDecissionMatrixFile = files[0].name + " is not a valid file. Only application/vnd.ms-excel files as valid";
+      this.messageErrorDecissionMatrixFile = files[0].name;
+      this.fileToUploadDecisionMatrix = null;
+    }    
+    
+  }
+ 
+  handleFileInputCriteriaDetails(files: FileList) {
+    this.invalidCriteriaDetailsFile = false;
+    this.messageErrorCriteriaDetailsFile = null;
+    this.uploadedCriteriaDetails = false;
+    if (files[0].type=="application/vnd.ms-excel") {
+      this.fileToUploadCriteriaDetails = files.item(0);
+      this.uploadedCriteriaDetails = true;
+    }
+    else {
+      this.invalidCriteriaDetailsFile = true;
+      //this.messageErrorCriteriaDetailsFile = files[0].name + " is not a valid file. Only application/vnd.ms-excel files as valid";
+      this.messageErrorCriteriaDetailsFile = files[0].name;
+      this.fileToUploadCriteriaDetails = null;
+    }
+  }
   
+  /**
+   * format bytes
+   * @param bytes (File size in bytes)
+   * @param decimals (Decimals point)
+   */
+  formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) {
+      return "0 Bytes";
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals;
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+  }
+
+  saveFilesForm() {
+    ELEMENT_DATA = null;
+
+    this.displayResults = false;
+    this.displayError = false;
+
+    const formData: FormData = new FormData();
+      formData.append('Decision Matrix', (<HTMLInputElement>document.getElementById('decisionMatrix')).files[0]);
+      formData.append('Criteria Details', (<HTMLInputElement>document.getElementById('criteriaDetails')).files[0]);
+
+
+      this.McdssService.postMCDSSFile(this.selectedMethodFiles, formData).subscribe(res => {
+        //console.log(res);
+        ELEMENT_DATA = res;
+        this.dataSource.data = res;
+        this.displayResults = true;
+
+      }, error => {      
+        //this.response = error;
+        this.displayResults = false;
+        this.displayError = true;
+        this.errorMessage = error;
+        //console.log(error);
+      });
+
+  }
+
 }
+
