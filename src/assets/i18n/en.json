@@ -598,10 +598,21 @@
   },
   "MCDDSS": {
     "TITLE": "Multicriteria Decision Support System",
+    "TAB": {
+      "MANUAL": "Manual input",
+      "FILE": "File input"
+    },
+    "RESULTS": {
+      "TITLE": "Results",
+      "ALTERNATIVE": "Alternative",
+      "RANKING": "Ranking",
+      "SCORE": "Score"
+    },
     "BUTTON": {
       "ADD_CRITERIA": "Add criteria",
       "ADD_ALTERNATIVE": "Add alternative",
-      "SEND": "Send data"
+      "SEND": "Send data",
+      "SEND_FILES": "Send files data"
     },
     "METHOD": {
       "PLACEHOLDER": "Select a method"
@@ -637,7 +648,19 @@
         "LABEL": "Value",
         "PLACEHOLDER": "a number"
       }
-    }     
+    },
+    "CHOOSE_FILE": {
+      "DECISION_MATRIX": {
+        "LABEL": "Choose file",
+        "PLACEHOLDER": "Choose a csv file for the Decision Matrix data",
+        "ERROR_MESSAGE" : "The file {{file_name}} is not a valid file to load the decision matrix data. Only application/vnd.ms-excel files are valid"
+      },
+      "CRITERIA_DETAILS_MATRIX": {
+        "LABEL": "Choose file",
+        "PLACEHOLDER": "Choose a csv file for the Criteria Details data",
+        "ERROR_MESSAGE" : "The file {{file_name}} is not a valid file to load criteria detaill data. Only application/vnd.ms-excel files are valid"
+      }
+    }
   },
   "NOTIFICATION_PREFERENCES": {
     "TITLE": "Notifications preferences",
@@ -651,5 +674,9 @@
       "LABEL": "Specializations",
       "PLACEHOLDER": "Specializations"
     }
+  },
+  "FILE": {
+    "TYPE": "Type",
+    "SIZE": "Size"
   }
 }

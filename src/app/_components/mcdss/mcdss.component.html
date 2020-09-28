@@ -1,211 +1,322 @@
 <h1 >{{ 'MCDDSS.TITLE' | translate }}</h1>
 
-
 <div [hidden]="!displayError" class="container">
-    <div class="row">
-        <div class="help is-error alert-danger" >
+    <div class="row1">
+        <div class="help is-error alert alert-danger" >
             {{errorMessage}}
         </div>
     </div>
     <br>
 </div>
+
+
+
 <div [hidden]="!displayResults" class="container">
-    <div class="row">
-        <div class="col col-lg-8">
-            <table mat-table [dataSource]="dataSource" matSort class="table">
+    
+        <div class="row1 result-mcdss">  
+            <div class="col col-lg-12">
+                <button class="btn btn-danger" (click)="displayResults=false">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> close </i> 
+                </button>
+                <span class="resultsTitle">{{ 'MCDDSS.RESULTS.TITLE' | translate }}</span>
+                
+            </div>
             
-                <!-- Alternative Column -->
-                <ng-container matColumnDef="Alternative">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alternative </th>
-                <td mat-cell *matCellDef="let element"> {{element.Alternative}} </td>
-                </ng-container>
-            
-                <!-- Ranking Column -->
-                <ng-container matColumnDef="Ranking">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ranking </th>
-                <td mat-cell *matCellDef="let element"> {{element.Ranking}} </td>
-                </ng-container>
-            
-                <!-- Score Column -->
-                <ng-container matColumnDef="Score">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
-                <td mat-cell *matCellDef="let element"> {{element.Score}} </td>
-                </ng-container>
-            
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <div class="col col-lg-12">
+                <table mat-table [dataSource]="dataSource" matSort class="table">
+                
+                    <!-- Alternative Column -->
+                    <ng-container matColumnDef="Alternative">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Alternative </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Alternative}} </td>
+                    </ng-container>
+                
+                    <!-- Ranking Column -->
+                    <ng-container matColumnDef="Ranking">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ranking </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Ranking}} </td>
+                    </ng-container>
+                
+                    <!-- Score Column -->
+                    <ng-container matColumnDef="Score">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Score}} </td>
+                    </ng-container>
+                
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-            </table>
-
+                </table>
+            </div>
 
         </div>
-        <div class="col col-lg-2">
-            <button class="btn btn-danger" (click)="displayResults=false">
-                <i _ngcontent-axy-c0="" class="material-icons small"> close </i> 
-            </button>
-        </div>
-    </div>
+    
 </div>
-
 
 
 <div class="container">
     <div class="row">
-        <button class="btn btn-primary" (click)="addFormGroupItem($event, 'criteria')">
-            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDDSS.BUTTON.ADD_CRITERIA' | translate }}
-        </button>
-
-        <button [disabled]="t.controls.length==0" class="btn btn-primary" (click)="addFormGroupItem($event, 'alternative')">
-            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDDSS.BUTTON.ADD_ALTERNATIVE' | translate }}
-        </button>
-
-        <button [disabled]="selectedMethod=='' || t.controls.length==0 || alternative.controls.length<=1 || t.status=='INVALID' || alternative.status=='INVALID'" class="btn btn-success" (click)="save()">
-            <i _ngcontent-axy-c0="" class="material-icons small"> send </i> {{ 'MCDDSS.BUTTON.SEND' | translate }}
-        </button>
-    </div>
-
-    <br/>
-    <div class="row">
-        <form #formConfig="ngForm">
-            <div class="col col-lg-3">
-                <mat-form-field >
-                    <mat-label>{{ 'MCDDSS.METHOD.PLACEHOLDER' | translate }}</mat-label>
-                    <mat-select [(ngModel)]="selectedMethod" name="methods" id="methods" ngDefaultControl>
-                        <mat-option *ngFor="let method of methods ; let pilotIndex = index" [value]="method.id">
-                            {{method.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div *ngIf="selectedMethod=='electreI'"  class="col col-lg-2" [class.has-error]="agreementWeightInput.invalid">
-                <mat-form-field >
-                    <mat-label>{{ 'MCDDSS.AGREEMENT_THRESHOLD.LABEL' | translate }}</mat-label> 
-                    <input matInput required 
-                    type="number"                         
-                    min="1" 
-                    [(ngModel)]="agreement_threshold"
-                    name="agreement_threshold" value="agreement_threshold"
-                    #agreementWeightInput="ngModel"
-                    placeholder="{{ 'MCDDSS.AGREEMENT_THRESHOLD.PLACEHOLDER' | translate }}" >
-                </mat-form-field>
-            </div>
-        </form>
-    </div>
-
-    <br/>
-
-    <div class="row">
-        <table class="criteria">
-            <tr>
-                <th colspan="2" class="withoutborders">
-                            
-                </th>
-                <th *ngFor="let criteria of t.controls; let index_criteria = index" class="criteria-th-header withborders">
-                    <div>
-                        <button [disabled]="t.controls.length==1" class="btn btn-danger" (click)="deleteFormGroupItem($event, index_criteria, 'criteria')">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> 
+        <mat-tab-group>
+            <mat-tab label="{{ 'MCDDSS.TAB.MANUAL' | translate }}">
+                <br>    
+                
+                <div class="row1">
+                    <div class="col col-lg-12">
+                        <button class="btn btn-primary" (click)="addFormGroupItem($event, 'criteria')">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDDSS.BUTTON.ADD_CRITERIA' | translate }}
+                        </button>
+                
+                        <button [disabled]="t.controls.length==0" class="btn btn-primary" (click)="addFormGroupItem($event, 'alternative')">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDDSS.BUTTON.ADD_ALTERNATIVE' | translate }}
+                        </button>
+                
+                        <button [disabled]="selectedMethod=='' || t.controls.length==0 || alternative.controls.length<=1 || t.status=='INVALID' || alternative.status=='INVALID'" class="btn btn-success" (click)="save()">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> send </i> {{ 'MCDDSS.BUTTON.SEND' | translate }}
                         </button>
                     </div>
-                </th>
-            </tr>
-            <tr>
-                <td colspan="2" >
-                    
-                </td>
-                <td *ngFor="let criteria of t.controls; let index_criteria = index" class="criteria-th-header withborders">
-                    
-                    
-                    <div [formGroup]="criteria" class="form-row">
-                        
-                        <div class="criteria-div">
-                            &nbsp;
-                            <mat-form-field class="citeria_field">
-                                <mat-label>{{ 'MCDDSS.CRITERIAL.NAME.LABEL' | translate }}</mat-label> 
-                                <input matInput required type="text" formControlName="label" placeholder="{{ 'MCDDSS.CRITERIAL.NAME.PLACEHOLDER' | translate }}" >
-                            </mat-form-field>
+                </div>
+                <div class="col col-lg-12">
+                    <br/>
+                </div>
+                <div class="row1">
+                    <form #formConfig="ngForm">
+                        <div class="col col-lg-12">
+                            <div class="col col-lg-3">
+                                <mat-form-field >
+                                    <mat-label>{{ 'MCDDSS.METHOD.PLACEHOLDER' | translate }}</mat-label>
+                                    <mat-select [(ngModel)]="selectedMethod" name="methods" id="methods" ngDefaultControl>
+                                        <mat-option *ngFor="let method of methods ; let pilotIndex = index" [value]="method.id">
+                                            {{method.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div *ngIf="selectedMethod=='electreI'"  class="col col-lg-2" [class.has-error]="agreementWeightInput.invalid">
+                                <mat-form-field >
+                                    <mat-label>{{ 'MCDDSS.AGREEMENT_THRESHOLD.LABEL' | translate }}</mat-label> 
+                                    <input matInput required 
+                                    type="number"                         
+                                    min="1" 
+                                    [(ngModel)]="agreement_threshold"
+                                    name="agreement_threshold" value="agreement_threshold"
+                                    #agreementWeightInput="ngModel"
+                                    placeholder="{{ 'MCDDSS.AGREEMENT_THRESHOLD.PLACEHOLDER' | translate }}" >
+                                </mat-form-field>
+                            </div>
                         </div>
-                        <br>
-                        <div class="criteria-div">
-                            &nbsp;
-                            <mat-form-field class="citeria_field">
-                                <mat-label>{{ 'MCDDSS.CRITERIAL.WEIGHT.LABEL' | translate }}</mat-label> 
-                                <input matInput required 
-                                type="number" 
-                                min="1" 
-                                formControlName="weight" placeholder="{{ 'MCDDSS.CRITERIAL.WEIGHT.PLACEHOLDER' | translate }}" >
-                            </mat-form-field>
-                        </div>
-                        <br>
-                        <div class="criteria-div">
-                            &nbsp;
-                            <mat-form-field class="citeria_field">
-                                <mat-label>{{ 'MCDDSS.CRITERIAL.TYPE.LABEL' | translate }}</mat-label> 
-                                <input matInput required 
-                                type="number" 
-                                min="0" 
-                                max="1"
-                                formControlName="type" placeholder="{{ 'MCDDSS.CRITERIAL.TYPE.PLACEHOLDER' | translate }}" >
-                            </mat-form-field>
-                        </div>
-
-                        <div *ngIf="selectedMethod=='electreI'" class="criteria-div">
-                            <mat-form-field class="citeria_field">
-                                <mat-label>{{ 'MCDDSS.CRITERIAL.VETO.LABEL' | translate }}</mat-label> 
-                                <input matInput required 
-                                type="number" 
-                                min="0" 
-                                formControlName="veto_thresholds" placeholder="{{ 'MCDDSS.CRITERIAL.VETO.PLACEHOLDER' | translate }}" >
-                            </mat-form-field>
-                        </div>
-                        
-                    </div>          
-                        
-                
-                </td>
-            </tr>
-
-            <tr *ngFor="let alt of alternative.controls; let index_alternative = index" [formGroup]="alt">
-                <td class="withborders">
-                    <div>
-                        <button [disabled]="alternative.controls.length<=2" class="btn btn-danger" (click)="deleteFormGroupItem($event, index_alternative, 'alternativa')">            
-                            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> 
-                        </button>
-                    </div>
-                </td>
-                <td class="withborders">
-                        <div class="form-group col-6">
-                            &nbsp;
-                            <mat-form-field class="citeria_field">
-                                <mat-label>{{ 'MCDDSS.ALTERNATIVE.NAME.LABEL' | translate }}</mat-label> 
-                                <input matInput required type="text" formControlName="Name" placeholder="{{ 'MCDDSS.ALTERNATIVE.NAME.PLACEHOLDER' | translate }}" >
-                            </mat-form-field>
-                        </div>
-                </td>
-
-
-                
-                <td *ngFor="let criteria of t.controls; let index_criteria = index" class="withborders">
-                    <div class="form-group col-6">
-
-                        &nbsp;
-                        <mat-form-field class="citeria_field">
-                            <mat-label>{{ 'MCDDSS.ALTERNATIVE.VALUE.LABEL' | translate }}</mat-label>
-                            <input  matInput required 
-                            type="number" 
-                            min="0" 
-                            value="0"
-                            id="value_{{index_alternative}}_{{index_criteria}}"                     
-                            (change)="changeVlaue(index_alternative,index_criteria)"
-                            placeholder="{{ 'MCDDSS.ALTERNATIVE.VALUE.PLACEHOLDER' | translate }}"
-                            >
-                            
-                        </mat-form-field>
-                    </div>
-                </td>
+                    </form>
+                </div>
             
-            </tr>
+                <br/>
+            
+                <div class="row1">
+                    <table class="criteria">
+                        <tr>
+                            <th colspan="2" class="withoutborders">
+                                        
+                            </th>
+                            <th *ngFor="let criteria of t.controls; let index_criteria = index" class="criteria-th-header withborders">
+                                <div>
+                                    <button [disabled]="t.controls.length==1" class="btn btn-danger" (click)="deleteFormGroupItem($event, index_criteria, 'criteria')">
+                                        <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> 
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                                
+                            </td>
+                            <td *ngFor="let criteria of t.controls; let index_criteria = index" class="criteria-th-header withborders">
+                                
+                                
+                                <div [formGroup]="criteria" class="form-row">
+                                    
+                                    <div class="criteria-div">
+                                        &nbsp;
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDDSS.CRITERIAL.NAME.LABEL' | translate }}</mat-label> 
+                                            <input matInput required type="text" formControlName="label" placeholder="{{ 'MCDDSS.CRITERIAL.NAME.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+                                    <br>
+                                    <div class="criteria-div">
+                                        &nbsp;
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDDSS.CRITERIAL.WEIGHT.LABEL' | translate }}</mat-label> 
+                                            <input matInput required 
+                                            type="number" 
+                                            min="1" 
+                                            formControlName="weight" placeholder="{{ 'MCDDSS.CRITERIAL.WEIGHT.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+                                    <br>
+                                    <div class="criteria-div">
+                                        &nbsp;
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDDSS.CRITERIAL.TYPE.LABEL' | translate }}</mat-label> 
+                                            <input matInput required 
+                                            type="number" 
+                                            min="0" 
+                                            max="1"
+                                            formControlName="type" placeholder="{{ 'MCDDSS.CRITERIAL.TYPE.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+            
+                                    <div *ngIf="selectedMethod=='electreI'" class="criteria-div">
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDDSS.CRITERIAL.VETO.LABEL' | translate }}</mat-label> 
+                                            <input matInput required 
+                                            type="number" 
+                                            min="0" 
+                                            formControlName="veto_thresholds" placeholder="{{ 'MCDDSS.CRITERIAL.VETO.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                </div>          
+                                    
+                            
+                            </td>
+                        </tr>
+            
+                        <tr *ngFor="let alt of alternative.controls; let index_alternative = index" [formGroup]="alt">
+                            <td class="withborders">
+                                <div>
+                                    <button [disabled]="alternative.controls.length<=2" class="btn btn-danger" (click)="deleteFormGroupItem($event, index_alternative, 'alternativa')">            
+                                        <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> 
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="withborders">
+                                    <div class="form-group col-6">
+                                        &nbsp;
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDDSS.ALTERNATIVE.NAME.LABEL' | translate }}</mat-label> 
+                                            <input matInput required type="text" formControlName="Name" placeholder="{{ 'MCDDSS.ALTERNATIVE.NAME.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+                            </td>
+            
+            
+                            
+                            <td *ngFor="let criteria of t.controls; let index_criteria = index" class="withborders">
+                                <div class="form-group col-6">
+            
+                                    &nbsp;
+                                    <mat-form-field class="citeria_field">
+                                        <mat-label>{{ 'MCDDSS.ALTERNATIVE.VALUE.LABEL' | translate }}</mat-label>
+                                        <input  matInput required 
+                                        type="number" 
+                                        min="0" 
+                                        value="0"
+                                        id="value_{{index_alternative}}_{{index_criteria}}"                     
+                                        (change)="changeVlaue(index_alternative,index_criteria)"
+                                        placeholder="{{ 'MCDDSS.ALTERNATIVE.VALUE.PLACEHOLDER' | translate }}"
+                                        >
+                                        
+                                    </mat-form-field>
+                                </div>
+                            </td>
+                        
+                        </tr>
+            
+                    </table>
+                
+                </div>
 
-        </table>
-    
+
+            </mat-tab>
+            <mat-tab label="{{ 'MCDDSS.TAB.FILE' | translate }}"> 
+                <br/>
+                <div class="row1">
+                    <div class="col col-lg-12">
+                        <button [disabled]="(formMCDSSFiles.invalid || !uploadedDecisionMatrix || !uploadedCriteriaDetails)" class="btn btn-success" (click)="saveFilesForm()">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> send </i> {{ 'MCDDSS.BUTTON.SEND_FILES' | translate }}
+                        </button>
+                    </div>
+                </div>
+            
+                <br/>
+                <div class="row1">
+                    <div class="col col-lg-12">
+                        
+                        <form #formMCDSSFiles="ngForm">
+
+                            <div class="col col-lg-12">
+                                <mat-form-field >
+                                    <mat-label>{{ 'MCDDSS.METHOD.PLACEHOLDER' | translate }}</mat-label>
+                                    <mat-select [(ngModel)]="selectedMethodFiles" name="methodsFiles" id="methodsFiles" ngDefaultControl required >
+                                        <mat-option *ngFor="let method of methods ; let pilotIndex = index" [value]="method.id">
+                                            {{method.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col col-lg-12">
+                                
+                                <div *ngIf="invalidDecisionMatrixFile" class="col col-lg-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ 'MCDDSS.CHOOSE_FILE.DECISION_MATRIX.ERROR_MESSAGE' | translate: {file_name: messageErrorDecissionMatrixFile } }}
+                                    </div>
+                                </div>
+
+                                <div col col-lg-12>
+                                    <button type="button"
+                                    class="btn btn-primary" 
+                                    mat-raised-button (click)="fileInputDM.click()">
+                                    <i _ngcontent-axy-c0="" class="material-icons small"> attach_file </i>
+                                    {{ 'MCDDSS.CHOOSE_FILE.DECISION_MATRIX.PLACEHOLDER' | translate }}</button>
+                                    <input hidden required 
+                                    #fileInputDM
+                                    name="Decision Matrix" ngModel type="file" id="decisionMatrix" (change)="handleFileInputDecisionMatrix($event.target.files)">
+                                    <!-- {{ 'MCDDSS.CHOOSE_FILE.DECISION_MATRIX.PLACEHOLDER' | translate }} -->
+                                </div>
+                                <div *ngIf="fileToUploadDecisionMatrix" class="col col-lg-12">
+                                    <div class="alert alert-success">
+                                        <h4 class="name">{{ fileToUploadDecisionMatrix?.name }}</h4>
+                                        <p class="size">{{ 'FILE.SIZE' | translate }}: {{ formatBytes(fileToUploadDecisionMatrix?.size) }} {{ 'FILE.TYPE' | translate }}: {{fileToUploadDecisionMatrix?.type}}</p>                                
+                                    </div>
+                                </div>
+                            </div>
+                            <div>&nbsp;<br></div>
+                            <div class="col col-lg-12">
+
+                                <div *ngIf="invalidCriteriaDetailsFile" class="col col-lg-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ 'MCDDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.ERROR_MESSAGE' | translate: {file_name: messageErrorCriteriaDetailsFile } }}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button 
+                                    class="btn btn-primary" 
+                                    type="button" mat-raised-button (click)="fileInputCD.click()">                            
+                                    <i _ngcontent-axy-c0="" class="material-icons small"> attach_file </i>                            
+                                    {{ 'MCDDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.PLACEHOLDER' | translate }}</button>
+                                    <input hidden required 
+                                    #fileInputCD
+                                    name="Criteria Details" ngModel type="file" id="criteriaDetails" (change)="handleFileInputCriteriaDetails($event.target.files)">
+                                    <!-- {{ 'MCDDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.PLACEHOLDER' | translate }} -->
+                                </div>
+
+                                <div *ngIf="fileToUploadCriteriaDetails" class="col col-lg-12">
+                                    <div class="alert alert-success">
+                                        <h4 class="name">{{ fileToUploadCriteriaDetails?.name }}</h4>
+                                        <p class="size"> {{ 'FILE.SIZE' | translate }}: {{ formatBytes(fileToUploadCriteriaDetails?.size) }} {{ 'FILE.TYPE' | translate }}: {{fileToUploadCriteriaDetails?.type}}</p>                                
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+        </mat-tab-group>
     </div>
 </div>
+
+

@@ -10,3 +10,22 @@
 .withoutborders {
     border: 0px solid #000;
 }
+
+.result-mcdss {
+    background: #fafafa;
+    color: #2e2e2e;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: inline-block;
+    width: 100%
+}
+
+.resultsTitle {    
+    text-indent: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #000;
+    font-size: 16px;
+    font-size: 1.6rem;
+}
