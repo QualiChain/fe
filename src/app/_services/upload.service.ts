@@ -1,29 +1,54 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpRequest,
-  HttpEventType,
-  HttpResponse,
-  HttpHeaders
-} from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEventType, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
+import { throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 //const url = 'http://localhost:3000/upload';
 const url = environment.uploadFilesUrl;
 const urlUploadUserAvatar = environment.uploadUserAvatar;
-
+const downloadUrl = environment.downloadFilesUrl;
 
 @Injectable()
 export class UploadService {
   constructor(private http: HttpClient) { }
+
+
+  getFile(fileName: string) {
+    const headers = new HttpHeaders();
+
+    return this.http.get(`${downloadUrl}/${fileName}`, {headers, responseType: 'blob' as 'json'}).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  } 
+
+  getUserFiles(userId: Number) {
+    return this.http.get(`${url}/${userId}/files`).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  } 
+
 
   public uploadUserAvatar(userId: Number,
     //files: Set<File>
     files: any
   ): { [key: string]: { progress: Observable<number>, error: Observable<boolean>, uploaded: Observable<boolean> } } {
     // this will be the our resulting map
-    const status: { [key: string]: { progress: Observable<number>, error: Observable<boolean>, uploaded: Observable<boolean> } } = {};
+    const status: { [key: string]: { 
+      progress: Observable<number>, 
+      error: Observable<boolean>, 
+      uploaded: Observable<boolean> } } = {};
 
     files.forEach(file => {
       // create a new multipart-form for every file
@@ -95,6 +120,8 @@ export class UploadService {
           error: errorStatus.asObservable(),
           uploaded: uploadedStatus.asObservable()
         };
+        file.errorMessage = error.error.message;
+
       }
       );
       //console.log(errorStatus);
@@ -110,12 +137,16 @@ export class UploadService {
     return status;
   }
 
-  public upload(
+  public upload(userId: Number,
     //files: Set<File>
-    files: any
+    files: any,
+    callbackFunction: any
   ): { [key: string]: { progress: Observable<number>, error: Observable<boolean>, uploaded: Observable<boolean> } } {
     // this will be the our resulting map
-    const status: { [key: string]: { progress: Observable<number>, error: Observable<boolean>, uploaded: Observable<boolean> } } = {};
+    const status: { [key: string]: { 
+      progress: Observable<number>, 
+      error: Observable<boolean>, 
+      uploaded: Observable<boolean> } } = {};
 
     files.forEach(file => {
       // create a new multipart-form for every file
@@ -124,7 +155,7 @@ export class UploadService {
 
       // create a http-post request and pass the form
       // tell it to report the upload progress
-      const req = new HttpRequest('POST', url, formData, {
+      const req = new HttpRequest('POST', url+"/"+userId+"/file-upload", formData, {
         reportProgress: true
       });
 
@@ -147,6 +178,7 @@ export class UploadService {
           if (percentDone>=100) {
             file.uploaded = true;
             uploadedStatus.next(true);
+            callbackFunction();
           }
           else {
             file.uploaded = true;
@@ -165,17 +197,19 @@ export class UploadService {
           progress.complete();
         }
       },
-      error => {
+      error => {        
         console.log("Error uploading file data");
+        console.log(error.error.message);
         uploadedStatus.next(false);
         errorStatus.next(true);
         file.error=true;
         //console.log(errorStatus);
         status[file.name] = {
           progress: progress.asObservable(),
-          error: errorStatus.asObservable(),
+          error: errorStatus.asObservable(),          
           uploaded: uploadedStatus.asObservable()
         };
+        file.errorMessage = error.error.message;        
       }
       );
       //console.log(errorStatus);

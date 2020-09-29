@@ -7,12 +7,13 @@
         <span *ngFor="let validFile of validFiles; let i = index"> {{validFile}}<span *ngIf="validFiles.length>1 && i<validFiles.length-1">,</span> </span>
       </p>
     </div>
+    <!--
     <div *ngIf="maxNumberOfFiles">
       <p>
         You can upload {{maxNumberOfFiles}} <span *ngIf="maxNumberOfFiles==1">file</span><span *ngIf="maxNumberOfFiles>1">files</span>.
       </p>
     </div>
-
+    -->
     <div *ngIf="tooMuchFiles" class="errormessage">Too much files, you can only upload {{maxNumberOfFiles}} files.</div>
     <div *ngIf="((files.length<maxNumberOfFiles) || maxNumberOfFiles==null)" class="containerdnd" appDnd (fileDropped)="onFileDropped($event)">
         <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
@@ -36,7 +37,7 @@
               --{{file | json}}--
               -->
               <app-progress *ngIf="file?.validfile==true && file?.error===false" [progress]="file?.progress"></app-progress>
-              <div *ngIf="file?.error===true"><h4 class="errormessage">Error loading file</h4></div>
+              <div *ngIf="file?.error===true"><h4 class="errormessage">Error loading file. {{file?.errorMessage}}</h4></div>
               <div *ngIf="file?.validfile===false"><h4 class="errormessage">This file is not valid to be uploaded</h4></div>
               <br/>
             </div>
@@ -52,11 +53,14 @@
             </div>
     
             <div class="col col-lg-2">
-                <button type="button" class="btn btn-danger" (click)="deleteFile(i)">
-                    <i *ngIf="file.uploaded==false" _ngcontent-axy-c0="" class="material-icons" > delete_forever </i>
-                    <i *ngIf="file.uploaded==true" _ngcontent-axy-c0="" class="material-icons" > cloud_off </i>
+                <button *ngIf="file.uploaded==false || file?.error===true" type="button" class="btn btn-danger" (click)="deleteFile(i)">
+                  <i _ngcontent-axy-c0="" class="material-icons small" > delete_forever </i>                    
                 </button>
-
+                <!--
+                <button *ngIf="file.uploaded==true" type="button" class="btn btn-danger" (click)="deleteFile(i)">                  
+                  <i  _ngcontent-axy-c0="" class="material-icons small" > cloud_off </i>
+                </button>
+                -->
             </div> 
             
           </div>

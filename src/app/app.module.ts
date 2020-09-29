@@ -146,6 +146,7 @@ import { SkillsComponent } from './_components/skills/skills/skills.component';
 import { SkillsGetComponent } from './_components/skills/skills-get/skills-get.component';
 import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edit.component';
 import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
+import { FilesRepositoryComponent } from './_components/profiles/files-repository/files-repository.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -270,7 +271,8 @@ export function tokenGetter() {
     SkillsComponent,
     SkillsGetComponent,
     SkillsEditComponent,
-    NotificationPreferencesComponent
+    NotificationPreferencesComponent,
+    FilesRepositoryComponent
   ],
   imports: [
     BrowserModule,
