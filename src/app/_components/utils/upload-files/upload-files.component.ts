@@ -14,6 +14,7 @@ export class UploadFilesComponent implements OnInit {
   @Input() maxNumberOfFiles: number = null;
   @Input() userId: number = null;
   @Input() fileDestination: string = null;
+  @Input() callbackFunction: (args: any) => void;
 
   imgURL = [];
   ngOnInit() {
@@ -72,7 +73,7 @@ export class UploadFilesComponent implements OnInit {
       let progressItem = this.us.uploadUserAvatar(this.userId, filtered2);  
     }
     else {
-      let progressItem = this.us.upload(filtered2);
+      let progressItem = this.us.upload(this.userId, filtered2, this.callbackFunction);
     }
     
 

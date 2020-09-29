@@ -41,6 +41,7 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
 import { MCDSSComponent } from './_components/mcdss/mcdss.component';
 import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
+import { FilesRepositoryComponent } from './_components/profiles/files-repository/files-repository.component';
 
 const routes: Routes = [
   {
@@ -153,7 +154,12 @@ const routes: Routes = [
     path: 'profiles/:id/notifications-preferences',
     component: NotificationPreferencesComponent,
     canActivate: [AuthGuard]
-  },  
+  },    
+  {
+    path: 'profiles/:id/personal-files-repository',
+    component: FilesRepositoryComponent,
+    canActivate: [AuthGuard]
+  },    
   {
     path: 'recruitment/certificate-validation',
     component: RecruitingComponent,

@@ -29,7 +29,11 @@
     "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",
     "MCDSS": "MCDSS",
     "SKILLS": "Skills",
-    "NOTIFICATION_PREFERENCES": "Notification Preferences"
+    "NOTIFICATION_PREFERENCES": "Notification Preferences",
+    "PERSONAL_FILES_REPOSITORY": "Files Repository"
+  },
+  "PERSONAL_FILES_REPOSITORY": {
+    "TITLE": "Personal file repository"
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",

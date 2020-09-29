@@ -1,0 +1,46 @@
+<h1>{{ 'PERSONAL_FILES_REPOSITORY.TITLE' | translate }}</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-6">
+
+            <table mat-table [dataSource]="dataSource" matSort class="table">
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name, 'open')">                  
+                            <i  _ngcontent-axy-c0="" class="material-icons small" > link </i>
+                        </button>
+                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name, 'download')">                  
+                            <i  _ngcontent-axy-c0="" class="material-icons small" > cloud_download </i>
+                        </button>
+                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name, 'print')">                  
+                            <i  _ngcontent-axy-c0="" class="material-icons small" > print </i>
+                        </button>
+                    </td>
+                </ng-container>
+
+        
+                <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+            
+        </div>
+        <div  class="col col-lg-6">
+            <div class="form-group field" >
+              <app-upload-files 
+              [callbackFunction]="myCallbackFunction"
+              [validFiles]="['image/png','image/jpg','image/jpeg','image/gif', 'application/pdf']" [maxNumberOfFiles]="99" [userId]=profileId fileDestination="personalFileRepository"></app-upload-files>
+            </div>
+          </div>
+
+    </div>
+</div>
