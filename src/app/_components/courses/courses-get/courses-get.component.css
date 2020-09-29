@@ -1,3 +1,7 @@
 .labelcourse {
     font-weight: bold;
 }
+
+.create-score-full-width {
+    width: 100%;
+  }

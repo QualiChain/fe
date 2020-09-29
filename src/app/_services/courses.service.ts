@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -127,6 +127,16 @@ export class CoursesService {
             )
         } 
 
+        deleteEnrollUser(userId: Number, courseId: Number) {
+            return this.http.delete(`${this.usersURL}/${userId}/courses/${courseId}`).
+            pipe(
+                map((data: any) => {
+                    return data;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+        } 
 
         getEnrolledUserByCourseId(courseId: Number) {
             return this.http.get(`${this.coursesURL}/${courseId}/users`).
@@ -139,4 +149,15 @@ export class CoursesService {
             )
         }
 
+        getUserEnrollmentStatusByCourseId(courseId: Number, userId: Number, enrollment: string)  {
+
+            return this.http.get(`${this.coursesURL}/${courseId}/users/${userId}/status/${enrollment}`).
+            pipe(
+                map((data: any) => {
+                    return data.exists;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+        }        
 }

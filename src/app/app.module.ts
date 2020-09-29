@@ -112,7 +112,7 @@ import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_c
 import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_components/recomended-skills/recomended-skills.component';
 import { CoursesComponent } from './_components/courses/courses/courses.component';
-import { CoursesGetComponent } from './_components/courses/courses-get/courses-get.component';
+import { CoursesGetComponent, DialogOverviewGradeDialog } from './_components/courses/courses-get/courses-get.component';
 import { CoursesEditComponent } from './_components/courses/courses-edit/courses-edit.component';
 import { ProgressComponent } from './_components/utils/progress/progress.component';
 import { UploadFilesComponent } from './_components/utils/upload-files/upload-files.component';
@@ -252,7 +252,7 @@ export function tokenGetter() {
     RecomendedJobsComponent, RecomendedJobsComponentPage,
     RecomendedSkillsComponent, RecomendedSkillsComponentPage,
     CoursesComponent,
-    CoursesGetComponent,
+    CoursesGetComponent, DialogOverviewGradeDialog,
     CoursesEditComponent,
     EmploymentTypePipe,
     LevelTypePipe,

@@ -476,9 +476,17 @@
     "AWARD_SMART_BADGE": "Award Smart Badge",
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
     "BUTTON": {
-      "ENROLL_TO_COURSE" : "Enroll to the course",
+      "ENROLL_TO_COURSE" : "Enroll me to the course",
+      "UNENROLL_TO_COURSE" : "Delete my enrollment to the course",
       "TOUGH_THE_COURSE" : "Set me as teacher",
-      "COURSE_DONE" : "Set as done"
+      "UNTOUGH_THE_COURSE" : "Delete me from the teacher of this course",
+      "COURSE_DONE" : "Set as done",
+      "COURSE_UNDONE": "Delete me from the users that done this course"
+    },
+    "SCORE_TITLE": "Which is your score?",
+    "SCORE": {
+      "LABEL": "Score",
+      "PLACEHOLDER": "A number between 0 and 10"
     },
     "DONE_BY": "Done by",
     "ENROLLED_USERS": "Enrolled users",
