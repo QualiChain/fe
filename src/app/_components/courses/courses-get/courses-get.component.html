@@ -5,22 +5,32 @@
       <button *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor'" class="btn btn-primary" [routerLink]="['/courses', courseData.courseid, 'edit']">
         <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
       </button>          
-
-      <!--
+      
       <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner"></mat-spinner>
 
-      <button *ngIf="!loadSpinner" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled')">
+      <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled')">
         <i _ngcontent-axy-c0="" class="material-icons small" > assignment_turned_in </i> {{ 'COURSE.BUTTON.ENROLL_TO_COURSE' | translate }}
       </button>
-
-      <button *ngIf="!loadSpinner" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'taught')">
-        <i _ngcontent-axy-c0="" class="material-icons small" > book </i> {{ 'COURSE.BUTTON.TOUGH_THE_COURSE' | translate }}
+      <button *ngIf="!loadSpinner && isUserAsEnrolled && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled')">
+        <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNENROLL_TO_COURSE' | translate }}
       </button>
 
-      <button *ngIf="!loadSpinner" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'done')">
+      <button *ngIf="!loadSpinner && !isUserAsDone && !isUserAsEnrolled && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid)">
         <i _ngcontent-axy-c0="" class="material-icons small" > done </i> {{ 'COURSE.BUTTON.COURSE_DONE' | translate }}
-      </button>      
-      -->
+      </button>
+      <button *ngIf="!loadSpinner && isUserAsDone && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done')">
+        <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.COURSE_UNDONE' | translate }}
+      </button>
+
+      <button *ngIf="!loadSpinner && !isUserAsTaught && currentUser.role.toLowerCase()=='professor'" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'taught')">
+        <i _ngcontent-axy-c0="" class="material-icons small" > book </i> {{ 'COURSE.BUTTON.TOUGH_THE_COURSE' | translate }}
+      </button>
+      <button *ngIf="!loadSpinner && isUserAsTaught && currentUser.role.toLowerCase()=='professor'" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught')">
+        <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNTOUGH_THE_COURSE' | translate }}
+      </button>
+
+      
+      
     </div>
 
     <div class="row"><br></div>
