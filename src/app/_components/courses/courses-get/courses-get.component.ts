@@ -9,9 +9,18 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../_services';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+//import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { UsersService } from '../../../_services/users.service';
+//import { FilterArrayByValueGetListPipe } from '../../../_pipes/FilterArrayByValueGetList/filterArrayByValueGetList.pipe';
 
 export interface DialogData {
+  grade: number;
+}
+
+export interface DialogDataEnrollment {
+  enrollment: string ;
+  usersSelected: [];
   grade: number;
 }
 
@@ -44,7 +53,50 @@ export class CoursesGetComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-  openDialogGrade(courseId: number): void {
+
+  openDialogUserSelection(courseId: number, userId: number): void {
+    const dialogRef = this.dialog.open(DialogSelectUser, {
+      width: '350px',
+      disableClose: true,
+      data: {courseId: courseId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log('The dialog was closed');  
+      //console.log(result);
+      if (result) {
+
+        let dataToPost = {
+          "course_id": courseId,
+          "course_status": result.enrollment
+        };
+        if (result.enrollment=='done') {          
+            dataToPost['grade'] = result.grade;          
+        }
+
+        result.usersSelected.forEach(element => {
+          
+          this.cs
+          .enrollUser(element, dataToPost).subscribe(
+            data => {
+              //console.log("enroll user!!");
+              this.getEnrolledUsersByCourse(courseId);
+
+            },
+            error => {
+              console.log("Error enrolling user");                      
+
+            }
+          );          
+          
+        });
+      }
+      
+      
+    });
+  }
+
+  openDialogGrade(courseId: number, userId: number): void {
     const dialogRef = this.dialog.open(DialogOverviewGradeDialog, {
       width: '350px',
       disableClose: true,
@@ -56,7 +108,7 @@ export class CoursesGetComponent implements OnInit {
       this.grade = result;
 
       if (result>=0) {
-        this.relationUserCourse(courseId, 'add' ,'done')
+        this.relationUserCourse(courseId, 'add' ,'done', userId)
       }
     });
   }
@@ -173,7 +225,7 @@ export class CoursesGetComponent implements OnInit {
       });
   }
 
-  relationUserCourse(courseId: number, action: string, type: string): void {
+  relationUserCourse(courseId: number, action: string, type: string, userId: number): void {
     //console.log("courseId:"+courseId);
     //console.log("action:"+action);
     //console.log("type:"+type);
@@ -205,7 +257,7 @@ export class CoursesGetComponent implements OnInit {
       
 
       this.cs
-      .enrollUser(this.currentUser.id, dataToPost).subscribe(
+      .enrollUser(userId, dataToPost).subscribe(
         data => {
           //console.log("enroll user!!");
           this.getEnrolledUsersByCourse(courseId);
@@ -231,7 +283,7 @@ export class CoursesGetComponent implements OnInit {
     else if (action=='delete'){
 
       this.cs
-      .deleteEnrollUser(this.currentUser.id, courseId).subscribe(
+      .deleteEnrollUser(userId, courseId).subscribe(
         data => {
           //console.log("enroll user deleted!!");
           this.getEnrolledUsersByCourse(courseId);
@@ -276,6 +328,97 @@ export class DialogOverviewGradeDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'dialog-select-user',
+  templateUrl: 'dialog-select-user.html',
+  styleUrls: ['./courses-get.component.css'],
+  //providers: [{
+  //  provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+  //}]
+})
+export class DialogSelectUser {
+
+  //enrollment: string = "";
+  //usersSelected = [];
+  usersList: User[] = [];
+  dataFiltered: User[] = [];
+  listOfEnrolledUsers = [];
+
+  toppings = new FormControl();
+
+  constructor(
+    //private FilterArrayByValueGetListPipe: FilterArrayByValueGetListPipe,
+    private us: UsersService,
+    private cs: CoursesService,
+    private _formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<DialogSelectUser>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataEnrollment) {}
+  
+  
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  ngOnInit() {
+    console.log("aaaaaaaa");
+
+    
+    
+
+  }
+
+  enrollmentSelected(value) {
+
+    this.dataFiltered = [];
+    this.data.usersSelected = [];
+    this.data.grade = null;
+
+      this.cs
+      .getEnrolledUserByCourseId(160).subscribe(
+      dataEnrolledUsers => {
+
+        dataEnrolledUsers.forEach(element => {
+          this.listOfEnrolledUsers.push(element.user.id);
+        });
+
+        this.us
+        .getUsers()
+        .subscribe((data: User[]) => {
+
+          data.forEach(element => {
+
+            let indexPos = this.listOfEnrolledUsers.indexOf(element.id);
+
+            if (indexPos<0) {
+              if ((value=='taught') && (element.role=="professor")) {
+                this.dataFiltered.push(element);
+              }
+              else if ((value=='enrolled') && (element.role=="student")) {
+                this.dataFiltered.push(element);
+              }
+              else if ((value=='done') && (element.role=="student")) {
+                this.dataFiltered.push(element);
+              }
+            }
+
+          });
+
+          this.dataFiltered.sort((a,b) => a.surname.toUpperCase().localeCompare(b.surname.toUpperCase()));
+          this.usersList = this.dataFiltered;
+
+        });      
+      
+    },
+    error => {
+      console.log("error recovering enrolled users by course id")
+    });
+
+    
+
   }
 
 }

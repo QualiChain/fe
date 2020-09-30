@@ -12,7 +12,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
 
 describe('NotificationPreferencesComponent', () => {
   let component: NotificationPreferencesComponent;
@@ -31,7 +31,9 @@ describe('NotificationPreferencesComponent', () => {
         MatDatepickerModule,
         MatChipsModule,      
         MatNativeDateModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'access_denied', component: AccessDeniedComponent}]
+        ),
         HttpClientTestingModule,
         MatAutocompleteModule
       ]

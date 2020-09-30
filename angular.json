@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "file-saver", "xlsx", "chart.js"
+              "file-saver", "xlsx", "chart.js", "angular2-flash-messages"
             ],
             "outputPath": "dist/QualiChain-FE",
             "index": "src/index.html",
@@ -63,8 +63,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "7mb",
-                  "maximumError": "8mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "9mb"
                 },
                 {
                   "type": "anyComponentStyle",

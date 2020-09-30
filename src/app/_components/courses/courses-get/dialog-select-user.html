@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>{{ 'COURSE.ENROLL_USER_TITLE' | translate }}</h1>
+<div mat-dialog-content>
+    <form #formScoreCourse="ngForm"  class="userlogin-form">  
+        <div class="form-group field" >
+
+            <mat-form-field class="create-score-full-width" >
+                <mat-label>{{ 'COURSE.ENROLLMENT_STATUS.LABEL' | translate }}</mat-label>
+                <mat-select 
+                [(ngModel)]="data.enrollment" name="enrollment" value="enrollment" required
+                (selectionChange)="enrollmentSelected($event.value)"
+                >
+                  <mat-option value="enrolled">{{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.ENROLLED' | translate }}</mat-option>
+                  <mat-option value="done">{{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.DONE' | translate }}</mat-option>
+                  <mat-option value="taught">{{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.TAUGHT' | translate }}</mat-option>
+                </mat-select>
+            </mat-form-field>            
+
+        </div>
+        <div *ngIf="data.enrollment" class="form-group field" >
+            <mat-form-field class="create-score-full-width" >
+                <mat-label>Users</mat-label>
+                <mat-select 
+                [(ngModel)]="data.usersSelected" name="usersSelected" value="usersSelected" required
+                [formControl]="toppings" multiple > 
+                    <mat-option *ngFor="let user of usersList" [value]="user.id">{{user.surname}}, {{user.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="data.enrollment=='done'" class="form-group field" >
+            <mat-form-field class="create-score-full-width" >
+                <mat-label>{{ 'COURSE.SCORE.LABEL' | translate }}</mat-label>
+                <input matInput [(ngModel)]="data.grade" name="grade" id="grade" required type="number" min=0 max=10 placeholder="{{ 'COURSE.SCORE.PLACEHOLDER' | translate }}" class="example-right-align">    
+                {{ 'COURSE.ENROLLMENT_STATUS.WARNING_ALL_USERS_SAME_SCORE' | translate }}
+            </mat-form-field>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-danger" (click)="onNoClick()">
+    <i _ngcontent-axy-c0="" class="material-icons small" > close </i> {{ 'BUTTON.CANCEL' | translate }}
+  </button>
+  
+  <button [disabled]="((!data.enrollment) || (data.usersSelected?.length == 0) || ((data.enrollment=='done') && (!data.grade)))" class="btn btn-primary" [mat-dialog-close]="data" >
+    <i _ngcontent-axy-c0="" class="material-icons small" > save </i> {{ 'BUTTON.SAVE' | translate }}
+  </button>
+</div>
