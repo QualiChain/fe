@@ -8,13 +8,13 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
                     <td mat-cell *matCellDef="let element">
-                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name, 'open')">                  
+                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name.filename, 'open')">                  
                             <i  _ngcontent-axy-c0="" class="material-icons small" > link </i>
                         </button>
-                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name, 'download')">                  
+                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name.filename, 'download')">                  
                             <i  _ngcontent-axy-c0="" class="material-icons small" > cloud_download </i>
                         </button>
-                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name, 'print')">                  
+                        <button  type="button" class="btn btn-primary" (click)="downLoadFile(element.name.filename, 'print')">                  
                             <i  _ngcontent-axy-c0="" class="material-icons small" > print </i>
                         </button>
                     </td>
@@ -23,7 +23,7 @@
         
                 <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.name.filename}}</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
