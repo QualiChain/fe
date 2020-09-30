@@ -9,6 +9,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UploadService } from '../../../_services/upload.service';
+import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
 
 describe('FilesRepositoryComponent', () => {
   let component: FilesRepositoryComponent;
@@ -26,7 +27,9 @@ describe('FilesRepositoryComponent', () => {
         ReactiveFormsModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'access_denied', component: AccessDeniedComponent}]
+        ),
         HttpClientTestingModule,
         ],
         providers: [UploadService]

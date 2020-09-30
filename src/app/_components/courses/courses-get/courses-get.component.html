@@ -8,28 +8,30 @@
       
       <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner"></mat-spinner>
 
-      <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled')">
+      <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > assignment_turned_in </i> {{ 'COURSE.BUTTON.ENROLL_TO_COURSE' | translate }}
       </button>
-      <button *ngIf="!loadSpinner && isUserAsEnrolled && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled')">
+      <button *ngIf="!loadSpinner && isUserAsEnrolled && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNENROLL_TO_COURSE' | translate }}
       </button>
 
-      <button *ngIf="!loadSpinner && !isUserAsDone && !isUserAsEnrolled && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid)">
+      <button *ngIf="!loadSpinner && !isUserAsDone && !isUserAsEnrolled && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid, this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > done </i> {{ 'COURSE.BUTTON.COURSE_DONE' | translate }}
       </button>
-      <button *ngIf="!loadSpinner && isUserAsDone && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done')">
+      <button *ngIf="!loadSpinner && isUserAsDone && (currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee')" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.COURSE_UNDONE' | translate }}
       </button>
 
-      <button *ngIf="!loadSpinner && !isUserAsTaught && currentUser.role.toLowerCase()=='professor'" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'taught')">
+      <button *ngIf="!loadSpinner && !isUserAsTaught && currentUser.role.toLowerCase()=='professor'" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > book </i> {{ 'COURSE.BUTTON.TOUGH_THE_COURSE' | translate }}
       </button>
-      <button *ngIf="!loadSpinner && isUserAsTaught && currentUser.role.toLowerCase()=='professor'" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught')">
+      <button *ngIf="!loadSpinner && isUserAsTaught && currentUser.role.toLowerCase()=='professor'" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNTOUGH_THE_COURSE' | translate }}
       </button>
 
-      
+      <button *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor'" class="btn btn-primary" (click)="openDialogUserSelection(courseData.courseid, this.currentUser.id)">
+        <i _ngcontent-axy-c0="" class="material-icons small" > add </i> {{ 'COURSE.BUTTON.ADD_NEW_RELATION' | translate }}
+      </button>      
       
     </div>
 
@@ -70,7 +72,7 @@
                 </span>
             </div> 
           </div>
-          
+<!--          
           <div class="col " *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor'">
             <div>
               <span class="labelcourse">{{ 'COURSE.DONE_BY' | translate }}:</span> 
@@ -79,7 +81,8 @@
               </span>
             </div>
           </div>
-
+-->          
+<!--
           <div class="col " *ngIf="(currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor')">
             <div>
               <span class="labelcourse">{{ 'COURSE.ENROLLED_USERS' | translate }}:</span> 
@@ -88,19 +91,130 @@
               </span>
             </div>
           </div>
-
+-->          
+<!--
           <div class="col ">
             <div>
-              <span class="labelcourse">Teachers:</span>
+              <span class="labelcourse">{{ 'COURSE.PROFESSORS' | translate }}:</span>
               <span *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'taught' ; let i=index">
                 <span *ngIf="i>0">,</span> <a href="/profiles/{{enrolledUser.user.id}}">{{enrolledUser.user.fullName}}</a> 
               </span>
               <span *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==0" > {{ 'COURSE.NO_TEACHERS_YET' | translate }}</span>
             </div>
           </div>
-
+-->
       </div>
     </div>
+
     
+    <div class="row">
+
+      <!-- professors users -->
+      <div><h2>{{ 'COURSE.PROFESSORS' | translate }}</h2></div>
+
+        <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==0"> {{ 'COURSE.NO_TEACHERS' | translate }}</div>
+
+        <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')>0" class="col col-lg-12">
+      
+
+            <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')>0" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
+                    <th scope="col">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
+                    <th scope="col"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'taught' ; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{enrolledUser.user.surname}}</td>
+                    <td>{{enrolledUser.user.name}}</td>
+                    <td>
+                        <button class="btn btn-primary" [routerLink]="['/profiles', enrolledUser.user.id]">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                        </button>
+                        <button *ngIf="(currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor')" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', enrolledUser.user.id)">
+                          <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
+                        </button>
+                    </td>
+                  </tr>                  
+                </tbody>
+              </table>
+        </div>
+
+
+        <!-- enrolled users -->
+        <div><h2>{{ 'COURSE.ENROLLED_USERS' | translate }}</h2></div>
+
+        <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'enrolled')==0"> {{ 'COURSE.NO_ENROLLED_USERS' | translate }}</div>
+
+        <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'enrolled')>0" class="col col-lg-12">
+     
+            <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'enrolled')>0" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
+                    <th scope="col">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
+                    <th scope="col"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'enrolled' ; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{enrolledUser.user.surname}}</td>
+                    <td>{{enrolledUser.user.name}}</td>
+                    <td>
+                        <button class="btn btn-primary" [routerLink]="['/profiles', enrolledUser.user.id]">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                        </button>
+                        <button class="btn btn-danger" *ngIf="(currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor')" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', enrolledUser.user.id)">
+                          <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
+                        </button>
+                    </td>
+                  </tr>                  
+                </tbody>
+              </table>
+        </div>
+
+
+        <!-- done users -->
+        <div><h2>{{ 'COURSE.DONE_BY' | translate }}</h2></div>
+
+        <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'done')==0"> {{ 'COURSE.NO_DONE_BY_USERS' | translate }}</div>
+
+        <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'done')>0" class="col col-lg-12">
+
+            <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'done')>0" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
+                    <th scope="col">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
+                    <th scope="col">{{ 'COURSE.SCORE.LABEL' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'done' ; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{enrolledUser.user.surname}}</td>
+                    <td>{{enrolledUser.user.name}}</td>
+                    <td>{{enrolledUser?.score}}</td>
+                    <td>
+                        <button class="btn btn-primary" [routerLink]="['/profiles', enrolledUser.user.id]">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                        </button>
+                        <button class="btn btn-danger" *ngIf="(currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor')" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', enrolledUser.user.id)">
+                          <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
+                        </button>
+                    </td>
+                  </tr>                  
+                </tbody>
+              </table>
+        </div>        
+
+    </div>    
 
 </div>

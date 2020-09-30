@@ -191,13 +191,15 @@ export class NotificationPreferencesComponent implements OnInit {
       "locations": listOfLocations,
       "specializations": listOfSpecializations
       };
-      //console.log(dataToPost);
+      //console.log(dataToPost);      
+      //this.saveData(dataToPost);
 
+      
       if (this.userPreferences.id>0) {
         //console.log("deleting old preferences");
         this.ms.deleteUserNotificationsPreferences(this.userPreferences.id).subscribe(
           res => {
-            this.saveData(dataToPost);    
+            this.saveData(dataToPost);
           },
           error => {        
               console.log("Error deleting notification preferences!!");
