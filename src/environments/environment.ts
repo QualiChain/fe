@@ -9,6 +9,7 @@ export const environment = {
   coursesUrl: 'http://qualichain.epu.ntua.gr:5004/courses',
   uploadFilesUrl : 'http://qualichain.epu.ntua.gr:5004/user',
   downloadFilesUrl : 'http://qualichain.epu.ntua.gr:5004/download',
+  deleteFilesUrl : 'http://qualichain.epu.ntua.gr:5004/delete',
   badgesUrl : 'http://qualichain.epu.ntua.gr:5000/badges',
   authUrl : 'http://qualichain.epu.ntua.gr:5004/auth',
   usersUrl : 'http://qualichain.epu.ntua.gr:5004/users',

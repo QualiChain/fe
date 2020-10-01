@@ -9,16 +9,17 @@ import { map, catchError } from 'rxjs/operators';
 const url = environment.uploadFilesUrl;
 const urlUploadUserAvatar = environment.uploadUserAvatar;
 const downloadUrl = environment.downloadFilesUrl;
+const deleteFilesUrl = environment.deleteFilesUrl;
 
 @Injectable()
 export class UploadService {
   constructor(private http: HttpClient) { }
 
 
-  getFile(fileName: string) {
+  getFile(fileId: number) {
     const headers = new HttpHeaders();
 
-    return this.http.get(`${downloadUrl}/${fileName}`, {headers, responseType: 'blob' as 'json'}).
+    return this.http.get(`${downloadUrl}/file/${fileId}`, {headers, responseType: 'blob' as 'json'}).
     pipe(
        map((data: any) => {
          return data;
@@ -27,6 +28,19 @@ export class UploadService {
        })
     )
   } 
+  
+  deleteFile(userId: number, fileId: number) {
+    const headers = new HttpHeaders();
+
+    return this.http.delete(`${deleteFilesUrl}/user/${userId}/files/id/${fileId}`, {headers, responseType: 'blob' as 'json'}).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
 
   getUserFiles(userId: Number) {
     return this.http.get(`${url}/${userId}/files`).

@@ -6,6 +6,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { environment } from '../../../../environments/environment';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+//import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 let ELEMENT_DATA = [];
 const downloadUrl = environment.downloadFilesUrl;
@@ -21,6 +25,8 @@ export class FilesRepositoryComponent implements OnInit {
   
 
   constructor(
+    private translate: TranslateService,
+    public dialog: MatDialog,
     private us: UploadService,
     private router: Router,
     private route: ActivatedRoute
@@ -66,13 +72,52 @@ export class FilesRepositoryComponent implements OnInit {
     });
   }
 
-  downLoadFile(fileName: string, action:string) {
+
+  confirmDialog(fileId, title): void {
+    //const message = `Are you sure you want to do this?`;
+    const message = this.translate.instant('PERSONAL_FILES_REPOSITORY.DELETE_MESSAGE') + " ("+title+")";
+    
+    const dialogData = new ConfirmDialogModel(this.translate.instant('PERSONAL_FILES_REPOSITORY.CONFIRM_ACTION'), message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      //this.result = dialogResult;
+
+      if (dialogResult) {
+         //console.log("Under construction");
+         this.deleteFile(fileId)
+      }
+    });
+  }
+
+  deleteFile(fileId: number) { 
+
+    this.us.deleteFile(+this.profileId, fileId).subscribe(
+      res => {
+        console.log("the file has been deleted");
+        this.loadUserFiles();
+      },
+      error => {
+        console.log("Error deleting file data");
+        console.log(error);
+        
+      }
+    );
+
+  }
+
+
+  downLoadFile(fileId: number, fileName: string, action:string) {
     if (action=='open') {
-        window.open(downloadUrl+'/'+fileName);
+        window.open(downloadUrl+'/file/'+fileId);
     }
     else {
     
-        this.us.getFile(fileName).subscribe(
+        this.us.getFile(fileId).subscribe(
           (response: any) =>{
             //console.log(response);
             if (action =='download') {

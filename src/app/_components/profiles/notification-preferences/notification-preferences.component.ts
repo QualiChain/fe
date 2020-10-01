@@ -192,9 +192,9 @@ export class NotificationPreferencesComponent implements OnInit {
       "specializations": listOfSpecializations
       };
       //console.log(dataToPost);      
-      //this.saveData(dataToPost);
+      this.saveData(dataToPost);
 
-      
+      /*      
       if (this.userPreferences.id>0) {
         //console.log("deleting old preferences");
         this.ms.deleteUserNotificationsPreferences(this.userPreferences.id).subscribe(
@@ -211,6 +211,7 @@ export class NotificationPreferencesComponent implements OnInit {
       else {
         this.saveData(dataToPost);
       }
+      */
       
 
   }
