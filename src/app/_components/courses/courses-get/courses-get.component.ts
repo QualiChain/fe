@@ -364,8 +364,6 @@ export class DialogSelectUser {
   }
 
   ngOnInit() {
-    console.log("aaaaaaaa");
-
     
     
 
@@ -397,10 +395,12 @@ export class DialogSelectUser {
               if ((value=='taught') && (element.role=="professor")) {
                 this.dataFiltered.push(element);
               }
-              else if ((value=='enrolled') && (element.role=="student")) {
+              //else if ((value=='enrolled') && (element.role=="student")) {
+              else if (value=='enrolled') {
                 this.dataFiltered.push(element);
               }
-              else if ((value=='done') && (element.role=="student")) {
+              //else if ((value=='done') && (element.role=="student")) {
+              else if (value=='done') {
                 this.dataFiltered.push(element);
               }
             }

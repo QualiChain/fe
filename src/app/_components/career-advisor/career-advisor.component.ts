@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UsersService } from '../../_services/users.service';
 import { CoursesService } from '../../_services/courses.service'
 import Course from '../../_models/course';
 import {PageEvent} from '@angular/material/paginator';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+
+let completedCoursesByUser: any[] = [];
 
 @Component({
   selector: 'app-career-advisor',
@@ -12,9 +17,18 @@ import {PageEvent} from '@angular/material/paginator';
   styleUrls: ['./career-advisor.component.css']
 })
 
-
-
 export class CareerAdvisorComponent implements OnInit {
+
+  displayedColumns: string[] = ['name', 'grade', 'action'];
+
+  //completedCoursesByUser: Course[] = [];
+  
+
+  dataSource = new MatTableDataSource(completedCoursesByUser);
+  @ViewChild(MatPaginator, {static: true}) 
+  paginator: MatPaginator;  
+  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   userid: number;
 
@@ -41,7 +55,7 @@ export class CareerAdvisorComponent implements OnInit {
 
   showRecommend: Boolean = false;
   
-  completedCoursesByUser: Course[] = [];
+
 
   recommendedCourses = [];
   pagedListRC = [];
@@ -77,7 +91,9 @@ export class CareerAdvisorComponent implements OnInit {
 
   ngOnInit() {
 
-    
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+
     this.route.params.subscribe(params => {
       
       //console.log(params['id']);
@@ -132,7 +148,9 @@ export class CareerAdvisorComponent implements OnInit {
                 .subscribe((coursesData: Course[]) => {
 */
                 //console.log(coursesData);
-                this.completedCoursesByUser = coursesData;
+                //this.completedCoursesByUser = coursesData;
+                this.dataSource.data = coursesData;
+                completedCoursesByUser = coursesData;
               },
               error => {            
                 console.log("error getting couses by user id")
