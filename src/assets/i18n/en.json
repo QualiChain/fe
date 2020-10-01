@@ -33,7 +33,9 @@
     "PERSONAL_FILES_REPOSITORY": "Files Repository"
   },
   "PERSONAL_FILES_REPOSITORY": {
-    "TITLE": "Personal file repository"
+    "TITLE": "Personal file repository",
+    "DELETE_MESSAGE": "Are you sure you want to delete this file?",
+    "CONFIRM_ACTION": "Confirm Action"
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Certificate Validation",
