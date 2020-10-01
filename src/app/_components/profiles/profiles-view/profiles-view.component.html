@@ -149,23 +149,27 @@
                                                     </div> 
                                                 
                                             </div>
-                                            <div class="completeCourseSectiontab" [ngClass]="{'col-lg-4':selectedCourse.courseid,'col-lg-8':!selectedCourse.courseid}">
+                                            <div class="completeCourseSectiontab" [ngClass]="{'col-lg-4':selectedCourse,'col-lg-8':!selectedCourse}">
                                                 
                                                     <ul class="list-group list-group-flush">
-                                                        <li  *ngFor="let course of listOfCoursesByUser" class="list-group-item" >
+                                                        <li  *ngFor="let course of listOfCompletedCoursesByUser" class="list-group-item" >
+                                                          <a [routerLink]="" (click)="selectedCourse=course">{{course.course.name}}</a>
+                                                          <!--
                                                           <table>
                                                             <tr>
-                                                              <td><input type="checkbox" class="custom-control-input" id="check_box_course_{{course.courseid}}" value="{{course.courseid}}"> </td>
-                                                              <td><a [routerLink]="" (click)="selectedCourse=course">{{course.name}}</a></td>
+                                                              <td><input type="checkbox" class="custom-control-input" id="check_box_course_{{course.course.courseid}}" value="{{course.course.courseid}}"> </td>
+                                                              <td><a [routerLink]="" (click)="selectedCourse=course">{{course.course.name}}</a></td>
                                                             </tr>
                                                           </table>  
+                                                          -->
                                                         </li>
                                                       </ul>
                                             </div>
-                                            <div *ngIf="selectedCourse.courseid" class="col-lg-4 completeCourseSectiontab">
-                                              <div class=""><h3>{{selectedCourse.name}}</h3></div>
-                                              <div class="">{{selectedCourse.description}}</div>
-                                              <div class=""><br/><a class="btn btn-success" [routerLink]="" (click)="selectedCourse=emptyCourseSelected">{{ 'BUTTON.CLOSE' | translate }}</a></div>
+                                            <div *ngIf="selectedCourse" class="col-lg-4 completeCourseSectiontab">
+                                              <div class=""><h3>{{selectedCourse.course.name}}</h3></div>
+                                              <div class="">{{selectedCourse.course.description}}</div>
+                                              <div class="">{{ 'COURSE.SCORE.LABEL' | translate }}: {{selectedCourse.grade}}</div>
+                                              <div class=""><br/><a class="btn btn-success" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a></div>
                                             </div>
 
                                       </ng-template>

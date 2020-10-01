@@ -70,6 +70,7 @@ export class ProfilesViewComponent implements OnInit {
   currentJustify: string;
   //listOfCoursesByUser: {};
   listOfCoursesByUser: Course[]=[];
+  listOfCompletedCoursesByUser: any[]=[];
 
   //selectedCourse: {};
   emptyCourseSelected: {
@@ -80,6 +81,8 @@ export class ProfilesViewComponent implements OnInit {
     course_badges: object
   };
   
+  selectedCourse: any;
+  /*
   selectedCourse: {
     courseid: number, 
     name: string, 
@@ -87,6 +90,7 @@ export class ProfilesViewComponent implements OnInit {
     related_skills: object, 
     course_badges: object
   };
+  */
   
   userId = '';
   visible = true;
@@ -267,7 +271,22 @@ export class ProfilesViewComponent implements OnInit {
         });
     });
 */      
+
+
       if (id>0) {
+
+
+        this.cs
+        .getCompletedCourseByUserId(id)
+        .subscribe((coursesData: Course[]) => {
+          this.listOfCompletedCoursesByUser = coursesData;
+        },
+        error => {            
+          console.log("error getting courses by user id")
+        }
+        );
+                
+
         this.cs
         .getTeachingCourseByUserId(id)
         .subscribe((data: any[]) => {
@@ -288,7 +307,7 @@ export class ProfilesViewComponent implements OnInit {
           });
         });
       }
-
+      /*
       this.emptyCourseSelected = {
         courseid: 0, 
         name: '', 
@@ -304,7 +323,8 @@ export class ProfilesViewComponent implements OnInit {
         related_skills: [], 
         course_badges: []
       };
-
+      */
+     this.selectedCourse = null;
 
 
       //const id = +params.id;
