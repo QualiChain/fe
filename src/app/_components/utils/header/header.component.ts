@@ -158,13 +158,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
       data => {
         console.log("user avatar ");
         //console.log(data.avatar_in_bytes);
-        let imageBinary = data.avatar_in_bytes; //image binary data response from api
-        console.log(imageBinary);
-        console.log("----------");
-        //let imageBase64String= btoa(imageBinary);
-        let imageBase64String= btoa(unescape(encodeURIComponent(imageBinary)));
+        let imageBinaryString = data.avatar_in_bytes; //image binary data response from api
+        console.log(imageBinaryString);
+        console.log("----------1");
+        var imageBinaryString2 = imageBinaryString.substring(2);
+        imageBinaryString2 = imageBinaryString2.slice(0, -1)
+        console.log(imageBinaryString2);
+        console.log("----------2");
+
+        var splitted = imageBinaryString2.split("\'", ); 
+        //console.log(splitted);
+        var imageBinaryString2 = splitted.join("");       
+        console.log(imageBinaryString2);
+        console.log("----------3");
+
+
+
+        /*
+
+        let imageBase64String= btoa(unescape(encodeURIComponent(imageBinaryString)));
         this.imagePath = 'data:image/jpeg;base64,' + imageBase64String;
         console.log(imageBase64String);
+        */
       },
       error => {
         console.log("error recovering user avatar image");

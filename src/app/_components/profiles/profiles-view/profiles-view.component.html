@@ -79,22 +79,17 @@
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
 
-              
-                <div *ngIf="canViewCV" class="col col-lg-2">                  
-                  <button class="btn btn-primary" (click)="openUserCV(userdata.id)" >  
+              <div>
+                  <button *ngIf="canViewCV" class="btn btn-primary" (click)="openUserCV(userdata.id)" >  
                     <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
                   </button>
-                </div>
-                
-                <div *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="col col-lg-2">
-                  <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
+                  <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" (click)="uploadUserCVKG(userdata.id)" >  
+                    <i _ngcontent-axy-c0="" class="material-icons small">  cloud_upload </i> {{ 'UPLOAD_CV_KG.BUTTON' | translate }} 
+                  </button>
+                  <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
                     <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
                   </button>
-                  <!--
-                  <a [routerLink]="['/profiles', userdata.id,'best-career-options']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}</a> 
-                  -->
                 </div>
-
             </div>
         </div>
         <div class="col col-lg-2">

@@ -65,6 +65,7 @@ export class UploadFilesComponent implements OnInit {
 
 
   uploadFilesToServer() {    
+    console.log(this.fileDestination);
     let filtered = this.files.filter(f => f.progress<100);
     let filtered2 = filtered.filter(f => f.validfile==true);
     //let progressItem = this.us.upload(this.files);
@@ -72,10 +73,12 @@ export class UploadFilesComponent implements OnInit {
     if (this.fileDestination=='avatarImage') {
       let progressItem = this.us.uploadUserAvatar(this.userId, filtered2);  
     }
-    else {
+    else if (this.fileDestination=='personalFileRepository') {
       let progressItem = this.us.upload(this.userId, filtered2, this.callbackFunction);
     }
-    
+    else if (this.fileDestination=='KGFile') {
+      let progressItem = this.us.uploadCVKG(this.userId, filtered2);
+    }
 
   }
   

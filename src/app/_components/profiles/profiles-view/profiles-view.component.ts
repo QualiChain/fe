@@ -142,6 +142,20 @@ export class ProfilesViewComponent implements OnInit {
   }
   
 
+  uploadUserCVKG(userId: number) {
+     
+    const dialogRef = this.CVDialog.open(UPLOAD_CV_KG_Dialog_modal, {
+      disableClose: true,
+      width: '550px',
+      data: {userId: userId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  }
+
+
   openUserCV(userId: number) {
      
     const dialogRef = this.CVDialog.open(CVDialog_modal, {
@@ -1022,6 +1036,33 @@ onSubmit() {
   
 }
 
+
+
+}
+
+/*******************/ 
+@Component({
+  selector: 'UPLOAD_CV_KG_Dialog_modal',
+  templateUrl: './uploadCVTOKG.html',
+  styleUrls: ['./profiles-view.component.css']
+})
+export class UPLOAD_CV_KG_Dialog_modal implements OnInit {
+
+  constructor(
+    public dialogRef: MatDialogRef<UPLOAD_CV_KG_Dialog_modal>,
+    @Inject(MAT_DIALOG_DATA) public data: CVDialogData) {}
+  
+    
+  
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  ngOnInit() {
+    
+    console.log("Hi!!!"+this.data.userId);
+
+  }
 
 
 }

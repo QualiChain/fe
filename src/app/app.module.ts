@@ -103,7 +103,7 @@ import { CustomMaterialModule } from './_components/custom-material/custom-mater
 import { ConfirmDialogComponent } from './_components/utils/confirm-dialog/confirm-dialog.component';
 import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
-import { ProfilesViewComponent, CVDialog_modal } from './_components/profiles/profiles-view/profiles-view.component';
+import { ProfilesViewComponent, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal } from './_components/profiles/profiles-view/profiles-view.component';
 import { ProfilesAddComponent } from './_components/profiles/profiles-add/profiles-add.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
@@ -222,7 +222,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal],
+  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -243,7 +243,7 @@ export function tokenGetter() {
     JobsAddComponent,
     JobsGetComponent,
     ConfirmDialogComponent,
-    ProfilesViewComponent, CVDialog_modal,
+    ProfilesViewComponent, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal,
     createChangePasswordDialog_modal,
     ProfilesAddComponent,
     RecruitmentViewComponent,
