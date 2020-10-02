@@ -706,5 +706,10 @@
   "FILE": {
     "TYPE": "Type",
     "SIZE": "Size"
+  },
+  "UPLOAD_CV_KG": {
+    "BUTTON": "Upload CV to the KG",
+    "TITLE": "Upload CV to the Knowledge Graph",
+    "DESCRIPTION": "help text description to be defined"
   }
 }

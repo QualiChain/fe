@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{ 'UPLOAD_CV_KG.TITLE' | translate }}</h1>
+
+UNDER CONSTRUCTION!!!!
+
+<div mat-dialog-content>
+    <p>{{ 'UPLOAD_CV_KG.DESCRIPTION' | translate }}</p>
+
+    <app-upload-files [validFiles]="['text/plain']" [maxNumberOfFiles]="1" [userId]=data.userId fileDestination="KGFile"></app-upload-files>
+
+</div>
+
+<mat-dialog-actions align="end">
+    <div class="modal-footer">  
+        <button class="btn btn-danger" (click)="onNoClick()">
+            <i _ngcontent-axy-c0="" class="material-icons small" > close </i> {{ 'BUTTON.CLOSE' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>
