@@ -8,6 +8,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AppComponent } from '../../../app.component';
 
 describe('ProfilesViewComponent', () => {
   let component: ProfilesViewComponent;
@@ -27,7 +28,8 @@ describe('ProfilesViewComponent', () => {
         ReactiveFormsModule,
         MatDialogModule,
         HttpClientTestingModule
-        ]
+        ],
+        providers: [AppComponent]
     })
     .compileComponents();
   }));

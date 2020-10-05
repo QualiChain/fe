@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {MatDialogModule} from '@angular/material/dialog';
+import { AppComponent } from '../../../app.component';
 
 describe('SkillsComponent', () => {
   let component: SkillsComponent;
@@ -20,7 +21,8 @@ describe('SkillsComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         MatDialogModule
-        ]
+        ],
+        providers: [AppComponent]
     })
     .compileComponents();
   }));

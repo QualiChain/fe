@@ -16,7 +16,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../_services';
 import User from '../../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { AppComponent } from '../../../app.component';
 
 let ELEMENT_DATA: any[] = [];
 
@@ -45,6 +45,7 @@ export class SkillsComponent implements OnInit {
   skills: any[];
 
   constructor(
+    private appcomponent: AppComponent,
     private router: Router,
     private ss: SkillsService, private authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
     public applyForAJobDialog: MatDialog) { 
@@ -53,7 +54,13 @@ export class SkillsComponent implements OnInit {
 
     }
 
-
+    isLogged = this.appcomponent.isLogged;
+    isAdmin = this.appcomponent.isAdmin;
+    isRecruiter = this.appcomponent.isRecruiter;
+    //isTeacher = this.appcomponent.isTeacher;
+    isProfessor = this.appcomponent.isProfessor;
+    isStudent = this.appcomponent.isStudent;
+    isEmployee = this.appcomponent.isEmployee; 
 
     confirmDialog(id, title): void {
     

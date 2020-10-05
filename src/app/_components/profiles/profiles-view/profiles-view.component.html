@@ -20,12 +20,12 @@
       {{ 'BUTTON.PRINT_PDF' | translate }}
     </button>
     -->
-    <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
+    <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       {{ 'BUTTON.EDIT' | translate }}
     </button>
 
-    <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'dss-curriculum-re-design']">
+    <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'dss-curriculum-re-design']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       DSS CV Re-design
     </button>
@@ -83,10 +83,10 @@
                   <button *ngIf="canViewCV" class="btn btn-primary" (click)="openUserCV(userdata.id)" >  
                     <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
                   </button>
-                  <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-primary" (click)="uploadUserCVKG(userdata.id)" >  
+                  <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" (click)="uploadUserCVKG(userdata.id)" >  
                     <i _ngcontent-axy-c0="" class="material-icons small">  cloud_upload </i> {{ 'UPLOAD_CV_KG.BUTTON' | translate }} 
                   </button>
-                  <button *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
+                  <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
                     <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
                   </button>
                 </div>
@@ -292,7 +292,7 @@
                             </div>
                             
                             <!--
-                            <div *ngIf="((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="row smartBudgesBody">
+                            <div *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="row smartBudgesBody">
                               <div class="col-lg-12  smartBudge">
                                 <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(userdata.id, smartBadgesByUser)">
                                   <i _ngcontent-axy-c0="" class="material-icons"> emoji_events </i> Award
@@ -313,7 +313,7 @@
               
               <a [routerLink]="['/profiles', userdata.id,'career-advisor']" class="btn btn-success"><span class="glyphicon glyphicon-star"></span> {{ 'PROFILES.CAREER_ADVISOR' | translate }}</a>
                               
-              <!-- <button *ngIf="(1==2) && ((userdata.id==currentUser.id) || (currentUser.role.toLowerCase()=='administrator'))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'career-advisor']">  
+              <!-- <button *ngIf="(1==2) && ((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'career-advisor']">  
                 <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.CAREER_ADVISOR' | translate }}
               </button> -->
             </div>

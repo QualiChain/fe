@@ -13,6 +13,7 @@ import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 //import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { UsersService } from '../../../_services/users.service';
 //import { FilterArrayByValueGetListPipe } from '../../../_pipes/FilterArrayByValueGetList/filterArrayByValueGetList.pipe';
+import { AppComponent } from '../../../app.component';
 
 export interface DialogData {
   grade: number;
@@ -44,6 +45,7 @@ export class CoursesGetComponent implements OnInit {
   grade: Number;
 
   constructor(
+    private appcomponent: AppComponent,
     private router: Router,
     private authservice: AuthService,
     public dialogModal: MatDialog, 
@@ -53,6 +55,13 @@ export class CoursesGetComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  //isTeacher = this.appcomponent.isTeacher;
+  isProfessor = this.appcomponent.isProfessor;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee;
 
   openDialogUserSelection(courseId: number, userId: number): void {
     const dialogRef = this.dialog.open(DialogSelectUser, {

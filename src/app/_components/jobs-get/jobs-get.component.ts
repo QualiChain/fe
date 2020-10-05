@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UsersService } from 'src/app/_services/users.service';
 import { AuthService } from '../../_services';
 import User from '../../_models/user';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-jobs-get',
@@ -20,6 +21,7 @@ import User from '../../_models/user';
 export class JobsGetComponent implements OnInit {
 
   constructor(
+    private appcomponent: AppComponent,
     private router: Router,
     public dialogModal: MatDialog, 
     private route: ActivatedRoute,
@@ -33,6 +35,13 @@ export class JobsGetComponent implements OnInit {
 
   }
 
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  //isTeacher = this.appcomponent.isTeacher;
+  isProfessor = this.appcomponent.isProfessor;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee;  
 
   deleteThisApply(jobId: any, userId: number, posI: number): void {
   

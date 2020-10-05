@@ -9,6 +9,7 @@ import { EmploymentTypePipe } from '../../../_pipes/employment-type/employment-t
 import { LevelTypePipe } from '../../../_pipes/level-type/level-type.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {MatDialogModule} from '@angular/material/dialog';
+import { AppComponent } from '../../../app.component';
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -26,7 +27,8 @@ describe('CoursesComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         MatDialogModule
-        ]
+        ],
+        providers: [AppComponent]
     })
     .compileComponents();
   }));
