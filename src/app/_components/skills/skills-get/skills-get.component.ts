@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../_services';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-skills-get',
@@ -19,6 +20,7 @@ export class SkillsGetComponent implements OnInit {
   currentUser: User;
 
   constructor(
+    private appcomponent: AppComponent,
     private router: Router,
     private authservice: AuthService,
     public dialogModal: MatDialog, 
@@ -26,6 +28,14 @@ export class SkillsGetComponent implements OnInit {
     private ss: SkillsService,
     private translate: TranslateService    
   ) { }
+
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  //isTeacher = this.appcomponent.isTeacher;
+  isProfessor = this.appcomponent.isProfessor;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee; 
 
   skillData: any = {};
 

@@ -1,11 +1,13 @@
 <h1 >{{ 'SKILL.TITLE' | translate }}: {{skillData.name}}</h1>
 
 <div class="container">
-    <div class="row" *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='professor'">
+    <!--
+    <div class="row" *ngIf="isAdmin || isProfessor">
       <button class="btn btn-primary" [routerLink]="['/skills', skillData.id, 'edit']">
         <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
       </button>          
     </div>
+    -->
 
     <div class="row"><br></div>
 

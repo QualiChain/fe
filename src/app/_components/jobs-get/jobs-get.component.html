@@ -3,7 +3,7 @@
 <div class="container">
 
     <div class="row">
-        <button *ngIf="(currentUser.role.toLowerCase()=='professor' && jobData.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && jobData.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
+          <button *ngIf="((isProfessor && jobData.creator_id==currentUser.id) || (isRecruiter && jobData.creator_id==currentUser.id) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
             <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
           </button>
           <button *ngIf="!userHasAnApply" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">
@@ -113,11 +113,11 @@
         </div>
     </div>
     
-    <div class="row" *ngIf="currentUser.role.toLowerCase()=='administrator' || currentUser.role.toLowerCase()=='recruiter'">
+    <div class="row" *ngIf="isAdmin || isRecruiter">
 
       <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
 
-        <div *ngIf="jobCandidates.length==0">There are not candidates for this Job</div>
+        <div *ngIf="jobCandidates.length==0">{{ 'JOB.NO_CANDIDATES' | translate }}</div>
 
         <div *ngIf="jobCandidates.length>0" class="col col-lg-12">
       
@@ -127,10 +127,10 @@
                   <tr>
                     <th scope="col">#</th>
                     <!--<th scope="col">Name</th>-->
-                    <th scope="col">Role</th>
-                    <th scope="col">Available</th>
-                    <th scope="col">Salary</th>
-                    <th scope="col">Score</th>
+                    <th scope="col">{{ 'JOB_APPLY.ROLE' | translate }}</th>
+                    <th scope="col">{{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }}</th>
+                    <th scope="col">{{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }}</th>
+                    <th scope="col">{{ 'JOB_APPLY.SCORE' | translate }}</th>
                     <th scope="col"> </th>
                   </tr>
                 </thead>

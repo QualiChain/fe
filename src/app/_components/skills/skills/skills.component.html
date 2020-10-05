@@ -1,9 +1,9 @@
 <h1>{{ 'SKILLS.TITLE' | translate }}</h1>
 
 <div class="row">
-  <div class="col" [ngClass]="{'col-lg-8': currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee'}">
+  <div class="col" [ngClass]="{'col-lg-8': isStudent || isEmployee}">
 
-    <div class="" *ngIf="currentUser.role.toLowerCase()=='professor' || currentUser.role.toLowerCase()=='recruiter' || currentUser.role.toLowerCase()=='administrator'">
+    <div class="" *ngIf="isProfessor || isRecruiter || isAdmin">
       <button class="btn btn-primary" [routerLink]="['/skills/add']">
         <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'SKILLS.BUTTON.CREATE_SKILL' | translate }}
       </button>
@@ -32,11 +32,11 @@
                     <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                   </button>    
                   <!--
-                  <button *ngIf="(currentUser.role.toLowerCase()=='professor' && element.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && element.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-primary" [routerLink]="['/skills', element.id, 'edit']">
+                  <button *ngIf="(isProfessor && element.creator_id==currentUser.id) || (isRecruiter && element.creator_id==currentUser.id) || isAdmin" class="btn btn-primary" [routerLink]="['/skills', element.id, 'edit']">
                     <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
                   </button>    
                   
-                  <button *ngIf="(currentUser.role.toLowerCase()=='professor' && element.creator_id==currentUser.id) || (currentUser.role.toLowerCase()=='recruiter' && element.creator_id==currentUser.id) || currentUser.role.toLowerCase()=='administrator'" class="btn btn-danger" (click)="confirmDialog(element.id, element.name)">
+                  <button *ngIf="(isProfessor && element.creator_id==currentUser.id) || (isRecruiter && element.creator_id==currentUser.id) || isAdmin" class="btn btn-danger" (click)="confirmDialog(element.id, element.name)">
                     <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
                   </button>
                   -->
@@ -77,12 +77,15 @@
 
   </div>
 
-  <div class="col col-lg-4" *ngIf="currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee'">
+  <div class="col col-lg-4" *ngIf="isStudent || isEmployee">
 
     <mat-accordion class="example-headers-align" multi>
-      <app-recomended-jobs userId="{{currentUser.id}}"></app-recomended-jobs>
+      <app-recomended-skills userId="{{currentUser.id}}"></app-recomended-skills>
+      <!--
       <app-job-applications-by-user userId="{{currentUser.id}}"></app-job-applications-by-user>
+      -->
     </mat-accordion>
+    
     
   </div>
 

@@ -19,6 +19,7 @@ import { AuthService } from '../../../_services';
 import { UsersService } from '../../../_services/users.service';
 import User from '../../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from '../../../app.component';
 
 export interface AvailableCourses {
   id: number;
@@ -54,13 +55,22 @@ export class CoursesComponent implements OnInit {
   }
 
   courses: Course[];
-  constructor(private router: Router, private us: UsersService, private authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
+  constructor(
+    private appcomponent: AppComponent,
+    private router: Router, private us: UsersService, private authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
     
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
   }
 
-  
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  //isTeacher = this.appcomponent.isTeacher;
+  isProfessor = this.appcomponent.isProfessor;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee;
+
 
   confirmDialog(id, title): void {
     

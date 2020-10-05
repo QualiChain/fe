@@ -132,6 +132,7 @@
   "JOB": {
     "HEADER_TITLE": "Job",
     "CANDIDATES": "Candidates",
+    "NO_CANDIDATES": "There are not candidates for this Job",
     "DELETE_APPLY_MESSAGE": "Are you sure you want to this apply?",
     "TITLE": {
       "LABEL": "Title",
@@ -254,7 +255,9 @@
     "EXPECTED_SALARY": {
       "TITLE": "Expected Salary",
       "PLACEHOLDER": "Expected Salary"
-    }
+    },
+    "SCORE": "Score",
+    "ROLE": "Role"
   },
   "CVS": {
     "TITLE": "CVs"

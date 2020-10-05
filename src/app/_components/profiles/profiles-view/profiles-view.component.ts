@@ -34,6 +34,7 @@ import { OUService } from '../../../_services/ou.service';
 import { CoursesService } from '../../../_services/courses.service';
 import Course from '../../../_models/course';
 import { exit } from 'process';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-profiles-view',
@@ -116,6 +117,7 @@ export class ProfilesViewComponent implements OnInit {
   listOfSmartAwardsOU: any =[];
   
   constructor(
+    private appcomponent: AppComponent,
     private ous: OUService,
     private cs: CoursesService,
     public CVDialog: MatDialog,
@@ -128,6 +130,14 @@ export class ProfilesViewComponent implements OnInit {
       map((skill: string | null) => skill ? this._filter(skill) : this.allSkills.slice()));
 
   }
+
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  //isTeacher = this.appcomponent.isTeacher;
+  isProfessor = this.appcomponent.isProfessor;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee;
 
   openAwardDialogInUserProfile(userId: number, element: any) {
      
@@ -345,11 +355,13 @@ export class ProfilesViewComponent implements OnInit {
       if (this.userId) {
         //this.userId=String(id);
 
-        if ((this.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
+        //if ((this.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
+        if ((this.userId.toString()==this.currentUser.id.toString()) || (this.isAdmin)) {
           this.canEditCV = true;
           this.canViewCV = true;
         }
-        else if (this.currentUser.role.toLowerCase()=='recruiter') {
+        //else if (this.currentUser.role.toLowerCase()=='recruiter') {
+        else if (this.isRecruiter) {
           this.canViewCV = true;
         }
         
@@ -837,6 +849,7 @@ export class CVDialog_modal implements OnInit {
   educationHistoryCV: any = [];
 
   constructor(
+    private appcomponent: AppComponent,
     private router: Router,  
     private us: UsersService, private authservice: AuthService,
     private cvs: CVService,
@@ -848,6 +861,13 @@ export class CVDialog_modal implements OnInit {
 
     }
 
+    isLogged = this.appcomponent.isLogged;
+    isAdmin = this.appcomponent.isAdmin;
+    isRecruiter = this.appcomponent.isRecruiter;
+    //isTeacher = this.appcomponent.isTeacher;
+    isProfessor = this.appcomponent.isProfessor;
+    isStudent = this.appcomponent.isStudent;
+    isEmployee = this.appcomponent.isEmployee;
 
     getUserData(id:string) {
       
@@ -929,11 +949,13 @@ export class CVDialog_modal implements OnInit {
     this.getUserCV(this.data.userId.toString());
 
     //console.log(this.data.userId+"----"+this.currentUser.id)
-    if ((this.data.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
+    //if ((this.data.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
+    if ((this.data.userId.toString()==this.currentUser.id.toString()) || (this.isAdmin)) {      
       this.canEditCV = true;
       this.canViewCV = true;
     }
-    else if (this.currentUser.role.toLowerCase()=='recruiter') {
+    //else if (this.currentUser.role.toLowerCase()=='recruiter') {
+    else if (this.isRecruiter) {
       this.canViewCV = true;
     }
 

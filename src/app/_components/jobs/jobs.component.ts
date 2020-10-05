@@ -17,6 +17,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../_services';
 import User from '../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 export interface AvailableJobs {
   id: number;
@@ -102,6 +103,7 @@ export class JobsComponent implements OnInit {
 
   jobs: Job[];
   constructor(
+    private appcomponent: AppComponent,
     private router: Router,
     private js: JobsService, private authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
     public applyForAJobDialog: MatDialog) { 
@@ -109,6 +111,14 @@ export class JobsComponent implements OnInit {
       this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
     }
+
+    isLogged = this.appcomponent.isLogged;
+    isAdmin = this.appcomponent.isAdmin;
+    isRecruiter = this.appcomponent.isRecruiter;
+    //isTeacher = this.appcomponent.isTeacher;
+    isProfessor = this.appcomponent.isProfessor;
+    isStudent = this.appcomponent.isStudent;
+    isEmployee = this.appcomponent.isEmployee;
 
   confirmDialog(id, title): void {
     //const message = `Are you sure you want to do this?`;

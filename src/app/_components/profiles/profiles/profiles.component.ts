@@ -12,13 +12,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../_services';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-profiles',
   templateUrl: './profiles.component.html',
   styleUrls: ['./profiles.component.css']
 })
-
 
 
 /*
@@ -39,6 +39,7 @@ export class ProfilesComponent implements OnInit {
   currentUser: User;
   
   constructor(
+    private appcomponent: AppComponent,
     private translate: TranslateService,
     public dialog: MatDialog,
     private authservice: AuthService, private us: UsersService, public createChangePasswordDialog: MatDialog) { 
@@ -47,6 +48,14 @@ export class ProfilesComponent implements OnInit {
 
   }
 
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  //isTeacher = this.appcomponent.isTeacher;
+  isProfessor = this.appcomponent.isProfessor;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee;
+    
   displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
