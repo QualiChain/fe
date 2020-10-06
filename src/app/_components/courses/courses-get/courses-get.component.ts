@@ -23,6 +23,7 @@ export interface DialogDataEnrollment {
   enrollment: string ;
   usersSelected: [];
   grade: number;
+  courseId: number;
 }
 
 @Component({
@@ -379,13 +380,13 @@ export class DialogSelectUser {
   }
 
   enrollmentSelected(value) {
-
+    //console.log(this.data.courseId);
     this.dataFiltered = [];
     this.data.usersSelected = [];
     this.data.grade = null;
 
       this.cs
-      .getEnrolledUserByCourseId(160).subscribe(
+      .getEnrolledUserByCourseId(this.data.courseId).subscribe(
       dataEnrolledUsers => {
 
         dataEnrolledUsers.forEach(element => {

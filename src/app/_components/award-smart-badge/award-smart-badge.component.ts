@@ -65,7 +65,7 @@ export class AwardSmartBadgeComponent implements OnInit {
 
 
   //displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
-  displayedColumns: string[] = ['id', 'student', 'action'];
+  displayedColumns: string[] = ['id', 'student', 'grade', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource<listOfStudents>([]);
@@ -122,6 +122,24 @@ export class AwardSmartBadgeComponent implements OnInit {
 
     let dataListUsers = [];
 
+    this.cs
+    .getEnrolledUserByCourseId(this.courseId).subscribe(
+    dataEnrolledUsers => {
+      console.log(dataEnrolledUsers);
+      dataEnrolledUsers.forEach(element => {
+        if ((element.course_status=='done')) {
+         
+            let aqcuired_badges_by_user = [];
+            dataListUsers.push({id: element.user.id , student: "from QC DB: "+element.user.surname+", "+element.user.name, semester: '-', grade: (0+element.course_grade), origin: 'external', aqcuired_badges: aqcuired_badges_by_user});
+            ELEMENT_DATA.push({id: element.user.id , student: "from QC DB: "+element.user.surname+", "+element.user.name, semester: '-', grade: (0+element.course_grade), origin: 'external', aqcuired_badges: aqcuired_badges_by_user});
+            this.dataSource.data = dataListUsers;
+
+        }
+        
+      });
+    });
+      
+      
     this.ous
     .getOUToken()
     .subscribe((
