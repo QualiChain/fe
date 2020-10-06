@@ -4,7 +4,25 @@
         <div class="form-group field" >
             <mat-form-field class="create-score-full-width" >
                 <mat-label>{{ 'COURSE.SCORE.LABEL' | translate }}</mat-label>
-                <input matInput [(ngModel)]="data.grade" name="grade" id="grade" required type="number" min=0 max=10 placeholder="{{ 'COURSE.SCORE.PLACEHOLDER' | translate }}" class="example-right-align">    
+
+                <mat-select 
+                [(ngModel)]="data.grade" name="grade" value="grade" required                
+                >
+                  <mat-option value=10>10</mat-option>
+                  <mat-option value=9>9</mat-option>
+                  <mat-option value=8>8</mat-option>
+                  <mat-option value=7>7</mat-option>
+                  <mat-option value=6>6</mat-option>
+                  <mat-option value=5>5</mat-option>
+                  <mat-option value=4>4</mat-option>
+                  <mat-option value=3>3</mat-option>
+                  <mat-option value=2>2</mat-option>
+                  <mat-option value=1>1</mat-option>
+                  <mat-option value=0>0</mat-option>
+                </mat-select>
+                <!--
+                <input matInput [(ngModel)]="data.grade" name="grade" id="grade" required type="number" min=0 max=10 step=1 decimals=0 placeholder="{{ 'COURSE.SCORE.PLACEHOLDER' | translate }}" class="example-right-align">    
+                -->
             </mat-form-field>
         </div>
     </form>

@@ -90,15 +90,19 @@
             <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')>0" class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
-                    <th scope="col">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
-                    <th scope="col"> </th>
+                    <!--
+                    <th scope="col" class="col-lg-1">#</th>
+                    -->
+                    <th scope="col" class="col-lg-4">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
+                    <th scope="col" class="col-lg-4">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
+                    <th scope="col" class="col-lg-4"> </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'taught' ; let i=index">
-                    <th scope="row">{{i+1}}</th>
+                    <!--
+                    <td scope="row">{{i+1}}</td>
+                    -->
                     <td>{{enrolledUser.user.surname}}</td>
                     <td>{{enrolledUser.user.name}}</td>
                     <td>
@@ -125,15 +129,19 @@
             <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'enrolled')>0" class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
-                    <th scope="col">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
-                    <th scope="col"> </th>
+                    <!--
+                    <th scope="col" class="col-lg-1">#</th>
+                    -->
+                    <th scope="col" class="col-lg-4">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
+                    <th scope="col" class="col-lg-4">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
+                    <th scope="col" class="col-lg-4"> </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'enrolled' ; let i=index">
-                    <th scope="row">{{i+1}}</th>
+                    <!--
+                    <td scope="row">{{i+1}}</td>
+                    -->
                     <td>{{enrolledUser.user.surname}}</td>
                     <td>{{enrolledUser.user.name}}</td>
                     <td>
@@ -160,19 +168,24 @@
             <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'done')>0" class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
-                    <th scope="col">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
-                    <th scope="col">{{ 'COURSE.SCORE.LABEL' | translate }}</th>
+                    <!--
+                    <th scope="col" class="col-lg-1">#</th>
+                    -->
+                    <th scope="col" class="col-lg-4">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
+                    <th scope="col" class="col-lg-4">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
+                    <th scope="col" class="col-lg-1">{{ 'COURSE.SCORE.LABEL' | translate }}</th>
+                    <th scope="col" class="col-lg-4"> </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'done' ; let i=index">
-                    <th scope="row">{{i+1}}</th>
+                    <!--
+                    <td scope="row">{{i+1}}</td>
+                    -->
                     <td>{{enrolledUser.user.surname}}</td>
                     <td>{{enrolledUser.user.name}}</td>
-                    <td>{{enrolledUser?.score}}</td>
-                    <td>
+                    <td>{{enrolledUser?.course_grade}}</td>
+                    <td style="white-space:nowrap">
                         <button class="btn btn-primary" [routerLink]="['/profiles', enrolledUser.user.id]">
                             <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                         </button>

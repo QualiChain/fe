@@ -498,6 +498,8 @@
       "LABEL": "Score",
       "PLACEHOLDER": "A number between 0 and 10"
     },
+    "USERS": "Users",
+    "NO_USERS_AVAILABLE": "No users available",
     "ENROLL_USER_TITLE": "Enroll users",
     "ENROLLMENT_STATUS": {
       "LABEL": "Enrollent status",

@@ -65,7 +65,7 @@ export class CoursesGetComponent implements OnInit {
 
   openDialogUserSelection(courseId: number, userId: number): void {
     const dialogRef = this.dialog.open(DialogSelectUser, {
-      width: '350px',
+      width: '450px',
       disableClose: true,
       data: {courseId: courseId}
     });
@@ -80,7 +80,7 @@ export class CoursesGetComponent implements OnInit {
           "course_status": result.enrollment
         };
         if (result.enrollment=='done') {          
-            dataToPost['grade'] = result.grade;          
+            dataToPost['grade'] = +result.grade;          
         }
 
         result.usersSelected.forEach(element => {
@@ -107,7 +107,7 @@ export class CoursesGetComponent implements OnInit {
 
   openDialogGrade(courseId: number, userId: number): void {
     const dialogRef = this.dialog.open(DialogOverviewGradeDialog, {
-      width: '350px',
+      width: '450px',
       disableClose: true,
       data: {grade: this.grade}
     });
@@ -253,10 +253,10 @@ export class CoursesGetComponent implements OnInit {
 
       if (type=='done') { 
         
-        console.log(this.grade);
-        if (this.grade>=0) {
+        //console.log(this.grade);
+        if (+this.grade>=0) {
           validInput = true;
-          dataToPost['grade'] = this.grade;
+          dataToPost['grade'] = +this.grade;
         }
       }
       else {
