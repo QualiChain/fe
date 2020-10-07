@@ -30,6 +30,7 @@ export const environment = {
   uploadUserAvatar: 'http://qualichain.epu.ntua.gr:5004/upload',
   selectUrl: 'http://qualichain.epu.ntua.gr:5004/select',
   notificationPreferences: 'http://qualichain.epu.ntua.gr:5004/set',
+  visualiserUrl: 'http://qualichain.epu.ntua.gr:8000/visualiser',
   uploadCVToKG: 'http://localhost:5000/KG'
 };
 
