@@ -122,7 +122,7 @@ import { DndDirective } from './_directives/dnd/dnd.directive';
 
 
 import { DatePipe } from '@angular/common';
-
+import { SafePipeModule } from 'safe-pipe';
 
 import { of, Observable, ObservableInput } from '../../node_modules/rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -147,6 +147,14 @@ import { SkillsGetComponent } from './_components/skills/skills-get/skills-get.c
 import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edit.component';
 import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
 import { FilesRepositoryComponent } from './_components/profiles/files-repository/files-repository.component';
+
+import { VisualisationsComponent, 
+  VisualisationsUserSkillsJobSkillsChartComponent,
+  VisualisationsUserGradesChartComponent, 
+  VisualisationsAverageGradesInCoursesChartComponent, 
+  VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
+  VisualisationsCarrerPathTrajectoryChartComponent
+} from './_components/utils/visualisations/visualisations.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -272,9 +280,13 @@ export function tokenGetter() {
     SkillsGetComponent,
     SkillsEditComponent,
     NotificationPreferencesComponent,
-    FilesRepositoryComponent
+    FilesRepositoryComponent,
+    VisualisationsComponent, VisualisationsUserSkillsJobSkillsChartComponent, VisualisationsUserGradesChartComponent, VisualisationsAverageGradesInCoursesChartComponent, 
+    VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
+    VisualisationsCarrerPathTrajectoryChartComponent
   ],
   imports: [
+    SafePipeModule,
     BrowserModule,
     FormsModule,
     ModalModule,
@@ -308,7 +320,7 @@ export function tokenGetter() {
     FlashMessagesModule.forRoot()
   ],
   exports: [materialModules],
-  providers: [ PilotsService, DatePipe, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, JwtHelperService,
+  providers: [ PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, JwtHelperService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {
       provide: APP_INITIALIZER,

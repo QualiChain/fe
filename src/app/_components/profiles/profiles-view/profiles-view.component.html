@@ -43,39 +43,7 @@
             <div><span class="profileLabel">{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
             <div><span class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>  {{ 'ROLES.'+userdata.role | translate}}</div>
             <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span>  {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</div>
-            <!--
-            <div *ngIf="userdata.role!='Recruiter'" class="university"><span>{{ 'PROFILES.UNIVERSITY' | translate }}:</span> {{userdata.university}}</div>
-            -->
-            <!--
-            <div *ngIf="userdata.role!='Recruiter'" class="skills"><span>Skills:</span>
-              <mat-form-field class="example-chip-list">
-                <mat-chip-list #chipList aria-label="Skill selection">
-                  <mat-chip
-                    *ngFor="let skill of skills"
-                    [selectable]="selectable"
-                    [removable]="removable"
-                    (removed)="remove(skill)">
-                    {{skill}}
-                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                  </mat-chip>
-                  <input
-                    placeholder="New skill..."
-                    #skillInput
-                    [formControl]="skillCtrl"
-                    [matAutocomplete]="auto"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)">
-                </mat-chip-list>
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                  <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
-                    {{skill}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
-            -->
+            
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
 
@@ -83,9 +51,11 @@
                   <button *ngIf="canViewCV" class="btn btn-primary" (click)="openUserCV(userdata.id)" >  
                     <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
                   </button>
+                  
                   <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" (click)="uploadUserCVKG(userdata.id)" >  
                     <i _ngcontent-axy-c0="" class="material-icons small">  cloud_upload </i> {{ 'UPLOAD_CV_KG.BUTTON' | translate }} 
                   </button>
+                  
                   <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
                     <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
                   </button>
@@ -108,11 +78,15 @@
         <ngb-accordion *ngIf="userdata.role.toLowerCase()!='recruiter'">
 
           
-                <ngb-panel  id="toggle-0" title="Career path" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+                <ngb-panel  id="toggle-0" title="{{ 'PROFILES.CARRER_PATH' | translate }}" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
                   <ng-template ngbPanelContent>
                     <div class="">
                       Mockup chart<br/>
+                      <!--
                       <svg id="sankey" width="600" height="350"></svg>
+                      -->
+                      <app-visualisations-carerr-path-trajectory-chart [userId]=userId></app-visualisations-carerr-path-trajectory-chart>
+
                     </div>
                   </ng-template>
                 </ngb-panel>

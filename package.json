@@ -44,6 +44,7 @@
     "ng2-charts": "^2.4.2",
     "pdfmake": "^0.1.68",
     "rxjs": "^6.6.2",
+    "safe-pipe": "^1.0.3",
     "serialize-javascript": "^5.0.1",
     "tslib": "^1.13.0",
     "xlsx": "^0.15.6",

@@ -508,7 +508,7 @@ connectToOU() {
 
 
   ngAfterViewChecked () {
-    this.DrawChart();
+    //this.DrawChart();
   }
 
   private DrawChart() {
