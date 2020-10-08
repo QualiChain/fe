@@ -40,32 +40,13 @@ export class RecomendedCoursesComponent implements OnInit {
     private route: ActivatedRoute,
     private rs: RecomendationsService, private cvss: CVService, private cs: CoursesService ) { }
 
-  ngOnInit() {
+  public recomendedCoursesByUserId(userId: number) {
 
-    //console.log(this.userId);  
-
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-
-    
-
-    if (!this.userId) {
-      this.route.params.subscribe(params => {
-      if(params.hasOwnProperty('id')){
-        this.userId = +params.id;
-      }
-    });
-    }
-
-    //console.log(this.userId);    
-
-    if (this.userId) {
-
-      this.cvss
-      .getCV(this.userId).subscribe(
+    this.cvss
+      .getCV(userId).subscribe(
         dataCVs => {
-          //console.log("user CV");
-          //console.log(dataCVs);
+          console.log("user CV");
+          console.log(dataCVs);
           
             let datatCVToSend = dataCVs;
             //console.log(datatCVToSend);
@@ -128,7 +109,7 @@ export class RecomendedCoursesComponent implements OnInit {
                     courseData => {
                       //console.log("courseData");
                       //console.log(courseData);
-                      element.course_decription = courseData.description;
+                      element.course_decription = courseData.description;                      
                     },
                     error => {
                       console.log("course not found in db");                        
@@ -150,21 +131,32 @@ export class RecomendedCoursesComponent implements OnInit {
         error => {
           console.log("user CVs not found in db");                        
         }
-      );  
+      ); 
+  }
 
-      /*      
-      this.rs
-      .getRecomendationsCourses(this.userId).subscribe(
-        data => {
-          //console.log("list of recomended courses");
-          //console.log(data);
-          this.recomendedCourses = data;
-        },
-        error => {
-          console.log("recomended courses not found in db");                        
-        }
-      );
-      */
+  ngOnInit() {
+
+    //console.log(this.userId);  
+
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+
+    
+
+    if (!this.userId) {
+      this.route.params.subscribe(params => {
+      if(params.hasOwnProperty('id')){
+        this.userId = +params.id;
+      }
+    });
+    }
+
+    //console.log(this.userId);    
+
+    if (this.userId) {
+
+      this.recomendedCoursesByUserId(this.userId);
+
     }    
 
   }
