@@ -382,7 +382,7 @@
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
     "DELETE_MESSAGE": "Are you sure you want to delete this user?",
     "CONFIRM_ACTION": "Confirm Action",
-    "CARRER_PATH": "Carrer path"
+    "CARRER_PATH": "Career path"
   },
   "BCO": {
     "TITLE": "Best Career Options"
@@ -425,7 +425,13 @@
         "NO_DATA": "No skills recomendations",
         "SELECTED_CNT": "You have selected {{value}}% skills"
       }
-    }
+    },
+    "PERCENTATGE_RELATION_WITH_JOB_TILES": "{{value}}% relation with targetted job titles",
+    "PERCENTATGE_RELATED_WITH_YOUR_INTERESTS": "{{value}}% relation with your interests",
+    "NUMBER_STUDENTS_SIMILAR_PROFILE": "{{value}} students with similar profile also find it interesting",
+    "YOU_HAVE_SELECTED_N_COURSES": "You have selected {{value}} courses",
+    "YOU_HAVE_SELECTED_N_SKILLS": "You have selected {{value}} skills",
+    "STATISTICS": "Statistics"
   },
   "SKILLS": {
     "TITLE": "Skills",

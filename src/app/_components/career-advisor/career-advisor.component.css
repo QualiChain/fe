@@ -11,3 +11,20 @@
 .selectedCard {
     background-color: #dbe6f3;
 }
+
+.recomendedCourseBoxDescription {
+    overflow-y: auto;
+    max-height: 100px;
+    min-height: 100px;
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+
+.recomendedCourseBoxSkills {
+    overflow-y: auto;
+    max-height: 100px;
+    min-height: 100px;
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,.125);
+}

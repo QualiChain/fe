@@ -171,7 +171,7 @@ export class ProfilesViewComponent implements OnInit {
     const dialogRef = this.CVDialog.open(CVDialog_modal, {
       disableClose: true,
       width: '550px',
-      data: {userId: userId}
+      data: {userId: userId, isAdmin: this.isAdmin, isRecruiter: this.isRecruiter}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -848,8 +848,8 @@ export class CVDialog_modal implements OnInit {
   workHistoryCV: any = [];
   educationHistoryCV: any = [];
 
-  constructor(
-    private appcomponent: AppComponent,
+  //private appcomponent: AppComponent,
+  constructor(            
     private router: Router,  
     private us: UsersService, private authservice: AuthService,
     private cvs: CVService,
@@ -860,7 +860,15 @@ export class CVDialog_modal implements OnInit {
       this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
     }
-
+    
+    isLogged = false;
+    isAdmin = false;
+    isRecruiter = false;
+    isProfessor = false;
+    isStudent = false;
+    isEmployee = false;
+    
+    /*
     isLogged = this.appcomponent.isLogged;
     isAdmin = this.appcomponent.isAdmin;
     isRecruiter = this.appcomponent.isRecruiter;
@@ -868,7 +876,7 @@ export class CVDialog_modal implements OnInit {
     isProfessor = this.appcomponent.isProfessor;
     isStudent = this.appcomponent.isStudent;
     isEmployee = this.appcomponent.isEmployee;
-
+    */
     getUserData(id:string) {
       
       this.us.getUser(id).subscribe(

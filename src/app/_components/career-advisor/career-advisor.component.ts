@@ -8,6 +8,9 @@ import {PageEvent} from '@angular/material/paginator';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import { RecomendationsService } from '../../_services/recomendations.service';
+import { CVService } from '../../_services/cv.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 let completedCoursesByUser: any[] = [];
 
@@ -57,7 +60,7 @@ export class CareerAdvisorComponent implements OnInit {
   
 
 
-  recommendedCourses = [];
+  recomendedCourses = [];
   pagedListRC = [];
   recommendedSkills = [];
   pagedListRS = []
@@ -81,18 +84,150 @@ export class CareerAdvisorComponent implements OnInit {
   selectedCourses: any[] = [];
   selectedSkills: any[] = [];
 
+  
   constructor(
-    private route: ActivatedRoute, 
-    private translate: TranslateService,
     private router: Router,
-    private us: UsersService,
-    private cs: CoursesService
-    ) { }
+    private route: ActivatedRoute, 
+    private rs: RecomendationsService,
+    private cvss: CVService,
+    private cs: CoursesService,
+    private translate: TranslateService,    
+    private us: UsersService
+    
+    ) { 
+      
+    }
+
+
+    public recomendedCoursesByUserId(userId: number) {
+
+      this.cvss
+        .getCV(userId).subscribe(
+          dataCVs => {
+            //console.log("user CV");
+            //console.log(dataCVs);
+            
+              let datatCVToSend = dataCVs;
+              //console.log(datatCVToSend);
+              let skillsCV = [];
+              dataCVs['skills'].forEach(element => {
+                //console.log(element);
+                skillsCV.push({
+                  "label":element.label,
+                  "comment":element.comment,
+                  "proficiencyLevel":element.proficiencyLevel, 
+                  "priorityLevel": element.priorityLevel,                
+                  "uri": element.uri, 
+                  "id": element.id});
+              });
+              //console.log(skillsCV);
+  
+              let educationCV = [];
+              dataCVs['education'].forEach(element => {
+                educationCV.push({"title":element.title,"from":element.from,"to":element.to,"organisation":element.organisation,"description":element.description});
+              });
+              //console.log(educationCV);
+  
+              let workHistoryCV = [];
+              dataCVs['workHistory'].forEach(element => {
+                workHistoryCV.push({"title":element.position,"from":element.from,"to":element.to,"organisation":element.employer,"description":""});
+              });
+              //console.log(workHistoryCV);
+  
+              datatCVToSend = {
+                "source":{
+                  "PersonURI": dataCVs['personURI'],
+                  "Label": dataCVs['label'],
+                  "targetSector": dataCVs['targetSector'],
+                  "expectedSalary": "",
+                  "Description": dataCVs['description'],
+                  "skills": skillsCV,
+                  "workHistory": workHistoryCV,
+                  "Education": educationCV
+                },
+                "source_type": "cv",
+                "recommendation_type": "courses"
+              };
+              
+              //console.log(datatCVToSend);
+  
+              this.rs
+              .getRecomendationsByCV(datatCVToSend).subscribe(
+                dataRecommendationByCV => {
+                  console.log("list of recomended courses by CV");
+                  console.log(dataRecommendationByCV);            
+                  this.recomendedCourses = dataRecommendationByCV['recommended_courses'];                  
+                  
+                  dataRecommendationByCV['recommended_courses'].forEach(element => {
+                    //console.log(element.course_id);
+                    this.cs
+                    .getCourse(element.course_id).subscribe(
+                      courseData => {
+                        //console.log("courseData");
+                        //console.log(courseData);
+                        element.course_data = courseData;
+                        //element.course_description = courseData.description;
+                      },
+                      error => {
+                        console.log("course not found in db");                        
+                      }
+                    );            
+                    
+                    
+                    this.cs
+                    .getSkillsByCourseId(element.course_id).subscribe(
+                      dataCourseSkills => {
+                        //console.log(dataCourseSkills);
+                        element.skills = dataCourseSkills;
+                    },
+                    error => {
+                      console.log("error recovering skills by course id")
+                    });
+                    
+                    element.rating1 = 80; 
+                    element.rating2 = 45;
+  
+                  });
+                  
+                                    
+                  this.recommendedSkills = dataRecommendationByCV['recommended_skills'];
+                  /*
+                  dataRecommendationByCV['recommended_skills'].forEach(element => {
+                    
+                  });
+                  */
+
+                  this.lengthRC = this.recomendedCourses.length;
+                  this.pagedListRC = this.recomendedCourses.slice(0, 4);
+
+                  this.lengthRS = this.recommendedSkills.length;
+                  this.pagedListRS = this.recommendedSkills.slice(0, 4);
+  
+                },
+                error => {
+                  console.log("recomended courses by CV not found in db");                        
+                }
+              );
+            
+            
+          },
+          error => {
+            console.log("user CVs not found in db");                        
+          }
+        ); 
+    }    
 
   ngOnInit() {
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+         case 'name': return item.course.name;
+         default: return item[property];
+      }
+    };
 
     this.route.params.subscribe(params => {
       
@@ -101,9 +236,12 @@ export class CareerAdvisorComponent implements OnInit {
       
       if (this.userid>0) {
 
+        this.recomendedCoursesByUserId(this.userid);
         //load demo data
+        /*
         for (let index = 1; index <=18 ; index++) {
-          this.recommendedCourses.push({
+               
+          this.recomendedCourses.push({
             id:index,
             title: 'recommended course demo '+String(index), 
             description: 'This is a demo course to test the CA recommendation engine, course:'+String(index), 
@@ -112,9 +250,8 @@ export class CareerAdvisorComponent implements OnInit {
             skills:['c','java','html','html5','git','python','javascript','css', 'skill '+index]
           });
         }
-        this.lengthRC = this.recommendedCourses.length;
-        this.pagedListRC = this.recommendedCourses.slice(0, 4);
-        
+        */      
+        /*
         for (let index = 1; index <=28 ; index++) {
           this.recommendedSkills.push({
             id:index,
@@ -127,8 +264,8 @@ export class CareerAdvisorComponent implements OnInit {
             courses:['https://www.classcentral.com/tag/mysql', 'https://www.coursera.org/courses?query=mysql']
           });
         }
-        this.lengthRS = this.recommendedSkills.length;
-        this.pagedListRS = this.recommendedSkills.slice(0, 4);
+        */
+        
 
         this.us
         .getUser(this.userid).subscribe(
@@ -141,7 +278,6 @@ export class CareerAdvisorComponent implements OnInit {
             this.cs
               .getCompletedCourseByUserId(this.userid)
               .subscribe((coursesData: Course[]) => {
-
 /*
                 this.cs
                 .getCourses()
@@ -176,7 +312,7 @@ export class CareerAdvisorComponent implements OnInit {
     if(endIndex > this.lengthRC){
       endIndex = this.lengthRC;
     }
-    this.pagedListRC = this.recommendedCourses.slice(startIndex, endIndex);
+    this.pagedListRC = this.recomendedCourses.slice(startIndex, endIndex);
   }
 
   OnPageChangeRS(event: PageEvent){
@@ -212,12 +348,24 @@ export class CareerAdvisorComponent implements OnInit {
     }
   }
   
+  scrollToTop() {
+    (function smoothscroll() {
+        var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            window.requestAnimationFrame(smoothscroll);
+            window.scrollTo(0, currentScroll - (currentScroll / 8));
+        }
+    })();
+}
+
   showCarrerAdvisorRecommended() {
     this.showRecommend = true;
+    this.scrollToTop();
   }
 
   hideCarrerAdvisorRecommended() {
     this.showRecommend = false;
+    this.scrollToTop();
   }
 
   plotPieChart() {

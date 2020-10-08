@@ -57,7 +57,7 @@
       
         <!-- semester Column -->
         <ng-container matColumnDef="semester">
-          <th mat-header-cell *matHeaderCellDef > {{ 'COURSE.SEMESTER.LABEL' | translate }} </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.SEMESTER.LABEL' | translate }} </th>
           <td mat-cell *matCellDef="let element"> {{ element.semester }} </td>
         </ng-container>
     
