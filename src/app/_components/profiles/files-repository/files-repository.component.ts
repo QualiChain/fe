@@ -98,7 +98,7 @@ export class FilesRepositoryComponent implements OnInit {
 
     this.us.deleteFile(+this.profileId, fileId).subscribe(
       res => {
-        console.log("the file has been deleted");
+        //console.log("the file has been deleted");
         this.loadUserFiles();
       },
       error => {

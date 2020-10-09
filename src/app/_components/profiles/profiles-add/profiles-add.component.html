@@ -276,8 +276,19 @@
     </div>
 
     <div *ngIf="mode=='Edit'" class="col col-lg-6">
-      <div class="form-group field" >
-        <app-upload-files [validFiles]="['image/png','image/jpg','image/jpeg','image/gif']" [maxNumberOfFiles]="1" [userId]=profileId fileDestination="avatarImage"></app-upload-files>
+      <div *ngIf="user_avatar_path_id" class="row"> 
+        <div class="form-group field col col-lg-2">
+          <img [src]="user_avatar_path">
+          <button class="btn btn-danger" (click)="confirmDialog(user_avatar_path_id, '')">
+            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+          </button>
+        </div>
+      </div>
+      <br>
+      <div *ngIf="!user_avatar_path_id" class="row">
+        <div class="form-group field">
+          <app-upload-files [currentAvatarFileId]=user_avatar_path_id [callbackFunction]=myCallbackFunction [validFiles]="['image/png','image/jpg','image/jpeg','image/gif']" [maxNumberOfFiles]="1" [userId]=profileId fileDestination="avatarImage"></app-upload-files>
+        </div>
       </div>
     </div>
     

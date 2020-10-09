@@ -3,7 +3,10 @@ import { ModalService } from '../../_modal';
 import { Router } from '@angular/router';
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../_services/auth.service';
+import { UploadService } from '../../_services/upload.service';
 
+import { environment } from '../../../environments/environment';
+const downloadUrl = environment.downloadFilesUrl;
 
 @Component({
   selector: 'app-login',
@@ -23,7 +26,9 @@ export class LoginComponent implements OnInit {
   loadingLoginSpinner: boolean = false;
   loadingRequestPasswordSpinner: boolean = false;
   
-  constructor(private modalService: ModalService, private el: ElementRef, private router: Router, private ls: AuthService) { 
+  constructor(
+    private us: UploadService,
+    private modalService: ModalService, private el: ElementRef, private router: Router, private ls: AuthService) { 
     
   }
   
@@ -42,8 +47,38 @@ export class LoginComponent implements OnInit {
       //console.log("else");
       if (data) {
         myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role};
+
+        this.us.getUserFiles(data.id).subscribe(
+          res => {
+            
+            res.files.forEach(element => {
+              var index = element.filename.indexOf(data.id+"_avatar_" ); 
+              if (index==0) {                
+                myObj['avatar_path'] = downloadUrl+"/file/"+element.file_id;
+              }
+            });
+            this.storeUserObject(myObj);
+            
+          },
+          error => {
+            console.log("Error recovering files");
+            this.storeUserObject(myObj);
+          }
+        );
+
+      }
+      else {
+        this.storeUserObject(myObj);
       }
     
+    //console.log(myObj);
+    //localStorage.setItem('userdata', JSON.stringify(myObj));
+    
+    //console.log("uncomment next line")
+    //window.location.href="/";
+  }
+
+  storeUserObject(myObj:{}) {
     //console.log(myObj);
     localStorage.setItem('userdata', JSON.stringify(myObj));
     window.location.href="/";

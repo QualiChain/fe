@@ -382,7 +382,8 @@
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
     "DELETE_MESSAGE": "Are you sure you want to delete this user?",
     "CONFIRM_ACTION": "Confirm Action",
-    "CARRER_PATH": "Career path"
+    "CARRER_PATH": "Career path",
+    "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?"
   },
   "BCO": {
     "TITLE": "Best Career Options"
@@ -723,5 +724,22 @@
     "BUTTON": "Upload CV to the KG",
     "TITLE": "Upload CV to the Knowledge Graph",
     "DESCRIPTION": "help text description to be defined"
+  },
+  "UPLOAD_FILES": {
+    "AVATAR": {
+      "TITLE": "Upload an avatar"
+    },
+    "FILES": {
+      "TITLE": "Upload files"
+    },
+    "ALLOWED_TYPES": "Allowed types",
+    "DRAG_AND_DROP_HERE": "Drag and drop file here",
+    "OR": "or",
+    "BROWSE_FOR_FILE": "Browse for file",
+    "ERROR_LOADING_FILE": "Error loading file",
+    "NOT_VALID_FILE": "This file is not valid to be uploaded",
+    "BUTTON": {
+      "UPLOAD_PENDING_FILES": "Upload pending files"
+    }
   }
 }

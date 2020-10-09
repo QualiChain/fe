@@ -1,9 +1,11 @@
   <div class="upladfilesdnd">
 
-    <h1>Upload files</h1>
+    <h1 *ngIf="fileDestination=='avatarImage'">{{ 'UPLOAD_FILES.AVATAR.TITLE' | translate }}</h1>
+    <h1 *ngIf="fileDestination!='avatarImage'">{{ 'UPLOAD_FILES.FILES.TITLE' | translate }}</h1>
+
     <div *ngIf="validFiles.length>0">
       <p>
-        Allowed types:
+        {{ 'UPLOAD_FILES.ALLOWED_TYPES' | translate }}:
         <span *ngFor="let validFile of validFiles; let i = index"> {{validFile}}<span *ngIf="validFiles.length>1 && i<validFiles.length-1">,</span> </span>
       </p>
     </div>
@@ -21,9 +23,9 @@
         <img class="uploadclass" src="assets/img/dnd/ic-upload-file.svg" alt="" id="20px">
         -->    
         <i _ngcontent-axy-c0="" class="material-icons"> cloud_upload </i>
-        <h3>Drag and drop file here</h3>
-        <h3>or</h3>
-        <label for="fileDropRef">Browse for file</label>
+        <h3>{{ 'UPLOAD_FILES.DRAG_AND_DROP_HERE' | translate }}</h3>
+        <h3>{{ 'UPLOAD_FILES.OR' | translate }}</h3>
+        <label for="fileDropRef">{{ 'UPLOAD_FILES.BROWSE_FOR_FILE' | translate }}</label>
     </div>
     
     <div class="files-list">
@@ -37,8 +39,8 @@
               --{{file | json}}--
               -->
               <app-progress *ngIf="file?.validfile==true && file?.error===false" [progress]="file?.progress"></app-progress>
-              <div *ngIf="file?.error===true"><h4 class="errormessage">Error loading file. {{file?.errorMessage}}</h4></div>
-              <div *ngIf="file?.validfile===false"><h4 class="errormessage">This file is not valid to be uploaded</h4></div>
+              <div *ngIf="file?.error===true"><h4 class="errormessage">{{ 'UPLOAD_FILES.ERROR_LOADING_FILE' | translate }}. {{file?.errorMessage}}</h4></div>
+              <div *ngIf="file?.validfile===false"><h4 class="errormessage">{{ 'UPLOAD_FILES.NOT_VALID_FILE' | translate }}</h4></div>
               <br/>
             </div>
           </div>
@@ -73,7 +75,7 @@
     </div>
 
     <button type="button" class="btn btn-primary" [disabled]="( (files | FilterArrayByValue : 'uploaded' : 'false') == 0 || (files | FilterArrayByValue : 'validfile' : 'true') == 0 )" (click)="uploadFilesToServer()">
-      <i _ngcontent-axy-c0="" class="material-icons"> cloud_upload </i> Upload pending files
+      <i _ngcontent-axy-c0="" class="material-icons"> cloud_upload </i> {{ 'UPLOAD_FILES.BUTTON.UPLOAD_PENDING_FILES' | translate }}
     </button>
 
   </div>

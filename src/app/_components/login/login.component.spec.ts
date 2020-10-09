@@ -5,6 +5,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UploadService } from '../../_services/upload.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -22,7 +23,8 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule
-        ]
+        ],
+        providers: [UploadService]
     })
     .compileComponents();
   }));
