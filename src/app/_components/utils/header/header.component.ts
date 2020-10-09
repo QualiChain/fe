@@ -24,6 +24,7 @@ import { PilotsService, HEADER_MENU } from '../../../_services/pilots.services';
 import { UsersService } from '../../../_services/users.service';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import {GlobalApp, StorageService} from '../../../_helpers/global';
 
 export interface OPTIONS_MENU {
   id: number;
@@ -50,8 +51,6 @@ const ELEMENT_DATA: OPTIONS_MENU[] =[
 })
 
 
-
-
 export class HeaderComponent implements OnInit, OnDestroy {
   
   currentUser: User;
@@ -72,6 +71,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
 
   constructor(
+    public globalApp: GlobalApp,
+    public storageService: StorageService,
     private _sanitizer: DomSanitizer,
     private ps: PilotsService,
     public createChangePasswordDialog: MatDialog,
@@ -207,7 +208,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
+
+    this.storageService.watchStorage().subscribe((data:string) => {
+      // this will call whenever your localStorage data changes
+      // use localStorage code here and set your data here for ngFor
+      let userdata = JSON.parse(localStorage.getItem('userdata'));
+      //console.log(userdata);
+      if (userdata) {
+        if (userdata.avatar_path!=this.currentUser.avatar_path) {            
+          this.currentUser.avatar_path = userdata.avatar_path;
+        }
+      }
+    })
+
     //todo , replace this by the pilotid of the user
     //console.log(this.currentUser);
     if (this.currentUser) {
@@ -234,8 +247,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     let userdata = JSON.parse(localStorage.getItem('userdata'));
     if (userdata) {
 
-      if (this.currentUser.avatar_path=='') {
+      if (userdata.avatar_path=='') {
         this.currentUser.avatar_path = 'assets/img/no_avatar.jpg';              
+      }
+      else {
+        this.currentUser.avatar_path = userdata.avatar_path;
       }
 
       this.userdata = userdata;
@@ -243,11 +259,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.reloadNotifications(userdata.id);
       //this.recoverUserAvatar(userdata.id);
 
+      //reload nortifications
       interval(60000).subscribe(x => {
         // something
         this.reloadNotifications(userdata.id);
       });
 
+      //reload avatar image
+      /*
+      interval(3000).subscribe(x => {
+        // something
+        let userdata = JSON.parse(localStorage.getItem('userdata'));
+        if (userdata) {
+          if (userdata.avatar_path!=this.currentUser.avatar_path) {            
+            this.currentUser.avatar_path = userdata.avatar_path;
+          }
+        }
+      });
+      */
       
     }
     else {

@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from '../../../app.component';
+import { UploadService } from '../../../_services/upload.service';
 
 describe('ProfilesViewComponent', () => {
   let component: ProfilesViewComponent;
@@ -29,7 +30,7 @@ describe('ProfilesViewComponent', () => {
         MatDialogModule,
         HttpClientTestingModule
         ],
-        providers: [AppComponent]
+        providers: [AppComponent, UploadService]
     })
     .compileComponents();
   }));

@@ -7,7 +7,9 @@ import { map, catchError } from 'rxjs/operators';
 
 //const url = 'http://localhost:3000/upload';
 const url = environment.uploadFilesUrl;
-const urlUploadUserAvatar = environment.uploadUserAvatar;
+//const urlUploadUserAvatar = environment.uploadUserAvatar;
+const urlUploadUserAvatar = environment.uploadFilesUrl;
+
 const downloadUrl = environment.downloadFilesUrl;
 const deleteFilesUrl = environment.deleteFilesUrl;
 const urlUploadCVToKG = environment.uploadCVToKG;
@@ -160,7 +162,8 @@ export class UploadService {
   //to upload avatar
   public uploadUserAvatar(userId: Number,
     //files: Set<File>
-    files: any
+    files: any,
+    callbackFunction: any
   ): { [key: string]: { progress: Observable<number>, error: Observable<boolean>, uploaded: Observable<boolean> } } {
     // this will be the our resulting map
     const status: { [key: string]: { 
@@ -173,8 +176,11 @@ export class UploadService {
       
 
       const formData: FormData = new FormData();
-      //formData.append('file', file, file.name);
-      formData.append('image', file, file.name);
+      
+      //formData.append('image', file, file.name);
+      //var splitted = file.name.split("."); 
+      //formData.append('image', file, file.name);
+      formData.append('file', file, "avatar_"+file.name);
 
       // create a http-post request and pass the form
       // tell it to report the upload progress
@@ -188,9 +194,10 @@ export class UploadService {
       */
       const httpOptions = {headers: new HttpHeaders({})};
 
-      const req = new HttpRequest('POST', urlUploadUserAvatar+'/user/'+userId+'/avatar', formData, {
+      //const req = new HttpRequest('POST', urlUploadUserAvatar+'/user/'+userId+'/avatar', formData, {
+      const req = new HttpRequest('POST', urlUploadUserAvatar+"/"+userId+"/file-upload", formData, {
         reportProgress: true,
-        responseType: 'text'
+       // responseType: 'text'
       });
 
       // create a new progress-subject for every file
@@ -213,6 +220,7 @@ export class UploadService {
           if (percentDone>=100) {
             file.uploaded = true;
             uploadedStatus.next(true);
+            callbackFunction();
           }
           else {
             file.uploaded = true;

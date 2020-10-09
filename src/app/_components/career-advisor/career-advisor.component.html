@@ -167,7 +167,7 @@
                 <div class="row" *ngIf="recomendedCourses.length>0" >
                     <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.HELP_TEXT' | translate }}</div>
                     <div class="col-sm-12" >
-                        <div class="col-sm-6 " *ngFor="let recommendedCourse of pagedListRC; let i = index;">
+                        <div class="col-sm-6 recomendedBox" *ngFor="let recommendedCourse of pagedListRC; let i = index;">
                             <div class="card" [ngClass]="{selectedCard:selectedCourses.indexOf(recommendedCourse.course_id)>=0}" style="width: 95%;">
 
                                 <div class="card-body">
@@ -248,7 +248,7 @@
                     <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.HELP_TEXT' | translate }}</div>
 
                     <div class="col-sm-12" >
-                        <div class="col-sm-6" *ngFor="let recommendedSkill of pagedListRS; let i = index">
+                        <div class="col-sm-6 recomendedBox" *ngFor="let recommendedSkill of pagedListRS; let i = index">
                             <div class="card" [ngClass]="{selectedCard:selectedSkills.indexOf(recommendedSkill)>=0}" style="width: 95%;">
                                 <div class="card-body">
                                     <div class="col-sm-10">

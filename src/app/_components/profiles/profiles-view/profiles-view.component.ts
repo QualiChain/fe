@@ -36,6 +36,10 @@ import Course from '../../../_models/course';
 import { exit } from 'process';
 import { AppComponent } from '../../../app.component';
 
+import { UploadService } from '../../../_services/upload.service';
+import { environment } from '../../../../environments/environment';
+const downloadUrl = environment.downloadFilesUrl;
+
 @Component({
   selector: 'app-profiles-view',
   templateUrl: './profiles-view.component.html',
@@ -117,6 +121,7 @@ export class ProfilesViewComponent implements OnInit {
   listOfSmartAwardsOU: any =[];
   
   constructor(
+    private uploads: UploadService,
     private appcomponent: AppComponent,
     private ous: OUService,
     private cs: CoursesService,
@@ -376,7 +381,21 @@ export class ProfilesViewComponent implements OnInit {
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
             } 
-           
+
+            this.uploads.getUserFiles(data.id).subscribe(
+              res => {                
+                res.files.forEach(element => {
+                  var index = element.filename.indexOf(data.id+"_avatar_" ); 
+                  if (index==0) {                
+                    this.userdata.avatar_path =  downloadUrl+"/file/"+element.file_id;
+                  }
+                });
+                                
+              },
+              error => {
+                console.log("Error recovering files");                
+              }
+            );
 
             //Start OU connexion 
             this.connectToOU();

@@ -8,13 +8,14 @@ import { UploadService } from '../../../_services/upload.service';
 })
 export class UploadFilesComponent implements OnInit {
 
-  constructor(public us: UploadService) { }
+  constructor(public uploads: UploadService) { }
 
   @Input() validFiles: string[] = [];
   @Input() maxNumberOfFiles: number = null;
   @Input() userId: number = null;
   @Input() fileDestination: string = null;
   @Input() callbackFunction: (args: any) => void;
+  @Input() currentAvatarFileId: number = null;
 
   imgURL = [];
   ngOnInit() {
@@ -65,19 +66,19 @@ export class UploadFilesComponent implements OnInit {
 
 
   uploadFilesToServer() {    
-    console.log(this.fileDestination);
+    //console.log(this.fileDestination);
     let filtered = this.files.filter(f => f.progress<100);
     let filtered2 = filtered.filter(f => f.validfile==true);
     //let progressItem = this.us.upload(this.files);
     //let progressItem = this.us.upload(filtered2);
     if (this.fileDestination=='avatarImage') {
-      let progressItem = this.us.uploadUserAvatar(this.userId, filtered2);  
+      let progressItem = this.uploads.uploadUserAvatar(this.userId, filtered2, this.callbackFunction);
     }
     else if (this.fileDestination=='personalFileRepository') {
-      let progressItem = this.us.upload(this.userId, filtered2, this.callbackFunction);
+      let progressItem = this.uploads.upload(this.userId, filtered2, this.callbackFunction);
     }
     else if (this.fileDestination=='KGFile') {
-      let progressItem = this.us.uploadCVKG(this.userId, filtered2);
+      let progressItem = this.uploads.uploadCVKG(this.userId, filtered2);
     }
 
   }

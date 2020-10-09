@@ -23,6 +23,14 @@ import { UsersService } from '../../../_services/users.service';
 import User from '../../../_models/user';
 import { DatePipe } from '@angular/common';
 
+import { UploadService } from '../../../_services/upload.service';
+import { environment } from '../../../../environments/environment';
+const downloadUrl = environment.downloadFilesUrl;
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { StorageService } from '../../../_helpers/global';
+
 @Component({
   selector: 'app-profiles-add',
   templateUrl: './profiles-add.component.html',
@@ -30,6 +38,9 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class ProfilesAddComponent implements OnInit {
+
+  user_avatar_path: string = 'assets/img/no_avatar.jpg';
+  user_avatar_path_id: number = null;
 
   public profileForm: FormGroup;
 
@@ -78,9 +89,12 @@ export class ProfilesAddComponent implements OnInit {
   public selectedOption: any;
 
   constructor(
+    public storageService: StorageService,
+    public dialog: MatDialog,
+    private us: UploadService,
     private fb: FormBuilder,
     private router: Router,
-    public datepipe: DatePipe, private us: UsersService, private authservice: AuthService, 
+    public datepipe: DatePipe, private userService: UsersService, private authservice: AuthService, 
     private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
@@ -132,7 +146,7 @@ export class ProfilesAddComponent implements OnInit {
           this.profileId=String(id);
           //console.log(this.profileId);  
   
-          this.us.getUser(+this.profileId).subscribe(
+          this.userService.getUser(+this.profileId).subscribe(
             res => {
               //console.log("Request OK");
               //console.log(res);
@@ -158,6 +172,8 @@ export class ProfilesAddComponent implements OnInit {
               
             }
           ); 
+          
+          this.getAvatarUser(+this.profileId);          
 
         }
         else {
@@ -178,6 +194,99 @@ export class ProfilesAddComponent implements OnInit {
   }
 
 
+  deleteFile(fileId: number) { 
+
+    this.us.deleteFile(+this.profileId, fileId).subscribe(
+      res => {
+        //console.log("the file has been deleted");
+        this.getAvatarUser(+this.profileId);
+      },
+      error => {
+        console.log("Error deleting file data");
+        console.log(error);
+        
+      }
+    );
+
+  }
+
+  confirmDialog(id, title): void {
+    //const message = `Are you sure you want to do this?`;
+    const message = this.translate.instant('PROFILES.DELETE_AVATAR_MESSAGE') ;
+    
+    const dialogData = new ConfirmDialogModel(this.translate.instant('PROFILES.CONFIRM_ACTION'), message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      //this.result = dialogResult;
+
+      if (dialogResult) {
+        this.deleteFile(id);
+      }
+    });
+  }
+
+
+
+  myCallbackFunction = (args: any): void => {
+    //callback code here
+    //console.log("hi!!!");
+    //console.log(this.profileId);
+    this.getAvatarUser(+this.profileId);
+        
+  }
+
+  getAvatarUser(profileId: number) {
+    //console.log("getAvatarUser:"+profileId);
+    this.user_avatar_path = null;
+    this.user_avatar_path_id = null;
+
+    let userdata = JSON.parse(localStorage.getItem('userdata'));
+    let currentUserData = JSON.parse(localStorage.getItem('currentUser'));
+    if (+profileId==+userdata['id'])
+    {    
+        userdata['avatar_path']='assets/img/no_avatar.jpg';
+        currentUserData['avatar_path']='assets/img/no_avatar.jpg';
+        //localStorage.setItem('userdata', JSON.stringify(userdata));
+        this.storageService.setItem('userdata', JSON.stringify(userdata));
+        this.storageService.setItem('currentUser', JSON.stringify(currentUserData));
+        //this.storageService.setItem(currentUser['avatar_path'], 'assets/img/no_avatar.jpg');
+    }
+
+    this.us.getUserFiles(+profileId).subscribe(
+      res => {                
+        res.files.forEach(element => {
+          //console.log(res);
+          var index = element.filename.indexOf(profileId+"_avatar_" ); 
+          if (index==0) {                
+            this.user_avatar_path =  downloadUrl+"/file/"+element.file_id;
+            this.user_avatar_path_id = element.file_id;
+
+            
+            if (+profileId==+userdata['id'])
+            {
+              if (userdata['avatar_path']!=this.user_avatar_path) {
+                userdata['avatar_path']=this.user_avatar_path;
+                currentUserData['avatar_path']=this.user_avatar_path;
+                //localStorage.setItem('userdata', JSON.stringify(userdata));
+                this.storageService.setItem('userdata', JSON.stringify(userdata));
+                this.storageService.setItem('currentUser', JSON.stringify(currentUserData));
+                //this.storageService.setItem(currentUser['avatar_path'], this.user_avatar_pat);
+              }
+            }
+            
+          }
+        });
+                        
+      },
+      error => {
+        console.log("Error recovering files");                
+      }
+    );
+  }
   
   processForm() {
     //console.log(this);
@@ -208,7 +317,7 @@ export class ProfilesAddComponent implements OnInit {
 
       obj['password']=this.password;
 
-      this.us.addUser(obj).subscribe(
+      this.userService.addUser(obj).subscribe(
         res => {
           //console.log("User created");
           console.log(res);
@@ -218,7 +327,7 @@ export class ProfilesAddComponent implements OnInit {
           
           this.router.navigate(["/profiles/"+splitted[1]]);
           /*
-          this.us.requestNewPassword(splitted[1], password).subscribe(
+          this.userService.requestNewPassword(splitted[1], password).subscribe(
             resPassword => {
               console.log("Password created");
               //console.log(resPassword);              
@@ -244,7 +353,7 @@ export class ProfilesAddComponent implements OnInit {
     }
     else {
       //console.log(this.profileId);
-      this.us.updateUser(+this.profileId, obj).subscribe(
+      this.userService.updateUser(+this.profileId, obj).subscribe(
         res => {
           //console.log("User updated");
           //console.log(res);

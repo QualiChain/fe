@@ -9,6 +9,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 //import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { UploadService } from '../../../_services/upload.service';
 
 describe('ProfilesAddComponent', () => {
   let component: ProfilesAddComponent;
@@ -28,7 +29,8 @@ describe('ProfilesAddComponent', () => {
         MatNativeDateModule,
         RouterTestingModule,
         HttpClientTestingModule
-        ]
+        ],
+        providers: [UploadService]
     })
     .compileComponents();
   }));
