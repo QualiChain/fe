@@ -11,7 +11,7 @@ import { Job, JobSkill, Education, WorkHistory } from '../../_models/Job';
 import {formatDate} from '@angular/common';
 import { AuthService } from '../../_services';
 import User from '../../_models/user';
-
+import { QCStorageService } from '../../_services/QC_storage.services';
 //import { tap } from 'rxjs/operators';
 
 @Component({
@@ -30,6 +30,7 @@ export class JobsAddComponent implements OnInit {
     dataIn : Job;
 
     constructor(      
+      private qcStorageService: QCStorageService,
       private authservice: AuthService,
       private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private js: JobsService, public dialog: MatDialog, private translate: TranslateService) {
 
@@ -141,7 +142,8 @@ export class JobsAddComponent implements OnInit {
 
 
     addJob() {
-      let userdata = JSON.parse(localStorage.getItem('userdata'));
+      //let userdata = JSON.parse(localStorage.getItem('userdata'));
+      let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
       let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en');
      
       let dataToSend = this.dataIn;

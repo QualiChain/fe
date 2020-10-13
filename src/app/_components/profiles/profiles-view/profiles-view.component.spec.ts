@@ -10,6 +10,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from '../../../app.component';
 import { UploadService } from '../../../_services/upload.service';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('ProfilesViewComponent', () => {
   let component: ProfilesViewComponent;
@@ -30,7 +31,7 @@ describe('ProfilesViewComponent', () => {
         MatDialogModule,
         HttpClientTestingModule
         ],
-        providers: [AppComponent, UploadService]
+        providers: [AppComponent, UploadService, QCStorageService]
     })
     .compileComponents();
   }));

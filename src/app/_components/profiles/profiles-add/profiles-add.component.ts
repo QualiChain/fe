@@ -30,6 +30,7 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StorageService } from '../../../_helpers/global';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 @Component({
   selector: 'app-profiles-add',
@@ -89,6 +90,7 @@ export class ProfilesAddComponent implements OnInit {
   public selectedOption: any;
 
   constructor(
+    private qcStorageService: QCStorageService,
     public storageService: StorageService,
     public dialog: MatDialog,
     private us: UploadService,
@@ -138,7 +140,8 @@ export class ProfilesAddComponent implements OnInit {
       const id = +params.id;
       this.mode = "Create";
       if (id && id > 0) {
-        let userdata = JSON.parse(localStorage.getItem('userdata'));
+        //let userdata = JSON.parse(localStorage.getItem('userdata'));
+        let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
         //console.log(userdata.role.toLowerCase());
         if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
 
@@ -244,15 +247,24 @@ export class ProfilesAddComponent implements OnInit {
     this.user_avatar_path = null;
     this.user_avatar_path_id = null;
 
-    let userdata = JSON.parse(localStorage.getItem('userdata'));
-    let currentUserData = JSON.parse(localStorage.getItem('currentUser'));
+    //let userdata = JSON.parse(localStorage.getItem('userdata'));
+    let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+
+    //let currentUserData = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUserData = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('currentUserQC')));
+
     if (+profileId==+userdata['id'])
     {    
         userdata['avatar_path']='assets/img/no_avatar.jpg';
         currentUserData['avatar_path']='assets/img/no_avatar.jpg';
         //localStorage.setItem('userdata', JSON.stringify(userdata));
-        this.storageService.setItem('userdata', JSON.stringify(userdata));
-        this.storageService.setItem('currentUser', JSON.stringify(currentUserData));
+
+        let encryptedDataUserData = this.qcStorageService.QCEncryptData(JSON.stringify(userdata));
+        let encryptedDataCurrentUserData = this.qcStorageService.QCEncryptData(JSON.stringify(currentUserData));
+
+        this.storageService.setItem('userdataQC', encryptedDataUserData);
+        this.storageService.setItem('currentUserQC', encryptedDataCurrentUserData);
+
         //this.storageService.setItem(currentUser['avatar_path'], 'assets/img/no_avatar.jpg');
     }
 
@@ -272,8 +284,13 @@ export class ProfilesAddComponent implements OnInit {
                 userdata['avatar_path']=this.user_avatar_path;
                 currentUserData['avatar_path']=this.user_avatar_path;
                 //localStorage.setItem('userdata', JSON.stringify(userdata));
-                this.storageService.setItem('userdata', JSON.stringify(userdata));
-                this.storageService.setItem('currentUser', JSON.stringify(currentUserData));
+                
+                let encryptedDataUserData = this.qcStorageService.QCEncryptData(JSON.stringify(userdata));
+                let encryptedDataCurrentUserData = this.qcStorageService.QCEncryptData(JSON.stringify(currentUserData));
+        
+                this.storageService.setItem('userdataQC', encryptedDataUserData);
+                this.storageService.setItem('currentUserQC', encryptedDataCurrentUserData);
+
                 //this.storageService.setItem(currentUser['avatar_path'], this.user_avatar_pat);
               }
             }

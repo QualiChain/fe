@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../../_services/index';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,9 @@ import { MessageService } from '../../../_services/index';
 export class AccessDeniedComponent implements OnInit {
   userdata: {};
 
-  constructor(private messageService: MessageService) { }
+  constructor(
+    private qcStorageService: QCStorageService,
+    private messageService: MessageService) { }
 
   sendMessage(): void {
     // send message to subscribers via observable subject
@@ -25,7 +28,9 @@ export class AccessDeniedComponent implements OnInit {
 
   ngOnInit() {
 
-    let userdata = JSON.parse(localStorage.getItem('userdata'));
+    //let userdata = JSON.parse(localStorage.getItem('userdata'));
+    let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')))
+    
     if (userdata) {
       this.userdata = userdata;
     }

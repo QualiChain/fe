@@ -10,6 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 //import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { UploadService } from '../../../_services/upload.service';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('ProfilesAddComponent', () => {
   let component: ProfilesAddComponent;
@@ -30,7 +31,7 @@ describe('ProfilesAddComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule
         ],
-        providers: [UploadService]
+        providers: [UploadService, QCStorageService]
     })
     .compileComponents();
   }));

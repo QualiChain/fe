@@ -10,6 +10,7 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 //import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 let ELEMENT_DATA = [];
 const downloadUrl = environment.downloadFilesUrl;
@@ -25,6 +26,7 @@ export class FilesRepositoryComponent implements OnInit {
   
 
   constructor(
+    private qcStorageService: QCStorageService,
     private translate: TranslateService,
     public dialog: MatDialog,
     private us: UploadService,
@@ -53,8 +55,9 @@ export class FilesRepositoryComponent implements OnInit {
       const id = +params.id;
       //console.log(id);
       if (id && id > 0) {
-        let userdata = JSON.parse(localStorage.getItem('userdata'));
-        
+        //let userdata = JSON.parse(localStorage.getItem('userdata'));
+        let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+
         if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
           this.profileId = id;
 

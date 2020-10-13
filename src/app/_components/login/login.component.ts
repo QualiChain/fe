@@ -7,6 +7,7 @@ import { UploadService } from '../../_services/upload.service';
 
 import { environment } from '../../../environments/environment';
 const downloadUrl = environment.downloadFilesUrl;
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   loadingRequestPasswordSpinner: boolean = false;
   
   constructor(
+    private qcStorageService: QCStorageService,
     private us: UploadService,
     private modalService: ModalService, private el: ElementRef, private router: Router, private ls: AuthService) { 
     
@@ -80,7 +82,9 @@ export class LoginComponent implements OnInit {
 
   storeUserObject(myObj:{}) {
     //console.log(myObj);
-    localStorage.setItem('userdata', JSON.stringify(myObj));
+    let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myObj));
+    //localStorage.setItem('userdata', encryptedData);
+    localStorage.setItem('userdataQC', encryptedData);
     window.location.href="/";
   }
 

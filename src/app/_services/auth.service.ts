@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { from, Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
+import { QCStorageService } from './QC_storage.services';
 
 //import { User } from '../_models/user';
 import User from '../_models/user';
@@ -20,8 +21,11 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private httpClient: HttpClient) {      
-      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+  constructor(
+    private qcStorageService: QCStorageService,
+    private httpClient: HttpClient) {      
+      //this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('currentUserQC'))));
       this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -33,7 +37,8 @@ export class AuthService {
   logout() {
     console.log("logout auth.service.ts")
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserQC');
+    localStorage.removeItem('userdataQC');
     this.currentUserSubject.next(null);
   }
   
@@ -52,7 +57,9 @@ export class AuthService {
         surname: data.surname, email: data.email, 
         userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, 'pilotId': data.pilotId};
       
-        localStorage.setItem('currentUser', JSON.stringify(myAuthObj));
+        //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
+        let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
+        localStorage.setItem('currentUserQC', encryptedData);        
 
          return data;
        }), catchError( error => {

@@ -5,7 +5,7 @@ import { PilotHomeComponent } from './pilot-home.component';
 import { HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilot4Component, HomePilot5Component } from './pilot-home.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('PilotHomeComponent', () => {
   let component: PilotHomeComponent;
@@ -20,7 +20,8 @@ describe('PilotHomeComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         HttpClientTestingModule
-        ]
+        ],
+      providers: [QCStorageService]
     })
     .compileComponents();
   }));
