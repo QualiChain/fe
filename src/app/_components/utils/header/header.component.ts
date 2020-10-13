@@ -25,6 +25,7 @@ import { UsersService } from '../../../_services/users.service';
 
 import { DomSanitizer } from '@angular/platform-browser';
 import {GlobalApp, StorageService} from '../../../_helpers/global';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 export interface OPTIONS_MENU {
   id: number;
@@ -71,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
 
   constructor(
+    private qcStorageService: QCStorageService,
     public globalApp: GlobalApp,
     public storageService: StorageService,
     private _sanitizer: DomSanitizer,
@@ -212,7 +214,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.storageService.watchStorage().subscribe((data:string) => {
       // this will call whenever your localStorage data changes
       // use localStorage code here and set your data here for ngFor
-      let userdata = JSON.parse(localStorage.getItem('userdata'));
+      //let userdata = JSON.parse(localStorage.getItem('userdata'));
+      let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+
       //console.log(userdata);
       if (userdata) {
         if (userdata.avatar_path!=this.currentUser.avatar_path) {            
@@ -244,7 +248,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //console.log(this.menuOptionsPerPilot);
 
     // Read item:
-    let userdata = JSON.parse(localStorage.getItem('userdata'));
+    //let userdata = JSON.parse(localStorage.getItem('userdata'));
+    let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
     if (userdata) {
 
       if (userdata.avatar_path=='') {
@@ -269,7 +274,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       /*
       interval(3000).subscribe(x => {
         // something
-        let userdata = JSON.parse(localStorage.getItem('userdata'));
+        //let userdata = JSON.parse(localStorage.getItem('userdata'));
+        let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
         if (userdata) {
           if (userdata.avatar_path!=this.currentUser.avatar_path) {            
             this.currentUser.avatar_path = userdata.avatar_path;

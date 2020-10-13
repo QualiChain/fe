@@ -10,6 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UploadService } from '../../../_services/upload.service';
 import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('FilesRepositoryComponent', () => {
   let component: FilesRepositoryComponent;
@@ -32,7 +33,7 @@ describe('FilesRepositoryComponent', () => {
         ),
         HttpClientTestingModule,
         ],
-        providers: [UploadService]
+        providers: [UploadService, QCStorageService]
     })
     .compileComponents();
   }));

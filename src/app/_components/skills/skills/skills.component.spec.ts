@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AppComponent } from '../../../app.component';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('SkillsComponent', () => {
   let component: SkillsComponent;
@@ -22,7 +23,7 @@ describe('SkillsComponent', () => {
         HttpClientTestingModule,
         MatDialogModule
         ],
-        providers: [AppComponent]
+        providers: [AppComponent, QCStorageService]
     })
     .compileComponents();
   }));

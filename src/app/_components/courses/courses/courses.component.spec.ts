@@ -10,6 +10,7 @@ import { LevelTypePipe } from '../../../_pipes/level-type/level-type.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AppComponent } from '../../../app.component';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -28,7 +29,7 @@ describe('CoursesComponent', () => {
         HttpClientTestingModule,
         MatDialogModule
         ],
-        providers: [AppComponent]
+        providers: [AppComponent, QCStorageService]
     })
     .compileComponents();
   }));

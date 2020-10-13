@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UploadService } from '../../_services/upload.service';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -24,7 +25,7 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule
         ],
-        providers: [UploadService]
+        providers: [UploadService, QCStorageService]
     })
     .compileComponents();
   }));

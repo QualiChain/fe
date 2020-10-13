@@ -135,6 +135,7 @@ import { RecruitingComponent } from './_components/recruiting/recruiting.compone
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { ValidateService } from './_services/recruiting/validate.service';
 import { AuthService } from './_services/recruiting/auth.service';
+import { QCStorageService } from './_services/QC_storage.services';
 import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -320,7 +321,7 @@ export function tokenGetter() {
     FlashMessagesModule.forRoot()
   ],
   exports: [materialModules],
-  providers: [ PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, JwtHelperService,
+  providers: [ PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, QCStorageService, JwtHelperService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {
       provide: APP_INITIALIZER,

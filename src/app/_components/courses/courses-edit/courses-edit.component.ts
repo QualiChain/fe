@@ -14,6 +14,7 @@ import {formatDate} from '@angular/common';
 import {FormControl} from '@angular/forms'
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 export interface Skill {
   name: string;
@@ -64,7 +65,8 @@ export class CoursesEditComponent implements OnInit {
   addOnBlurEvent = true;
   courseId: number = null;
   events: Event[] = [];
-  userdata = JSON.parse(localStorage.getItem('userdata'));
+  //userdata = JSON.parse(localStorage.getItem('userdata'));
+  userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
   
   skillCtrl = new FormControl();
   //allSkills: any = [];
@@ -75,6 +77,7 @@ export class CoursesEditComponent implements OnInit {
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
+    private qcStorageService: QCStorageService,
     private ss: SkillsService,
     private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private cs: CoursesService) {
     //this.createForm();

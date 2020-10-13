@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MessageService } from '../../../_services/message.service'
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 export interface Specialization {
   name: string;
@@ -50,6 +51,7 @@ export class NotificationPreferencesComponent implements OnInit {
   //message: string = "";
 
   constructor(
+    private qcStorageService: QCStorageService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -67,7 +69,8 @@ export class NotificationPreferencesComponent implements OnInit {
       const id = +params.id;
       
       if (id && id > 0) {
-        let userdata = JSON.parse(localStorage.getItem('userdata'));
+        //let userdata = JSON.parse(localStorage.getItem('userdata'));
+        let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
         //console.log(userdata.role.toLowerCase());
         if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
 

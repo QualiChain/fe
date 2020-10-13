@@ -13,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('NotificationPreferencesComponent', () => {
   let component: NotificationPreferencesComponent;
@@ -36,7 +37,8 @@ describe('NotificationPreferencesComponent', () => {
         ),
         HttpClientTestingModule,
         MatAutocompleteModule
-      ]
+      ],
+      providers: [QCStorageService]
     })
     .compileComponents();
   }));
