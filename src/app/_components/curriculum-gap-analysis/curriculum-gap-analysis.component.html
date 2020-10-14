@@ -1,1 +1,125 @@
-<p>curriculum-gap-analysis works!</p>
+<h1>{{ 'CV_GAP_ANALYSIS.TITLE' | translate }}</h1>
+<p>This is a mockup</p>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col col-lg-2">
+            <a [routerLink]="['/profiles', userid]" class="btn btn-primary"><i _ngcontent-axy-c0="" class="material-icons small"> arrow_back </i>  {{ 'BUTTON.BACK_TO_USER_PROFILE' | translate }}</a> 
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col col-lg-6">
+            <div *ngIf="showPieChart" class="wrapperPieChart">
+                <canvas baseChart 
+                    [data]="pieChartData"
+                    [options]="pieChartOptions"
+                    [labels]="pieChartLabels"
+                    [colors]="pieChartColors"
+                    [chartType]="pieChartType">
+                </canvas>
+
+            </div>
+
+        </div>
+        <div class="col col-lg-6">
+            <div *ngIf="showRadarChart" class="wrapperRadarChart">
+                <canvas
+                    baseChart
+                    [chartType]="radarChartType"
+                    [labels]="radarChartLabels"
+                    [colors]="radarChartColors"
+                    [datasets]="radarChartData"                    
+                    [options]="radarChartOptions"
+                    [legend]="true"
+                    [colors]="radarChartColors">
+                </canvas>
+                <!--
+                <div>{{ 'CAREER_ADVISOR.FOOTER_BAR_CHART' | translate }}</div>
+                -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-12">
+            <hr>
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="col col-lg-12">
+            <div class="col">
+                <h2>{{ 'CV_GAP_ANALYSIS.CURRENTLY_MISSING_SKILLS' | translate }}</h2>
+            </div>
+        </div>
+        <div class="col col-lg-12" *ngFor="let recommendedSkill of pagedListRS; let i = index">
+            <div class="col col-lg-6">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <h5 class="card-title">{{recommendedSkill.title}}</h5>  
+                        </div>
+                        <div class="col-sm-12">
+                            {{ 'CV_GAP_ANALYSIS.RELATION_TO_COURSES' | translate }}
+                        </div>
+                        
+                            <div *ngFor="let course of recommendedSkill.courses" class="col-sm-12">
+
+                                <div class="progress col-sm-6" >
+                                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':course.relation}" attr.aria-valuenow="{{course.relation}}"  aria-valuemin="0" aria-valuemax="100">{{course.relation}}%</div>
+                                </div>
+                                <div class="col-sm-6" >
+                                    &nbsp;{{course.title}}
+                                </div>
+                            </div>
+                        
+                    </div>
+                
+                </div>
+
+            </div>
+            <div class="col col-lg-6">
+
+                <canvas
+                    baseChart
+                    [chartType]="lineChartType"
+                    [labels]="lineChartLabels"
+                    [colors]="lineChartColors"
+                    [datasets]="lineChartData"                    
+                    [options]="lineChartOptions"
+                    [legend]="true"
+                    [colors]="lineChartColors">
+                </canvas>
+
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <mat-paginator 
+                [length]="recommendedSkills.length"
+                [pageSize]="recommendedSkills.slice(0, 1)"
+                [pageSizeOptions]="pageSizeOptionsRS"
+                (page)="OnPageChangeSkill($event)">
+            </mat-paginator>
+        </div>
+
+        <div class="col col-lg-12">
+            <br>
+        </div>
+
+        <div class="col col-lg-12">
+            <div class="col col-lg-10"></div>
+            <div class="col col-lg-2">
+                <button class="btn btn-success"  >  
+                    <i _ngcontent-axy-c0="" class="material-icons"> stars </i> {{ 'CV_GAP_ANALYSIS.BUTTON.SHOW_RESULTS' | translate }}
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
