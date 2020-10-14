@@ -741,5 +741,16 @@
     "BUTTON": {
       "UPLOAD_PENDING_FILES": "Upload pending files"
     }
+  },
+  "CV_GAP_ANALYSIS": {
+    "TITLE": "Curriculum Gap Analysis",
+    "FOOTER_PIE_CHART": "Accumulative Job Demand",
+    "FOOTER_RADAR_CHART": "Curriculum Skills Gap Analysis",
+    "FOOTER_LINE_CHART": "Skill Demand Timeseries",
+    "CURRENTLY_MISSING_SKILLS": "Currently Missing Skills",
+    "RELATION_TO_COURSES": "Relation to Courses",
+    "BUTTON": {
+      "SHOW_RESULTS": "Show Results"
+    }
   }
 }
