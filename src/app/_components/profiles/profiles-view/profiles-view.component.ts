@@ -705,11 +705,11 @@ connectToOU() {
 
  
 async generatePdf(action = 'open') {
-  console.log(this.userdata.avatar_path);
+  //console.log(this.userdata.avatar_path);
   if (!this.userdata.avatar_path) {
     this.userdata.avatar_path = 'assets/img/no_avatar.jpg';
   }
-  console.log(this.userdata.avatar_path);
+  //console.log(this.userdata.avatar_path);
   
   let docDefinition = {
     footer: function(currentPage, pageCount) {
