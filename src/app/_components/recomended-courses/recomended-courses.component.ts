@@ -23,7 +23,8 @@ export class RecomendedCoursesComponent implements OnInit {
   recomendedCourses = [];
 
 
-  displayedColumns: string[] = ['course_title', 'course_decription', 'action'];
+  //displayedColumns: string[] = ['course_title', 'course_decription', 'action'];
+  displayedColumns: string[] = ['course_title', 'data.description', 'action'];
   
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -32,8 +33,21 @@ export class RecomendedCoursesComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  applyFilter(filterValue: string) {
+  applyFilterCourses(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  nestedFilterCheck(search, data, key) {
+    if (typeof data[key] === 'object') {
+      for (const k in data[key]) {
+        if (data[key][k] !== null) {
+          search = this.nestedFilterCheck(search, data[key], k);
+        }
+      }
+    } else {
+      search += data[key];
+    }
+    return search;
   }
 
   constructor(
@@ -44,7 +58,7 @@ export class RecomendedCoursesComponent implements OnInit {
   public async recomendedCoursesByUserId(userId: number) {
 
     let dataTest = await this.rs.recomendedDataByCVByUserId(userId, 'courses');    
-    //console.log(dataTest);
+    console.log(dataTest);
     this.recomendedCourses = dataTest['recommended_courses'];
     this.dataSource.data = dataTest['recommended_courses'];
     this.loadingSpinner = false;
@@ -150,6 +164,15 @@ export class RecomendedCoursesComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
+    this.dataSource.filterPredicate = (data, filter: string)  => {
+      const accumulator = (currentTerm, key) => {
+        return this.nestedFilterCheck(currentTerm, data, key);
+      };
+      const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+      // Transform the filter by converting it to lowercase and removing whitespace.
+      const transformedFilter = filter.trim().toLowerCase();
+      return dataStr.indexOf(transformedFilter) !== -1;
+    };
     
 
     if (!this.userId) {
