@@ -17,7 +17,8 @@ import {MatSort} from '@angular/material/sort';
 export class RecomendedCoursesComponent implements OnInit {
 
   @Input() userId: number = null;
-
+  
+  loadingSpinner: boolean = true;
   
   recomendedCourses = [];
 
@@ -40,8 +41,15 @@ export class RecomendedCoursesComponent implements OnInit {
     private route: ActivatedRoute,
     private rs: RecomendationsService, private cvss: CVService, private cs: CoursesService ) { }
 
-  public recomendedCoursesByUserId(userId: number) {
+  public async recomendedCoursesByUserId(userId: number) {
 
+    let dataTest = await this.rs.recomendedDataByCVByUserId(userId, 'courses');    
+    //console.log(dataTest);
+    this.recomendedCourses = dataTest['recommended_courses'];
+    this.dataSource.data = dataTest['recommended_courses'];
+    this.loadingSpinner = false;
+
+    /*
     this.cvss
       .getCV(userId).subscribe(
         dataCVs => {
@@ -132,6 +140,7 @@ export class RecomendedCoursesComponent implements OnInit {
           console.log("user CVs not found in db");                        
         }
       ); 
+      */
   }
 
   ngOnInit() {

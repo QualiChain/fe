@@ -4,6 +4,10 @@
         {{ 'RECOMENDED_SKILLS.NO_DATA' | translate }} 
     </div>
 
+    <div class="row" *ngIf="loadingSpinner">
+        <app-qc-spinner></app-qc-spinner>
+    </div>
+    
     <div [hidden]="!dataSource.data.length" >  
         <div >
             <mat-form-field>

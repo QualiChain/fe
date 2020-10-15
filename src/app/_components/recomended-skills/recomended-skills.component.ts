@@ -15,6 +15,8 @@ export class RecomendedSkillsComponent implements OnInit {
 
   @Input() userId: number = null;
 
+  loadingSpinner: boolean = true;
+
   //displayedColumns: string[] = ['title', 'job_description', 'action'];
   displayedColumns: string[] = ['title'];
   
@@ -37,6 +39,16 @@ export class RecomendedSkillsComponent implements OnInit {
     private rs: RecomendationsService,
     private cvss: CVService ) { }
   
+    public async recomendedSkillsByUserId(userId: number) {
+
+      let dataTest = await this.rs.recomendedDataByCVByUserId(userId, 'skills');      
+      //console.log(dataTest);
+      this.recomendedSkills = dataTest['recommended_skills'];
+      this.dataSource.data = dataTest['recommended_skills'];
+      this.loadingSpinner = false;
+
+    }
+
   ngOnInit() {
 
     //console.log(this.userId);
@@ -55,8 +67,9 @@ export class RecomendedSkillsComponent implements OnInit {
 
     if (this.userId) {
 
+      this.recomendedSkillsByUserId(this.userId);
 
-
+/*
       this.cvss
       .getCV(this.userId).subscribe(
         dataCVs => {
@@ -120,7 +133,7 @@ export class RecomendedSkillsComponent implements OnInit {
                 });
 
                 //this.recomendedSkills = dataRecommendationByCV['recommended_skills'];
-
+                //console.log(this.recomendedSkills);
                 this.dataSource.data = this.recomendedSkills;
                 //console.log(this.dataSource.data);
 
@@ -139,7 +152,7 @@ export class RecomendedSkillsComponent implements OnInit {
           console.log("user CVs not found in db");                        
         }
       );  
-
+*/
             
 /*
       this.rs
