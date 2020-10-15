@@ -98,7 +98,39 @@ export class CareerAdvisorComponent implements OnInit {
       
     }
 
+    public async recomendedDataByUserId(userId: number) {
 
+      let datarecommendedData = await this.rs.recomendedDataByCVByUserId(userId, 'courses_and_skills');
+      console.log(datarecommendedData);
+      this.recomendedCourses = datarecommendedData['recommended_courses'];
+      
+      datarecommendedData['recommended_courses'].forEach(element => {
+
+        this.cs
+        .getSkillsByCourseId(element.course_id).subscribe(
+          dataCourseSkills => {
+            //console.log(dataCourseSkills);
+            element.skills = dataCourseSkills;
+        },
+        error => {
+          console.log("error recovering skills by course id")
+        });
+        
+        element.rating1 = 80; 
+        element.rating2 = 45;
+
+      });
+
+
+      this.recommendedSkills = datarecommendedData['recommended_skills'];   
+      
+      this.lengthRC = this.recomendedCourses.length;
+      this.pagedListRC = this.recomendedCourses.slice(0, 4);
+
+      this.lengthRS = this.recommendedSkills.length;
+      this.pagedListRS = this.recommendedSkills.slice(0, 4);
+      
+    }
     public recomendedCoursesByUserId(userId: number) {
 
       this.cvss
@@ -235,8 +267,9 @@ export class CareerAdvisorComponent implements OnInit {
       this.userid=params['id'];
       
       if (this.userid>0) {
+        this.recomendedDataByUserId(this.userid);
+        //this.recomendedCoursesByUserId(this.userid);
 
-        this.recomendedCoursesByUserId(this.userid);
         //load demo data
         /*
         for (let index = 1; index <=18 ; index++) {

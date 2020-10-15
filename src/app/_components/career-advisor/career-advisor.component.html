@@ -185,10 +185,10 @@
                                         -->
                                     </div>
                                     <div class="col-sm-12 recomendedCourseBoxDescription">
-                                        <div class="card-text">{{recommendedCourse?.course_data?.description}}</div>
+                                        <div class="card-text">{{recommendedCourse?.data?.description}}</div>
                                     </div>
                                     <div class="col-sm-12">
-                                        {{ 'COURSE.SEMESTER.LABEL' | translate }}: {{recommendedCourse?.course_data?.semester}}
+                                        {{ 'COURSE.SEMESTER.LABEL' | translate }}: {{recommendedCourse?.data?.semester}}
                                     </div>
                                     <div class="col-sm-12">
                                         <h5>{{ 'COURSE.SKILLS.LABEL' | translate }}:</h5>
@@ -249,18 +249,18 @@
 
                     <div class="col-sm-12" >
                         <div class="col-sm-6 recomendedBox" *ngFor="let recommendedSkill of pagedListRS; let i = index">
-                            <div class="card" [ngClass]="{selectedCard:selectedSkills.indexOf(recommendedSkill)>=0}" style="width: 95%;">
+                            <div class="card" [ngClass]="{selectedCard:selectedSkills.indexOf(recommendedSkill.id)>=0}" style="width: 95%;">
                                 <div class="card-body">
                                     <div class="col-sm-10">
-                                        <h5 class="card-title">{{recommendedSkill}}</h5>
+                                        <h5 class="card-title">{{recommendedSkill.title}}</h5>
                                     </div>                                    
                                     <div class="col-sm-2">
                                         <mat-checkbox class="example-margin" 
-                                        [checked]="(selectedSkills.indexOf(recommendedSkill)>=0)"
-                                        (change)="changeSelectedSkills($event, recommendedSkill)"></mat-checkbox>
+                                        [checked]="(selectedSkills.indexOf(recommendedSkill.id)>=0)"
+                                        (change)="changeSelectedSkills($event, recommendedSkill.id)"></mat-checkbox>
                                     </div>
                                     <div class="col-sm-12">                   
-                                        <p class="card-text">{{recommendedSkill}}</p>                                
+                                        <p class="card-text">{{recommendedSkill.description}}</p>                                
                                     </div>
 
                                     <div class="col-sm-12 relevant_jobs">

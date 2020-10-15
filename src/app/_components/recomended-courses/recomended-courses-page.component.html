@@ -4,6 +4,10 @@
         {{ 'RECOMENDED_COURSES.NO_DATA' | translate }} 
     </div>
 
+    <div class="row" *ngIf="loadingSpinner">
+        <app-qc-spinner></app-qc-spinner>
+    </div>
+
     <div [hidden]="!dataSource.data.length" >  
         <div >
             <mat-form-field>
@@ -34,7 +38,7 @@
             <!-- Description Column -->
             <ng-container matColumnDef="course_decription">
                 <th mat-header-cell *matHeaderCellDef > {{ 'COURSE.DESCRIPTION.LABEL' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.course_decription}} </td>
+                <td mat-cell *matCellDef="let element"> {{element?.data?.description}} </td>
             </ng-container>
 
 
