@@ -1,0 +1,60 @@
+<h1>{{ 'EDUCATION_PLAN.TITLE' | translate }} ({{ 'EDUCATION_PLAN.'+typeURL | translate }})</h1>
+<p>This is a mockup</p>
+<div class="container">
+
+    <div class="row">
+        <div class="col col-lg-2">
+
+            <button class="btn btn-primary" [routerLink]="['/profiles', userid, 'career-advisor']" 
+            [queryParams]="{showRecommend: 'true', ids: stingIds, type:typeURL.toLowerCase()}">
+                <i _ngcontent-axy-c0="" class="material-icons small"> arrow_back </i> {{ 'BUTTON.BACK' | translate }}
+            </button>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            <table mat-table [dataSource]="dataSource" matSort class="table">
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Label Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.NAME.LABEL' | translate }} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+              
+                <!-- semester Column -->
+                <ng-container matColumnDef="semester">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.SEMESTER.LABEL' | translate }} </th>
+                  <td mat-cell *matCellDef="let element"> {{ element.semester }} </td>
+                </ng-container>
+            
+                <!-- ranking Column -->
+                <ng-container matColumnDef="rating">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'EDUCATION_PLAN.RATING' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        
+                        <span class="star" [class.full]="element.rating === 10">
+                            <span class="half" 
+                            [ngStyle]="{'width': (element.rating*10)+'%'}"
+                            >&#9733;</span>&#9733;
+                        </span>
+
+                        {{ element.rating }} </td>
+                  </ng-container>
+
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </div>
+        <div class="col col-lg-6">
+            
+        </div>
+    </div>
+</div>

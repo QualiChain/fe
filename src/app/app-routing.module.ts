@@ -42,6 +42,7 @@ import { Role } from './_models/role';
 import { MCDSSComponent } from './_components/mcdss/mcdss.component';
 import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
 import { FilesRepositoryComponent } from './_components/profiles/files-repository/files-repository.component';
+import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 
 const routes: Routes = [
   {
@@ -138,7 +139,12 @@ const routes: Routes = [
     path: 'profiles/:id/career-advisor',
     component: CareerAdvisorComponent,
     canActivate: [AuthGuard]
-  },  
+  },
+  {
+    path: 'profiles/:id/education-plan',
+    component: EducationPlanComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'profiles/:id/dss-curriculum-re-design',
     component: DSSCurriculumReDesignComponent,
