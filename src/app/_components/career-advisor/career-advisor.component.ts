@@ -101,7 +101,7 @@ export class CareerAdvisorComponent implements OnInit {
     public async recomendedDataByUserId(userId: number) {
 
       let datarecommendedData = await this.rs.recomendedDataByCVByUserId(userId, 'courses_and_skills');
-      console.log(datarecommendedData);
+      //console.log(datarecommendedData);
       this.recomendedCourses = datarecommendedData['recommended_courses'];
       
       datarecommendedData['recommended_courses'].forEach(element => {
@@ -304,8 +304,8 @@ export class CareerAdvisorComponent implements OnInit {
         .getUser(this.userid).subscribe(
           data => {
             //console.log("user in db");
-            this.plotPieChart();
-            this.plotBarChart();
+            //this.plotPieChart();
+            //this.plotBarChart();
             this.plotLineChart();
 
             this.cs

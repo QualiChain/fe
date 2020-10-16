@@ -1,8 +1,9 @@
 .frame-area {
     display: block;
     width: 100%;  /* RESPONSIVE WIDTH */
-    min-height: 350px;        
-    border: #999999 1px solid;
+    min-height: 350px;            
+    border: 1px solid rgba(0,0,0,.125);
     margin: 0px;
     padding: 0px;
     }
+    

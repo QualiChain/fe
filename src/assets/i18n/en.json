@@ -386,7 +386,15 @@
     "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?"
   },
   "BCO": {
-    "TITLE": "Best Career Options"
+    "TITLE": "Best Career Options",
+    "DESCRIPTION": "Description",
+    "STATISITICS": "Statisitics",
+    "ADDITIONAL_COURSES": "Additional Courses",
+    "RECOMMENDATIONS": "Recommendations",
+    "BUTTON": {
+      "COURSE_RECOMMENDATION": "Course Recommendation",
+      "SKILL_RECOMMENDATION": "Skill Recommendation"
+    }
   },   
   "DSS_CV_RE_DESIGN": {
     "TITLE": "DSS Curriculum Re-design",

@@ -159,3 +159,92 @@ export class VisualisationsCarrerPathTrajectoryChartComponent implements OnInit 
   }
 
 }
+
+
+/*** User skillset coverage to Applied job skills  * */
+@Component({
+  selector: 'app-visualisations-user-skillset-coverage-to-applied-job-skills-chart',
+  templateUrl: './visualisations.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnInit {
+
+  @Input() userId: [];
+  @Input() jobId: [];
+
+  //urlSafe: SafeUrl;
+  urlSafe: string = ""
+
+  constructor(
+    public sanitizer: DomSanitizer
+  ) { }
+
+  ngOnInit(): void {
+    
+  }
+  ngOnChanges(): void {    
+    
+    this.urlSafe = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request%5b%5d=red&color_list_request%5b%5d=blue&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=200&base_query=skills_coverage&user_id="+this.userId+"&job_id="+this.jobId;
+    
+  }
+
+}
+
+/*** Market Demand  * */
+@Component({
+  selector: 'app-visualisations-market-demand-chart',
+  templateUrl: './visualisations.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationsMarketDemand implements OnInit {
+
+  //urlSafe: SafeUrl;
+  urlSafe: string = ""
+
+  constructor(
+    public sanitizer: DomSanitizer
+  ) { }
+
+  ngOnInit(): void {
+    this.urlSafe = urlVisualisations+"/show_pie_chart?y_var_names%5b%5d=count&y_var_titles%5b%5d=Market%20Demand&y_var_units%5b%5d=Job%20Postings&x_axis_name=specialization&x_axis_title=Specialization&use_default_colors=false&chart_3d=false&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&color_list_request%5b%5d=green&color_list_request%5b%5d=gold&color_list_request%5b%5d=ceramic&color_list_request%5b%5d=fuchsia&color_list_request%5b%5d=violet&color_list_request%5b%5d=purple&color_list_request%5b%5d=cyan&base_query=group_jobs";
+  }
+
+  ngOnChanges(): void {          
+    
+  }
+
+}
+
+/*** Skills demand in time per specialization  * */
+@Component({
+  selector: 'app-visualisations-skills-demand-in-time-per-specialization-chart',
+  templateUrl: './visualisations.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit {
+
+  @Input() skillId: [];
+  @Input() specialization: [];
+
+  //urlSafe: SafeUrl;
+  urlSafe: string = ""
+
+  constructor(
+    public sanitizer: DomSanitizer
+  ) { }
+
+  ngOnInit(): void {
+    
+  }
+  ngOnChanges(): void {    
+    
+    let tmpURL = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d=skill_demand&y_var_units%5b%5d=v1_unit&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId
+    if (this.specialization) {
+      tmpURL = tmpURL +"&specialization="+this.specialization;
+    }
+    tmpURL = tmpURL +"&base_query=skill_demand_in_time"; 
+    //this.urlSafe = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d=skill_demand&y_var_units%5b%5d=v1_unit&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId+"&specialization="+this.specialization+"&base_query=skill_demand_in_time"; 
+    this.urlSafe = tmpURL;
+  }
+
+}

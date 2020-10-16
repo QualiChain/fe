@@ -94,7 +94,7 @@
                 <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
                   <ng-template ngbPanelContent>
                       <div class="">
-                            
+                            <!--
                             <ngb-tabset [justify]="currentJustify">
                                     <ngb-tab id="tab-selectbyid-{{year}}"  title="Year {{year}}" *ngFor="let year of years; let i = index">
                                       <ng-template ngbTabContent>
@@ -118,7 +118,8 @@
                                                     </div> 
                                                 
                                             </div>
-                                            <div class="completeCourseSectiontab" [ngClass]="{'col-lg-4':selectedCourse,'col-lg-8':!selectedCourse}">
+                            -->                                            
+                                            <div class="completeCourseSectiontab" [ngClass]="{'col-lg-6':selectedCourse,'col-lg-12':!selectedCourse}">
                                                 
                                                     <ul class="list-group list-group-flush">
                                                         <li  *ngFor="let course of listOfCompletedCoursesByUser" class="list-group-item" >
@@ -134,17 +135,22 @@
                                                         </li>
                                                       </ul>
                                             </div>
-                                            <div *ngIf="selectedCourse" class="col-lg-4 completeCourseSectiontab">
+                                            <div *ngIf="selectedCourse" class="col-lg-6 completeCourseSectiontab">
                                               <div class=""><h3>{{selectedCourse.course.name}}</h3></div>
                                               <div class="">{{selectedCourse.course.description}}</div>
                                               <div class="">{{ 'COURSE.SCORE.LABEL' | translate }}: {{selectedCourse.grade}}</div>
-                                              <div class=""><br/><a class="btn btn-success" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a></div>
+                                              <div class=""><br/><a class="btn btn-danger" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a> 
+                                               &nbsp; <a class="btn btn-success" [routerLink]="['/courses', selectedCourse.course.courseid]" >{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+                                               
+                                              
+                                              </div>
                                             </div>
-
+                          <!--
                                       </ng-template>
                                     </ngb-tab>
                                     
                                   </ngb-tabset>
+                          -->
                       </div>
 
                   </ng-template>
@@ -294,7 +300,7 @@
             
         </div>
 
-        <div class="row cv_gap_analysis" *ngIf="userdata.role.toLowerCase()=='professor'">
+        <div class="row cv_gap_analysis" *ngIf="(userdata.role.toLowerCase()=='professor' && isProfessor)">
           <div class="col col-lg-8"> </div>
           <div class="col col-lg-2">            
             <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']">  

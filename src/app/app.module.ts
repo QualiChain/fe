@@ -154,7 +154,9 @@ import { VisualisationsComponent,
   VisualisationsUserGradesChartComponent, 
   VisualisationsAverageGradesInCoursesChartComponent, 
   VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
-  VisualisationsCarrerPathTrajectoryChartComponent
+  VisualisationsCarrerPathTrajectoryChartComponent,
+  VisualisationsUserSkillsetCoverageToAppliedJobSkills,
+  VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization
 } from './_components/utils/visualisations/visualisations.component';
 
 
@@ -284,7 +286,7 @@ export function tokenGetter() {
     FilesRepositoryComponent,
     VisualisationsComponent, VisualisationsUserSkillsJobSkillsChartComponent, VisualisationsUserGradesChartComponent, VisualisationsAverageGradesInCoursesChartComponent, 
     VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
-    VisualisationsCarrerPathTrajectoryChartComponent
+    VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization
   ],
   imports: [
     SafePipeModule,
