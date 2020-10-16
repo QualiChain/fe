@@ -12,7 +12,10 @@
 
         
     <div class="row">
-        <div class="col col-lg-6">
+        <div class="col col-lg-12">
+            <br>
+            <app-visualisations-market-demand-chart></app-visualisations-market-demand-chart>
+            <!--
             <div *ngIf="showPieChart" class="wrapperPieChart">
                 <canvas baseChart 
                     [data]="pieChartData"
@@ -21,12 +24,11 @@
                     [colors]="pieChartColors"
                     [chartType]="pieChartType">
                 </canvas>
-                <!--
-                <div>{{ 'CAREER_ADVISOR.FOOTER_PIE_CHART' | translate }}</div>
-                -->
             </div>
+            -->
 
         </div>
+        <!--
         <div class="col col-lg-6">
             <div *ngIf="showBarChart" class="wrapperBarChart">
                 <canvas
@@ -40,11 +42,9 @@
                     [colors]="barChartColors"
                     >
                 </canvas>
-                <!--
-                <div>{{ 'CAREER_ADVISOR.FOOTER_BAR_CHART' | translate }}</div>
-                -->
             </div>
         </div>
+        -->
     </div>
 
     <div class="row">
@@ -196,6 +196,7 @@
                                     <div class="col-sm-12 relevant_skills recomendedCourseBoxSkills">                                        
                                         <span class="badge badge-info ml-2" *ngFor="let skill of recommendedCourse.skills let j = index"><a href="/skills/{{skill.skill.id}}">{{skill.skill.name}}</a></span>                                        
                                     </div>
+                                    <!--
                                     <div class="col-sm-12">
                                         <h5>{{ 'CAREER_ADVISOR.STATISTICS' | translate }}</h5>
                                     </div>
@@ -215,9 +216,12 @@
                                             &nbsp;{{ 'CAREER_ADVISOR.PERCENTATGE_RELATED_WITH_YOUR_INTERESTS' | translate : {value: recommendedCourse.rating2} }}
                                         </div>
                                     </div>
+                                    -->
+                                    <!--
                                     <div class="col-sm-12">
                                         {{ 'CAREER_ADVISOR.NUMBER_STUDENTS_SIMILAR_PROFILE' | translate : {value: 17} }}
                                     </div>
+                                    -->
                                 </div>                            
                             </div>
                         </div>
@@ -272,6 +276,7 @@
                                         Relevant Skills:
                                         <span class="badge badge-info ml-2" *ngFor="let skill of recommendedSkill.skills let j = index">{{skill}}</span>                                        
                                     </div>
+                                    <!--
                                     <div class="col-sm-12">
                                         <h5>{{ 'CAREER_ADVISOR.STATISTICS' | translate }}</h5>
                                     </div>
@@ -291,16 +296,20 @@
                                             &nbsp;{{ 'CAREER_ADVISOR.PERCENTATGE_RELATED_WITH_YOUR_INTERESTS' | translate : {value: recommendedSkill.rating2} }}
                                         </div>
                                     </div>
+                                    -->                                    
+                                    <!--
                                     <div class="col-sm-12">
                                         <h5>Open Courses</h5>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="" *ngFor="let course of recommendedSkill.courses let j = index"><a target="" href="{{course}}">{{course}}</a></div>
                                     </div>
+                                    -->
+                                    <!--
                                     <div class="col-sm-12">
                                         {{ 'CAREER_ADVISOR.NUMBER_STUDENTS_SIMILAR_PROFILE' | translate : {value: 14} }}
                                     </div>  
-
+                                    -->
                                 </div>
                             </div>
                         </div>

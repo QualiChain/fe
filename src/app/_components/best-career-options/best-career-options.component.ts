@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-best-career-options',
@@ -120,7 +120,21 @@ public pieChartOptions: ChartOptions = {
   public  progress_relation_cv_bar: Array<any> = [];
   public progress_relation_smart_badges_bar: Array<any> = [];
 
+  lengthBCO: number = 0;
+  pagedListBCO = [];
+  pageSizeBCO: number = 1;  //displaying three cards each row
+  pageSizeOptionsBCO: number[] = [1];
+
   constructor(private route: ActivatedRoute) { }
+
+  OnPageChangeBCO(event: PageEvent){
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if(endIndex > this.lengthBCO){
+      endIndex = this.lengthBCO;
+    }
+    this.pagedListBCO = this.best_career_options.slice(startIndex, endIndex);
+  }
 
   ngOnInit() {
 
@@ -136,6 +150,9 @@ public pieChartOptions: ChartOptions = {
       ];
 
       this.best_career_options = options;
+
+      this.lengthBCO = this.best_career_options.length;
+      this.pagedListBCO = this.best_career_options.slice(0, 1);
 
       for (let i=0; i<=options.length-1; i++) {
         //progress bar data

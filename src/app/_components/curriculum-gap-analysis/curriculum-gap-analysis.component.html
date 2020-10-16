@@ -9,7 +9,13 @@
         </div>
     </div>
 
-
+    <div class="row">
+        <div class="col col-lg-12">
+            <br>
+            <app-visualisations-market-demand-chart></app-visualisations-market-demand-chart>
+        </div>
+    </div>
+    <!--
     <div class="row">
         <div class="col col-lg-6">
             <div *ngIf="showPieChart" class="wrapperPieChart">
@@ -36,13 +42,10 @@
                     [legend]="true"
                     [colors]="radarChartColors">
                 </canvas>
-                <!--
-                <div>{{ 'CAREER_ADVISOR.FOOTER_BAR_CHART' | translate }}</div>
-                -->
             </div>
         </div>
     </div>
-
+    -->
     <div class="row">
         <div class="col col-lg-12">
             <hr>
@@ -84,7 +87,8 @@
 
             </div>
             <div class="col col-lg-6">
-
+                <app-visualisations-skills-demand-in-time-per-specialization-chart [skillId]="recommendedSkill.id" [specialization]=""></app-visualisations-skills-demand-in-time-per-specialization-chart>
+                <!--
                 <canvas
                     baseChart
                     [chartType]="lineChartType"
@@ -95,7 +99,7 @@
                     [legend]="true"
                     [colors]="lineChartColors">
                 </canvas>
-
+                -->
             </div>
         </div>
 

@@ -5,6 +5,7 @@ import { UsersService } from '../../_services/users.service';
 import { CoursesService } from '../../_services/courses.service'
 import Course from '../../_models/course';
 import {PageEvent} from '@angular/material/paginator';
+import { RecomendationsService } from '../../_services/recomendations.service';
 
 @Component({
   selector: 'app-curriculum-gap-analysis',
@@ -47,36 +48,48 @@ export class CurriculumGapAnalysisComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private us: UsersService,
-    private cs: CoursesService
+    private cs: CoursesService,
+    private rs: RecomendationsService
     ) { }
+
+    public async recomendedSkillsByUserId(userId: number) {
+
+      let dataTest = await this.rs.recomendedDataByCVByUserId(userId, 'skills');      
+      console.log(dataTest);
+      this.recommendedSkills = dataTest['recommended_skills'];
+      this.lengthRS = this.recommendedSkills.length;
+      this.pagedListRS = this.recommendedSkills.slice(0, 1);      
+
+    }
 
   ngOnInit(): void {
 
     this.route.params.subscribe(params => {
-      
-      this.recommendedSkills.push({title: 'Python (Programming Language)', courses:[{title:'Introduction to Programming', relation:72},{title:'Algorithmic Techniques', relation:50},{title:'Software Technology', relation:48}]});
-      this.recommendedSkills.push({title: 'TypeScript (Programming Language)', courses:[{title:'Introduction to Programming', relation:65},{title:'Algorithmic Techniques', relation:43},{title:'Software Technology', relation:23}]});
-      this.recommendedSkills.push({title: 'Test 1', courses:[{title:'C 1', relation:65},{title:'C 2', relation:63},{title:'C 3', relation:23}]});
-      this.recommendedSkills.push({title: 'Test 2', courses:[{title:'C 4', relation:62},{title:'C 5', relation:53},{title:'C 6', relation:23}]});
-      this.recommendedSkills.push({title: 'Test 3', courses:[{title:'C 7', relation:25},{title:'C 8', relation:22}]});
-      this.recommendedSkills.push({title: 'Test 4', courses:[{title:'C 9', relation:10},{title:'C 10', relation:12}]});
+      /*
+      this.recommendedSkills.push({id: 354, title: 'Python (Programming Language)', courses:[{title:'Introduction to Programming', relation:72},{title:'Algorithmic Techniques', relation:50},{title:'Software Technology', relation:48}]});
+      this.recommendedSkills.push({id: 300, title: 'TypeScript (Programming Language)', courses:[{title:'Introduction to Programming', relation:65},{title:'Algorithmic Techniques', relation:43},{title:'Software Technology', relation:23}]});
+      this.recommendedSkills.push({id: 154, title: 'Test 1', courses:[{title:'C 1', relation:65},{title:'C 2', relation:63},{title:'C 3', relation:23}]});
+      this.recommendedSkills.push({id: 187, title: 'Test 2', courses:[{title:'C 4', relation:62},{title:'C 5', relation:53},{title:'C 6', relation:23}]});
+      this.recommendedSkills.push({id: 111, title: 'Test 3', courses:[{title:'C 7', relation:25},{title:'C 8', relation:22}]});
+      this.recommendedSkills.push({id: 222, title: 'Test 4', courses:[{title:'C 9', relation:10},{title:'C 10', relation:12}]});
+      */
 
-      this.lengthRS = this.recommendedSkills.length;
-      this.pagedListRS = this.recommendedSkills.slice(0, 1);
       
       //console.log(params['id']);
       this.userid=params['id'];
       
       if (this.userid>0) {
 
+        this.recomendedSkillsByUserId(this.userid);
+
         this.us
         .getUser(this.userid).subscribe(
           data => {
             //console.log(data);
 
-            this.plotPieChart();
-            this.plotRadarChart();
-            this.plotLineChart();
+            //this.plotPieChart();
+            //this.plotRadarChart();
+            //this.plotLineChart();
 
           },
           error => {            
@@ -179,7 +192,7 @@ export class CurriculumGapAnalysisComponent implements OnInit {
       endIndex = this.lengthRS;
     }
     this.pagedListRS = this.recommendedSkills.slice(startIndex, endIndex);
-    this.plotLineChart();
+    //this.plotLineChart();
   }
 
 }
