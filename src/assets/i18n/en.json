@@ -760,5 +760,11 @@
     "BUTTON": {
       "SHOW_RESULTS": "Show Results"
     }
+  },
+  "EDUCATION_PLAN": {
+    "TITLE": "Education Plan",
+    "COURSES": "Courses",
+    "SKILLS": "Skills",
+    "RATING": "Rating"
   }
 }

@@ -11,6 +11,7 @@ import {MatSort} from '@angular/material/sort';
 import { RecomendationsService } from '../../_services/recomendations.service';
 import { CVService } from '../../_services/cv.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ThemeService } from 'ng2-charts';
 
 let completedCoursesByUser: any[] = [];
 
@@ -83,8 +84,8 @@ export class CareerAdvisorComponent implements OnInit {
 
   selectedCourses: any[] = [];
   selectedSkills: any[] = [];
+  selectedTabIndex: number = 0;
 
-  
   constructor(
     private router: Router,
     private route: ActivatedRoute, 
@@ -250,6 +251,28 @@ export class CareerAdvisorComponent implements OnInit {
     }    
 
   ngOnInit() {
+
+    const showRecommendationParam: string = this.route.snapshot.queryParamMap.get('showRecommend');
+    const typeParam: string = this.route.snapshot.queryParamMap.get('type');
+    const idsParam: string = this.route.snapshot.queryParamMap.get('ids');
+
+    if (showRecommendationParam=='true') {
+      this.showRecommend = true;
+    }
+    this.selectedTabIndex = 0;
+    if (typeParam=="courses") {
+      this.selectedTabIndex = 0;
+      if (idsParam) {        
+        this.selectedCourses = idsParam.split(",").map(Number);
+      }
+    }
+    else if (typeParam=="skills") {
+      this.selectedTabIndex = 1;
+      if (idsParam) {        
+        //this.selectedSkills = idsParam.split(",").map(Number);
+        this.selectedSkills = idsParam.split(",");
+      }
+    }
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

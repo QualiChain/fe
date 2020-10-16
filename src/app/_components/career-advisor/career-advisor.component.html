@@ -160,11 +160,11 @@
 
     <div class="row">
                 
-        <mat-tab-group>
+        <mat-tab-group [(selectedIndex)]="selectedTabIndex">
             <mat-tab label="{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.TITLE' | translate }}">
                 <br>
-                <div class="row" *ngIf="recomendedCourses.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.NO_DATA' | translate }}</div></div>
-                <div class="row" *ngIf="recomendedCourses.length>0" >
+                <div class="" *ngIf="recomendedCourses.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.NO_DATA' | translate }}</div></div>
+                <div class="" *ngIf="recomendedCourses.length>0" >
                     <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.HELP_TEXT' | translate }}</div>
                     <div class="col-sm-12" >
                         <div class="col-sm-6 recomendedBox" *ngFor="let recommendedCourse of pagedListRC; let i = index;">
@@ -239,16 +239,31 @@
                         </mat-paginator>
                     </div>
 
+                    <br/>
+                    <div class="">
+                        <div class="col col-lg-8"></div>
+                        <div class="col col-lg-2">
+                            <button [disabled]="selectedCourses.length==0" class="btn btn-success" 
+                            [routerLink] = "['/profiles',userid,'education-plan']"
+                            [queryParams]="{type: 'courses', ids: selectedCourses.toString()}"
+                            >  
+                                <i _ngcontent-axy-c0="" class="material-icons"> menu_book </i> {{ 'CAREER_ADVISOR.BUTTON.SHOW_EDUCATION_PLAN' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
+
+                 
             
             </mat-tab>
             <mat-tab label="{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.TITLE' | translate }}">
 
                 <br/>                    
-                <div class="row" *ngIf="recommendedSkills.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.NO_DATA' | translate }}</div></div>
+                <div class="" *ngIf="recommendedSkills.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.NO_DATA' | translate }}</div></div>
                 
                 
-                <div class="row" *ngIf="recommendedSkills.length>0">
+                <div class="" *ngIf="recommendedSkills.length>0">
                     <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.HELP_TEXT' | translate }}</div>
 
                     <div class="col-sm-12" >
@@ -328,6 +343,20 @@
                         </div>
 
                     </div>
+
+                    <br/>
+                    <div class="">
+                        <div class="col col-lg-8"></div>
+                        <div class="col col-lg-2">
+                            <button [disabled]="selectedSkills.length==0" class="btn btn-success" 
+                            [routerLink] = "['/profiles',userid,'education-plan']"
+                            [queryParams]="{type: 'skills', ids: selectedSkills.toString()}"
+                            > 
+                                <i _ngcontent-axy-c0="" class="material-icons"> menu_book </i> {{ 'CAREER_ADVISOR.BUTTON.SHOW_EDUCATION_PLAN' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
                 </div>                
 
             </mat-tab>
@@ -356,14 +385,6 @@
         -->
     </div>
 
-    <br/>
-    <div class="row">
-        <div class="col col-lg-10"></div>
-        <div class="col col-lg-2">
-            <button class="btn btn-success"  >  
-                <i _ngcontent-axy-c0="" class="material-icons"> menu_book </i> {{ 'CAREER_ADVISOR.BUTTON.SHOW_EDUCATION_PLAN' | translate }}
-            </button>
-        </div>
-    </div>    
+       
 
 </div>

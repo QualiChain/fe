@@ -158,6 +158,7 @@ import { VisualisationsComponent,
   VisualisationsUserSkillsetCoverageToAppliedJobSkills,
   VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization
 } from './_components/utils/visualisations/visualisations.component';
+import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -286,7 +287,7 @@ export function tokenGetter() {
     FilesRepositoryComponent,
     VisualisationsComponent, VisualisationsUserSkillsJobSkillsChartComponent, VisualisationsUserGradesChartComponent, VisualisationsAverageGradesInCoursesChartComponent, 
     VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
-    VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization
+    VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, EducationPlanComponent
   ],
   imports: [
     SafePipeModule,
