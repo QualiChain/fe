@@ -327,7 +327,7 @@ export class ProfilesViewComponent implements OnInit {
               this.cs
               .getSkillsByCourseId(element.course.courseid)
               .subscribe((dataSkillsByCourse: any[]) => {
-                console.log(dataSkillsByCourse);
+                //console.log(dataSkillsByCourse);
                 this.skillsByCourseInfo[element.course.courseid] = dataSkillsByCourse;
                 
               });

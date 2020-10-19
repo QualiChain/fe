@@ -160,6 +160,7 @@ import { VisualisationsComponent,
 } from './_components/utils/visualisations/visualisations.component';
 import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 
+import { CanAccessDirective } from './_directives/can-access.directive';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -287,7 +288,8 @@ export function tokenGetter() {
     FilesRepositoryComponent,
     VisualisationsComponent, VisualisationsUserSkillsJobSkillsChartComponent, VisualisationsUserGradesChartComponent, VisualisationsAverageGradesInCoursesChartComponent, 
     VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
-    VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, EducationPlanComponent
+    VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, EducationPlanComponent,
+    CanAccessDirective
   ],
   imports: [
     SafePipeModule,
@@ -323,7 +325,7 @@ export function tokenGetter() {
     CustomMaterialModule,
     FlashMessagesModule.forRoot()
   ],
-  exports: [materialModules],
+  exports: [materialModules, CanAccessDirective],
   providers: [ PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, QCStorageService, JwtHelperService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {
