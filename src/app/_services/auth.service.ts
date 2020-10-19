@@ -35,7 +35,7 @@ export class AuthService {
   
 
   logout() {
-    console.log("logout auth.service.ts")
+    //console.log("logout auth.service.ts")
     // remove user from local storage to log user out
     localStorage.removeItem('currentUserQC');
     localStorage.removeItem('userdataQC');
