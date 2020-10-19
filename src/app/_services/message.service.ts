@@ -5,17 +5,22 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class MessageService {
+export class MessageService {    
     private subject = new Subject<any>();
     private uriNotifications = environment.notificationsURL;
     private uriNotificationsPreferences = environment.notificationPreferences;
     
-    constructor(private http: HttpClient) { }
+    constructor(
+      private authService: AuthService,
+      private http: HttpClient) { }
 
     sendNotification(obj: Object) {
-        return this.http.post(`${this.uriNotifications}`, obj).
+      let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.post(`${this.uriNotifications}`, obj, {headers:headers}).
         pipe(
            map((data: any) => {
              return data;
@@ -26,7 +31,9 @@ export class MessageService {
       }
 
       changeNotificationStatus(notificationId: number, obj: Object) {
-        return this.http.post(`${this.uriNotifications}/${notificationId}`, obj).
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.post(`${this.uriNotifications}/${notificationId}`, obj, {headers:headers}).
         pipe(
            map((data: any) => {
              return data;
@@ -37,7 +44,9 @@ export class MessageService {
       }
 
       deleteNotification(notificationId: number) {
-        return this.http.delete(`${this.uriNotifications}/${notificationId}`).
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.delete(`${this.uriNotifications}/${notificationId}`, {headers:headers}).
         pipe(
            map((data: any) => {
              return data;
@@ -48,9 +57,11 @@ export class MessageService {
       }
 
     getNotificationsByUserId(userId: Number) {
+        let headers = this.authService.createQCAuthorizationHeader();
+        
         return this
         .http
-        .get(`${this.uriNotifications}?userid=${userId}`);
+        .get(`${this.uriNotifications}?userid=${userId}`, {headers:headers});
         //.get(`${this.uriNotifications}`);
     } 
 

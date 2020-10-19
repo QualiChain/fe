@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
@@ -86,6 +86,17 @@ export class AuthService {
       )
       }
 
+
+    createQCAuthorizationHeader() {
+      let token = localStorage.getItem('token');
+      //token = "AABBCCCDDD";
+
+      let headers = new HttpHeaders()
+        .set('content-type', 'application/json')
+        .set('Authorization', 'Bearer '+token);
+      
+      return headers;
+    }      
 }
 
 
