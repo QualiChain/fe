@@ -55,6 +55,8 @@
               </div>
               <div>
                 <button type="submit" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }}</button>
+
+                <button type="button"  (click)="processFormSEAL()" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }} WITH SEAL UNDER CONSTRUCTION</button>
               </div>         
           </form> 
         </div>
