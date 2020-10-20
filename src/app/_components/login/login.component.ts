@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     
       //console.log("else");
       if (data) {
-        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role};
+        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role, roles: data.roles};
 
         this.us.getUserFiles(data.id).subscribe(
           res => {
@@ -118,6 +118,28 @@ export class LoginComponent implements OnInit {
         this.loadingRequestPasswordSpinner = false;
       }
     );
+  }
+
+  processFormSEAL() {
+    //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
+    //alert(allInfo); 
+    this.loadingLoginSpinner = true;
+    this.invalidCredentials = false;
+
+    this.ls.loginSEAL(this.name, this.password).subscribe(
+        res => {
+          console.log("Valid credentials for the auth service");
+          this.invalidCredentials = false;
+          this.validCredentials(res);
+          //this.loadingLoginSpinner = false;
+        },
+        error => {
+          this.invalidCredentials = true;
+          
+          this.loadingLoginSpinner = false;
+          
+        }
+      );    
   }
 
   processForm() {

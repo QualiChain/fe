@@ -15,6 +15,7 @@ import User from '../_models/user';
 export class AuthService {
  
   uri = environment.authUrl;
+  SEALAuthUrl = environment.SEALAuthUrl;
   userURL = environment.userUrl;
   //uri = 'http://localhost:4000/auth';
 
@@ -39,6 +40,7 @@ export class AuthService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUserQC');
     localStorage.removeItem('userdataQC');
+    localStorage.removeItem('token');
     this.currentUserSubject.next(null);
   }
   
@@ -46,8 +48,8 @@ export class AuthService {
     const obj = { username: username, password: password};
     //console.log(obj);
     
-    //let myAuthObj = {};
-    let myAuthObj=  new User;
+    let myAuthObj = {};
+    //let myAuthObj=  new User;
     
     return this.httpClient.post(`${this.uri}`, obj).
     pipe(
@@ -55,13 +57,14 @@ export class AuthService {
 
         myAuthObj = { authenticated: true,  password:'******', name: data.name, 
         surname: data.surname, email: data.email, 
-        userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, 'pilotId': data.pilotId};
+        userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, roles: [], 'pilotId': data.pilotId};
       
         //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
         let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
         localStorage.setItem('currentUserQC', encryptedData);        
 
-         return data;
+         //return data;
+         return  myAuthObj;
        }), catchError( error => {
          return throwError( 'Something went wrong!' );
        })
@@ -93,11 +96,46 @@ export class AuthService {
 
       let headers = new HttpHeaders()
         .set('content-type', 'application/json')
-        .set('Authorization', 'Bearer '+token);
+        .set('Authorization', token);
       
       return headers;
     }      
-}
+
+
+    loginSEAL(username, password) {
+      
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('password', password);
+      //console.log(obj);
+      
+      //let myAuthObj = {};
+      //let myAuthObj=  new User;
+      let myAuthObj= {};
+      
+      return this.httpClient.post(`${this.SEALAuthUrl}`, formData).
+      pipe(
+         map((data: any) => {
+          
+          myAuthObj = { authenticated: true,  password:'******', name: data.response_data.user.name, 
+          surname: 'surname', email: data.response_data.user.email, 
+          userName: 'name', id: data.response_data.user.id , 'avatar_path': '', 'role': 'authenticated', 'roles': data.response_data.user.roles, 'pilotId': null};
+          
+          //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
+          let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
+
+          localStorage.setItem('currentUserQC', encryptedData);        
+          localStorage.setItem('token', data.response_data.token); 
+  
+          return myAuthObj;
+
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+      }
+
+  }
 
 
 
