@@ -5,7 +5,11 @@
   <div class="col" [ngClass]="{'col-lg-8': currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee'}">
   -->
   <div class="col" [ngClass]="{'col-lg-8': isStudent || isEmployee}">
-    <div class="" *ngIf="isProfessor || isRecruiter || isAdmin">
+
+    <div class="" *appCanAccess="['add_job_post']">
+    <!--
+      <div class="" *ngIf="isProfessor || isRecruiter || isAdmin">      
+    -->      
       <button class="btn btn-primary" [routerLink]="['/jobs/add']">
         <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'JOBS.BUTTON.CREATE_JOB' | translate }}
       </button>
@@ -28,19 +32,22 @@
       
               <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
-                <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element" style="white-space: nowrap;">
     
                   <button class="btn btn-primary" [routerLink]="['/jobs', element.id]">
                     <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                   </button>    
                   
-                  <button *ngIf="(isProfessor && element.creator_id==currentUser.id) || (isRecruiter && element.creator_id==currentUser.id) || isAdmin" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
-                    <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
-                  </button>    
-                  
-                  <button *ngIf="(isProfessor && element.creator_id==currentUser.id) || (isRecruiter && element.creator_id==currentUser.id) || isAdmin" class="btn btn-danger" (click)="confirmDialog(element.id, element.Label)">
-                    <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
-                  </button>
+                  <span *appCanAccess="['edit_job_post']">
+                    <button *ngIf="((element.creator_id==currentUser.id) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
+                      <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+                    </button>    
+                  </span>
+                  <span *appCanAccess="['delete_job_post']">
+                    <button *ngIf="((element.creator_id==currentUser.id) || isAdmin)" class="btn btn-danger" (click)="confirmDialog(element.id, element.Label)">
+                      <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
+                    </button>
+                  </span>
                   <!--
                   <button class="btn btn-primary" (click)="openApllyJobDialog(element.id, element.label)">
                     <i _ngcontent-axy-c0="" class="material-icons"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}

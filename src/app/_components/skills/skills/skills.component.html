@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col" [ngClass]="{'col-lg-8': isStudent || isEmployee}">
-
+    <!--
     <div class="" *ngIf="isProfessor || isRecruiter || isAdmin">
       <button class="btn btn-primary" [routerLink]="['/skills/add']">
         <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'SKILLS.BUTTON.CREATE_SKILL' | translate }}
@@ -12,7 +12,7 @@
         <i _ngcontent-axy-c0="" class="material-icons small"> import_export </i> {{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}
       </button>
     </div>
-
+    -->
     <div>
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">

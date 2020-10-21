@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
   hidePassword: boolean = true;
   loadingLoginSpinner: boolean = false;
   loadingRequestPasswordSpinner: boolean = false;
-  
+  customErrorMessageLogin: string = "";
+
   constructor(
     private qcStorageService: QCStorageService,
     private us: UploadService,
@@ -103,6 +104,7 @@ export class LoginComponent implements OnInit {
    */
 
   processFormRequestPassword() {
+    this.customErrorMessageLogin = "";
     this.loadingRequestPasswordSpinner = true;
     this.requestPasswordError = false;
     this.requestPasswordConfirmation = false;
@@ -123,21 +125,29 @@ export class LoginComponent implements OnInit {
   processFormSEAL() {
     //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
     //alert(allInfo); 
+    this.customErrorMessageLogin = "";
     this.loadingLoginSpinner = true;
     this.invalidCredentials = false;
 
     this.ls.loginSEAL(this.name, this.password).subscribe(
-        res => {
-          console.log("Valid credentials for the auth service");
-          this.invalidCredentials = false;
-          this.validCredentials(res);
+        res => {          
+          if (res['authenticated']) {
+            console.log("Valid credentials for the auth service");
+            this.invalidCredentials = false;
+            this.validCredentials(res);
+          }
+          else {            
+            this.customErrorMessageLogin = res['message'];
+            this.invalidCredentials = true;          
+            this.loadingLoginSpinner = false;            
+          }
+          
           //this.loadingLoginSpinner = false;
         },
         error => {
-          this.invalidCredentials = true;
-          
+          console.log(error);
+          this.invalidCredentials = true;          
           this.loadingLoginSpinner = false;
-          
         }
       );    
   }
