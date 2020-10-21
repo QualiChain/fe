@@ -93,12 +93,23 @@ export class AuthService {
     createQCAuthorizationHeader() {
       let token = localStorage.getItem('token');
       //token = "AABBCCCDDD";
+      let dataToReturn: any = null;
 
-      let headers = new HttpHeaders()
-        .set('content-type', 'application/json')
-        .set('Authorization', token);
-      
-      return headers;
+      if (token) {
+        let headers = new HttpHeaders()
+          .set('content-type', 'application/json')
+          .set('Authorization', token);
+
+          dataToReturn = headers;
+      }
+      else {
+        let headers = new HttpHeaders()
+        .set('content-type', 'application/json');
+
+        dataToReturn = headers;
+      }
+
+      return dataToReturn;
     }      
 
 
@@ -117,17 +128,24 @@ export class AuthService {
       pipe(
          map((data: any) => {
           
-          myAuthObj = { authenticated: true,  password:'******', name: data.response_data.user.name, 
-          surname: 'surname', email: data.response_data.user.email, 
-          userName: 'name', id: data.response_data.user.id , 'avatar_path': '', 'role': 'authenticated', 'roles': data.response_data.user.roles, 'pilotId': null};
+          console.log(data);
+          if (data.succeeded) {
+            myAuthObj = { authenticated: true,  password:'******', name: data.response_data.user.name, 
+            surname: 'surname', email: data.response_data.user.email, 
+            userName: 'name', id: data.response_data.user.id , 'avatar_path': '', 'role': 'authenticated', 'roles': data.response_data.user.roles, 'pilotId': null};
           
-          //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
-          let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
+            //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
+            let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
 
-          localStorage.setItem('currentUserQC', encryptedData);        
-          localStorage.setItem('token', data.response_data.token); 
-  
+            localStorage.setItem('currentUserQC', encryptedData);        
+            localStorage.setItem('token', data.response_data.token); 
+          }
+          else {
+            myAuthObj = { authenticated: false, message: data.message }
+          }
+          
           return myAuthObj;
+          
 
          }), catchError( error => {
            return throwError( 'Something went wrong!' );

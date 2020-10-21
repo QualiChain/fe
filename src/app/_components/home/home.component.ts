@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     let currentdate = new Date();
     //this.messageService.sendMessage(0, 'This is a test message ! Date:'+currentdate, false);
 
-    
+
     this.messageService.sendNotification({"message": 'This is a test message ! Date:'+currentdate,"user_id": this.userdata.id}).subscribe(
       res => {
         console.log("Notification created");

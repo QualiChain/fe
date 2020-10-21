@@ -29,31 +29,38 @@
 							<li class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===''}"><a class="btn navbar-item" routerLink="/" (click)="route='/'">{{ 'MENU.HOME' | translate }}</a></li>
 
 <!--
-							<li *ngIf="(isStudent || isEmployee || isProfessor || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/courses'}"><a class="btn navbar-item" routerLink="/courses" (click)="route='/courses'">{{ 'MENU.COURSES' | translate }}</a></li>						
-							<li *ngIf="(isStudent || isEmployee || isRecruiter || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/jobs'}"><a class="btn navbar-item" routerLink="/jobs" (click)="route='/jobs'">{{ 'MENU.JOBS' | translate }}</a></li>
-							<li *ngIf="(isProfessor || isEmployee || isRecruiter || isAdmin)" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/profiles'}"><a class="btn navbar-item" routerLink="/profiles" (click)="route='/profiles'">{{ 'MENU.PROFILES' | translate }}</a></li>						
-							<li *ngIf="isRecruiter || isAdmin" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/recruitment'}"><a class="btn navbar-item" routerLink="/recruitment" (click)="route='/recruitment'">{{ 'MENU.RECRUITMENT' | translate }}</a></li>
--->
 
 							<li 
 							[hidden]="((menuOption.rolesPermissions.indexOf(this.userdata.role.toLowerCase())==-1) && !menuOption.public)"
 							*ngFor="let menuOption of menuOptionsPerPilot.menu" 
 							class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption dynamicmenuoptions" [ngClass]="displayActivenessMenuOption(route, menuOption.route , 'li')">
-								<a *ngIf="menuOption.submenu.length==0" class="btn navbar-item" routerLink="{{ menuOption.route }}" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a>
-								<div *ngIf="menuOption.submenu.length>0" class="dropdown dropdown-menu-right">
-									<a class="btn navbar-item dropdown-toggle" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" id="dropdownMenuButtonRecruitment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuOption.label | translate }}</a>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<ul>
-											<li 
-												[hidden]="((subMenuOption.rolesPermissions.indexOf(this.userdata.role.toLowerCase())==-1) && !subMenuOption.public)"
+-->
+							<li 							
+							*ngFor="let menuOption of menuOptionsPerPilot.menu" 
+							class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption dynamicmenuoptions" [ngClass]="displayActivenessMenuOption(route, menuOption.route , 'li')">
+								<span *appCanAccess="menuOption.permissions">
+									<a *ngIf="menuOption.submenu.length==0" class="btn navbar-item" routerLink="{{ menuOption.route }}" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a>
+									<div *ngIf="menuOption.submenu.length>0" class="dropdown dropdown-menu-right">
+										<a class="btn navbar-item dropdown-toggle" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" id="dropdownMenuButtonRecruitment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuOption.label | translate }}</a>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<ul>
+											<!--
+												<li 
+													[hidden]="((subMenuOption.rolesPermissions.indexOf(this.userdata.role.toLowerCase())==-1) && !subMenuOption.public)"
+													*ngFor="let subMenuOption of menuOption.submenu" 												
+													class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page " [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'li')">
+											-->
+												<li 											
 												*ngFor="let subMenuOption of menuOption.submenu" 												
 												class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page " [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'li')">
-												<a class="navbar-item" [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'a')" routerLink="{{ subMenuOption.route }}" (click)="route=subMenuOption.route">{{ subMenuOption.label | translate }}</a>												
-											</li>
-										</ul>
+													<span *appCanAccess="subMenuOption.permissions">
+														<a class="navbar-item" [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'a')" routerLink="{{ subMenuOption.route }}" (click)="route=subMenuOption.route">{{ subMenuOption.label | translate }}</a>												
+													</span>
+												</li>
+											</ul>
+										</div>
 									</div>
-								</div>
-
+								</span>
 							</li>
 
 
@@ -67,7 +74,7 @@
 							<li *ngIf="!isLogged" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="btn navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
 							
 							
-							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
+							<li *appCanAccess="['manage_own_notifications']" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" class="btn navbar-item" data-target="#myModal" href="#">
 									<span [hidden]="( (messages | FilterArrayByValue : 'read' : 'false') <=0)" class="nav-item__badge">
 										<span aria-hidden="true" class="nav-item__badge-count">
@@ -113,7 +120,7 @@
 											</li>
 
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
-											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a></li>
+											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a></li>
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a></li>
 
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>

@@ -16,7 +16,8 @@ declare var $: any;
 })
 export class AppComponent {
   title = 'QualiChain-FE';
-  currentUser: User;
+  //currentUser: User;
+  currentUser: any;
 
   constructor(
     private router: Router,
@@ -33,25 +34,100 @@ export class AppComponent {
   get isLogged() {
     return this.currentUser ;
   }
+  
+  currentUserHasThisRole(roleName: string) {
+    let hasTheRole = false;
+    let hasTheRoleByArrayOfRoles = false;
+    let hasTheRoleByRole = false;
+
+    if (this.currentUser) {
+      
+      if (this.currentUser.hasOwnProperty('roles')) {
+        if (this.currentUser.roles.indexOf(roleName.toLowerCase())>=0) {
+          hasTheRoleByArrayOfRoles = true;
+        }
+      }      
+      
+      if (this.currentUser.hasOwnProperty('role')) {
+        if (this.currentUser.role.toLowerCase() === roleName.toLowerCase()) {
+          hasTheRoleByRole = true;
+        }
+      }
+    }
+
+    hasTheRole = (hasTheRoleByArrayOfRoles || hasTheRoleByRole);
+
+    return hasTheRole;
+  }
 
   get isAdmin() {
-    return this.currentUser && (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase()) ;
+    let isAdmin = false;
+    let isAdministrator = false;
+
+    isAdmin = this.currentUserHasThisRole(Role.admin.toLowerCase());
+    if (!isAdmin) {
+      isAdministrator = this.currentUserHasThisRole(Role.administrator.toLowerCase());
+    }
+    
+    let userIsAdmin = (this.currentUser && (isAdmin || isAdministrator));
+    //return this.currentUser && (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase()) ;
+    return userIsAdmin;
   }
 
   get isRecruiter() {
-    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    let isAdmin = false;
+    let isRecruiter = false;
+
+    isAdmin = this.currentUserHasThisRole(Role.admin.toLowerCase());
+    if (!isAdmin) {
+      isRecruiter = this.currentUserHasThisRole(Role.recruiter.toLowerCase());
+    }
+
+    let userIsRecruiter = (this.currentUser && (isAdmin || isRecruiter));
+    //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    return isRecruiter;
   }
 
   get isProfessor() {
-    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.professor.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    let isAdmin = false;
+    let isProfessor = false;
+
+    isAdmin = this.currentUserHasThisRole(Role.admin.toLowerCase());
+    if (!isAdmin) {
+      isProfessor = this.currentUserHasThisRole(Role.professor.toLowerCase());
+    }
+
+    let userIsProfessor = (this.currentUser && (isAdmin || isProfessor));
+    //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.professor.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    return userIsProfessor;
   }
 
   get isStudent() {
-    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.student.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    let isAdmin = false;
+    let isStudent = false;
+
+    isAdmin = this.currentUserHasThisRole(Role.admin.toLowerCase());
+    if (!isAdmin) {
+      isStudent = this.currentUserHasThisRole(Role.student.toLowerCase());
+    }
+
+    let userIsStudent = (this.currentUser && (isAdmin || isStudent));    
+    //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.student.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    return userIsStudent;
   }
   
   get isEmployee() {
-    return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.employee.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    let isAdmin = false;
+    let isEmployee = false;
+
+    isAdmin = this.currentUserHasThisRole(Role.admin.toLowerCase());
+    if (!isAdmin) {
+      isEmployee = this.currentUserHasThisRole(Role.employee.toLowerCase());
+    }
+    
+    let userIsEmployee = (this.currentUser && (isAdmin || isEmployee));     
+    //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.employee.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    return userIsEmployee;
   }
 
   logout() {
