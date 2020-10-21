@@ -35,21 +35,23 @@ export class CanAccessDirective implements OnInit, OnDestroy {
 
   checkIfPermissionsExistsByUserRoles(value: string | string[]) {
     let authorized = false;
-    for (const elementV of value) {
-        if (permissionsByRole[elementV]) {
-            for (const pRole of permissionsByRole[elementV]) {
-                //check if logged user has this role                
-                if (this.currentUser.hasOwnProperty('role')) {
-                    if (this.currentUser['role']===pRole) {
-                        authorized = true;
-                        exit;
+    if (this.currentUser) {
+        for (const elementV of value) {
+            if (permissionsByRole[elementV]) {
+                for (const pRole of permissionsByRole[elementV]) {
+                    //check if logged user has this role                
+                    if (this.currentUser.hasOwnProperty('role')) {
+                        if (this.currentUser['role']===pRole) {
+                            authorized = true;
+                            exit;
+                        }
                     }
-                }
-                if (this.currentUser.hasOwnProperty('roles')) {
-                    let posRoleInArray = this.currentUser['roles'].indexOf(pRole);
-                    if (posRoleInArray > -1) {
-                        authorized = true;
-                        exit;
+                    if (this.currentUser.hasOwnProperty('roles')) {
+                        let posRoleInArray = this.currentUser['roles'].indexOf(pRole);
+                        if (posRoleInArray > -1) {
+                            authorized = true;
+                            exit;
+                        }
                     }
                 }
             }
