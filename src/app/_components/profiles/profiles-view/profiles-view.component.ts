@@ -402,8 +402,14 @@ export class ProfilesViewComponent implements OnInit {
             //End OU connexion 
 
           },
-          error => {            
-            this.router.navigate(["/not_found"]);            
+          error => {     
+            if (this.userId.toString()==this.currentUser.id.toString()){
+              this.userdata.id= this.currentUser.id.toString();
+            }
+            else {
+              this.router.navigate(["/not_found"]);
+            }
+            
           }
         );
 

@@ -1,4 +1,5 @@
-<h1 >{{ 'PROFILES.PROFILE' | translate }}</h1>
+<h1 *ngIf="userId.toString()!=currentUser.id.toString()">{{ 'PROFILES.PROFILE' | translate }}</h1>
+<h1 *ngIf="userId.toString()==currentUser.id.toString()">{{ 'PROFILE.MY_PROFILE' | translate }}</h1>
 <!--
 --{{ userdata.id }} --- {{currentUser.id}} --- {{userdata.role}} --- {{userdata.avatar_path}} --
 -->
@@ -20,12 +21,12 @@
       {{ 'BUTTON.PRINT_PDF' | translate }}
     </button>
     -->
-    <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
+    <button *ngIf="((userId.toString()==currentUser.id.toString()) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       {{ 'BUTTON.EDIT' | translate }}
     </button>
 
-    <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'dss-curriculum-re-design']">
+    <button *ngIf="((userId.toString()==currentUser.id.toString()) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'dss-curriculum-re-design']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       DSS CV Re-design
     </button>
@@ -41,8 +42,8 @@
             <div><span class="profileLabel">{{ 'PROFILES.NAME' | translate }}:</span> {{userdata.name}}</div>
             <div><span class="profileLabel">{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
             <div><span class="profileLabel">{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
-            <div><span class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>  {{ 'ROLES.'+userdata.role | translate}}</div>
-            <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span>  {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>  <span *ngIf="userdata.role">{{ 'ROLES.'+userdata.role | translate}}</span></div>
+            <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span> <span *ngIf="userdata.gender">{{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</span></div>
             
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">

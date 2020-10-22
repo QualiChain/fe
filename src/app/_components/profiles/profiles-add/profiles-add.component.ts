@@ -86,7 +86,8 @@ export class ProfilesAddComponent implements OnInit {
   mode: string = '';
   files: any[] = [];
   currentUser: User;
-  
+  userId: string = null;
+
   public selectedOption: any;
 
   constructor(
@@ -138,6 +139,9 @@ export class ProfilesAddComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const id = +params.id;
+      this.userId = params.id;
+      console.log(this.userId );
+
       this.mode = "Create";
       if (id && id > 0) {
         //let userdata = JSON.parse(localStorage.getItem('userdata'));
