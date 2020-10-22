@@ -263,6 +263,7 @@
     "TITLE": "CVs"
   },
   "PROFILE": {
+    "MY_PROFILE": "My profile",
     "CREATE_PROFILE": {
       "TITLE" : "Create new profile"
     },

@@ -1,7 +1,6 @@
-<h1 *ngIf="mode=='Create'">{{ 'PROFILE.CREATE_PROFILE.TITLE' | translate }}</h1>
-<h1 *ngIf="mode=='Edit'">{{ 'PROFILE.EDIT_PROFILE.TITLE' | translate }}</h1>
-
-
+<h1 *ngIf="(mode=='Create' && (userId.toString()!=currentUser.id.toString()))">{{ 'PROFILE.CREATE_PROFILE.TITLE' | translate }}</h1>
+<h1 *ngIf="(mode=='Edit' && (userId.toString()!=currentUser.id.toString()))">{{ 'PROFILE.EDIT_PROFILE.TITLE' | translate }}</h1>
+<h1 *ngIf="userId.toString()==currentUser.id.toString()">{{ 'PROFILE.MY_PROFILE' | translate }}</h1>
 
 <div class="container">
   <div class="row">
