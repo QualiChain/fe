@@ -18,7 +18,7 @@
                             <i  _ngcontent-axy-c0="" class="material-icons small" > print </i>
                         </button>
 
-                        <button  type="button" class="btn btn-danger" (click)="confirmDialog(element.name.file_id, element.name.filename)">                  
+                        <button *appCanAccess="['delete_own_files']" type="button" class="btn btn-danger" (click)="confirmDialog(element.name.file_id, element.name.filename)">                  
                             <i  _ngcontent-axy-c0="" class="material-icons small" > delete </i>
                         </button>
 
@@ -39,13 +39,13 @@
 
             
         </div>
-        <div  class="col col-lg-6">
+        <div *appCanAccess="['upload_own_files']" class="col col-lg-6">
             <div class="form-group field" >
               <app-upload-files 
               [callbackFunction]="myCallbackFunction"
               [validFiles]="['image/png','image/jpg','image/jpeg','image/gif', 'application/pdf']" [maxNumberOfFiles]="99" [userId]=profileId fileDestination="personalFileRepository"></app-upload-files>
             </div>
-          </div>
+        </div>
 
     </div>
 </div>

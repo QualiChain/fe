@@ -257,19 +257,26 @@ export class ProfilesViewComponent implements OnInit {
       Education: new FormArray([])
     });
     
-
+    let id:any = 0;
     this.route.params.subscribe(params => {
       
       //console.log(params['id']);
  
-      let id:number = 0;      
+            
       if(params.hasOwnProperty('id')){
-        id = +params.id;
-        this.userId = params.id;
-        
+        //id = +params.id;
+        id = params.id;
+        this.userId = params.id;        
+      }
+      else {        
+        if(this.currentUser.hasOwnProperty('id')) { 
+          id = this.currentUser.id.toString();
+          this.userId = id;        
+        }
       }
 
-      if (id>0) {
+      //if (id>0) {
+      if (id) {
         this.bs
         .getBadgesByUser(id)
         .subscribe((data: any) => {

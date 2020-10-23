@@ -157,14 +157,36 @@ const routes: Routes = [
       permissions: ['add_profile'] }  
   },
   {
+    path: 'myprofile',
+    component: ProfilesViewComponent,
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [],
+      permissions: ['view_own_profile'] }  
+  },
+  {
+    path: 'myprofile/edit',
+    component: ProfilesAddComponent,
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [],
+      permissions: ['edit_own_profile'] }  
+  },  
+  {
     path: 'profiles/:id',
     component: ProfilesViewComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [],
+      permissions: ['view_other_profile'] }  
   },
   {
     path: 'profiles/:id/edit',
     component: ProfilesAddComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [],
+      permissions: ['edit_own_profile', 'edit_other_profile'] }  
   },
   {
     path: 'profiles/:id/best-career-options',
@@ -202,7 +224,9 @@ const routes: Routes = [
   {
     path: 'profiles/:id/personal-files-repository',
     component: FilesRepositoryComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { permissions: ['retrieve_own_files'] }    
   },    
   {
     path: 'profiles/:id/recomended/courses',

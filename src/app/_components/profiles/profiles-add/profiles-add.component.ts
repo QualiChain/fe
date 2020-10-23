@@ -32,6 +32,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StorageService } from '../../../_helpers/global';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 
+
 @Component({
   selector: 'app-profiles-add',
   templateUrl: './profiles-add.component.html',
@@ -86,7 +87,7 @@ export class ProfilesAddComponent implements OnInit {
   mode: string = '';
   files: any[] = [];
   currentUser: User;
-  userId: string = null;
+  userId: string = '';
 
   public selectedOption: any;
 
@@ -136,19 +137,38 @@ export class ProfilesAddComponent implements OnInit {
         this.pilotId = null;
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:'', pilotId: null};
       }
-
+    
+    let id:any = 0;
     this.route.params.subscribe(params => {
-      const id = +params.id;
-      this.userId = params.id;
-      console.log(this.userId );
+
+            
+      if(params.hasOwnProperty('id')){
+        //id = +params.id;
+        id = params.id;
+        this.userId = params.id;        
+      }
+      else { 
+
+        if(this.currentUser.hasOwnProperty('id')) { 
+          id = this.currentUser.id.toString();
+          this.userId = id;
+        }
+        
+      }
+      
+      //console.log(this.userId );
 
       this.mode = "Create";
-      if (id && id > 0) {
+      //if (id && id > 0) {
+      if (id) {
         //let userdata = JSON.parse(localStorage.getItem('userdata'));
         let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
         //console.log(userdata.role.toLowerCase());
-        if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
+        let authorizedEditOwnProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['edit_own_profile']);
+        let authorizedEditOtherProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['edit_other_profile']);
 
+        if ( (String(userdata.id) == String(id) && (authorizedEditOwnProfile) )  || (authorizedEditOtherProfile) ){
+        //if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
           this.mode = "Edit";
           this.profileId=String(id);
           //console.log(this.profileId);  
@@ -183,12 +203,10 @@ export class ProfilesAddComponent implements OnInit {
           this.getAvatarUser(+this.profileId);          
 
         }
-        else {
-          
+        else {          
           //window.location.href="/profiles/"+id;
           //this.router.navigate(["/profiles/"+id]);
           this.router.navigate(["/access_denied"]);
-
         }
                
       }

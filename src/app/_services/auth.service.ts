@@ -8,6 +8,8 @@ import { QCStorageService } from './QC_storage.services';
 //import { User } from '../_models/user';
 import User from '../_models/user';
 //import { exists } from 'fs';
+import { exit } from 'process';
+import permissionsByRole from "../_helpers/permissionsByRole";
 
 @Injectable({
   providedIn: 'root'
@@ -152,6 +154,40 @@ export class AuthService {
          })
       )
       }
+
+    
+        public checkIfPermissionsExistsByUserRoles(value: string | string[]) {
+          //console.log(value);
+          let currentLogedUser: any;
+          this.currentUser.subscribe(x => currentLogedUser = x);
+            let authorized = false;
+            if (currentLogedUser) {
+                for (const elementV of value) {
+                    if (permissionsByRole[elementV]) {                      
+                        for (const pRole of permissionsByRole[elementV]) {
+                            //check if logged user has this role
+                            if (currentLogedUser.hasOwnProperty('role')) {
+                                if (currentLogedUser['role']===pRole) {
+                                    authorized = true;
+                                    return true;
+                                    //exit;
+                                }
+                            }
+                            if (currentLogedUser.hasOwnProperty('roles')) {                              
+                                let posRoleInArray = currentLogedUser['roles'].indexOf(pRole);
+                                if (posRoleInArray > -1) {
+                                    authorized = true;
+                                    return true;
+                                    //exit;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return authorized;
+          }
+       
 
   }
 

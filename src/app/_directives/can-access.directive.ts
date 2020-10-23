@@ -6,6 +6,7 @@ import { exit } from 'process';
 import permissionsByRole from "../_helpers/permissionsByRole";
 import { Injectable } from '@angular/core';
 
+
 @Directive({
   selector: '[appCanAccess]'
 })
@@ -32,36 +33,7 @@ export class CanAccessDirective implements OnInit, OnDestroy {
   // into the templates you can add this:
   // <div *appCanAccess="['view_user_profile']"> CODE  </div>
   // if current user has permisions to this string (you can send an array of strings), the contet is displayed
-
-  checkIfPermissionsExistsByUserRoles(value: string | string[]) {
-    let authorized = false;
-    if (this.currentUser) {
-        for (const elementV of value) {
-            if (permissionsByRole[elementV]) {
-                for (const pRole of permissionsByRole[elementV]) {
-                    //check if logged user has this role                
-                    if (this.currentUser.hasOwnProperty('role')) {
-                        if (this.currentUser['role']===pRole) {
-                            authorized = true;
-                            exit;
-                        }
-                    }
-                    if (this.currentUser.hasOwnProperty('roles')) {
-                        let posRoleInArray = this.currentUser['roles'].indexOf(pRole);
-                        if (posRoleInArray > -1) {
-                            authorized = true;
-                            exit;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    return authorized;
-
-  }
-
+  
   private applyPermission(value: string | string[] ): void {
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -76,7 +48,8 @@ export class CanAccessDirective implements OnInit, OnDestroy {
     };*/
     
     //this.currentUser['roles'] = ['student', 'professor', 'admin', 'employee'];
-    authorized = this.checkIfPermissionsExistsByUserRoles(value);
+    //authorized = this.checkIfPermissionsExistsByUserRoles(value);
+    authorized = this.authservice.checkIfPermissionsExistsByUserRoles(value);
 
     if (authorized) {
         this.viewContainer.createEmbeddedView(this.templateRef);
@@ -102,35 +75,7 @@ export class AuthGuardByPermission implements CanActivate {
         private router: Router,
         private authenticationService: AuthService
     ) { }
-
-    checkIfPermissionsExistsByUserRoles(value: string | string[]) {
-        let authorized = false;
-        const currentUser = this.authenticationService.currentUserValue;
-
-        for (const elementV of value) {
-            if (permissionsByRole[elementV]) {
-                for (const pRole of permissionsByRole[elementV]) {
-                    //check if logged user has this role                
-                    if (currentUser.hasOwnProperty('role')) {
-                        if (currentUser['role']===pRole) {
-                            authorized = true;
-                            exit;
-                        }
-                    }                                
-                    if (currentUser.hasOwnProperty('roles')) {
-                        if (currentUser['roles'].indexOf(pRole) > -1) {
-                            authorized = true;
-                            exit;
-                        }
-                    }
-                }
-            }
-        }
     
-        return authorized;
-    
-      }
-
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
         
@@ -138,7 +83,8 @@ export class AuthGuardByPermission implements CanActivate {
             // check if route is restricted by role           
             if (route.data.permissions) {
                 
-                let authorized = this.checkIfPermissionsExistsByUserRoles(route.data.permissions);
+                //let authorized = this.checkIfPermissionsExistsByUserRoles(route.data.permissions);
+                let authorized = this.authenticationService.checkIfPermissionsExistsByUserRoles(route.data.permissions);
 
                 if (authorized) {
                     return authorized
