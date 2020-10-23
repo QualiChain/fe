@@ -21,10 +21,24 @@
       {{ 'BUTTON.PRINT_PDF' | translate }}
     </button>
     -->
+    <!--
     <button *ngIf="((userId.toString()==currentUser.id.toString()) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       {{ 'BUTTON.EDIT' | translate }}
     </button>
+    -->
+    <span *appCanAccess="['edit_own_profile']">
+      <button *ngIf="userId.toString()==currentUser.id.toString()" class="btn btn-primary" [routerLink]="['/myprofile', 'edit']">
+        <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
+        {{ 'BUTTON.EDIT' | translate }}
+      </button>
+    </span>
+    <span *appCanAccess="['edit_other_profile']">
+      <button *ngIf="userId.toString()!=currentUser.id.toString()" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'edit']">
+        <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
+        {{ 'BUTTON.EDIT' | translate }}
+      </button>
+    </span>
 
     <button *ngIf="((userId.toString()==currentUser.id.toString()) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata.id, 'dss-curriculum-re-design']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>

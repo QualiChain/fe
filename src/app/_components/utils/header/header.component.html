@@ -27,9 +27,7 @@
 							-->
 
 							<li class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===''}"><a class="btn navbar-item" routerLink="/" (click)="route='/'">{{ 'MENU.HOME' | translate }}</a></li>
-
 <!--
-
 							<li 
 							[hidden]="((menuOption.rolesPermissions.indexOf(this.userdata.role.toLowerCase())==-1) && !menuOption.public)"
 							*ngFor="let menuOption of menuOptionsPerPilot.menu" 
@@ -63,11 +61,6 @@
 								</span>
 							</li>
 
-
-							
-								
-							
-							
 							<!--
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/logout'}"><a class="navbar-item" routerLink="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 							-->
@@ -118,13 +111,19 @@
 															<hr>
 													</div>															
 											</li>
-
+											<!--
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
-											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a></li>
-											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a></li>
-
+											-->											
+											<li *appCanAccess="['view_own_profile']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/myprofile'}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/myprofile'}" routerLink="/myprofile" (click)="route='/myprofile'" >{{ 'MENU.PROFILE' | translate }}</a>
+											</li>
+											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a>
+											</li>
+											<li *appCanAccess="['retrieve_own_files']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a>
+											</li>
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
-
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 										</ul>
 									</div>
