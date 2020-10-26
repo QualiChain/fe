@@ -11,6 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 //import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { UploadService } from '../../../_services/upload.service';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
 
 describe('ProfilesAddComponent', () => {
   let component: ProfilesAddComponent;
@@ -29,7 +30,10 @@ describe('ProfilesAddComponent', () => {
         MatDatepickerModule,
         MatNativeDateModule,
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'access_denied', component: AccessDeniedComponent}]
+        ),
         ],
         providers: [UploadService, QCStorageService]
     })

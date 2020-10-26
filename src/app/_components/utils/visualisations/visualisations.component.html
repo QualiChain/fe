@@ -3,7 +3,9 @@
     <iframe name="Framename" [src]="urlSafe | safe: 'resourceUrl' "
     frameborder="0" 
     scrolling="no" 
-    class="frame-area">
+    class="frame-area"
+    [ngClass]="extraClass"
+    >
     </iframe>
 
 </div>

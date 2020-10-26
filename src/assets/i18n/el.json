@@ -412,7 +412,8 @@
     "FOOTER_BAR_CHART": "Comparative between Demand and Actual Employment",
     "TARGETED_JOB_TITLES": {
       "TITLE": "Targeted Job Titles",
-      "PLACEHOLDER": "Please, type targeted job titles..."
+      "PLACEHOLDER": "Please, type targeted job titles...",
+      "CHART_HELP_TEXT": "Select at least two targeted titles"
     },
     "COMPLETED_COURSES": {
       "TITLE": "Completed Courses",

@@ -54,7 +54,7 @@
     </div>
 
     <div class="row">
-        <div class="col col-lg-6">
+        <div class="col col-lg-12">
             <div class="col">
                 <h2>{{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.TITLE' | translate }}</h2>
             </div>
@@ -62,14 +62,82 @@
                 <!--
                 <input type="text" placeholder="{{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.PLACEHOLDER' | translate }}">
                 -->
+                <!--
                 <mat-form-field appearance="fill">
                     <mat-label>{{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.PLACEHOLDER' | translate }}</mat-label>
                     <input matInput>
                 </mat-form-field>
+                -->
+
+                <form class="tjt-form">
+                    
+                    <mat-form-field class="tjt-full-width">
+                        <!--
+                        <mat-label>{{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.TITLE' | translate }}</mat-label>
+                        -->
+                        <mat-chip-list #chipListSpecializations>
+                            <mat-chip *ngFor="let specialization of specializations;let indx=index;" 
+                            [selectable]="selectableSpecializations" [removable]="removableSpecializations" (removed)="removeSpecialization(specialization,indx)">
+                                {{specialization.name}}
+                                <mat-icon matChipRemove *ngIf="removableSpecializations">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="{{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.PLACEHOLDER' | translate }}"
+                            #specializationInput
+                            [formControl]="specializationCtrl"
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="chipListSpecializations"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur" 
+                            >                    
+                        </mat-chip-list>
+
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let specialization of filteredSpecializations | async" [value]="specialization">
+                                {{specialization.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                    </mat-form-field>                    
+
+
+                </form>
+
+
             </div>
-            
-            <br>
-            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-lg-12" *ngIf="specializations.length<=1">
+            {{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.CHART_HELP_TEXT' | translate }}
+        </div>
+        <div class="col col-lg-12" *ngIf="specializations.length>1">
+            <app-visualisations-specialization-demand-in-function-of-time-chart 
+            [cntSpecializations]="specializations.length"
+            [specializations]="specializations"></app-visualisations-specialization-demand-in-function-of-time-chart>
+            <!--
+            <div *ngIf="showLineChart" class="wrapperLineChart">
+                <canvas
+                    baseChart
+                    [chartType]="lineChartType"
+                    [labels]="lineChartLabels"
+                    [colors]="lineChartColors"
+                    [datasets]="lineChartData"                    
+                    [options]="lineChartOptions"
+                    [legend]="true"
+                    [colors]="lineChartColors"
+                    >
+                </canvas>
+                <div>{{ 'CAREER_ADVISOR.FOOTER_BAR_CHART' | translate }}</div>
+            </div>
+            -->
+
+        </div>
+
+    </div>
+    <br>
+
+    <div class="row">    
+        <div class="col col-lg-6">
             <div class="col"><h2>{{ 'CAREER_ADVISOR.COMPLETED_COURSES.TITLE' | translate }}</h2></div>
 
             <div class="col" *ngIf="dataSource.data.length==0">
@@ -114,29 +182,10 @@
                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
             
             </div>
-            
-        </div>
-        <div class="col col-lg-6">
-
-            <div *ngIf="showLineChart" class="wrapperLineChart">
-                <canvas
-                    baseChart
-                    [chartType]="lineChartType"
-                    [labels]="lineChartLabels"
-                    [colors]="lineChartColors"
-                    [datasets]="lineChartData"                    
-                    [options]="lineChartOptions"
-                    [legend]="true"
-                    [colors]="lineChartColors"
-                    >
-                </canvas>
-                <!--
-                <div>{{ 'CAREER_ADVISOR.FOOTER_BAR_CHART' | translate }}</div>
-                -->
-            </div>
-
-        </div>
+        </div>    
     </div>
+
+
     <br/>
     <div class="row">
         <div class="col col-lg-10"></div>

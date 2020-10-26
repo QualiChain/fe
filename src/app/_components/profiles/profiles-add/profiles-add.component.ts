@@ -167,45 +167,50 @@ export class ProfilesAddComponent implements OnInit {
         let authorizedEditOwnProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['edit_own_profile']);
         let authorizedEditOtherProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['edit_other_profile']);
 
-        if ( (String(userdata.id) == String(id) && (authorizedEditOwnProfile) )  || (authorizedEditOtherProfile) ){
-        //if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
-          this.mode = "Edit";
-          this.profileId=String(id);
-          //console.log(this.profileId);  
-  
-          this.userService.getUser(+this.profileId).subscribe(
-            res => {
-              //console.log("Request OK");
-              //console.log(res);
-              this.pilotId = res.pilotId;
-              this.role = res.role;
-              this.userName = res.userName;
-              this.fullName = res.fullName;
-              this.name = res.name;
-              this.surname = res.surname;
-              this.gender = res.gender;
-              this.birthDate = res.birthDate;
-              this.country = res.country;
-              this.city = res.city;
-              this.address = res.address;
-              this.zipCode = res.zipCode;
-              this.mobilePhone = res.mobilePhone;
-              this.homePhone = res.homePhone;
-              this.email = res.email;
-            },
-            error => {
-              console.log("Error getting data");
-              this.router.navigate(["/not_found"]);
-              
-            }
-          ); 
-          
-          this.getAvatarUser(+this.profileId);          
+        if(userdata) {
+          if ( (String(userdata.id) == String(id) && (authorizedEditOwnProfile) )  || (authorizedEditOtherProfile) ){
+          //if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
+            this.mode = "Edit";
+            this.profileId=String(id);
+            //console.log(this.profileId);  
+    
+            this.userService.getUser(+this.profileId).subscribe(
+              res => {
+                //console.log("Request OK");
+                //console.log(res);
+                this.pilotId = res.pilotId;
+                this.role = res.role;
+                this.userName = res.userName;
+                this.fullName = res.fullName;
+                this.name = res.name;
+                this.surname = res.surname;
+                this.gender = res.gender;
+                this.birthDate = res.birthDate;
+                this.country = res.country;
+                this.city = res.city;
+                this.address = res.address;
+                this.zipCode = res.zipCode;
+                this.mobilePhone = res.mobilePhone;
+                this.homePhone = res.homePhone;
+                this.email = res.email;
+              },
+              error => {
+                console.log("Error getting data");
+                this.router.navigate(["/not_found"]);
+                
+              }
+            ); 
+            
+            this.getAvatarUser(+this.profileId);          
 
+          }
+          else {          
+            //window.location.href="/profiles/"+id;
+            //this.router.navigate(["/profiles/"+id]);
+            this.router.navigate(["/access_denied"]);
+          }
         }
-        else {          
-          //window.location.href="/profiles/"+id;
-          //this.router.navigate(["/profiles/"+id]);
+        else {
           this.router.navigate(["/access_denied"]);
         }
                

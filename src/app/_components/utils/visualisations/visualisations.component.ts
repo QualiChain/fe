@@ -4,6 +4,11 @@ import { environment } from '../../../../environments/environment';
 
 const urlVisualisations:string = environment.visualiserUrl;
 
+export interface Specialization {
+  name: string;
+  id: number;
+}
+
 @Component({
   selector: 'app-visualisations',
   templateUrl: './visualisations.component.html',
@@ -19,6 +24,7 @@ export class VisualisationsComponent implements OnInit {
   }
 
 }
+
 /** User skills - job skills chart ***************************************/
 @Component({
   selector: 'app-visualisations-user-skills-job-skills-chart',
@@ -32,6 +38,7 @@ export class VisualisationsUserSkillsJobSkillsChartComponent implements OnInit {
 
   //urlSafe: SafeUrl;
   urlSafe: string = "";
+  extraClass: string = "user_skills_job_skills";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -58,7 +65,8 @@ export class VisualisationsUserGradesChartComponent implements OnInit {
   @Input() userId: string;
   
   //urlSafe: SafeUrl;
-  urlSafe: string = ""
+  urlSafe: string = "";
+  extraClass: string = "user_grade";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -85,7 +93,8 @@ export class VisualisationsAverageGradesInCoursesChartComponent implements OnIni
   @Input() coursesIds: [];
   
   //urlSafe: SafeUrl;
-  urlSafe: string = ""
+  urlSafe: string = "";
+  extraClass: string = "average_grades";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -113,7 +122,8 @@ export class VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkills
   @Input() userId: [];
   
   //urlSafe: SafeUrl;
-  urlSafe: string = ""
+  urlSafe: string = "";
+  extraClass: string = "enrolled_courses_skills_coverage";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -141,7 +151,8 @@ export class VisualisationsCarrerPathTrajectoryChartComponent implements OnInit 
   @Input() userId: [];
   
   //urlSafe: SafeUrl;
-  urlSafe: string = ""
+  urlSafe: string = "";
+  extraClass: string = "career_path_trajectory";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -173,7 +184,8 @@ export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnI
   @Input() jobId: [];
 
   //urlSafe: SafeUrl;
-  urlSafe: string = ""
+  urlSafe: string = "";
+  extraClass: string = "skill_coverage";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -199,7 +211,8 @@ export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnI
 export class VisualisationsMarketDemand implements OnInit {
 
   //urlSafe: SafeUrl;
-  urlSafe: string = ""
+  urlSafe: string = "";
+  extraClass: string = "market_demand";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -227,7 +240,8 @@ export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit
   @Input() specialization: [];
 
   //urlSafe: SafeUrl;
-  urlSafe: string = ""
+  urlSafe: string = "";
+  extraClass: string = "demand_in_time_per_specialization";
 
   constructor(
     public sanitizer: DomSanitizer
@@ -248,3 +262,76 @@ export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit
   }
 
 }
+
+/*** Curriculum Up to Date - Circular Gauge (used in the curriculum designer interface)  * */
+@Component({
+  selector: 'app-visualisations-curriculum-up-to-date-chart',
+  templateUrl: './visualisations.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationsCurriculumUpToDate implements OnInit {
+
+
+  //urlSafe: SafeUrl;
+  urlSafe: string = "";
+  extraClass: string = "curriculum_up_to_date";
+
+  constructor(
+    public sanitizer: DomSanitizer
+  ) { }
+
+  ngOnInit(): void {
+    let tmpURL = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=up_to_date&x_axis_title=Up%20To%20Date&x_axis_unit=%&color_list_request[]=green&color_list_request[]=red&use_default_colors=false&min_max_y_value[]=0&min_max_y_value[]=100&base_query=curriculum_up_to_date";
+    
+    this.urlSafe = tmpURL;
+
+  }
+
+  ngOnChanges(): void {       
+
+  }
+
+}
+
+/*** Specialization demand in function of time  * */
+@Component({
+  selector: 'app-visualisations-specialization-demand-in-function-of-time-chart',
+  templateUrl: './visualisations.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationsSpecializationDemandInFunctionOfTime implements OnInit {
+
+  @Input() cntSpecializations: number;
+  @Input() specializations: Specialization[] = [];
+
+  //urlSafe: SafeUrl;
+  urlSafe: string = "";
+  
+  extraClass: string = "specialization_demand";
+
+  constructor(
+    public sanitizer: DomSanitizer
+  ) { }
+
+  ngOnInit(): void {
+    
+  }
+  ngOnChanges(): void {    
+
+    let tmpURL = '';
+    this.specializations.forEach(element => {
+      //console.log(element);
+      tmpURL = tmpURL+"&y_var_names[]="+element.name+"&y_var_titles[]="+element.name+"&y_var_units[]=job%20postings";
+
+    });
+
+    tmpURL = urlVisualisations+"/show_line_chart?x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Specialization%20Demand%20Demand&color_list_request[]=blue&color_list_request[]=red&use_default_colors=true&min_max_y_value[]=0&min_max_y_value[]=2000&base_query=specialization_demand_in_time"+tmpURL;
+    
+    //console.log(tmpURL);
+
+    this.urlSafe = tmpURL;
+  }
+
+}
+
+

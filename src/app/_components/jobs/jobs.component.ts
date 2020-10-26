@@ -105,7 +105,7 @@ export class JobsComponent implements OnInit {
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
-    private js: JobsService, private authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
+    private js: JobsService, public authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
     public applyForAJobDialog: MatDialog) { 
 
       this.authservice.currentUser.subscribe(x => this.currentUser = x);
