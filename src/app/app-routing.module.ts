@@ -178,7 +178,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { roles: [],
-      permissions: ['view_other_profile'] }  
+      permissions: ['view_own_profile','view_other_profile'] }  
   },
   {
     path: 'profiles/:id/edit',
