@@ -4,8 +4,8 @@
   <!--
   <div class="col" [ngClass]="{'col-lg-8': currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee'}">
   -->
-  <div class="col" [ngClass]="{'col-lg-8': isStudent || isEmployee}">
-
+  <div class="col" [ngClass]="{'col-lg-8': authservice.checkIfPermissionsExistsByUserRoles(['get_job_recommendations'])}">
+    
     <div class="" *appCanAccess="['add_job_post']">
     <!--
       <div class="" *ngIf="isProfessor || isRecruiter || isAdmin">      
@@ -91,11 +91,11 @@
 
   </div>
 
-  <div class="col col-lg-4" *ngIf="isStudent || isEmployee">
+  <div class="col col-lg-4" *appCanAccess="['get_job_recommendations','get_their_job_applications']">
 
     <mat-accordion class="example-headers-align" multi>
-      <app-recomended-jobs userId="{{currentUser.id}}"></app-recomended-jobs>
-      <app-job-applications-by-user userId="{{currentUser.id}}"></app-job-applications-by-user>
+      <app-recomended-jobs userId="{{currentUser.id}}" *appCanAccess="['get_job_recommendations']"></app-recomended-jobs>
+      <app-job-applications-by-user userId="{{currentUser.id}}" *appCanAccess="['get_their_job_applications']"></app-job-applications-by-user>
     </mat-accordion>
     
   </div>

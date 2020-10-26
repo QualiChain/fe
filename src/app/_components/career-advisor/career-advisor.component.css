@@ -32,3 +32,13 @@
 .recomendedBox {
     padding-bottom: 15px;
 }
+
+
+.tjt-form {
+    min-width: 150px;
+    width: 100%;
+}
+ 
+.tjt-full-width {
+    width: 100%;
+}

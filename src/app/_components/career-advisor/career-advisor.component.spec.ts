@@ -9,6 +9,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NotFoundComponent } from '../../_components/utils/not-found/not-found.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 describe('CareerAdvisorComponent', () => {
   let component: CareerAdvisorComponent;
@@ -23,6 +24,7 @@ describe('CareerAdvisorComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         HttpClientTestingModule,
+        MatAutocompleteModule,
         RouterTestingModule.withRoutes(
           [{path: 'not_found', component: NotFoundComponent}]
         )

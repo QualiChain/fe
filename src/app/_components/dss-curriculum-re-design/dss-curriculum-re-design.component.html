@@ -80,7 +80,10 @@
     <br>
     <div *ngIf="doughnutChartData.length>0" class="row">
         <div class="col col-lg-6 ">
-            {{ 'DSS_CV_RE_DESIGN.CURRICULUM_IS_UP_TO_DATE' | translate:{ value: doughnutChartData[0][0] } }}
+
+            <app-visualisations-curriculum-up-to-date-chart></app-visualisations-curriculum-up-to-date-chart>
+            <!--
+            {{ 'DSS_CV_RE_DESIGN.CURRICULUM_IS_UP_TO_DATE' | translate:{ value: doughnutChartData[0][0] } }}            
             <div class="wrapperPieChart">
                 <canvas baseChart 
                     [data]="doughnutChartData"
@@ -89,7 +92,7 @@
                     [chartType]="doughnutChartType">
                 </canvas>
             </div>
-            
+            -->
         </div>
         <div class="col col-lg-6 ">
             <!--

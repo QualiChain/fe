@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UsersService } from '../../_services/users.service';
@@ -12,8 +13,19 @@ import { RecomendationsService } from '../../_services/recomendations.service';
 import { CVService } from '../../_services/cv.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ThemeService } from 'ng2-charts';
+import {FormControl} from '@angular/forms';
+import { SpecializationsService } from '../../_services/specializations.service';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 let completedCoursesByUser: any[] = [];
+
+export interface Specialization {
+  name: string;
+  id: number;
+}
 
 @Component({
   selector: 'app-career-advisor',
@@ -86,6 +98,23 @@ export class CareerAdvisorComponent implements OnInit {
   selectedSkills: any[] = [];
   selectedTabIndex: number = 0;
 
+  
+  specializationCtrl = new FormControl();
+  //specializationOptions: string[] = [];
+  //filteredSpecializationOptions: Observable<string[]>;
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  addOnBlur = false;
+  specializations: Specialization[] = [];
+  selectableSpecializations = true;
+  removableSpecializations = true;
+  addOnBlurSpecializations = true;
+  allSpecialisations: Specialization[] = [];
+
+  filteredSpecializations: Observable<string[]>;
+  @ViewChild('specializationInput', {static: false}) specializationInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute, 
@@ -93,11 +122,66 @@ export class CareerAdvisorComponent implements OnInit {
     private cvss: CVService,
     private cs: CoursesService,
     private translate: TranslateService,    
-    private us: UsersService
-    
+    private us: UsersService,
+    private ss: SpecializationsService    
     ) { 
-      
+        
+      this.filteredSpecializations = this.specializationCtrl.valueChanges.pipe(
+        startWith(null),
+        map((specialisation: string | null) => specialisation ? this._filter(specialisation) : this.allSpecialisations.slice())
+        );      
+
     }
+
+    private _filter(value: any): any[] {   
+      if ( value.hasOwnProperty('name') ) {
+        return this.allSpecialisations;
+      }
+      else {
+        //filter by text
+        //console.log(this.allSpecialisations);
+        let filteredSpecializations: Specialization[] = this.allSpecialisations.filter(specialization => specialization.name.toLowerCase().includes(value.toLowerCase()));
+  
+        //filter skills we have in the selectd list of skills
+        let activeIds = [];
+        this.specializations.forEach(element => {
+          activeIds.push(element.id);
+        });
+  
+        let arr = filteredSpecializations;
+  
+        if (activeIds.length>0) {
+          arr = arr.filter(function(item){
+            return activeIds.indexOf(item.id) === -1;
+          });
+        }
+        
+        
+        return arr;
+      }
+  
+    }
+    
+
+    add(event: MatChipInputEvent): void {
+      console.log(event);      
+    }
+
+    removeSpecialization(specialization: any, indx: number): void {
+      
+      const index = indx;
+  
+      if (index >= 0) {
+        this.specializations.splice(index, 1);
+      }
+    }
+
+
+    selected(event: MatAutocompleteSelectedEvent): void {
+      this.specializations.push(event.option.value);
+      this.specializationInput.nativeElement.value = '';
+      this.specializationCtrl.setValue(null);  
+    } 
 
     public async recomendedDataByUserId(userId: number) {
 
@@ -250,7 +334,11 @@ export class CareerAdvisorComponent implements OnInit {
         ); 
     }    
 
+
+   
+
   ngOnInit() {
+
 
     const showRecommendationParam: string = this.route.snapshot.queryParamMap.get('showRecommend');
     const typeParam: string = this.route.snapshot.queryParamMap.get('type');
@@ -322,6 +410,18 @@ export class CareerAdvisorComponent implements OnInit {
         }
         */
         
+        this.ss.getSpecializations().subscribe(
+          dataSpecializations => { 
+            //console.log(dataSpecializations);            
+            dataSpecializations.forEach(element => {
+              this.allSpecialisations.push({id:element.id, name: element.name});
+            }); 
+
+          },
+          error => {            
+            console.log("Error recovering specializations list")
+          }
+        );
 
         this.us
         .getUser(this.userid).subscribe(

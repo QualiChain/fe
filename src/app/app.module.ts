@@ -156,7 +156,8 @@ import { VisualisationsComponent,
   VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
   VisualisationsCarrerPathTrajectoryChartComponent,
   VisualisationsUserSkillsetCoverageToAppliedJobSkills,
-  VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization
+  VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization,
+  VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime
 } from './_components/utils/visualisations/visualisations.component';
 import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 
@@ -288,7 +289,8 @@ export function tokenGetter() {
     FilesRepositoryComponent,
     VisualisationsComponent, VisualisationsUserSkillsJobSkillsChartComponent, VisualisationsUserGradesChartComponent, VisualisationsAverageGradesInCoursesChartComponent, 
     VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
-    VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, EducationPlanComponent,
+    VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, 
+    VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime, EducationPlanComponent,
     CanAccessDirective
   ],
   imports: [
