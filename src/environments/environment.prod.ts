@@ -9,7 +9,7 @@ export const environment = {
   deleteFilesUrl : 'http://qualichain.epu.ntua.gr:5004/delete',
   badgesUrl : 'http://qualichain.epu.ntua.gr:5000/badges',
   authUrl : 'http://qualichain.epu.ntua.gr:5004/auth',
-  SEALAuthUrl : 'https://qualichain.herokuapp.com/users/login',
+  IAMAuthUrl : 'https://qualichain.herokuapp.com/users',
   usersUrl : 'http://qualichain.epu.ntua.gr:5004/users',
   userUrl : 'http://qualichain.epu.ntua.gr:5004/user',
   jobsUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',

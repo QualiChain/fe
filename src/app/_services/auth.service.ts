@@ -17,7 +17,7 @@ import permissionsByRole from "../_helpers/permissionsByRole";
 export class AuthService {
  
   uri = environment.authUrl;
-  SEALAuthUrl = environment.SEALAuthUrl;
+  IAMAuthUrl = environment.IAMAuthUrl;
   userURL = environment.userUrl;
   //uri = 'http://localhost:4000/auth';
 
@@ -115,7 +115,7 @@ export class AuthService {
     }      
 
 
-    loginSEAL(username, password) {
+    loginIAM(username, password) {
       
       const formData = new FormData();
       formData.append('username', username);
@@ -126,11 +126,11 @@ export class AuthService {
       //let myAuthObj=  new User;
       let myAuthObj= {};
       
-      return this.httpClient.post(`${this.SEALAuthUrl}`, formData).
+      return this.httpClient.post(`${this.IAMAuthUrl}/login`, formData).
       pipe(
          map((data: any) => {
           
-          console.log(data);
+          //console.log(data);
           if (data.succeeded) {
             myAuthObj = { authenticated: true,  password:'******', name: data.response_data.user.name, 
             surname: 'surname', email: data.response_data.user.email, 

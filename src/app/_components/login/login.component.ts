@@ -122,14 +122,14 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  processFormSEAL() {
+  processFormIAM() {
     //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
     //alert(allInfo); 
     this.customErrorMessageLogin = "";
     this.loadingLoginSpinner = true;
     this.invalidCredentials = false;
 
-    this.ls.loginSEAL(this.name, this.password).subscribe(
+    this.ls.loginIAM(this.name, this.password).subscribe(
         res => {          
           if (res['authenticated']) {
             console.log("Valid credentials for the auth service");
