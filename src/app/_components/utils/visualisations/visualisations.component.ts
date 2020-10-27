@@ -19,7 +19,8 @@ export class VisualisationsComponent implements OnInit {
   constructor() { }
   
   urlSafe: string = "";
-
+  extraClass: string = "";
+  
   ngOnInit(): void {
   }
 
