@@ -29,6 +29,12 @@ export class AppComponent {
     this.translate.use('en');
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    let last_language = localStorage.getItem("last_language");
+    if (last_language=='pt' || last_language=='el') {
+      this.translate.use(last_language);
+    }
+
   }
 
   get isLogged() {

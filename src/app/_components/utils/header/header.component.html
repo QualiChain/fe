@@ -138,7 +138,7 @@
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="block-languageswitcher">
 										<ul class="links">
-											<li *ngFor="let lang of translate.getLangs()" [ngClass]="{'current_page_parent': lang===translate.currentLang, 'is-active': lang===translate.currentLang}" class="{{lang}}"><a (click)="translate.use(lang)" [routerLink]="" class="language-link" [ngClass]="{'is-active': lang===translate.currentLang}" hreflang="{{lang}}" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }}</a></li>
+											<li *ngFor="let lang of translate.getLangs()" [ngClass]="{'current_page_parent': lang===translate.currentLang, 'is-active': lang===translate.currentLang}" class="{{lang}}"><a (click)="translate.use(lang);setLastLanguage(lang)" [routerLink]="" class="language-link" [ngClass]="{'is-active': lang===translate.currentLang}" hreflang="{{lang}}" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }}</a></li>
 											<!-- 
 												<li *ngFor="let lang of translate.getLangs()" [ngClass]="{current_page_parent: lang===translate.currentLang}" ><a class="dropdown-item " (click)="translate.use(lang)" [routerLink]="" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }} </a></li>
 											-->											

@@ -108,6 +108,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
 
+  setLastLanguage(lng: string) {
+    localStorage.setItem('last_language', lng); 
+  }
+
   deleteItemMessages(index: number): void {
     // clear messages
     this.messageService.deleteItemMessages(index);
