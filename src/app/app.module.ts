@@ -36,7 +36,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorModule, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatRadioModule} from '@angular/material/radio';
@@ -162,6 +162,8 @@ import { VisualisationsComponent,
 import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 
 import { CanAccessDirective } from './_directives/can-access.directive';
+import { PaginatorIntlService } from './_services/multilingual-paginator-intl'
+import { TranslateService } from "@ngx-translate/core";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -188,7 +190,7 @@ const materialModules = [
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
-    MatPaginatorModule,
+    MatPaginatorModule, 
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
@@ -330,6 +332,15 @@ export function tokenGetter() {
   exports: [materialModules, CanAccessDirective],
   providers: [ PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, QCStorageService, JwtHelperService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
+    {  
+      provide: MatPaginatorIntl, 
+      useFactory: (translate) => {
+        const service = new PaginatorIntlService();
+        service.injectTranslateService(translate);
+        return service;
+      },
+      deps: [TranslateService] 
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: load,

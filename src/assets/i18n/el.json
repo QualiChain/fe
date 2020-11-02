@@ -771,5 +771,13 @@
     "COURSES": "Courses",
     "SKILLS": "Skills",
     "RATING": "Rating"
+  },
+  "PAGINATOR": {
+    "ITEMS_PER_PAGE": "Αντικείμενα ανά σελίδα",
+    "OF": "of",
+    "NEXT_PAGE": "Επόμενη σελίδα",
+    "PREVIOUS_PAGE": "Προηγούμενη σελίδα",
+    "FIRST_PAGE": "Πρώτη σελίδα",
+    "LAST_PAGE": "Τελευταία σελίδα"
   }
 }
