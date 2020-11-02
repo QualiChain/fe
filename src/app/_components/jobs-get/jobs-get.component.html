@@ -36,9 +36,10 @@
             </div>
     
             <div class="col ">
-                <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</h2> 
-
-                    <table class="table table-striped">
+                <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</h2></div> 
+                <div>
+                  <div *ngIf="jobData.skillReq.length==0">{{ 'JOBS.REQUIRED_SKILLS_NOT_AVAILABLE' | translate }}</div>
+                    <table *ngIf="jobData.skillReq.length>0" class="table table-striped">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
@@ -64,9 +65,10 @@
             </div>
 
             <div class="col ">
-              <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EDUCATIONS' | translate }}</h2> 
-
-                  <table class="table table-striped">
+              <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EDUCATIONS' | translate }}</h2></div>
+              <div>
+                  <div *ngIf="jobData.educationReq.length==0">{{ 'JOBS.REQUIRED_EDUCATIONS_NOT_AVAILABLE' | translate }}</div>
+                  <table *ngIf="jobData.educationReq.length>0" class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
@@ -88,9 +90,10 @@
           </div>
 
           <div class="col ">
-            <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EXPERIENCES' | translate }}</h2> 
-
-                <table class="table table-striped">
+            <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EXPERIENCES' | translate }}</h2></div>
+            <div>
+                <div *ngIf="jobData.workExperienceReq.length==0">{{ 'JOBS.REQUIRED_EXPERIENCES_NOT_AVAILABLE' | translate }}</div>
+                <table *ngIf="jobData.workExperienceReq.length>0" class="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col">#</th>

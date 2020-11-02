@@ -1,5 +1,5 @@
 <h1>{{ 'DSS_CV_RE_DESIGN.TITLE' | translate }}</h1>
-<p>This is a mockup</p>
+
 <div class="container">
     <div class="row">
         <div class="col col-lg-2">
@@ -22,22 +22,27 @@
                 <div class="col col-lg-6" >                    
                     {{skill.skill_title}}
                 </div>
+
+                <div class="col col-lg-6">
+                    <div *ngFor="let scored_courses of skill.scored_courses let j = index">
+
+                        <span *ngIf="scored_courses.course_id">
+                            {{scored_courses.course_title}}
+                        </span>
+                    </div>
+                </div>
+                <!--
                 <div class="col col-lg-6">
                     <div *ngFor="let relevant_skill of skill.relevant_skills let j = index">
                         <div *ngFor="let related_course of relevant_skill.related_courses let k = index">
-                            
-                            
                             <span *ngIf="related_course.course_id">
                                 {{related_course.course_title}}
-                                <!--
-                                <a [routerLink]="" (click)="selectedSkill=skill;selectedCourse=related_course" (click)="selectMissingSkill(skill);selectCourseBySkill(related_course)">{{related_course.course_title}}</a>
-                                <a routerLink="/courses/{{related_course.course_id}}">View Course</a>
-                                -->
                             </span>
                         </div>
                         
                     </div>
                 </div>
+                -->
             </div>            
         </div>
         <div *ngIf="selectedSkill.skill_title" class="col col-lg-6">
@@ -64,10 +69,10 @@
                 <canvas
                     baseChart
                     [chartType]="'bar'"
-                    [datasets]="barChartData"
+                    [data]= "barChartData"                    
                     [labels]="barLabels"
                     [options]="barChartOptions"
-                    [legend]="true"
+                    [legend]="false"
                     [colors]="barChartColors"
                     (chartClick)="onChartClick($event)">
                 </canvas>
