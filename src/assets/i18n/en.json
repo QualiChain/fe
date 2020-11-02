@@ -112,8 +112,11 @@
   "JOBS": {
     "TITLE": "Jobs",
     "REQUIRED_SKILLS": "Required Skills",
+    "REQUIRED_SKILLS_NOT_AVAILABLE": "There are not required skills available",
     "REQUIRED_EDUCATIONS": "Required Degrees",
+    "REQUIRED_EDUCATIONS_NOT_AVAILABLE": "There are not required degrees available",
     "REQUIRED_EXPERIENCES": "Required Experiences",
+    "REQUIRED_EXPERIENCES_NOT_AVAILABLE": "There are not required experiences available",
     "BUTTON": {
       "ADD_SKILL": "Add Skill",
       "DELETE_SKILL": "Delete Skill",

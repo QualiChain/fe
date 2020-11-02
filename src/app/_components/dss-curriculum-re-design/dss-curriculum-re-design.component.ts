@@ -20,8 +20,9 @@ export class DSSCurriculumReDesignComponent implements OnInit {
   ) { }
   
   missingSkills: missingSkillData[] = [];
-  selectedSkill: missingSkillData = {skill_title: '', skill_description: '', relevant_skills: []};
-  selectedCourse: related_courses = {course_id: null, course_title: '', suitability_score: null};
+  selectedSkill: missingSkillData = {skill_title: '', skill_description: '', relevant_skills: [], scored_courses:[]};
+  //selectedCourse: related_courses = {course_id: null, course_title: '', suitability_score: null};
+  selectedCourse: related_courses = {course_id: null, course_title: '', score: null};
   listOfRelatedCourses: [];
   userId: number = 0;      
 
@@ -131,10 +132,18 @@ export class DSSCurriculumReDesignComponent implements OnInit {
     let dataToPlot = [];
     let labelsToPlot = [];
     this.relatedCourses = [];
+
+    
+    for (let i = 0; i < missingSkill.scored_courses.length; i++) {
+      dataToPlot.push(missingSkill.scored_courses[i].score);
+      labelsToPlot.push(missingSkill.scored_courses[i].course_title);
+      this.relatedCourses.push(missingSkill.scored_courses[i]);      
+    }
+    /*
     for (let i = 0; i < missingSkill.relevant_skills.length; i++) {
       
       for (let j = 0; j < missingSkill.relevant_skills[i].related_courses.length; j++) {
-
+        //console.log(missingSkill.relevant_skills[i].related_courses[j]);
         //var n = labelsToPlot.includes(missingSkill.relevant_skills[i].related_courses[j].course_title);
         //if (!n) {
           //dataToPlot.push(missingSkill.relevant_skills[i].related_courses[j].suitability_score);
@@ -146,7 +155,7 @@ export class DSSCurriculumReDesignComponent implements OnInit {
         //}
       }
     }
-
+    */
     
     let chartLabel = this.translate.instant('DSS_CV_RE_DESIGN.FOOTER_BAR_CHART', { skill_title: missingSkill.skill_title });
 
@@ -155,11 +164,31 @@ export class DSSCurriculumReDesignComponent implements OnInit {
         text: chartLabel,
         display: true
       },
+      legend: {
+        position: 'top',
+      },
+    hover: {
+        mode: 'label'
+    },
+    scales: {
+        yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true,
+                    steps: 10,
+                    stepValue: 0.1,
+                    max: 1,
+                    min: 0,
+                }
+            }]
+    },
       responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
     }    
     
     let chartLabel2 = this.translate.instant('COURSES.TITLE');
-    this.barChartData = [{data: dataToPlot, label: chartLabel2}];
+    //this.barChartData = [{data: dataToPlot, label: chartLabel2}];
+    this.barChartData = dataToPlot;
+
     this.barLabels = labelsToPlot;
     /*
     this.barLabels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -195,8 +224,14 @@ export class DSSCurriculumReDesignComponent implements OnInit {
 export interface missingSkillData {
   skill_title: string;
   skill_description: string;
-  relevant_skills : relevant_skills[];
-  
+  relevant_skills: relevant_skills[];
+  scored_courses: scored_courses[]; 
+}
+
+export interface scored_courses {
+  course_id: number;
+  course_title: string;  
+  score : number;
 }
 
 export interface relevant_skills {
@@ -208,5 +243,5 @@ export interface relevant_skills {
 export interface related_courses {
   course_id: number,
   course_title: string,
-  suitability_score: number
+  score: number
 }

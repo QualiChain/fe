@@ -60,7 +60,7 @@ docker run --name ng-app-qualichain-fe -d -p 80:80 qualichain-fe-app
 
 - In your browser, navigate to 'http://localhost'
 
-It deploys the FE in an nginx server
+It deploys the FE in a nginx server
 
 The default.conf file is used to configure nginx as proxy to solve CORS problem.
 
