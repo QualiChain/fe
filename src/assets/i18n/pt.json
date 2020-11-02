@@ -771,5 +771,13 @@
     "COURSES": "Courses",
     "SKILLS": "Skills",
     "RATING": "Rating"
+  },
+  "PAGINATOR": {
+    "ITEMS_PER_PAGE": "Itens por página",
+    "OF": "de",
+    "NEXT_PAGE": "Próxima página",
+    "PREVIOUS_PAGE": "Página anterior",
+    "FIRST_PAGE": "Primeira página",
+    "LAST_PAGE": "Última página"
   }
 }
