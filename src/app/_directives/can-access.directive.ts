@@ -2,8 +2,7 @@ import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } fr
 import { Subscription } from 'rxjs';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../_services';
-import { exit } from 'process';
-import permissionsByRole from "../_helpers/permissionsByRole";
+//import { exit } from 'process';
 import { Injectable } from '@angular/core';
 
 
@@ -40,15 +39,6 @@ export class CanAccessDirective implements OnInit, OnDestroy {
     let authorized: boolean = false;
     
     //console.log(this.currentUser);    
-    /*
-    let permissionsByRole: {} = {
-        'view_user_profile': ['student', 'professor'],
-        'view_user_profile_2': ['admin', 'recruiter'],
-        'view_user_profile_3': ['student', 'professor'],
-    };*/
-    
-    //this.currentUser['roles'] = ['student', 'professor', 'admin', 'employee'];
-    //authorized = this.checkIfPermissionsExistsByUserRoles(value);
     authorized = this.authservice.checkIfPermissionsExistsByUserRoles(value);
 
     if (authorized) {
