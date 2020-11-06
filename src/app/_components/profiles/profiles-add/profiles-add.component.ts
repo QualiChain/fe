@@ -148,12 +148,13 @@ export class ProfilesAddComponent implements OnInit {
         this.userId = params.id;        
       }
       else { 
-
-        if(this.currentUser.hasOwnProperty('id')) { 
-          id = this.currentUser.id.toString();
-          this.userId = id;
+        //console.log(this.router.url);
+        if (this.router.url!='/profiles/add') {
+          if(this.currentUser.hasOwnProperty('id')) { 
+            id = this.currentUser.id.toString();
+            this.userId = id;
+          }
         }
-        
       }
       
       //console.log(this.userId );

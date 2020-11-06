@@ -104,6 +104,7 @@ export class LoginComponent implements OnInit {
    */
 
   processFormRequestPassword() {
+    console.log(this);
     this.customErrorMessageLogin = "";
     this.loadingRequestPasswordSpinner = true;
     this.requestPasswordError = false;

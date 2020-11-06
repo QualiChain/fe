@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole, Inject } from '@angular/core';
+import { Component, OnInit, ɵConsole, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../../_services/courses.service';
 import Course from '../../../_models/course';
@@ -14,6 +14,9 @@ import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UsersService } from '../../../_services/users.service';
 //import { FilterArrayByValueGetListPipe } from '../../../_pipes/FilterArrayByValueGetList/filterArrayByValueGetList.pipe';
 import { AppComponent } from '../../../app.component';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator'
 
 export interface DialogData {
   grade: number;
@@ -33,9 +36,23 @@ export interface DialogDataEnrollment {
 })
 export class CoursesGetComponent implements OnInit {
 
+  displayedColumnsEnrolled: string[] = ['surname', 'name', 'action'];
+  displayedColumnsDoneBy: string[] = ['surname', 'name', 'course_grade', 'action'];
+  //@ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  @ViewChild('paginatorProfessor', {static: true, read: MatPaginator}) paginatorProfessor: MatPaginator;
+  @ViewChild('paginatorUsersStatusEnrolled', {static: true, read: MatPaginator}) paginatorUsersStatusEnrolled: MatPaginator;
+  @ViewChild('paginatorUsersStatusDone', {static: true, read: MatPaginator}) paginatorUsersStatusDone: MatPaginator;
+
+  @ViewChild('ProfessorSort', {static: true}) ProfessorSort: MatSort;
+  @ViewChild('EnrolledSort', {static: true}) EnrolledSort: MatSort;
+  @ViewChild('DoneSort', {static: true}) DoneSort: MatSort;
+  
   currentUser: User;
   enrolledUsers: any[] = [];
-
+  professorList = new MatTableDataSource([]);
+  enrolledUsersStatusEnrolled = new MatTableDataSource([]);
+  enrolledUsersStatusDone = new MatTableDataSource([]);
   loadSpinner: boolean = false;
   errorRelation: boolean = false;
 
@@ -127,6 +144,39 @@ export class CoursesGetComponent implements OnInit {
   courseData: any;
   
   ngOnInit() {
+    
+    this.professorList.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'name': return item.user.name;
+        case 'surname': return item.user.surname;
+        default: return item[property];
+      }
+    };    
+    this.professorList.sort = this.ProfessorSort;
+    this.professorList.paginator = this.paginatorProfessor;
+
+    this.enrolledUsersStatusEnrolled.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'name': return item.user.name;
+        case 'surname': return item.user.surname;
+        default: return item[property];
+      }
+    };
+    //this.enrolledUsersStatusEnrolled.sort = this.sort;
+    this.enrolledUsersStatusEnrolled.sort = this.EnrolledSort;
+    this.enrolledUsersStatusEnrolled.paginator = this.paginatorUsersStatusEnrolled;
+
+    this.enrolledUsersStatusDone.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'name': return item.user.name;
+        case 'surname': return item.user.surname;
+        default: return item[property];
+      }
+    };
+    //this.enrolledUsersStatusDone.sort = this.sort;
+    this.enrolledUsersStatusDone.sort = this.DoneSort;
+    this.enrolledUsersStatusDone.paginator = this.paginatorUsersStatusDone;
+
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
     this.courseData = {courseid: 0, name: "", description: "", semester: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
@@ -206,12 +256,29 @@ export class CoursesGetComponent implements OnInit {
       });
   }
 
+  
+  filterByDoneStatus(element, index, array) 
+  {  
+       return element.course_status==='done'; 
+  }
+  filterByEnrolledStatus(element, index, array) 
+  {  
+       return element.course_status==='enrolled'; 
+  }
+  filterByProfessorStatus(element, index, array) 
+  {  
+       return element.course_status==='taught'; 
+  }
+  
   getEnrolledUsersByCourse(courseId: Number) {
     this.cs
     .getEnrolledUserByCourseId(courseId).subscribe(
-    dataEnrolledUsers => {
+    (dataEnrolledUsers: any[]) => {
       //console.log(dataEnrolledUsers);
       this.enrolledUsers = dataEnrolledUsers;
+      this.enrolledUsersStatusDone.data = (dataEnrolledUsers.filter(this.filterByDoneStatus));
+      this.enrolledUsersStatusEnrolled.data = (dataEnrolledUsers.filter(this.filterByEnrolledStatus));
+      this.professorList.data = (dataEnrolledUsers.filter(this.filterByProfessorStatus));
     },
     error => {
       console.log("error recovering enrolled users by course id")

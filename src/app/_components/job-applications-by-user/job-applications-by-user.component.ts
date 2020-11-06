@@ -38,6 +38,8 @@ export class JobApplicationsByUserComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
 
     if (!this.userId) {
       this.route.params.subscribe(params => {
@@ -94,8 +96,12 @@ let ELEMENT_DATA: any[] = [];
 })
 export class JobAppliesComponentPage extends JobApplicationsByUserComponent{
 
+/*
+  @ViewChild(MatPaginator, {static: true}) 
+  paginator: MatPaginator;  
 
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+*/
 
 }
 

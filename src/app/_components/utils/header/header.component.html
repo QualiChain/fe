@@ -219,8 +219,8 @@
 						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn" 
 						[ngClass]="{'btn-primary': message.read, 'btn-secondary': !message.read}"
 						(click)="changeItemStatus(message)">
-						    <span *ngIf="message.read"> <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'NOTIFICATIONS.SET_AS_UNREADED' | translate }}</span>
-							<span *ngIf="!message.read"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READED' | translate }}</span>
+						    <span *ngIf="message.read"> <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'NOTIFICATIONS.SET_AS_UNREAD' | translate }}</span>
+							<span *ngIf="!message.read"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READ' | translate }}</span>
 						</button>
 
 						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="deleteNotificationItem(message, i)">
