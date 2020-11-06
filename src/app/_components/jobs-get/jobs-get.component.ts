@@ -62,6 +62,7 @@ export class JobsGetComponent implements OnInit {
         this.js.deleteJobApply(jobId, userId).subscribe(
           res => {
             //console.log("Request OK");
+            //console.log(res);
             if (posI<0) {
               this.getCandidates(jobId);
             }
@@ -72,8 +73,8 @@ export class JobsGetComponent implements OnInit {
             this.userHasAnApply = false;
           },
           error => {
-            //console.log("Error deletring job apply data");
-            
+            console.log("Error deletring job apply data");
+            //console.log(error);
           }
         ); 
       }
@@ -108,7 +109,7 @@ export class JobsGetComponent implements OnInit {
 
           appliesByuser.forEach(element => {
             //console.log(element.jobURI);
-            if (element.jobURI==id) {
+            if (element.jobURI=="saro:"+id) {
               this.userHasAnApply = true;
             }
           });
@@ -173,7 +174,7 @@ export class JobsGetComponent implements OnInit {
         this.userHasAnApply = result;
         this.getCandidates(jobId);
       }
-      console.log(result);
+      //console.log(result);
     });    
     
 
