@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -86,10 +86,8 @@ export class JobsService {
 
 
     applyJob(jobId: any, userId: any, dataIn: object) {
-      console.log(userId);
-      console.log(jobId);
-
-      
+      //console.log(userId);
+      //console.log(jobId);     
       return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, JSON.stringify(dataIn)).
       pipe(
          map((data: any) => {
@@ -101,12 +99,16 @@ export class JobsService {
     }
 
     deleteJobApply(jobId: any, userId: any) {   
-      console.log(jobId);console.log(userId);   
-      return this.http.delete(`${this.jobsURL}/${jobId}/apply/${userId}`).
+      //console.log(jobId);console.log(userId);   
+      const headers = new HttpHeaders();
+
+      return this.http.delete(`${this.jobsURL}/${jobId}/apply/${userId}`,{ headers, responseType: 'text'}).
       pipe(
          map((data: any) => {
+           console.log(data);
            return data;
          }), catchError( error => {
+           console.log(error);
            return throwError( 'Something went wrong!' );
          })
       )
