@@ -11,6 +11,7 @@ export class JobsService {
 
   //uri = 'http://localhost:4000/jobs';
   private jobsURL = environment.jobsUrl;
+  private jobsProfilesURL = environment.jobsProfilesUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -128,7 +129,8 @@ export class JobsService {
     }
 
     getJobAppliesPerCandidat(userId: number) {
-      return this.http.get(`${this.jobsURL}/${userId}/jobapplies`).
+      //return this.http.get(`${this.jobsURL}/${userId}/jobapplies`).
+      return this.http.get(`${this.jobsProfilesURL}/${userId}/applications`).
       pipe(
          map((data: any) => {
            return data;

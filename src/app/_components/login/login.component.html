@@ -2,64 +2,65 @@
 
 <div class="container">
   <div class="row">
-      <mat-tab-group>
-          <mat-tab label="{{ 'LOGIN.TAB.LOGIN' | translate }}">
-
-            <br>
-
-              <div class="row" *ngIf="loadingLoginSpinner">
-                <app-qc-spinner></app-qc-spinner>
-              </div>
-      
-              
-              <div *ngIf="!loadingLoginSpinner">
-      
-                <div *ngIf="invalidCredentials" class="alert alert-danger" role="alert">
+    <mat-tab-group>        
+      <mat-tab label="{{ 'LOGIN.TAB.LOGIN' | translate }}">
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-8 col-md-offset-2">
+          <mat-card class="mat-card">
+            <div class="row" *ngIf="loadingLoginSpinner">
+              <app-qc-spinner></app-qc-spinner>
+            </div>                
+            <div *ngIf="!loadingLoginSpinner">        
+              <div *ngIf="invalidCredentials" class="alert alert-danger" role="alert">
                   {{ 'LOGIN.INVALID_CREDENTIALS_MESSAGE' | translate }}<br>
                   {{customErrorMessageLogin}}
-                </div>
-        
-                <form #formLogin="ngForm" (ngSubmit)="processForm()" class="userlogin-form">
-                    <!-- name -->
-                    <div class="form-group field" [class.has-error]="usernameInput.invalid">
-                      <mat-form-field class="userlogin-full-width">
-                        <mat-label>{{ 'LOGIN.USERNAME' | translate }}</mat-label>
-                        <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'LOGIN.USERNAME' | translate }}" #usernameInput="ngModel">
-                      </mat-form-field>
-                      <div class="help is-error alert-warning" *ngIf="(usernameInput.invalid && usernameInput.dirty)  || (!name)">
-                        {{ 'LOGIN.USERNAME_HELP' | translate }}
-                      </div>
-                    </div>
-                    
-                    <!-- password -->
-                    <div class="form-group field" [class.has-error]="passwordInput.invalid" id="loginpasswordQC">  
-                      <mat-form-field appearance="fill" class="userlogin-full-width">
-                        <mat-label>{{ 'LOGIN.PASSWORD' | translate }}</mat-label>
-                        <input  #passwordInput="ngModel" required minlength="3" matInput [(ngModel)]="password" name="password" value="password" [type]="hidePassword ? 'password' : 'text'">
-                        <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
-                      </mat-form-field>
-                      <div class="help is-error alert-warning" *ngIf="(passwordInput.invalid && passwordInput.dirty) || (!password)">
-                        {{ 'LOGIN.PASSWORD_HELP' | translate }}
-                      </div>
-                    </div>
-                    <div>
-                      <button type="submit" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }}</button>
-      
-                      <button type="button"  (click)="processFormIAM()" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }} WITH SEAL UNDER CONSTRUCTION</button>
-                    </div>         
-                </form> 
               </div>
+          
+              <form #formLogin="ngForm" (ngSubmit)="processForm()" class="userlogin-form">
+                <!-- name -->
+                <div class="form-group field" [class.has-error]="usernameInput.invalid">
+                  <mat-form-field class="userlogin-full-width">
+                    <mat-label>{{ 'LOGIN.USERNAME' | translate }}</mat-label>
+                    <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'LOGIN.USERNAME' | translate }}" #usernameInput="ngModel">
+                  </mat-form-field>
+                  <div class="help is-error alert-warning" *ngIf="(usernameInput.invalid && usernameInput.dirty)  || (!name)">
+                    {{ 'LOGIN.USERNAME_HELP' | translate }}
+                  </div>
+                </div>
+                      
+                <!-- password -->
+                <div class="form-group field" [class.has-error]="passwordInput.invalid" id="loginpasswordQC">  
+                  <mat-form-field appearance="fill" class="userlogin-full-width">
+                    <mat-label>{{ 'LOGIN.PASSWORD' | translate }}</mat-label>
+                    <input  #passwordInput="ngModel" required minlength="3" matInput [(ngModel)]="password" name="password" value="password" [type]="hidePassword ? 'password' : 'text'">
+                    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <div class="help is-error alert-warning" *ngIf="(passwordInput.invalid && passwordInput.dirty) || (!password)">
+                    {{ 'LOGIN.PASSWORD_HELP' | translate }}
+                  </div>
+                </div>
+                
+                <div>
+                  <button type="submit" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }}</button>        
+                  <button type="button"  (click)="processFormIAM()" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }} WITH SEAL UNDER CONSTRUCTION</button>
+                </div>         
+              </form> 
+            </div>              
+          </mat-card>
+        </div>
+        <div class="col-md-12">&nbsp;</div>
+      </mat-tab>
 
-          </mat-tab>
-          <mat-tab label="{{ 'LOGIN.TAB.REQUEST_YOUR_PASSWORD' | translate }}">    
-            <br/>
+      <mat-tab label="{{ 'LOGIN.TAB.REQUEST_YOUR_PASSWORD' | translate }}">    
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-8 col-md-offset-2">
+          <mat-card class="mat-card">            
             <div class="row" *ngIf="loadingRequestPasswordSpinner">
               <app-qc-spinner></app-qc-spinner>          
             </div>
             <div *ngIf="!loadingRequestPasswordSpinner">
-    
               <div class="alert alert-danger" role="alert">
                 UNDER CONSTRUCTION!!!
               </div>
@@ -71,40 +72,35 @@
               </div>
               
               <div class="">
-                <form #formRequestPassword="ngForm" (ngSubmit)="processFormRequestPassword()" class="requestPasword-form">         
-    
-                    <!-- name -->
-                    <div class="form-group field" [class.has-error]="usernameInput.invalid">
-                      <mat-form-field class="requestPasword-full-width">
-                        <mat-label>{{ 'LOGIN.USERNAME' | translate }}</mat-label>
-                        <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'LOGIN.USERNAME' | translate }}" #usernameInput="ngModel">
-                      </mat-form-field>
-                      <div class="help is-error alert-warning" >
-                        {{ 'LOGIN.USERNAME_HELP' | translate }}
-                      </div>
-                    </div>
-                    <!-- email -->
-                    <div class="form-group field" [class.has-error]="emailInput.invalid">
-                      <mat-form-field class="requestPasword-full-width">
-                        <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
-                        <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'LOGIN.EMAIL' | translate }}" #emailInput="ngModel">
-                      </mat-form-field>
-      
-                      <div class="help is-error alert-warning">
-                        {{ 'LOGIN.EMAIL_HELP' | translate }}
-                      </div>
-                    </div>
+                <form #formRequestPassword="ngForm" (ngSubmit)="processFormRequestPassword()" class="requestPasword-form">
+                  <!-- name -->
+                  <div class="form-group field" [class.has-error]="usernameInput.invalid">
+                    <mat-form-field class="requestPasword-full-width">
+                      <mat-label>{{ 'LOGIN.USERNAME' | translate }}</mat-label>
+                      <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'LOGIN.USERNAME' | translate }}" #usernameInput="ngModel">
+                    </mat-form-field>
+                    <div class="help is-error alert-warning">{{ 'LOGIN.USERNAME_HELP' | translate }}</div>
+                  </div>
+                  <!-- email -->
+                  <div class="form-group field" [class.has-error]="emailInput.invalid">
+                    <mat-form-field class="requestPasword-full-width">
+                      <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
+                      <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'LOGIN.EMAIL' | translate }}" #emailInput="ngModel">
+                    </mat-form-field>      
+                    <div class="help is-error alert-warning">{{ 'LOGIN.EMAIL_HELP' | translate }}</div>
+                  </div>
 
-                    <button type="submit" class="btn btn-success" [disabled]="formRequestPassword.invalid">{{ 'LOGIN.BUTTON.SUBMIT' | translate }}</button>
-          
-                  </form>      
-          
-                </div>          
-    
+                  <button type="submit" class="btn btn-success" [disabled]="formRequestPassword.invalid">{{ 'LOGIN.BUTTON.SUBMIT' | translate }}</button>
+            
+                </form>      
+            
+              </div>              
             </div>            
-           
-          </mat-tab>
-      </mat-tab-group>
+          </mat-card>
+        </div>
+        <div class="col-md-12">&nbsp;</div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
 

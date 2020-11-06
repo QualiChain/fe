@@ -33,7 +33,7 @@
     "PERSONAL_FILES_REPOSITORY": "Files Repository"
   },
   "PERSONAL_FILES_REPOSITORY": {
-    "TITLE": "Personal file repository",
+    "TITLE": "Personal files repository",
     "DELETE_MESSAGE": "Are you sure you want to delete this file?",
     "CONFIRM_ACTION": "Confirm Action"
   },
@@ -104,7 +104,7 @@
   },
   "JOBS_APPLICATIONS": {
     "TITLE": "Job applications",
-    "NO_DATA": "There are not job applications",
+    "NO_DATA": "There are no job applications",
     "BUTTON": {
       "VIEW_JOB": "View job"
     }
@@ -511,7 +511,7 @@
       "TOUGH_THE_COURSE" : "Set me as teacher",
       "UNTOUGH_THE_COURSE" : "Delete me from the teacher of this course",
       "COURSE_DONE" : "Set as done",
-      "COURSE_UNDONE": "Delete me from the users that done this course",
+      "COURSE_UNDONE": "Delete me from the users that did this course",
       "ADD_NEW_RELATION": "Add new user relation"
     },
     "SCORE_TITLE": "Which is your score?",
@@ -540,7 +540,7 @@
   },
   "RECRUITMENT"  : {
     "TITLE": "Προσλήψεις",
-    "NO_DATA": "There are not candidates for this job",
+    "NO_DATA": "There are no candidates for this job",
     "SEARCH_LABEL" : "Select a Job",
     "CV-JOB-MATCHING": "CV-JOB Matching",
     "NAME": "Name",
@@ -615,8 +615,8 @@
   "NOTIFICATIONS": {
     "NOTIFICATIONS": "Notifications",
     "NO_NOTIFICATIONS_AVAILABLE" : "There are not notifications available",
-    "SET_AS_READED" : "Set as readed",
-    "SET_AS_UNREADED" : "Set as unreaded"
+    "SET_AS_READ" : "Set as read",
+    "SET_AS_UNREAD" : "Set as unread"
   },
   "CV": {
     "TITLE": {

@@ -26,7 +26,7 @@
     </div>
 
     <div class="">  
-      <table mat-table [dataSource]="dataSource" matSort class="table">
+      <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
       
@@ -79,7 +79,7 @@
         <!-- level Column -->
         <ng-container matColumnDef="level">
           <th mat-header-cell *matHeaderCellDef > {{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+element.seniorityLevel | uppercase | translate }} </td>
+          <td mat-cell *matCellDef="let element"> <span *ngIf="element.seniorityLevel">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+element.seniorityLevel | uppercase | translate }}</span> </td>
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

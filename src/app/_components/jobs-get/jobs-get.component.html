@@ -116,13 +116,13 @@
         </div>
     </div>
     
-    <div class="row" *ngIf="isAdmin || isRecruiter">
-
+    <div class="col" *ngIf="isAdmin || isRecruiter">
+      
       <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
 
         <div *ngIf="jobCandidates.length==0">{{ 'JOB.NO_CANDIDATES' | translate }}</div>
 
-        <div *ngIf="jobCandidates.length>0" class="col col-lg-12">
+        <div *ngIf="jobCandidates.length>0">
       
 
             <table *ngIf="jobCandidates.length>0" class="table table-striped">

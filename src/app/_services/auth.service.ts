@@ -81,7 +81,7 @@ export class AuthService {
       //let myAuthObj = {};
       let myAuthObj=  new User;
          
-      return this.httpClient.post(`${this.userURL}`+"/${username}/resetPassword", obj).
+      return this.httpClient.post(`${this.userURL}`+"/"+`${username}`+"/resetPassword", obj).
       pipe(
          map((data: any) => {
            return data;
