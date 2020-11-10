@@ -80,9 +80,12 @@ export class JobsGetComponent implements OnInit {
               this.getCandidates(jobId);
             }
             else {
+              /*
               this.jobCandidates.splice(posI, 1);
               //this.dataSource.data.splice(posI, 1);              
               this.dataSource._updateChangeSubscription();
+              */
+              this.getCandidates(jobId);
             }
             
             this.userHasAnApply = false;
