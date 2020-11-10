@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ɵConsole, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobsService } from '../../_services/jobs.service';
 import { Job, JobSkill } from '../../_models/Job';
@@ -13,12 +13,24 @@ import { AuthService } from '../../_services';
 import User from '../../_models/user';
 import { AppComponent } from '../../app.component';
 
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+
 @Component({
   selector: 'app-jobs-get',
   templateUrl: './jobs-get.component.html',
   styleUrls: ['./jobs-get.component.css']
 })
 export class JobsGetComponent implements OnInit {
+
+  displayedColumns: string[] = ['candidateSurname', 'candidateName', 'available', 'expsalary', 'score', 'action'];
+  dataSource = new MatTableDataSource([]);
+  @ViewChild(MatPaginator, {static: true}) 
+  paginator: MatPaginator;  
+  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
 
   constructor(
     private appcomponent: AppComponent,
@@ -69,6 +81,8 @@ export class JobsGetComponent implements OnInit {
             }
             else {
               this.jobCandidates.splice(posI, 1);
+              //this.dataSource.data.splice(posI, 1);              
+              this.dataSource._updateChangeSubscription();
             }
             
             this.userHasAnApply = false;
@@ -92,6 +106,9 @@ export class JobsGetComponent implements OnInit {
   //jobData = {};
   
   ngOnInit() {
+
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
 
     this.jobData = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",skillReq: [],workExperienceReq:[],educationReq:[]};
 
@@ -158,7 +175,25 @@ export class JobsGetComponent implements OnInit {
     .subscribe((jobCandidates: any) => {
 
       //console.log(jobCandidates);  
+      jobCandidates.forEach(element => {
+        this.us
+        .getUser(element.id).subscribe(
+          data => {
+            //console.log("user in db");
+            element.candidateName = data.name;
+            element.candidateSurname = data.surname;
+          },
+          error => {
+            console.log("error recovering user data");
+            element.candidateName = "";
+            element.candidateSurname = "";
+          }
+        );
+        
+      });
+      
       this.jobCandidates = jobCandidates;  
+      this.dataSource.data = this.jobCandidates;
 
     });
   }
