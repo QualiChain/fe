@@ -19,22 +19,22 @@
                     <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/jobs',element.id]" class="btn btn-primary small">
+                        <a [routerLink]="['/jobs',element?.id]" class="btn btn-primary small">
                             <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                         </a>
                     </td>
                     </ng-container>
 
             <!-- Title Column -->
-            <ng-container matColumnDef="title">
+            <ng-container matColumnDef="label">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.TITLE.LABEL' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                <td mat-cell *matCellDef="let element"> {{element?.label}} </td>
             </ng-container>
 
             <!-- Description Column -->
-            <ng-container matColumnDef="job_description">
+            <ng-container matColumnDef="jobDescription">
                 <th mat-header-cell *matHeaderCellDef > {{ 'JOB.DESCRIPTION.LABEL' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.job_description}} </td>
+                <td mat-cell *matCellDef="let element"> {{element?.jobDescription}} </td>
             </ng-container>
 
             <!-- rating Column -->

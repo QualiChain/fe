@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, Inject} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-
+import { FormControl } from '@angular/forms';
 import { Job } from '../../_models/Job';
 import { JobsService } from '../../_services/jobs.service';
 import { ExcelServiceService } from '../../_services/excel/excel-service.service';
@@ -85,12 +85,17 @@ export class JobsComponent implements OnInit {
 */
 
 export class JobsComponent implements OnInit {
+
+
+ 
+
   //displayedColumns: string[] = ['id', 'title', 'employment_type', 'level', 'action'];
-  displayedColumns: string[] = ['label', 'employment_type', 'level', 'action'];
+  displayedColumns: string[] = ['label', 'employment_type', 'level', 'hiringOrg', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   currentUser: User;
+  companies: any[] = [];
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
@@ -102,6 +107,15 @@ export class JobsComponent implements OnInit {
   }
 
   jobs: Job[];
+
+  nameFilter = new FormControl('');
+  organizationFilter = new FormControl('');
+
+  filterValues = {
+    label: '',
+    hiringOrg: ''
+  };
+
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
@@ -109,6 +123,8 @@ export class JobsComponent implements OnInit {
     public applyForAJobDialog: MatDialog) { 
 
       this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+      this.dataSource.filterPredicate = this.createFilter();
 
     }
 
@@ -167,35 +183,80 @@ export class JobsComponent implements OnInit {
 
   jobsList = [];
 
+  createFilter(): (data: any, filter: string) => boolean {
+    let filterFunction = function(data, filter): boolean {
+      let searchTerms = JSON.parse(filter);
+
+      if ( data.hiringOrg ) {
+        if (searchTerms.hiringOrg) {
+          return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1
+          && data.hiringOrg.toString().toLowerCase().indexOf(searchTerms.hiringOrg.toLowerCase()) !== -1;
+        }
+        else {
+          return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1;
+        }        
+      }
+      else {
+        if (searchTerms.hiringOrg) {
+          return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1
+          && (data.hiringOrg)!= null;
+        }
+        else {
+          return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1;
+        }        
+      }      
+    }
+    return filterFunction;
+  }
+
   ngOnInit() {
+    this.getCompaniesList();
     this.getJobList();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.nameFilter.valueChanges
+    .subscribe(
+      label => {
+        this.filterValues.label = label;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+  this.organizationFilter.valueChanges
+    .subscribe(
+      hiringOrg => {
+        this.filterValues.hiringOrg = hiringOrg;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
 
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
       }  
     }
+
+    selectCompany(value: any) {
+      console.log(value);
+    }
+
+    getCompaniesList() {
+      this.js
+      .getCompanies()
+      .subscribe((dataCompanies: any[]) => {
+        this.companies = dataCompanies;
+      });
+    }
+    
     getJobList() {
-    this.js
+      this.js
       .getJobs()
       .subscribe((data: Job[]) => {
         this.jobs = data;
         ELEMENT_DATA = data;
-        //console.log(data);
-        /*
-        ELEMENT_DATA.forEach(element => {
-          data.push(element);
-          //console.log(element);
-        });
-        */
         this.dataSource.data = data;
-
-    });
-   
-
-  }
+      });
+    }
 
   exportExcel(){    
     this.excelService.exportAsExcelFile(ELEMENT_DATA, 'list_of_jobs');

@@ -16,7 +16,7 @@ export class RecomendedJobsComponent implements OnInit {
   @Input() userId: number = null;
 
   //displayedColumns: string[] = ['title', 'job_description', 'rating', 'action'];
-  displayedColumns: string[] = ['title', 'job_description', 'action'];
+  displayedColumns: string[] = ['label', 'jobDescription', 'action'];
   
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -71,7 +71,8 @@ export class RecomendedJobsComponent implements OnInit {
           */
 
           this.recomendedJobs.forEach(element => {
-            tmpData.push(element.job);
+            //tmpData.push(element.job);
+            tmpData.push(element);
           });
           this.dataSource.data = tmpData;
           //console.log(this.recomendedJobs);

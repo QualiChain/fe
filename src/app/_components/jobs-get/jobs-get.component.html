@@ -34,7 +34,10 @@
             <div class="col ">
                 <div><span class="labeljob">{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+jobData.seniorityLevel | uppercase | translate }}</div> 
             </div>
-    
+            <div class="col ">
+              <div><span class="labeljob">{{ 'JOB.ORGANIZATION' | translate }}:</span> {{ jobData?.hiringOrg }} </div> 
+            </div>
+            
             <div class="col ">
                 <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</h2></div> 
                 <div>
