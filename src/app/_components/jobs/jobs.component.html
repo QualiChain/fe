@@ -20,9 +20,31 @@
     </div>
 
     <div>
+
+<!--
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
       </mat-form-field>
+-->
+      <div class="col-lg-8">
+        <strong>{{ 'FILTER' | translate }}:</strong>
+        
+        &nbsp;
+
+        <mat-form-field>
+          <input matInput [formControl]="nameFilter" placeholder="{{ 'JOBS.FILTER.TITLE' | translate }}">
+        </mat-form-field>
+      
+        &nbsp;
+
+        <mat-form-field>
+          <mat-select [formControl]="organizationFilter" placeholder="{{ 'JOBS.FILTER.ORGANIZATION' | translate }}" (selectionChange)="selectCompany($event.value)">          
+            <mat-option>{{ 'JOBS.NONE' | translate }}</mat-option>
+            <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
     </div>
 
     <div class="">  
@@ -81,7 +103,13 @@
           <th mat-header-cell *matHeaderCellDef > {{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }} </th>
           <td mat-cell *matCellDef="let element"> <span *ngIf="element.seniorityLevel">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+element.seniorityLevel | uppercase | translate }}</span> </td>
         </ng-container>
-    
+        
+        <!-- hiringOrg Column -->
+        <ng-container matColumnDef="hiringOrg">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.ORGANIZATION' | translate }} </th>
+          <td mat-cell *matCellDef="let element"> {{element?.hiringOrg }} </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>

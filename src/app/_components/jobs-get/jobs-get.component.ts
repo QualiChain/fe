@@ -35,6 +35,7 @@ export class JobsGetComponent implements OnInit {
 
   }
 
+  
   isLogged = this.appcomponent.isLogged;
   isAdmin = this.appcomponent.isAdmin;
   isRecruiter = this.appcomponent.isRecruiter;
@@ -73,7 +74,7 @@ export class JobsGetComponent implements OnInit {
             this.userHasAnApply = false;
           },
           error => {
-            console.log("Error deletring job apply data");
+            console.log("Error deleting job apply data");
             //console.log(error);
           }
         ); 
@@ -85,6 +86,7 @@ export class JobsGetComponent implements OnInit {
   jobCandidates: any =[]
   userHasAnApply: boolean = false;
   currentUser: User;
+  jobPostId: string = null;
 
   //jobData: any;
   //jobData = {};
@@ -108,9 +110,10 @@ export class JobsGetComponent implements OnInit {
         .subscribe((appliesByuser: any[]) => {
 
           appliesByuser.forEach(element => {
-            //console.log(element.jobURI);
+            //console.log(element);
             if (element.jobURI=="saro:"+id) {
               this.userHasAnApply = true;
+              this.jobPostId = element.id;
             }
           });
           

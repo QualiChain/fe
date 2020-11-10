@@ -142,4 +142,16 @@ export class JobsService {
       )
     }    
 
+
+    getCompanies() {
+      return this.http.get(`${this.jobsURL}/companies`).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }
+
 }

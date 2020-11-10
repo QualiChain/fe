@@ -14,6 +14,7 @@ export class RecomendationsService {
 
   private uriRecomendations = environment.recomendationsUrl;
   private uriRecomendationsByCV = environment.recomendationsUrlByCV;
+  private uriRecomendationsJobsByCV = environment.cvUrl
 
 
   constructor(private http: HttpClient, private cvss: CVService, private cs: CoursesService) { }
@@ -137,7 +138,7 @@ export class RecomendationsService {
 
 
   getRecomendationsJobs(userId: Number) {    
-    return this.http.get(`${this.uriRecomendations}/${userId}/jobs`).
+    return this.http.get(`${this.uriRecomendationsJobsByCV}/${userId}/recommendations/jobs`).
     pipe(
        map((data: any) => {
          return data;

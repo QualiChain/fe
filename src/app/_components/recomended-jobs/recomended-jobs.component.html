@@ -10,7 +10,7 @@
     <mat-expansion-panel  id="job-{{i}}" *ngFor="let job of recomendedJobs | slice:0:5; let i = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{job.job.title}}
+          {{job?.label}}
         </mat-panel-title>
         <mat-panel-description>
           
@@ -20,7 +20,7 @@
       <div class="job-card">                    
         <div class="job-card-body">                      
           <div class="job-card-text">
-            {{job.job.job_description}}
+            {{job?.jobDescription}}
             <br/>
             <!--{{ 'RECOMENDED_JOBS.MATCH' | translate }}:-->
           </div>
@@ -32,7 +32,7 @@
           -->
 
           <br/>
-          <button class="btn btn-primary" [routerLink]="['/jobs', job.job.id]">
+          <button class="btn btn-primary" [routerLink]="['/jobs', job?.id]">
             <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
           </button>
 
