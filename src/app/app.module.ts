@@ -164,6 +164,7 @@ import { EducationPlanComponent } from './_components/education-plan/education-p
 import { CanAccessDirective } from './_directives/can-access.directive';
 import { PaginatorIntlService } from './_services/multilingual-paginator-intl'
 import { TranslateService } from "@ngx-translate/core";
+import { QcUserNameComponent } from './_components/utils/qc-user-name/qc-user-name.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -293,7 +294,8 @@ export function tokenGetter() {
     VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
     VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, 
     VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime, EducationPlanComponent,
-    CanAccessDirective
+    CanAccessDirective,
+    QcUserNameComponent
   ],
   imports: [
     SafePipeModule,

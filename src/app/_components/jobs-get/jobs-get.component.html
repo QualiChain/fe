@@ -119,21 +119,68 @@
         </div>
     </div>
     
-    <div class="col" *ngIf="isAdmin || isRecruiter">
+    <div class="col" [hidden]="!(isAdmin || isRecruiter)">
       
       <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
 
         <div *ngIf="jobCandidates.length==0">{{ 'JOB.NO_CANDIDATES' | translate }}</div>
 
-        <div *ngIf="jobCandidates.length>0">
-      
+        <div [hidden]="jobCandidates.length==0">
+          <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+              <td mat-cell *matCellDef="let element; let i=index" style="white-space: nowrap;">
 
+                <button class="btn btn-primary" [routerLink]="['/profiles', element.id]">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+              </button>
+
+              <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, element.id, i)">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
+              </button>
+
+              </td>
+            </ng-container>
+
+            <!-- candidate surname -->
+            <ng-container matColumnDef="candidateSurname">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.SURNAME' | translate }} </th>
+              <td mat-cell *matCellDef="let element"> {{element.candidateSurname}} </td>
+            </ng-container>
+            <!-- candidate name -->
+            <ng-container matColumnDef="candidateName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.NAME' | translate }} </th>
+              <td mat-cell *matCellDef="let element"> {{element.candidateName}} </td>
+            </ng-container>
+            <!-- AVAILABLE column -->
+            <ng-container matColumnDef="available">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }} </th>
+              <td mat-cell *matCellDef="let element"> {{element.available}} </td>
+            </ng-container>
+
+            <!-- EXPECTED_SALARY column -->
+            <ng-container matColumnDef="expsalary">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }} </th>
+              <td mat-cell *matCellDef="let element"> {{element.expsalary}} </td>
+            </ng-container>
+            
+            <!-- SCORE column -->
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.SCORE' | translate }} </th>
+              <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<!--
             <table *ngIf="jobCandidates.length>0" class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <!--<th scope="col">Name</th>-->
-                    <th scope="col">{{ 'JOB_APPLY.ROLE' | translate }}</th>
+                    <th scope="col">{{ 'PROFILES.NAME' | translate }}</th>
                     <th scope="col">{{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }}</th>
                     <th scope="col">{{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }}</th>
                     <th scope="col">{{ 'JOB_APPLY.SCORE' | translate }}</th>
@@ -143,8 +190,7 @@
                 <tbody>
                   <tr *ngFor="let candidate of jobCandidates; let i=index">
                     <th scope="row">{{i+1}}</th>
-                    <!--<td>{{candidate.name}}</td>-->
-                    <td>{{candidate.role}}</td>
+                    <td>{{candidate.candidateName}}</td>
                     <td>{{candidate.available}}</td>
                     <td>{{candidate.expsalary}}</td>
                     <td>{{candidate.score}}</td>
@@ -160,7 +206,7 @@
                   </tr>                  
                 </tbody>
               </table>
-
+-->
             
         </div>
 
