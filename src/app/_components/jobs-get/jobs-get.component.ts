@@ -24,6 +24,30 @@ import {MatSort} from '@angular/material/sort';
 })
 export class JobsGetComponent implements OnInit {
 
+  public chartType = 'pie';
+  public chartLabels: Array<any> = ['Match', 'Not Match'];
+
+  public chartOptions: any = {
+    responsive: true,
+      plugins: {
+      datalabels: {
+        display: true,
+        align: 'top',
+        anchor: 'end',
+        //color: "#2756B3",
+        color: "#222",
+        font: {
+          family: 'FontAwesome',
+          size: 14
+        },
+      
+      },
+      deferred: false,
+      legend: false
+    },
+
+  };
+
   displayedColumns: string[] = ['candidateSurname', 'candidateName', 'available', 'expsalary', 'score', 'action'];
   dataSource = new MatTableDataSource([]);
   @ViewChild(MatPaginator, {static: true}) 
@@ -173,32 +197,35 @@ export class JobsGetComponent implements OnInit {
   }
 
   getCandidates(jobId: any): void {
-    this.js
-    .getJobCandidats(jobId)
-    .subscribe((jobCandidates: any) => {
+    //only admin users or recuiters can load candidates list
+    if (this.isAdmin || this.isRecruiter) {
+      this.js
+      .getJobCandidats(jobId)
+      .subscribe((jobCandidates: any) => {
 
-      //console.log(jobCandidates);  
-      jobCandidates.forEach(element => {
-        this.us
-        .getUser(element.id).subscribe(
-          data => {
-            //console.log("user in db");
-            element.candidateName = data.name;
-            element.candidateSurname = data.surname;
-          },
-          error => {
-            console.log("error recovering user data");
-            element.candidateName = "";
-            element.candidateSurname = "";
-          }
-        );
+        //console.log(jobCandidates);  
+        jobCandidates.forEach(element => {
+          this.us
+          .getUser(element.id).subscribe(
+            data => {
+              //console.log("user in db");
+              element.candidateName = data.name;
+              element.candidateSurname = data.surname;
+            },
+            error => {
+              console.log("error recovering user data");
+              element.candidateName = "";
+              element.candidateSurname = "";
+            }
+          );
+          
+        });
         
-      });
-      
-      this.jobCandidates = jobCandidates;  
-      this.dataSource.data = this.jobCandidates;
+        this.jobCandidates = jobCandidates;  
+        this.dataSource.data = this.jobCandidates;
 
-    });
+      });
+    }
   }
 
   openApllyJobDialog(jobId: any, element: any): void {

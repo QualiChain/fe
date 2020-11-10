@@ -61,7 +61,8 @@ export class RecruitmentComponent implements OnInit {
   public chartDataList: Array<number> = [];
   public labelList: Array<any> = [];  
   // labels
-  public chartLabels: Array<any> = ['Score', ''];
+  //public chartLabels: Array<any> = ['Score', ''];
+  public chartLabels: Array<any> = ['Match', 'Not Match'];
 
   public chartOptions: any = {
     responsive: true,

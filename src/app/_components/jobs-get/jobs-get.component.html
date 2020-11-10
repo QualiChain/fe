@@ -167,7 +167,20 @@
             <!-- SCORE column -->
             <ng-container matColumnDef="score">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.SCORE' | translate }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+              <td mat-cell *matCellDef="let element"> <!-- {{element.score}}  -->
+                <div class="wrapperpiechart">
+                  <canvas id="canvas_pie_chart_{{element.id}}" baseChart
+                  [datasets]="[{ data: [element.score,(100-element.score)],label: 'Matching Score', backgroundColor: [
+                  'rgba(30, 144, 255, 1)',
+                  'rgba(0, 0, 0, 1)'
+              ]}]"
+                  [labels]="chartLabels"
+                  [options]="chartOptions"
+                  [chartType]="chartType">
+                </canvas>
+                </div>
+
+              </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
