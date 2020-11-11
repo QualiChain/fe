@@ -3,3 +3,9 @@
     height: 50px;
     vertical-align: middle;
 }
+
+
+#candidatestable td 
+{
+    vertical-align: middle;
+}

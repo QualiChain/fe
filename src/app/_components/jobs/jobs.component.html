@@ -14,12 +14,13 @@
         <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'JOBS.BUTTON.CREATE_JOB' | translate }}
       </button>
       &nbsp;     
-      <button class="btn btn-primary" (click)="exportExcel()">
+      <button [hidden]="dataSource.data.length==0" class="btn btn-primary" (click)="exportExcel()">
         <i _ngcontent-axy-c0="" class="material-icons small"> import_export </i> {{ 'BUTTON.EXPORT_TO_EXCEL' | translate }}
       </button>
     </div>
 
-    <div>
+    <div [hidden]="dataSource.data.length>0" class="col-lg-8"><br/>{{ 'JOBS.NO_JOBS_AVAILABLE' | translate }}</div>
+    <div [hidden]="dataSource.data.length==0">
 
 <!--
       <mat-form-field>
@@ -47,7 +48,7 @@
 
     </div>
 
-    <div class="">  
+    <div class="" [hidden]="dataSource.data.length==0">  
       <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->

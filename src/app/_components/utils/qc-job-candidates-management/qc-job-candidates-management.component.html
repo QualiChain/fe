@@ -10,19 +10,20 @@
         </mat-form-field>
     </div>
 
-    <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+    <table id="candidatestable" mat-table [dataSource]="dataSource" matSort class="table table-striped">
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
             <td mat-cell *matCellDef="let element; let i=index" style="white-space: nowrap;">
                 <button [disabled]="!element.candidateName" class="btn btn-primary" [routerLink]="['/profiles', element.id]">
                     <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
-                <button [disabled]="!element.candidateName" class="btn btn-info" (click)="assignThisApply(jobId, element.id)">
+                <button [disabled]="(!element.candidateName || element.candidateSelected==1) " class="btn btn-info" (click)="assignThisApply(jobId, element.id)">
                     <i _ngcontent-axy-c0="" class="material-icons small"> done_outline </i> {{ 'BUTTON.ASSIGN' | translate }}
-                </button>
+                </button>                
                 <button class="btn btn-danger" (click)="deleteThisApply(jobId, element.id, i)">
                     <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
-                </button>                
+                </button>
+                <button class="btn btn-success" [hidden]="element.candidateSelected==0"> <i _ngcontent-axy-c0="" class="material-icons small"> assignment_turned_in </i> {{ 'JOB.ASSIGNED' | translate }} </button>
             </td>
         </ng-container>
 

@@ -121,6 +121,17 @@ export class UsersService {
     )
   }
 
+  getUserProfileInJobEndPoint(userId: Number) {
+    return this.http.get(`${this.jobsProfilesURL}/${userId}`).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
+
   deleteUser(userId: Number){
     return this.http.delete(`${this.uriUsers}/${userId}`);
   }
