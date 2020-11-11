@@ -142,7 +142,8 @@
     "HEADER_TITLE": "Job",
     "CANDIDATES": "Candidates",
     "NO_CANDIDATES": "There are not candidates for this Job",
-    "DELETE_APPLY_MESSAGE": "Are you sure you want to this apply?",
+    "SELECT_USER_APPLY_MESSAGE": "Are you sure you want to select this candidate?",
+    "DELETE_APPLY_MESSAGE": "Are you sure you want to delete this apply?",
     "ORGANIZATION": "Organization",
     "TITLE": {
       "LABEL": "Title",
@@ -615,7 +616,8 @@
     "CHANGE_PASSWORD": "Change password",
     "VIEW_MORE": "View more",
     "BACK_TO_USER_PROFILE": "Back to user profile",
-    "BACK": "Back"
+    "BACK": "Back",
+    "ASSIGN": "Assign"
   },
   "ACTION": "Action",
   "FILTER": "Filter",
