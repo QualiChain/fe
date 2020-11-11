@@ -54,7 +54,7 @@ export class JobsGetComponent implements OnInit {
   paginator: MatPaginator;  
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
+  cntReloads: number = 0;
 
   constructor(
     private appcomponent: AppComponent,
@@ -196,6 +196,11 @@ export class JobsGetComponent implements OnInit {
 
   }
 
+  //as we move the list of candidate to a component is not needed this reload here
+  getCandidates(jobId: any): void {
+    this.cntReloads = this.cntReloads +1;
+  }
+  /*
   getCandidates(jobId: any): void {
     //only admin users or recuiters can load candidates list
     if (this.isAdmin || this.isRecruiter) {
@@ -227,7 +232,7 @@ export class JobsGetComponent implements OnInit {
       });
     }
   }
-
+  */
   openApllyJobDialog(jobId: any, element: any): void {
     //console.log(jobId);
     

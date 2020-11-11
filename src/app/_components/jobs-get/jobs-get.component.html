@@ -121,6 +121,8 @@
     
     <div class="col" [hidden]="!(isAdmin || isRecruiter)">
       
+      <app-qc-job-candidates-management [jobId]="jobData.id"  [reload]="cntReloads"></app-qc-job-candidates-management>
+<!--
       <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
 
         <div *ngIf="jobCandidates.length==0">{{ 'JOB.NO_CANDIDATES' | translate }}</div>
@@ -142,32 +144,29 @@
               </td>
             </ng-container>
 
-            <!-- candidate surname -->
             <ng-container matColumnDef="candidateSurname">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.SURNAME' | translate }} </th>
               <td mat-cell *matCellDef="let element"> {{element.candidateSurname}} </td>
             </ng-container>
-            <!-- candidate name -->
+
             <ng-container matColumnDef="candidateName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.NAME' | translate }} </th>
               <td mat-cell *matCellDef="let element"> {{element.candidateName}} </td>
             </ng-container>
-            <!-- AVAILABLE column -->
+
             <ng-container matColumnDef="available">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }} </th>
               <td mat-cell *matCellDef="let element"> {{element.available}} </td>
             </ng-container>
 
-            <!-- EXPECTED_SALARY column -->
             <ng-container matColumnDef="expsalary">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }} </th>
               <td mat-cell *matCellDef="let element"> {{element.expsalary}} </td>
             </ng-container>
             
-            <!-- SCORE column -->
             <ng-container matColumnDef="score">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.SCORE' | translate }} </th>
-              <td mat-cell *matCellDef="let element"> <!-- {{element.score}}  -->
+              <td mat-cell *matCellDef="let element">
                 <div class="wrapperpiechart">
                   <canvas id="canvas_pie_chart_{{element.id}}" baseChart
                   [datasets]="[{ data: [element.score,(100-element.score)],label: 'Matching Score', backgroundColor: [
@@ -188,42 +187,9 @@
           </table>
         
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-<!--
-            <table *ngIf="jobCandidates.length>0" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">{{ 'PROFILES.NAME' | translate }}</th>
-                    <th scope="col">{{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }}</th>
-                    <th scope="col">{{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }}</th>
-                    <th scope="col">{{ 'JOB_APPLY.SCORE' | translate }}</th>
-                    <th scope="col"> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let candidate of jobCandidates; let i=index">
-                    <th scope="row">{{i+1}}</th>
-                    <td>{{candidate.candidateName}}</td>
-                    <td>{{candidate.available}}</td>
-                    <td>{{candidate.expsalary}}</td>
-                    <td>{{candidate.score}}</td>
-                    <td>
-                        <button class="btn btn-primary" [routerLink]="['/profiles', candidate.id]">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
-                        </button>
 
-                        <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, candidate.id, i)">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
-                        </button>
-                    </td>
-                  </tr>                  
-                </tbody>
-              </table>
--->
-            
         </div>
-
-
+-->
 
         
     </div>

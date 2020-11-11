@@ -141,7 +141,8 @@ export class RecruitmentComponent implements OnInit {
   processSeacrhJobForm() {
     this.displayMessage = false;
     this.dataSource.data = [];
-    this.getMatchedCVs(this.seachJobTextInput);
+    //commentted because we add the component that displays the list of candidates in the template
+    //this.getMatchedCVs(this.seachJobTextInput);
     
   }
 

@@ -154,4 +154,18 @@ export class JobsService {
       )
     }
 
+
+    assignJobtoCandidate(userId: any, jobId: any,) {
+      return this.http.post(`${this.jobsProfilesURL}/${userId}/currentJob/${jobId}`,JSON.stringify({})).
+      pipe(
+         map((data: any) => {
+           //console.log(data);
+           return data;
+         }), catchError( error => {
+           //console.log(error);
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }
+
 }
