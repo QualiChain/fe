@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { JobsService } from '../../../_services/jobs.service';
 import { AuthService } from '../../../_services';
 import { AppComponent } from '../../../app.component';
-import { UsersService } from 'src/app/_services/users.service';
+import { UsersService } from '../../../_services/users.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -78,6 +78,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
     if (this.jobId) {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.data = [];
       this.getCandidates(this.jobId);
     }
   }
@@ -95,6 +96,27 @@ export class QcJobCandidatesManagementComponent implements OnInit {
 
         //console.log(jobCandidates);  
         jobCandidates.forEach(element => {
+
+          element.candidateSelected = 0;
+          this.us.getUserProfileInJobEndPoint(element.id).subscribe(
+            data => {
+              if ( data ) {
+                if ( data.hasOwnProperty('currentJobURI') ) {
+                  if (data.currentJobURI) {
+                    var splitted = data.currentJobURI.split(":"); 
+                    if (splitted[splitted.length-1]==jobId) {
+                      element.candidateSelected = 1;  
+                    }
+                  }
+                }
+              }
+            },
+            error => {
+              console.log("error recovering user data from job endpoint - uid:"+element.id);
+              element.candidateSelected = 0;
+            }
+          );
+
           this.us
           .getUser(element.id).subscribe(
             data => {
@@ -108,7 +130,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
               
             },
             error => {
-              console.log("error recovering user data");
+              console.log("error recovering user data - uid:"+element.id);
               element.candidateName = "";
               element.candidateSurname = "";
             }
@@ -145,7 +167,8 @@ export class QcJobCandidatesManagementComponent implements OnInit {
         this.js.assignJobtoCandidate(userId, jobId).subscribe(
           res => {
             //console.log("Request OK");
-            //console.log(res);            
+            //console.log(res);     
+            this.getCandidates(jobId);
           },
           error => {
             //console.log("Error assigning a job to a user");
