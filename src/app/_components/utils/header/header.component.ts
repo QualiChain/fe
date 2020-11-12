@@ -83,7 +83,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private us: UsersService,
     location: Location, public router: Router, public translate: TranslateService, private messageService: MessageService) {
   //  constructor(location: Location, router: Router) {
-    
+
+    router.events.subscribe(val => {
+      if (location.path() != "") {
+        this.route = location.path();
+        //this.route = location.path();
+      } else {        
+        this.route = "";
+      }
+    });
+
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
     // subscribe to home component messages
@@ -214,7 +223,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    
+    
     this.storageService.watchStorage().subscribe((data:string) => {
       // this will call whenever your localStorage data changes
       // use localStorage code here and set your data here for ngFor

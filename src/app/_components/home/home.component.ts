@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../_services/index';
 import { QCStorageService } from '../../_services/QC_storage.services';
+import { PilotsService, HEADER_MENU } from '../../_services/pilots.services';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,10 @@ import { QCStorageService } from '../../_services/QC_storage.services';
 export class HomeComponent implements OnInit {
   userdata: {id:'', authenticated: false};
   isauthenticated: boolean = false;
+  menuOptionsPerPilot: HEADER_MENU;
+
   constructor(
+    private ps: PilotsService,
     private qcStorageService: QCStorageService,
     private messageService: MessageService) { }
 
@@ -49,6 +53,8 @@ export class HomeComponent implements OnInit {
 
       if(userdata.hasOwnProperty('authenticated')){
         this.isauthenticated = userdata.authenticated;
+
+        this.menuOptionsPerPilot = this.ps.getPilot(1);
       }
     }
     else {
