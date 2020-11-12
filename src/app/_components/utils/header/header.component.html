@@ -26,7 +26,7 @@
 								<li [hidden]="(!isLogged && !menuOption.public)" *ngFor="let menuOption of menuOptions" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===menuOption.route}"><a class="btn navbar-item" routerLink="{{ menuOption.route }}" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a></li>
 							-->
 
-							<li class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===''}"><a class="btn navbar-item" routerLink="/" (click)="route='/'">{{ 'MENU.HOME' | translate }}</a></li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route===''}"><a class="btn navbar-item" routerLink="" (click)="route=''">{{ 'MENU.HOME' | translate }}</a></li>
 <!--
 							<li 
 							[hidden]="((menuOption.rolesPermissions.indexOf(this.userdata.role.toLowerCase())==-1) && !menuOption.public)"

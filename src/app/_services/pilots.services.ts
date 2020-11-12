@@ -42,6 +42,7 @@ export interface OPTION_HEADER_MENU {
     order: number;
     label: string;
     route: string;
+    image: string;
     public: boolean;
     rolesPermissions: any [];
     permissions: any [];
@@ -61,15 +62,15 @@ const PILOTS_DATA: HEADER_MENU[] =[]
 PILOTS_DATA.push({'id':0, 'label':'ANONYMOUS', 'menu':[]});
 
 PILOTS_DATA.push({'id':1, 'label':'AUTHENTICATED', 'menu':[
-  {'id': 1, 'order': 2, 'label': 'MENU.COURSES', 'route': '/courses', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_courses']},
-  {'id': 2, 'order': 3, 'label': 'MENU.JOBS', 'route': '/jobs', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_jobs']},  
-  {'id': 3, 'order': 4, 'label': 'MENU.PROFILES', 'route': '/profiles', 'public': false, 'rolesPermissions':[Role.professor, Role.recruiter, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_profiles']},
-  {'id': 4, 'order': 5, 'label': 'MENU.RECRUITMENT', 'route': '/recruitment', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator], 'submenu': [
-    {'id': 5, 'order': 1, 'label': 'MENU.RECRUITMENT', 'route': '/recruitment', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator], 'permissions': ['view_recruitment']},
-    {'id': 6, 'order': 2, 'label': 'MENU.CERTIFICATE_VALIDATION', 'route': '/recruitment/certificate-validation', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator], 'permissions': ['view_recruitment']}
+  {'id': 1, 'order': 2, 'image': '/assets/img/courses.jpg', 'label': 'MENU.COURSES', 'route': '/courses', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_courses']},
+  {'id': 2, 'order': 3, 'image': '/assets/img/jobs.jpg', 'label': 'MENU.JOBS', 'route': '/jobs', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_jobs']},  
+  {'id': 3, 'order': 4, 'image': '/assets/img/profiles.png', 'label': 'MENU.PROFILES', 'route': '/profiles', 'public': false, 'rolesPermissions':[Role.professor, Role.recruiter, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_profiles']},
+  {'id': 4, 'order': 5,  'image': '/assets/img/recruitment.jpg', 'label': 'MENU.RECRUITMENT', 'route': '/recruitment', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator], 'submenu': [
+    {'id': 5, 'order': 1,  'image': '', 'label': 'MENU.RECRUITMENT', 'route': '/recruitment', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator], 'permissions': ['view_recruitment']},
+    {'id': 6, 'order': 2,  'image': '', 'label': 'MENU.CERTIFICATE_VALIDATION', 'route': '/recruitment/certificate-validation', 'public': false, 'rolesPermissions':[Role.recruiter, Role.admin, Role.administrator], 'permissions': ['view_recruitment']}
   ], 'permissions': ['view_recruitment']},
-  {'id': 7, 'order': 8, 'label': 'MENU.MCDSS', 'route': '/MCDSS', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['access_MCDSS']},
-  {'id': 8, 'order': 8, 'label': 'MENU.SKILLS', 'route': '/skills', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_skills']},
+  {'id': 7, 'order': 8,  'image': '/assets/img/mcdss.jpg', 'label': 'MENU.MCDSS', 'route': '/MCDSS', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['access_MCDSS']},
+  {'id': 8, 'order': 8,  'image': '/assets/img/skills.jpg', 'label': 'MENU.SKILLS', 'route': '/skills', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_skills']},
 ]});
 
 /*

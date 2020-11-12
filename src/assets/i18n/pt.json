@@ -18,19 +18,25 @@
   "MENU": {
     "HOME": "Home",
     "JOBS": "Empregos",
+    "JOBS_HELP_TEXT": "Aqui você encontra a lista de empregos disponíveis",
     "CVS": "Cvs",
     "COURSES": "Cursos",
+    "COURSES_HELP_TEXT": "Aqui você encontra a lista de cursos disponíveis",
     "PROFILES": "Perfis",
+    "PROFILES_HELP_TEXT": "Aqui você pode encontrar a lista de perfis de usuário",
     "LOGIN": "Login",
     "LOGOUT": "Logout",
     "WELCOME_MESSAGE": "Bem vinda",
     "PROFILE": "Perfil",
     "RECRUITMENT": "Recrutamento",
+    "RECRUITMENT_HELP_TEXT": "O formulário de recrutamento está disponível aqui",
     "CERTIFICATE_VALIDATION": "Validação de Certificado",
     "MCDSS": "MCDSS",
+    "MCDSS_HELP_TEXT": "A ferramenta 'Multicriteria Decision Support System' está disponível aqui",
     "SKILLS": "Skills",
+    "SKILLS_HELP_TEXT": "Aqui você pode encontrar a lista de habilidades",
     "NOTIFICATION_PREFERENCES": "Notification Preferences",
-    "PERSONAL_FILES_REPOSITORY": "Files Repository"
+    "PERSONAL_FILES_REPOSITORY": "Repositório de Arquivos"
   },
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Personal files repository",

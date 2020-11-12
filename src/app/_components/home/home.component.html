@@ -1,16 +1,59 @@
-
-
+<!--
 <h1>{{ 'HOME.TITLE' | translate }}</h1>
 <p>	{{ 'HOME.BODY' | translate }} </p>
-
+-->
 <!--
 <app-pilot-home></app-pilot-home>
 -->
 
 <div *ngIf="isauthenticated">
-    For demo purposes
-    <button (click)="sendMessage()" class="btn btn-primary mr-2">Send Message to increase counter in notification</button>
-    <!--
+<!--
+    <div class="row">
+        For demo purposes<br/>
+        <button (click)="sendMessage()" class="btn btn-primary mr-2">Send Message to increase counter in notification</button>        
+--> 
+<!--       
         <button (click)="clearMessages()" class="btn btn-secondary">Clear Messages in notifications</button>
-    -->    
+-->
+<!--
+    </div>
+-->
+    
+        <div class="row">
+            <ng-container *ngFor="let menuOption of menuOptionsPerPilot.menu">
+                <div id="div-menu-home" *appCanAccess="menuOption.permissions" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                    
+                    <div class="post-module hover">
+                        <div class="thumbnail">
+                            <a *ngIf="menuOption.submenu.length==0" routerLink="{{ menuOption.route }}" class="noborder" title="{{ menuOption.label | translate }}"><img src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}"></a>
+                            <img *ngIf="menuOption.submenu.length>0" src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}">
+                        </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            
+                            <h1 class="title">
+                                <a *ngIf="menuOption.submenu.length==0" routerLink="{{ menuOption.route }}" >{{ menuOption.label | translate }}</a>
+                                <span *ngIf="menuOption.submenu.length>0">{{ menuOption.label | translate }}</span>
+                            </h1>
+                            <!--<h2 class="authors"></h2>-->
+                            <p class="description"></p>
+                            <p>{{ menuOption.label+"_HELP_TEXT" | translate }}</p>
+                            <p></p>
+                                <div *ngIf="menuOption.submenu.length>0" class="dropdown dropdown-menu-right">
+                                    <div *ngFor="let subMenuOption of menuOption.submenu">                                        
+                                                <p *appCanAccess="subMenuOption.permissions">
+                                                    <a class="navbar-item" routerLink="{{ subMenuOption.route }}" >{{ subMenuOption.label | translate }}</a>												
+                                                </p>
+                                    </div>
+                                </div>
+
+                            <p></p>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </div>
+    
+
 </div>
