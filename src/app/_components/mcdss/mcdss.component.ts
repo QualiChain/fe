@@ -10,6 +10,12 @@ export interface mcdssOutput {
   Ranking: number;
   Score: number;
 }
+
+export interface mcdssOutputElectre {
+  Alternatives: string[];
+  "Dominance Table": [][];
+}
+
 /*
 let ELEMENT_DATA: mcdssOutput[] = [ 
   { Alternative: "alternative 1", Ranking: 1, Score: 1 }, 
@@ -18,6 +24,8 @@ let ELEMENT_DATA: mcdssOutput[] = [
 ];
 */
 let ELEMENT_DATA: mcdssOutput[] = [];
+let ELEMENT_DATA_ELECTRE: mcdssOutputElectre[] = [];
+
 
 @Component({
   selector: 'app-mcdss',
@@ -45,7 +53,10 @@ export class MCDSSComponent implements OnInit {
   errorMessage: string = "";
 
   displayedColumns: string[] = ['Alternative', 'Ranking', 'Score'];
+  displayedColumnsElectre: string[] = [];
+
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSourceElectre = new MatTableDataSource(ELEMENT_DATA_ELECTRE);
 
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -63,7 +74,8 @@ export class MCDSSComponent implements OnInit {
   ];
   selectedMethod: string = "";
   agreement_threshold: number = 1;
-  
+  electredSelected: boolean = false;
+
   response: any = [];
 
   constructor(
@@ -74,6 +86,7 @@ export class MCDSSComponent implements OnInit {
   ngOnInit(): void {
     
     this.dataSource.sort = this.sort;
+    this.dataSourceElectre.sort = this.sort;
     
     this.dynamicFormCriterias = this.formBuilder.group({
       Criterias: new FormArray([])
@@ -157,17 +170,33 @@ export class MCDSSComponent implements OnInit {
       "Criteria_Details": criteriaDetails
     };
 
+    this.electredSelected = false;
+    if (this.selectedMethod=='electreI') {
+      this.electredSelected = true;
+    }
     this.McdssService.postMCDSS( this.selectedMethod, dataToPost).subscribe(
       res => {
         //console.log("McdssServices");
         //console.log(res)        
         //this.response = res;
         //this.response = new MatTableDataSource(res);
+        if (this.selectedMethod=='electreI') {
 
-        ELEMENT_DATA = res;
-        this.dataSource.data = res;
-        this.displayResults = true;
-  
+          let newRes = [];
+          this.displayedColumnsElectre = [];
+          
+          newRes = this.processResultElectreI(res);
+                 
+          ELEMENT_DATA_ELECTRE = newRes;
+          this.dataSourceElectre.data = newRes;
+          this.displayResults = true;
+
+        }
+        else {        
+          ELEMENT_DATA = res;
+          this.dataSource.data = res;
+          this.displayResults = true;
+        }
       },
       error => {
         //console.log("Error McdssServices!!");
@@ -318,8 +347,35 @@ export class MCDSSComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
+  processResultElectreI(res) {
+    let newRes = [];
+    this.displayedColumnsElectre = [];
+    this.displayedColumnsElectre.push('Alternative');
+    res[0]['Alternatives'].forEach((value, index) => {
+      //console.log("---------");
+      //console.log("index:"+index+"---value:"+value);            
+      this.displayedColumnsElectre.push(value);
+      //console.log(this.displayedColumnsElectre);
+      //console.log("---------");
+      let valuePerItem = {};
+      valuePerItem['Alternative'] = value;;
+      res[0]['Alternatives'].forEach((value2, index2) => {
+        //console.log("index2:"+index2+"---value2:"+value2);
+        //console.log(res[0]['Dominance Table'][index]);
+        valuePerItem[value2] = res[0]['Dominance Table'][index][index2];
+      });
+      newRes.push(valuePerItem);
+
+      
+    });
+    //console.log(newRes);
+
+    return newRes;
+  }
+
   saveFilesForm() {
     ELEMENT_DATA = null;
+    ELEMENT_DATA_ELECTRE = null;
 
     this.displayResults = false;
     this.displayError = false;
@@ -328,12 +384,31 @@ export class MCDSSComponent implements OnInit {
       formData.append('Decision Matrix', (<HTMLInputElement>document.getElementById('decisionMatrix')).files[0]);
       formData.append('Criteria Details', (<HTMLInputElement>document.getElementById('criteriaDetails')).files[0]);
 
+      
+      this.electredSelected = false;
+      if (this.selectedMethodFiles=='electreI') {
+        this.electredSelected = true;
+      }
 
-      this.McdssService.postMCDSSFile(this.selectedMethodFiles, formData).subscribe(res => {
-        //console.log(res);
-        ELEMENT_DATA = res;
-        this.dataSource.data = res;
-        this.displayResults = true;
+        this.McdssService.postMCDSSFile(this.selectedMethodFiles, formData).subscribe(res => {
+        
+        if (this.selectedMethodFiles=='electreI') {
+
+          let newRes = [];
+          this.displayedColumnsElectre = [];
+          
+          newRes = this.processResultElectreI(res);
+                 
+          ELEMENT_DATA_ELECTRE = newRes;
+          this.dataSourceElectre.data = newRes;
+          this.displayResults = true;
+
+        }
+        else {
+          ELEMENT_DATA = res;
+          this.dataSource.data = res;
+          this.displayResults = true;
+        }
 
       }, error => {      
         //this.response = error;
