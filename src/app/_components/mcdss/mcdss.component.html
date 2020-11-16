@@ -49,7 +49,11 @@
                                 <div class="rowCompareCandidate" *ngFor="let value of dataToCompare[0]?.Criterias; let i = index">
                                     <span>
                                         <div class="progress" >
-                                            <div class="progress-bar" role="progressbar" style="display: block; float: right;" [ngStyle]="{'width.%':((100*value)/dataToCompare[0]?.maxCriterias[i])}" attr.aria-valuenow="{{value}}"  aria-valuemin="0" aria-valuemax="100">{{value}}</div>
+                                            <div class="progress-bar" 
+                                            [ngClass]="{
+                                                'lowerbar': (value<dataToCompare[1]?.Criterias[i])                                                
+                                                }"
+                                            role="progressbar" style="display: block; float: right;" [ngStyle]="{'width.%':((100*value)/dataToCompare[0]?.maxCriterias[i])}" attr.aria-valuenow="{{value}}"  aria-valuemin="0" aria-valuemax="100">{{value}}</div>
                                         </div>
                                     </span>
                                 </div>
@@ -76,7 +80,11 @@
                                 <div class="rowCompareCandidate" *ngFor="let value of dataToCompare[1]?.Criterias; let i = index">
                                     <span>
                                         <div class="progress" >
-                                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':((100*value)/dataToCompare[1]?.maxCriterias[i])}" attr.aria-valuenow="{{value}}"  aria-valuemin="0" aria-valuemax="100">{{value}}</div>
+                                            <div class="progress-bar" 
+                                            [ngClass]="{
+                                                'lowerbar': (value<dataToCompare[0]?.Criterias[i])                                                
+                                                }"
+                                            role="progressbar" [ngStyle]="{'width.%':((100*value)/dataToCompare[1]?.maxCriterias[i])}" attr.aria-valuenow="{{value}}"  aria-valuemin="0" aria-valuemax="100">{{value}}</div>
                                         </div>
                                     </span>
                                 </div>
