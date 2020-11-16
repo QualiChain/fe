@@ -667,11 +667,15 @@
     "EDUCATION_ORGANISATION": "Organisation",
     "EDUCATION_DESCRIPTION": "Description"
   },
-  "MCDDSS": {
+  "MCDSS": {
     "TITLE": "Multicriteria Decision Support System",
     "TAB": {
       "MANUAL": "Manual input",
       "FILE": "File input"
+    },
+    "COMPARE": {
+      "TITLE": "Compare alternatives",
+      "FINAL_SCORE": "Final score"
     },
     "RESULTS": {
       "TITLE": "Results",
@@ -683,9 +687,11 @@
       "ADD_CRITERIA": "Add criteria",
       "ADD_ALTERNATIVE": "Add alternative",
       "SEND": "Send data",
-      "SEND_FILES": "Send files data"
+      "SEND_FILES": "Send files data",
+      "COMPARE": "Compare"
     },
     "METHOD": {
+      "TITLE": "Method",
       "PLACEHOLDER": "Select a method"
     },
     "AGREEMENT_THRESHOLD": {
