@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import { McdssService } from '../../_services/mcdss.service';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {SelectionModel} from '@angular/cdk/collections';
 
 export interface mcdssOutput {
   Alternative: string;
@@ -34,6 +35,7 @@ let ELEMENT_DATA_ELECTRE: mcdssOutputElectre[] = [];
 })
 export class MCDSSComponent implements OnInit {
 
+  
   invalidDecisionMatrixFile: boolean = false;
   messageErrorDecissionMatrixFile: string = null;
   invalidCriteriaDetailsFile: boolean = false;
@@ -52,10 +54,12 @@ export class MCDSSComponent implements OnInit {
   displayError: boolean = false;
   errorMessage: string = "";
 
-  displayedColumns: string[] = ['Alternative', 'Ranking', 'Score'];
+  displayedColumns: string[] = ['checked', 'Alternative', 'Ranking', 'Score'];
   displayedColumnsElectre: string[] = [];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  selection = new SelectionModel<mcdssOutput>(true, []);
+
   dataSourceElectre = new MatTableDataSource(ELEMENT_DATA_ELECTRE);
 
   
@@ -66,7 +70,8 @@ export class MCDSSComponent implements OnInit {
   dynamicForAlternatives: FormGroup;
   criteriaCtrl = new FormControl();
   
-
+  
+ methodsTranslator = {'maut': 'MAUT', 'topsis': 'TOPSIS', 'electreI': 'ELECTRE I'} 
  methods: any[] = [
   {id: 'maut', name: 'MAUT'},
   {id: 'topsis', name: 'TOPSIS'},
@@ -77,6 +82,28 @@ export class MCDSSComponent implements OnInit {
   electredSelected: boolean = false;
 
   response: any = [];
+
+  //dataToPost: {};
+  dataToPost: {
+    "Decision_Matrix":{
+      "Number_of_alternatives": number,
+      "Number_of_criteria": number,
+      "Criteria": string[],
+      "Alternatives": {"Name":string, "Values": number[]}[]
+    },
+    "Criteria_Details":{
+      "Number_of_criteria": number,
+      "Weights": number[],
+      "Optimization_Type": number[]
+      }
+  };
+
+  cntCheckBoxesSelected: number = 0;
+  maxCheckBoxesSelected = 2;
+  viewCompare: boolean = false;
+  dataToCompare: any[] = [];
+  byFile: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -106,8 +133,23 @@ export class MCDSSComponent implements OnInit {
     return index;
   }
 
+/** Selects all rows if they are not all selected; otherwise clear selection. */  
+masterToggle() {  
+ //this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(r => this.selection.select(r));  
+}  
+/** The label for the checkbox on the passed row */  
+checkboxLabel(row: any): string {  
+  /*
+  if (!row) {  
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;  
+  }  
+  */
+  return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.UserId + 1}`;  
+}  
+  
 
   save() {
+    this.byFile = false;
     this.errorMessage = "";
     this.displayResults = false;
     this.displayError = false;
@@ -151,7 +193,7 @@ export class MCDSSComponent implements OnInit {
       }
  
      let dataToPush ={ 
-      Name: this.dynamicForAlternatives.value.Alternatives[index].Name,
+      Name: this.dynamicForAlternatives.value.Alternatives[index].Name+"_|_"+index,
       Values: arrayValues
      }
 
@@ -159,7 +201,7 @@ export class MCDSSComponent implements OnInit {
     }
 
 
-    let dataToPost = {
+    this.dataToPost = {
       "Decision_Matrix":
         {
             "Number_of_alternatives": numAlternatives,
@@ -174,7 +216,7 @@ export class MCDSSComponent implements OnInit {
     if (this.selectedMethod=='electreI') {
       this.electredSelected = true;
     }
-    this.McdssService.postMCDSS( this.selectedMethod, dataToPost).subscribe(
+    this.McdssService.postMCDSS( this.selectedMethod, this.dataToPost).subscribe(
       res => {
         //console.log("McdssServices");
         //console.log(res)        
@@ -190,12 +232,29 @@ export class MCDSSComponent implements OnInit {
           ELEMENT_DATA_ELECTRE = newRes;
           this.dataSourceElectre.data = newRes;
           this.displayResults = true;
+          this.dataSourceElectre.sort = this.sort;
 
         }
-        else {        
-          ELEMENT_DATA = res;
-          this.dataSource.data = res;
+        else {                 
+          let newRes = [];
+          res.forEach((value, index) => {
+            var resSplit = value.Alternative.split("_|_");
+            
+            let dataItem = {
+              "Alternative": resSplit[0],
+              "AID": resSplit[1],              
+              "Ranking": value.Ranking,
+              "Score": value.Score
+            }
+            newRes.push(dataItem);
+          });
+
+          //ELEMENT_DATA = res;
+          ELEMENT_DATA = newRes;
+          //this.dataSource.data = res;
+          this.dataSource.data = newRes;
           this.displayResults = true;
+          this.dataSource.sort = this.sort;
         }
       },
       error => {
@@ -209,6 +268,60 @@ export class MCDSSComponent implements OnInit {
 
   }
   
+  @ViewChildren ('checkBox') checkBox:QueryList<any>;
+  
+  compareSelection() {
+    const checked = this.checkBox.filter(checkbox => checkbox.checked);
+    this.dataToCompare = [];
+    let criteriasValues = [];
+    let maxCriterias = [];
+
+    for (var j = 0, len = this.dataToPost.Decision_Matrix.Alternatives[0].Values.length; j < len; j++) {
+      maxCriterias.push(0);
+    }
+
+    checked.forEach(data => {
+        //console.log(data.checked);
+        //console.log(data.value);
+        //console.log(data.value.AID);
+        if (data.checked) {
+
+          var resSplit = data.value.Alternative.split("_|_");
+
+          for (var index = 0, len = this.dataToPost.Decision_Matrix.Alternatives.length; index < len; index++) {
+            //console.log(data);
+            //console.log("index:"+index+"---data.AID:"+data.value.AID+"<---");
+            if(index==+data.value.AID) {
+              criteriasValues = this.dataToPost.Decision_Matrix.Alternatives[index].Values;
+            }
+            
+            for (var j = 0, len2 = this.dataToPost.Decision_Matrix.Alternatives[index].Values.length; j < len2; j++) {
+
+              if (this.dataToPost.Decision_Matrix.Alternatives[index].Values[j]>maxCriterias[j]) {
+                maxCriterias[j] = this.dataToPost.Decision_Matrix.Alternatives[index].Values[j];
+              }
+            }
+
+
+            
+          }
+
+
+
+          let itemToCompare = {
+            "Score": data.value.Score,
+            "Ranking": data.value.Ranking,
+            "AlternativeName": resSplit[0],
+            "Criterias": criteriasValues,
+            "maxCriterias": maxCriterias
+          }
+          this.dataToCompare.push(itemToCompare);
+        }
+    })
+    this.viewCompare = true;
+
+  }
+
   changeVlaue (index_alternative, index_criteria) {
     let newValue= (<HTMLInputElement>document.getElementById("value_"+index_alternative+"_"+index_criteria)).value;
     //console.log(newValue);
@@ -302,9 +415,9 @@ export class MCDSSComponent implements OnInit {
     this.invalidDecisionMatrixFile = false;
     this.messageErrorDecissionMatrixFile = null;
     this.uploadedDecisionMatrix = false;
-   if (files[0].type=="application/vnd.ms-excel") {
+   if (files[0].type=="application/vnd.ms-excel") {     
       this.fileToUploadDecisionMatrix = files.item(0);
-      this.uploadedDecisionMatrix = true;
+      this.uploadedDecisionMatrix = true;      
     }
     else {
       this.invalidDecisionMatrixFile = true;
@@ -354,15 +467,22 @@ export class MCDSSComponent implements OnInit {
     res[0]['Alternatives'].forEach((value, index) => {
       //console.log("---------");
       //console.log("index:"+index+"---value:"+value);            
-      this.displayedColumnsElectre.push(value);
+      var resSplitName = value.split("_|_");
+
+      //this.displayedColumnsElectre.push(value);
+      this.displayedColumnsElectre.push(resSplitName[0]);
       //console.log(this.displayedColumnsElectre);
       //console.log("---------");
       let valuePerItem = {};
-      valuePerItem['Alternative'] = value;;
+      //valuePerItem['Alternative'] = value;
+      valuePerItem['Alternative'] = resSplitName[0];
       res[0]['Alternatives'].forEach((value2, index2) => {
         //console.log("index2:"+index2+"---value2:"+value2);
         //console.log(res[0]['Dominance Table'][index]);
-        valuePerItem[value2] = res[0]['Dominance Table'][index][index2];
+        var resSplit = value2.split("_|_");
+        //console.log(resSplit);
+        //valuePerItem[value2] = res[0]['Dominance Table'][index][index2];
+        valuePerItem[resSplit[0]] = res[0]['Dominance Table'][index][index2];
       });
       newRes.push(valuePerItem);
 
@@ -374,6 +494,7 @@ export class MCDSSComponent implements OnInit {
   }
 
   saveFilesForm() {
+    this.byFile = true;
     ELEMENT_DATA = null;
     ELEMENT_DATA_ELECTRE = null;
 
@@ -402,12 +523,13 @@ export class MCDSSComponent implements OnInit {
           ELEMENT_DATA_ELECTRE = newRes;
           this.dataSourceElectre.data = newRes;
           this.displayResults = true;
-
+          this.dataSourceElectre.sort = this.sort;
         }
         else {
           ELEMENT_DATA = res;
           this.dataSource.data = res;
           this.displayResults = true;
+          this.dataSource.sort = this.sort;
         }
 
       }, error => {      

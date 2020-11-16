@@ -1,4 +1,4 @@
-<h1 >{{ 'MCDDSS.TITLE' | translate }}</h1>
+<h1 >{{ 'MCDSS.TITLE' | translate }}</h1>
 
 <div [hidden]="!displayError" class="container">
     <div class="row1">
@@ -12,46 +12,139 @@
 
 
 <div [hidden]="!displayResults" class="container">
-    
-        <div class="row1 result-mcdss">  
-            <div class="col col-lg-12">
-                <button class="btn btn-danger" (click)="displayResults=false">
-                    <i _ngcontent-axy-c0="" class="material-icons small"> close </i> 
-                </button>
-                <span class="resultsTitle">{{ 'MCDDSS.RESULTS.TITLE' | translate }}</span>
-                
+
+
+        <div class="col col-lg-12">
+            <button *ngIf="!viewCompare" class="btn btn-primary" (click)="displayResults=false; viewCompare=false; this.selection.clear()">
+                <i _ngcontent-axy-c0="" class="material-icons small">  arrow_back  </i> {{ 'BUTTON.BACK' | translate}}
+            </button>
+
+            <button *ngIf="viewCompare" class="btn btn-primary" (click)="viewCompare=false;">
+                <i _ngcontent-axy-c0="" class="material-icons small">  arrow_back  </i> {{ 'BUTTON.BACK' | translate}}
+            </button>
+
+            <button *ngIf="!byFile && !viewCompare" 
+            [hidden]="electredSelected"
+            [disabled]="(selection.selected.length!=2)"
+            class="btn btn-info" (click)="compareSelection()">
+                <i _ngcontent-axy-c0="" class="material-icons small"> compare </i>  {{ 'MCDSS.BUTTON.COMPARE' | translate }}
+            </button>
+        </div>
+
+
+
+        <div class="row1 result-mcdss">              
+
+            <div class="col col-lg-12 ">
+                <br>
+                <span *ngIf="!viewCompare" class="resultsTitle">{{ 'MCDSS.RESULTS.TITLE' | translate }}</span>
+                <span *ngIf="viewCompare" class="resultsTitle">{{ 'MCDSS.COMPARE.TITLE' | translate }}</span>
             </div>
-            
-            <div class="col col-lg-12">
+
+            <div [hidden]="!viewCompare" class="col col-lg-12">
+                <div class="col containercompare">
+                        <div class="col col-lg-5 compare-results-align-right">
+                            <div class="rowCompareCandidate candidateHeader candidateBorder"><span>{{dataToCompare[0]?.AlternativeName}}&nbsp;</span></div>
+                            <div class="candidateBody candidateBorder">
+                                <div class="rowCompareCandidate" *ngFor="let value of dataToCompare[0]?.Criterias; let i = index">
+                                    <span>
+                                        <div class="progress" >
+                                            <div class="progress-bar" role="progressbar" style="display: block; float: right;" [ngStyle]="{'width.%':((100*value)/dataToCompare[0]?.maxCriterias[i])}" attr.aria-valuenow="{{value}}"  aria-valuemin="0" aria-valuemax="100">{{value}}</div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rowCompareCandidate candidateBorder"><span 
+                                [ngClass]="{
+                                    'lower': (dataToCompare[0]?.Score<dataToCompare[1]?.Score),
+                                    'higher': (dataToCompare[0]?.Score>dataToCompare[1]?.Score)
+                                    }"
+                                >{{dataToCompare[0]?.Score}}</span><span> :{{ 'MCDSS.COMPARE.FINAL_SCORE' | translate }}&nbsp;</span></div>
+                        </div>
+                        <div class="col col-lg-2 compare-results-align-center">
+                            <div class="rowCompareCandidate candidateHeader candidateBorder"><span>Vs.</span></div>
+                            <div class="candidateBody">
+                                <div class="rowCompareCandidate" *ngFor="let criteria of dataToPost?.Decision_Matrix?.Criteria; let i = index">
+                                    <span>{{criteria}}</span>
+                                </div>
+                            </div>
+                            <div class="rowCompareCandidate"></div>
+                        </div>
+                        <div class="col col-lg-5 compare-results-align-left">
+                            <div class="rowCompareCandidate candidateHeader candidateBorder"><span>&nbsp;{{dataToCompare[1]?.AlternativeName}}</span></div>
+                            <div class="candidateBody candidateBorder">
+                                <div class="rowCompareCandidate" *ngFor="let value of dataToCompare[1]?.Criterias; let i = index">
+                                    <span>
+                                        <div class="progress" >
+                                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':((100*value)/dataToCompare[1]?.maxCriterias[i])}" attr.aria-valuenow="{{value}}"  aria-valuemin="0" aria-valuemax="100">{{value}}</div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rowCompareCandidate candidateBorder"><span>&nbsp;{{ 'MCDSS.COMPARE.FINAL_SCORE' | translate }}: </span><span 
+                                [ngClass]="{
+                                    'lower': (dataToCompare[1]?.Score<dataToCompare[0]?.Score),
+                                    'higher': (dataToCompare[1]?.Score>dataToCompare[0]?.Score)
+                                    }"
+                                >{{dataToCompare[1]?.Score}}</span></div>
+                        </div>
+                </div>
                 
-                <table [hidden]="!electredSelected" mat-table [dataSource]="dataSourceElectre" matSort class="table">
+
+            </div>
+            <div class="col col-lg-12" [hidden]="viewCompare">
+                
+                                
+                <table [hidden]="!electredSelected"  mat-table [dataSource]="dataSourceElectre" matSort class="table table-striped">
 
                     <!-- Alternative Column -->
                     <ng-container matColumnDef="{{column}}"  *ngFor="let column of displayedColumnsElectre ; let index = index">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
+                        <th mat-header-cell *matHeaderCellDef > {{column}} </th>
                         <td mat-cell *matCellDef="let element">{{element[column]}}</td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumnsElectre"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumnsElectre;"></tr>
                 </table>
 
-                <table [hidden]="electredSelected" mat-table [dataSource]="dataSource" matSort class="table">
-                
+                <table [hidden]="electredSelected" mat-table [dataSource]="dataSource" matSort class="table table-striped">
+
+ 
+                    <!-- Checkbox Column -->  
+                    <ng-container matColumnDef="checked">  
+                        <th mat-header-cell *matHeaderCellDef style="width: 10px;">  </th>
+                        <!--
+                        <th style="width: 100px;" mat-header-cell *matHeaderCellDef>  
+                            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() " [indeterminate]="selection.hasValue() "></mat-checkbox>  
+                        </th>  
+                        -->
+                        <td mat-cell *matCellDef="let row">  
+                            <mat-checkbox 
+                            *ngIf="!byFile"
+                            #checkBox      
+                            [value]="row"         
+                            [disabled]="((!selection.isSelected(row)) && (selection.selected.length==2))"
+                            (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"  
+                            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)"></mat-checkbox>  
+                        </td>  
+                    </ng-container>  
+
                     <!-- Alternative Column -->
                     <ng-container matColumnDef="Alternative">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Alternative </th>
-                    <td mat-cell *matCellDef="let element"> {{element.Alternative}} </td>
+                    <th mat-header-cell *matHeaderCellDef > {{ 'MCDSS.RESULTS.ALTERNATIVE' | translate }} </th>
+                    <td mat-cell *matCellDef="let element">                         
+                        {{element.Alternative}} 
+                    </td>
                     </ng-container>
                 
                     <!-- Ranking Column -->
                     <ng-container matColumnDef="Ranking">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ranking </th>
+                    <th mat-header-cell *matHeaderCellDef > {{ 'MCDSS.RESULTS.RANKING' | translate }} </th>
                     <td mat-cell *matCellDef="let element"> {{element.Ranking}} </td>
                     </ng-container>
                 
                     <!-- Score Column -->
                     <ng-container matColumnDef="Score">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+                    <th mat-header-cell *matHeaderCellDef > {{ 'MCDSS.RESULTS.SCORE' | translate }} </th>
                     <td mat-cell *matCellDef="let element"> {{element.Score}} </td>
                     </ng-container>
                 
@@ -59,6 +152,18 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                 </table>
+
+
+            </div>
+
+            <br>
+            <div  class="col col-lg-12">
+                <div>{{ 'MCDSS.METHOD.TITLE' | translate }}: 
+                    <span *ngIf="!byFile">{{methodsTranslator[selectedMethod]}}</span>
+                    <span *ngIf="byFile">{{methodsTranslator[selectedMethodFiles]}}</span>
+                </div>
+                <div [hidden]="byFile" *ngFor="let criteria of dataToPost?.Decision_Matrix?.Criteria; let i = index">{{ 'MCDSS.CRITERIAL.NAME.LABEL' | translate }}: {{criteria}} - {{ 'MCDSS.CRITERIAL.WEIGHT.LABEL' | translate }}: {{dataToPost?.Criteria_Details?.Weights[i]}}</div>
+                <br>
             </div>
 
         </div>
@@ -69,21 +174,21 @@
 <div [hidden]="displayResults" class="container">
     <div class="row">
         <mat-tab-group>
-            <mat-tab label="{{ 'MCDDSS.TAB.MANUAL' | translate }}">
+            <mat-tab label="{{ 'MCDSS.TAB.MANUAL' | translate }}">
                 <br>    
                 
                 <div class="row1">
                     <div class="col col-lg-12">
                         <button class="btn btn-primary" (click)="addFormGroupItem($event, 'criteria')">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDDSS.BUTTON.ADD_CRITERIA' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDSS.BUTTON.ADD_CRITERIA' | translate }}
                         </button>
                 
                         <button [disabled]="t.controls.length==0" class="btn btn-primary" (click)="addFormGroupItem($event, 'alternative')">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDDSS.BUTTON.ADD_ALTERNATIVE' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDSS.BUTTON.ADD_ALTERNATIVE' | translate }}
                         </button>
                 
                         <button [disabled]="selectedMethod=='' || t.controls.length==0 || alternative.controls.length<=1 || t.status=='INVALID' || alternative.status=='INVALID'" class="btn btn-success" (click)="save()">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> send </i> {{ 'MCDDSS.BUTTON.SEND' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons small"> send </i> {{ 'MCDSS.BUTTON.SEND' | translate }}
                         </button>
                     </div>
                 </div>
@@ -95,7 +200,7 @@
                         <div class="col col-lg-12">
                             <div class="col col-lg-3">
                                 <mat-form-field >
-                                    <mat-label>{{ 'MCDDSS.METHOD.PLACEHOLDER' | translate }}</mat-label>
+                                    <mat-label>{{ 'MCDSS.METHOD.PLACEHOLDER' | translate }}</mat-label>
                                     <mat-select [(ngModel)]="selectedMethod" name="methods" id="methods" ngDefaultControl>
                                         <mat-option *ngFor="let method of methods ; let pilotIndex = index" [value]="method.id">
                                             {{method.name}}
@@ -105,14 +210,14 @@
                             </div>
                             <div *ngIf="selectedMethod=='electreI'"  class="col col-lg-2" [class.has-error]="agreementWeightInput.invalid">
                                 <mat-form-field >
-                                    <mat-label>{{ 'MCDDSS.AGREEMENT_THRESHOLD.LABEL' | translate }}</mat-label> 
+                                    <mat-label>{{ 'MCDSS.AGREEMENT_THRESHOLD.LABEL' | translate }}</mat-label> 
                                     <input matInput required 
                                     type="number"                         
                                     min="1" 
                                     [(ngModel)]="agreement_threshold"
                                     name="agreement_threshold" value="agreement_threshold"
                                     #agreementWeightInput="ngModel"
-                                    placeholder="{{ 'MCDDSS.AGREEMENT_THRESHOLD.PLACEHOLDER' | translate }}" >
+                                    placeholder="{{ 'MCDSS.AGREEMENT_THRESHOLD.PLACEHOLDER' | translate }}" >
                                 </mat-form-field>
                             </div>
                         </div>
@@ -147,41 +252,41 @@
                                     <div class="criteria-div">
                                         &nbsp;
                                         <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDDSS.CRITERIAL.NAME.LABEL' | translate }}</mat-label> 
-                                            <input matInput required type="text" formControlName="label" placeholder="{{ 'MCDDSS.CRITERIAL.NAME.PLACEHOLDER' | translate }}" >
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.NAME.LABEL' | translate }}</mat-label>                                             
+                                            <input matInput required type="text" formControlName="label" placeholder="{{ 'MCDSS.CRITERIAL.NAME.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
                                     </div>
                                     <br>
                                     <div class="criteria-div">
                                         &nbsp;
                                         <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDDSS.CRITERIAL.WEIGHT.LABEL' | translate }}</mat-label> 
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.WEIGHT.LABEL' | translate }}</mat-label> 
                                             <input matInput required 
                                             type="number" 
                                             min="1" 
-                                            formControlName="weight" placeholder="{{ 'MCDDSS.CRITERIAL.WEIGHT.PLACEHOLDER' | translate }}" >
+                                            formControlName="weight" placeholder="{{ 'MCDSS.CRITERIAL.WEIGHT.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
                                     </div>
                                     <br>
                                     <div class="criteria-div">
                                         &nbsp;
                                         <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDDSS.CRITERIAL.TYPE.LABEL' | translate }}</mat-label> 
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.TYPE.LABEL' | translate }}</mat-label> 
                                             <input matInput required 
                                             type="number" 
                                             min="0" 
                                             max="1"
-                                            formControlName="type" placeholder="{{ 'MCDDSS.CRITERIAL.TYPE.PLACEHOLDER' | translate }}" >
+                                            formControlName="type" placeholder="{{ 'MCDSS.CRITERIAL.TYPE.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
                                     </div>
             
                                     <div *ngIf="selectedMethod=='electreI'" class="criteria-div">
                                         <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDDSS.CRITERIAL.VETO.LABEL' | translate }}</mat-label> 
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.VETO.LABEL' | translate }}</mat-label> 
                                             <input matInput required 
                                             type="number" 
                                             min="0" 
-                                            formControlName="veto_thresholds" placeholder="{{ 'MCDDSS.CRITERIAL.VETO.PLACEHOLDER' | translate }}" >
+                                            formControlName="veto_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.VETO.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
                                     </div>
                                     
@@ -203,8 +308,8 @@
                                     <div class="form-group col-6">
                                         &nbsp;
                                         <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDDSS.ALTERNATIVE.NAME.LABEL' | translate }}</mat-label> 
-                                            <input matInput required type="text" formControlName="Name" placeholder="{{ 'MCDDSS.ALTERNATIVE.NAME.PLACEHOLDER' | translate }}" >
+                                            <mat-label>{{ 'MCDSS.ALTERNATIVE.NAME.LABEL' | translate }}</mat-label> 
+                                            <input matInput required type="text" formControlName="Name" placeholder="{{ 'MCDSS.ALTERNATIVE.NAME.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
                                     </div>
                             </td>
@@ -216,14 +321,14 @@
             
                                     &nbsp;
                                     <mat-form-field class="citeria_field">
-                                        <mat-label>{{ 'MCDDSS.ALTERNATIVE.VALUE.LABEL' | translate }}</mat-label>
+                                        <mat-label>{{ 'MCDSS.ALTERNATIVE.VALUE.LABEL' | translate }}</mat-label>
                                         <input  matInput required 
                                         type="number" 
                                         min="0" 
                                         value="0"
                                         id="value_{{index_alternative}}_{{index_criteria}}"                     
                                         (change)="changeVlaue(index_alternative,index_criteria)"
-                                        placeholder="{{ 'MCDDSS.ALTERNATIVE.VALUE.PLACEHOLDER' | translate }}"
+                                        placeholder="{{ 'MCDSS.ALTERNATIVE.VALUE.PLACEHOLDER' | translate }}"
                                         >
                                         
                                     </mat-form-field>
@@ -238,12 +343,12 @@
 
 
             </mat-tab>
-            <mat-tab label="{{ 'MCDDSS.TAB.FILE' | translate }}"> 
+            <mat-tab label="{{ 'MCDSS.TAB.FILE' | translate }}"> 
                 <br/>
                 <div class="row1">
                     <div class="col col-lg-12">
                         <button [disabled]="(formMCDSSFiles.invalid || !uploadedDecisionMatrix || !uploadedCriteriaDetails)" class="btn btn-success" (click)="saveFilesForm()">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> send </i> {{ 'MCDDSS.BUTTON.SEND_FILES' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons small"> send </i> {{ 'MCDSS.BUTTON.SEND_FILES' | translate }}
                         </button>
                     </div>
                 </div>
@@ -256,7 +361,7 @@
 
                             <div class="col col-lg-12">
                                 <mat-form-field >
-                                    <mat-label>{{ 'MCDDSS.METHOD.PLACEHOLDER' | translate }}</mat-label>
+                                    <mat-label>{{ 'MCDSS.METHOD.PLACEHOLDER' | translate }}</mat-label>
                                     <mat-select [(ngModel)]="selectedMethodFiles" name="methodsFiles" id="methodsFiles" ngDefaultControl required >
                                         <mat-option *ngFor="let method of methods ; let pilotIndex = index" [value]="method.id">
                                             {{method.name}}
@@ -269,7 +374,7 @@
                                 
                                 <div *ngIf="invalidDecisionMatrixFile" class="col col-lg-12">
                                     <div class="alert alert-danger" role="alert">
-                                        {{ 'MCDDSS.CHOOSE_FILE.DECISION_MATRIX.ERROR_MESSAGE' | translate: {file_name: messageErrorDecissionMatrixFile } }}
+                                        {{ 'MCDSS.CHOOSE_FILE.DECISION_MATRIX.ERROR_MESSAGE' | translate: {file_name: messageErrorDecissionMatrixFile } }}
                                     </div>
                                 </div>
 
@@ -278,11 +383,11 @@
                                     class="btn btn-primary" 
                                     mat-raised-button (click)="fileInputDM.click()">
                                     <i _ngcontent-axy-c0="" class="material-icons small"> attach_file </i>
-                                    {{ 'MCDDSS.CHOOSE_FILE.DECISION_MATRIX.PLACEHOLDER' | translate }}</button>
+                                    {{ 'MCDSS.CHOOSE_FILE.DECISION_MATRIX.PLACEHOLDER' | translate }}</button>
                                     <input hidden required 
                                     #fileInputDM
                                     name="Decision Matrix" ngModel type="file" id="decisionMatrix" (change)="handleFileInputDecisionMatrix($event.target.files)">
-                                    <!-- {{ 'MCDDSS.CHOOSE_FILE.DECISION_MATRIX.PLACEHOLDER' | translate }} -->
+                                    <!-- {{ 'MCDSS.CHOOSE_FILE.DECISION_MATRIX.PLACEHOLDER' | translate }} -->
                                 </div>
                                 <div *ngIf="fileToUploadDecisionMatrix" class="col col-lg-12">
                                     <div class="alert alert-success">
@@ -296,7 +401,7 @@
 
                                 <div *ngIf="invalidCriteriaDetailsFile" class="col col-lg-12">
                                     <div class="alert alert-danger" role="alert">
-                                        {{ 'MCDDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.ERROR_MESSAGE' | translate: {file_name: messageErrorCriteriaDetailsFile } }}
+                                        {{ 'MCDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.ERROR_MESSAGE' | translate: {file_name: messageErrorCriteriaDetailsFile } }}
                                     </div>
                                 </div>
 
@@ -305,11 +410,11 @@
                                     class="btn btn-primary" 
                                     type="button" mat-raised-button (click)="fileInputCD.click()">                            
                                     <i _ngcontent-axy-c0="" class="material-icons small"> attach_file </i>                            
-                                    {{ 'MCDDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.PLACEHOLDER' | translate }}</button>
+                                    {{ 'MCDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.PLACEHOLDER' | translate }}</button>
                                     <input hidden required 
                                     #fileInputCD
                                     name="Criteria Details" ngModel type="file" id="criteriaDetails" (change)="handleFileInputCriteriaDetails($event.target.files)">
-                                    <!-- {{ 'MCDDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.PLACEHOLDER' | translate }} -->
+                                    <!-- {{ 'MCDSS.CHOOSE_FILE.CRITERIA_DETAILS_MATRIX.PLACEHOLDER' | translate }} -->
                                 </div>
 
                                 <div *ngIf="fileToUploadCriteriaDetails" class="col col-lg-12">
