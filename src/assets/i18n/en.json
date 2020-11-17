@@ -760,7 +760,7 @@
   "UPLOAD_CV_KG": {
     "BUTTON": "Upload CV to the KG",
     "TITLE": "Upload CV to the Knowledge Graph",
-    "DESCRIPTION": "help text description to be defined"
+    "DESCRIPTION": "Here you can upload your CV in txt format"
   },
   "UPLOAD_FILES": {
     "AVATAR": {

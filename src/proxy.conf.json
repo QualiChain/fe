@@ -25,5 +25,11 @@
         "changeOrigin": true,
         "logLevel": "debug",
         "pathRewrite": {"^/recruitmentComponent" : "qualichain"}
-    }
+    },
+    "/dobie/*": {
+        "target": "https://demo.iais.fraunhofer.de",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }   
 }
