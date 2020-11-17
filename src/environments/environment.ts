@@ -35,7 +35,8 @@ export const environment = {
   selectUrl: 'http://qualichain.epu.ntua.gr:5004/select',
   notificationPreferences: 'http://qualichain.epu.ntua.gr:5004/set',
   visualiserUrl: 'http://qualichain.epu.ntua.gr:8000/visualiser',
-  uploadCVToKG: 'http://localhost:5000/KG'
+  uploadCVToKG: 'https://demo.iais.fraunhofer.de/dobie'
+  //uploadCVToKG: '/dobie'
 };
 
 /*

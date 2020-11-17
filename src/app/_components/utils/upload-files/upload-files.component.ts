@@ -78,7 +78,7 @@ export class UploadFilesComponent implements OnInit {
       let progressItem = this.uploads.upload(this.userId, filtered2, this.callbackFunction);
     }
     else if (this.fileDestination=='KGFile') {
-      let progressItem = this.uploads.uploadCVKG(this.userId, filtered2);
+      let progressItem = this.uploads.uploadCVKG(this.userId, filtered2, this.callbackFunction);
     }
 
   }

@@ -4,9 +4,10 @@ UNDER CONSTRUCTION!!!!
 
 <div mat-dialog-content>
     <p>{{ 'UPLOAD_CV_KG.DESCRIPTION' | translate }}</p>
-
-    <app-upload-files [validFiles]="['text/plain']" [maxNumberOfFiles]="1" [userId]=data.userId fileDestination="KGFile"></app-upload-files>
-
+    <div *ngIf="!dobieResult">
+        <app-upload-files [callbackFunction]="myCallbackFunctionKG" [validFiles]="['text/plain']" [maxNumberOfFiles]="1" [userId]=data.userId fileDestination="KGFile"></app-upload-files>
+    </div>
+    <div *ngIf="dobieResult"><p>{{dobieResult}}</p></div>
 </div>
 
 <mat-dialog-actions align="end">

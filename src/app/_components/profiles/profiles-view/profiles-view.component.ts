@@ -1109,7 +1109,9 @@ onSubmit() {
   styleUrls: ['./profiles-view.component.css']
 })
 export class UPLOAD_CV_KG_Dialog_modal implements OnInit {
-
+  
+  dobieResult: string = null;
+  
   constructor(
     public dialogRef: MatDialogRef<UPLOAD_CV_KG_Dialog_modal>,
     @Inject(MAT_DIALOG_DATA) public data: CVDialogData) {}
@@ -1122,10 +1124,15 @@ export class UPLOAD_CV_KG_Dialog_modal implements OnInit {
 
   ngOnInit() {
     
-    console.log("Hi!!!"+this.data.userId);
+    //console.log(this.data.userId);
 
   }
 
+  myCallbackFunctionKG = (args: any): void => {
+    //callback code here 
+    console.log(args);
+    this.dobieResult = args
+  }
 
 }
 
