@@ -19,21 +19,29 @@
     </div>
 -->
     
+        <div>
+            <button *ngIf="selectedSubmenu" class="btn btn-primary" (click)="selectSubMenu('home')">
+                <i _ngcontent-axy-c0="" class="material-icons small">  arrow_back  </i> {{ 'BUTTON.BACK' | translate}}
+            </button>
+        </div>
+
         <div class="row">
-            <ng-container *ngFor="let menuOption of menuOptionsPerPilot.menu">
+            <ng-container *ngFor="let menuOption of menuOptionsToPlot.menu">
                 <div id="div-menu-home" *appCanAccess="menuOption.permissions" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                     
                     <div class="post-module hover">
                         <div class="thumbnail">
                             <a *ngIf="menuOption.submenu.length==0" routerLink="{{ menuOption.route }}" class="noborder" title="{{ menuOption.label | translate }}"><img src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}"></a>
-                            <img *ngIf="menuOption.submenu.length>0" src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}">
+                            <a *ngIf="menuOption.submenu.length!=0" [routerLink]="" (click)="selectSubMenu(menuOption)" class="noborder" title="{{ menuOption.label | translate }}"><img 
+                                
+                                src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}"></a>
                         </div>
                         <!-- Post Content-->
                         <div class="post-content">
                             
                             <h1 class="title">
                                 <a *ngIf="menuOption.submenu.length==0" routerLink="{{ menuOption.route }}" >{{ menuOption.label | translate }}</a>
-                                <span *ngIf="menuOption.submenu.length>0">{{ menuOption.label | translate }}</span>
+                                <a [routerLink]="" *ngIf="menuOption.submenu.length>0" (click)="selectSubMenu(menuOption)">{{ menuOption.label | translate }}</a>
                             </h1>
                             <!--<h2 class="authors"></h2>-->
                             <p class="description"></p>

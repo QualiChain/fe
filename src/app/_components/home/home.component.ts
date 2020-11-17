@@ -12,6 +12,9 @@ export class HomeComponent implements OnInit {
   userdata: {id:'', authenticated: false};
   isauthenticated: boolean = false;
   menuOptionsPerPilot: HEADER_MENU;
+  menuOptionsToPlot: HEADER_MENU;
+  menuOptionSelected: any[] = [];
+  selectedSubmenu: boolean = false;
 
   constructor(
     private ps: PilotsService,
@@ -43,6 +46,22 @@ export class HomeComponent implements OnInit {
   } 
 
 
+  selectSubMenu(option: any): void {
+    this.selectedSubmenu = false;
+    if (option == 'home') {
+      this.selectedSubmenu = false;
+      this.menuOptionsToPlot = this.jsonCopy(this.menuOptionsPerPilot);
+    }
+    else {
+      this.selectedSubmenu = true;
+      this.menuOptionsToPlot.menu = this.jsonCopy(option.submenu);
+    }
+  }
+
+  jsonCopy(src) {
+    return JSON.parse(JSON.stringify(src));
+  }
+  
   ngOnInit() {
 
     //let userdata = JSON.parse(localStorage.getItem('userdata'));
@@ -55,6 +74,8 @@ export class HomeComponent implements OnInit {
         this.isauthenticated = userdata.authenticated;
 
         this.menuOptionsPerPilot = this.ps.getPilot(1);
+
+        this.menuOptionsToPlot = this.jsonCopy(this.menuOptionsPerPilot);
       }
     }
     else {
