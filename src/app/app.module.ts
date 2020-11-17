@@ -83,7 +83,7 @@ import { PilotsService } from './_services/pilots.services';
 import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pipe';
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
-import { FilterArrayByValueGetListPipe } from './_pipes/FilterArrayByValueGetList/filterArrayByValueGetList.pipe';
+import { FilterArrayByValueGetListPipe } from './_pipes/filterArrayByValueGetList/filterArrayByValueGetList.pipe';
 /*custom components*/
 //import { CvsComponent } from './_components/cvs/cvs.component';
 import { NotFoundComponent } from './_components/utils/not-found/not-found.component';
