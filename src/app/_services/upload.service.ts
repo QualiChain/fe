@@ -120,7 +120,7 @@ export class UploadService {
         if (event.type === HttpEventType.Response) {
           const responseData = event.body;
           console.dir(responseData); // do something with the response
-          callbackFunction(responseData);
+          callbackFunction({status:'ok', message:responseData});
         }
         else if (event.type === HttpEventType.UploadProgress) {
           // calculate the progress percentage
@@ -163,7 +163,7 @@ export class UploadService {
           uploaded: uploadedStatus.asObservable()
         };
         file.errorMessage = error.error.message;
-        callbackFunction(error.message);
+        callbackFunction({status:'error', message:error.message});
       }
       );
 
