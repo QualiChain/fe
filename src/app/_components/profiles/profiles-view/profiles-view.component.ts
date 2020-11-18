@@ -1131,7 +1131,7 @@ export class UPLOAD_CV_KG_Dialog_modal implements OnInit {
   myCallbackFunctionKG = (args: any): void => {
     //callback code here 
     console.log(args);
-    this.dobieResult = args
+    this.dobieResult = args.message;
   }
 
 }
