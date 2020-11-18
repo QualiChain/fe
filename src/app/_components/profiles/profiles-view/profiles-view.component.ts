@@ -32,6 +32,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { awardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
 import { OUService } from '../../../_services/ou.service';
 import { CoursesService } from '../../../_services/courses.service';
+import { UtilsService } from '../../../_services/utils.service';
 import Course from '../../../_models/course';
 import { exit } from 'process';
 import { AppComponent } from '../../../app.component';
@@ -1111,8 +1112,11 @@ onSubmit() {
 export class UPLOAD_CV_KG_Dialog_modal implements OnInit {
   
   dobieResult: string = null;
-  
+  uploadFinished: boolean = false;
+  errorLoadingData: boolean = false;
+
   constructor(
+    private us: UtilsService,
     public dialogRef: MatDialogRef<UPLOAD_CV_KG_Dialog_modal>,
     @Inject(MAT_DIALOG_DATA) public data: CVDialogData) {}
   
@@ -1130,8 +1134,29 @@ export class UPLOAD_CV_KG_Dialog_modal implements OnInit {
 
   myCallbackFunctionKG = (args: any): void => {
     //callback code here 
-    console.log(args);
+    //console.log(args);
     this.dobieResult = args.message;
+    if (args.status=='ok') {
+      this.us.sendTextTriples(args.message).subscribe(
+        res => {
+          //console.log("Tripleted created");
+          //console.log(res);
+          this.uploadFinished = true;        
+        },
+        error => {
+          console.log("Error sending triplete!!");
+          console.log(error);
+          this.uploadFinished = true;
+          this.errorLoadingData = true;
+        }
+      );
+    }
+    else {
+      this.uploadFinished = true;
+      this.errorLoadingData = true;
+    }
+
+
   }
 
 }

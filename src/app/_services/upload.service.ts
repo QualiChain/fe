@@ -119,7 +119,7 @@ export class UploadService {
         //console.log(event);
         if (event.type === HttpEventType.Response) {
           const responseData = event.body;
-          console.dir(responseData); // do something with the response
+          //console.dir(responseData); // do something with the response
           callbackFunction({status:'ok', message:responseData});
         }
         else if (event.type === HttpEventType.UploadProgress) {

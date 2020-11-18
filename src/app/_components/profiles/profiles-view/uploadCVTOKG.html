@@ -1,13 +1,16 @@
 <h1 mat-dialog-title>{{ 'UPLOAD_CV_KG.TITLE' | translate }}</h1>
 
-UNDER CONSTRUCTION!!!!
-
 <div mat-dialog-content>
-    <p>{{ 'UPLOAD_CV_KG.DESCRIPTION' | translate }}</p>
+    
     <div *ngIf="!dobieResult">
+
+        <p>{{ 'UPLOAD_CV_KG.DESCRIPTION' | translate }}</p>
+
         <app-upload-files [callbackFunction]="myCallbackFunctionKG" [validFiles]="['text/plain']" [maxNumberOfFiles]="1" [userId]=data.userId fileDestination="KGFile"></app-upload-files>
     </div>
-    <div *ngIf="dobieResult"><p>{{dobieResult}}</p></div>
+    <div *ngIf="dobieResult && errorLoadingData"><p>{{dobieResult}}</p></div>
+
+    <div *ngIf="uploadFinished && !errorLoadingData"><p>{{ 'UPLOAD_CV_KG.CV_PROCESSED_MESSAGE' | translate }}</p></div>
 </div>
 
 <mat-dialog-actions align="end">
