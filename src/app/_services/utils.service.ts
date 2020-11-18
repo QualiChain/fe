@@ -11,6 +11,7 @@ import User from '../_models/user';
 export class UtilsService {
 
   private uriSelect = environment.selectUrl;
+  private uriTextTriples = environment.insertTextTriples
 
   constructor(private http: HttpClient) { }
 
@@ -52,4 +53,19 @@ export class UtilsService {
        })
     )
   }
+
+  sendTextTriples(textTriples: String){
+
+    return this.http.post(`${this.uriTextTriples}`, textTriples, { responseType: 'text'}).
+        pipe(
+            map((data: any) => {
+                return data;
+            }), catchError( error => {
+                return throwError( 'Something went wrong!' );
+            })
+        )
+
+  }
+
+
 }
