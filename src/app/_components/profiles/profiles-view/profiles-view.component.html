@@ -58,7 +58,8 @@
             <div><span class="profileLabel">{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
             <div><span class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>  <span *ngIf="userdata.role"> {{ 'ROLES.'+userdata.role | translate}}</span></div>
             <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span> <span *ngIf="userdata.gender"> {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</span></div>
-            
+            <div *ngIf="currentJobPosition"><span class="profileLabel">{{ 'PROFILES.CURRENT_JOB_POSITION' | translate }}:</span> {{currentJobPosition}}</div>
+
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
 

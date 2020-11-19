@@ -25,11 +25,12 @@
             <!--{{ 'RECOMENDED_COURSE.MATCH' | translate }}:-->
           </div>
           
-         <!--
-                    <div class="progress" >
-                      <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':course.rating}" attr.aria-valuenow="{{course.rating}}"  aria-valuemin="0" aria-valuemax="100">{{course.rating}}%</div>
-                    </div>
-                    -->
+          <div><br>{{ 'RECOMENDED_COURSES.SCORE' | translate }}</div>
+
+          <div class="progress" >
+            <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':((100*course.score)/1)}" attr.aria-valuenow="{{course.score}}"  aria-valuemin="0" aria-valuemax="1">{{course.score}}</div>
+          </div>
+                    
 
           <br/>
           <button class="btn btn-primary" [routerLink]="['/courses', course.course_id]">

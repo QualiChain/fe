@@ -18,7 +18,7 @@ export class RecomendedSkillsComponent implements OnInit {
   loadingSpinner: boolean = true;
 
   //displayedColumns: string[] = ['title', 'job_description', 'action'];
-  displayedColumns: string[] = ['title'];
+  displayedColumns: string[] = ['title', 'action'];
   
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -42,7 +42,7 @@ export class RecomendedSkillsComponent implements OnInit {
     public async recomendedSkillsByUserId(userId: number) {
 
       let dataTest = await this.rs.recomendedDataByCVByUserId(userId, 'skills');      
-      //console.log(dataTest);
+      //console.log(dataTest['recommended_skills']);
       this.recomendedSkills = dataTest['recommended_skills'];
       this.dataSource.data = dataTest['recommended_skills'];
       this.loadingSpinner = false;
