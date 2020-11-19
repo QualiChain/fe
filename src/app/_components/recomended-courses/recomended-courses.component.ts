@@ -24,7 +24,7 @@ export class RecomendedCoursesComponent implements OnInit {
 
 
   //displayedColumns: string[] = ['course_title', 'course_decription', 'action'];
-  displayedColumns: string[] = ['course_title', 'data.description', 'action'];
+  displayedColumns: string[] = ['course_title', 'data.description', 'score', 'action'];
   
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 

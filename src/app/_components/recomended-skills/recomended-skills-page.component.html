@@ -19,6 +19,15 @@
             <table  mat-table [dataSource]="dataSource" matSort class="table table-striped">
                                
 
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+                    <td mat-cell *matCellDef="let element">
+                        <a [routerLink]="['/skills',element.id]" class="btn btn-primary small">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                        </a>
+                    </td>
+                    </ng-container>
+
             <!-- Title Column -->
             <ng-container matColumnDef="title">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CV.SKILL' | translate }} </th>

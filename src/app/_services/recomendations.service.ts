@@ -94,7 +94,7 @@ export class RecomendationsService {
       let recomendedDataTmp = dataRecommendationByCV['recommended_skills'];
       let posI = 0;
       for (const element of recomendedDataTmp) {
-        recomendedData['recommended_skills'].push({'id':element,'title': element ,'description': element, 'rating': null}); 
+        recomendedData['recommended_skills'].push({'id':element.id,'title': element.name ,'description': element.name, 'rating': null}); 
         posI = posI + 1;
       }
     }

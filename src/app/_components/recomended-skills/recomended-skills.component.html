@@ -20,8 +20,10 @@
       <div class="job-card">                    
         <div class="job-card-body">                      
           <div class="job-card-text">
-            {{skill.description}}
+            <!--
+            {{skill.description}}            
             <br/>
+            -->
             <!--{{ 'RECOMENDED_JOBS.MATCH' | translate }}:-->
           </div>
           
@@ -30,12 +32,12 @@
             <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':skill.rating}" attr.aria-valuenow="{{skill.rating}}"  aria-valuemin="0" aria-valuemax="100">{{job.job.rating}}%</div>
           </div>
           -->
-          <!--
+          
           <br/>
           <button class="btn btn-primary" [routerLink]="['/skills', skill.id]">
             <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
           </button>
-          -->
+          
         </div>
       </div>
 

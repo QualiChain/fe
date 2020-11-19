@@ -45,7 +45,11 @@
                 <td mat-cell *matCellDef="let element"> {{element?.data?.description}} </td>
             </ng-container>
 
-
+            <!-- score Column -->
+            <ng-container matColumnDef="score">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> {{ 'RECOMENDED_COURSES.SCORE' | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element?.score}} </td>
+            </ng-container>
             
             </table>
         

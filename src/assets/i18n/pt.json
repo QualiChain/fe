@@ -404,7 +404,8 @@
     "DELETE_MESSAGE": "Are you sure you want to delete this user?",
     "CONFIRM_ACTION": "Confirm Action",
     "CARRER_PATH": "Career path",
-    "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?"
+    "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?",
+    "CURRENT_JOB_POSITION": "Current job position"
   },
   "BCO": {
     "TITLE": "Best Career Options",
@@ -594,7 +595,8 @@
   },  
   "RECOMENDED_COURSES": {
     "TITLE": "Recommended courses",
-    "NO_DATA": "This user does not have any recomended course yet."
+    "NO_DATA": "This user does not have any recomended course yet.",
+    "SCORE": "Score"
   },
   "RECOMENDED_JOBS": {
     "TITLE": "Recommended jobs",

@@ -99,7 +99,7 @@ export class EducationPlanComponent implements OnInit {
         this.ss
         .getSkill(+element).subscribe(
           dataSkill => {
-            console.log(dataSkill)
+            //console.log(dataSkill)
             let dataToPush = {id:dataSkill.courseid, name:dataSkill.name, rating: Math.floor(Math.random() * (10 - 0 + 1)) + 0};
              this.itemList.push(dataToPush);
             this.dataSource.data = this.itemList;

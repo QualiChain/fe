@@ -33,6 +33,7 @@ import { awardDialog_modal } from '../../../_components/award-smart-badge/award-
 import { OUService } from '../../../_services/ou.service';
 import { CoursesService } from '../../../_services/courses.service';
 import { UtilsService } from '../../../_services/utils.service';
+import { JobsService } from '../../../_services/jobs.service';
 import Course from '../../../_models/course';
 import { exit } from 'process';
 import { AppComponent } from '../../../app.component';
@@ -114,6 +115,7 @@ export class ProfilesViewComponent implements OnInit {
   workHistoryCV: any = [];
   educationHistoryCV: any = [];
   skillsByCourseInfo: any = [];
+  currentJobPosition: string = null;
 
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
@@ -122,6 +124,7 @@ export class ProfilesViewComponent implements OnInit {
   listOfSmartAwardsOU: any =[];
   
   constructor(
+    private js: JobsService,
     private uploads: UploadService,
     private appcomponent: AppComponent,
     private ous: OUService,
@@ -312,6 +315,7 @@ export class ProfilesViewComponent implements OnInit {
 
       if (id>0) {
 
+        this.getUserCurrentJobPosition(id.toString());
 
         this.cs
         .getCompletedCourseByUserId(id)
@@ -428,6 +432,39 @@ export class ProfilesViewComponent implements OnInit {
 
 
   }
+
+  getUserCurrentJobPosition(id:string) {
+    //console.log("getUserCurrentJobPosition-"+id);
+    this.us.getUserProfileInJobEndPoint(+id).subscribe(
+      data => {
+        if ( data ) {
+          if ( data.hasOwnProperty('currentJobURI') ) {
+            if (data.currentJobURI) {
+              //console.log(data.currentJobURI);
+              var splitted = data.currentJobURI.split(":"); 
+              //console.log(splitted[splitted.length-1]);
+              let jobId = splitted[splitted.length-1];
+              
+              this.js.getJob(jobId).subscribe(
+                (jobData:any) => {
+                  //console.log(jobData);
+                  this.currentJobPosition = jobData.label;
+                },
+                error => {
+                  console.log("error recovering job data - jid:"+jobId);                  
+                }
+              );
+              
+            }
+          }
+        }
+      },
+      error => {
+        console.log("error recovering user data from job endpoint - uid:"+id);
+      }
+    );
+
+  }  
 
 connectToOU() {
   this.ous
@@ -988,6 +1025,7 @@ export class CVDialog_modal implements OnInit {
 
     this.getUserData(this.data.userId.toString());
     this.getUserCV(this.data.userId.toString());
+    
 
     //console.log(this.data.userId+"----"+this.currentUser.id)
     //if ((this.data.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
