@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 const urlVisualisations:string = environment.visualiserUrl;
 
 export interface Specialization {
-  name: string;
+  title: string;
   id: number;
 }
 
@@ -322,7 +322,7 @@ export class VisualisationsSpecializationDemandInFunctionOfTime implements OnIni
     let tmpURL = '';
     this.specializations.forEach(element => {
       //console.log(element);
-      tmpURL = tmpURL+"&y_var_names[]="+element.name+"&y_var_titles[]="+element.name+"&y_var_units[]=job%20postings";
+      tmpURL = tmpURL+"&y_var_names[]="+element.title+"&y_var_titles[]="+element.title+"&y_var_units[]=job%20postings";
 
     });
 

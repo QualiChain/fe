@@ -15,7 +15,7 @@ export const environment = {
   jobsUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',
   jobsProfilesUrl : 'http://knowledgebizvpn.ddns.net:8000/profiles',
   skillsUrl : 'http://qualichain.epu.ntua.gr:5004/skills',
-  specializationsURL : 'http://qualichain.epu.ntua.gr:5004/skills',
+  specializationsURL : 'http://qualichain.epu.ntua.gr:5004/specializations',
   notificationsURL : 'http://qualichain.epu.ntua.gr:5004/notifications',
   cvUrl : 'http://knowledgebizvpn.ddns.net:8000/cv',//'http://qualichain.epu.ntua.gr:5000/CV',
   jobmatchingUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',//'http://localhost:8000/jobs',

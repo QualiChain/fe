@@ -23,7 +23,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 let completedCoursesByUser: any[] = [];
 
 export interface Specialization {
-  name: string;
+  title: string;
   id: number;
 }
 
@@ -140,7 +140,19 @@ export class CareerAdvisorComponent implements OnInit {
       else {
         //filter by text
         //console.log(this.allSpecialisations);
-        let filteredSpecializations: Specialization[] = this.allSpecialisations.filter(specialization => specialization.name.toLowerCase().includes(value.toLowerCase()));
+        //console.log(value);
+        let stringToCompare = "";
+        if ( value.hasOwnProperty('title') ) {
+          stringToCompare = value.title.toLowerCase();
+        }
+        else if ( value ) {
+          stringToCompare = value.toLowerCase();
+        }
+        else {
+          stringToCompare = "";
+        }
+        //console.log(stringToCompare);
+        let filteredSpecializations: Specialization[] = this.allSpecialisations.filter(specialization => specialization.title.toLowerCase().includes(stringToCompare));
   
         //filter skills we have in the selectd list of skills
         let activeIds = [];
@@ -412,11 +424,12 @@ export class CareerAdvisorComponent implements OnInit {
         
         this.ss.getSpecializations().subscribe(
           dataSpecializations => { 
-            //console.log(dataSpecializations);            
+            //console.log(dataSpecializations);
             dataSpecializations.forEach(element => {
-              this.allSpecialisations.push({id:element.id, name: element.name});
+              this.allSpecialisations.push({id:element.id, title: element.title});
             }); 
 
+            this.allSpecialisations.sort((a, b) => (a.title > b.title) ? 1 : -1)
           },
           error => {            
             console.log("Error recovering specializations list")
