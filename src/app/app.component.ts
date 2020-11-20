@@ -6,6 +6,8 @@ import {TranslateService} from '@ngx-translate/core';
 import { AuthService } from '../app/_services';
 import User from './_models/user';
 import { Role } from './_models/role';
+import { StorageService } from './_helpers/global';
+import { QCStorageService } from './_services/QC_storage.services';
 
 declare var $: any;
 
@@ -20,6 +22,8 @@ export class AppComponent {
   currentUser: any;
 
   constructor(
+    public storageService: StorageService,
+    private qcStorageService: QCStorageService,
     private router: Router,
     private authservice: AuthService,
     private readonly translate: TranslateService
@@ -152,8 +156,15 @@ export class AppComponent {
   }
   */
 
- ngOnInit() { // In the ngOnInit() or in the constructor
+ async ngOnInit() { // In the ngOnInit() or in the constructor
   
+  
+      
+  let dataP = await this.authservice.recoverPerimissionsAsync();
+  
+  let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(dataP));
+  this.storageService.setItem('QCP', encryptedData);
+    
   const el = document.getElementById('nb-global-spinner');
   if (el) {
     setTimeout(()=>{

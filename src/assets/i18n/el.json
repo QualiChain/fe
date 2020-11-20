@@ -13,7 +13,10 @@
     "professor": "Professor",
     "recruiter": "Recruiter",
     "administrator": "Administrator",
-    "admin": "Administrator"
+    "admin": "Administrator",
+    "life long learner": "Life long learner",
+    "academic organization": "Academic organization",
+    "recruitment organisation": "Recruitment organisation"
   },
   "MENU": {
     "HOME": "Home",

@@ -84,6 +84,7 @@ import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pip
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
 import { FilterArrayByValueGetListPipe } from './_pipes/filterArrayByValueGetList/filterArrayByValueGetList.pipe';
+
 /*custom components*/
 //import { CvsComponent } from './_components/cvs/cvs.component';
 import { NotFoundComponent } from './_components/utils/not-found/not-found.component';
@@ -166,6 +167,7 @@ import { PaginatorIntlService } from './_services/multilingual-paginator-intl'
 import { TranslateService } from "@ngx-translate/core";
 import { QcUserNameComponent } from './_components/utils/qc-user-name/qc-user-name.component';
 import { QcJobCandidatesManagementComponent } from './_components/utils/qc-job-candidates-management/qc-job-candidates-management.component';
+import { OrderTemplatePipePipe } from './_pipes/orderTemplatePipe/order-template-pipe.pipe';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -297,7 +299,8 @@ export function tokenGetter() {
     VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime, EducationPlanComponent,
     CanAccessDirective,
     QcUserNameComponent,
-    QcJobCandidatesManagementComponent
+    QcJobCandidatesManagementComponent,
+    OrderTemplatePipePipe
   ],
   imports: [
     SafePipeModule,

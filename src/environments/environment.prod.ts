@@ -33,5 +33,6 @@ export const environment = {
   visualiserUrl: 'http://qualichain.epu.ntua.gr:8000/visualiser',
   //uploadCVToKG: 'https://demo.iais.fraunhofer.de/dobie',
   uploadCVToKG: '/dobie',
-  insertTextTriples: 'http://knowledgebizvpn.ddns.net:8000/insertTextTriples'
+  insertTextTriples: 'http://knowledgebizvpn.ddns.net:8000/insertTextTriples',
+  permissionsUrl: 'http://qualichain.epu.ntua.gr:5004/user_permissions'
 };

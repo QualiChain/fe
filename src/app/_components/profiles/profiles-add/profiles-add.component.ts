@@ -32,7 +32,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StorageService } from '../../../_helpers/global';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 
-
 @Component({
   selector: 'app-profiles-add',
   templateUrl: './profiles-add.component.html',
@@ -58,7 +57,10 @@ export class ProfilesAddComponent implements OnInit {
     {value: 'administrator', viewValue: 'Administrator'},
     {value: 'employee', viewValue: 'Employee'},
     {value: 'professor', viewValue: 'Professor'},
-    {value: 'recruiter', viewValue: 'Recruiter'}
+    {value: 'recruiter', viewValue: 'Recruiter'},
+    {value: 'life long learner', viewValue: 'Life long learner'},
+    {value: 'academic organization', viewValue: 'Academic organization'},
+    {value: 'recruitment organisation', viewValue: 'Recruitment organisation'}
   ];
 
   public currentValue: string = null;
