@@ -78,7 +78,7 @@
                         <mat-chip-list #chipListSpecializations>
                             <mat-chip *ngFor="let specialization of specializations;let indx=index;" 
                             [selectable]="selectableSpecializations" [removable]="removableSpecializations" (removed)="removeSpecialization(specialization,indx)">
-                                {{specialization.name}}
+                            {{specialization.title}}
                                 <mat-icon matChipRemove *ngIf="removableSpecializations">cancel</mat-icon>
                             </mat-chip>
                             <input placeholder="{{ 'CAREER_ADVISOR.TARGETED_JOB_TITLES.PLACEHOLDER' | translate }}"
@@ -93,7 +93,7 @@
 
                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                             <mat-option *ngFor="let specialization of filteredSpecializations | async" [value]="specialization">
-                                {{specialization.name}}
+                                {{specialization.title}}
                             </mat-option>
                         </mat-autocomplete>
 
