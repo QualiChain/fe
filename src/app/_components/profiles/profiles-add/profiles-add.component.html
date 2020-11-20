@@ -17,7 +17,7 @@
             <mat-select [(ngModel)]="pilotId" name="pilot" required ngDefaultControl>
               <mat-option *ngFor="let pilot of pilots" [value]="pilot.value">
                 {{pilot.viewValue}}
-              </mat-option>
+              </mat-option>               
             </mat-select>
           </mat-form-field>
         </div>
@@ -30,9 +30,16 @@
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.ROLE.SELECT_ONE' | translate }}</mat-label>
             <mat-select [(ngModel)]="role" name="role" required ngDefaultControl>
+              <!--
               <mat-option *ngFor="let role of roles" [value]="role.value">
                 {{'ROLES.'+role.viewValue.toLowerCase() | translate}}
               </mat-option>
+              orderTranslate
+            -->
+              <mat-option *ngFor="let role of roles | orderTemplatePipe : 'viewValue' " [value]="role.value">
+                {{'ROLES.'+role.viewValue.toLowerCase() | translate}}
+              </mat-option>
+
             </mat-select>
           </mat-form-field>
         </div>

@@ -12,6 +12,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UploadService } from '../../../_services/upload.service';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
+import { OrderTemplatePipePipe } from '../../../_pipes/orderTemplatePipe/order-template-pipe.pipe';
 
 describe('ProfilesAddComponent', () => {
   let component: ProfilesAddComponent;
@@ -19,7 +20,7 @@ describe('ProfilesAddComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfilesAddComponent ],
+      declarations: [ ProfilesAddComponent, OrderTemplatePipePipe ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
       ],

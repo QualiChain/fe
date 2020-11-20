@@ -220,7 +220,7 @@ export class VisualisationsMarketDemand implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.urlSafe = urlVisualisations+"/show_pie_chart?y_var_names%5b%5d=count&y_var_titles%5b%5d=Market%20Demand&y_var_units%5b%5d=Job%20Postings&x_axis_name=specialization&x_axis_title=Specialization&use_default_colors=false&chart_3d=false&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&color_list_request%5b%5d=green&color_list_request%5b%5d=gold&color_list_request%5b%5d=ceramic&color_list_request%5b%5d=fuchsia&color_list_request%5b%5d=violet&color_list_request%5b%5d=purple&color_list_request%5b%5d=cyan&base_query=group_jobs";
+    this.urlSafe = urlVisualisations+"/show_pie_chart?y_var_names%5b%5d=count&y_var_titles%5b%5d=Market%20Demand&y_var_units%5b%5d=Job%20Postings&x_axis_name=specialization_id&x_axis_title=Specialization&use_default_colors=false&chart_3d=false&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&color_list_request%5b%5d=green&color_list_request%5b%5d=gold&color_list_request%5b%5d=ceramic&color_list_request%5b%5d=fuchsia&color_list_request%5b%5d=violet&color_list_request%5b%5d=purple&color_list_request%5b%5d=cyan&base_query=group_jobs";
   }
 
   ngOnChanges(): void {          

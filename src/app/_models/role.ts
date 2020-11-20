@@ -5,5 +5,8 @@ export enum Role {
     'professor' = 'professor',
     'recruiter' = 'recruiter',
     'administrator' = 'administrator',
+    'life long learner' = 'life long learner',
+    'academic organization' = 'academic organization',
+    'recruitment organisation' = 'recruitment organisation',
     'admin' = 'administrator'
 }
