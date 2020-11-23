@@ -164,8 +164,8 @@ export class AuthService {
       let authorized = false;
       if (currentLogedUser) {
           for (const elementV of value) {
-            let permissionsByRole = permissionsByRoleTest;
-            //let permissionsByRole = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('QCP')));
+            //let permissionsByRole = permissionsByRoleTest;
+            let permissionsByRole = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('QCP')));
             //console.log(permissionsByRole);
 
               if (permissionsByRole[elementV]) {                      

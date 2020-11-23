@@ -40,6 +40,7 @@ import { AppComponent } from '../../../app.component';
 
 import { UploadService } from '../../../_services/upload.service';
 import { environment } from '../../../../environments/environment';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 const downloadUrl = environment.downloadFilesUrl;
 
 @Component({
@@ -124,13 +125,14 @@ export class ProfilesViewComponent implements OnInit {
   listOfSmartAwardsOU: any =[];
   
   constructor(
+    public dialog: MatDialog,
     private js: JobsService,
     private uploads: UploadService,
     private appcomponent: AppComponent,
     private ous: OUService,
     private cs: CoursesService,
     public CVDialog: MatDialog,
-    private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, private authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
+    private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, public authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
     
@@ -232,6 +234,7 @@ export class ProfilesViewComponent implements OnInit {
 
   ngOnInit() {
     
+
     if(!this.currentUser) {
     //if(!this.currentUser.hasOwnProperty('id')){
       this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:'', gender:''};
@@ -279,75 +282,92 @@ export class ProfilesViewComponent implements OnInit {
         }
       }
 
-      //if (id>0) {
-      if (id) {
-        this.bs
-        .getBadgesByUser(id)
-        .subscribe((data: any) => {
-          //this.jobs = data;
-          //console.log(dataFull);
-          //console.log(data);
-          this.smartBadgesByUser = data;
-
-        });
-        
-      }
-
-      //let listOfUsers = [];
       
-      this.years = [1,2,3,4,5];
-      this.currentJustify = 'fill';
-      //this.listOfCoursesByUser = listOfCoursesByUser;
-/*
-      this.cs
-      .getCourses()
-      .subscribe((data: Course[]) => {
-        //console.log(data);
-        data.forEach((element, index) => {         
-          if (index<5) {
-            this.listOfCoursesByUser.push(element);
-          }
-          
-        });
-    });
-*/      
+      let authorizedViewOwnProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['view_own_profile']);
+      let authorizedViewOtherProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['view_other_profile']);
 
 
-      if (id>0) {
+      if (authorizedViewOtherProfile || (authorizedViewOwnProfile && (id.toString() == this.currentUser.id.toString()))) {
 
-        this.getUserCurrentJobPosition(id.toString());
-
-        this.cs
-        .getCompletedCourseByUserId(id)
-        .subscribe((coursesData: Course[]) => {
-          this.listOfCompletedCoursesByUser = coursesData;
-        },
-        error => {            
-          console.log("error getting courses by user id")
+        //recover smart badges of the user
+        //if (id>0) {
+        if (id) {
+          this.bs
+          .getBadgesByUser(id)
+          .subscribe((data: any) => {
+            //this.jobs = data;
+            //console.log(dataFull);
+            //console.log(data);
+            this.smartBadgesByUser = data;
+          });        
         }
-        );
-                
 
+        //load demo data for testing proposes
+        //let listOfUsers = [];      
+        this.years = [1,2,3,4,5];
+        this.currentJustify = 'fill';
+        //this.listOfCoursesByUser = listOfCoursesByUser;
+        /*
         this.cs
-        .getTeachingCourseByUserId(id)
-        .subscribe((data: any[]) => {
+        .getCourses()
+        .subscribe((data: Course[]) => {
           //console.log(data);
           data.forEach((element, index) => {         
-            //if (index<5) {              
-              this.listOfCoursesByUser.push(element.course);
-              //getSkillsByCourseId
-              this.cs
-              .getSkillsByCourseId(element.course.courseid)
-              .subscribe((dataSkillsByCourse: any[]) => {
-                //console.log(dataSkillsByCourse);
-                this.skillsByCourseInfo[element.course.courseid] = dataSkillsByCourse;
-                
-              });
-            //}
-            
+            if (index<5) {
+              this.listOfCoursesByUser.push(element);
+            }          
           });
         });
+        */     
+
+        if (id>0) {
+
+          //recover current job position
+          this.getUserCurrentJobPosition(id.toString());
+
+          //recover list completed courses by user id
+          this.cs
+          .getCompletedCourseByUserId(id)
+          .subscribe((coursesData: Course[]) => {
+            this.listOfCompletedCoursesByUser = coursesData;
+          },
+          error => {            
+            console.log("error getting courses by user id")
+          }
+          );
+
+          //recover teached coursed by user id
+          this.cs
+          .getTeachingCourseByUserId(id)
+          .subscribe((data: any[]) => {
+            //console.log(data);
+            data.forEach((element, index) => {         
+              //if (index<5) {              
+                this.listOfCoursesByUser.push(element.course);
+                //getSkillsByCourseId
+                this.cs
+                .getSkillsByCourseId(element.course.courseid)
+                .subscribe((dataSkillsByCourse: any[]) => {
+                  //console.log(dataSkillsByCourse);
+                  this.skillsByCourseInfo[element.course.courseid] = dataSkillsByCourse;
+                  
+                });
+              //}
+              
+            });
+          });
+        }
+
+
       }
+      else {
+        this.router.navigate(["/access_denied"]);
+      }
+
+       
+
+
+      
       /*
       this.emptyCourseSelected = {
         courseid: 0, 
@@ -373,12 +393,18 @@ export class ProfilesViewComponent implements OnInit {
         //this.userId=String(id);
 
         //if ((this.userId.toString()==this.currentUser.id.toString()) || (this.currentUser.role.toLowerCase()=='administrator')) {
-        if ((this.userId.toString()==this.currentUser.id.toString()) || (this.isAdmin)) {
+
+        let authorizedEditOwnProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['edit_own_profile']);
+        let authorizedEditOtherProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['edit_other_profile']);
+        let authorizedViewRecruitment =  this.authservice.checkIfPermissionsExistsByUserRoles(['view_recruitment']);
+
+        //if ((this.userId.toString()==this.currentUser.id.toString()) || (this.isAdmin)) {
+        if (authorizedEditOtherProfile || (authorizedEditOwnProfile && (id.toString() == this.currentUser.id.toString()))) {
           this.canEditCV = true;
           this.canViewCV = true;
         }
-        //else if (this.currentUser.role.toLowerCase()=='recruiter') {
-        else if (this.isRecruiter) {
+        //else if (this.isRecruiter) {
+        else if (authorizedViewRecruitment) {
           this.canViewCV = true;
         }
         
@@ -430,6 +456,44 @@ export class ProfilesViewComponent implements OnInit {
 
     });
 
+
+  }
+
+  confirmDialog() {
+    //console.log("delete own profile");
+    const message = this.translate.instant('PROFILES.DELETE_OWN_PROFILE');
+    const message2 = this.translate.instant('PROFILES.DELETE_OWN_PROFILE_HELP_MESSAGE');
+
+    const dialogData = new ConfirmDialogModel(this.translate.instant('PROFILES.CONFIRM_ACTION'), message+"<br>"+message2);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      //this.result = dialogResult;
+     
+
+      if (dialogResult) {
+        //console.log(dialogResult);
+        this.us.deleteUser(+this.userId).subscribe(
+          data => {
+            //console.log("profile deleted!!");
+            //localStorage.removeItem('userdataQC');
+            //localStorage.removeItem('currentUserQC');
+            //localStorage.removeItem('token');
+            this.authservice.logout();
+            //this.router.navigate(['/login']);
+            window.location.reload();
+            
+          },
+          error => {
+            alert("Error deleting own profile");
+          }
+        );
+      }
+    });
 
   }
 

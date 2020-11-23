@@ -3,12 +3,19 @@
 <div class="container">
 
     <div class="row">
-          <button *ngIf="((isProfessor && jobData.creator_id==currentUser.id) || (isRecruiter && jobData.creator_id==currentUser.id) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']">
+<!--
+          <button *ngIf="((isProfessor && jobData.creator_id==currentUser.id) || (isRecruiter && jobData.creator_id==currentUser.id) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']"></button>
+-->
+          <button *ngIf="((jobData.creator_id==currentUser.id) && authservice.checkIfPermissionsExistsByUserRoles(['edit_job_post']))">       
             <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
           </button>
-          <button *ngIf="!userHasAnApply" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">
-            <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
-          </button>
+
+          <span *appCanAccess="['apply_for_a_job_position']">
+            <button *ngIf="!userHasAnApply" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">
+              <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
+            </button>
+          </span>
+
           <button *ngIf="userHasAnApply" class="btn btn-danger" (click)="deleteThisApply(jobData.id, currentUser.id, -1)">
             <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
           </button>
@@ -119,79 +126,11 @@
         </div>
     </div>
     
+    <!--     
     <div class="col" [hidden]="!(isAdmin || isRecruiter)">
-      
+    -->
+    <div class="col" *appCanAccess="['view_recruitment']">      
       <app-qc-job-candidates-management [jobId]="jobData.id"  [reload]="cntReloads"></app-qc-job-candidates-management>
-<!--
-      <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
-
-        <div *ngIf="jobCandidates.length==0">{{ 'JOB.NO_CANDIDATES' | translate }}</div>
-
-        <div [hidden]="jobCandidates.length==0">
-          <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
-            <ng-container matColumnDef="action">
-              <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
-              <td mat-cell *matCellDef="let element; let i=index" style="white-space: nowrap;">
-
-                <button class="btn btn-primary" [routerLink]="['/profiles', element.id]">
-                  <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
-              </button>
-
-              <button class="btn btn-danger" (click)="deleteThisApply(jobData.id, element.id, i)">
-                  <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
-              </button>
-
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="candidateSurname">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.SURNAME' | translate }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.candidateSurname}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="candidateName">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.NAME' | translate }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.candidateName}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="available">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.available}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="expsalary">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.expsalary}} </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="score">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.SCORE' | translate }} </th>
-              <td mat-cell *matCellDef="let element">
-                <div class="wrapperpiechart">
-                  <canvas id="canvas_pie_chart_{{element.id}}" baseChart
-                  [datasets]="[{ data: [element.score,(100-element.score)],label: 'Matching Score', backgroundColor: [
-                  'rgba(30, 144, 255, 1)',
-                  'rgba(0, 0, 0, 1)'
-              ]}]"
-                  [labels]="chartLabels"
-                  [options]="chartOptions"
-                  [chartType]="chartType">
-                </canvas>
-                </div>
-
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-        </div>
--->
-
-        
     </div>
 
 </div>

@@ -25,7 +25,7 @@
               <br/>
             </div>
             <br/>
-            <button class="btn btn-primary" [routerLink]="['/jobs', apply.jobURI]">
+            <button *appCanAccess="['view_jobs']" class="btn btn-primary" [routerLink]="['/jobs', apply.jobURI]">
               <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'JOBS_APPLICATIONS.BUTTON.VIEW_JOB' | translate }}
             </button> 
           </div>

@@ -33,7 +33,7 @@
                     
 
           <br/>
-          <button class="btn btn-primary" [routerLink]="['/courses', course.course_id]">
+          <button *appCanAccess="['view_courses']" class="btn btn-primary" [routerLink]="['/courses', course.course_id]">
             <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
           </button>
 

@@ -47,7 +47,7 @@ export class SkillsComponent implements OnInit {
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
-    private ss: SkillsService, private authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
+    private ss: SkillsService, public authservice: AuthService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService,
     public applyForAJobDialog: MatDialog) { 
 
       this.authservice.currentUser.subscribe(x => this.currentUser = x);

@@ -1,7 +1,7 @@
 <h1>{{ 'SKILLS.TITLE' | translate }}</h1>
 
 <div class="row">
-  <div class="col" [ngClass]="{'col-lg-8': isStudent || isEmployee}">
+  <div class="col" [ngClass]="{'col-lg-8':authservice.checkIfPermissionsExistsByUserRoles(['get_skills_recomendations'])}">
     <!--
     <div class="" *ngIf="isProfessor || isRecruiter || isAdmin">
       <button class="btn btn-primary" [routerLink]="['/skills/add']">
@@ -77,7 +77,7 @@
 
   </div>
 
-  <div class="col col-lg-4" *ngIf="isStudent || isEmployee">
+  <div class="col col-lg-4" *appCanAccess="['get_skills_recomendations']">
 
     <mat-accordion class="example-headers-align" multi>
       <app-recomended-skills userId="{{currentUser.id}}"></app-recomended-skills>

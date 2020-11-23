@@ -408,7 +408,9 @@
     "CONFIRM_ACTION": "Confirm Action",
     "CARRER_PATH": "Career path",
     "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?",
-    "CURRENT_JOB_POSITION": "Current job position"
+    "CURRENT_JOB_POSITION": "Current job position",
+    "DELETE_OWN_PROFILE": "Delete own profile",
+    "DELETE_OWN_PROFILE_HELP_MESSAGE": "You are going to delete your user account, this action cannot be undone. All your data will be lost."
   },
   "BCO": {
     "TITLE": "Best Career Options",
@@ -631,7 +633,10 @@
     "VIEW_MORE": "View more",
     "BACK_TO_USER_PROFILE": "Back to user profile",
     "BACK": "Back",
-    "ASSIGN": "Assign"
+    "ASSIGN": "Assign",
+    "DELETE_OWN_PROFILE": "Delete own profile",
+    "NO": "No",
+    "YES": "Yes"
   },
   "ACTION": "Action",
   "FILTER": "Filter",

@@ -231,25 +231,33 @@ const routes: Routes = [
   {
     path: 'profiles/:id/recomended/courses',
     component: RecomendedCoursesComponentPage,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
+    //canActivate: [AuthGuard],
+    //data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] },
+    canActivate: [AuthGuardByPermission],
+    data: { permissions: ['get_courses_recomendations'] }
   },
   {
     path: 'profiles/:id/recomended/jobs',
     component: RecomendedJobsComponentPage,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
+      permissions: ['get_job_recommendations'] }    
   },
   {
     path: 'profiles/:id/recomended/skills',
     component: RecomendedSkillsComponentPage,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
+      permissions: ['get_skills_recomendations'] }    
   },{
     path: 'profiles/:id/jobapplies',
     component: JobAppliesComponentPage,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] }    
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
+      permissions: ['get_their_job_applications'] }    
   },
   {
     path: 'recruitment/certificate-validation',
@@ -283,9 +291,8 @@ const routes: Routes = [
     component: CoursesComponent,
     //canActivate: [AuthGuard]
     canActivate: [AuthGuardByPermission],
-    data: { roles: [Role.student, Role.employee, Role.professor, Role.admin, Role.administrator],
-    permissions: ['view_courses']
-    }    
+    data: { roles: [Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 
+      permissions: ['view_courses'] }    
   },
   {
     path: 'courses/add',
@@ -293,7 +300,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
-      permissions: ['add_course'] }    
+    permissions: ['add_course'] }    
   },  
   {
     path: 'courses/:id',

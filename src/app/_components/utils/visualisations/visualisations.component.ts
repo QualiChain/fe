@@ -181,8 +181,8 @@ export class VisualisationsCarrerPathTrajectoryChartComponent implements OnInit 
 })
 export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnInit {
 
-  @Input() userId: [];
-  @Input() jobId: [];
+  @Input() userId: string;
+  @Input() jobId: string;
 
   //urlSafe: SafeUrl;
   urlSafe: string = "";
@@ -196,9 +196,11 @@ export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnI
     
   }
   ngOnChanges(): void {    
-    
-    this.urlSafe = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request%5b%5d=red&color_list_request%5b%5d=blue&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=200&base_query=skills_coverage&user_id="+this.userId+"&job_id="+this.jobId;
-    
+    //console.log("user id:"+this.userId);
+    //console.log(this.jobId);
+    this.jobId = this.jobId.toLowerCase().replace("job", "");
+    //console.log("job id:"+this.jobId);
+    this.urlSafe = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request%5b%5d=red&color_list_request%5b%5d=blue&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=200&base_query=skills_coverage&user_id="+this.userId+"&job_id="+this.jobId;    
   }
 
 }

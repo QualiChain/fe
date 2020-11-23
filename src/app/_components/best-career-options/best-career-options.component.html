@@ -1,5 +1,5 @@
 <h1>{{ 'BCO.TITLE' | translate }}</h1>
-<p>This is a mockup</p>
+<p>(Recommended jobs)</p>
 <div class="container">
 
     <div class="row">
@@ -17,16 +17,16 @@
     
 
     <div [hidden]="cardToDisplay!=i" class="bco-card" *ngFor="let bco of pagedListBCO; let i = index">
-        <div class="bco-head">{{bco.title}} </div>
+        <div class="bco-head">{{bco.label}} </div>
         <div class="bco-body">
             <div class="bco-body-title">{{ 'BCO.DESCRIPTION' | translate }}</div>
-            <div class="bco-body-content"><p>{{bco.description}}</p></div>
+            <div class="bco-body-content"><p>{{bco.jobDescription}}</p></div>
 
             <div class="bco-body-title">{{ 'BCO.STATISITICS' | translate }}</div>
             <div class="bco-body-content">
                 <div class="row">
                         <div class="col col-lg-4">
-
+                            <!--
                                 <p>
                                     <ngb-progressbar showValue="true" type="info" [value]="progress_relation_cv_bar[i]"></ngb-progressbar>                                    
                                     {{progress_relation_cv_bar[i]}}% relation with your CV
@@ -37,7 +37,7 @@
                                     {{progress_relation_smart_badges_bar[i]}}% relation with your Smart Badges
                                     <br>
                                 </p>
-
+                            -->
                         </div>
                         <div class="col col-lg-8">                            
                             <app-visualisations-user-skillset-coverage-to-applied-job-skills-chart [userId]="userid" [jobId]="bco.id"></app-visualisations-user-skillset-coverage-to-applied-job-skills-chart>                            
