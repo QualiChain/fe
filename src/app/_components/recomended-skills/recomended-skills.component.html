@@ -34,7 +34,7 @@
           -->
           
           <br/>
-          <button class="btn btn-primary" [routerLink]="['/skills', skill.id]">
+          <button *appCanAccess="['view_skills']" class="btn btn-primary" [routerLink]="['/skills', skill.id]">
             <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
           </button>
           

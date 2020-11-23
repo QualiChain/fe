@@ -95,7 +95,7 @@
 									<button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span >
 											<div class="user-authenticated-container">
-												<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + currentUser.avatar_path + ')'}"> </div>												
+												<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + currentUser?.avatar_path + ')'}"> </div>												
 											</div>
 										</span>									
 									</button>
@@ -107,23 +107,23 @@
 															{{ 'MENU.WELCOME_MESSAGE' | translate }}
 													</div>
 													<div class="user-authenticated-name">
-															{{currentUser.name}} {{currentUser.surname}}
+															{{currentUser?.name}} {{currentUser?.surname}}
 															<hr>
 													</div>															
 											</li>
 											<!--
-											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}" (click)="route='/profiles/'+currentUser.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser?.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}" (click)="route='/profiles/'+currentUser?.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
 											-->											
 											<li *appCanAccess="['view_own_profile']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/myprofile'}">
 												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/myprofile'}" routerLink="/myprofile" (click)="route='/myprofile'" >{{ 'MENU.PROFILE' | translate }}</a>
 											</li>
-											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}">
-												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a>
+											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser?.id}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser?.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a>
 											</li>
-											<li *appCanAccess="['retrieve_own_files']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser.id}">
-												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser.id}" routerLink="/profiles/{{currentUser.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a>
+											<li *appCanAccess="['retrieve_own_files']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser?.id}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser?.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a>
 											</li>
-											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser?.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 										</ul>
 									</div>

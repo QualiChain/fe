@@ -1,10 +1,7 @@
 <h1>{{ 'COURSES.TITLE' | translate }}</h1>
 
 <div class="row">
-  <div class="col" [ngClass]="{'col-lg-8': isStudent || isEmployee}">
-    <!--
-    <div class="" *ngIf="isProfessor || isAdmin">
-    -->
+  <div class="col" [ngClass]="{'col-lg-8':authservice.checkIfPermissionsExistsByUserRoles(['get_courses_recomendations'])}">
     <div class="" *appCanAccess="['add_course']">
       <button class="btn btn-primary" [routerLink]="['/courses/add']">
         <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'COURSES.BUTTON.CREATE_COURSE' | translate }}
@@ -73,7 +70,8 @@
     </div>    
 
   </div>
-  <div class="col col-lg-4" *ngIf="isStudent || isEmployee">
+
+  <div class="col col-lg-4" *appCanAccess="['get_courses_recomendations']">
     <app-recomended-courses userId="{{currentUser.id}}"></app-recomended-courses>
   </div>
 </div>

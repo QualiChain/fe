@@ -1,15 +1,10 @@
 <h1>{{ 'JOBS.TITLE' | translate }}</h1>
 
 <div class="row">
-  <!--
-  <div class="col" [ngClass]="{'col-lg-8': currentUser.role.toLowerCase()=='student' || currentUser.role.toLowerCase()=='employee'}">
-  -->
+
   <div class="col" [ngClass]="{'col-lg-8': authservice.checkIfPermissionsExistsByUserRoles(['get_job_recommendations'])}">
-    
+  
     <div class="" *appCanAccess="['add_job_post']">
-    <!--
-      <div class="" *ngIf="isProfessor || isRecruiter || isAdmin">      
-    -->      
       <button class="btn btn-primary" [routerLink]="['/jobs/add']">
         <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'JOBS.BUTTON.CREATE_JOB' | translate }}
       </button>

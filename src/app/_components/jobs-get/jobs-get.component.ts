@@ -64,7 +64,7 @@ export class JobsGetComponent implements OnInit {
     private js: JobsService,
     private us: UsersService,
     private translate: TranslateService,
-    private authservice: AuthService
+    public authservice: AuthService
   ) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);

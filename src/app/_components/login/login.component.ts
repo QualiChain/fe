@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
 
         this.us.getUserFiles(data.id).subscribe(
           res => {
-            
+            myObj['avatar_path'] = "assets/img/no_avatar.jpg";
+
             res.files.forEach(element => {
               var index = element.filename.indexOf(data.id+"_avatar_" ); 
               if (index==0) {                

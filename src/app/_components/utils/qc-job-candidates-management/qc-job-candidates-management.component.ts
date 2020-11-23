@@ -89,7 +89,8 @@ export class QcJobCandidatesManagementComponent implements OnInit {
 
   getCandidates(jobId: any): void {
     //only admin users or recuiters can load candidates list
-    if (this.isAdmin || this.isRecruiter) {
+    //if (this.isAdmin || this.isRecruiter) {
+    if (this.authservice.checkIfPermissionsExistsByUserRoles(['view_recruitment'])) {
       this.js
       .getJobCandidats(jobId)
       .subscribe((jobCandidates: any) => {

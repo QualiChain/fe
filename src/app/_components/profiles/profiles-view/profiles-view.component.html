@@ -39,17 +39,42 @@
         {{ 'BUTTON.EDIT' | translate }}
       </button>
     </span>
-
+    
     <button *ngIf="((userId.toString()==currentUser?.id.toString()) || (isAdmin))" class="btn btn-primary" [routerLink]="['/profiles', userdata?.id, 'dss-curriculum-re-design']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       DSS CV Re-design
     </button>
 
+    <span *appCanAccess="['delete_own_profile']">
+      <button *ngIf="userId.toString()==currentUser?.id.toString()" class="btn btn-danger" [routerLink]="" (click)="confirmDialog()">
+        <i _ngcontent-axy-c0="" class="material-icons small"> delete </i>
+        {{ 'BUTTON.DELETE_OWN_PROFILE' | translate }}
+      </button>
+    </span>
   </div>
   <div class="row"><br></div>
   
   <div class="row">
+    <!--
     <div class="col" [ngClass]="{'col-lg-8': ((userdata?.id==currentUser?.id) && (userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'))}">
+    -->
+
+    <div class="col" [ngClass]="{'col-lg-8':
+    (
+      (userdata?.id==currentUser?.id)
+      &&
+      (
+        authservice.checkIfPermissionsExistsByUserRoles(['get_job_recommendations'])
+        ||
+        authservice.checkIfPermissionsExistsByUserRoles(['get_courses_recomendations'])
+        ||
+        authservice.checkIfPermissionsExistsByUserRoles(['get_skills_recomendations'])
+        ||
+        authservice.checkIfPermissionsExistsByUserRoles(['get_their_job_applications'])
+      )
+    )    
+    }">
+
       <div class="row">
         <div class="col col-lg-8">
             <div><span class="profileLabel">{{ 'PROFILES.USERNAME' | translate }}:</span> {{userdata.userName}}</div>            
@@ -328,20 +353,16 @@
     </div>
       
     </div>
-    <div class="col col-lg-4" *ngIf="(userdata.id==currentUser.id) && (userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee')">      
     <!--
-      <app-recomended-jobs userId="{{userdata.id}}"></app-recomended-jobs>
-      <br/>
-      <app-recomended-courses userId="{{userdata.id}}"></app-recomended-courses>
-      <br/>
-      <app-recomended-skills userId="{{userdata.id}}"></app-recomended-skills>
+    <div class="col col-lg-4" *ngIf="(userdata.id==currentUser.id) && (userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee')">
     -->
-
+    <div class="col col-lg-4" *ngIf="(userdata.id==currentUser.id)">
+    
       <mat-accordion class="example-headers-align" multi>
-        <app-recomended-jobs userId="{{userdata.id}}"></app-recomended-jobs>
-        <app-recomended-courses userId="{{userdata.id}}"></app-recomended-courses>
-        <app-recomended-skills userId="{{userdata.id}}"></app-recomended-skills>
-        <app-job-applications-by-user userId="{{userdata.id}}"></app-job-applications-by-user>
+        <app-recomended-jobs *appCanAccess="['get_job_recommendations']" userId="{{userdata.id}}"></app-recomended-jobs>
+        <app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{userdata.id}}"></app-recomended-courses>
+        <app-recomended-skills *appCanAccess="['get_skills_recomendations']" userId="{{userdata.id}}"></app-recomended-skills>
+        <app-job-applications-by-user *appCanAccess="['get_their_job_applications']" userId="{{userdata.id}}"></app-job-applications-by-user>
       </mat-accordion>
 
     </div>

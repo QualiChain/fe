@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import {PageEvent} from '@angular/material/paginator';
+import { RecomendationsService } from '../../_services/recomendations.service';
 
 @Component({
   selector: 'app-best-career-options',
@@ -125,7 +126,11 @@ public pieChartOptions: ChartOptions = {
   pageSizeBCO: number = 1;  //displaying three cards each row
   pageSizeOptionsBCO: number[] = [1];
 
-  constructor(private route: ActivatedRoute) { }
+  recomendedJobs = [];
+  
+  constructor(
+    private rs: RecomendationsService,
+    private route: ActivatedRoute) { }
 
   OnPageChangeBCO(event: PageEvent){
     let startIndex = event.pageIndex * event.pageSize;
@@ -142,7 +147,31 @@ public pieChartOptions: ChartOptions = {
       
       //console.log(params['id']);
       this.userid=params['id'];
+
+      this.lengthBCO = 0;
+
+
+      if (this.userid) {
+        this.rs
+        .getRecomendationsJobs(this.userid).subscribe(
+          data => {
+            //console.log("list of recomended jobs");
+            console.log(data);
+            this.recomendedJobs = data;
+            this.best_career_options = data;
+
+            this.lengthBCO = this.best_career_options.length;
+            this.pagedListBCO = this.best_career_options.slice(0, 1);
+
+          },
+          error => {
+            console.log("recomended jobs not found in db");                        
+          }
+        );
+      }
+
       this.cardToDisplay = 0;
+      /*
       let options = [
         {id: 1, title:"Front-end Web Developer", description: "A front-end web developer is responsible for implementing visual elements that users see and interact with in a web application. they are usually supported by back-end web developers, who are responsible for server-side applications logic and integration of the work fron-end developers do."},
         {id: 2, title:"Back-end Web Developer", description: "A back-end web developer is responsible for server-side web application logic and integration of the work front-end developers do. Back-end developers are usually write the web services and APIs used by front-end developers and mobile application developers."},
@@ -169,7 +198,7 @@ public pieChartOptions: ChartOptions = {
         this.lineChartLabels[i]= ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
       }
-      
+      */
     });
 
   }

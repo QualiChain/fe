@@ -5,6 +5,7 @@ import { BestCareerOptionsComponent } from './best-career-options.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChartsModule } from 'ng2-charts';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BestCareerOptionsComponent', () => {
   let component: BestCareerOptionsComponent;
@@ -19,7 +20,8 @@ describe('BestCareerOptionsComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         RouterTestingModule,
-        ChartsModule
+        ChartsModule,
+        HttpClientTestingModule
         ]
     })
     .compileComponents();

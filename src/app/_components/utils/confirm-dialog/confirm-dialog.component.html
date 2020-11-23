@@ -1,13 +1,32 @@
+<!--
 <h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   <mat-icon>drag_handle</mat-icon>
   {{title}}
 </h1>
+-->
+<h1 mat-dialog-title>{{title}}</h1>
+
 
 <div mat-dialog-content>
-  <p>{{message}}</p>
+  <p [innerHTML]="message"></p>
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onDismiss()">No</button>
-  <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
-</div>
+<mat-dialog-actions align="end">
+  <div class="modal-footer">   
+    <!--
+    <button mat-button (click)="onDismiss()">No</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+    -->
+
+    <button mat-button class="btn btn-primary" (click)="onDismiss()">
+      <i _ngcontent-axy-c0="" class="material-icons small"> cancel </i>
+      {{ 'BUTTON.NO' | translate }}
+    </button>
+
+    <button mat-button class="btn btn-danger" (click)="onConfirm()">
+      <i _ngcontent-axy-c0="" class="material-icons small"> check </i>
+      {{ 'BUTTON.YES' | translate }}
+    </button>
+
+  </div>
+</mat-dialog-actions>  

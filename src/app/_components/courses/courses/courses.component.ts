@@ -57,7 +57,7 @@ export class CoursesComponent implements OnInit {
   courses: Course[];
   constructor(
     private appcomponent: AppComponent,
-    private router: Router, private us: UsersService, private authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
+    private router: Router, private us: UsersService, public authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
     
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
