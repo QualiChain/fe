@@ -1,12 +1,14 @@
 
         <div class="box">
             <div class="col-6">
+                <!--
                 <button class="btn btn-info float-right" (click)="showHelpDialog(visualisationHelpId)">
                     <i _ngcontent-axy-c0="" class="material-icons small"> help </i> {{ 'BUTTON.HELP' | translate }}
                 </button>
+                -->
+                <a class="noborder float-right" [routerLink]="" (click)="showHelpDialog(visualisationHelpId)" ><mat-icon>help_outline</mat-icon> </a>
             </div>
-            
-        
+                    
             <iframe name="Framename" [src]="urlSafe | safe: 'resourceUrl' "
             frameborder="0" 
             scrolling="no" 

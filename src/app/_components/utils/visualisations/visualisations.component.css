@@ -7,6 +7,10 @@
     padding: 0px;
     }
 
+.user_grade {
+    min-height: 550px;
+}
+
 .specialization_demand {
     min-height: 500px;
 }

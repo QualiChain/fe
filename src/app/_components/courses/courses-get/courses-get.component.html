@@ -58,7 +58,7 @@
           -->
           
           <div *ngIf="courseData.skills.length>0" class="col ">
-            <div><span class="labelcourse">{{ 'COURSE.SKILLS.LABEL' | translate }}:</span> 
+            <div *appCanAccess="['view_skills']"><span class="labelcourse">{{ 'COURSE.SKILLS.LABEL' | translate }}:</span> 
                 <span *ngFor="let skill of courseData.skills; let i=index">
                   <span *ngIf="i>0">,</span> <a href="/skills/{{skill.skill.id}}">{{ skill.skill.name }}</a>
                 </span>
