@@ -49,7 +49,8 @@
                 <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</h2></div> 
                 <div>
                   <div *ngIf="jobData.skillReq.length==0">{{ 'JOBS.REQUIRED_SKILLS_NOT_AVAILABLE' | translate }}</div>
-                    <table *ngIf="jobData.skillReq.length>0" class="table table-striped">
+                  <div *ngIf="jobData.skillReq.length>0" class="col col-lg-8">
+                    <table class="table table-striped">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
@@ -68,8 +69,11 @@
                             <!--<td>{{skill.assign}}</td>-->
                           </tr>                  
                         </tbody>
-                      </table>
-
+                    </table>
+                  </div>  
+                  <div *ngIf="jobData.skillReq.length>0" class="col col-lg-4">
+                    <app-visualisations-user-skills-job-skills-chart [userId]="currentUser.id" [jobId]="jobData.id"></app-visualisations-user-skills-job-skills-chart>
+                  </div>
                     
                 </div> 
             </div>
@@ -78,7 +82,8 @@
               <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EDUCATIONS' | translate }}</h2></div>
               <div>
                   <div *ngIf="jobData.educationReq.length==0">{{ 'JOBS.REQUIRED_EDUCATIONS_NOT_AVAILABLE' | translate }}</div>
-                  <table *ngIf="jobData.educationReq.length>0" class="table table-striped">
+                  <div *ngIf="jobData.educationReq.length>0" class="col col-lg-12">
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
@@ -94,7 +99,7 @@
                         </tr>                  
                       </tbody>
                     </table>
-
+                  </div>
                   
               </div> 
           </div>
@@ -103,7 +108,8 @@
             <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EXPERIENCES' | translate }}</h2></div>
             <div>
                 <div *ngIf="jobData.workExperienceReq.length==0">{{ 'JOBS.REQUIRED_EXPERIENCES_NOT_AVAILABLE' | translate }}</div>
-                <table *ngIf="jobData.workExperienceReq.length>0" class="table table-striped">
+                <div *ngIf="jobData.workExperienceReq.length>0" class="col col-lg-12">
+                  <table class="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -119,7 +125,9 @@
                       </tr>                  
                     </tbody>
                   </table>
-
+                </div> 
+                
+              
                 
             </div> 
         </div>          
@@ -129,7 +137,7 @@
     <!--     
     <div class="col" [hidden]="!(isAdmin || isRecruiter)">
     -->
-    <div class="col" *appCanAccess="['view_recruitment']">      
+    <div class="col" *appCanAccess="['view_own_profile','view_recruitment']">      
       <app-qc-job-candidates-management [jobId]="jobData.id"  [reload]="cntReloads"></app-qc-job-candidates-management>
     </div>
 

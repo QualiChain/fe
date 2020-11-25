@@ -1,6 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
+
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+
 
 const urlVisualisations:string = environment.visualiserUrl;
 
@@ -10,18 +16,99 @@ export interface Specialization {
 }
 
 @Component({
+  selector: 'app-visualisations-helper-dialog',
+  templateUrl: './visualisations-helper-dialog.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationHelperDialogComponent implements OnInit {
+  title: string;
+  message: string;
+
+  constructor(public dialogRef: MatDialogRef<VisualisationHelperDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: VisualisationDialogModel) {
+    // Update view with given values
+    this.title = data.title;
+    this.message = data.message;
+  }
+
+  ngOnInit() {
+    
+  }
+
+  onConfirm(): void {
+    // Close the dialog, return true
+    this.dialogRef.close(true);
+  }
+
+  onDismiss(): void {
+    // Close the dialog, return false
+    console.log(this.dialogRef);
+    this.dialogRef.close(false);
+    
+  }
+/*
+  ngOnDestroy(){
+    console.log('ngOnDestroy called');
+    this.dialogRef.close(false);
+  }*/
+
+}
+
+/**
+ * Class to represent confirm dialog model.
+ *
+ * It has been kept here to keep it as part of shared component.
+ */
+export class VisualisationDialogModel {
+
+  constructor(public title: string, public message: string) {
+  }
+}
+
+@Component({
   selector: 'app-visualisations',
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
 export class VisualisationsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) { }
   
   urlSafe: string = "";
   extraClass: string = "";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "";
   
+
+  showHelpDialog(helpId: string): void {
+
+    
+    const message = this.translate.instant('HELP.VISUALISATION.BODY.'+helpId);    
+    const dialogData = new VisualisationDialogModel(this.translate.instant('HELP.VISUALISATION.HEADER'), message);
+    
+
+    const dialogRef = this.dialog.open(VisualisationHelperDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      //this.result = dialogResult;
+
+      if (dialogResult) {
+         console.log("Under construction");
+
+      }
+    });
+  }
+
   ngOnInit(): void {
+
+
   }
 
 }
@@ -32,7 +119,8 @@ export class VisualisationsComponent implements OnInit {
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsUserSkillsJobSkillsChartComponent implements OnInit {
+export class VisualisationsUserSkillsJobSkillsChartComponent extends VisualisationsComponent {
+//export class VisualisationsUserSkillsJobSkillsChartComponent implements OnInit {
 
   @Input() userId: string;
   @Input() jobId: string;
@@ -40,38 +128,54 @@ export class VisualisationsUserSkillsJobSkillsChartComponent implements OnInit {
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "user_skills_job_skills";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "USER_SKILLS_JOB_SKILLS";  
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     
   }
   ngOnChanges(): void {
+
+    this.jobId = this.jobId.toLowerCase().replace("job", "");
+
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(urlVisualisations+"/show_radar_chart?y_var_names[]=skil_level&y_var_titles[]=skill_level&x_axis_name=name&x_axis_title=Name&use_default_colors=false&chart_3d=false&color_list_request[]=red&color_list_request[]=blue&base_query=user_job_skills&user_id="+this.userId+"&job_id="+this.jobId);
     this.urlSafe = urlVisualisations+"/show_radar_chart?y_var_names[]=skil_level&y_var_titles[]=skill_level&x_axis_name=name&x_axis_title=Name&use_default_colors=false&chart_3d=false&color_list_request[]=red&color_list_request[]=blue&base_query=user_job_skills&user_id="+this.userId+"&job_id="+this.jobId;
   }
 
 }
 
-/** User grade chart ***************************************/
+/** User grades chart ***************************************/
 @Component({
   selector: 'app-visualisations-user-grades-chart',
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsUserGradesChartComponent implements OnInit {
+export class VisualisationsUserGradesChartComponent extends VisualisationsComponent {
+//export class VisualisationsUserGradesChartComponent implements OnInit {
 
   @Input() userId: string;
   
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "user_grade";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "USER_GRADES";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     
@@ -89,17 +193,24 @@ export class VisualisationsUserGradesChartComponent implements OnInit {
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsAverageGradesInCoursesChartComponent implements OnInit {
+export class VisualisationsAverageGradesInCoursesChartComponent extends VisualisationsComponent {
+//export class VisualisationsAverageGradesInCoursesChartComponent implements OnInit {
 
   @Input() coursesIds: [];
   
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "average_grades";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "AVERAGE_GRADE_IN_COURSES";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     
@@ -118,17 +229,24 @@ export class VisualisationsAverageGradesInCoursesChartComponent implements OnIni
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent implements OnInit {
+export class VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent extends VisualisationsComponent {
+//export class VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent implements OnInit {
 
   @Input() userId: [];
   
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "enrolled_courses_skills_coverage";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "ENROLLED_COURSES_SKILLS_COVERED_TO_USERS";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     
@@ -147,17 +265,24 @@ export class VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkills
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsCarrerPathTrajectoryChartComponent implements OnInit {
+export class VisualisationsCarrerPathTrajectoryChartComponent extends VisualisationsComponent {
+//export class VisualisationsCarrerPathTrajectoryChartComponent implements OnInit {
 
   @Input() userId: [];
   
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "career_path_trajectory";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "CAREER_PATH_TRAJECTORY";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     
@@ -179,18 +304,25 @@ export class VisualisationsCarrerPathTrajectoryChartComponent implements OnInit 
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnInit {
+export class VisualisationsUserSkillsetCoverageToAppliedJobSkills extends VisualisationsComponent {
+//export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnInit {
 
   @Input() userId: string;
   @Input() jobId: string;
+  showHelp: boolean = false;
+  visualisationHelpId: string = "USER_SKILLSET_COVERAGE_TO_APPLIED_JOB_SKILLS";
 
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "skill_coverage";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     
@@ -211,15 +343,22 @@ export class VisualisationsUserSkillsetCoverageToAppliedJobSkills implements OnI
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsMarketDemand implements OnInit {
+export class VisualisationsMarketDemand extends VisualisationsComponent {
+//export class VisualisationsMarketDemand implements OnInit {
 
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "market_demand";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "MARKET_DEMAND";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     this.urlSafe = urlVisualisations+"/show_pie_chart?y_var_names%5b%5d=count&y_var_titles%5b%5d=Market%20Demand&y_var_units%5b%5d=Job%20Postings&x_axis_name=specialization_id&x_axis_title=Specialization&use_default_colors=false&chart_3d=false&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&color_list_request%5b%5d=green&color_list_request%5b%5d=gold&color_list_request%5b%5d=ceramic&color_list_request%5b%5d=fuchsia&color_list_request%5b%5d=violet&color_list_request%5b%5d=purple&color_list_request%5b%5d=cyan&base_query=group_jobs";
@@ -237,7 +376,8 @@ export class VisualisationsMarketDemand implements OnInit {
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit {
+export class VisualisationsSkillsDemandInTimePerSpecialization extends VisualisationsComponent {
+//export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit {
 
   @Input() skillId: [];
   @Input() specialization: [];
@@ -245,10 +385,16 @@ export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "demand_in_time_per_specialization";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     
@@ -272,16 +418,23 @@ export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsCurriculumUpToDate implements OnInit {
+export class VisualisationsCurriculumUpToDate extends VisualisationsComponent {
+//export class VisualisationsCurriculumUpToDate implements OnInit {
 
 
   //urlSafe: SafeUrl;
   urlSafe: string = "";
   extraClass: string = "curriculum_up_to_date";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "CURRICULUM_UP_TO_DATE";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     let tmpURL = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=up_to_date&x_axis_title=Up%20To%20Date&x_axis_unit=%&color_list_request[]=green&color_list_request[]=red&use_default_colors=false&min_max_y_value[]=0&min_max_y_value[]=100&base_query=curriculum_up_to_date";
@@ -302,19 +455,25 @@ export class VisualisationsCurriculumUpToDate implements OnInit {
   templateUrl: './visualisations.component.html',
   styleUrls: ['./visualisations.component.css']
 })
-export class VisualisationsSpecializationDemandInFunctionOfTime implements OnInit {
+export class VisualisationsSpecializationDemandInFunctionOfTime extends VisualisationsComponent {
+//export class VisualisationsSpecializationDemandInFunctionOfTime implements OnInit {
 
   @Input() cntSpecializations: number;
   @Input() specializations: Specialization[] = [];
 
   //urlSafe: SafeUrl;
-  urlSafe: string = "";
-  
+  urlSafe: string = "";  
   extraClass: string = "specialization_demand";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME";
 
   constructor(
-    public sanitizer: DomSanitizer
-  ) { }
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
 
   ngOnInit(): void {
     

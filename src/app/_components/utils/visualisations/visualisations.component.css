@@ -10,3 +10,7 @@
 .specialization_demand {
     min-height: 500px;
 }
+
+.float-right {
+    float: right!important;
+}

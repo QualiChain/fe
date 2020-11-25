@@ -636,7 +636,8 @@
     "ASSIGN": "Assign",
     "DELETE_OWN_PROFILE": "Delete own profile",
     "NO": "No",
-    "YES": "Yes"
+    "YES": "Yes",
+    "HELP": "Help"
   },
   "ACTION": "Action",
   "FILTER": "Filter",
@@ -814,5 +815,22 @@
     "PREVIOUS_PAGE": "Previous page",
     "FIRST_PAGE": "First page",
     "LAST_PAGE": "Last page"
+  },
+  "HELP": {
+    "VISUALISATION": {
+      "HEADER": "Visualisation help",
+      "BODY": {
+        "USER_SKILLS_JOB_SKILLS": "The derived radar chart demonstrates user skills coverage to job application required skillset.",
+        "USER_GRADES": "The derived Bar chart demonstrates User grades in courses which have completed.",
+        "AVERAGE_GRADE_IN_COURSES": "The chart demonstrates average grades in provided courses.",
+        "ENROLLED_COURSES_SKILLS_COVERED_TO_USERS": "This chart demonstrates how much the skills that belong to the user's enrolled courses cover the skills in jobs that this user has applied.",
+        "CAREER_PATH_TRAJECTORY": "This charts shows the user career path trajectory.",
+        "USER_SKILLSET_COVERAGE_TO_APPLIED_JOB_SKILLS": "This chart demonstrates the coverage percentage resulting from the common skills between user’s skills and job required skills.",
+        "MARKET_DEMAND": "This chart shows the demand according to job postings for each specialization.",
+        "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": "This chart demonstrates the demand in job postings for a provided skill in a provided visualization.",
+        "CURRICULUM_UP_TO_DATE": "This visualisation shows how up to date the current curriculum of the school is.",
+        "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "This chart is used to demonstrate the demand in job postings for provided job specializations"
+      }
+    }
   }
 }
