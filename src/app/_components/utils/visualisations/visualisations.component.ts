@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-
+import { SkillsService } from '../../../_services/skills.service';
 
 const urlVisualisations:string = environment.visualiserUrl;
 
@@ -18,13 +18,14 @@ export interface Specialization {
 @Component({
   selector: 'app-visualisations-helper-dialog',
   templateUrl: './visualisations-helper-dialog.component.html',
-  styleUrls: ['./visualisations.component.css']
+  styleUrls: ['./visualisations.component.css'],
 })
 export class VisualisationHelperDialogComponent implements OnInit {
   title: string;
   message: string;
 
-  constructor(public dialogRef: MatDialogRef<VisualisationHelperDialogComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<VisualisationHelperDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: VisualisationDialogModel) {
     // Update view with given values
     this.title = data.title;
@@ -42,15 +43,9 @@ export class VisualisationHelperDialogComponent implements OnInit {
 
   onDismiss(): void {
     // Close the dialog, return false
-    console.log(this.dialogRef);
     this.dialogRef.close(false);
     
   }
-/*
-  ngOnDestroy(){
-    console.log('ngOnDestroy called');
-    this.dialogRef.close(false);
-  }*/
 
 }
 
@@ -379,8 +374,8 @@ export class VisualisationsMarketDemand extends VisualisationsComponent {
 export class VisualisationsSkillsDemandInTimePerSpecialization extends VisualisationsComponent {
 //export class VisualisationsSkillsDemandInTimePerSpecialization implements OnInit {
 
-  @Input() skillId: [];
-  @Input() specialization: [];
+  @Input() skillId: string;
+  @Input() specialization: string;
 
   //urlSafe: SafeUrl;
   urlSafe: string = "";
@@ -391,7 +386,8 @@ export class VisualisationsSkillsDemandInTimePerSpecialization extends Visualisa
   constructor(
     public dialog: MatDialog,
     public sanitizer: DomSanitizer,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private ss: SkillsService
   ) {
     super(dialog, sanitizer, translate);
   }
@@ -401,13 +397,29 @@ export class VisualisationsSkillsDemandInTimePerSpecialization extends Visualisa
   }
   ngOnChanges(): void {    
     
-    let tmpURL = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d=skill_demand&y_var_units%5b%5d=v1_unit&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId
-    if (this.specialization) {
-      tmpURL = tmpURL +"&specialization="+this.specialization;
-    }
-    tmpURL = tmpURL +"&base_query=skill_demand_in_time"; 
-    //this.urlSafe = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d=skill_demand&y_var_units%5b%5d=v1_unit&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId+"&specialization="+this.specialization+"&base_query=skill_demand_in_time"; 
-    this.urlSafe = tmpURL;
+
+    this.ss
+    .getSkill(+this.skillId).subscribe(
+      dataSkill => {
+        //console.log("skille in db");
+        console.log(dataSkill);
+        let skillName = dataSkill.name;
+        let tmpURL = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d="+skillName+"&y_var_units%5b%5d=Job%20posting&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId
+        if (this.specialization) {
+          tmpURL = tmpURL +"&specialization="+this.specialization;
+        }
+        tmpURL = tmpURL +"&base_query=skill_demand_in_time"; 
+        //this.urlSafe = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d=skill_demand&y_var_units%5b%5d=Job%20posting&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId+"&specialization="+this.specialization+"&base_query=skill_demand_in_time"; 
+        this.urlSafe = tmpURL;
+
+      },
+      error => {
+        console.log("Error recovering skill id "+this.skillId);
+        this.urlSafe = "";
+      }
+    ); 
+
+    
   }
 
 }

@@ -11,6 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from '../../../app.component';
 import { UploadService } from '../../../_services/upload.service';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
 
 describe('ProfilesViewComponent', () => {
   let component: ProfilesViewComponent;
@@ -29,7 +30,10 @@ describe('ProfilesViewComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatDialogModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'access_denied', component: AccessDeniedComponent}]
+        ),
         ],
         providers: [AppComponent, UploadService, QCStorageService]
     })

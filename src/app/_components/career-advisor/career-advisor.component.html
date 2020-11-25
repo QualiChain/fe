@@ -136,7 +136,7 @@
     <br>
 
     <div class="row">    
-        <div class="col col-lg-6">
+        <div class="col col-lg-12">
             <div class="col"><h2>{{ 'CAREER_ADVISOR.COMPLETED_COURSES.TITLE' | translate }}</h2></div>
 
             <div class="col" *ngIf="dataSource.data.length==0">
@@ -181,7 +181,13 @@
                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
             
             </div>
+
+            <div class="col " [hidden]="dataSource.data.length==0">
+                <app-visualisations-user-grades-chart [userId]="userid"></app-visualisations-user-grades-chart>
+            </div>
+
         </div>    
+
     </div>
 
 
