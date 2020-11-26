@@ -155,7 +155,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.admin, Role.administrator ],
-      permissions: ['add_profile'] }  
+      permissions: ['view_own_profile','add_profile'] }  
   },
   {
     path: 'myprofile',

@@ -4,6 +4,7 @@ import { from, Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { QCStorageService } from './QC_storage.services';
+import { UsersService } from './users.service';
 
 //import { User } from '../_models/user';
 import User from '../_models/user';
@@ -26,6 +27,7 @@ export class AuthService {
   public currentUser: Observable<User>;
 
   constructor(
+    private us: UsersService,
     private qcStorageService: QCStorageService,
     private httpClient: HttpClient) {      
       //this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -47,6 +49,22 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
   
+  createCurentUserData(data: any) {
+    let myAuthObj = {};
+    let roles = [];
+    if (data.hasOwnProperty('roles')){
+      roles = data.roles;
+    }
+    myAuthObj = { authenticated: true,  password:'******', name: data.name, 
+    surname: data.surname, email: data.email, 
+    userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, roles: roles, 'pilotId': data.pilotId};
+  
+    //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
+    let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
+    localStorage.setItem('currentUserQC', encryptedData);
+    return myAuthObj;
+  }
+
   login(username, password) {
     const obj = { username: username, password: password};
     //console.log(obj);
@@ -58,13 +76,7 @@ export class AuthService {
     pipe(
        map((data: any) => {
 
-        myAuthObj = { authenticated: true,  password:'******', name: data.name, 
-        surname: data.surname, email: data.email, 
-        userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, roles: [], 'pilotId': data.pilotId};
-      
-        //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
-        let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
-        localStorage.setItem('currentUserQC', encryptedData);        
+        myAuthObj = this.createCurentUserData(data);
 
          //return data;
          return  myAuthObj;
@@ -116,7 +128,42 @@ export class AuthService {
   }      
 
 
-  loginIAM(username, password) {
+  async loginIAMAsync(username: string, password: string) {
+    
+    let myAuthObj= {};
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    console.log(formData);
+    let data:any = await this.httpClient.post(`${this.IAMAuthUrl}/login`, formData).toPromise().catch(()=>
+    {
+        //if there is an error we return emty response
+        return myAuthObj;
+    });
+
+    if (data.succeeded) {
+      //let userID = data.response_data.user.id;
+      //let userID = 3;
+      let userID = data.response_data.user.userId;
+      let userQCData: any = await this.us.getUserAsync(userID);
+      if (userQCData.hasOwnProperty('id')){
+        myAuthObj = this.createCurentUserData(userQCData);
+        localStorage.setItem('token', data.response_data.token); 
+      }
+      else {
+        myAuthObj = { authenticated: false, message: ""}  
+      }
+
+    }
+    else {
+      myAuthObj = { authenticated: false, message: data.message }
+    }
+    
+    return myAuthObj;    
+
+  }
+
+  loginIAM(username: string, password: string) {
       
       const formData = new FormData();
       formData.append('username', username);
@@ -131,8 +178,14 @@ export class AuthService {
       pipe(
          map((data: any) => {
           
+          //let dataP = this.recoverPerimissionsAsync();
+          //console.log(dataP);
+
           //console.log(data);
           if (data.succeeded) {
+
+            myAuthObj = this.createCurentUserData(data);
+            /*
             myAuthObj = { authenticated: true,  password:'******', name: data.response_data.user.name, 
             surname: 'surname', email: data.response_data.user.email, 
             userName: 'name', id: data.response_data.user.id , 'avatar_path': '', 'role': 'authenticated', 'roles': data.response_data.user.roles, 'pilotId': null};
@@ -140,8 +193,10 @@ export class AuthService {
             //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
             let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
 
-            localStorage.setItem('currentUserQC', encryptedData);        
+            localStorage.setItem('currentUserQC', encryptedData);  
+            */      
             localStorage.setItem('token', data.response_data.token); 
+            
           }
           else {
             myAuthObj = { authenticated: false, message: data.message }

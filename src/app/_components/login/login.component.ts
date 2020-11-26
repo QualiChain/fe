@@ -124,19 +124,33 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  processFormIAM() {
+  async processFormIAM() {
     //const allInfo = `My name is ${this.name}. My email is ${this.password}.`;
     //alert(allInfo); 
     this.customErrorMessageLogin = "";
     this.loadingLoginSpinner = true;
     this.invalidCredentials = false;
 
+    let res:any = await this.ls.loginIAMAsync(this.name, this.password);
+    //console.log(res);
+    if (res['authenticated']) {
+      //console.log("Valid credentials for the auth service");
+      this.invalidCredentials = false;            
+      this.validCredentials(res);
+    }
+    else {            
+      this.customErrorMessageLogin = res['message'];
+      this.invalidCredentials = true;          
+      this.loadingLoginSpinner = false;            
+    }
+
+    /*
     this.ls.loginIAM(this.name, this.password).subscribe(
         res => {          
           if (res['authenticated']) {
             console.log("Valid credentials for the auth service");
-            this.invalidCredentials = false;
-            this.validCredentials(res);
+            this.invalidCredentials = false;            
+            //this.validCredentials(res);
           }
           else {            
             this.customErrorMessageLogin = res['message'];
@@ -152,6 +166,7 @@ export class LoginComponent implements OnInit {
           this.loadingLoginSpinner = false;
         }
       );    
+      */
   }
 
   processForm() {
