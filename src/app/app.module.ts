@@ -150,7 +150,9 @@ import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edi
 import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
 import { FilesRepositoryComponent } from './_components/profiles/files-repository/files-repository.component';
 
-import { VisualisationsComponent, 
+import {
+  VisualisationHelperDialogComponent,
+  VisualisationsComponent, 
   VisualisationsUserSkillsJobSkillsChartComponent,
   VisualisationsUserGradesChartComponent, 
   VisualisationsAverageGradesInCoursesChartComponent, 
@@ -242,7 +244,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  entryComponents: [ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal],
+  entryComponents: [VisualisationHelperDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -293,6 +295,7 @@ export function tokenGetter() {
     SkillsEditComponent,
     NotificationPreferencesComponent,
     FilesRepositoryComponent,
+    VisualisationHelperDialogComponent,
     VisualisationsComponent, VisualisationsUserSkillsJobSkillsChartComponent, VisualisationsUserGradesChartComponent, VisualisationsAverageGradesInCoursesChartComponent, 
     VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
     VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, 
