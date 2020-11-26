@@ -43,7 +43,7 @@ import { MCDSSComponent } from './_components/mcdss/mcdss.component';
 import { NotificationPreferencesComponent } from './_components/profiles/notification-preferences/notification-preferences.component';
 import { FilesRepositoryComponent } from './_components/profiles/files-repository/files-repository.component';
 import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
-import { AuthGuardByPermission } from './_directives/can-access.directive';
+import { AuthGuardByPermission, AuthGuardForAnonymous } from './_directives/can-access.directive';
 
 const routes: Routes = [
   {
@@ -54,7 +54,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuardForAnonymous]
    },
    {
     path: 'skills',
