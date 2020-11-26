@@ -94,3 +94,25 @@ export class AuthGuardByPermission implements CanActivate {
         return false;
     }
 }
+
+
+@Injectable({ providedIn: 'root' })
+export class AuthGuardForAnonymous implements CanActivate {
+    constructor(
+        private router: Router,
+        private authenticationService: AuthService
+    ) { }
+    
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const currentUser = this.authenticationService.currentUserValue;
+        
+        if (currentUser) {
+            this.router.navigate(['/myprofile'], { queryParams: { } });
+            return false;
+        }
+        else {
+            return true;    
+        }
+
+    }
+}
