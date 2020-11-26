@@ -59,6 +59,15 @@ export class UsersService {
       )
     }
 
+    async getUserAsync(userId: any) {
+    
+      let data = await this.http.get(`${this.uriUsers}/${userId}`).toPromise().catch(()=>
+      {
+          return {};
+      });
+      return data;    
+    }    
+
   addUser(obj: Object) {
     return this.http.post(`${this.uriUsers}`, JSON.stringify(obj), {headers: this.createHeader()}).
     pipe(
