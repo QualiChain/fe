@@ -26,6 +26,7 @@ import { UsersService } from '../../../_services/users.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import {GlobalApp, StorageService} from '../../../_helpers/global';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+import { QcEvaluationQuestionnaireModel, QcEvaluationQuestionnaireComponent } from '../../utils/qc-evaluation-questionnaire/qc-evaluation-questionnaire.component';
 
 export interface OPTIONS_MENU {
   id: number;
@@ -69,9 +70,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   menuOptions =ELEMENT_DATA;
 
-  
+  isQuestionnaireOpen: boolean = false;
 
   constructor(
+    public dialog: MatDialog,
     private qcStorageService: QCStorageService,
     public globalApp: GlobalApp,
     public storageService: StorageService,
@@ -284,6 +286,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.reloadNotifications(userdata.id);
       });
 
+      interval(300000).subscribe(x => {
+        // something
+        this.openQCQuestionnaire('auto');
+      });
+
       //reload avatar image
       /*
       interval(3000).subscribe(x => {
@@ -303,6 +310,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.userdata = {'authenticated': false ,'role': 'anonymous'};
     }
     
+  }
+
+  openQCQuestionnaire(action:string) {
+
+    if (!this.isQuestionnaireOpen) {
+
+      if ((localStorage.getItem('QC_seen_questionnaire') != (new Date()).getDate().toString()) || (action=="manual")){
+
+        this.isQuestionnaireOpen = true;
+        const dialogRef = this.dialog.open(QcEvaluationQuestionnaireComponent, {
+          maxWidth: "600px",
+          disableClose: true,
+          data: {}      
+        });
+    
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          //console.log(dialogResult);
+          localStorage.setItem('QC_seen_questionnaire', new Date().getDate().toString());
+          
+          this.isQuestionnaireOpen = false;  
+        });
+  
+      }
+    }
+
   }
 
   displayActivenessSubMenuOption(currentRoute: string, subMenuRoute: string, itemType: string) {

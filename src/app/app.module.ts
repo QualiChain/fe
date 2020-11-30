@@ -170,6 +170,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { QcUserNameComponent } from './_components/utils/qc-user-name/qc-user-name.component';
 import { QcJobCandidatesManagementComponent } from './_components/utils/qc-job-candidates-management/qc-job-candidates-management.component';
 import { OrderTemplatePipePipe } from './_pipes/orderTemplatePipe/order-template-pipe.pipe';
+import { QcEvaluationQuestionnaireComponent } from './_components/utils/qc-evaluation-questionnaire/qc-evaluation-questionnaire.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -244,7 +245,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  entryComponents: [VisualisationHelperDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal],
+  entryComponents: [QcEvaluationQuestionnaireComponent, VisualisationHelperDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -303,7 +304,8 @@ export function tokenGetter() {
     CanAccessDirective,
     QcUserNameComponent,
     QcJobCandidatesManagementComponent,
-    OrderTemplatePipePipe
+    OrderTemplatePipePipe,
+    QcEvaluationQuestionnaireComponent
   ],
   imports: [
     SafePipeModule,

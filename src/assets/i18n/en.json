@@ -40,7 +40,8 @@
     "SKILLS": "Skills",
     "SKILLS_HELP_TEXT": "Here you can find the list of skills",
     "NOTIFICATION_PREFERENCES": "Notification Preferences",
-    "PERSONAL_FILES_REPOSITORY": "Files Repository"
+    "PERSONAL_FILES_REPOSITORY": "Files Repository",
+    "QUESTIONNAIRE": "Questionnaire"
   },
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Personal files repository",
@@ -637,7 +638,8 @@
     "DELETE_OWN_PROFILE": "Delete own profile",
     "NO": "No",
     "YES": "Yes",
-    "HELP": "Help"
+    "HELP": "Help",
+    "SEND": "Send"
   },
   "ACTION": "Action",
   "FILTER": "Filter",
@@ -832,5 +834,18 @@
         "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "This chart is used to demonstrate the demand in job postings for provided job specializations"
       }
     }
+  },
+  "QUESTIONNAIRE": {
+    "TITLE": "Questionnaire",
+    "QUESTION": "How satisfied have you been today/ recently with the performance of QualiChain on a scale of 1 to 5?",
+    "THAKS_MESSAGE": "Thanks for your feedback!!!",
+    "ANSWER": {
+      "VERY_DISSATISFIED": "Very dissatisfied",
+      "DISSATISFIED": "Dissatisfied",
+      "NEUTRAL": "Neutral",
+      "SATISFIED": "Satisfied",
+      "VERY_SATISFIED": "Very satisfied"      
+    },
+    "TELL_US": "Give us your free text feedback"
   }
 }
