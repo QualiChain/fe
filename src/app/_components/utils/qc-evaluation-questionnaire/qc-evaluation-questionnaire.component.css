@@ -1,0 +1,54 @@
+.selectedAnswer {
+    background-color: #e2def8;
+}
+
+.questionnaire-full-width {
+    width: 100%;
+}
+
+.mainContainer {
+    height:155px;
+}
+
+.qc-questionnaire-answer-container {
+    min-height: 150px;
+}
+
+.qc-questionnaire-rating-option {
+    min-height: 50px;
+    line-height: 50px;
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    margin: 2px;
+}
+
+.qc-questionnaire-text-align-center {
+    text-align: center;
+}
+
+.qc-questionnaire-rating-option i {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+.qc-very-dissatisfied {
+    background-color: #dc3545!important;
+}
+
+.qc-dissatisfied {
+    background-color: #f17380!important;
+}
+
+.qc-satisfied {
+    background-color: #ffc107!important;
+}
+
+.qc-satisfied-alt {
+    background-color: #6bcf82!important;
+}
+
+.qc-very-satisfied {    
+    background-color: #28a745!important;
+}

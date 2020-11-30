@@ -1,0 +1,98 @@
+<h1 mat-dialog-title>{{ 'QUESTIONNAIRE.TITLE' | translate }} - UNDER CONSTRUCTION!!! -- </h1>
+
+    <div class="col" *ngIf="selectedOption">
+        {{ 'QUESTIONNAIRE.THAKS_MESSAGE' | translate }}
+    </div>
+
+    <div *ngIf="!selectedOption">
+        <div class="col">
+            {{ 'QUESTIONNAIRE.QUESTION' | translate }}
+        </div>
+        <div class="col">&nbsp;</div>
+
+        <div class="col qc-questionnaire-answer-container">
+            <div class="col col-lg-2 mainContainer" [ngClass]="{selectedAnswer:1==satisfiedLevel}">
+                <a (click)="answerQuestion(1)" [routerLink]="" class="noborder" title="{{ 'QUESTIONNAIRE.ANSWER.VERY_DISSATISFIED' | translate }}">
+                    <div class="qc-very-dissatisfied text-white qc-questionnaire-rating-option">
+                        <i _ngcontent-axy-c0="" class="material-icons big"> sentiment_very_dissatisfied </i>
+                    </div>
+                </a>
+                <div class="qc-questionnaire-text-align-center">
+                    (1) {{ 'QUESTIONNAIRE.ANSWER.VERY_DISSATISFIED' | translate }}
+                </div>
+            </div>
+
+            <div class="col col-lg-2 mainContainer" [ngClass]="{selectedAnswer:2==satisfiedLevel}">
+                <a (click)="answerQuestion(2)" [routerLink]="" class="noborder" title="{{ 'QUESTIONNAIRE.ANSWER.DISSATISFIED' | translate }}">
+                    <div class="qc-dissatisfied text-white qc-questionnaire-rating-option">
+                        <i _ngcontent-axy-c0="" class="material-icons big"> sentiment_dissatisfied </i>
+                    </div>
+                </a>
+                <div class="qc-questionnaire-text-align-center">
+                    (2) {{ 'QUESTIONNAIRE.ANSWER.DISSATISFIED' | translate }}
+                </div>
+            </div>
+
+            <div class="col col-lg-2 mainContainer" [ngClass]="{selectedAnswer:3==satisfiedLevel}">
+                <a (click)="answerQuestion(3)" [routerLink]="" class="noborder" title="{{ 'QUESTIONNAIRE.ANSWER.NEUTRAL' | translate }}">
+                    <div class="qc-satisfied text-white qc-questionnaire-rating-option">
+                        <i _ngcontent-axy-c0="" class="material-icons big"> sentiment_satisfied </i>
+                    </div>
+                </a>
+                <div class="qc-questionnaire-text-align-center">
+                    (3) {{ 'QUESTIONNAIRE.ANSWER.NEUTRAL' | translate }}
+                </div>
+            </div>
+
+            <div class="col col-lg-2 mainContainer" [ngClass]="{selectedAnswer:4==satisfiedLevel}">
+                <a (click)="answerQuestion(4)" [routerLink]="" class="noborder" title="{{ 'QUESTIONNAIRE.ANSWER.SATISFIED' | translate }}">
+                    <div class="qc-satisfied-alt text-white qc-questionnaire-rating-option">
+                        <i _ngcontent-axy-c0="" class="material-icons big"> sentiment_satisfied_alt </i>
+                    </div>
+                </a>
+                <div class="qc-questionnaire-text-align-center">
+                    (4) {{ 'QUESTIONNAIRE.ANSWER.SATISFIED' | translate }}
+                </div>
+            </div>
+
+            <div class="col col-lg-2 mainContainer" [ngClass]="{selectedAnswer:5==satisfiedLevel}">
+                <a (click)="answerQuestion(5)" [routerLink]="" class="noborder" title="{{ 'QUESTIONNAIRE.ANSWER.VERY_SATISFIED' | translate }}">
+                    <div class="qc-very-satisfied text-white qc-questionnaire-rating-option">
+                        <i _ngcontent-axy-c0="" class="material-icons big"> sentiment_very_satisfied </i>
+                    </div>
+                </a>
+                <div class="qc-questionnaire-text-align-center">
+                    (5) {{ 'QUESTIONNAIRE.ANSWER.VERY_SATISFIED' | translate }}
+                </div>
+            </div>
+
+        </div>
+        <div class="col"> &nbsp; </div>
+        <div class="col">
+            <mat-form-field class="questionnaire-full-width">
+                <mat-label>{{ 'QUESTIONNAIRE.TELL_US' | translate }}</mat-label>
+                <textarea matInput
+                          cdkTextareaAutosize
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="5">
+                </textarea>
+            </mat-form-field>
+        </div>
+    
+    </div>
+
+    <br>
+
+<mat-dialog-actions align="end">
+  <div class="modal-footer">
+    <button [disabled]="!satisfiedLevel" *ngIf="!selectedOption" mat-button class="btn btn-primary" (click)="onSubmit()">
+        <i _ngcontent-axy-c0="" class="material-icons small"> send </i>
+        {{ 'BUTTON.SEND' | translate }}
+    </button>
+
+    <button mat-button class="btn btn-danger" (click)="onDismiss()">
+      <i _ngcontent-axy-c0="" class="material-icons small"> cancel </i>
+      {{ 'BUTTON.CLOSE' | translate }}
+    </button>
+  </div>
+</mat-dialog-actions>
