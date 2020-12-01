@@ -1,5 +1,6 @@
 <h1 mat-dialog-title>{{ 'QUESTIONNAIRE.TITLE' | translate }} - UNDER CONSTRUCTION!!! -- </h1>
 
+<mat-dialog-content>
     <div class="col" *ngIf="selectedOption">
         {{ 'QUESTIONNAIRE.THAKS_MESSAGE' | translate }}
     </div>
@@ -18,7 +19,7 @@
                     </div>
                 </a>
                 <div class="qc-questionnaire-text-align-center">
-                    (1) {{ 'QUESTIONNAIRE.ANSWER.VERY_DISSATISFIED' | translate }}
+                    1 - {{ 'QUESTIONNAIRE.ANSWER.VERY_DISSATISFIED' | translate }}
                 </div>
             </div>
 
@@ -29,7 +30,7 @@
                     </div>
                 </a>
                 <div class="qc-questionnaire-text-align-center">
-                    (2) {{ 'QUESTIONNAIRE.ANSWER.DISSATISFIED' | translate }}
+                    2 - {{ 'QUESTIONNAIRE.ANSWER.DISSATISFIED' | translate }}
                 </div>
             </div>
 
@@ -40,7 +41,7 @@
                     </div>
                 </a>
                 <div class="qc-questionnaire-text-align-center">
-                    (3) {{ 'QUESTIONNAIRE.ANSWER.NEUTRAL' | translate }}
+                    3 - {{ 'QUESTIONNAIRE.ANSWER.NEUTRAL' | translate }}
                 </div>
             </div>
 
@@ -51,7 +52,7 @@
                     </div>
                 </a>
                 <div class="qc-questionnaire-text-align-center">
-                    (4) {{ 'QUESTIONNAIRE.ANSWER.SATISFIED' | translate }}
+                    4 - {{ 'QUESTIONNAIRE.ANSWER.SATISFIED' | translate }}
                 </div>
             </div>
 
@@ -62,7 +63,7 @@
                     </div>
                 </a>
                 <div class="qc-questionnaire-text-align-center">
-                    (5) {{ 'QUESTIONNAIRE.ANSWER.VERY_SATISFIED' | translate }}
+                    5 - {{ 'QUESTIONNAIRE.ANSWER.VERY_SATISFIED' | translate }}
                 </div>
             </div>
 
@@ -82,7 +83,7 @@
     </div>
 
     <br>
-
+</mat-dialog-content>
 <mat-dialog-actions align="end">
   <div class="modal-footer">
     <button [disabled]="!satisfiedLevel" *ngIf="!selectedOption" mat-button class="btn btn-primary" (click)="onSubmit()">

@@ -46,6 +46,8 @@ export class AuthService {
     localStorage.removeItem('currentUserQC');
     localStorage.removeItem('userdataQC');
     localStorage.removeItem('token');
+    localStorage.removeItem('QC_seen_questionnaire');
+    localStorage.removeItem('QCP');
     this.currentUserSubject.next(null);
   }
   
