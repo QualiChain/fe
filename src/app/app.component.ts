@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+
+
 import {TranslateService} from '@ngx-translate/core';
 //import * as $ from 'node_modules/jquery';
 
@@ -11,23 +15,33 @@ import { QCStorageService } from './_services/QC_storage.services';
 
 declare var $: any;
 
+// declare ga as a function to access the JS code in TS
+//declare let ga: Function;
+declare let gtag: Function;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent  implements OnInit {
   title = 'QualiChain-FE';
+
+
   //currentUser: User;
   currentUser: any;
 
   constructor(
+    private titleService: Title,
+    private activatedRoute: ActivatedRoute,
     public storageService: StorageService,
     private qcStorageService: QCStorageService,
     private router: Router,
     private authservice: AuthService,
     private readonly translate: TranslateService
   ) {
+
+/******************/
 
     this.translate.setDefaultLang('en');
     this.translate.use('en');
@@ -157,8 +171,37 @@ export class AppComponent {
   */
 
  async ngOnInit() { // In the ngOnInit() or in the constructor
-  
-  
+
+  this.router.events.subscribe(event => {
+
+    if (event instanceof NavigationEnd) {
+     // ga('set', 'page', event.urlAfterRedirects);
+     // ga('send', 'pageview');
+      gtag ('config', 'G-H6JLS05VT6', {'page_path': event.urlAfterRedirects});
+    }
+  });
+
+  const appTitle = this.titleService.getTitle();
+    this.router
+      .events.pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => {
+          const child = this.activatedRoute.firstChild;
+          if (child.snapshot.data['title']) {
+            return child.snapshot.data['title'];
+          }
+          return appTitle;
+        })
+      ).subscribe((ttl: string) => {
+
+        if (ttl) {
+          ttl = 'QualiChain | '+ttl;
+        }
+        else {
+          ttl = 'QualiChain';
+        }
+        this.titleService.setTitle(ttl);
+      });
       
   let dataP = await this.authservice.recoverPerimissionsAsync();
   
