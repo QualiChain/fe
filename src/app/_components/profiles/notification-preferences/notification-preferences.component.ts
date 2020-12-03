@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import User from '../../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MessageService } from '../../../_services/message.service'
 import { QCStorageService } from '../../../_services/QC_storage.services';
-
-export interface Specialization {
-  name: string;
-}
+import {Observable} from 'rxjs';
+import {FormControl} from '@angular/forms'
+import {map, startWith} from 'rxjs/operators';
+import { SpecializationsService } from '../../../_services/specializations.service'
 
 export interface Location {
   name: string;
@@ -20,6 +21,16 @@ export interface NotificationPreference {
  locations: string,
  specializations: string,
  user_id: number
+}
+/*
+export interface Specialization {
+  name: string;
+}
+*/
+
+export interface Specialization {
+  title: string;
+  id: number;
 }
 
 @Component({
@@ -33,7 +44,8 @@ export class NotificationPreferencesComponent implements OnInit {
   specializations: Specialization[] = [];
   selectableSpecialization = true;
   removableSpecialization = true;  
-  addOnBlurSpecialization = true;
+  //addOnBlurSpecialization = true;
+  addOnBlurSpecialization = false;
 
   locations: Location[] = [];
   selectableLocation = true;
@@ -50,13 +62,65 @@ export class NotificationPreferencesComponent implements OnInit {
   displayMessage: boolean = false;
   //message: string = "";
 
+  //skillCtrl = new FormControl();
+  allSpecializations: Specialization[] = [];
+  specializationCtrl = new FormControl();
+  filteredSpecializations: Observable<string[]>;
+
+  @ViewChild('specializationsInput', {static: false}) specializationsInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    //console.log(event);
+    this.specializations.push(event.option.value);
+    this.specializationsInput.nativeElement.value = '';
+    this.specializationCtrl.setValue(null); 
+  }
+
+  private _filter(value: any): any[] {
+    if ( value.hasOwnProperty('title') ) {
+      return this.allSpecializations;
+    }
+    else {
+      //filter by text
+      let filteredSpecializations: Specialization[] = this.allSpecializations.filter(specialisation => specialisation.title.toLowerCase().includes(value.toLowerCase()));
+
+      //filter specializations we have in the selectd list of specializations
+      let activeIds = [];
+      this.specializations.forEach(element => {
+        activeIds.push(element.title.toLowerCase());
+      });
+
+      let arr = filteredSpecializations;
+
+      if (activeIds.length>0) {
+        arr = arr.filter(function(item){
+          return activeIds.indexOf(item.title.toLowerCase()) === -1;
+        });
+      }
+      
+      
+      return arr;
+    }
+
+  }
+
   constructor(
     private qcStorageService: QCStorageService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private ms : MessageService,
-  ) { }
+    private ss: SpecializationsService
+  ) { 
+
+    this.filteredSpecializations = this.specializationCtrl.valueChanges.pipe(
+      startWith(null),
+      map((specialization: string | null) => specialization ? this._filter(specialization) : this.allSpecializations.slice())
+      );
+
+
+  }
 
   ngOnInit(): void {
 
@@ -88,7 +152,9 @@ export class NotificationPreferencesComponent implements OnInit {
 
                 initialListOfSpecializations.forEach(element => {
                   //console.log(element);
-                  this.specializations.push({name: element.trim()});
+                  if (element.trim().length>0) {
+                    this.specializations.push({id: null, title: element.trim()});
+                  }
                 });
               }
 
@@ -97,7 +163,9 @@ export class NotificationPreferencesComponent implements OnInit {
 
                 initialListOfLocations.forEach(element => {
                   //console.log(element);
-                  this.locations.push({name: element.trim()});                
+                  if (element.trim().length>0) {
+                    this.locations.push({name: element.trim()});
+                  }                  
                 });
               }
 
@@ -110,6 +178,25 @@ export class NotificationPreferencesComponent implements OnInit {
         else {
           this.router.navigate(["/access_denied"]);
         }
+
+
+        this.allSpecializations = [];
+        this.ss.getSpecializations().subscribe(
+        resSpecializations => {
+          //console.log("Request OK");
+          //console.log(resSpecializations); 
+        
+          resSpecializations.forEach(element => {
+            //console.log(element.title);
+            let data: Specialization = {title:element.title, id:element.id};
+            this.allSpecializations.push(data)          
+          });       
+        
+        },
+        error => {
+            console.log("Error getting data");            
+        });
+
       }
       else {
         this.router.navigate(["/access_denied"]);
@@ -148,9 +235,9 @@ export class NotificationPreferencesComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add the new skill
+    // Add the new specialization
     if ((value || '').trim()) {
-      this.specializations.push({name: value.trim()});
+      this.specializations.push({id: null, title: value.trim()});
     }
 
     // Reset the input value
@@ -186,7 +273,7 @@ export class NotificationPreferencesComponent implements OnInit {
       if (listOfSpecializations!="") {
         listOfSpecializations = listOfSpecializations+",";
       }
-      listOfSpecializations = listOfSpecializations+element.name;
+      listOfSpecializations = listOfSpecializations+element.title;
     });
 
     let dataToPost = {
@@ -224,7 +311,7 @@ export class NotificationPreferencesComponent implements OnInit {
 
     this.ms.addUserNotificationsPreferences(dataToPost).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         //alert("Saved!!!");
         this.displayMessage = true;
       },
