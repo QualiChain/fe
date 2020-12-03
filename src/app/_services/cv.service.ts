@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { from, Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
-
+import { AuthService } from '../_services/auth.service';
 
 //import { exists } from 'fs';
 
@@ -18,18 +18,26 @@ export class CVService {
 
  
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private authService: AuthService,
+    private httpClient: HttpClient) {
   }
 
   getCV(userId: any) {
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
     return this
       .httpClient
-      .get(`${this.uri}/${userId}`);
+      .get(`${this.uri}/${userId}`, { headers: headers } );
     }   
   
   postCV(userId, dataIn:any) {
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
     const obj = dataIn;
-    return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn));/*.
+    return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn), { headers: headers} );/*.
     pipe(
        map((data: any) => {
            console.log("post OK");

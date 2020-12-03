@@ -5,6 +5,7 @@ import { JobApplicationsByUserComponent } from './job-applications-by-user.compo
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('JobApplicationsByUserComponent', () => {
   let component: JobApplicationsByUserComponent;
@@ -20,7 +21,8 @@ describe('JobApplicationsByUserComponent', () => {
         TranslateModule.forRoot(),
         RouterTestingModule,
         HttpClientTestingModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

@@ -8,6 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import {MatDialogModule} from '@angular/material/dialog';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('AwardSmartBadgeComponent', () => {
   let component: AwardSmartBadgeComponent;
@@ -27,7 +28,8 @@ describe('AwardSmartBadgeComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         MatDialogModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

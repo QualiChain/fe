@@ -4,7 +4,7 @@ import { from, Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { QCStorageService } from './QC_storage.services';
-import { UsersService } from './users.service';
+//import { UsersService } from './users.service';
 
 //import { User } from '../_models/user';
 import User from '../_models/user';
@@ -21,13 +21,14 @@ export class AuthService {
   permissionsUrl = environment.permissionsUrl;
   IAMAuthUrl = environment.IAMAuthUrl;
   userURL = environment.userUrl;
+  private uriUsers = environment.usersUrl;
   //uri = 'http://localhost:4000/auth';
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
   constructor(
-    private us: UsersService,
+    //private us: UsersService,
     private qcStorageService: QCStorageService,
     private httpClient: HttpClient) {      
       //this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -106,10 +107,29 @@ export class AuthService {
       )
   }
 
+  createQCAuthorizationHeaderForFormData() {
+    let token = localStorage.getItem('token');      
+    //let token = "AABBCCCDDD";
+    let dataToReturn: any = null;
+
+    if (token) {
+      let headers = new HttpHeaders()
+        .set('Authorization', token);
+
+        dataToReturn = headers;
+    }
+    else {
+      let headers = new HttpHeaders();
+
+      dataToReturn = headers;
+    }
+
+    return dataToReturn;
+  }
 
   createQCAuthorizationHeader() {
-      let token = localStorage.getItem('token');
-      //token = "AABBCCCDDD";
+      let token = localStorage.getItem('token');      
+      //let token = "AABBCCCDDD";
       let dataToReturn: any = null;
 
       if (token) {
@@ -147,7 +167,7 @@ export class AuthService {
       //let userID = data.response_data.user.id;
       //let userID = 3;
       let userID = data.response_data.user.userId;
-      let userQCData: any = await this.us.getUserAsync(userID);
+      let userQCData: any = await this.getUserAsyncInAuth(userID);
       if (userQCData.hasOwnProperty('id')){
         myAuthObj = this.createCurentUserData(userQCData);
         localStorage.setItem('token', data.response_data.token); 
@@ -164,6 +184,16 @@ export class AuthService {
     return myAuthObj;    
 
   }
+
+  async getUserAsyncInAuth(userId: any) {
+    let headers = this.createQCAuthorizationHeader();
+
+    let data = await this.httpClient.get(`${this.uriUsers}/${userId}`, {headers:headers}).toPromise().catch(()=>
+    {
+        return {};
+    });
+    return data;    
+  }     
 
   loginIAM(username: string, password: string) {
       

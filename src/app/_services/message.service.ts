@@ -30,39 +30,39 @@ export class MessageService {
         )
       }
 
-      changeNotificationStatus(notificationId: number, obj: Object) {
-        let headers = this.authService.createQCAuthorizationHeader();
+    changeNotificationStatus(notificationId: number, obj: Object) {
+      let headers = this.authService.createQCAuthorizationHeader();
 
-        return this.http.post(`${this.uriNotifications}/${notificationId}`, obj, {headers:headers}).
-        pipe(
-           map((data: any) => {
-             return data;
-           }), catchError( error => {
-             return throwError( 'Something went wrong!' );
-           })
-        )
-      }
+      return this.http.post(`${this.uriNotifications}/${notificationId}`, obj, {headers:headers}).
+      pipe(
+          map((data: any) => {
+            return data;
+          }), catchError( error => {
+            return throwError( 'Something went wrong!' );
+          })
+      )
+    }
 
-      deleteNotification(notificationId: number) {
-        let headers = this.authService.createQCAuthorizationHeader();
+    deleteNotification(notificationId: number) {
+      let headers = this.authService.createQCAuthorizationHeader();
 
-        return this.http.delete(`${this.uriNotifications}/${notificationId}`, {headers:headers}).
-        pipe(
-           map((data: any) => {
-             return data;
-           }), catchError( error => {
-             return throwError( 'Something went wrong!' );
-           })
-        )
-      }
+      return this.http.delete(`${this.uriNotifications}/${notificationId}`, {headers:headers}).
+      pipe(
+          map((data: any) => {
+            return data;
+          }), catchError( error => {
+            return throwError( 'Something went wrong!' );
+          })
+      )
+    }
 
     getNotificationsByUserId(userId: Number) {
-        let headers = this.authService.createQCAuthorizationHeader();
-        
-        return this
-        .http
-        .get(`${this.uriNotifications}?userid=${userId}`, {headers:headers});
-        //.get(`${this.uriNotifications}`);
+      let headers = this.authService.createQCAuthorizationHeader();
+      
+      return this
+      .http
+      .get(`${this.uriNotifications}?userid=${userId}`, {headers:headers});
+      //.get(`${this.uriNotifications}`);
     } 
 
     sendMessage(messageId: number, message: string, read: boolean) {
@@ -86,7 +86,9 @@ export class MessageService {
 
 
     addUserNotificationsPreferences(obj: Object) {
-      return this.http.post(`${this.uriNotificationsPreferences}/notification/preferences`, obj).
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.post(`${this.uriNotificationsPreferences}/notification/preferences`, obj, {headers:headers}).
       pipe(
          map((data: any) => {
            return data;
@@ -97,11 +99,15 @@ export class MessageService {
     } 
 
     getUserNotificationsPreferences(userId: Number) {
-      return this.http.get(`${this.uriNotificationsPreferences}/notification/preferences?user_id=${userId}`);
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.get(`${this.uriNotificationsPreferences}/notification/preferences?user_id=${userId}`, {headers:headers});
     } 
 
     deleteUserNotificationsPreferences(preferenceId: Number) {
-      return this.http.delete(`${this.uriNotificationsPreferences}/notification/preferences?preference_id=${preferenceId}`).
+      let headers = this.authService.createQCAuthorizationHeader();
+      
+      return this.http.delete(`${this.uriNotificationsPreferences}/notification/preferences?preference_id=${preferenceId}`, {headers:headers}).
       pipe(
          map((data: any) => {
            return data;

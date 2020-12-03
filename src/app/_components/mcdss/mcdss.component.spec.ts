@@ -8,6 +8,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatTableModule } from '@angular/material/table';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('MCDSSComponent', () => {
   let component: MCDSSComponent;
@@ -25,7 +26,8 @@ describe('MCDSSComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         MatTableModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

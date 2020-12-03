@@ -837,6 +837,7 @@
   },
   "QUESTIONNAIRE": {
     "TITLE": "Questionnaire",
+    "HELP_MESSAGE": "The answer to this questionnaire is anonymous",
     "QUESTION": "How satisfied have you been today/ recently with the performance of QualiChain on a scale of 1 to 5?",
     "THAKS_MESSAGE": "Thanks for your feedback!!!",
     "ANSWER": {

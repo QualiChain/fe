@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,14 @@ export class SkillsService {
   
   private skillsURL = environment.skillsUrl;
   
-  constructor(private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient) { }
 
   addSkill(dataIn: any) {
-    return this.http.post(`${this.skillsURL}`, dataIn).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.post(`${this.skillsURL}`, dataIn, {headers:headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -26,7 +31,9 @@ export class SkillsService {
   }  
 
   updateSkill(skillId: number, dataIn: any) {
-    return this.http.put(`${this.skillsURL}/${skillId}`, dataIn).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.put(`${this.skillsURL}/${skillId}`, dataIn, {headers:headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -37,7 +44,9 @@ export class SkillsService {
   }  
 
   getSkills() {
-    return this.http.get(`${this.skillsURL}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.skillsURL}`, {headers:headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -48,7 +57,9 @@ export class SkillsService {
   } 
 
   getSkill(skillId: number) {
-    return this.http.get(`${this.skillsURL}/${skillId}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.skillsURL}/${skillId}`, {headers:headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -59,7 +70,9 @@ export class SkillsService {
   } 
 
   deleteSkill(skillId: number) {
-    return this.http.delete(`${this.skillsURL}/${skillId}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.delete(`${this.skillsURL}/${skillId}`, {headers:headers}).
     pipe(
        map((data: any) => {
          return data;

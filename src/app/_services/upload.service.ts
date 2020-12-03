@@ -4,6 +4,7 @@ import { Subject, Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 //const url = 'http://localhost:3000/upload';
 const url = environment.uploadFilesUrl;
@@ -17,13 +18,18 @@ const credentialsKG = "dXNlcjo1VXhMdHdhZUo4Zks=";
 
 @Injectable()
 export class UploadService {
-  constructor(private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient) { }
 
 
   getFile(fileId: number) {
-    const headers = new HttpHeaders();
+    //const headers = new HttpHeaders();
+    let headers = this.authService.createQCAuthorizationHeader();
 
-    return this.http.get(`${downloadUrl}/file/${fileId}`, {headers, responseType: 'blob' as 'json'}).
+    return this.http.get(`${downloadUrl}/file/${fileId}`, {
+      headers: headers, 
+      responseType: 'blob' as 'json'}).
     pipe(
        map((data: any) => {
          return data;
@@ -34,9 +40,12 @@ export class UploadService {
   } 
   
   deleteFile(userId: number, fileId: number) {
-    const headers = new HttpHeaders();
+    //const headers = new HttpHeaders();
+    let headers = this.authService.createQCAuthorizationHeader();
 
-    return this.http.delete(`${deleteFilesUrl}/user/${userId}/files/id/${fileId}`, {headers, responseType: 'blob' as 'json'}).
+    return this.http.delete(`${deleteFilesUrl}/user/${userId}/files/id/${fileId}`, {
+      headers: headers, 
+      responseType: 'blob' as 'json'}).
     pipe(
        map((data: any) => {
          return data;
@@ -47,7 +56,10 @@ export class UploadService {
   }
 
   getUserFiles(userId: Number) {
-    return this.http.get(`${url}/${userId}/files`).
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${url}/${userId}/files`, { headers: headers }).
     pipe(
        map((data: any) => {
          return data;
@@ -264,8 +276,11 @@ export class UploadService {
       */
       const httpOptions = {headers: new HttpHeaders({})};
 
+      let headers = this.authService.createQCAuthorizationHeaderForFormData();
+
       //const req = new HttpRequest('POST', urlUploadUserAvatar+'/user/'+userId+'/avatar', formData, {
       const req = new HttpRequest('POST', urlUploadUserAvatar+"/"+userId+"/file-upload", formData, {
+        headers: headers,
         reportProgress: true,
        // responseType: 'text'
       });
@@ -355,9 +370,12 @@ export class UploadService {
       const formData: FormData = new FormData();
       formData.append('file', file, file.name);
 
+      let headers = this.authService.createQCAuthorizationHeaderForFormData();
+
       // create a http-post request and pass the form
       // tell it to report the upload progress
       const req = new HttpRequest('POST', url+"/"+userId+"/file-upload", formData, {
+        headers: headers,
         reportProgress: true
       });
 

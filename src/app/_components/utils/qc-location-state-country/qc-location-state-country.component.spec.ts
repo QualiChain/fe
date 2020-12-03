@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { QcLocationStateCountryComponent } from './qc-location-state-country.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('QcLocationStateCountryComponent', () => {
   let component: QcLocationStateCountryComponent;
@@ -14,7 +15,8 @@ describe('QcLocationStateCountryComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         HttpClientTestingModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

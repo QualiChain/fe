@@ -6,6 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 import User from '../_models/user';
 import { CVService } from '../_services/cv.service';
 import { CoursesService } from '../_services/courses.service';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,11 @@ export class RecomendationsService {
   private uriRecomendationsJobsByCV = environment.cvUrl
 
 
-  constructor(private http: HttpClient, private cvss: CVService, private cs: CoursesService) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient, 
+    private cvss: CVService, 
+    private cs: CoursesService) { }
 
   async recomendedDataByCVByUserId(userId: number, type: string) {
 
@@ -104,7 +109,8 @@ export class RecomendationsService {
 
 
   getRecomendationsByCV(dataToSend: object) {    
-    return this.http.post(`${this.uriRecomendationsByCV}`,dataToSend).
+    let headers = this.authService.createQCAuthorizationHeader();
+    return this.http.post(`${this.uriRecomendationsByCV}`,dataToSend, { headers: headers }).
     pipe(
        map((data: any) => {
          return data;
@@ -115,7 +121,9 @@ export class RecomendationsService {
   }
   
   getRecomendationsSkills(userId: Number) {    
-    return this.http.get(`${this.uriRecomendations}/${userId}/skills`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriRecomendations}/${userId}/skills`, { headers: headers }).
     pipe(
        map((data: any) => {
          return data;
@@ -124,9 +132,11 @@ export class RecomendationsService {
        })
     )
   }
-
+/*
   getRecomendationsCourses(userId: Number) {    
-    return this.http.get(`${this.uriRecomendations}/${userId}/courses`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriRecomendations}/${userId}/courses`, { headers: headers }).
     pipe(
        map((data: any) => {
          return data;
@@ -135,10 +145,12 @@ export class RecomendationsService {
        })
     )
   }
-
+*/
 
   getRecomendationsJobs(userId: Number) {    
-    return this.http.get(`${this.uriRecomendationsJobsByCV}/${userId}/recommendations/jobs`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriRecomendationsJobsByCV}/${userId}/recommendations/jobs`, { headers:headers} ).
     pipe(
        map((data: any) => {
          return data;

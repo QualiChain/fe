@@ -4,6 +4,7 @@ import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import User from '../_models/user';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class UsersService {
   private uriUsers = environment.usersUrl;
   private uriJobs = environment.jobsUrl;
   private jobsProfilesURL = environment.jobsProfilesUrl;
+  private avatarURL = environment.avatarURL;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient) { }
 /*
   getUsers() {
     return this
@@ -31,7 +35,9 @@ export class UsersService {
   }
 
   getUsers() {
-    return this.http.get(`${this.uriUsers}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriUsers}`, {headers:headers}).
     pipe(
        map((data: [User]) => {
          return data;
@@ -49,7 +55,9 @@ export class UsersService {
     }  
 */
     getUser(userId: any) {
-      return this.http.get(`${this.uriUsers}/${userId}`).
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.get(`${this.uriUsers}/${userId}`, {headers:headers}).
       pipe(
          map((data: User) => {
            return data;
@@ -60,8 +68,9 @@ export class UsersService {
     }
 
     async getUserAsync(userId: any) {
-    
-      let data = await this.http.get(`${this.uriUsers}/${userId}`).toPromise().catch(()=>
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      let data = await this.http.get(`${this.uriUsers}/${userId}`, {headers:headers}).toPromise().catch(()=>
       {
           return {};
       });
@@ -69,7 +78,10 @@ export class UsersService {
     }    
 
   addUser(obj: Object) {
-    return this.http.post(`${this.uriUsers}`, JSON.stringify(obj), {headers: this.createHeader()}).
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.post(`${this.uriUsers}`, JSON.stringify(obj), {headers: headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -80,7 +92,10 @@ export class UsersService {
   }
 
   updateUser(userId: number, obj: Object) {
-    return this.http.put(`${this.uriUsers}/${userId}`, obj).
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.put(`${this.uriUsers}/${userId}`, obj, {headers: headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -92,9 +107,11 @@ export class UsersService {
 
   requestNewPassword(userId: Number, password: String) {
     
+    let headers = this.authService.createQCAuthorizationHeader();
+
     let obj = {"password": password};
     
-    return this.http.post(`${this.uriUsers}/${userId}/requestnewpassword`, obj).
+    return this.http.post(`${this.uriUsers}/${userId}/requestnewpassword`, obj, {headers: headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -106,9 +123,11 @@ export class UsersService {
 
   changePassword(userId: Number, password: String) {
     
+    let headers = this.authService.createQCAuthorizationHeader();
+
     let obj = {"new_password": password};
     
-    return this.http.post(`${this.uriUsers}/${userId}/updatePassword`, obj).
+    return this.http.post(`${this.uriUsers}/${userId}/updatePassword`, obj, {headers: headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -119,8 +138,11 @@ export class UsersService {
   }  
   
   getJobApplisByUser(userId: Number) {
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
     //return this.http.get(`${this.uriJobs}/${userId}/jobapplies`).
-    return this.http.get(`${this.jobsProfilesURL}/${userId}/applications`).
+    return this.http.get(`${this.jobsProfilesURL}/${userId}/applications`, {headers: headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -131,7 +153,9 @@ export class UsersService {
   }
 
   getUserProfileInJobEndPoint(userId: Number) {
-    return this.http.get(`${this.jobsProfilesURL}/${userId}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.jobsProfilesURL}/${userId}`, {headers: headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -142,13 +166,17 @@ export class UsersService {
   }
 
   deleteUser(userId: Number){
-    return this.http.delete(`${this.uriUsers}/${userId}`);
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.delete(`${this.uriUsers}/${userId}`, {headers: headers});
   }
 
 
 
   getUserAvatar(userId: Number) {
-    return this.http.get(`http://qualichain.epu.ntua.gr:5004/get/user/${userId}/avatar`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.avatarURL}/user/${userId}/avatar`, {headers: headers}).
     pipe(
        map((data: any) => {
          return data;

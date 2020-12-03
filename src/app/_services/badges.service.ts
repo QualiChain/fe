@@ -5,6 +5,7 @@ import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import User from '../_models/user';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,15 @@ export class BadgesService {
   private uriBadges = environment.badgesUrl;
   private uriUser = environment.userUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient) { }
 
   
   getBadges() {
-    return this.http.get(`${this.uriBadges}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriBadges}`, { headers: headers }).
     pipe(
        map((data: [any]) => {
          return data;
@@ -30,7 +35,10 @@ export class BadgesService {
   }
 
     getBadge(badgeId: Number) {
-      return this.http.get(`${this.uriBadges}/${badgeId}`).
+
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.get(`${this.uriBadges}/${badgeId}`, { headers: headers }).
       pipe(
          map((data: any) => {
            return data;
@@ -41,7 +49,9 @@ export class BadgesService {
     }
 
   addBadge(obj: Object) {
-    return this.http.post(`${this.uriBadges}`, obj).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.post(`${this.uriBadges}`, obj, { headers: headers } ).
     pipe(
        map((data: any) => {
          return data;
@@ -52,7 +62,9 @@ export class BadgesService {
   }
 
   addBadgeToUser(obj: Object) {
-    return this.http.post(`${this.uriUser}/badges`, obj).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.post(`${this.uriUser}/badges`, obj, { headers: headers } ).
     pipe(
        map((data: any) => {
          return data;
@@ -63,7 +75,9 @@ export class BadgesService {
   }
  
   getBadgesByUser(userId: Number) {
-    return this.http.get(`${this.uriUser}/badges?userid=${userId}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriUser}/badges?userid=${userId}`, { headers: headers } ).
     pipe(
        map((data: any) => {
          return data;
@@ -74,7 +88,9 @@ export class BadgesService {
   }
  
   deleteBadgeOfUser(userId: Number, badgeId: Number) {
-    return this.http.delete(`${this.uriUser}/badges?badgeid=${badgeId}&userid=${userId}`)    
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.delete(`${this.uriUser}/badges?badgeid=${badgeId}&userid=${userId}`, { headers: headers } )
     .pipe(
        map((data: any) => {
          return data;
