@@ -1,6 +1,8 @@
 <h1 mat-dialog-title>{{ 'QUESTIONNAIRE.TITLE' | translate }} - UNDER CONSTRUCTION!!! -- </h1>
 
 <mat-dialog-content>
+    <div class="col">{{ 'QUESTIONNAIRE.HELP_MESSAGE' | translate }}<br>&nbsp;</div>
+
     <div class="col" *ngIf="selectedOption">
         {{ 'QUESTIONNAIRE.THAKS_MESSAGE' | translate }}
     </div>

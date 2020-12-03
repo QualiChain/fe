@@ -6,6 +6,7 @@ import { FilterArrayByValuePipe } from '../../../_pipes/filterArrayByValue/filte
 import { TranslateModule } from "@ngx-translate/core";
 import { UploadService } from '../../../_services/upload.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('UploadFilesComponent', () => {
   let component: UploadFilesComponent;
@@ -14,7 +15,7 @@ describe('UploadFilesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ UploadFilesComponent, FilterArrayByValuePipe ],
-      providers: [UploadService],
+      providers: [QCStorageService, UploadService],
       imports: [
         TranslateModule.forRoot(),
         HttpClientTestingModule

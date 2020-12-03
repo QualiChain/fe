@@ -22,7 +22,13 @@ export class QcEvaluationQuestionnaireComponent implements OnInit {
   }
 
   answerQuestion(answerValue) {
-    this.satisfiedLevel = answerValue;
+    if (answerValue==this.satisfiedLevel) {
+      this.satisfiedLevel = null;
+    }
+    else {
+      this.satisfiedLevel = answerValue;
+    }
+    
   }
 
   onSubmit(): void {

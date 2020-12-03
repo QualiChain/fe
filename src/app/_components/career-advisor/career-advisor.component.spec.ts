@@ -10,6 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NotFoundComponent } from '../../_components/utils/not-found/not-found.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('CareerAdvisorComponent', () => {
   let component: CareerAdvisorComponent;
@@ -28,7 +29,8 @@ describe('CareerAdvisorComponent', () => {
         RouterTestingModule.withRoutes(
           [{path: 'not_found', component: NotFoundComponent}]
         )
-        ]      
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

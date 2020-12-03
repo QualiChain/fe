@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,15 @@ export class SpecializationsService {
   
     private specializationsURL = environment.specializationsURL;
   
-    constructor(private http: HttpClient) { }    
+    constructor(
+      private authService: AuthService,
+      private http: HttpClient) { }    
 
     getSpecializations() {
-        return this.http.get(`${this.specializationsURL}`).
+
+      let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.get(`${this.specializationsURL}`, {headers:headers}).
         pipe(
            map((data: any) => {
              return data;
@@ -26,7 +32,10 @@ export class SpecializationsService {
       } 
     
       getSpecialization(specializationId: number) {
-        return this.http.get(`${this.specializationsURL}/${specializationId}`).
+
+        let headers = this.authService.createQCAuthorizationHeader();
+        
+        return this.http.get(`${this.specializationsURL}/${specializationId}`, {headers:headers}).
         pipe(
            map((data: any) => {
              return data;

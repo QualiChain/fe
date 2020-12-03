@@ -263,7 +263,7 @@ export class VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkills
 export class VisualisationsCarrerPathTrajectoryChartComponent extends VisualisationsComponent {
 //export class VisualisationsCarrerPathTrajectoryChartComponent implements OnInit {
 
-  @Input() userId: [];
+  @Input() userId: string;
   
   //urlSafe: SafeUrl;
   urlSafe: string = "";
@@ -286,6 +286,7 @@ export class VisualisationsCarrerPathTrajectoryChartComponent extends Visualisat
     
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(urlVisualisations+"/show_sankey_diagram?pass_value=pass_value&use_def_colors=false&chart_title=Career%20Path%20Trajectory&node_list[]=Programmer&node_list[]=senior%20developer&node_list[]=software%20architect&node_list[]=project%20manager&node_list[]=cto&node_list[]=product%20manager&node_list[]=lead%20developer&node_list[]=development%20manager&color_node_list[]=blue&color_node_list[]=violet&color_node_list[]=purple&color_node_list[]=fuchsia&color_node_list[]=red&color_node_list[]=ceramic&color_node_list[]=gold&color_node_list[]=black&color_node_list[]=gray&base_query=career_path_trajectory");
     this.urlSafe = urlVisualisations+"/show_sankey_diagram?pass_value=pass_value&use_def_colors=false&chart_title=Career%20Path%20Trajectory&node_list[]=Programmer&node_list[]=senior%20developer&node_list[]=software%20architect&node_list[]=project%20manager&node_list[]=cto&node_list[]=product%20manager&node_list[]=lead%20developer&node_list[]=development%20manager&color_node_list[]=blue&color_node_list[]=violet&color_node_list[]=purple&color_node_list[]=fuchsia&color_node_list[]=red&color_node_list[]=ceramic&color_node_list[]=gold&color_node_list[]=black&color_node_list[]=gray&base_query=career_path_trajectory";
+    this.urlSafe = urlVisualisations+"/show_sankey_diagram?pass_value=pass_value&use_def_colors=false&chart_title=Career%20Path%20Trajectory&&color_node_list%5b%5d=blue&color_node_list%5b%5d=violet&color_node_list%5b%5d=purple&color_node_list%5b%5d=fuchsia&color_node_list%5b%5d=red&color_node_list%5b%5d=ceramic&color_node_list%5b%5d=gold&color_node_list%5b%5d=black&color_node_list%5b%5d=gray&base_query=career_path_trajectory&user_id="+this.userId;
 
     
   }

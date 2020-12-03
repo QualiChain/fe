@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,14 @@ export class JobsService {
   private jobsURL = environment.jobsUrl;
   private jobsProfilesURL = environment.jobsProfilesUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient) { }
 
   addJob(dataIn: any) {
-    return this.http.post(`${this.jobsURL}`, JSON.stringify(dataIn)).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.post(`${this.jobsURL}`, JSON.stringify(dataIn), {headers:headers}).
     pipe(
        map((data: any) => {
          return data;
@@ -26,41 +31,34 @@ export class JobsService {
     )
   }  
 
+ 
   getJobs() {
-    return this
-           .http
-           .get(`${this.jobsURL}`);
-  }
-  
-    getJobs2() {
-      /*
-      return this
-           .http
-           .get(`${this.uri}`);
-      */
-     // return({'id':1,'JobName':'Job name','JobDescription':'Job description','JobPrice':'22'})
-      return(
-        [{'id': 1, 'skill': 'Angular fff', 'required_level': 'req. level 1', 'priority': '1'},
-  {'id': 2, 'skill': 'Java', 'required_level': 'req. level 2', 'priority': '2'},
-  {'id': 3, 'skill': 'Nodejs', 'required_level': 'req. level 3', 'priority': '3'},
-  {'id': 4, 'skill': 'Python', 'required_level': 'req. level 4', 'priority': '4'},
-  {'id': 5, 'skill': 'Drupal', 'required_level': 'req. level 5', 'priority': '3'},  
-  {'id': 6, 'skill': 'Javascript', 'required_level': 'req. level 2', 'priority': '2'},
-  {'id': 7, 'skill': 'C/CPP', 'required_level': 'req. level 7', 'priority': '7'},
-  {'id': 8, 'skill': 'PHP', 'required_level': 'req. level 2', 'priority': '2'},
-  {'id': 9, 'skill': 'Swift', 'required_level': 'req. level 4', 'priority': '7'},
-  {'id': 10, 'skill': 'C#', 'required_level': 'req. level 3', 'priority': '8'},
-  {'id': 11, 'skill': 'Ruby', 'required_level': 'req. level 1', 'priority': '3'},
-  {'id': 12, 'skill': 'SQL', 'required_level': 'req. level 3', 'priority': '4'}
-      ]);
-    }
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.jobsURL}`, {headers:headers}).
+    pipe(
+        map((data: any[]) => {
+            return data;
+        }), catchError( error => {
+            return throwError( 'Something went wrong!' );
+        })
+    )
+  }    
 
 
-    getJob(jobId) {
-      return this
-             .http
-             .get(`${this.jobsURL}/${jobId}`);
-    }
+    getJob(jobId: any) {
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.get(`${this.jobsURL}/${jobId}`, {headers:headers}).
+      pipe(
+          map((data: {}) => {
+              return data;
+          }), catchError( error => {
+              return throwError( 'Something went wrong!' );
+          })
+      )
+      }    
+
 
     editJob(id) {
       /*
@@ -74,7 +72,9 @@ export class JobsService {
 
 
     updateJob(jobId: number, dataIn: any) {
-      return this.http.put(`${this.jobsURL}/${jobId}`, JSON.stringify(dataIn)).
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.put(`${this.jobsURL}/${jobId}`, JSON.stringify(dataIn), {headers:headers}).
       pipe(
          map((data: any) => {
            return data;
@@ -87,8 +87,10 @@ export class JobsService {
 
     applyJob(jobId: any, userId: any, dataIn: object) {
       //console.log(userId);
-      //console.log(jobId);     
-      return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, JSON.stringify(dataIn)).
+      //console.log(jobId);    
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, JSON.stringify(dataIn), {headers:headers}).
       pipe(
          map((data: any) => {
            return data;
@@ -100,9 +102,10 @@ export class JobsService {
 
     deleteJobApply(jobId: any, userId: any) {   
       //console.log(jobId);console.log(userId);   
-      const headers = new HttpHeaders();
+      //const headers = new HttpHeaders();
+      let headers = this.authService.createQCAuthorizationHeader();
 
-      return this.http.delete(`${this.jobsURL}/${jobId}/apply/${userId}`,{ headers, responseType: 'text'}).
+      return this.http.delete(`${this.jobsURL}/${jobId}/apply/${userId}`, { headers:headers, responseType: 'text'}).
       pipe(
          map((data: any) => {
            console.log(data);
@@ -116,7 +119,9 @@ export class JobsService {
 
 
     getJobCandidats(jobId: number) {
-      return this.http.get(`${this.jobsURL}/${jobId}/candidates`).
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.get(`${this.jobsURL}/${jobId}/candidates`, { headers:headers }).
       pipe(
          map((data: any) => {
            return data;
@@ -127,12 +132,16 @@ export class JobsService {
     }
 
     deleteJob(jobId){
-      return this.http.delete(`${this.jobsURL}/${jobId}`);
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.delete(`${this.jobsURL}/${jobId}`, { headers:headers });
     }
 
     getJobAppliesPerCandidat(userId: number) {
+      let headers = this.authService.createQCAuthorizationHeader();
+
       //return this.http.get(`${this.jobsURL}/${userId}/jobapplies`).
-      return this.http.get(`${this.jobsProfilesURL}/${userId}/applications`).
+      return this.http.get(`${this.jobsProfilesURL}/${userId}/applications`, { headers:headers }).
       pipe(
          map((data: any) => {
            return data;
@@ -144,7 +153,9 @@ export class JobsService {
 
 
     getCompanies() {
-      return this.http.get(`${this.jobsURL}/companies`).
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.get(`${this.jobsURL}/companies`, { headers:headers }).
       pipe(
          map((data: any) => {
            return data;
@@ -156,7 +167,9 @@ export class JobsService {
 
 
     assignJobtoCandidate(userId: any, jobId: any,) {
-      return this.http.post(`${this.jobsProfilesURL}/${userId}/currentJob/${jobId}`,JSON.stringify({})).
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.post(`${this.jobsProfilesURL}/${userId}/currentJob/${jobId}`, JSON.stringify({}), { headers:headers }).
       pipe(
          map((data: any) => {
            //console.log(data);

@@ -6,6 +6,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChartsModule } from 'ng2-charts';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('BestCareerOptionsComponent', () => {
   let component: BestCareerOptionsComponent;
@@ -22,7 +23,8 @@ describe('BestCareerOptionsComponent', () => {
         RouterTestingModule,
         ChartsModule,
         HttpClientTestingModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

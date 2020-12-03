@@ -5,6 +5,7 @@ import { RecomendedSkillsComponent } from './recomended-skills.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('RecomendedSkillsComponent', () => {
   let component: RecomendedSkillsComponent;
@@ -20,7 +21,8 @@ describe('RecomendedSkillsComponent', () => {
         TranslateModule.forRoot(),
         RouterTestingModule,
         HttpClientTestingModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

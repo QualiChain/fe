@@ -4,6 +4,7 @@ import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import User from '../_models/user';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class UtilsService {
   private uriSelect = environment.selectUrl;
   private uriTextTriples = environment.insertTextTriples
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient) { }
 
   createHeader() {
       const headers= new HttpHeaders()
@@ -22,7 +25,9 @@ export class UtilsService {
   }
 
   getCountries() {
-    return this.http.get(`${this.uriSelect}/location`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriSelect}/location`, { headers:headers } ).
     pipe(
        map((data: [any]) => {
          return data;
@@ -33,7 +38,9 @@ export class UtilsService {
   }
 
   getStatesByCountry(countryId: String) {
-    return this.http.get(`${this.uriSelect}/location?country=${countryId}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriSelect}/location?country=${countryId}`, { headers:headers }).
     pipe(
        map((data: [any]) => {
          return data;
@@ -44,7 +51,9 @@ export class UtilsService {
   }
 
   getCitiesByState(stateId: String) {
-    return this.http.get(`${this.uriSelect}/location?state=${stateId}`).
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriSelect}/location?state=${stateId}`, { headers:headers }).
     pipe(
        map((data: [any]) => {
          return data;
@@ -55,8 +64,9 @@ export class UtilsService {
   }
 
   sendTextTriples(textTriples: String){
+    let headers = this.authService.createQCAuthorizationHeader();
 
-    return this.http.post(`${this.uriTextTriples}`, textTriples, { responseType: 'text'}).
+    return this.http.post(`${this.uriTextTriples}`, textTriples, { headers:headers, responseType: 'text'}).
         pipe(
             map((data: any) => {
                 return data;

@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ChartsModule } from 'ng2-charts';
+import { QCStorageService } from '../../_services/QC_storage.services';
 
 describe('RecruitmentComponent', () => {
   let component: RecruitmentComponent;
@@ -26,7 +27,8 @@ describe('RecruitmentComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         ChartsModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));

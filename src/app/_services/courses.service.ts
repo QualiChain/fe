@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import Course from '../_models/course';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,14 @@ export class CoursesService {
   private coursesURL = environment.coursesUrl;
   private usersURL = environment.usersUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,  
+    private http: HttpClient) { }
 
     addCourse(dataIn: any) {
-        return this.http.post(`${this.coursesURL}`, dataIn).
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.post(`${this.coursesURL}`, dataIn, {headers:headers}).
         pipe(
             map((data: any) => {
                 return data;
@@ -27,14 +32,11 @@ export class CoursesService {
         )
     }  
 
-    getCourses_old() {
-        return this
-           .http
-           .get(`${this.coursesURL}`);
-    }
 
     getCourses() {
-        return this.http.get(`${this.coursesURL}`).
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.get(`${this.coursesURL}`, {headers:headers}).
         pipe(
             map((data: Course[]) => {
                 return data;
@@ -46,7 +48,9 @@ export class CoursesService {
 
 
     getCourse(courseId: Number) {
-        return this.http.get(`${this.coursesURL}/${courseId}`).
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.get(`${this.coursesURL}/${courseId}`, {headers:headers}).
         pipe(
             map((data: Course) => {
                 return data;
@@ -58,7 +62,9 @@ export class CoursesService {
 
 
     updateCourse(courseId: number, dataIn: any) {
-        return this.http.put(`${this.coursesURL}/${courseId}`, dataIn).
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.put(`${this.coursesURL}/${courseId}`, dataIn, {headers:headers}).
             pipe(
                 map((data: any) => {
                     return data;
@@ -69,7 +75,9 @@ export class CoursesService {
     }
 
     deleteCourse(courseId: Number) {
-        return this.http.delete(`${this.coursesURL}/${courseId}`).
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.delete(`${this.coursesURL}/${courseId}`, {headers:headers}).
         pipe(
             map((data: Course) => {
                 return data;
@@ -81,7 +89,9 @@ export class CoursesService {
        
 
         getCompletedCourseByUserId(userId: Number) {
-            return this.http.get(`${this.coursesURL}/completedcourses/${userId}`).
+            let headers = this.authService.createQCAuthorizationHeader();
+
+            return this.http.get(`${this.coursesURL}/completedcourses/${userId}`, {headers:headers}).
             pipe(
                 map((data: Course[]) => {
                     return data;
@@ -93,7 +103,9 @@ export class CoursesService {
         
 
         getTeachingCourseByUserId(userId: Number) {
-            return this.http.get(`${this.coursesURL}/teachingcourses/${userId}`).
+            let headers = this.authService.createQCAuthorizationHeader();
+
+            return this.http.get(`${this.coursesURL}/teachingcourses/${userId}`, {headers:headers}).
             pipe(
                 map((data: Course[]) => {
                     return data;
@@ -104,7 +116,9 @@ export class CoursesService {
         }
 
         getSkillsByCourseId(courseId: Number) {
-            return this.http.get(`${this.coursesURL}/${courseId}/skills`).
+            let headers = this.authService.createQCAuthorizationHeader();
+
+            return this.http.get(`${this.coursesURL}/${courseId}/skills`, {headers:headers}).
             pipe(
                 map((data: any[]) => {
                     return data;
@@ -117,7 +131,9 @@ export class CoursesService {
     
         
         enrollUser(userId: Number, dataIn: any) {
-            return this.http.post(`${this.usersURL}/${userId}/courses`, dataIn).
+            let headers = this.authService.createQCAuthorizationHeader();
+
+            return this.http.post(`${this.usersURL}/${userId}/courses`, dataIn, {headers:headers}).
             pipe(
                 map((data: any) => {
                     return data;
@@ -128,7 +144,9 @@ export class CoursesService {
         } 
 
         deleteEnrollUser(userId: Number, courseId: Number) {
-            return this.http.delete(`${this.usersURL}/${userId}/courses/${courseId}`).
+            let headers = this.authService.createQCAuthorizationHeader();
+
+            return this.http.delete(`${this.usersURL}/${userId}/courses/${courseId}`, {headers:headers}).
             pipe(
                 map((data: any) => {
                     return data;
@@ -139,7 +157,9 @@ export class CoursesService {
         } 
 
         getEnrolledUserByCourseId(courseId: Number) {
-            return this.http.get(`${this.coursesURL}/${courseId}/users`).
+            let headers = this.authService.createQCAuthorizationHeader();
+
+            return this.http.get(`${this.coursesURL}/${courseId}/users`, {headers:headers}).
             pipe(
                 map((data: any[]) => {
                     return data;
@@ -150,8 +170,9 @@ export class CoursesService {
         }
 
         getUserEnrollmentStatusByCourseId(courseId: Number, userId: Number, enrollment: string)  {
+            let headers = this.authService.createQCAuthorizationHeader();
 
-            return this.http.get(`${this.coursesURL}/${courseId}/users/${userId}/status/${enrollment}`).
+            return this.http.get(`${this.coursesURL}/${courseId}/users/${userId}/status/${enrollment}`, {headers:headers}).
             pipe(
                 map((data: any) => {
                     return data.exists;

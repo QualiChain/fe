@@ -5,16 +5,22 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class McdssService {
     
     private uriMCDSS = environment.mcdssURL;
     
-    constructor(private http: HttpClient) { }
+    constructor(
+      private authService: AuthService, 
+      private http: HttpClient) { }
     
     postMCDSS(method: String, obj: Object) {
-        return this.http.post(`${this.uriMCDSS}/${method}`, obj).
+      
+        let headers = this.authService.createQCAuthorizationHeader();
+
+        return this.http.post(`${this.uriMCDSS}/${method}`, obj, { headers: headers }).
         pipe(
            map((data: any) => {
              return data;
@@ -27,13 +33,15 @@ export class McdssService {
     }
 
     postMCDSSFile(method: String, formData: any) {
+      
       //console.log("At Validate, Form Data:");
       //console.log(formData.get('Decision Matrix'))
       
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
+      //let headers = new Headers();
+      //headers.append('Content-Type', 'application/json');
+      let headers = this.authService.createQCAuthorizationHeaderForFormData();
 
-      return this.http.post(`${this.uriMCDSS}/${method}/file`, formData)
+      return this.http.post(`${this.uriMCDSS}/${method}/file`, formData, { headers: headers})
       .pipe(
         map((res: any) => {
           return res;

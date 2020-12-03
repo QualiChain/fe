@@ -11,6 +11,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('SkillsEditComponent', () => {
   let component: SkillsEditComponent;
@@ -29,7 +30,8 @@ describe('SkillsEditComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         MatAutocompleteModule
-        ]
+        ],
+        providers: [QCStorageService]
     })
     .compileComponents();
   }));
