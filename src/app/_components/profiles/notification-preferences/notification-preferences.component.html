@@ -7,10 +7,11 @@
     </div>
     <div class="row alert alert-success" *ngIf="displayMessage">
         {{ 'NOTIFICATION_PREFERENCES.CONFIRM_MESSAGE' | translate }}
-    </div>    
-    <div class="row">
-          <form #formNotPref="ngForm" class="notification-form" (ngSubmit)="processForm()" >
+    </div> 
+    
+    <form #formNotPref="ngForm" class="notification-form" (ngSubmit)="processForm()" >
 
+        <div class="row">          
             <!--Locations-->
             <div class="form-group field" >
                 <mat-form-field class="notification-full-width">
@@ -28,8 +29,10 @@
                             (matChipInputTokenEnd)="addLocation($event)">
                     </mat-chip-list>
                 </mat-form-field>
-            </div>
+            </div>           
+        </div>
 
+        <div class="row">
             <!--Specializations-->
             <div class="form-group field" >
                 <mat-form-field class="notification-full-width">
@@ -37,24 +40,37 @@
                     <mat-chip-list #chipListSpecializations aria-label="Event selection">
                     <mat-chip *ngFor="let specialization of specializations" [selectable]="selectableSpecialization"
                             [removable]="removableSpecialization" (removed)="removeSpecialization(specialization)">
-                        {{specialization.name}}
+                        {{specialization.title}}
                         <mat-icon matChipRemove *ngIf="removableSpecialization">cancel</mat-icon>
                     </mat-chip>
+
                     <input placeholder="{{ 'NOTIFICATION_PREFERENCES.SPECIALIZATIONS.PLACEHOLDER' | translate }}"
+                            #specializationsInput
+                            [formControl]="specializationCtrl"
+                            [matAutocomplete]="auto"
                             [matChipInputFor]="chipListSpecializations"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlurSpecialization"
-                            (matChipInputTokenEnd)="addSpecialization($event)">
+                            (matChipInputTokenEnd)="addSpecialization($event)"
+                            >
                     </mat-chip-list>
+
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let specialization of filteredSpecializations | async" [value]="specialization">
+                          {{specialization.title}}
+                        </mat-option>
+                      </mat-autocomplete>
+
                 </mat-form-field>
             </div>
-            
-            <div class="form-group field" >
-                <button type="submit" class="btn btn-success" [disabled]="formNotPref.invalid">
-                    <i _ngcontent-axy-c0="" class="material-icons small"> save </i> {{ 'BUTTON.SAVE' | translate }} 
-                </button>
-            </div>
-          </form>
+        </div>
+        
+        <div class="form-group field" >
+            <button type="submit" class="btn btn-success" [disabled]="formNotPref.invalid">
+                <i _ngcontent-axy-c0="" class="material-icons small"> save </i> {{ 'BUTTON.SAVE' | translate }} 
+            </button>
+        </div>
+    </form>
 
-    </div>
+
 </div>
