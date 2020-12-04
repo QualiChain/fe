@@ -172,6 +172,7 @@ export class AppComponent  implements OnInit {
 
  async ngOnInit() { // In the ngOnInit() or in the constructor
 
+  /*
   this.router.events.subscribe(event => {
 
     if (event instanceof NavigationEnd) {
@@ -180,6 +181,7 @@ export class AppComponent  implements OnInit {
       gtag ('config', 'G-H6JLS05VT6', {'page_path': event.urlAfterRedirects});
     }
   });
+  */
 
   const appTitle = this.titleService.getTitle();
     this.router
