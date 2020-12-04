@@ -8,12 +8,17 @@
                 -->
                 <a class="noborder float-right" [routerLink]="" (click)="showHelpDialog(visualisationHelpId)" ><mat-icon>help_outline</mat-icon> </a>
             </div>
+
+            <div class="row" [hidden]="cnt>=2">
+                <app-qc-spinner></app-qc-spinner>
+            </div>
                     
-            <iframe name="Framename" [src]="urlSafe | safe: 'resourceUrl' "
+            <iframe [hidden]="cnt<2" name="Framename" [src]="urlSafe | safe: 'resourceUrl' "
             frameborder="0" 
             scrolling="no" 
             class="frame-area"
             [ngClass]="extraClass"
+            (load)="loadEvent($event)"
             >
             </iframe>
         
