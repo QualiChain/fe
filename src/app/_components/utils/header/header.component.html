@@ -208,8 +208,8 @@
 			  <h4 class="modal-title">{{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }}</h4>
 			</div>
 			<div class="modal-body">
-				<span *ngIf="messages.length<=0">{{ 'NOTIFICATIONS.NO_NOTIFICATIONS_AVAILABLE' | translate }} </span>
-				<div *ngFor="let message of messages; let i = index" class="alert alert-sm alert-info view-layout-custom" [ngClass]="{'readed-class': message.read, 'unreaded-class': !message.read }">
+				<span *ngIf="(messages | FilterArrayByValue : 'read' : 'false') ==0 ">{{ 'NOTIFICATIONS.NO_NOTIFICATIONS_AVAILABLE' | translate }} </span>
+				<div *ngFor="let message of messages | FilterArrayByValueGetList : 'read' : 'false'; let i = index" class="alert alert-sm alert-info view-layout-custom" [ngClass]="{'readed-class': message.read, 'unreaded-class': !message.read }">					
 					{{message.message}}
 					<!-- 					
 					<span *ngIf="message.read" _ngcontent-cjg-c2="" class="glyphicon glyphicon glyphicon-eye-open">Readed</span>
@@ -227,11 +227,11 @@
 						    <span *ngIf="message.read"> <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'NOTIFICATIONS.SET_AS_UNREAD' | translate }}</span>
 							<span *ngIf="!message.read"> <i _ngcontent-axy-c0="" class="material-icons"> done </i> {{ 'NOTIFICATIONS.SET_AS_READ' | translate }}</span>
 						</button>
-
+<!--
 						<button *ngIf="loadingNotificationSpinnerid!=message.id" class="btn btn-danger" (click)="deleteNotificationItem(message, i)">
 							<i _ngcontent-axy-c0="" class="material-icons"> delete </i> {{ 'BUTTON.DELETE' | translate }}
 						</button>
-
+-->
 
 					</div>
 					
