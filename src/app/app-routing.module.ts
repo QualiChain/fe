@@ -45,6 +45,7 @@ import { FilesRepositoryComponent } from './_components/profiles/files-repositor
 import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 import { AuthGuardByPermission, AuthGuardForAnonymous } from './_directives/can-access.directive';
 
+
 const routes: Routes = [
   {
    path: '',
@@ -87,7 +88,7 @@ const routes: Routes = [
     data: { 
         roles: [Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator ],
         permissions: ['view_skills'],
-        title: 'Skills'      }
+        title: 'Skill'      }
    },
   // {
  //   path: 'skills/:id/edit',
@@ -117,7 +118,7 @@ const routes: Routes = [
     data: { 
       roles: [Role.recruiter, Role.admin, Role.administrator ],      
       permissions: ['add_job_post'],
-      title: 'Jobs'
+      title: 'Jobs | Add'
       }
   },
   {
@@ -128,7 +129,7 @@ const routes: Routes = [
     data: { 
       roles: [Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator ],
       permissions: ['view_jobs'],
-      title: 'Jobs'
+      title: 'Job'
      }    
   },
   {
@@ -139,7 +140,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.recruiter, Role.admin, Role.administrator ],
       permissions: ['edit_job_post'],
-      title: 'Jobs'
+      title: 'Jobs | Edit'
     }
   },  
   //{
@@ -163,8 +164,8 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.admin, Role.administrator ],
-      permissions: ['view_own_profile','add_profile'],
-      title: 'Profiles' }  
+      permissions: ['add_profile'],
+      title: 'Profiles | Add' }  
   },
   {
     path: 'myprofile',
@@ -182,7 +183,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [],
       permissions: ['edit_own_profile'],
-      title: 'My profile' }  
+      title: 'My profile | Edit' }  
   },  
   {
     path: 'profiles/:id',
@@ -191,7 +192,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [],
       permissions: ['view_own_profile','view_other_profile'],
-      title: 'Profiles' }  
+      title: 'Profile' }  
   },
   {
     path: 'profiles/:id/edit',
@@ -200,38 +201,38 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [],
       permissions: ['edit_own_profile', 'edit_other_profile'],
-      title: 'Profiles' }  
+      title: 'Profile | Edit' }  
   },
   {
     path: 'profiles/:id/best-career-options',
     component: BestCareerOptionsComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Best career options' }
+    data: { title: 'Profile | Best career options' }
   },  
   {
     path: 'profiles/:id/career-advisor',
     component: CareerAdvisorComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Career advisor' }
+    data: { title: 'Profile | Career advisor' }
   },
   {
     path: 'profiles/:id/education-plan',
     component: EducationPlanComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Education plan' }
+    data: { title: 'Profile | Education plan' }
   },
   {
     path: 'profiles/:id/dss-curriculum-re-design',
     component: DSSCurriculumReDesignComponent,
     canActivate: [AuthGuard],
-    data: { title: 'DSS Curriculum re-design' }
+    data: { title: 'Profile | DSS Curriculum re-design' }
   },
   {
     path: 'profiles/:id/cv-gap-analysis',
     component: CurriculumGapAnalysisComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.professor, Role.recruiter, Role.admin, Role.administrator ],
-    title: 'CV Gap analysis' }
+    title: 'Profile | CV Gap analysis' }
   },
   {
     path: 'profiles/:id/notifications-preferences',
@@ -239,7 +240,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { permissions: ['manage_own_notifications_preferences'],
-    title: 'Notifications preferences' }    
+    title: 'Profile | Notifications preferences' }    
   },    
   {
     path: 'profiles/:id/personal-files-repository',
@@ -247,7 +248,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { permissions: ['retrieve_own_files'],
-    title: 'Personal files repository' }    
+    title: 'Profile | Personal files repository' }    
   },    
   {
     path: 'profiles/:id/recomended/courses',
@@ -256,7 +257,7 @@ const routes: Routes = [
     //data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] },
     canActivate: [AuthGuardByPermission],
     data: { permissions: ['get_courses_recomendations'],
-    title: 'Courses' }
+    title: 'Profile | Recommended Courses' }
   },
   {
     path: 'profiles/:id/recomended/jobs',
@@ -265,7 +266,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
       permissions: ['get_job_recommendations'],
-      title: 'Recommended Jobs' }    
+      title: 'Profile | Recommended Jobs' }    
   },
   {
     path: 'profiles/:id/recomended/skills',
@@ -274,7 +275,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
       permissions: ['get_skills_recomendations'],
-      title: 'Recommended Skills' }    
+      title: 'Profile | Recommended Skills' }    
   },{
     path: 'profiles/:id/jobapplies',
     component: JobAppliesComponentPage,
@@ -291,7 +292,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.recruiter, Role.admin, Role.administrator],
       permissions: ['view_recruitment'],
-      title: 'Certificate validation'
+      title: 'Recruitment | Certificate validation'
     }
    }, 
   {
@@ -330,7 +331,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
     permissions: ['add_course'],
-    title: 'Courses' }    
+    title: 'Courses | Add' }    
   },  
   {
     path: 'courses/:id',
@@ -339,7 +340,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.student, Role.employee, Role.professor, Role.admin, Role.administrator],
     permissions: ['view_courses'],
-    title: 'Courses' }    
+    title: 'Course' }    
   },       
   {
     path: 'courses/:id/edit',
@@ -348,19 +349,19 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
       permissions: ['edit_course'],
-      title: 'Courses' }    
+      title: 'Course | Edit' }    
   },  
   {
     path: 'courses/:id/award',
     component: AwardSmartBadgeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
-      title: 'Courses' }    
+      title: 'Course | Award' }    
   },  
   {
     path: 'MCDSS',
     component: MCDSSComponent,
-    data: {title: 'Courses'}
+    data: {title: 'MCDSS'}
   },  
   {
     path: 'access_denied',

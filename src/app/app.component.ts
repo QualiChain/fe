@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 
 
@@ -12,12 +12,13 @@ import User from './_models/user';
 import { Role } from './_models/role';
 import { StorageService } from './_helpers/global';
 import { QCStorageService } from './_services/QC_storage.services';
-
+import { QCMatomoConnectorService} from './_services/qc-matomo-connector.service';
 declare var $: any;
 
 // declare ga as a function to access the JS code in TS
 //declare let ga: Function;
-declare let gtag: Function;
+////declare let gtag: Function;
+declare let _paq: any;
 
 @Component({
   selector: 'app-root',
@@ -26,12 +27,13 @@ declare let gtag: Function;
 })
 export class AppComponent  implements OnInit {
   title = 'QualiChain-FE';
-
+  loadSpinner: boolean = true;
 
   //currentUser: User;
   currentUser: any;
 
   constructor(
+    private mc: QCMatomoConnectorService,
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
     public storageService: StorageService,
@@ -53,12 +55,40 @@ export class AppComponent  implements OnInit {
       this.translate.use(last_language);
     }
 
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+          // Show loading indicator          
+          this.loadSpinner = true;
+      }
+
+      if (event instanceof NavigationEnd) {
+          // Hide loading indicator
+          this.loadSpinner = false;
+      }
+
+      if (event instanceof NavigationError) {
+          // Hide loading indicator
+          this.loadSpinner = false;
+          // Present error to user
+          console.log(event.error);
+      }
+  });
+
   }
 
   get isLogged() {
     return this.currentUser ;
   }
   
+  
+  
+  trackEvent(eventCategory, eventAction, eventName, eventValue) {
+    console.log("track Event");
+    //_paq.push(['trackEvent', 'Menu', 'Freedom']);    
+    this.mc.sendMatomoEvent(eventCategory, eventAction, eventName, eventValue);   
+  }
+  
+
   currentUserHasThisRole(roleName: string) {
     let hasTheRole = false;
     let hasTheRoleByArrayOfRoles = false;
@@ -203,6 +233,14 @@ export class AppComponent  implements OnInit {
           ttl = 'QualiChain';
         }
         this.titleService.setTitle(ttl);
+
+        _paq.push(['setDocumentTitle', document.title]);
+        if (this.currentUser) {
+          _paq.push(['setUserId', this.currentUser.id.toString()]);
+        }
+             
+        _paq.push(['trackPageView']);
+
       });
       
   let dataP = await this.authservice.recoverPerimissionsAsync();
@@ -215,6 +253,7 @@ export class AppComponent  implements OnInit {
     setTimeout(()=>{
       el.style['display'] = 'none';
     },1500);
+        
     
   }
 

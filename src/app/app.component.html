@@ -9,9 +9,12 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="edit-link"></div>
 				<div class="clearfix"></div>
-			
+					<!--
+					<a [routerLink]="" (click)="trackEvent('Matomo', 'link test', null, null)">Matomo Test</a>
+					-->
 					<!-- routes will be rendered here -->		
-					<router-outlet></router-outlet>
+					<router-outlet *ngIf="!loadSpinner"></router-outlet>
+					<app-qc-spinner *ngIf="loadSpinner"></app-qc-spinner>
 					
 		    	<div class="entry-links"></div>
 			</div>		
