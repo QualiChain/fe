@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "file-saver", "xlsx", "chart.js", "angular2-flash-messages"
+              "file-saver", "xlsx", "chart.js", "angular2-flash-messages", "crypto-js"
             ],
             "outputPath": "dist/QualiChain-FE",
             "index": "src/index.html",
