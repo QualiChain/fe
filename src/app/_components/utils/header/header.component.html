@@ -68,18 +68,31 @@
 							-->
 							<li *ngIf="!isLogged" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="btn navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
 							
-							
+							<li *appCanAccess="['manage_own_notifications']" class="menu-item menu-item-type-post_type menu-item-object-page">
+								<!-- #docregion mat-badge-color -->
+								  <a data-toggle="modal" class="btn navbar-item" data-target="#myModal" href="#">
+									 <mat-icon *ngIf="(messages | FilterArrayByValue : 'read' : 'false') >0" matBadge="{{ messages | FilterArrayByValue : 'read' : 'false'}}" matBadgeColor="warn">notifications_active</mat-icon>
+									 <mat-icon *ngIf="(messages | FilterArrayByValue : 'read' : 'false') ==0" >notifications</mat-icon>
+								  </a>
+								<!-- #enddocregion mat-badge-color -->
+									<!-- Include text description of the icon's meaning for screen-readers -->
+									<span class="cdk-visually-hidden">
+										{{ messages | FilterArrayByValue : 'read' : 'false'}} notificacions
+									</span>
+							</li>
+<!--
 							<li *appCanAccess="['manage_own_notifications']" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" class="btn navbar-item" data-target="#myModal" href="#">
 									<span [hidden]="( (messages | FilterArrayByValue : 'read' : 'false') <=0)" class="nav-item__badge">
 										<span aria-hidden="true" class="nav-item__badge-count">
 											{{ messages | FilterArrayByValue : 'read' : 'false'}}
 										</span>
-										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'read' : 'false'}} notificaciones nuevas.</span>
+										<span class="visually-hidden">{{ messages | FilterArrayByValue : 'read' : 'false'}} notificacions.</span>
 									</span>
 									<span class="glyphicon glyphicon-bell"></span>
 								</a>
 							</li>
+-->							
 							<!--
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<a data-toggle="modal" data-target="#myModal" href="#">
