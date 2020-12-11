@@ -105,6 +105,46 @@
 							</li>
 							-->
 							
+							<li *ngIf="isLogged" 														
+							class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption dynamicmenuoptions current_page_parent ">
+								<div  class="dropdown dropdown-menu-right">
+									<a class="btn navbar-item dropdown-toggle" id="dropdownMenuButtonUserProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span >
+											<div class="user-authenticated-container">
+												<div class="user-authenticated-picture-image" [ngStyle]="{'background-image': 'url(' + currentUser?.avatar_path + ')'}"> </div>												
+											</div>
+										</span>	
+									</a>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<ul>
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" >
+													<div class="user-authenticated-name">
+															{{ 'MENU.WELCOME_MESSAGE' | translate }}
+													</div>
+													<div class="user-authenticated-name">
+															{{currentUser?.name}} {{currentUser?.surname}}
+															<hr>
+													</div>															
+											</li>										
+											<li *appCanAccess="['view_own_profile']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/myprofile'}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/myprofile'}" routerLink="/myprofile" (click)="route='/myprofile'" >{{ 'MENU.PROFILE' | translate }}</a>
+											</li>
+											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser?.id}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser?.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a>
+											</li>
+											<li *appCanAccess="['retrieve_own_files']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser?.id}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser?.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a>
+											</li>
+
+											<li><a (click)="openQCQuestionnaire('manual')" [routerLink]="" >{{ 'MENU.QUESTIONNAIRE' | translate }}</a></li>
+
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser?.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
+											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
+										</ul>
+									</div>
+								</div>
+							</li>
+						<!--
 							<li *ngIf="isLogged" class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption">
 								<div class="dropdown dropdown-menu-right">
 									<button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -125,10 +165,7 @@
 															{{currentUser?.name}} {{currentUser?.surname}}
 															<hr>
 													</div>															
-											</li>
-											<!--
-											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/profiles/'+currentUser?.id}"><a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}" (click)="route='/profiles/'+currentUser?.id" >{{ 'MENU.PROFILE' | translate }}</a></li>
-											-->											
+											</li>										
 											<li *appCanAccess="['view_own_profile']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/myprofile'}">
 												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/myprofile'}" routerLink="/myprofile" (click)="route='/myprofile'" >{{ 'MENU.PROFILE' | translate }}</a>
 											</li>
@@ -148,7 +185,25 @@
 
 								</div>
 							</li>
-
+						-->
+							<li 														
+							class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption dynamicmenuoptions current_page_parent ">
+								<div  class="dropdown dropdown-menu-right">
+									<a class="btn navbar-item dropdown-toggle" id="dropdownMenuButtonLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-globe"></span>
+									</a>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<ul>												
+											<li 											
+											*ngFor="let lang of translate.getLangs()"
+											class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page " >
+													<a (click)="translate.use(lang);setLastLanguage(lang)" [routerLink]="" class="btn navbar-item" [ngClass]="{'selectedItem': lang===translate.currentLang}" hreflang="{{lang}}" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }}</a>
+											</li>
+										</ul>
+									</div>
+								</div>								
+							</li>
+							<!--
 							<li class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption">
 								<div class="dropdown dropdown-menu-right">
 									<button title="{{ 'LANGUAGE_SELECTOR.SELECT' | translate }}" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -156,14 +211,12 @@
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="block-languageswitcher">
 										<ul class="links">
-											<li *ngFor="let lang of translate.getLangs()" [ngClass]="{'current_page_parent': lang===translate.currentLang, 'is-active': lang===translate.currentLang}" class="{{lang}}"><a (click)="translate.use(lang);setLastLanguage(lang)" [routerLink]="" class="language-link" [ngClass]="{'is-active': lang===translate.currentLang}" hreflang="{{lang}}" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }}</a></li>
-											<!-- 
-												<li *ngFor="let lang of translate.getLangs()" [ngClass]="{current_page_parent: lang===translate.currentLang}" ><a class="dropdown-item " (click)="translate.use(lang)" [routerLink]="" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }} </a></li>
-											-->											
+											<li *ngFor="let lang of translate.getLangs()" [ngClass]="{'current_page_parent': lang===translate.currentLang, 'is-active': lang===translate.currentLang}" class="{{lang}}"><a (click)="translate.use(lang);setLastLanguage(lang)" [routerLink]="" class="language-link" [ngClass]="{'is-active': lang===translate.currentLang}" hreflang="{{lang}}" >{{ 'LANGUAGE_SELECTOR.'+lang | translate }}</a></li>									
 										</ul>
 									</div>
 								</div>
 							</li>
+							-->
 	
 						</ul>							                
 					<!--
