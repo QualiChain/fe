@@ -1,6 +1,10 @@
 
+.nav ul li a {
+    max-height: 40px;
+}
+
 .user-authenticated-container {
-    display: flex;
+    display: inline-block;
     align-items: center;
     width: auto;
 }

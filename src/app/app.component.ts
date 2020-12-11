@@ -59,21 +59,23 @@ export class AppComponent  implements OnInit {
     }
 
     this.router.events.subscribe((event: Event) => {
+      
       if (event instanceof NavigationStart) {
           // Show loading indicator          
           this.loadSpinner = true;
       }
-
-      if (event instanceof NavigationEnd) {
+      else if (event instanceof NavigationEnd) {
           // Hide loading indicator
           this.loadSpinner = false;
       }
-
-      if (event instanceof NavigationError) {
+      else if (event instanceof NavigationError) {
           // Hide loading indicator
           this.loadSpinner = false;
           // Present error to user
           console.log(event.error);
+      }
+      else {
+        this.loadSpinner = false;
       }
   });
 
