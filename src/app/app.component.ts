@@ -32,6 +32,9 @@ export class AppComponent  implements OnInit {
   //currentUser: User;
   currentUser: any;
 
+  params = [];
+  url = [];
+
   constructor(
     private mc: QCMatomoConnectorService,
     private titleService: Title,
@@ -202,6 +205,7 @@ export class AppComponent  implements OnInit {
 
  async ngOnInit() { // In the ngOnInit() or in the constructor
 
+
   /*
   this.router.events.subscribe(event => {
 
@@ -220,7 +224,18 @@ export class AppComponent  implements OnInit {
         map(() => {
           const child = this.activatedRoute.firstChild;
           if (child.snapshot.data['title']) {
-            return child.snapshot.data['title'];
+            let paramId = child.params['_value']['id'];
+            let returnValue = child.snapshot.data['title'];
+            if (paramId) {
+              if (returnValue.includes(':id')) {
+                returnValue = returnValue.replace(':id', paramId); 
+              }
+              else {
+                returnValue = returnValue+" | "+paramId;
+              }
+              
+            }
+            return returnValue;
           }
           return appTitle;
         })
