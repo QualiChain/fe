@@ -88,7 +88,7 @@ const routes: Routes = [
     data: { 
         roles: [Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator ],
         permissions: ['view_skills'],
-        title: 'Skill'      }
+        title: 'Skill | :id'      }
    },
   // {
  //   path: 'skills/:id/edit',
@@ -129,7 +129,7 @@ const routes: Routes = [
     data: { 
       roles: [Role.student, Role.employee, Role.recruiter, Role.admin, Role.administrator ],
       permissions: ['view_jobs'],
-      title: 'Job'
+      title: 'Job | :id'
      }    
   },
   {
@@ -140,7 +140,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.recruiter, Role.admin, Role.administrator ],
       permissions: ['edit_job_post'],
-      title: 'Jobs | Edit'
+      title: 'Job | :id | Edit'
     }
   },  
   //{
@@ -192,7 +192,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [],
       permissions: ['view_own_profile','view_other_profile'],
-      title: 'Profile' }  
+      title: 'Profile | :id' }  
   },
   {
     path: 'profiles/:id/edit',
@@ -201,38 +201,38 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [],
       permissions: ['edit_own_profile', 'edit_other_profile'],
-      title: 'Profile | Edit' }  
+      title: 'Profile | :id | Edit' }  
   },
   {
     path: 'profiles/:id/best-career-options',
     component: BestCareerOptionsComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Profile | Best career options' }
+    data: { title: 'Profile | :id | Best career options' }
   },  
   {
     path: 'profiles/:id/career-advisor',
     component: CareerAdvisorComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Profile | Career advisor' }
+    data: { title: 'Profile | :id | Career advisor' }
   },
   {
     path: 'profiles/:id/education-plan',
     component: EducationPlanComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Profile | Education plan' }
+    data: { title: 'Profile | :id | Education plan' }
   },
   {
     path: 'profiles/:id/dss-curriculum-re-design',
     component: DSSCurriculumReDesignComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Profile | DSS Curriculum re-design' }
+    data: { title: 'Profile | :id | DSS Curriculum re-design' }
   },
   {
     path: 'profiles/:id/cv-gap-analysis',
     component: CurriculumGapAnalysisComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.professor, Role.recruiter, Role.admin, Role.administrator ],
-    title: 'Profile | CV Gap analysis' }
+    title: 'Profile | :id | CV Gap analysis' }
   },
   {
     path: 'profiles/:id/notifications-preferences',
@@ -240,7 +240,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { permissions: ['manage_own_notifications_preferences'],
-    title: 'Profile | Notifications preferences' }    
+    title: 'Profile | :id | Notifications preferences' }    
   },    
   {
     path: 'profiles/:id/personal-files-repository',
@@ -248,7 +248,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { permissions: ['retrieve_own_files'],
-    title: 'Profile | Personal files repository' }    
+    title: 'Profile | :id | Personal files repository' }    
   },    
   {
     path: 'profiles/:id/recomended/courses',
@@ -257,7 +257,7 @@ const routes: Routes = [
     //data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator] },
     canActivate: [AuthGuardByPermission],
     data: { permissions: ['get_courses_recomendations'],
-    title: 'Profile | Recommended Courses' }
+    title: 'Profile | :id | Recommended Courses' }
   },
   {
     path: 'profiles/:id/recomended/jobs',
@@ -266,7 +266,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
       permissions: ['get_job_recommendations'],
-      title: 'Profile | Recommended Jobs' }    
+      title: 'Profile | :id | Recommended Jobs' }    
   },
   {
     path: 'profiles/:id/recomended/skills',
@@ -275,7 +275,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
       permissions: ['get_skills_recomendations'],
-      title: 'Profile | Recommended Skills' }    
+      title: 'Profile | :id | Recommended Skills' }    
   },{
     path: 'profiles/:id/jobapplies',
     component: JobAppliesComponentPage,
@@ -283,7 +283,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.student, Role.employee, Role.admin, Role.administrator],
       permissions: ['get_their_job_applications'],
-      title: 'Job applies' }    
+      title: 'Profile | :id | Job applies' }    
   },
   {
     path: 'recruitment/certificate-validation',
@@ -312,7 +312,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.recruiter, Role.admin, Role.administrator],
       permissions: ['view_recruitment'],
-      title: 'Recruitment'
+      title: 'Recruitment | :id'
      }    
   },  
   {
@@ -340,7 +340,7 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.student, Role.employee, Role.professor, Role.admin, Role.administrator],
     permissions: ['view_courses'],
-    title: 'Course' }    
+    title: 'Course | :id' }    
   },       
   {
     path: 'courses/:id/edit',
@@ -349,14 +349,14 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
       permissions: ['edit_course'],
-      title: 'Course | Edit' }    
+      title: 'Course | :id | Edit' }    
   },  
   {
     path: 'courses/:id/award',
     component: AwardSmartBadgeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
-      title: 'Course | Award' }    
+      title: 'Course | :id | Award' }    
   },  
   {
     path: 'MCDSS',
