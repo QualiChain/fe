@@ -11,6 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UploadService } from '../../../_services/upload.service';
 import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+//import { FlashMessagesService } from 'angular2-flash-messages';
 
 describe('FilesRepositoryComponent', () => {
   let component: FilesRepositoryComponent;

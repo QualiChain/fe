@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 //import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+//import { FlashMessagesService } from 'angular2-flash-messages';
 
 let ELEMENT_DATA = [];
 const downloadUrl = environment.downloadFilesUrl;
@@ -24,8 +25,11 @@ export class FilesRepositoryComponent implements OnInit {
 
   profileId: Number = null;
   
+  showError: boolean = false;
+  errorMessage: string = null;
 
   constructor(
+    //private flashMessage: FlashMessagesService,
     private qcStorageService: QCStorageService,
     private translate: TranslateService,
     public dialog: MatDialog,
@@ -92,12 +96,15 @@ export class FilesRepositoryComponent implements OnInit {
 
       if (dialogResult) {
          //console.log("Under construction");
-         this.deleteFile(fileId)
+         this.deleteFile(fileId, title)
       }
     });
   }
 
-  deleteFile(fileId: number) { 
+  deleteFile(fileId: number, title: string) { 
+
+    this.showError = false;
+    this.errorMessage = null;
 
     this.us.deleteFile(+this.profileId, fileId).subscribe(
       res => {
@@ -107,6 +114,10 @@ export class FilesRepositoryComponent implements OnInit {
       error => {
         console.log("Error deleting file data");
         console.log(error);
+        //this.flashMessage.show(this.translate.instant('PERSONAL_FILES_REPOSITORY.ERROR_DELETING_FILE', {fileName:title}), {cssClass: 'alert-danger', timeout: 5000});        
+
+        this.showError = true;
+        this.errorMessage = this.translate.instant('PERSONAL_FILES_REPOSITORY.ERROR_DELETING_FILE', {fileName:title});        
         
       }
     );

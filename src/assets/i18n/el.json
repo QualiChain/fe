@@ -46,7 +46,8 @@
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Personal files repository",
     "DELETE_MESSAGE": "Are you sure you want to delete this file?",
-    "CONFIRM_ACTION": "Confirm Action"
+    "CONFIRM_ACTION": "Confirm Action",
+    "ERROR_DELETING_FILE": "Sorry, there was an error deleting the file. The file '{{fileName}}' cannot be deleted."
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",

@@ -282,8 +282,15 @@
     </div>
 
     <div *ngIf="mode=='Edit'" class="col col-lg-6">
+      <!--
+      <flash-messages></flash-messages>
+      -->
+      <div *ngIf="showError" class="alert alert-danger" role="alert">      
+        {{errorMessage}}
+      </div>
+
       <div *ngIf="user_avatar_path_id" class="row"> 
-        <div class="form-group field col col-lg-2">
+        <div class="form-group field col col-lg-2">          
           <img [src]="user_avatar_path">
           <button class="btn btn-danger" (click)="confirmDialog(user_avatar_path_id, '')">
             <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}

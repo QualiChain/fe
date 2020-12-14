@@ -31,6 +31,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StorageService } from '../../../_helpers/global';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+//import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-profiles-add',
@@ -92,8 +93,11 @@ export class ProfilesAddComponent implements OnInit {
   userId: string = '';
 
   public selectedOption: any;
+  showError: boolean = false;
+  errorMessage: string = null;
 
   constructor(
+    //private flashMessage: FlashMessagesService,
     private qcStorageService: QCStorageService,
     public storageService: StorageService,
     public dialog: MatDialog,
@@ -229,6 +233,9 @@ export class ProfilesAddComponent implements OnInit {
 
   deleteFile(fileId: number) { 
 
+    this.showError = false;
+    this.errorMessage = null;
+
     this.us.deleteFile(+this.profileId, fileId).subscribe(
       res => {
         //console.log("the file has been deleted");
@@ -237,7 +244,10 @@ export class ProfilesAddComponent implements OnInit {
       error => {
         console.log("Error deleting file data");
         console.log(error);
+        //this.flashMessage.show(this.translate.instant('PERSONAL_FILES_REPOSITORY.ERROR_DELETING_FILE', {fileName:"Avatar"}), {cssClass: 'alert-danger', timeout: 5000});        
         
+        this.showError = true;
+        this.errorMessage = this.translate.instant('PERSONAL_FILES_REPOSITORY.ERROR_DELETING_FILE', {fileName:"Avatar"});
       }
     );
 

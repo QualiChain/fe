@@ -13,6 +13,7 @@ import { UploadService } from '../../../_services/upload.service';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
 import { OrderTemplatePipePipe } from '../../../_pipes/orderTemplatePipe/order-template-pipe.pipe';
+//import { FlashMessagesService } from 'angular2-flash-messages';
 
 describe('ProfilesAddComponent', () => {
   let component: ProfilesAddComponent;
