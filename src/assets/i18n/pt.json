@@ -420,6 +420,7 @@
     "STATISITICS": "Statisitics",
     "ADDITIONAL_COURSES": "Additional Courses",
     "RECOMMENDATIONS": "Recommendations",
+    "NO_DATA": "There are no recommendations available",
     "BUTTON": {
       "COURSE_RECOMMENDATION": "Course Recommendation",
       "SKILL_RECOMMENDATION": "Skill Recommendation"
