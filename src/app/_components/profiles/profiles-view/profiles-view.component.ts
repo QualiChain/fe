@@ -981,6 +981,7 @@ export class CVDialog_modal implements OnInit {
   skillsCV: any = [];
   workHistoryCV: any = [];
   educationHistoryCV: any = [];
+  showError: boolean = false;
 
   //private appcomponent: AppComponent,
   constructor(            
@@ -1168,7 +1169,7 @@ addFormGroupItem(e, type) {
 
 
 onSubmit() {
-
+  this.showError = false;
   this.loadingSpinner = true;
 
   var dataToSend = {
@@ -1189,11 +1190,13 @@ onSubmit() {
       //console.log("CV sended correctly");
       //alert('Success!!');
       this.loadingSpinner = false;
+      this.showError = false;
     },
     error => {
       //console.log("error sending CV data");
       //alert('Error sending data!!!');
       this.loadingSpinner = false;
+      this.showError = true;
     }
   );
 

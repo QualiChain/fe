@@ -37,17 +37,19 @@ export class CVService {
     let headers = this.authService.createQCAuthorizationHeader();
 
     const obj = dataIn;
-    return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn), { headers: headers} );/*.
+    //return this.httpClient.post(`${this.uri}/${userId}`, JSON.stringify(dataIn), { headers: headers} ).
+    return this.httpClient.post(`${this.uri}/${userId}`, dataIn, { headers: headers} ).
     pipe(
        map((data: any) => {
            console.log("post OK");
+           console.log(data);
          return data;
        }), catchError( error => {
         console.log("post KO");
          return throwError( 'Something went wrong!' );
        })
     )
-    */
+    
     }
 
 
