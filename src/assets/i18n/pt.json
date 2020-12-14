@@ -652,6 +652,7 @@
     "SET_AS_UNREAD" : "Set as unread"
   },
   "CV": {
+    "ERROR_SAVING_DATA": "Sorry, there was an error saving the data",
     "TITLE": {
       "LABEL": "Title",
       "PLACEHOLDER": "Title"

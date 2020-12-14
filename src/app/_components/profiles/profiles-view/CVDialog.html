@@ -6,6 +6,11 @@
   </div>
 </div>
 
+
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    {{ 'CV.ERROR_SAVING_DATA' | translate }}
+  </div>
+
 <mat-dialog-content class="mat-typography">
 
     <form #formUserCV="ngForm" class="cv-form" (ngSubmit)="onSubmit()">
