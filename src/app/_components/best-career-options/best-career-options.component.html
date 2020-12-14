@@ -14,7 +14,8 @@
             
         </div>
     </div>
-    
+    <app-qc-spinner *ngIf="showLoading"></app-qc-spinner>
+    <div class="col col-lg-12" *ngIf="(!showLoading && best_career_options.length==0)"><br>{{ 'BCO.NO_DATA' | translate }}<br>&nbsp;</div>
 
     <div [hidden]="cardToDisplay!=i" class="bco-card" *ngFor="let bco of pagedListBCO; let i = index">
         <div class="bco-head">{{bco.label}} </div>

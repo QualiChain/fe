@@ -128,6 +128,8 @@ public pieChartOptions: ChartOptions = {
 
   recomendedJobs = [];
   
+  showLoading: boolean = true;
+
   constructor(
     private rs: RecomendationsService,
     private route: ActivatedRoute) { }
@@ -162,10 +164,11 @@ public pieChartOptions: ChartOptions = {
 
             this.lengthBCO = this.best_career_options.length;
             this.pagedListBCO = this.best_career_options.slice(0, 1);
-
+            this.showLoading = false;
           },
           error => {
-            console.log("recomended jobs not found in db");                        
+            console.log("recomended jobs not found in db");
+            this.showLoading = false;
           }
         );
       }
