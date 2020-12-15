@@ -171,6 +171,10 @@ import { QcUserNameComponent } from './_components/utils/qc-user-name/qc-user-na
 import { QcJobCandidatesManagementComponent } from './_components/utils/qc-job-candidates-management/qc-job-candidates-management.component';
 import { OrderTemplatePipePipe } from './_pipes/orderTemplatePipe/order-template-pipe.pipe';
 import { QcEvaluationQuestionnaireComponent } from './_components/utils/qc-evaluation-questionnaire/qc-evaluation-questionnaire.component';
+import { ThesisComponent, ThesisComponentSummaryPage } from './_components/thesis/thesis/thesis.component';
+import { ThesisService } from './_services/thesis.service';
+import { ThesisGetComponent } from './_components/thesis/thesis-get/thesis-get.component';
+import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edit.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -305,7 +309,10 @@ export function tokenGetter() {
     QcUserNameComponent,
     QcJobCandidatesManagementComponent,
     OrderTemplatePipePipe,
-    QcEvaluationQuestionnaireComponent
+    QcEvaluationQuestionnaireComponent,
+    ThesisComponent, ThesisComponentSummaryPage,
+    ThesisGetComponent,
+    ThesisEditComponent
   ],
   imports: [
     SafePipeModule,
@@ -342,7 +349,7 @@ export function tokenGetter() {
     FlashMessagesModule.forRoot()
   ],
   exports: [materialModules, CanAccessDirective],
-  providers: [ PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, QCStorageService, JwtHelperService,
+  providers: [ ThesisService, PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, QCStorageService, JwtHelperService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {  
       provide: MatPaginatorIntl, 

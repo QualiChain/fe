@@ -1,0 +1,51 @@
+<mat-expansion-panel  [expanded]="thesisList.length>0 ? true : false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'THESIS.HEADER' | translate }}</mat-panel-title>
+      <mat-panel-description></mat-panel-description>
+    </mat-expansion-panel-header>
+  
+    <div *ngIf="thesisList.length==0">{{ 'THESIS.NO_LINKED_THESIS' | translate }} </div>
+  
+    <mat-accordion *ngIf="thesisList.length>=0" activeIds="course-0">
+      <mat-expansion-panel  id="course-{{i}}" *ngFor="let thesis of thesisList | slice:0:5; let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{thesis.title}}
+          </mat-panel-title>
+          <mat-panel-description>
+            
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <div class="thesis-card">                    
+          <div class="thesis-card-body">                      
+            <div class="thesis-card-text">
+              <div>{{thesis?.description}}</div>
+              <div>{{ 'THESIS.STATUS.LABEL' | translate }}: {{ 'THESIS.STATUS.OPTIONS.'+thesis.status | uppercase  | translate}}</div>
+              <span *ngIf="thesis.student_id">
+                <div *appCanAccess="['add_and_update_thesis']">
+                  {{ 'THESIS.STUDENT.LABEL' | translate }}: <app-qc-user-name [userId]="thesis.student_id"></app-qc-user-name>
+                </div>
+              </span>
+            </div>
+            <br/>
+            <button *appCanAccess="['view_courses']" class="btn btn-primary" [routerLink]="['/thesis', thesis.id]">
+              <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+            </button>
+  
+          </div>
+      </div>
+  
+  
+      </mat-expansion-panel>
+      
+    </mat-accordion>
+  
+    <br>
+    <div  class="col-lg-8">      
+      <a [routerLink]="['/thesis']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+      &nbsp;
+      <a *appCanAccess="['add_and_update_thesis']" [routerLink]="['/thesis/add']" class="btn btn-primary">{{ 'BUTTON.ADD' | translate }}</a>
+    </div>
+  
+  </mat-expansion-panel>

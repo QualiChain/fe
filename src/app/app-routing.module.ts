@@ -44,7 +44,9 @@ import { NotificationPreferencesComponent } from './_components/profiles/notific
 import { FilesRepositoryComponent } from './_components/profiles/files-repository/files-repository.component';
 import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 import { AuthGuardByPermission, AuthGuardForAnonymous } from './_directives/can-access.directive';
-
+import { ThesisComponent } from './_components/thesis/thesis/thesis.component';
+import { ThesisGetComponent } from './_components/thesis/thesis-get/thesis-get.component';
+import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edit.component';
 
 const routes: Routes = [
   {
@@ -357,7 +359,43 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
       title: 'Course | :id | Award' }    
-  },  
+  },
+  {
+    path: 'thesis',
+    component: ThesisComponent,
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.professor, Role.student],
+      permissions: ['view_thesis_subjects', 'add_and_update_thesis'],
+      title: 'Thesis' }    
+  },
+  {
+    path: 'thesis/add',
+    component: ThesisEditComponent,
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.professor, Role.student],
+      permissions: ['add_and_update_thesis'],
+      title: 'Thesis | Add' }    
+  }, 
+  {
+    path: 'thesis/:id',
+    component: ThesisGetComponent,
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.professor, Role.student],
+      permissions: ['view_thesis_subjects', 'add_and_update_thesis'],
+      title: 'Thesis | :id' }    
+  },
+  {
+    path: 'thesis/:id/edit',
+    component: ThesisEditComponent,
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.professor, Role.student],
+      permissions: ['add_and_update_thesis'],
+      title: 'Thesis | :id | Edit' }    
+  },   
   {
     path: 'MCDSS',
     component: MCDSSComponent,

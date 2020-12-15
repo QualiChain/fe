@@ -853,5 +853,40 @@
       "VERY_SATISFIED": "Very satisfied"
     },
     "TELL_US": "Give us your free text feedback"
+  },
+  "THESIS": {
+    "HEADER": "Thesis",
+    "NO_DATA": "There are no thesis",
+    "NO_LINKED_THESIS": "This user does not have any thesis yet.",
+    "DELETE_MESSAGE": "Are you sure you want to delete this thesis?",
+    "CONFIRM_ACTION": "Confirm Action",
+    "TITLE": {
+      "LABEL": "Title",
+      "PLACEHOLDER": "Title"
+    },
+    "DESCRIPTION": {
+      "LABEL": "Description",
+      "PLACEHOLDER": "Description",
+      "OPTIONS": {
+        "PUBLISHED": "Published",
+        "ASSIGNED": "Assigned",
+        "COMPLETED": "Completed"
+      }
+    },
+    "STATUS": {
+      "LABEL": "Status",
+      "PLACEHOLDER": "Status"
+    },
+    "PROFESSOR": {
+      "LABEL": "Professor",
+      "PLACEHOLDER": "Professor"
+    },
+    "STUDENT": {
+      "LABEL": "Student",
+      "PLACEHOLDER": "Student"
+    },
+    "BUTTON": {
+      "LIST": "Thesis list"
+    }
   }
 }

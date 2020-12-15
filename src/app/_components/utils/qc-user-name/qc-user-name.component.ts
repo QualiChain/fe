@@ -25,7 +25,8 @@ export class QcUserNameComponent implements OnInit {
       data => {
         //console.log("user in db");
         //console.log(data);
-        this.userName = data.userName;
+        //this.userName = data.userName;
+        this.userName = data.surname+", "+data.name;
       },
       error => {     
         console.log("error recovering user data")        
