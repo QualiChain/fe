@@ -160,7 +160,7 @@ import {
   VisualisationsCarrerPathTrajectoryChartComponent,
   VisualisationsUserSkillsetCoverageToAppliedJobSkills,
   VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization,
-  VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime
+  VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime, VisualisationsMostPopularSkillsInTheJobMarker, VisualisationsMostPopularCourses
 } from './_components/utils/visualisations/visualisations.component';
 import { EducationPlanComponent } from './_components/education-plan/education-plan.component';
 
@@ -300,7 +300,7 @@ export function tokenGetter() {
     VisualisationsComponent, VisualisationsUserSkillsJobSkillsChartComponent, VisualisationsUserGradesChartComponent, VisualisationsAverageGradesInCoursesChartComponent, 
     VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkillsChartComponent,
     VisualisationsCarrerPathTrajectoryChartComponent, VisualisationsUserSkillsetCoverageToAppliedJobSkills, VisualisationsMarketDemand, VisualisationsSkillsDemandInTimePerSpecialization, 
-    VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime, EducationPlanComponent,
+    VisualisationsCurriculumUpToDate, VisualisationsSpecializationDemandInFunctionOfTime, VisualisationsMostPopularSkillsInTheJobMarker, VisualisationsMostPopularCourses, EducationPlanComponent,
     CanAccessDirective,
     QcUserNameComponent,
     QcJobCandidatesManagementComponent,
