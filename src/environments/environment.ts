@@ -40,6 +40,7 @@ export const environment = {
   insertTextTriples: 'http://knowledgebizvpn.ddns.net:8000/insertTextTriples',
   permissionsUrl: 'http://qualichain.epu.ntua.gr:5004/user_permissions',
   avatarURL: 'http://qualichain.epu.ntua.gr:5004/get',
+  thesisURL: 'http://qualichain.epu.ntua.gr:5004/thesis'
 };
 
 /*

@@ -1,0 +1,31 @@
+<h1 >{{ 'THESIS.HEADER' | translate }}: {{thesisMainData.title}}</h1>
+
+<div class="container">
+
+    <div class="row">
+        <button  *appCanAccess="['view_thesis_subjects']" class="btn btn-primary" [routerLink]="['/thesis']">
+            <i _ngcontent-axy-c0="" class="material-icons small"> list </i> {{ 'THESIS.BUTTON.LIST' | translate }}
+        </button> 
+
+        <button  *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', thesisMainData.id, 'edit']">
+          <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+        </button>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+        <div class="col col-lg-12">
+            <div class="col ">
+                <div><span class="labelthesis">{{ 'THESIS.DESCRIPTION.LABEL' | translate }}:</span> {{thesisMainData.description}}</div> 
+            </div>
+            <div class="col ">
+                <div><span class="labelthesis">{{ 'THESIS.STATUS.LABEL' | translate }}:</span> {{thesisMainData.status}}</div> 
+            </div>
+            <div class="col " *ngIf="thesisMainData.professor_id">
+            <div><span class="labelthesis">{{ 'THESIS.PROFESSOR.LABEL' | translate }}:</span>&nbsp;<app-qc-user-name [userId]="thesisMainData.professor_id"></app-qc-user-name></div> 
+            </div>
+            <div class="col " *ngIf="thesisMainData.student_id">
+                <div><span class="labelthesis">{{ 'THESIS.STUDENT.LABEL' | translate }}:</span>&nbsp;<app-qc-user-name [userId]="thesisMainData.student_id"></app-qc-user-name></div> 
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<h1>{{ 'THESIS.HEADER' | translate }} - {{mode}}</h1>
+
+<div class="card">
+    <div class="card-body">
+        
+        <form #formCreateThesis="ngForm" class="create-thesis-form" (ngSubmit)="processForm()">
+
+            <!-- Title -->
+            <div class="form-group field" [class.has-error]="titleThesisInput.invalid">
+                <mat-form-field class="create-thesis-full-width">
+                    <mat-label>{{ 'THESIS.TITLE.LABEL' | translate }}</mat-label>
+                    <input matInput required [(ngModel)]="thesis.title" name="thesisTitle" value="thesisTitle" placeholder="{{ 'THESIS.TITLE.PLACEHOLDER' | translate }}"  #titleThesisInput="ngModel">
+                </mat-form-field>
+            </div>
+            <!-- description -->
+            <div class="form-group field" [class.has-error]="descriptionThesisInput.invalid">
+                <mat-form-field class="create-thesis-full-width">
+                    <mat-label>{{ 'THESIS.DESCRIPTION.LABEL' | translate }}</mat-label>
+                    <textarea matInput required [(ngModel)]="thesis.description" name="thesisDescription" value="thesisDescription" placeholder="{{ 'THESIS.DESCRIPTION.PLACEHOLDER' | translate }}" #descriptionThesisInput="ngModel"></textarea>
+                </mat-form-field>
+            </div>
+
+            <!-- status -->
+            <div *ngIf="mode=='Edit'" class="form-group field" [class.has-error]="statusThesisInput.invalid">
+
+                <mat-form-field class="create-thesis-full-width" >
+                    <mat-label>{{ 'THESIS.STATUS.LABEL' | translate }}</mat-label>
+                    <mat-select 
+                    #statusThesisInput="ngModel"
+                    [(ngModel)]="thesis.status" name="thesisStatus" value="thesisStatus" required                    
+                    >
+                      <mat-option value="published">{{ 'THESIS.STATUS.OPTIONS.PUBLISHED' | translate }}</mat-option>
+                      <mat-option value="assigned">{{ 'THESIS.STATUS.OPTIONS.ASSIGNED' | translate }}</mat-option>
+                      <mat-option value="completed">{{ 'THESIS.STATUS.OPTIONS.COMPLETED' | translate }}</mat-option>
+                    </mat-select>
+                </mat-form-field>    
+
+            </div>
+
+            <!-- student -->
+            <div *ngIf="mode=='Edit'" class="form-group field" [class.has-error]="studentThesisInput.invalid">                        
+                <div *ngIf="usersList.length==0">{{ 'COURSE.NO_USERS_AVAILABLE' | translate }}</div>
+                <mat-form-field class="create-score-full-width" [hidden]="usersList.length==0" >
+                    <mat-label>{{ 'THESIS.STUDENT.LABEL' | translate }}</mat-label>
+                    <mat-select 
+                    #studentThesisInput="ngModel"
+                    [(ngModel)]="thesis.student_id" name="thesisStudent" value="thesisStudent" required
+                    > 
+                        <mat-option *ngFor="let user of usersList" [value]="user?.id">{{user?.surname}}, {{user?.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-group">
+
+                <button *ngIf="mode=='Create'" type="submit" class="btn btn-success" [disabled]="formCreateThesis.invalid">
+                    <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }} 
+                </button>
+                
+                <button *ngIf="mode=='Edit'" type="submit" class="btn btn-success" [disabled]="formCreateThesis.invalid">
+                    <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.UPDATE' | translate }} 
+                </button>
+                  
+                <button type="button" class="btn btn-danger" (click)="redirectToURL('/thesis')">
+                    <i _ngcontent-axy-c0="" class="material-icons" > cancel </i> {{ 'BUTTON.CANCEL' | translate }} 
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

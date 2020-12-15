@@ -358,6 +358,7 @@
     <div class="col col-lg-4" *ngIf="(userdata.id==currentUser.id)">
     
       <mat-accordion class="example-headers-align" multi>
+        <app-thesis-summary *appCanAccess="['view_thesis_subjects', 'add_and_update_thesis']" userId="{{userdata.id}}"></app-thesis-summary>
         <app-recomended-jobs *appCanAccess="['get_job_recommendations']" userId="{{userdata.id}}"></app-recomended-jobs>
         <app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{userdata.id}}"></app-recomended-courses>
         <app-recomended-skills *appCanAccess="['get_skills_recomendations']" userId="{{userdata.id}}"></app-recomended-skills>
