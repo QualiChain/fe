@@ -67,12 +67,17 @@
       </table>
     
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>    
-
+    </div>
   </div>
 
   <div class="col col-lg-4" *appCanAccess="['get_courses_recomendations']">
     <app-recomended-courses userId="{{currentUser.id}}"></app-recomended-courses>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-lg-12">
+    <app-visualisations-most-popular-courses-chart></app-visualisations-most-popular-courses-chart>
   </div>
 </div>
 

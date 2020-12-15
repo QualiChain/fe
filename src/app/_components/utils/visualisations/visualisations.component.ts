@@ -514,3 +514,68 @@ export class VisualisationsSpecializationDemandInFunctionOfTime extends Visualis
 }
 
 
+/*** Most popular skills in the job market  * */
+@Component({
+  selector: 'app-visualisations-most-popular-skills-in-the-job-market-chart',
+  templateUrl: './visualisations.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationsMostPopularSkillsInTheJobMarker extends VisualisationsComponent {
+
+  //urlSafe: SafeUrl;
+  urlSafe: string = "";  
+  extraClass: string = "most_popular_skills";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "MOST_POPULAR_SKILLS";
+
+  constructor(
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
+
+  ngOnInit(): void {
+
+    let tmpURL = '';    
+    tmpURL = urlVisualisations+"/show_column_chart?y_var_names[]=count&y_var_titles[]=Job%20postings&y_var_units[]=number%20of%20job%20postings&x_axis_type=text&x_axis_name=skill_name&x_axis_title=Skill&y_axis_title=Demand%20in%20Job%20Market&color_list_request[]=blue&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=popular_skills_market&asc=True&limit_skills=10";
+    //console.log(tmpURL);
+    this.urlSafe = tmpURL;
+
+  }
+
+}
+
+/*** Most popular courses * */
+@Component({
+  selector: 'app-visualisations-most-popular-courses-chart',
+  templateUrl: './visualisations.component.html',
+  styleUrls: ['./visualisations.component.css']
+})
+export class VisualisationsMostPopularCourses extends VisualisationsComponent {
+
+  //urlSafe: SafeUrl;
+  urlSafe: string = "";  
+  extraClass: string = "most_popular_courses";
+  showHelp: boolean = false;
+  visualisationHelpId: string = "MOST_POPULAR_COURSES";
+
+  constructor(
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService
+  ) {
+    super(dialog, sanitizer, translate);
+  }
+
+  ngOnInit(): void {
+
+    let tmpURL = '';    
+    tmpURL = urlVisualisations+"/show_column_chart?y_var_names[]=count&y_var_titles[]=Job%20postings&y_var_units[]=number%20of%20job%20postings&x_axis_type=text&x_axis_name=course_name&x_axis_title=Course&y_axis_title=Demand%20in%20Job%20Market&color_list_request[]=blue&color_list_request[]=red&color_list_request[]=green&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=popular_courses_market&asc=True&limit_courses=10";
+    //console.log(tmpURL);
+    this.urlSafe = tmpURL;
+
+  }
+
+}

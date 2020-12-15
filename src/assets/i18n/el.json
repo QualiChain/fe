@@ -834,7 +834,9 @@
         "MARKET_DEMAND": "This chart shows the demand according to job postings for each specialization.",
         "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": "This chart demonstrates the demand in job postings for a provided skill in a provided visualization.",
         "CURRICULUM_UP_TO_DATE": "This visualisation shows how up to date the current curriculum of the school is.",
-        "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "This chart is used to demonstrate the demand in job postings for provided job specializations"
+        "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "This chart is used to demonstrate the demand in job postings for provided job specializations.",
+        "MOST_POPULAR_SKILLS": "This chart shows the most popular skills in the job market at the moment according to the available job postings. (It shows the number of job postings related to specific skills).",
+        "MOST_POPULAR_COURSES": "This chart shows the most popular courses related to popular skills required in the job market at the moment. (also counted in job postings)."
       }
     }
   },
