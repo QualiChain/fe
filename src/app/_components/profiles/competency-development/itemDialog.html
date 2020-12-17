@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{ 'COMPETENCY_LEVEL.HEADER' | translate }} - {{mode}} </h1>
+
+<mat-dialog-content class="mat-typography">
+    <form #formCDItem="ngForm" class="cv-form" (ngSubmit)="onSubmit()">
+
+        <mat-form-field class="item-full-width" >
+            <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
+            <input matInput required [(ngModel)]="item.competency" name="competency" value="competency" placeholder="{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}">
+        </mat-form-field>
+
+        <mat-form-field class="item-full-width" >
+            <mat-label>{{ 'COMPETENCY_LEVEL.LEVEL' | translate }}</mat-label>
+            <input matInput type="number" min="0" max="10" required [(ngModel)]="item.level" name="level" value="level" placeholder="{{ 'COMPETENCY_LEVEL.LEVEL' | translate }}">
+        </mat-form-field>
+
+        <mat-form-field class="item-full-width" >
+            <mat-label>{{ 'COMPETENCY_LEVEL.PROGRESS' | translate }}</mat-label>
+            <input matInput type="number" min="0" max="100" required [(ngModel)]="item.progress" name="progress" value="progress" placeholder="{{ 'COMPETENCY_LEVEL.PROGRESS' | translate }}">
+        </mat-form-field>
+
+        <mat-form-field class="item-full-width" >
+            <mat-label>{{ 'COMPETENCY_LEVEL.NEXT_EVALUATION' | translate }}</mat-label>
+            <input matInput [matDatepicker]="picker" name="nextEvaluation" [(ngModel)]="item.next_evaluation" #nextEvaluationDateInput="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="item.next_evaluation" format="DD-MM-YYYY"></mat-datepicker>
+          </mat-form-field>
+
+    </form> 
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <div class="modal-footer">      
+
+        <button [disabled]="formCDItem.invalid" type="button" class="btn btn-success"  (click)="onSubmit()">
+            <i _ngcontent-axy-c0="" class="material-icons"> save </i>
+            {{ 'BUTTON.SAVE' | translate }}
+        </button>
+
+        <button type="button" class="btn btn-danger" [mat-dialog-close]="false" id="closeAwardModalWindow">
+            <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>  

@@ -47,6 +47,7 @@ import { AuthGuardByPermission, AuthGuardForAnonymous } from './_directives/can-
 import { ThesisComponent } from './_components/thesis/thesis/thesis.component';
 import { ThesisGetComponent } from './_components/thesis/thesis-get/thesis-get.component';
 import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edit.component';
+import { CompetencyDevelopmentComponent } from './_components/profiles/competency-development/competency-development.component';
 
 const routes: Routes = [
   {

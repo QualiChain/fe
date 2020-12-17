@@ -412,7 +412,8 @@
     "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?",
     "CURRENT_JOB_POSITION": "Current job position",
     "DELETE_OWN_PROFILE": "Delete own profile",
-    "DELETE_OWN_PROFILE_HELP_MESSAGE": "You are going to delete your user account, this action cannot be undone. All your data will be lost."
+    "DELETE_OWN_PROFILE_HELP_MESSAGE": "You are going to delete your user account, this action cannot be undone. All your data will be lost.",
+    "COMPETENCY_DEVELOPMENT": "Competency Development"
   },
   "BCO": {
     "TITLE": "Best Career Options",
@@ -888,5 +889,15 @@
     "BUTTON": {
       "LIST": "Thesis list"
     }
+  },
+  "COMPETENCY_LEVEL": {
+    "HEADER": "Competency Level",
+    "COMPETENCY": "Competency",
+    "LEVEL": "Level",
+    "PROGRESS": "Progress",
+    "NEXT_EVALUATION": "Next evaluation",
+    "DELETE_MESSAGE": "Are you sure you want to delete this file?",
+    "CONFIRM_ACTION": "Confirm Action",
+    "NO_COMPETENCES_YET": "This user does not have any competence yet."
   }
 }
