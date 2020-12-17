@@ -38,7 +38,8 @@ export class CVService {
 
     const obj = dataIn;
     //return this.httpClient.post(`${this.uri}/${userId}`, JSON.stringify(dataIn), { headers: headers} ).
-    return this.httpClient.post(`${this.uri}/${userId}`, dataIn, { headers: headers} ).
+    //return this.httpClient.post(`${this.uri}/${userId}`, dataIn, { headers: headers} ).
+    return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn), { headers: headers } ).
     pipe(
        map((data: any) => {
            console.log("post OK");

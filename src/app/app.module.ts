@@ -175,6 +175,7 @@ import { ThesisComponent, ThesisComponentSummaryPage } from './_components/thesi
 import { ThesisService } from './_services/thesis.service';
 import { ThesisGetComponent } from './_components/thesis/thesis-get/thesis-get.component';
 import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edit.component';
+import { CompetencyDevelopmentComponent, ItemCDDialog_modal } from './_components/profiles/competency-development/competency-development.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -312,7 +313,8 @@ export function tokenGetter() {
     QcEvaluationQuestionnaireComponent,
     ThesisComponent, ThesisComponentSummaryPage,
     ThesisGetComponent,
-    ThesisEditComponent
+    ThesisEditComponent,
+    CompetencyDevelopmentComponent, ItemCDDialog_modal
   ],
   imports: [
     SafePipeModule,
