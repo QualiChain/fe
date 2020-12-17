@@ -1191,6 +1191,7 @@ onSubmit() {
       //alert('Success!!');
       this.loadingSpinner = false;
       this.showError = false;
+      this.dialogRef.close();
     },
     error => {
       //console.log("error sending CV data");

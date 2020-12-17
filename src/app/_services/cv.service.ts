@@ -33,17 +33,18 @@ export class CVService {
     }   
   
   postCV(userId, dataIn:any) {
-
-    let headers = this.authService.createQCAuthorizationHeader();
+    //userId is not needed  into the URL
+    //the content type must be text/plain
+    //the response of the API is text
+    let headers = this.authService.createQCAuthorizationHeaderText();
 
     const obj = dataIn;
-    //return this.httpClient.post(`${this.uri}/${userId}`, JSON.stringify(dataIn), { headers: headers} ).
-    //return this.httpClient.post(`${this.uri}/${userId}`, dataIn, { headers: headers} ).
-    return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn), { headers: headers } ).
+    //return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn), { headers: headers} ).
+    return this.httpClient.post(`${this.uri}`, dataIn, { headers: headers, responseType: 'text'} ).    
     pipe(
        map((data: any) => {
-           console.log("post OK");
-           console.log(data);
+           //console.log("post OK");
+           //console.log(data);
          return data;
        }), catchError( error => {
         console.log("post KO");

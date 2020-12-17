@@ -149,6 +149,27 @@ export class AuthService {
       return dataToReturn;
   }      
 
+  createQCAuthorizationHeaderText() {
+    let token = localStorage.getItem('token');      
+    //let token = "AABBCCCDDD";
+    let dataToReturn: any = null;
+
+    if (token) {
+      let headers = new HttpHeaders()
+        .set('content-type', 'text/plain')
+        .set('Authorization', token);
+
+        dataToReturn = headers;
+    }
+    else {
+      let headers = new HttpHeaders()
+      .set('content-type', 'text/plain');
+
+      dataToReturn = headers;
+    }
+
+    return dataToReturn;
+}
 
   async loginIAMAsync(username: string, password: string) {
     
