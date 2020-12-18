@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { UtilsService } from '../../../_services/utils.service';
 
 @Component({
   selector: 'app-qc-evaluation-questionnaire',
@@ -12,8 +12,12 @@ export class QcEvaluationQuestionnaireComponent implements OnInit {
   
   selectedOption: boolean = false;
   satisfiedLevel: number = null;
+  showError: boolean = false;
+  feedback: string = null;
 
-  constructor(public dialogRef: MatDialogRef<QcEvaluationQuestionnaireComponent>,
+  constructor(
+    private us: UtilsService,
+    public dialogRef: MatDialogRef<QcEvaluationQuestionnaireComponent>,
     @Inject(MAT_DIALOG_DATA) public data: QcEvaluationQuestionnaireModel) {
     // Update view with given values
   }
@@ -32,7 +36,22 @@ export class QcEvaluationQuestionnaireComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.selectedOption = true;
+
+    this.showError= false;
+    let dataToSend = {"satisfaction_level": this.satisfiedLevel, "feedback": this.feedback};
+    
+    this.us.postQuestionnaire(dataToSend).subscribe(
+      res => {
+        console.log("Questionnaire completed");
+        //console.log(res);
+        this.selectedOption = true;    
+      },
+      error => {        
+        console.log("Error posting questionnaire");
+        this.showError= true;
+      }
+    );
+
   }
 
   onConfirm(): void {
