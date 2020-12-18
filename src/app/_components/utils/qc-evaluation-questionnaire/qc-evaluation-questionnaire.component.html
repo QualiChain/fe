@@ -1,11 +1,15 @@
-<h1 mat-dialog-title>{{ 'QUESTIONNAIRE.TITLE' | translate }} - UNDER CONSTRUCTION!!! -- </h1>
+<h1 mat-dialog-title>{{ 'QUESTIONNAIRE.TITLE' | translate }} </h1>
 
 <mat-dialog-content>
     <div class="col">{{ 'QUESTIONNAIRE.HELP_MESSAGE' | translate }}<br>&nbsp;</div>
 
-    <div class="col" *ngIf="selectedOption">
+    <div class="alert alert-success" *ngIf="selectedOption">
         {{ 'QUESTIONNAIRE.THAKS_MESSAGE' | translate }}
     </div>
+
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
+        {{ 'QUESTIONNAIRE.ERROR_SAVING_DATA' | translate }}
+      </div>
 
     <div *ngIf="!selectedOption">
         <div class="col">
@@ -75,6 +79,7 @@
             <mat-form-field class="questionnaire-full-width">
                 <mat-label>{{ 'QUESTIONNAIRE.TELL_US' | translate }}</mat-label>
                 <textarea matInput
+                          [(ngModel)]="feedback"
                           cdkTextareaAutosize
                           cdkAutosizeMinRows="1"
                           cdkAutosizeMaxRows="5">

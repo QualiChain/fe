@@ -13,6 +13,7 @@ export class UtilsService {
 
   private uriSelect = environment.selectUrl;
   private uriTextTriples = environment.insertTextTriples
+  private uriQuestionnaire = environment.questionnaireURL;
 
   constructor(
     private authService: AuthService,
@@ -77,5 +78,18 @@ export class UtilsService {
 
   }
 
+  postQuestionnaire(dataToPost){
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.post(`${this.uriQuestionnaire}`, dataToPost, { headers:headers}).
+        pipe(
+            map((data: any) => {
+                return data;
+            }), catchError( error => {
+                return throwError( 'Something went wrong!' );
+            })
+        )
+
+  }
 
 }

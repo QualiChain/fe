@@ -4,6 +4,10 @@ import { QcEvaluationQuestionnaireComponent } from './qc-evaluation-questionnair
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AppComponent } from '../../../app.component';
+import { UploadService } from '../../../_services/upload.service';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 describe('QcEvaluationQuestionnaireComponent', () => {
   let component: QcEvaluationQuestionnaireComponent;
@@ -14,9 +18,11 @@ describe('QcEvaluationQuestionnaireComponent', () => {
       declarations: [ QcEvaluationQuestionnaireComponent ],
       imports:[
         TranslateModule.forRoot(),
-        MatDialogModule
+        MatDialogModule,
+        HttpClientTestingModule
       ],
       providers: [
+        AppComponent, UploadService, QCStorageService,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }
       ]

@@ -853,7 +853,8 @@
       "SATISFIED": "Satisfied",
       "VERY_SATISFIED": "Very satisfied"
     },
-    "TELL_US": "Give us your free text feedback"
+    "TELL_US": "Give us your free text feedback",
+    "ERROR_SAVING_DATA": "Sorry, there was an error saving the data"
   },
   "THESIS": {
     "HEADER": "Thesis",
