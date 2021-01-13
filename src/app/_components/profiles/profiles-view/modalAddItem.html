@@ -1,0 +1,117 @@
+<h1 mat-dialog-title>{{ 'BUTTON.ADD' | translate }}:
+    <span *ngIf="data.type=='skillitem'" >{{ 'CV.SKILL' | translate }}</span>
+    <span *ngIf="data.type=='workitem'" >{{ 'CV.WORK' | translate }}</span>
+    <span *ngIf="data.type=='educationitem'" >{{ 'CV.EDUCATION' | translate }}</span>
+</h1>
+
+
+
+<mat-dialog-content>
+    
+    <form #formAddItem="ngForm" class="add-item-form" >
+        <div *ngIf="data.type=='skillitem'" class="form-row">
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width" >
+                    <mat-label>{{ 'CV.SKILL_LABEL' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="skill_label" name="skill_name">
+                </mat-form-field>          
+            </div>
+
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.SKILL_PROFIENCY_LEVEL' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="skill_profiency_level" name="skill_profiency_level">
+                </mat-form-field>                        
+            </div>
+
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.SKILL_COMMENT' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="skill_comment" name="skill_comment">
+                </mat-form-field>          
+            </div>
+
+        </div>
+
+        <div *ngIf="data.type=='workitem'" class="form-row">
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width" >
+                    <mat-label>{{ 'CV.WORK_POSITION' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="work_position" name="work_position">
+                </mat-form-field>                
+            </div>
+
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width" >
+                    <mat-label>{{ 'CV.WORK_FROM' | translate }}</mat-label>                            
+                    <input matInput required type="date" [(ngModel)]="work_from" name="work_from">
+                </mat-form-field>                
+            </div>
+
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width" >
+                    <mat-label>{{ 'CV.WORK_TO' | translate }}</mat-label>                            
+                    <input matInput required type="date" [(ngModel)]="work_to" name="work_to">
+                </mat-form-field>                
+            </div>
+
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width" >
+                    <mat-label>{{ 'CV.WORK_EMPLOYER' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="work_employer" name="work_employer">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div *ngIf="data.type=='educationitem'" class="form-row">
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.EDUCATION_TITLE' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="education_title" name="education_title">
+                </mat-form-field>            
+            </div>
+    
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.EDUCATION_FROM' | translate }}</mat-label>                            
+                    <input matInput required type="date" [(ngModel)]="education_from" name="education_from">
+                </mat-form-field>            
+            </div>
+    
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.EDUCATION_TO' | translate }}</mat-label>                            
+                    <input matInput required type="date" [(ngModel)]="education_to" name="education_to">
+                </mat-form-field>
+            </div>
+    
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.EDUCATION_ORGANISATION' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="education_organisation" name="education_organisation">
+                </mat-form-field>
+            </div>
+    
+            <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.EDUCATION_DESCRIPTION' | translate }}</mat-label>                            
+                    <input matInput required type="text" [(ngModel)]="education_description" name="education_description">
+                </mat-form-field>            
+            </div>
+        </div>
+
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="modal-footer">      
+        <button [disabled]="!formAddItem.valid" type="button" class="btn btn-success"  (click)="onSubmit()">
+            <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+            {{ 'BUTTON.ADD' | translate }}
+        </button>
+        <button type="button" class="btn btn-danger" [mat-dialog-close]="true" id="closeAwardModalWindow">
+            <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>

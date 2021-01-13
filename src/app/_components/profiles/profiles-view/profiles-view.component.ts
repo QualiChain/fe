@@ -989,6 +989,7 @@ export class CVDialog_modal implements OnInit {
     private us: UsersService, private authservice: AuthService,
     private cvs: CVService,
     private formBuilder: FormBuilder,
+    public CVDialog: MatDialog,
     public dialogRef: MatDialogRef<CVDialog_modal>,
     @Inject(MAT_DIALOG_DATA) public data: CVDialogData) {
 
@@ -1138,6 +1139,46 @@ deleteFormGroupItem(e, i, type) {
   }
 }
 
+
+
+openAddNewItem(e, type) {
+     
+  const dialogRef = this.CVDialog.open(AddItemDialog_modal, {
+    disableClose: true,
+    width: '550px',
+    data: {type: type, isAdmin: this.isAdmin, isRecruiter: this.isRecruiter}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    //console.log(result);
+    if (type=='skillitem') {
+      this.t.push(this.formBuilder.group({
+        label: [result.label, [Validators.required]],
+        proficiencyLevel: [result.proficiencyLevel, Validators.required],
+        comment: [result.comment, [Validators.required]],      
+      }));
+    }
+    else if (type=='workitem') {
+      this.w.push(this.formBuilder.group({
+        position: [result.position, Validators.required],
+        from: [result.from, [Validators.required]],
+        to: [result.to, [Validators.required]],
+        employer: [result.employer, [Validators.required]],
+      }));
+    }
+    else if (type=='educationitem') {
+      this.e.push(this.formBuilder.group({
+        title: [result.title, Validators.required],
+        from: [result.from, [Validators.required]],
+        to: [result.to, [Validators.required]],
+        organisation: [result.organisation, [Validators.required]],
+        description: [result.description, [Validators.required]],
+      }));
+    }
+  });
+  
+}
+
 addFormGroupItem(e, type) {
   if (type=='skillitem') {
     this.t.push(this.formBuilder.group({
@@ -1269,4 +1310,81 @@ export class UPLOAD_CV_KG_Dialog_modal implements OnInit {
 
 export interface CVDialogData {
   userId: number;
+}
+
+
+export interface AddItemDialogData {
+  type: string;
+}
+
+/************* */
+@Component({
+  selector: 'AddItemDialog',
+  templateUrl: './modalAddItem.html',
+  styleUrls: ['./profiles-view.component.css']
+})
+export class AddItemDialog_modal implements OnInit {
+  
+  //skill
+  skill_label: string = "";
+  skill_profiency_level: string = "";
+  skill_comment: string = "";
+  
+  //work
+  work_position: string = "";
+  work_from: string = "";
+  work_to: string = "";
+  work_employer: string = "";
+
+  //education
+  education_title: string = "";
+  education_from: string = "";
+  education_to: string = "";
+  education_organisation: string = "";
+  education_description: string = "";
+
+  constructor(
+    private us: UtilsService,
+    public dialogRef: MatDialogRef<AddItemDialog_modal>,
+    @Inject(MAT_DIALOG_DATA) public data: AddItemDialogData) {}
+
+    ngOnInit() {
+      //console.log(this.data.type.toString());
+    }
+
+    onSubmit() {
+      //console.log("submit!!");
+
+      var dataToReturn = {};
+
+      if (this.data.type=='skillitem') {
+        dataToReturn = {
+          "label": this.skill_label,
+          "proficiencyLevel": this.skill_profiency_level,
+          "comment": this.skill_comment
+        }
+      }
+      else if (this.data.type=='workitem') {
+        dataToReturn = {
+          "position": this.work_position,
+          "from": this.work_from,
+          "to": this.work_to,
+          "employer": this.work_employer
+        }
+      }
+      else if (this.data.type=='educationitem') {
+        dataToReturn = {
+          "title": this.education_title,
+          "from": this.education_from,
+          "to": this.education_to,
+          "organisation": this.education_organisation,
+          "description": this.education_description
+        }
+      }
+
+      this.dialogRef.close(dataToReturn);
+      
+
+    }
+
 }
