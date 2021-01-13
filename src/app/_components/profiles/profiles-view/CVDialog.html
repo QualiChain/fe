@@ -44,10 +44,16 @@
             <div class="card-header">
               <span><i _ngcontent-pqf-c0="" class="material-icons"> timeline </i> {{ 'CV.SKILLS' | translate }}</span>
               <span *ngIf="canEditCV" class="">              
-                <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">
+                <a class="btn btn-primary float-right" ng-href="" (click)="openAddNewItem($event, 'skillitem')">
                   <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
                   {{ 'BUTTON.ADD' | translate }}
                 </a>                           
+                <!--
+                <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'skillitem')">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                  {{ 'BUTTON.ADD' | translate }}
+                </a>
+                -->                           
               </span>
             </div>
       
@@ -94,11 +100,18 @@
         <div class="card m-3">
             <div class="card-header">
               <span><i _ngcontent-pqf-c0="" class="material-icons"> work </i> {{ 'CV.WORK_HISTORY' | translate }}</span>
-              <span *ngIf="canEditCV" class="">              
+              <span *ngIf="canEditCV" class="">  
+
+                <a class="btn btn-primary float-right" ng-href="" (click)="openAddNewItem($event, 'workitem')">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                  {{ 'BUTTON.ADD' | translate }}
+                </a>
+<!--
                         <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'workitem')">
                           <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
                           {{ 'BUTTON.ADD' | translate }}
                         </a>                          
+-->
               </span>
             </div>
             <div *ngFor="let workItem of w.controls; let i = index" class="list-group list-group-flush card-body">
@@ -150,11 +163,18 @@
         <div class="card m-3">
             <div class="card-header">
               <span><i _ngcontent-pqf-c0="" class="material-icons"> school </i> {{ 'CV.EDUCATION_HISTORY' | translate }}</span>
-              <span *ngIf="canEditCV" class="">              
+              <span *ngIf="canEditCV" class="">  
+
+                <a class="btn btn-primary float-right" ng-href="" (click)="openAddNewItem($event, 'educationitem')">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                  {{ 'BUTTON.ADD' | translate }}
+                </a>
+<!--
                 <a class="btn btn-primary float-right" ng-href="" (click)="addFormGroupItem($event, 'educationitem')">
                   <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
                   {{ 'BUTTON.ADD' | translate }}
-                </a>                         
+                </a>
+-->
               </span>
             </div>
             
