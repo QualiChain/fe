@@ -176,6 +176,7 @@ import { ThesisService } from './_services/thesis.service';
 import { ThesisGetComponent } from './_components/thesis/thesis-get/thesis-get.component';
 import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edit.component';
 import { CompetencyDevelopmentComponent, ItemCDDialog_modal } from './_components/profiles/competency-development/competency-development.component';
+import { QcSelectCityDialogComponent } from './_components/utils/qc-select-city-dialog/qc-select-city-dialog.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -314,7 +315,7 @@ export function tokenGetter() {
     ThesisComponent, ThesisComponentSummaryPage,
     ThesisGetComponent,
     ThesisEditComponent,
-    CompetencyDevelopmentComponent, ItemCDDialog_modal
+    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent
   ],
   imports: [
     SafePipeModule,

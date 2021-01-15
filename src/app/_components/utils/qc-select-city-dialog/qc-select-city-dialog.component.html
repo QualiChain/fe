@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>City selector</h1>
+
+<mat-dialog-content class="mat-typography">
+    <div [ngClass]="{'col-lg-6': (dataSource.data.length>0)}" class="col">
+        <form #formLogin="ngForm" class="create-profile-form" >
+            <!-- country -->
+            <div class="form-group field" [class.has-error]="countryInput.invalid">
+                <input [hidden]="true" matInput required [(ngModel)]="country" name="country" value="country" #countryInput="ngModel">
+                <app-qc-location-country [parentForm]="profileForm"  [defaultValue]="country" [requiredValue]="true" formInnerControlName="selectCtrl">
+                </app-qc-location-country>
+            </div>
+            <!-- state -->            
+            <div [hidden]="!country" class="form-group field" [class.has-error]="stateInput.invalid">
+                <input [hidden]="true" matInput required [(ngModel)]="state" name="state" value="state" #stateInput="ngModel">        
+                <app-qc-location-state-country  [parentForm]="profileForm" [countryValue]="country" [defaultValue]="state" [requiredValue]="true" formInnerControlName="selectCtrlState">
+                </app-qc-location-state-country>
+            </div>
+            <!-- city -->            
+            <div [hidden]="(!country) || (!state)" class="form-group field" [class.has-error]="cityInput.invalid">
+                <input [hidden]="true" matInput required [(ngModel)]="city" name="city" value="city" #cityInput="ngModel">        
+                <app-qc-location-city-state [parentForm]="profileForm" [stateValue]="state" [defaultValue]="city" [requiredValue]="true" formInnerControlName="selectCtrlCity">
+                </app-qc-location-city-state>                
+            </div>
+
+            <div [hidden]="(!country) || (!state) || (!city)" >
+                <button type="button" class="btn btn-primary" (click)="addCityToTheList()">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> add </i>  
+                </button>
+            </div>
+        </form>      
+        
+    </div>
+    <div [hidden]="dataSource.data.length==0" class="col-lg-6">
+        <table mat-table [dataSource]="dataSource" >
+            <!-- name Column -->
+            <ng-container matColumnDef="$implicit">
+                <th class="col-lg-6" mat-header-cell *matHeaderCellDef> {{ 'PROFILE.CITY.LABEL' | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element}} </td>
+            </ng-container>
+
+            <!-- index Column -->
+            <ng-container matColumnDef="index">
+                <th class="col-lg-6" mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let index = index"> 
+                    <button type="button" class="btn btn-danger" (click)="deleteRow(index)">
+                        <i _ngcontent-axy-c0="" class="material-icons small"> delete </i>
+                    </button>    
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+        
+    </div>
+    
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <div class="modal-footer">      
+        <button [disabled]="dataSource.data.length==0" type="button" class="btn btn-success" (click)="addlistofcities()" >
+            <i _ngcontent-axy-c0="" class="material-icons" > add </i>
+            {{ 'BUTTON.ADD' | translate }}
+        </button>
+
+        <button type="button" class="btn btn-danger" [mat-dialog-close]="true" id="closeAwardModalWindow">
+            <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>  

@@ -12,6 +12,11 @@ import {FormControl} from '@angular/forms'
 import {map, startWith} from 'rxjs/operators';
 import { SpecializationsService } from '../../../_services/specializations.service'
 
+import { MatDialog } from '@angular/material/dialog';
+//import { MatDialogRef } from '@angular/material/dialog';
+//import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { QcSelectCityDialogComponent } from '../../../_components/utils/qc-select-city-dialog/qc-select-city-dialog.component';
+
 export interface Location {
   name: string;
 }
@@ -111,7 +116,8 @@ export class NotificationPreferencesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private ms : MessageService,
-    private ss: SpecializationsService
+    private ss: SpecializationsService,
+    public matDialog: MatDialog
   ) { 
 
     this.filteredSpecializations = this.specializationCtrl.valueChanges.pipe(
@@ -320,6 +326,27 @@ export class NotificationPreferencesComponent implements OnInit {
           this.displayErrorMessage = true;
         }
       );
+
+  }
+
+  openAddLocation() {
+
+
+    const dialogRef = this.matDialog.open(QcSelectCityDialogComponent, {
+      disableClose: true,
+      width: '650px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+      if (result.length>0) {
+        for (let i = 0; i < result.length; i++) {
+          let customEvent:MatChipInputEvent = {value:result[i], input: null};
+          this.addLocation(customEvent);
+        }
+      }
+
+    });
 
   }
 
