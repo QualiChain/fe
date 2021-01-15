@@ -7,3 +7,7 @@
 .notification-full-width {
     width: 100%;
 }
+
+.notification-notfull-width {
+    width: 90%;
+}
