@@ -896,9 +896,20 @@
     "COMPETENCY": "Competency",
     "LEVEL": "Level",
     "PROGRESS": "Progress",
+    "PROGRESS_MIN_VALUE_ERROR": "The value is lower than the minimum (0)",
+    "PROGRESS_MAX_VALUE_ERROR": "The value is greater than the maximum (100)",
     "NEXT_EVALUATION": "Next evaluation",
-    "DELETE_MESSAGE": "Are you sure you want to delete this file?",
+    "ACQUIRED_DATE": "Acquired date",
+    "LABEL": "Label",
+    "COMMENT": "Comment",
+    "DELETE_MESSAGE": "Are you sure you want to delete this competence?",
     "CONFIRM_ACTION": "Confirm Action",
-    "NO_COMPETENCES_YET": "This user does not have any competence yet."
+    "NO_COMPETENCES_YET": "This user does not have any competence yet.",
+    "LEVELS": {
+      "BASIC": "Basic",
+      "MEDIUM": "Medium",
+      "ADVANCED": "Advanced",
+      "EXPERT": "Expert"
+    }
   }
 }

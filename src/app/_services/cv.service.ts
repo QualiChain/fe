@@ -14,6 +14,7 @@ import { AuthService } from '../_services/auth.service';
 export class CVService {
  
   uri = environment.cvUrl;
+  uriSkillCV = environment.skillsCV;
   //uri = 'http://localhost:4000/cvs';
 
  
@@ -54,6 +55,59 @@ export class CVService {
     
     }
 
+    getCompetencesByUser(userId:string) {
+      let headers = this.authService.createQCAuthorizationHeader();
 
+      return this.httpClient.get(`${this.uri}/${userId}/skillsRefs`, {headers:headers}).
+      pipe(
+          map((data: []) => {
+              return data;
+          }), catchError( error => {
+              return throwError( 'Something went wrong!' );
+          })
+      )
+    }
+
+    addSkilCompetence(userId:string, dataIn: any) {
+      //let headers = this.authService.createQCAuthorizationHeader();
+      let headers = this.authService.createQCAuthorizationHeaderText();
+
+      return this.httpClient.post(`${this.uri}/${userId}/skills`, dataIn, {headers:headers}).
+      pipe(
+          map((data: any) => {
+              return data;
+          }), catchError( error => {
+              return throwError( 'Something went wrong!' );
+          })
+      )
+    }  
+
+    updateSkilCompetence(userId:string, dataIn: any) {
+      //let headers = this.authService.createQCAuthorizationHeader();
+      let headers = this.authService.createQCAuthorizationHeaderText();
+
+      return this.httpClient.put(`${this.uri}/${userId}/skills`, dataIn, {headers:headers}).
+      pipe(
+          map((data: any) => {
+              return data;
+          }), catchError( error => {
+              return throwError( 'Something went wrong!' );
+          })
+      )
+    }
+
+  getCompetencesSkills() {
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    //return this.httpClient.get(`${this.uri}/${userId}/skillsRefs`, {headers:headers}).
+    return this.httpClient.get(`${this.uriSkillCV}`, {headers:headers}).
+    pipe(
+        map((data: []) => {
+            return data;
+        }), catchError( error => {
+            return throwError( 'Something went wrong!' );
+        })
+    )
+  }  
 
 }

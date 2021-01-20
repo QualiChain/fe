@@ -1,3 +1,7 @@
 .item-full-width  {
     width: 100%;
 }
+
+.competenesbyuser .progress .progress-bar {
+    color: #000;
+}

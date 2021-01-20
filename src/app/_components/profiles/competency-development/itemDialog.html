@@ -1,28 +1,76 @@
-<h1 mat-dialog-title>{{ 'COMPETENCY_LEVEL.HEADER' | translate }} - {{mode}} </h1>
+<h1 mat-dialog-title>{{ 'COMPETENCY_LEVEL.HEADER' | translate }} - {{mode}} {{skillName}}</h1>
 
 <mat-dialog-content class="mat-typography">
     <form #formCDItem="ngForm" class="cv-form" (ngSubmit)="onSubmit()">
-
+      <!--
         <mat-form-field class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
             <input matInput required [(ngModel)]="item.competency" name="competency" value="competency" placeholder="{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}">
         </mat-form-field>
+      -->
+        <mat-form-field class="item-full-width" *ngIf="mode=='Create'">          
+            <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
+            <input required type="text"
+                   placeholder="Pick one"
+                   matInput
+                   [formControl]="myControl"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="OptionSelected($event)">
+              <mat-option *ngFor="let opt of options of filteredOptions | async" [id]="opt.id" [value]="opt.name">
+                {{opt.name}}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        
 
+        <mat-form-field class="item-full-width" >
+            <mat-label>{{ 'COMPETENCY_LEVEL.LEVEL' | translate }}</mat-label>
+            <mat-select required [(ngModel)]="item.skillLevel" name="level" value="level" (selectionChange)="OptionChanged($event)">
+              <mat-option *ngFor="let competencie of competencies" [value]="competencie.value">
+                {{ 'COMPETENCY_LEVEL.LEVELS.'+competencie.viewValue | uppercase | translate}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+<!--
         <mat-form-field class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.LEVEL' | translate }}</mat-label>
             <input matInput type="number" min="0" max="10" required [(ngModel)]="item.level" name="level" value="level" placeholder="{{ 'COMPETENCY_LEVEL.LEVEL' | translate }}">
         </mat-form-field>
-
+-->
         <mat-form-field class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.PROGRESS' | translate }}</mat-label>
-            <input matInput type="number" min="0" max="100" required [(ngModel)]="item.progress" name="progress" value="progress" placeholder="{{ 'COMPETENCY_LEVEL.PROGRESS' | translate }}">
+            <input matInput [formControl]="numberFormControl"  type="number" min="0" max="100" required [(ngModel)]="item.progress" name="progress" value="progress" placeholder="{{ 'COMPETENCY_LEVEL.PROGRESS' | translate }}">
+
+            <mat-error *ngIf="numberFormControl.hasError('min')">            
+              {{ 'COMPETENCY_LEVEL.PROGRESS_MIN_VALUE_ERROR' | translate }}
+            </mat-error>
+            <mat-error *ngIf="numberFormControl.hasError('max')">            
+              {{ 'COMPETENCY_LEVEL.PROGRESS_MAX_VALUE_ERROR' | translate }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="item-full-width" >
+          <mat-label>{{ 'COMPETENCY_LEVEL.ACQUIRED_DATE' | translate }}</mat-label>
+          <input matInput [matDatepicker]="pickerAcquiredDate" name="acquiredDate" [(ngModel)]="item.acquiredDate" #adquiredDateInput="ngModel" required>
+          <mat-datepicker-toggle matSuffix [for]="pickerAcquiredDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerAcquiredDate startView="year" [startAt]="item.acquiredDate" format="DD-MM-YYYY"></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.NEXT_EVALUATION' | translate }}</mat-label>
-            <input matInput [matDatepicker]="picker" name="nextEvaluation" [(ngModel)]="item.next_evaluation" #nextEvaluationDateInput="ngModel" required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker startView="year" [startAt]="item.next_evaluation" format="DD-MM-YYYY"></mat-datepicker>
+            <input matInput [matDatepicker]="pickerNextEvaluation" name="nextEvaluation" [(ngModel)]="item.evalDate" #nextEvaluationDateInput="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="pickerNextEvaluation"></mat-datepicker-toggle>
+            <mat-datepicker #pickerNextEvaluation startView="year" [startAt]="item.evalDate" format="DD-MM-YYYY"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="item-full-width" >
+            <mat-label>{{ 'COMPETENCY_LEVEL.LABEL' | translate }}</mat-label>
+            <input matInput  [(ngModel)]="item.label" name="label" value="label" placeholder="{{ 'COMPETENCY_LEVEL.LABEL' | translate }}">
+        </mat-form-field>
+
+          <mat-form-field class="item-full-width">
+            <mat-label>{{ 'COMPETENCY_LEVEL.COMMENT' | translate }}</mat-label>
+            <textarea matInput [(ngModel)]="item.comment" name="comment" placeholder="{{ 'COMPETENCY_LEVEL.COMMENT' | translate }}"></textarea>
           </mat-form-field>
 
     </form> 
@@ -31,7 +79,7 @@
 <mat-dialog-actions align="end">
     <div class="modal-footer">      
 
-        <button [disabled]="formCDItem.invalid" type="button" class="btn btn-success"  (click)="onSubmit()">
+        <button [disabled]="formCDItem.invalid || item.progress<0 || item.progress>100" type="button" class="btn btn-success"  (click)="onSubmit()">
             <i _ngcontent-axy-c0="" class="material-icons"> save </i>
             {{ 'BUTTON.SAVE' | translate }}
         </button>

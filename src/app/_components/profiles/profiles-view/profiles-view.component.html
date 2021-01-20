@@ -323,13 +323,13 @@
 
                   </ng-template>
                 </ngb-panel>
-<!--
+
                 <ngb-panel id="toggle-4" title="{{ 'PROFILES.COMPETENCY_DEVELOPMENT' | translate }}" *ngIf="userdata.role.toLowerCase()=='professor' || userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
                   <ng-template ngbPanelContent>
                     <app-competency-development userId="{{userdata.id}}"></app-competency-development>
                   </ng-template>
                 </ngb-panel>
--->
+
         </ngb-accordion>
 
         <div class="row careeradvisor" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
