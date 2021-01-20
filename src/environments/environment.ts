@@ -22,6 +22,7 @@ export const environment = {
   specializationsURL : 'http://qualichain.epu.ntua.gr:5004/specializations',
   notificationsURL : 'http://qualichain.epu.ntua.gr:5004/notifications',
   cvUrl : 'http://knowledgebizvpn.ddns.net:8000/cv',//'http://qualichain.epu.ntua.gr:5000/CV',
+  skillsCV : 'http://knowledgebizvpn.ddns.net:8000/skills',
   jobmatchingUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',
   jobpostUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',
   validateCertificate : 'https://qualichain.herokuapp.com/qualichain/validateCertificate',

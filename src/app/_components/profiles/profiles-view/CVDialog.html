@@ -79,8 +79,16 @@
 
                       <div class="form-group col-6">
                         <mat-form-field class="cv-full-width" *ngIf="canEditCV">
-                            <mat-label>{{ 'CV.SKILL_PROFIENCY_LEVEL' | translate }}</mat-label>                            
+                            <mat-label>{{ 'CV.SKILL_PROFIENCY_LEVEL' | translate }}</mat-label>              
+                            <!--              
                             <input matInput required type="text" formControlName="proficiencyLevel"  >
+                            -->
+                            <mat-select required formControlName="proficiencyLevel" >
+                              <mat-option *ngFor="let competencie of competencies" [value]="competencie.value">
+                                {{ 'COMPETENCY_LEVEL.LEVELS.'+competencie.viewValue | uppercase | translate}}
+                              </mat-option>
+                            </mat-select>
+
                         </mat-form-field>                        
                         <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.SKILL_PROFIENCY_LEVEL' | translate }}</span> {{skillsCV[i].proficiencyLevel}}</span>
                       </div>

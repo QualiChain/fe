@@ -957,6 +957,12 @@ interface DAG {
   links: SLink[];
 }
 
+/**********/
+interface CompetencyLevelValues {
+  value: string;
+  viewValue: string;
+}
+
 /************************/
 @Component({
   selector: 'CVDialog',
@@ -982,6 +988,12 @@ export class CVDialog_modal implements OnInit {
   workHistoryCV: any = [];
   educationHistoryCV: any = [];
   showError: boolean = false;
+
+  competencies: CompetencyLevelValues[] = [
+    {value: 'basic', viewValue: 'Basic'},
+    {value: 'medium', viewValue: 'Medium'},
+    {value: 'advanced', viewValue: 'Advanced'}
+  ];
 
   //private appcomponent: AppComponent,
   constructor(            
@@ -1151,29 +1163,31 @@ openAddNewItem(e, type) {
 
   dialogRef.afterClosed().subscribe(result => {
     //console.log(result);
-    if (type=='skillitem') {
-      this.t.push(this.formBuilder.group({
-        label: [result.label, [Validators.required]],
-        proficiencyLevel: [result.proficiencyLevel, Validators.required],
-        comment: [result.comment, [Validators.required]],      
-      }));
-    }
-    else if (type=='workitem') {
-      this.w.push(this.formBuilder.group({
-        position: [result.position, Validators.required],
-        from: [result.from, [Validators.required]],
-        to: [result.to, [Validators.required]],
-        employer: [result.employer, [Validators.required]],
-      }));
-    }
-    else if (type=='educationitem') {
-      this.e.push(this.formBuilder.group({
-        title: [result.title, Validators.required],
-        from: [result.from, [Validators.required]],
-        to: [result.to, [Validators.required]],
-        organisation: [result.organisation, [Validators.required]],
-        description: [result.description, [Validators.required]],
-      }));
+    if (result!=false) {
+      if (type=='skillitem') {
+        this.t.push(this.formBuilder.group({
+          label: [result.label, [Validators.required]],
+          proficiencyLevel: [result.proficiencyLevel, Validators.required],
+          comment: [result.comment, [Validators.required]],      
+        }));
+      }
+      else if (type=='workitem') {
+        this.w.push(this.formBuilder.group({
+          position: [result.position, Validators.required],
+          from: [result.from, [Validators.required]],
+          to: [result.to, [Validators.required]],
+          employer: [result.employer, [Validators.required]],
+        }));
+      }
+      else if (type=='educationitem') {
+        this.e.push(this.formBuilder.group({
+          title: [result.title, Validators.required],
+          from: [result.from, [Validators.required]],
+          to: [result.to, [Validators.required]],
+          organisation: [result.organisation, [Validators.required]],
+          description: [result.description, [Validators.required]],
+        }));
+      }
     }
   });
   
@@ -1342,6 +1356,12 @@ export class AddItemDialog_modal implements OnInit {
   education_to: string = "";
   education_organisation: string = "";
   education_description: string = "";
+
+  competencies: CompetencyLevelValues[] = [
+    {value: 'basic', viewValue: 'Basic'},
+    {value: 'medium', viewValue: 'Medium'},
+    {value: 'advanced', viewValue: 'Advanced'}
+  ];
 
   constructor(
     private us: UtilsService,

@@ -207,6 +207,14 @@ const routes: Routes = [
       title: 'Profile | :id | Edit' }  
   },
   {
+    path: 'profiles/:id/competences',
+    component: CompetencyDevelopmentComponent,
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [],
+      permissions: ['view_own_profile'],
+      title: 'Profile | :id | Competences' }   
+  },  
+  {
     path: 'profiles/:id/best-career-options',
     component: BestCareerOptionsComponent,
     canActivate: [AuthGuard],

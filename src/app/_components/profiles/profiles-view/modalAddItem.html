@@ -19,8 +19,16 @@
 
             <div class="form-group col-6">
                 <mat-form-field class="cv-full-width">
-                    <mat-label>{{ 'CV.SKILL_PROFIENCY_LEVEL' | translate }}</mat-label>                            
+                    <mat-label>{{ 'CV.SKILL_PROFIENCY_LEVEL' | translate }}</mat-label>  
+                    <!--
                     <input matInput required type="text" [(ngModel)]="skill_profiency_level" name="skill_profiency_level">
+                    -->
+                    <mat-select required [(ngModel)]="skill_profiency_level" name="skill_profiency_level" >
+                        <mat-option *ngFor="let competencie of competencies" [value]="competencie.value">
+                          {{ 'COMPETENCY_LEVEL.LEVELS.'+competencie.viewValue | uppercase | translate}}
+                        </mat-option>
+                      </mat-select>
+
                 </mat-form-field>                        
             </div>
 
@@ -110,7 +118,7 @@
             <i _ngcontent-axy-c0="" class="material-icons"> add </i>
             {{ 'BUTTON.ADD' | translate }}
         </button>
-        <button type="button" class="btn btn-danger" [mat-dialog-close]="true" id="closeAwardModalWindow">
+        <button type="button" class="btn btn-danger" [mat-dialog-close]="false" id="closeAwardModalWindow">
             <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
         </button>
     </div>
