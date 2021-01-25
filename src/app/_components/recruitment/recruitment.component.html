@@ -40,7 +40,8 @@
     <div class="form-group field col-lg-10" >
       <mat-form-field class="create-profile-full-width">
         <mat-label>{{ 'RECRUITMENT.SEARCH_LABEL' | translate }}</mat-label>
-        <mat-select [(ngModel)]="seachJobTextInput" name="fieldSearchTextSelect" required ngDefaultControl>
+        <mat-select [(ngModel)]="seachJobTextInput" name="fieldSearchTextSelect" required ngDefaultControl 
+                (selectionChange)="selectJob($event)" >
           <mat-option *ngFor="let job of jobs" [value]="job.id">
             {{job.label}}
           </mat-option>

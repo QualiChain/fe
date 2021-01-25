@@ -5,10 +5,12 @@ import { AppComponent } from '../../../app.component';
 import { UsersService } from '../../../_services/users.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
+import {MatSort, Sort, SortDirection} from '@angular/material/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+//import { MatDialogRef } from '@angular/material/dialog';
+import { CVDialog_modal } from '../../../_components/profiles/profiles-view/profiles-view.component';
 
 @Component({
   selector: 'app-qc-job-candidates-management',
@@ -48,10 +50,13 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   dataSource = new MatTableDataSource([]);
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
+  pageSize: number = 5;
+  pageNumber: number = 0;
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  //@ViewChild(MatSort) sort: MatSort;
   searchTxt: string = "";
- 
+  showSpinner: boolean = true;
 
   constructor(
     private appcomponent: AppComponent,
@@ -60,6 +65,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
     private authservice: AuthService,
     private translate: TranslateService,
     public dialogModal: MatDialog, 
+    public CVDialog: MatDialog,
   ) { }
 
   isLogged = this.appcomponent.isLogged;
@@ -71,12 +77,75 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   isEmployee = this.appcomponent.isEmployee;   
   jobCandidates: any =[]
 
+  openUserCV(userId: number) {
+    
+    const dialogRef = this.CVDialog.open(CVDialog_modal, {
+      disableClose: true,
+      width: '550px',
+      data: {userId: userId, isAdmin: false, isRecruiter: false}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  }
+
+  sortList(sort: Sort) { 
+    let paginator = {};
+    let localStorageData = JSON.parse(localStorage.getItem('qc.candidatesList'));
+    if(localStorageData.hasOwnProperty('paginator')){
+      paginator = localStorageData.paginator;
+    }
+    localStorage.setItem('qc.candidatesList', JSON.stringify({'sort': sort, 'paginator':paginator}));
+  }
+
   ngOnInit(): void {
     
   }
+  onChangePage(x) {
+    //console.log(x);
+    let localStorageData = JSON.parse(localStorage.getItem('qc.candidatesList'));
+    let sort = {};
+    if(localStorageData.hasOwnProperty('sort')){
+      sort = localStorageData.sort;
+    }    
+    localStorage.setItem('qc.candidatesList', JSON.stringify({'sort': sort, 'paginator': x}));
+
+  }
   ngOnChanges(): void {
     if (this.jobId) {
+
+      this.paginator.page.subscribe(x => this.onChangePage(x));
+
       this.dataSource.sort = this.sort;
+
+      let orderType: string = 'score';
+      let orderDirection: SortDirection = 'desc';
+      let localStorageData = JSON.parse(localStorage.getItem('qc.candidatesList'));
+      if (localStorageData) {
+        if(localStorageData.hasOwnProperty('sort')){
+          if(localStorageData.sort.hasOwnProperty('active')){
+            orderType = localStorageData.sort.active;
+          }
+          if(localStorageData.sort.hasOwnProperty('direction')){
+            orderDirection = localStorageData.sort.direction;
+          }
+        }
+        //console.log(localStorageData);
+        if(localStorageData.hasOwnProperty('paginator')){
+          if(localStorageData.paginator.hasOwnProperty('pageSize')){
+            this.pageSize = localStorageData.paginator.pageSize;
+          }
+          
+        }
+      }
+
+      //const sortState: Sort = {active: orderType, direction: orderDirection};
+      const sortState: Sort = {active: 'candidateSurname', direction: 'desc'};
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+
       this.dataSource.paginator = this.paginator;
       this.dataSource.data = [];
       this.getCandidates(this.jobId);
@@ -88,6 +157,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   }
 
   getCandidates(jobId: any): void {
+    this.showSpinner = true;
     //only admin users or recuiters can load candidates list
     //if (this.isAdmin || this.isRecruiter) {
     //if (this.authservice.checkIfPermissionsExistsByUserRoles(['view_recruitment'])) {
@@ -142,11 +212,10 @@ export class QcJobCandidatesManagementComponent implements OnInit {
         this.jobCandidates = jobCandidates;  
         this.dataSource.data = this.jobCandidates;
         
-
       });
     //}
 
-    
+    this.showSpinner = false;
   }
 
   assignThisApply(jobId: any, userId: number): void {
