@@ -422,7 +422,8 @@ const routes: Routes = [
   } ,
   { 
     path: '**', 
-    component: NotFoundComponent
+    component: NotFoundComponent,
+    data: {title: 'Not found'}
   } ,
   { path: '**', redirectTo: '' }
   ];
