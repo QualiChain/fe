@@ -36,7 +36,7 @@ const ELEMENT_DATA: listOfCandidates[] = [
 */
 
 export class RecruitmentComponent implements OnInit {
-
+  
   jobs: Job[];
   users: User[];
   displayMessage = false;
@@ -116,26 +116,32 @@ export class RecruitmentComponent implements OnInit {
   }
   
   
+  selectJob(objectData)
+  {
+    localStorage.setItem('qc.recruitment', JSON.stringify({'job': objectData.value}));
+  }
 
   ngOnInit() {
     //console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.getAvailableJobs();//
+
+    
     //this.getMatchedCVs('Job1');
     
     this.us
     .getUsers()
     .subscribe((data: User[]) => {
-      /*
-      ELEMENT_DATA.forEach(element => {
-        data.push(element);
-      });
-      */
+      
+     // ELEMENT_DATA.forEach(element => {
+     //   data.push(element);
+    //  });
+      
       this.users = data;
 
   });
-    
+   
   }
  
   processSeacrhJobForm() {
@@ -217,6 +223,14 @@ getAvailableJobs() {
   .subscribe((data: Job[]) => {
     this.jobs = data;
     //console.log(data);
+    let localStorageData = JSON.parse(localStorage.getItem('qc.recruitment'));
+    if (localStorageData) {
+      //console.log(localStorageData);
+      if(localStorageData.hasOwnProperty('job')){
+        this.seachJobTextInput = localStorageData.job;
+      }
+    }
+
   },
   err => {
     console.log(err);
