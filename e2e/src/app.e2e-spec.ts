@@ -10,7 +10,8 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('QualiChain-FE app is running!');
+    //expect(page.getTitleText()).toEqual('Welcome to QualiChain');
+    expect(page.getH1Text()).toEqual('Welcome to QualiChain');
   });
 
   afterEach(async () => {

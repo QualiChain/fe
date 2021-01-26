@@ -259,7 +259,12 @@ export class AppComponent  implements OnInit {
         _paq.push(['trackPageView']);
 
       });
-      
+
+  let dataValidToken = await this.authservice.validateTokenIAMAsync();  
+  if (!dataValidToken) {
+    this.authservice.logout();
+  }
+
   let dataP = await this.authservice.recoverPerimissionsAsync();
   
   let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(dataP));

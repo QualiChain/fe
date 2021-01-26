@@ -20,6 +20,8 @@ export class AuthService {
   uri = environment.authUrl;
   permissionsUrl = environment.permissionsUrl;
   IAMAuthUrl = environment.IAMAuthUrl;
+  IAMtokenvalidation = environment.IAMtokenvalidation;
+  IAMValidateTokenUrl = environment.IAMValidateTokenUrl;
   userURL = environment.userUrl;
   private uriUsers = environment.usersUrl;
   //uri = 'http://localhost:4000/auth';
@@ -49,6 +51,8 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('QC_seen_questionnaire');
     localStorage.removeItem('QCP');
+    localStorage.removeItem('qc.candidatesList');
+    localStorage.removeItem('qc.recruitment');
     this.currentUserSubject.next(null);
   }
   
@@ -170,6 +174,39 @@ export class AuthService {
 
     return dataToReturn;
 }
+
+  async validateTokenIAMAsync() {
+    let myAuthObj= {};
+    let token = localStorage.getItem('token'); 
+    const formData = new FormData();
+    let headers = new HttpHeaders()    
+      .set('Authorization', token);
+
+    if (this.IAMtokenvalidation) {
+      let data:any = await this.httpClient.post(`${this.IAMValidateTokenUrl}`, formData, {headers:headers}).toPromise().catch(()=>
+      {
+          //if there is an error we return emty response
+          return myAuthObj;
+      });
+
+
+      if (data) {
+        if ( data.hasOwnProperty('succeeded') ) {
+          return data.succeeded;
+        }
+        else {
+          return false;
+        }
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return true;
+    }
+
+  }
 
   async loginIAMAsync(username: string, password: string) {
     
