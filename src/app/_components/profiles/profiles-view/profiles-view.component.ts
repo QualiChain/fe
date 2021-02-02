@@ -1079,6 +1079,9 @@ export class CVDialog_modal implements OnInit {
           
           this.loadingSpinner = false;
         //}      
+      },
+      error => {            
+        this.loadingSpinner = false;
       });
     }
 
