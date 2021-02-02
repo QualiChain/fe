@@ -222,9 +222,7 @@ export class AuthService {
     });
 
     if (data.succeeded) {
-      //let userID = data.response_data.user.id;
-      //let userID = 3;
-      let userID = data.response_data.user.userId;
+      let userID = data.response_data.user.id;
       let userQCData: any = await this.getUserAsyncInAuth(userID);
       if (userQCData.hasOwnProperty('id')){
         myAuthObj = this.createCurentUserData(userQCData);

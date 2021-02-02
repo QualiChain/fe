@@ -48,6 +48,7 @@ import { ThesisComponent } from './_components/thesis/thesis/thesis.component';
 import { ThesisGetComponent } from './_components/thesis/thesis-get/thesis-get.component';
 import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edit.component';
 import { CompetencyDevelopmentComponent } from './_components/profiles/competency-development/competency-development.component';
+import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-use.component';
 
 const routes: Routes = [
   {
@@ -410,6 +411,11 @@ const routes: Routes = [
     component: MCDSSComponent,
     data: {title: 'MCDSS'}
   },  
+  {
+    path: 'terms-of-use',
+    component: TermsOfUseComponent,
+    data: {title: 'Terms of use'}
+  },
   {
     path: 'access_denied',
     component: AccessDeniedComponent,

@@ -1,8 +1,9 @@
 <h1>{{ 'AWARD_SMART_BADGE.TITLE' | translate }} - {{courseData.name}}</h1>
 
-<button class="btn btn-primary" (click)="openCreateAwardDialog()">
-  <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
-</button><br/>
+<button *appCanAccess="['create_smart_badge']" class="btn btn-primary" (click)="openCreateAwardDialog()">
+  <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
+</button>
+<br/>
 
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -15,10 +16,10 @@
         The actual rendered columns are set as a property on the row definition" -->
 
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+          <th  mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
           <td mat-cell *matCellDef="let element">
 
-            <button class="btn btn-primary" (click)="openAwardDialog(element.id, element)">
+            <button *appCanAccess="['issue_smart_badge']" class="btn btn-primary" (click)="openAwardDialog(element.id, element)">
               <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
             </button>
 
@@ -26,11 +27,13 @@
         </ng-container>
 
   <!-- id Column -->
+  <!--
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
-
+  -->
+  
   <!-- Student Column -->
   <ng-container matColumnDef="student">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Student </th>

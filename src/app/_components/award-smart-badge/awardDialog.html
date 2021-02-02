@@ -2,19 +2,85 @@
 
 <mat-dialog-content class="mat-typography">
 
+
+
       <div *ngFor="let itemBadgeData of listOfSmartAwards; let i = index" class="alert alert-sm alert-info">
+<!--
+        <mat-card class="example-card" >
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{itemBadgeData.issuer.image}}");'></div>
+            <mat-card-title>{{itemBadgeData.issuer.name}}</mat-card-title>
+            <mat-card-subtitle>{{itemBadgeData.issuer.description}}</mat-card-subtitle>
+            <mat-card-subtitle>{{itemBadgeData.issuer.url}}</mat-card-subtitle>
+            <mat-card-subtitle>{{itemBadgeData.issuer.email}}</mat-card-subtitle>
+            <mat-card-subtitle>{{itemBadgeData.issuer.telephone}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image *ngIf="itemBadgeData.image" [src]="itemBadgeData.image" >
+          <mat-card-content>
+            <p>
+              {{itemBadgeData.description}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>{{ 'AWARD_SMART_BADGE.BUTTON.REVOKE_AWARD' | translate }}</button>
+            <button mat-button>{{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}</button>
+          </mat-card-actions>
+        </mat-card>
+-->        
 
         <div class="row">
           <div class="col col-lg-12">
-            <img style="width:30px" *ngIf="itemBadgeData.imageurl" [src]="itemBadgeData.imageurl">
-            <h2>{{itemBadgeData.name}}</h2><br/>
-            <p>
+            <div class="col col-lg-2">
+              <img style="width:30px" *ngIf="itemBadgeData.image" [src]="itemBadgeData.image">
+            </div>
+            <div class="col col-lg-10">
+              <h2>{{itemBadgeData.name}}</h2>
+            </div>
+          </div>
+          <div class="col col-lg-12">
               <span *ngIf="itemBadgeData.status">Status: {{itemBadgeData.status}} <br/></span>
-              Description: {{itemBadgeData.description}}<br/>
-            </p>
+              <span *ngIf="itemBadgeData.description" class="col col-lg-12">{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}: {{itemBadgeData.description}}</span>
+              <span *ngIf="itemBadgeData.version" class="col col-lg-12">{{ 'BADGES.BADGE.VERSION.LABEL' | translate }}: {{itemBadgeData.version}} </span>
+              
+                            
+          </div>
+<!--
+          <div class="col col-lg-12">
+            <div class="col col-lg-2">
+              <div class="issuer-img" style='background-size: cover;background-image: url("{{itemBadgeData.issuer.image}}");'></div>
+            </div>
+            <div class="col col-lg-10">
+              <span *ngIf="itemBadgeData.issuer.name" class="col col-lg-12">{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}: {{itemBadgeData.issuer.name}} </span>
+              <span *ngIf="itemBadgeData.issuer.description" class="col col-lg-12">{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}: {{itemBadgeData.issuer.description}} </span>
+              <span *ngIf="itemBadgeData.issuer.url" class="col col-lg-12">{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.LABEL' | translate }}: {{itemBadgeData.issuer.url}} </span>
+              <span *ngIf="itemBadgeData.issuer.email" class="col col-lg-12">{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.LABEL' | translate }}: {{itemBadgeData.issuer.email}} </span>
+            </div>
+          </div>
+-->
+        </div>
+        <div class="row">
+          <div *ngIf="showErrorMessage && itemSelected==i" class="col col-lg-12">
+            <div class="alert alert-danger">
+              {{errorMessage}}
+            </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col col-lg-5">
+            
+          </div>
+          <div class="col col-lg-3">
+            <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==i"></mat-spinner>
+            <button *ngIf="lodingspinnerid!=i" (click)="issueSmartBadge(itemBadgeData, i)" type="button" class="btn btn-primary">
+              <i _ngcontent-axy-c0="" class="material-icons small">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}
+            </button>
 
+            <button *ngIf="lodingspinnerid!=i" (click)="verifySmartBadge(itemBadgeData, i)" type="button" class="btn btn-primary">
+              <i _ngcontent-axy-c0="" class="material-icons small">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.VALIDATE_AWARD' | translate }}
+            </button>
+          </div>
+        </div>
+<!--
         <div class="row">
           <div class="col col-lg-5">
             
@@ -42,6 +108,7 @@
           </div>
 
         </div>
+      -->
        
         
       </div>
