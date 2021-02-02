@@ -178,6 +178,7 @@ import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edi
 import { CompetencyDevelopmentComponent, ItemCDDialog_modal } from './_components/profiles/competency-development/competency-development.component';
 import { QcSelectCityDialogComponent } from './_components/utils/qc-select-city-dialog/qc-select-city-dialog.component';
 import { MomentDateModule } from '@angular/material-moment-adapter';
+import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-use.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -316,7 +317,7 @@ export function tokenGetter() {
     ThesisComponent, ThesisComponentSummaryPage,
     ThesisGetComponent,
     ThesisEditComponent,
-    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent
+    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent
   ],
   imports: [
     MomentDateModule,

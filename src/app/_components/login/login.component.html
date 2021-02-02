@@ -16,7 +16,7 @@
                   {{customErrorMessageLogin}}
               </div>
           
-              <form #formLogin="ngForm" (ngSubmit)="processForm()" class="userlogin-form">
+              <form #formLogin="ngForm" (ngSubmit)="processFormIAM()" class="userlogin-form">
                 <!-- name -->
                 <div class="form-group field" [class.has-error]="usernameInput.invalid">
                   <mat-form-field class="userlogin-full-width">
@@ -43,8 +43,10 @@
                 </div>
                 
                 <div>
+                  <!--
                   <button type="submit" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }}</button>        
-                  <button type="button"  (click)="processFormIAM()" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }} WITH SEAL UNDER CONSTRUCTION</button>
+                  -->
+                  <button type="button"  (click)="processFormIAM()" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }} </button>
                 </div>         
               </form> 
             </div>              

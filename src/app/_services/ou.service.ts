@@ -9,6 +9,7 @@ import { environment } from './../../environments/environment';
 import User from '../_models/user';
 //import { exists } from 'fs';
 import { CustomConfigEnvironmentDataService } from './customConfigEnvironmentData.service';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,16 @@ import { CustomConfigEnvironmentDataService } from './customConfigEnvironmentDat
 export class OUService {
  
   uri = environment.authUrl;
+  badgingURI = environment.badging;
   //uri = 'http://localhost:4000/auth';
 
   /*
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 */
-  constructor(private httpClient: HttpClient, private cs: CustomConfigEnvironmentDataService) {      
+  constructor(
+    private authService: AuthService,
+    private httpClient: HttpClient, private cs: CustomConfigEnvironmentDataService) {      
      // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
      // this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -267,6 +271,62 @@ export class OUService {
        })
     )
   }  
+
+
+  
+  createBadgeV2(obj: {}) {
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    let endPoint = this.badgingURI;
+    //console.log(endPoint);    
+    return this.httpClient.post(`${endPoint}/createSmartBadge`, obj, {headers: headers}).
+    pipe(
+       map((data: any) => {
+         //console.log(data);
+         return data;
+       }), catchError( error => {
+         //console.log(error);
+         return throwError( error );
+       })
+    )
+  }
+
+  issueSmartBadgeV2(obj: {}) {
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    let endPoint = this.badgingURI;
+    //console.log(endPoint);    
+    return this.httpClient.post(`${endPoint}/issueSmartBadge`, obj, {headers: headers}).
+    pipe(
+       map((data: any) => {
+         //console.log(data);
+         return data;
+       }), catchError( error => {
+         //console.log(error);
+         return throwError( error );
+       })
+    )
+  }
+
+  verifySmartBadgeV2(obj: {}) {
+
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    let endPoint = this.badgingURI;
+    //console.log(endPoint);    
+    return this.httpClient.post(`${endPoint}/verifySmartBadge`, obj, {headers: headers}).
+    pipe(
+       map((data: any) => {
+         //console.log(data);
+         return data;
+       }), catchError( error => {
+         //console.log(error);
+         return throwError( error );
+       })
+    )
+  }
 
 }
 
