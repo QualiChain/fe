@@ -214,7 +214,7 @@ export class AuthService {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    console.log(formData);
+    
     let data:any = await this.httpClient.post(`${this.IAMAuthUrl}/login`, formData).toPromise().catch(()=>
     {
         //if there is an error we return emty response
@@ -224,6 +224,8 @@ export class AuthService {
     if (data.succeeded) {
       let userID = data.response_data.user.id;
       let userQCData: any = await this.getUserAsyncInAuth(userID);
+      userQCData['roles'] = data.response_data.user.roles;
+      
       if (userQCData.hasOwnProperty('id')){
         myAuthObj = this.createCurentUserData(userQCData);
         localStorage.setItem('token', data.response_data.token); 
