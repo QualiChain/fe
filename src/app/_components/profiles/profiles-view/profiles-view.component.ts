@@ -41,6 +41,7 @@ import { AppComponent } from '../../../app.component';
 import { UploadService } from '../../../_services/upload.service';
 import { environment } from '../../../../environments/environment';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
+import { ConditionalExpr } from '@angular/compiler';
 const downloadUrl = environment.downloadFilesUrl;
 
 @Component({
@@ -123,6 +124,7 @@ export class ProfilesViewComponent implements OnInit {
 
 
   listOfSmartAwardsOU: any =[];
+  profileAvatarImg: string = 'assets/img/no_avatar.jpg';
   
   constructor(
     public dialog: MatDialog,
@@ -417,7 +419,8 @@ export class ProfilesViewComponent implements OnInit {
             this.userdata = data;
 
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
-              this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
+              this.userdata.avatar_path = 'assets/img/no_avatar.jpg';
+              
             } 
 
             this.uploads.getUserFiles(data.id).subscribe(
@@ -426,6 +429,18 @@ export class ProfilesViewComponent implements OnInit {
                   var index = element.filename.indexOf(data.id+"_avatar_" ); 
                   if (index==0) {                
                     this.userdata.avatar_path =  downloadUrl+"/file/"+element.file_id;
+                    let finalURL = downloadUrl+"/file/"+element.file_id;
+                    //console.log(finalURL);
+                    this.uploads.getFileURL(finalURL).subscribe(
+                      (response: any) =>{
+                        //console.log(response);
+                          let dataType = response.type;
+                          let binaryData = [];
+                          binaryData.push(response);
+                          let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+                          this.profileAvatarImg = url;
+                      }
+                    )
                   }
                 });
                                 

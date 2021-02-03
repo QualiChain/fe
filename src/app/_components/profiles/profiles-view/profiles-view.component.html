@@ -105,8 +105,8 @@
         </div>
         <div class="col col-lg-2">
             <div>
-              <img *ngIf="userdata.avatar_path" [src]="userdata.avatar_path">
-              <img *ngIf="!userdata.avatar_path" src="assets/img/no_avatar.jpg">
+              <div *ngIf="userdata.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(' + profileAvatarImg + ')'}"> </div>
+              <div *ngIf="!userdata.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(assets/img/no_avatar.jpg)'}"> </div>
             </div>
             
         </div>
