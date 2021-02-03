@@ -127,7 +127,21 @@ export class FilesRepositoryComponent implements OnInit {
 
   downLoadFile(fileId: number, fileName: string, action:string) {
     if (action=='open') {
-        window.open(downloadUrl+'/file/'+fileId);
+        //window.open(downloadUrl+'/file/'+fileId);
+        this.us.getFile(fileId).subscribe(
+          (response: any) =>{
+            console.log(response);
+            
+              let dataType = response.type;
+              let binaryData = [];
+              binaryData.push(response);
+
+              let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+              //console.log(url);
+              window.open(url);
+
+          }
+        )
     }
     else {
     

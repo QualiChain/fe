@@ -7,3 +7,16 @@
   .create-profile-full-width {
     width: 100%;
   }
+
+  .user-avatar-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    height: 130px;
+    width: 130px;
+    position: relative;
+    flex-shrink: 0;
+    background-color: transparent;
+    border: 1px solid #edf1f7;
+    box-sizing: border-box;
+}

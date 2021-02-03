@@ -23,9 +23,27 @@ export class UploadService {
     private http: HttpClient) { }
 
 
+    getFileURL(url: string) {
+      //const headers = new HttpHeaders();
+      //let headers = this.authService.createQCAuthorizationHeader();
+      let headers = this.authService.createQCAuthorizationHeaderText();
+  
+      return this.http.get(`${url}`, {
+        headers: headers, 
+        responseType: 'blob' as 'json'}).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    } 
+
   getFile(fileId: number) {
     //const headers = new HttpHeaders();
-    let headers = this.authService.createQCAuthorizationHeader();
+    //let headers = this.authService.createQCAuthorizationHeader();
+    let headers = this.authService.createQCAuthorizationHeaderText();
 
     return this.http.get(`${downloadUrl}/file/${fileId}`, {
       headers: headers, 

@@ -290,8 +290,12 @@
       </div>
 
       <div *ngIf="user_avatar_path_id" class="row"> 
-        <div class="form-group field col col-lg-2">          
+        <div class="form-group field col col-lg-2"> 
+          <!--
           <img [src]="user_avatar_path">
+          -->
+          <div class="user-avatar-img" [ngStyle]="{'background-image': 'url(' + profileAvatarImg + ')'}"> </div>
+          <br>
           <button class="btn btn-danger" (click)="confirmDialog(user_avatar_path_id, '')">
             <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
           </button>

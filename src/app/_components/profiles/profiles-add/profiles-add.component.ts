@@ -95,6 +95,7 @@ export class ProfilesAddComponent implements OnInit {
   public selectedOption: any;
   showError: boolean = false;
   errorMessage: string = null;
+  profileAvatarImg: string = 'assets/img/no_avatar.jpg';
 
   constructor(
     //private flashMessage: FlashMessagesService,
@@ -317,6 +318,15 @@ export class ProfilesAddComponent implements OnInit {
             this.user_avatar_path =  downloadUrl+"/file/"+element.file_id;
             this.user_avatar_path_id = element.file_id;
 
+            this.us.getFileURL(this.user_avatar_path).subscribe(
+              (response: any) =>{
+                  let dataType = response.type;
+                  let binaryData = [];
+                  binaryData.push(response);
+                  let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));                 
+                  this.profileAvatarImg = url;
+              }
+            )
             
             if (+profileId==+userdata['id'])
             {

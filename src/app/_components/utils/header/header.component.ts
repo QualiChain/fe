@@ -27,6 +27,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import {GlobalApp, StorageService} from '../../../_helpers/global';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 import { QcEvaluationQuestionnaireModel, QcEvaluationQuestionnaireComponent } from '../../utils/qc-evaluation-questionnaire/qc-evaluation-questionnaire.component';
+import { UploadService } from '../../../_services/upload.service';
 
 export interface OPTIONS_MENU {
   id: number;
@@ -71,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   menuOptions =ELEMENT_DATA;
 
   isQuestionnaireOpen: boolean = false;
+  avatarImg: string = 'assets/img/no_avatar.jpg';
 
   constructor(
     public dialog: MatDialog,
@@ -83,6 +85,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private appcomponent: AppComponent,
     private authservice: AuthService,
     private us: UsersService,
+    private ups: UploadService,
     location: Location, public router: Router, public translate: TranslateService, private messageService: MessageService) {
   //  constructor(location: Location, router: Router) {
 
@@ -224,6 +227,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
     );
   }
 
+  getCurrentAvatarImage(userdata) {
+    this.avatarImg = 'assets/img/no_avatar.jpg';
+    if (userdata.avatar_path=='') {
+      this.currentUser.avatar_path = 'assets/img/no_avatar.jpg';
+      this.avatarImg = 'assets/img/no_avatar.jpg';
+    }
+    else {      
+      this.ups.getFileURL(userdata.avatar_path).subscribe(
+        (response: any) =>{
+            let dataType = response.type;
+            let binaryData = [];
+            binaryData.push(response);
+            let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+            //this.currentUser.avatar_path = url;
+            this.avatarImg = url;
+        }
+      )
+      this.currentUser.avatar_path = userdata.avatar_path;
+    }    
+  }
+
   ngOnInit() {
     
     
@@ -237,7 +261,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (userdata) {
         if (userdata.avatar_path!=this.currentUser.avatar_path) {            
           this.currentUser.avatar_path = userdata.avatar_path;
+          this.getCurrentAvatarImage(userdata);
         }
+        
       }
     })
 
@@ -267,13 +293,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //let userdata = JSON.parse(localStorage.getItem('userdata'));
     let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
     if (userdata) {
-
-      if (userdata.avatar_path=='') {
-        this.currentUser.avatar_path = 'assets/img/no_avatar.jpg';              
-      }
-      else {
-        this.currentUser.avatar_path = userdata.avatar_path;
-      }
+      this.getCurrentAvatarImage(userdata);
+      
 
       this.userdata = userdata;
 
