@@ -4,7 +4,8 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthService } from '../_services';
 //import { exit } from 'process';
 import { Injectable } from '@angular/core';
-
+import { StorageService } from '../_helpers/global';
+import { QCStorageService } from '../_services/QC_storage.services';
 
 @Directive({
   selector: '[appCanAccess]'
@@ -63,15 +64,31 @@ export class CanAccessDirective implements OnInit, OnDestroy {
 export class AuthGuardByPermission implements CanActivate {
     constructor(
         private router: Router,
-        private authenticationService: AuthService
+        private authenticationService: AuthService,
+        public storageService: StorageService,
+        private qcStorageService: QCStorageService,
     ) { }
     
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
         
         if (currentUser) {
+            let dataValidToken = await this.authenticationService.validateTokenIAMAsync();  
+            
+            if (!dataValidToken) {
+                let currentUserData = {'authenticated': false};
+                let encryptedDataCurrentUserData = this.qcStorageService.QCEncryptData(JSON.stringify(currentUserData));
+                this.storageService.setItem('userdataQC', encryptedDataCurrentUserData);
+                this.storageService.setItem('currentUserQC', encryptedDataCurrentUserData);
+
+                this.authenticationService.logout();
+                
+                this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+                return false;
+            }
+
             // check if route is restricted by role           
-            if (route.data.permissions) {
+            else if (route.data.permissions) {
                 
                 //let authorized = this.checkIfPermissionsExistsByUserRoles(route.data.permissions);
                 let authorized = this.authenticationService.checkIfPermissionsExistsByUserRoles(route.data.permissions);

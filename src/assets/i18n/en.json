@@ -592,7 +592,9 @@
       "REVOKE_AWARD": "Revoke",
       "UNASSIGN_AWARD": "Unassign",
       "ASSIGN_AWARD": "Assign",
-      "VALIDATE_AWARD": "Validate"
+      "VALIDATE_AWARD": "Validate",
+      "AWARD_COURSE": "Award Course",
+      "AWARD_LEARNERS": "Award Learners"
     }
   },
   "ACCESS_DENIED": {

@@ -226,25 +226,27 @@
                                   </div>
                                   <div>&nbsp; </div>
                                   <div class="row courseRelatedData">
-                                      <div class="col-lg-6">
+                                      <div class="col-lg-12">
                                           <div><h4>{{ 'COURSE.RELATED_SKILLS' | translate }}</h4></div>
                                           <div><span *ngFor="let skill of skillsByCourseInfo[course.courseid]"><a href="/skills/{{skill.skill.id}}">{{skill.skill.name}}</a>, </span></div>
                                           <div *ngIf="skillsByCourseInfo[course.courseid].length==0">{{ 'COURSE.RELATED_SKILLS_NO_DATA' | translate }}</div>
                                       </div>
+                                      <!--
                                       <div class="col-lg-6">
                                           <div><h4>{{ 'COURSE.COURSE_BADGES' | translate }}</h4></div>                                            
                                           <div>                                             
                                              {{ 'COURSE.COURSE_BADGES_NO_DATA' | translate }}  &nbsp;
+                                      -->
                                              <!--<span *ngFor="let badge of course.course_badges">{{badge}}, </span>-->
-                                          </div>
-                                      </div>                                        
+                                      <!--
+                                          </div>                                      
+                                      </div>
+                                      -->
                                   </div>
                                   <div class="row ">&nbsp; </div>                                  
                                   <div *ngIf="userdata.id==currentUser.id" class="row courseActions">
                                       <div class="col-lg-6">
-                                        <!--
-                                        <a [routerLink]="['/courses', course.id,'edit']" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> {{ 'COURSE.UPDATE' | translate }}</a>
-                                        -->
+
                                         <button class="btn btn-primary" [routerLink]="['/courses', course.courseid]" type="button">  
                                           <i _ngcontent-axy-c0="" class="material-icons small">  details  </i> {{ 'BUTTON.VIEW' | translate }}
                                         </button>
@@ -254,10 +256,10 @@
                                         </button>
 
                                       </div>
-                                       <div class="col-lg-6">
-                                          <!--
-                                          <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-star-empty"></span> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}</button>
-                                          -->
+                                       <div *appCanAccess="['issue_smart_badge']" class="col-lg-6">
+                                       <!--
+                                          <button class="btn btn-primary" (click)="openAwardDialogCourse(course.courseid, course)" type="button"><span class="glyphicon glyphicon-star-empty"></span> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD_COURSE' | translate }}</button>
+                                       -->
                                           <button class="btn btn-primary" [routerLink]="['/courses', course.courseid,'award']" type="button">  
                                             <i _ngcontent-axy-c0="" class="material-icons small"> star </i> {{ 'COURSE.AWARD_SMART_BADGE' | translate }}
                                           </button>  
@@ -278,27 +280,52 @@
 
                 <ngb-panel id="toggle-3" title="{{ 'PROFILES.SMART_BADGES' | translate }}">
                   <ng-template ngbPanelContent>
-                    <div class="row smartBudgesBody">
+                    <div class="col-lg-12 smartBudgesBody">
 
+                      
+                        <div *appCanAccess="['issue_smart_badge']" class="col-lg-12 ">
+                          <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(userdata.id, smartBadgesByUser)">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> Award
+                          </button>
+                        </div>
+                      
                               
                               <div *ngIf="smartBadgesByUser.length==0" class="col-lg-8  smartBudge">                                
                                 {{ 'PROFILE.NO_SMART_BADGE_YET' | translate }}
                               </div>
-                              <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-12 card-ou" 
+
+                              <mat-card *ngFor="let smartBadge of smartBadgesByUser; let i = index" class="col-lg-6 example-card" >
+                                <mat-card-header>
+                                  <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{smartBadge.badge.badge.image}}");'></div>
+                                  <mat-card-title>{{smartBadge.badge.badge.name}}</mat-card-title>
+
+                                </mat-card-header>
+                                
+                                <mat-card-content>
+                                  <p>
+                                    {{smartBadge.badge.badge.description}}
+                                  </p>
+                                </mat-card-content>
+                                
+                              </mat-card>
+
+                              <!--
+                              <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-6 card-ou" 
                                 [ngClass]="{
                                   'card-ou-status-issued': smartBadge.badge.status==='issued',
                                   'card-ou-status-revoked': smartBadge.badge.status==='revoked',
                                   'card-ou-status-pending': smartBadge.badge.status==='pending'
                                   }">
                                   <div class="col-lg-2 ">
-                                    <img style="width:80px" src="{{smartBadge.badge.image}}" alt="{{smartBadge.badge.name}}">
+                                    <img style="width:80px" *ngIf="smartBadge.badge.badge.image" [src]="smartBadge.badge.badge.image">
                                   </div>
                                   <div class="col-lg-10 ">
-                                    <h5 >{{smartBadge.badge.name}}</h5>
-                                    <p >{{smartBadge.badge.description}}</p>
+                                    <h5 >{{smartBadge.badge.badge.name}}</h5>
+                                    <div >{{smartBadge.badge.badge.description}}</div>
                                     <p >Status: {{smartBadge.badge.status}}</p>
                                   </div>
                                 </div>
+                              -->
                               <!--
                               <div *ngFor="let smartBadge of smartBadgesByUser; let i = index"  class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center smartBudge">                                
                                 <br/>
@@ -311,15 +338,9 @@
                               
                     </div>
                             
-                    <!--
-                    <div *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="row smartBudgesBody">
-                      <div class="col-lg-12  smartBudge">
-                        <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(userdata.id, smartBadgesByUser)">
-                          <i _ngcontent-axy-c0="" class="material-icons"> emoji_events </i> Award
-                        </button>
-                      </div>
-                    </div>
-                  -->
+                    
+                    
+                  
 
                   </ng-template>
                 </ngb-panel>

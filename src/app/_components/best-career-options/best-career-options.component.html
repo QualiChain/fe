@@ -98,7 +98,7 @@
         </div>    
     </div>
 
-    <div class="col-sm-12">
+    <div *ngIf="!(!showLoading && best_career_options.length==0)" class="col-sm-12">
         <mat-paginator 
             [length]="best_career_options.length"
             [pageSize]="best_career_options.slice(0, 1)"

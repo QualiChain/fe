@@ -366,8 +366,10 @@ const routes: Routes = [
   {
     path: 'courses/:id/award',
     component: AwardSmartBadgeComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
+    canActivate: [AuthGuardByPermission],
     data: { roles: [Role.professor, Role.admin, Role.administrator],
+      permissions: ['create_smart_badge','issue_smart_badge'],
       title: 'Course | :id | Award' }    
   },
   {
@@ -409,7 +411,8 @@ const routes: Routes = [
   {
     path: 'MCDSS',
     component: MCDSSComponent,
-    data: {title: 'MCDSS'}
+    canActivate: [AuthGuardByPermission],
+    data: {permissions: ['access_MCDSS'], title: 'MCDSS'}
   },  
   {
     path: 'terms-of-use',
