@@ -219,7 +219,7 @@ export class AwardSmartBadgeComponent implements OnInit {
     const dialogRef = this.awardDialog.open(awardDialog_modal, {
       disableClose: true,
       width: '550px',
-      data: {userId: userId, element: element, source: 'award_list'}
+      data: {userId: userId, element: element, source: 'award_list', type: 'user'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -302,7 +302,7 @@ export class createAwardDialog_modal implements OnInit {
     getUserData(id:string) {
       
       let currentUserData = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('currentUserQC')));
-      console.log(currentUserData);
+      //console.log(currentUserData);
       
       this.badgeissuername = currentUserData.name;
       this.badgeissueremail = currentUserData.email;
@@ -476,6 +476,8 @@ export class awardDialog_modal implements OnInit {
   fullDataSmartBadgesByUser = [];
   lodingspinnerid: number = null;
   userDataRec: any = [];
+  courseDataRec: any = [];
+  pageTitle: string = null;
   currentlistOfBadges: any = [];
 
   errorMessage: string = null;
@@ -489,6 +491,7 @@ export class awardDialog_modal implements OnInit {
     private bs: BadgesService,
     private as: AuthService,
     private ous: OUService,
+    private cs: CoursesService,
     public dialogRef: MatDialogRef<awardDialog_modal>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
@@ -581,6 +584,7 @@ export class awardDialog_modal implements OnInit {
     }
     );
     
+   //@todo update this part to recover smartbadges per user in NTUAs API.
    /*
     this.bs
       .getBadges()
@@ -624,24 +628,40 @@ export class awardDialog_modal implements OnInit {
     */
 
     
-    //console.log(this.data);
+    console.log(this.data);
     if (this.data.element.student) {
-      this.userDataRec.userName = this.data.element.student;
+      this.userDataRec.userName = this.data.element.student;      
+      
     }
-    else {
-    
-      this.us
+
+      if (this.data.userId) {
+        this.us
         .getUser(this.data.userId).subscribe(
           data => {
             //console.log("user in db");      
             this.userDataRec = data;
+            this.pageTitle = this.userDataRec.userName;
           },
           error => {
             console.log("user not found in db");                        
           }
         );
+      }
+      else if (this.data.courseId) {
+        this.cs
+        .getCourse(this.data.courseId).subscribe(
+          data => {
+            this.courseDataRec = data;
+            this.pageTitle = this.courseDataRec.name;
+          },
+          error => {
+            console.log("couse not found in db");                        
+          }
+        );
+      }
+      
     
-    }
+    
 
   }
 
@@ -724,15 +744,24 @@ export class awardDialog_modal implements OnInit {
     console.log("issueSmartBadge");
     console.log(smartBadgeData);
     this.resetErrorMessages(i);
+    
+    let dataToPost = {};
+    if (this.data.userId) {
+      
+      dataToPost = {
+        "badge":smartBadgeData,
+        "recipient":{"name": this.userDataRec.fullName, "email": this.userDataRec.email}
+        };
 
-    this.us
-    .getUser(this.data.userId).subscribe(
-      dataUser => {
-        console.log(dataUser);
-        let dataToPost = {
-          "badge":smartBadgeData,
-          "recipient":{"name": dataUser.fullName, "email": dataUser.email}
-          };
+    }
+    else if (this.data.courseId) {
+
+      dataToPost = {
+        "badge":smartBadgeData,
+        "recipient":{"name": this.courseDataRec.name, "email": "qualichain@qualichain.com"}
+        };
+
+    }
           console.log(dataToPost);
 
           this.ous
@@ -752,15 +781,8 @@ export class awardDialog_modal implements OnInit {
           }
         );
           
-      },
-      error => {
-        console.log("user not found in db");  
-        this.errorMessage = "User not found";
-        this.showErrorMessage = true;
-        this.itemSelected = i;
-        this.lodingspinnerid = null;                      
-      }
-    );    
+      
+  
   }
 
   updateSmartAwardStatusOU(smartBadgeId, posI, smartAwardBadgeData, action) {
@@ -1087,9 +1109,11 @@ export class awardDialog_modal implements OnInit {
 
 export interface DialogData {
   userId: number;
+  courseId: number;
   element: any;
   source: string;
   origin: string,
+  type: string,
   badgesList: any;
 }
 /*

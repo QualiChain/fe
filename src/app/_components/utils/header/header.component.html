@@ -68,7 +68,7 @@
 							-->
 							<li *ngIf="!isLogged" class="menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: route==='/login'}"><a class="btn navbar-item" routerLink="/login" (click)="route='/login'">{{ 'MENU.LOGIN' | translate }}</a></li>
 							
-							<li *appCanAccess="['manage_own_notifications']" class="menu-item menu-item-type-post_type menu-item-object-page">
+							<li [hidden]="!isLogged" *appCanAccess="['manage_own_notifications']" class="menu-item menu-item-type-post_type menu-item-object-page">
 								<!-- #docregion mat-badge-color -->
 								  <a data-toggle="modal" class="btn navbar-item" data-target="#myModal" href="#">
 									 <mat-icon *ngIf="(messages | FilterArrayByValue : 'read' : 'false') >0" matBadge="{{ messages | FilterArrayByValue : 'read' : 'false'}}" matBadgeColor="warn">notifications_active</mat-icon>

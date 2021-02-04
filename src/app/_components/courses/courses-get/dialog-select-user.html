@@ -23,7 +23,7 @@
                 <mat-select 
                 [(ngModel)]="data.usersSelected" name="usersSelected" value="usersSelected" required
                 [formControl]="toppings" multiple > 
-                    <mat-option *ngFor="let user of usersList" [value]="user.id">{{user.surname}}, {{user.name}}</mat-option>
+                    <mat-option *ngFor="let user of usersList" [value]="user.id">{{user.surname}}, {{user.name}} ({{user.fullName}} - {{user.userName}})</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

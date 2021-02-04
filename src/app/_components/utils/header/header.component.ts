@@ -248,28 +248,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }    
   }
 
-  ngOnInit() {
-    
-    
-    this.storageService.watchStorage().subscribe((data:string) => {
-      // this will call whenever your localStorage data changes
-      // use localStorage code here and set your data here for ngFor
-      //let userdata = JSON.parse(localStorage.getItem('userdata'));
-      let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+  getTopMenus(userdata) {
+    //console.log("getTopMenus");
 
-      //console.log(userdata);
-      if (userdata) {
-        if (userdata.avatar_path!=this.currentUser.avatar_path) {            
-          this.currentUser.avatar_path = userdata.avatar_path;
-          this.getCurrentAvatarImage(userdata);
-        }
-        
-      }
-    })
-
-    //todo , replace this by the pilotid of the user
-    //console.log(this.currentUser);
-    if (this.currentUser) {
+    if (!userdata) {
+      this.menuOptionsPerPilot = this.ps.getPilot(0);
+      this.isLogged = false;
+    }
+    else if (!userdata.authenticated) {
+      this.menuOptionsPerPilot = this.ps.getPilot(0);
+      this.isLogged = false;
+    }
+    else if (this.currentUser) {
       //console.log(this.currentUser);
       /*
       if (this.currentUser.pilotId) {
@@ -286,13 +276,41 @@ export class HeaderComponent implements OnInit, OnDestroy {
     else {
       this.menuOptionsPerPilot = this.ps.getPilot(0);
     }
+  }
+
+  ngOnInit() {
+    
+    
+    this.storageService.watchStorage().subscribe((data:string) => {
+      // this will call whenever your localStorage data changes
+      // use localStorage code here and set your data here for ngFor
+      //let userdata = JSON.parse(localStorage.getItem('userdata'));
+      let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+
+      this.getTopMenus(userdata);
+      if (userdata) {
+        if (userdata.avatar_path!=this.currentUser.avatar_path) {            
+          this.currentUser.avatar_path = userdata.avatar_path;
+          this.getCurrentAvatarImage(userdata);
+        }
+        
+      }
+    })
+
+    //todo , replace this by the pilotid of the user
+    //console.log(this.currentUser);
+    
+
     
     //console.log(this.menuOptionsPerPilot);
 
     // Read item:
     //let userdata = JSON.parse(localStorage.getItem('userdata'));
     let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+    
+
     if (userdata) {
+      this.getTopMenus(userdata);
       this.getCurrentAvatarImage(userdata);
       
 
@@ -329,6 +347,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
     else {
       this.userdata = {'authenticated': false ,'role': 'anonymous'};
+      this.getTopMenus(this.userdata);
     }
     
   }

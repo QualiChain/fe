@@ -17,6 +17,7 @@ import { AppComponent } from '../../../app.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator'
+import { awardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
 
 export interface DialogData {
   grade: number;
@@ -70,7 +71,8 @@ export class CoursesGetComponent implements OnInit {
     private route: ActivatedRoute,
     private cs: CoursesService,
     private translate: TranslateService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public awardDialog: MatDialog,
   ) { }
 
   isLogged = this.appcomponent.isLogged;
@@ -80,6 +82,20 @@ export class CoursesGetComponent implements OnInit {
   isProfessor = this.appcomponent.isProfessor;
   isStudent = this.appcomponent.isStudent;
   isEmployee = this.appcomponent.isEmployee;
+
+  openAwardDialog(userId: number, element: any) {
+     
+    const dialogRef = this.awardDialog.open(awardDialog_modal, {
+      width: '550px',
+      data: {userId: userId, element: element, source: 'profile'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      
+    });
+    
+  }
 
   openDialogUserSelection(courseId: number, userId: number): void {
     const dialogRef = this.dialog.open(DialogSelectUser, {

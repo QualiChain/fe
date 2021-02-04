@@ -1,8 +1,6 @@
-<h1 mat-dialog-title>{{ 'AWARD_SMART_BADGE.SELECTED_BADGES' | translate }} - {{userDataRec.userName}}</h1>
+<h1 mat-dialog-title>{{ 'AWARD_SMART_BADGE.SELECTED_BADGES' | translate }} - {{pageTitle}}</h1>
 
 <mat-dialog-content class="mat-typography">
-
-
 
       <div *ngFor="let itemBadgeData of listOfSmartAwards; let i = index" class="alert alert-sm alert-info">
 <!--
@@ -140,7 +138,7 @@
     -->
     <div class="modal-footer">
       
-      <button class="btn btn-primary" (click)="openCreateAwardDialogInModal()">
+      <button *appCanAccess="['create_smart_badge']" class="btn btn-primary" (click)="openCreateAwardDialogInModal()">
         <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
       </button>
       
