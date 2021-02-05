@@ -7,7 +7,7 @@
             <i _ngcontent-axy-c0="" class="material-icons small"> list </i> {{ 'THESIS.BUTTON.LIST' | translate }}
         </button> 
 
-        <button  *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', thesisMainData.id, 'edit']">
+        <button [hidden]="this.currentUser.id!=thesisMainData.professor_id" *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', thesisMainData.id, 'edit']">
           <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
         </button>
     </div>

@@ -291,6 +291,7 @@ export class ProfilesViewComponent implements OnInit {
       avatar_path: 'assets/img/no_avatar.jpg',
       university: '',
       role: '',
+      roles: [],
       gender: ''
   };
 
@@ -449,6 +450,13 @@ export class ProfilesViewComponent implements OnInit {
           data => {
             //console.log("user in db");
             this.userdata = data;
+            
+            console.log("curent user id:"+this.currentUser.id);
+            console.log("id user rec:"+this.userId);
+            console.log(this.currentUser);
+            if (this.userId.toString()==this.currentUser.id.toString()) {
+              this.userdata['roles'] = this.currentUser['roles'];
+            }
 
             if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
               this.userdata.avatar_path = 'assets/img/no_avatar.jpg';

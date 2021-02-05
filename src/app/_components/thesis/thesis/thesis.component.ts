@@ -109,7 +109,8 @@ export class ThesisComponent implements OnInit {
       else if (this.authservice.checkIfPermissionsExistsByUserRoles(['add_and_update_thesis'])) {
         //only the ones created by the logged user
         this.ts
-        .getThesisByProfessorId(this.newUserId)
+        //.getThesisByProfessorId(this.newUserId)
+        .getAllThesis()
         .subscribe((data: any[]) => {
           //console.log(data);
           this.dataSource.data = data;        
