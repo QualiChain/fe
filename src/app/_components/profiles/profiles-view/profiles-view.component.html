@@ -77,13 +77,17 @@
 
       <div class="row">
         <div class="col col-lg-8">
-            <div><span class="profileLabel">{{ 'PROFILES.USERNAME' | translate }}:</span> {{userdata.userName}}</div>            
-            <div><span class="profileLabel">{{ 'PROFILES.NAME' | translate }}:</span> {{userdata.name}}</div>
-            <div><span class="profileLabel">{{ 'PROFILES.SURNAME' | translate }}:</span>  {{userdata.surname}}</div>
-            <div><span class="profileLabel">{{ 'PROFILES.EMAIL' | translate }}:</span>  {{userdata.email}}</div>
-            <div><span class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>  <span *ngIf="userdata.role"> {{ 'ROLES.'+userdata.role | translate}}</span></div>
+            <div><span class="profileLabel">{{ 'PROFILES.USERNAME' | translate }}:</span>&nbsp;{{userdata.userName}}</div>            
+            <div><span class="profileLabel">{{ 'PROFILES.NAME' | translate }}:</span>&nbsp;{{userdata.name}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.SURNAME' | translate }}:</span>&nbsp;{{userdata.surname}}</div>
+            <div><span class="profileLabel">{{ 'PROFILES.EMAIL' | translate }}:</span>&nbsp;{{userdata.email}}</div>
+            <div *ngIf="(userdata.role && !userdata.roles)"><span class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>&nbsp;<span>{{ 'ROLES.'+userdata.role | translate}}</span></div>
+            <div *ngIf="userdata.roles">
+              <span *ngIf="(userdata.roles.length==1)" class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>
+              <span *ngIf="(userdata.roles.length>1)" class="profileLabel">{{ 'PROFILES.ROLES' | translate }}:</span>
+              &nbsp;<span *ngFor="let role of userdata.roles;  let i = index">{{ 'ROLES.'+role | translate}}<span *ngIf="(i<userdata.roles.length-1)">,&nbsp;</span></span></div>
             <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span> <span *ngIf="userdata.gender"> {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</span></div>
-            <div *ngIf="currentJobPosition"><span class="profileLabel">{{ 'PROFILES.CURRENT_JOB_POSITION' | translate }}:</span> {{currentJobPosition}}</div>
+            <div *ngIf="currentJobPosition"><span class="profileLabel">{{ 'PROFILES.CURRENT_JOB_POSITION' | translate }}:</span>&nbsp;{{currentJobPosition}}</div>
 
             <div class="row"><br></div>
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">

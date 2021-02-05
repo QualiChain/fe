@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ThesisService } from '../../../_services/thesis.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { AuthService } from '../../../_services';
+import User from '../../../_models/user';
 
 @Component({
   selector: 'app-thesis-get',
@@ -10,14 +11,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ThesisGetComponent implements OnInit {
 
+  currentUser: User;
+
   constructor(
     private ts: ThesisService,
     private route: ActivatedRoute,
-    private router: Router,) { }
+    private router: Router,
+    private authservice: AuthService,) { 
+
+      this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    }
 
   thesisMainData: any = {};
   
   ngOnInit(): void {
+
+    if(!this.currentUser) {
+      this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
+  }
+
 
     this.route.params.subscribe(params => {
 
