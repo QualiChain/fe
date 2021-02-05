@@ -67,7 +67,7 @@ export class ThesisEditComponent implements OnInit {
             this.us
             .getUsers()
             .subscribe((data: User[]) => {
-              //console.log(data)
+              console.log(data)
               //this.usersList = data;              
               data.forEach(element => {
                 if (element.role=="student") {

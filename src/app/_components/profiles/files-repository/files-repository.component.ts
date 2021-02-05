@@ -62,7 +62,8 @@ export class FilesRepositoryComponent implements OnInit {
         //let userdata = JSON.parse(localStorage.getItem('userdata'));
         let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
 
-        if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
+        //if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
+        if ((String(userdata.id) == String(id)) || (userdata.roles('administrator'))) {
           this.profileId = id;
 
           this.loadUserFiles();

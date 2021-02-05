@@ -28,11 +28,11 @@
       <button *ngIf="!loadSpinner && isUserAsTaught && isProfessor" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNTOUGH_THE_COURSE' | translate }}
       </button>
-
+      <!--
       <button *ngIf="isAdmin || isProfessor" class="btn btn-primary" (click)="openDialogUserSelection(courseData.courseid, this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > add </i> {{ 'COURSE.BUTTON.ADD_NEW_RELATION' | translate }}
       </button>      
-      
+      -->
     </div>
 
     <div class="row"><br></div>
@@ -235,9 +235,9 @@
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
                 </button>          
 
-                  <button [hidden]="!isUserAsTaught && !isAdmin" *appCanAccess="['issue_smart_badge']" class="btn btn-primary" (click)="openAwardDialog(element.user.id, element)">
-                    <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
-                  </button>
+                <button [hidden]="!isUserAsTaught && !isAdmin" *appCanAccess="['issue_smart_badge']" class="btn btn-primary" (click)="openAwardDialog(element.user.id, element)">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
+                </button>
 
               </td>
             </ng-container>
