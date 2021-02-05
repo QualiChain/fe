@@ -40,13 +40,13 @@
             <!-- student -->
             <div *ngIf="mode=='Edit'" class="form-group field" [class.has-error]="studentThesisInput.invalid">                        
                 <div *ngIf="usersList.length==0">{{ 'COURSE.NO_USERS_AVAILABLE' | translate }}</div>
-                <mat-form-field class="create-score-full-width" [hidden]="usersList.length==0" >
+                <mat-form-field class="create-thesis-full-width" [hidden]="usersList.length==0" >
                     <mat-label>{{ 'THESIS.STUDENT.LABEL' | translate }}</mat-label>
                     <mat-select 
                     #studentThesisInput="ngModel"
                     [(ngModel)]="thesis.student_id" name="thesisStudent" value="thesisStudent" required
                     > 
-                        <mat-option *ngFor="let user of usersList" [value]="user?.id">{{user?.surname}}, {{user?.name}}</mat-option>
+                        <mat-option *ngFor="let user of usersList" [value]="user?.id">{{user?.surname}}, {{user?.name}} ({{user?.fullName}} - {{user?.userName}})</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

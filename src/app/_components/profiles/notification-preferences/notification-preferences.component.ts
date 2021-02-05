@@ -142,8 +142,8 @@ export class NotificationPreferencesComponent implements OnInit {
         //let userdata = JSON.parse(localStorage.getItem('userdata'));
         let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
         //console.log(userdata.role.toLowerCase());
-        if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
-
+        //if ((String(userdata.id) == String(id)) || (userdata.role.toLowerCase() =='administrator')) {
+        if ((String(userdata.id) == String(id)) || (userdata.roles('administrator'))) {
           this.userId = id;
 
           //ms.getUserNotificationsPreferences
