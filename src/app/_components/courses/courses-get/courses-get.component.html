@@ -18,9 +18,11 @@
       <button *ngIf="!loadSpinner && !isUserAsDone && !isUserAsEnrolled && !isUserAsTaught && (isStudent || isEmployee)" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid, this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > done </i> {{ 'COURSE.BUTTON.COURSE_DONE' | translate }}
       </button>
+      <!--
       <button *ngIf="!loadSpinner && isUserAsDone && (isStudent || isEmployee)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.COURSE_UNDONE' | translate }}
       </button>
+      -->
 
       <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && !isUserAsTaught && isProfessor" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > book </i> {{ 'COURSE.BUTTON.TOUGH_THE_COURSE' | translate }}
@@ -28,7 +30,7 @@
       <button *ngIf="!loadSpinner && isUserAsTaught && isProfessor" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNTOUGH_THE_COURSE' | translate }}
       </button>
-      <!--
+      <!--  
       <button *ngIf="isAdmin || isProfessor" class="btn btn-primary" (click)="openDialogUserSelection(courseData.courseid, this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > add </i> {{ 'COURSE.BUTTON.ADD_NEW_RELATION' | translate }}
       </button>      
@@ -64,7 +66,7 @@
                 </span>
             </div> 
           </div>
-
+          <!--
           <div *ngIf="courseData.events.length>0" class="col ">
             <div><span class="labelcourse">{{ 'COURSE.EVENTS.LABEL' | translate }}:</span> 
                 <span *ngFor="let event of courseData.events; let i=index">
@@ -72,6 +74,7 @@
                 </span>
             </div> 
           </div>
+          -->
 
       </div>
     </div>
@@ -80,14 +83,11 @@
     <div class="row">
 
       <!-- professors users -->
-      <div><h2>{{ 'COURSE.PROFESSORS' | translate }}</h2></div>
-
+      <div>
+        <div><h2>{{ 'COURSE.PROFESSORS' | translate }}</h2></div>
         <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==0"> {{ 'COURSE.NO_TEACHERS' | translate }}</div>
-
-        <div [hidden]="professorList.data.length==0" class="col col-lg-12">
-      
-          <table #ProfessorSort="matSort"  mat-table [dataSource]="professorList " class="table table-striped" matSort>
-            
+        <div [hidden]="professorList.data.length==0" class="col col-lg-12">      
+          <table #ProfessorSort="matSort"  mat-table [dataSource]="professorList " class="table table-striped" matSort>            
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
               <td mat-cell *matCellDef="let element" style=" white-space: nowrap;">
@@ -99,8 +99,6 @@
                 </button>               
               </td>
             </ng-container>
-
-
             <!-- surname Column -->
             <ng-container matColumnDef="surname">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.SURNAME.LABEL' | translate }} </th>
@@ -111,51 +109,19 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.NAME.LABEL' | translate }} </th>
               <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
             </ng-container>
-            
-
             <tr mat-header-row *matHeaderRowDef="displayedColumnsEnrolled"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsEnrolled;"></tr>
-
           </table>
-
           <mat-paginator #paginatorProfessor [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-<!--
-            <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')>0" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col" class="col-lg-4">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
-                    <th scope="col" class="col-lg-4">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
-                    <th scope="col" class="col-lg-4"> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'taught' ; let i=index">
-                    <td>{{enrolledUser.user.surname}}</td>
-                    <td>{{enrolledUser.user.name}}</td>
-                    <td>
-                        <button class="btn btn-primary" [routerLink]="['/profiles', enrolledUser.user.id]">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
-                        </button>
-                        <button *ngIf="(isAdmin || isProfessor)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', enrolledUser.user.id)">
-                          <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
-                        </button>
-                    </td>
-                  </tr>                  
-                </tbody>
-              </table>
--->              
         </div>
+      </div>
 
-
-        <!-- enrolled users -->
+      <!-- enrolled users -->
+      <div [hidden]="(!isAdmin && !isProfessor)">
         <div><h2>{{ 'COURSE.ENROLLED_USERS' | translate }}</h2></div>
-
         <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'enrolled')==0"> {{ 'COURSE.NO_ENROLLED_USERS' | translate }}</div>
-
-        <div [hidden]="enrolledUsersStatusEnrolled.data.length==0" class="col col-lg-12">
-     
+        <div [hidden]="enrolledUsersStatusEnrolled.data.length==0" class="col col-lg-12">     
           <table #EnrolledSort="matSort"  mat-table [dataSource]="enrolledUsersStatusEnrolled " class="table table-striped" matSort>
-            
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
               <td mat-cell *matCellDef="let element" style=" white-space: nowrap;">
@@ -167,8 +133,6 @@
                 </button>                
               </td>
             </ng-container>
-
-
             <!-- surname Column -->
             <ng-container matColumnDef="surname">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.SURNAME.LABEL' | translate }} </th>
@@ -179,52 +143,19 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.NAME.LABEL' | translate }} </th>
               <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
             </ng-container>
-            
-
             <tr mat-header-row *matHeaderRowDef="displayedColumnsEnrolled"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsEnrolled;"></tr>
-
-          </table>
-        
+          </table>        
           <mat-paginator #paginatorUsersStatusEnrolled [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-            <!--
-            <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'enrolled')>0" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col" class="col-lg-4">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
-                    <th scope="col" class="col-lg-4">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
-                    <th scope="col" class="col-lg-4"> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'enrolled' ; let i=index">
-                    <td>{{enrolledUser.user.surname}}</td>
-                    <td>{{enrolledUser.user.name}}</td>
-                    <td>
-                        <button class="btn btn-primary" [routerLink]="['/profiles', enrolledUser.user.id]">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
-                        </button>
-                        <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', enrolledUser.user.id)">
-                          <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
-                        </button>
-                    </td>
-                  </tr>                  
-                </tbody>
-              </table>
-            -->
         </div>
+      </div>
 
-
-        <!-- done users -->
+      <!-- done users -->
+      <div [hidden]="(!isAdmin && !isProfessor)">
         <div><h2>{{ 'COURSE.DONE_BY' | translate }}</h2></div>
-
         <div *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'done')==0"> {{ 'COURSE.NO_DONE_BY_USERS' | translate }}</div>
-        
         <div [hidden]="enrolledUsersStatusDone.data.length==0" class="col col-lg-12">
-
-          <table #DoneSort="matSort" mat-table [dataSource]="enrolledUsersStatusDone " class="table table-striped" matSort>
-            
+          <table #DoneSort="matSort" mat-table [dataSource]="enrolledUsersStatusDone " class="table table-striped" matSort>            
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
               <td mat-cell *matCellDef="let element" style=" white-space: nowrap;">
@@ -234,15 +165,11 @@
                 <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', element.user.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
                 </button>          
-
                 <button [hidden]="!isUserAsTaught && !isAdmin" *appCanAccess="['issue_smart_badge']" class="btn btn-primary" (click)="openAwardDialog(element.user.id, element)">
                   <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
                 </button>
-
               </td>
             </ng-container>
-
-
             <!-- surname Column -->
             <ng-container matColumnDef="surname">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.SURNAME.LABEL' | translate }} </th>
@@ -258,43 +185,12 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.SCORE.LABEL' | translate }} </th>
               <td mat-cell *matCellDef="let element"> {{element?.course_grade}} </td>
             </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumnsDoneBy"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsDoneBy;"></tr>
-
           </table>
-
           <mat-paginator #paginatorUsersStatusDone [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-          <!--
-            <table *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'done')>0" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col" class="col-lg-4">{{ 'PROFILE.SURNAME.LABEL' | translate }}</th>
-                    <th scope="col" class="col-lg-4">{{ 'PROFILE.NAME.LABEL' | translate }}</th>
-                    <th scope="col" class="col-lg-1">{{ 'COURSE.SCORE.LABEL' | translate }}</th>
-                    <th scope="col" class="col-lg-4"> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let enrolledUser of enrolledUsers | FilterArrayByValueGetList : 'course_status' : 'done' ; let i=index">
-                    <td>{{enrolledUser.user.surname}}</td>
-                    <td>{{enrolledUser.user.name}}</td>
-                    <td>{{enrolledUser?.course_grade}}</td>
-                    <td style="white-space:nowrap">
-                        <button class="btn btn-primary" [routerLink]="['/profiles', enrolledUser.user.id]">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
-                        </button>
-                        <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', enrolledUser.user.id)">
-                          <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
-                        </button>
-                    </td>
-                  </tr>                  
-                </tbody>
-              </table>
-            -->
         </div>        
-
-    </div>    
+      </div>
+    </div>
 
 </div>

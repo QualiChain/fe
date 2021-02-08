@@ -115,6 +115,12 @@ export class CoursesComponent implements OnInit {
 
   coursesList = [];
 
+  filterByProfessorStatus(element, index, array) 
+  {  
+       return element.course_status==='taught'; 
+  }
+  
+
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -124,12 +130,41 @@ export class CoursesComponent implements OnInit {
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
       }
 
+
+
     this.cs
       .getCourses()
       .subscribe((data: Course[]) => {
         this.courses = data;                
         this.dataSource.data = data;        
         ELEMENT_DATA = data;
+        /*
+        data.forEach(element => {
+          //console.log(element.courseid);
+          this.cs
+          .getEnrolledUserByCourseId(element.courseid).subscribe(
+          (dataEnrolledUsers: any[]) => {
+            //console.log(dataEnrolledUsers);
+
+            let professorList = (dataEnrolledUsers.filter(this.filterByProfessorStatus));
+            console.log(professorList);
+            professorList.forEach(professorInList => {
+
+              console.log(this.currentUser.id);
+              console.log(professorInList.user.id);
+              if (professorInList.user.id==this.currentUser.id) {
+
+              }
+
+            });
+
+          },
+          error => {
+            console.log("error recovering enrolled users by course id")
+          });
+        
+        });
+        */
     });
    
 

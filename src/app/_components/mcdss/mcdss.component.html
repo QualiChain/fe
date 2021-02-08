@@ -166,7 +166,7 @@
 
             <br>
             <div  class="col col-lg-12">
-                <div>{{ 'MCDSS.METHOD.TITLE' | translate }}: 
+                <div>{{ 'MCDSS.METHOD.TITLE' | translate }}: --{{selectedMethod}}-{{selectedMethodFiles}}--
                     <span *ngIf="!byFile">{{methodsTranslator[selectedMethod]}}</span>
                     <span *ngIf="byFile">{{methodsTranslator[selectedMethodFiles]}}</span>
                 </div>
@@ -295,6 +295,35 @@
                                             type="number" 
                                             min="0" 
                                             formControlName="veto_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.VETO.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div [hidden]="selectedMethod!='prometheeII'" class="criteria-div">
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.PREFERENCE.LABEL' | translate }}</mat-label> 
+                                            <input matInput required 
+                                            type="number" 
+                                            min="0" 
+                                            formControlName="preference_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.PREFERENCE.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div [hidden]="selectedMethod!='prometheeII'" class="criteria-div">
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.INDIFFERENCE.LABEL' | translate }}</mat-label> 
+                                            <input matInput required 
+                                            type="number" 
+                                            min="0" 
+                                            formControlName="indifference_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.INDIFFERENCE.PLACEHOLDER' | translate }}" >
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div [hidden]="selectedMethod!='prometheeII'" class="criteria-div">
+                                        <mat-form-field class="citeria_field">
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.CRITERIA.LABEL' | translate }}</mat-label> 
+                                            <input matInput required 
+                                            type="text" 
+                                            formControlName="criteria_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.CRITERIA.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
                                     </div>
                                     

@@ -8,6 +8,8 @@ import { Job } from '../../_models/Job';
 import { JobsService } from '../../_services/jobs.service';
 import { UsersService } from '../../_services/users.service';
 import User from '../../_models/user';
+import { AuthService } from '../../_services';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-recruitment',
@@ -52,7 +54,7 @@ export class RecruitmentComponent implements OnInit {
   ];
   */
   listOfCandidates = [];
-
+  currentUser: User;
   recruits = this.listOfCandidates;
   canvas: any;
   ctx: any;
@@ -99,7 +101,16 @@ export class RecruitmentComponent implements OnInit {
   public ChartType = 'pie';
   
   
-  constructor(private us: UsersService, private jobService: JobsService, private matchingService: MatchingService, private excelService:ExcelServiceService) { }
+  constructor(
+    private appcomponent: AppComponent,
+    public authservice: AuthService,
+    private us: UsersService, private jobService: JobsService, private matchingService: MatchingService, private excelService:ExcelServiceService) {
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+   }
+
+   isAdmin = this.appcomponent.isAdmin;
 
   //displayedColumns: string[] = ['id', 'title', 'action'];
   displayedColumns: string[] = ['id', 'name', 'role', 'available', 'expsalary', 'score', 'action'];
@@ -217,12 +228,39 @@ export class RecruitmentComponent implements OnInit {
       );
       
 }
+/*
+filterByCreator(element, userID) 
+{  
+     return element.creator_id==":"+userID;
+}
+*/
+filterByCreator(userID) {
+  return function(element) {
+    return element.creator_id==":"+userID;
+  }
+}
 
 getAvailableJobs() {
   this.jobService.getJobs()
   .subscribe((data: Job[]) => {
-    this.jobs = data;
     //console.log(data);
+    //console.log(this.currentUser.id);
+    let jobsFilteredList = [];
+
+    if (this.isAdmin) {
+      jobsFilteredList = data;
+    }
+    else {
+      jobsFilteredList = (data.filter(this.filterByCreator(this.currentUser.id)));
+    }
+    
+    //console.log(jobsFilteredList);
+
+    //this.jobs = data;
+    this.jobs = jobsFilteredList;
+
+    //console.log(data);
+    /*
     let localStorageData = JSON.parse(localStorage.getItem('qc.recruitment'));
     if (localStorageData) {
       //console.log(localStorageData);
@@ -230,7 +268,7 @@ getAvailableJobs() {
         this.seachJobTextInput = localStorageData.job;
       }
     }
-
+    */
   },
   err => {
     console.log(err);
