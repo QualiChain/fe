@@ -147,7 +147,7 @@ export class JobsAddComponent implements OnInit {
       let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en');
      
       let dataToSend = this.dataIn;
-      dataToSend.creator_id =  this.currentUser.id;
+      dataToSend.creator_id =  ":"+this.currentUser.id.toString();
 
 
       delete dataToSend.id;

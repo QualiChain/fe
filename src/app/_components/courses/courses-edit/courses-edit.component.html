@@ -57,7 +57,7 @@
                 <mat-chip-list #chipListSkills>
                     <mat-chip *ngFor="let skill of skills;let indx=index;" 
                     [selectable]="selectableSkill" [removable]="removableSkill" (removed)="removeSkill(skill,indx)">
-                        {{skill.name}}
+                    {{skill.name}}
                         <mat-icon matChipRemove *ngIf="removableSkill">cancel</mat-icon>
                     </mat-chip>
                     <input placeholder="{{ 'COURSE.SKILLS.PLACEHOLDER' | translate }}"
@@ -69,9 +69,7 @@
                     [matChipInputAddOnBlur]="addOnBlur" 
                     >                    
                 </mat-chip-list>
-                <!-- 
-                    (matChipInputTokenEnd)="addSkill($event)"
-                -->
+
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                     <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
                         {{skill.name}}

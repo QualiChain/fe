@@ -9,6 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ChartsModule } from 'ng2-charts';
 import { QCStorageService } from '../../_services/QC_storage.services';
+import { AppComponent } from '../../app.component';
 
 describe('RecruitmentComponent', () => {
   let component: RecruitmentComponent;
@@ -28,7 +29,7 @@ describe('RecruitmentComponent', () => {
         HttpClientTestingModule,
         ChartsModule
         ],
-        providers: [QCStorageService]
+        providers: [AppComponent, QCStorageService]
     })
     .compileComponents();
   }));

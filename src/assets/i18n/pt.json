@@ -134,6 +134,7 @@
     "REQUIRED_SKILLS_NOT_AVAILABLE": "There are not required skills available",
     "REQUIRED_EDUCATIONS": "Required Degrees",
     "REQUIRED_EDUCATIONS_NOT_AVAILABLE": "There are not required degrees available",
+    "REQUIRED_EXPERIENCE": "Required Experience",
     "REQUIRED_EXPERIENCES": "Required Experiences",
     "REQUIRED_EXPERIENCES_NOT_AVAILABLE": "There are not required experiences available",
     "ORGANIZATION": "Organization",
@@ -405,6 +406,7 @@
     "TEACHING_COURSES": "Cursos de Ensino",
     "SMART_BADGES": "Selos inteligentes",
     "CV": "CV",
+    "DSS_CV_RE_DESIGN": "Curriculum Redesign",
     "BEST_CAREER_OPTIONS": "Best Career Options",
     "CAREER_ADVISOR": "Career Advisor",
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
@@ -430,7 +432,7 @@
     }
   },
   "DSS_CV_RE_DESIGN": {
-    "TITLE": "DSS Curriculum Re-design",
+    "TITLE": "Curriculum Redesign",
     "FOOTER_BAR_CHART": "Course Suitability Rating for skill ({{skill_title}})",
     "MISSING_SKILLS": "Missing Skills",
     "RECOMMENDED_COURSES": "Recommended Courses",
@@ -536,7 +538,7 @@
     "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
     "BUTTON": {
       "ENROLL_TO_COURSE" : "Enroll me to the course",
-      "UNENROLL_TO_COURSE" : "Delete my enrollment to the course",
+      "UNENROLL_TO_COURSE" : "Leave course",
       "TOUGH_THE_COURSE" : "Set me as teacher",
       "UNTOUGH_THE_COURSE" : "Delete me from the teacher of this course",
       "COURSE_DONE" : "Set as done",
@@ -736,6 +738,18 @@
        "VETO":  {
         "LABEL": "Veto",
         "PLACEHOLDER": "a number"
+       },
+       "PREFERENCE":  {
+        "LABEL": "Preference",
+        "PLACEHOLDER": "a number"
+       },
+       "INDIFFERENCE":  {
+        "LABEL": "Indifferance",
+        "PLACEHOLDER": "a number"
+       },
+       "CRITERIA":  {
+        "LABEL": "Criteria",
+        "PLACEHOLDER": "the criteria ('linear with indifference threshold', 'usual', 'level')"
        }
      },
      "ALTERNATIVE": {
@@ -779,8 +793,8 @@
     "SIZE": "Size"
   },
   "UPLOAD_CV_KG": {
-    "BUTTON": "Upload CV to the KG",
-    "TITLE": "Upload CV to the Knowledge Graph",
+    "BUTTON": "Upload CV",
+    "TITLE": "Upload CV",
     "DESCRIPTION": "Here you can upload your CV in txt format",
     "CV_PROCESSED_MESSAGE": "The CV has been procesed"
   },

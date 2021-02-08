@@ -346,10 +346,12 @@ selected(event: MatAutocompleteSelectedEvent): void {
     let finalSkillList = [];
 
     this.skills.forEach(element => {
-      finalSkillList.push({id: element.id});
+      finalSkillList.push({id: element.id, name: element.name});
     });
     //console.log(this);
-    let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en')
+    
+    let newDateToday = formatDate(new Date(), 'yyyy-MM-dd', 'en')
+          
         /*
         const obj = {
           "name": this.courseName,
@@ -367,12 +369,14 @@ selected(event: MatAutocompleteSelectedEvent): void {
         "description": this.courseDescription,
         "semester": this.courseSemester,
         "skills": finalSkillList,
-        "events": this.events
+        "events": this.events,
+        "updatedDate": newDateToday
         };       
         //console.log(obj);
         
         if (this.mode=='Create') {
-    
+          
+
           this.cs.addCourse(obj).subscribe(
             res => {
               //console.log("User created");

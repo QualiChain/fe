@@ -71,11 +71,12 @@ export class MCDSSComponent implements OnInit {
   criteriaCtrl = new FormControl();
   
   
- methodsTranslator = {'maut': 'MAUT', 'topsis': 'TOPSIS', 'electreI': 'ELECTRE I'} 
+ methodsTranslator = {'maut': 'MAUT', 'topsis': 'TOPSIS', 'electreI': 'ELECTRE I', 'prometheeII': 'PROMETHEE II'} 
  methods: any[] = [
   {id: 'maut', name: 'MAUT'},
   {id: 'topsis', name: 'TOPSIS'},
-  {id: 'electreI', name: 'ELECTRE I'}
+  {id: 'electreI', name: 'ELECTRE I'},
+  {id: 'prometheeII', name: 'PROMETHEE II'}
   ];
   selectedMethod: string = "";
   agreement_threshold: number = 1;
@@ -161,25 +162,38 @@ checkboxLabel(row: any): string {
     let criteriasWeights = [];
     let criteriasTypes = [];
     let criteriasVetos = [];
+    let criteriaspreferences = [];
+    let criteriasIndifferences = [];
+    let criteriaCriterias = [];
     for (let index = 0; index < numCriterias; index++) {
       criteriasLabels.push(this.dynamicFormCriterias.value.Criterias[index].label);
       criteriasWeights.push(+this.dynamicFormCriterias.value.Criterias[index].weight);
       criteriasTypes.push(+this.dynamicFormCriterias.value.Criterias[index].type);
-      criteriasVetos.push(+this.dynamicFormCriterias.value.Criterias[index].veto_thresholds);      
+      criteriasVetos.push(+this.dynamicFormCriterias.value.Criterias[index].veto_thresholds);
+
+      criteriaspreferences.push(+this.dynamicFormCriterias.value.Criterias[index].preference_thresholds);
+      criteriasIndifferences.push(+this.dynamicFormCriterias.value.Criterias[index].indifference_thresholds);
+      criteriaCriterias.push(this.dynamicFormCriterias.value.Criterias[index].criteria_thresholds);
     }
 
     let criteriaDetails =
       {
         "Number_of_criteria": numCriterias,
         "Weights": criteriasWeights,
-        "Optimization_Type": criteriasTypes,
-        
+        "Optimization_Type": criteriasTypes,        
       };
 
     if (this.selectedMethod=='electreI') {
       let agreement_threshold_number = +this.agreement_threshold;
       criteriaDetails["Agreement_Threshold"] = agreement_threshold_number;
       criteriaDetails["Veto_Thresholds"] = criteriasVetos;        
+    }
+    else if (this.selectedMethod=='prometheeII') {
+      
+      criteriaDetails["Preference_Thresholds"] = criteriaspreferences;
+      criteriaDetails["Indifference_Thresholds"] = criteriasIndifferences;
+      criteriaDetails["Criteria_Types"] = criteriaCriterias;
+
     }
     
     let alternativesData = [];
@@ -330,6 +344,7 @@ checkboxLabel(row: any): string {
       (<HTMLInputElement>document.getElementById("value_"+index_alternative+"_"+index_criteria)).value=newValue;
     }
     this.dynamicForAlternatives.value.Alternatives[index_alternative].Values[index_criteria].value = newValue;
+    //console.log(this.dynamicForAlternatives.value.Alternatives);
   }
 
   // convenience getters for easy access to form fields
@@ -359,6 +374,9 @@ checkboxLabel(row: any): string {
         weight: [1, Validators.required],
         type: [0, [Validators.required]],
         veto_thresholds: [0, [Validators.required]],
+        preference_thresholds: [0, [Validators.required]],
+        indifference_thresholds: [0, [Validators.required]],
+        criteria_thresholds: ['usual', [Validators.required]],
       }));
 
       //this.dynamicForAlternatives.value.Alternatives[index_alternative].Values[index_criteria].value
@@ -391,7 +409,7 @@ checkboxLabel(row: any): string {
       //tmpArray.push({'id':index, 'value': index*2});      
       tmpArray.push(
         this.formBuilder.group({
-          value: 1
+          value: 0
         })
       );
     }

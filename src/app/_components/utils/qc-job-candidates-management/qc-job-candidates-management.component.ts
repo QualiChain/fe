@@ -27,6 +27,15 @@ export class QcJobCandidatesManagementComponent implements OnInit {
 
   public chartOptions: any = {
     responsive: true,
+    tooltips: {
+      enabled: true,
+      mode: 'single',
+      callbacks: {
+        label: function (tooltipItems, data) {
+          return data.datasets[0].data[tooltipItems.index] + ' %';
+        }
+      }
+    },
       plugins: {
       datalabels: {
         display: true,
@@ -41,7 +50,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
       
       },
       deferred: false,
-      legend: false
+      legend: false,
     },
 
   };
@@ -93,8 +102,10 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   sortList(sort: Sort) { 
     let paginator = {};
     let localStorageData = JSON.parse(localStorage.getItem('qc.candidatesList'));
-    if(localStorageData.hasOwnProperty('paginator')){
-      paginator = localStorageData.paginator;
+    if (localStorageData) {
+      if(localStorageData.hasOwnProperty('paginator')){
+        paginator = localStorageData.paginator;
+      }
     }
     localStorage.setItem('qc.candidatesList', JSON.stringify({'sort': sort, 'paginator':paginator}));
   }
@@ -157,6 +168,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   }
 
   getCandidates(jobId: any): void {
+    console.log(jobId);
     this.showSpinner = true;
     //only admin users or recuiters can load candidates list
     //if (this.isAdmin || this.isRecruiter) {

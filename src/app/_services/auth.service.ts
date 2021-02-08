@@ -222,16 +222,18 @@ export class AuthService {
     });
 
     if (data.succeeded) {
+      localStorage.setItem('token', data.response_data.token); 
       let userID = data.response_data.user.id;
       let userQCData: any = await this.getUserAsyncInAuth(userID);
       userQCData['roles'] = data.response_data.user.roles;
       
       if (userQCData.hasOwnProperty('id')){
         myAuthObj = this.createCurentUserData(userQCData);
-        localStorage.setItem('token', data.response_data.token); 
+        //localStorage.setItem('token', data.response_data.token); 
       }
       else {
-        myAuthObj = { authenticated: false, message: ""}  
+        myAuthObj = { authenticated: false, message: ""};
+        localStorage.removeItem('token');
       }
 
     }
@@ -245,7 +247,7 @@ export class AuthService {
 
   async getUserAsyncInAuth(userId: any) {
     let headers = this.createQCAuthorizationHeader();
-
+console.log(headers);
     let data = await this.httpClient.get(`${this.uriUsers}/${userId}`, {headers:headers}).toPromise().catch(()=>
     {
         return {};

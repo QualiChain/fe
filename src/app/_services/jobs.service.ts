@@ -19,7 +19,8 @@ export class JobsService {
     private http: HttpClient) { }
 
   addJob(dataIn: any) {
-    let headers = this.authService.createQCAuthorizationHeader();
+    //let headers = this.authService.createQCAuthorizationHeader();
+    let headers = this.authService.createQCAuthorizationHeaderText();
 
     return this.http.post(`${this.jobsURL}`, JSON.stringify(dataIn), {headers:headers}).
     pipe(
@@ -72,7 +73,8 @@ export class JobsService {
 
 
     updateJob(jobId: number, dataIn: any) {
-      let headers = this.authService.createQCAuthorizationHeader();
+      //let headers = this.authService.createQCAuthorizationHeader();
+      let headers = this.authService.createQCAuthorizationHeaderText();
 
       return this.http.put(`${this.jobsURL}/${jobId}`, JSON.stringify(dataIn), {headers:headers}).
       pipe(
@@ -89,6 +91,7 @@ export class JobsService {
       //console.log(userId);
       //console.log(jobId);    
       let headers = this.authService.createQCAuthorizationHeader();
+      //let headers = this.authService.createQCAuthorizationHeaderText();
 
       return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, JSON.stringify(dataIn), {headers:headers}).
       pipe(
@@ -119,8 +122,8 @@ export class JobsService {
 
 
     getJobCandidats(jobId: number) {
-      let headers = this.authService.createQCAuthorizationHeader();
-
+      let headers = this.authService.createQCAuthorizationHeader();      
+      
       return this.http.get(`${this.jobsURL}/${jobId}/candidates`, { headers:headers }).
       pipe(
          map((data: any) => {
