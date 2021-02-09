@@ -130,7 +130,15 @@ export class QcJobCandidatesManagementComponent implements OnInit {
         alternativeValue = this.selectedCandidates[i].candidateName+" "+this.selectedCandidates[i].candidateSurname;
       }
       options['alternative'].push(alternativeValue);
-      options['values'].push(this.selectedCandidates[i].expsalary+"|"+this.selectedCandidates[i].score);
+      let salary = 0;
+      if (this.selectedCandidates[i].expsalary) {
+        salary= this.selectedCandidates[i].expsalary
+      }
+      let score = 0;
+      if (this.selectedCandidates[i].score) {
+        score= this.selectedCandidates[i].score
+      }
+      options['values'].push(salary+"|"+score);
 
     }
 
