@@ -57,12 +57,12 @@
                   </button>    
 
                   <span *appCanAccess="['edit_job_post']">
-                    <button *ngIf="((element.creator_id.toString()==':'+currentUser.id.toString()) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
+                    <button *ngIf="((element.creator_id==':'+currentUser.id.toString()) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
                       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
                     </button>    
                   </span>
                   <span *appCanAccess="['delete_job_post']">
-                    <button *ngIf="((element.creator_id.toString()==':'+currentUser.id.toString()) || isAdmin)" class="btn btn-danger" (click)="confirmDialog(element.id, element.Label)">
+                    <button *ngIf="((element.creator_id==':'+currentUser.id.toString()) || isAdmin)" class="btn btn-danger" (click)="confirmDialog(element.id, element.Label)">
                       <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
                     </button>
                   </span>
@@ -91,7 +91,7 @@
         <!-- employmentType Column -->
         <ng-container matColumnDef="employment_type">
           <th mat-header-cell *matHeaderCellDef > {{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+element.contractType | uppercase | translate }} </td>
+          <td mat-cell *matCellDef="let element"> <span *ngIf="element.contractType">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+element.contractType | uppercase | translate }} </span></td>
         </ng-container>
     
         <!-- level Column -->

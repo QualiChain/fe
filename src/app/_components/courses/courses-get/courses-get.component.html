@@ -7,7 +7,7 @@
       </button>          
       
       <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner"></mat-spinner>
-
+      --isUserAsDone:{{isUserAsDone}}--isUserAsEnrolled:{{isUserAsEnrolled}}---isUserAsTaught:{{isUserAsTaught}}--
       <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && !isUserAsTaught && (isStudent || isEmployee)" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > assignment_turned_in </i> {{ 'COURSE.BUTTON.ENROLL_TO_COURSE' | translate }}
       </button>
@@ -30,11 +30,11 @@
       <button *ngIf="!loadSpinner && isUserAsTaught && isProfessor" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNTOUGH_THE_COURSE' | translate }}
       </button>
-      <!--  
-      <button *ngIf="isAdmin || isProfessor" class="btn btn-primary" (click)="openDialogUserSelection(courseData.courseid, this.currentUser.id)">
+      
+      <button *ngIf="isAdmin" class="btn btn-primary" (click)="openDialogUserSelection(courseData.courseid, this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > add </i> {{ 'COURSE.BUTTON.ADD_NEW_RELATION' | translate }}
       </button>      
-      -->
+      
     </div>
 
     <div class="row"><br></div>
@@ -130,7 +130,12 @@
                 </button>
                 <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', element.user.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
-                </button>                
+                </button>
+
+                <button *ngIf="(isAdmin || isProfessor)" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid, element.user.id)">
+                  <i _ngcontent-axy-c0="" class="material-icons small" > done </i> {{ 'COURSE.BUTTON.COURSE_DONE' | translate }}
+                </button>
+
               </td>
             </ng-container>
             <!-- surname Column -->

@@ -15,6 +15,8 @@ import {FormControl} from '@angular/forms'
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+import { AuthService } from '../../../_services/auth.service';
+import User from '../../../_models/user';
 
 export interface Skill {
   name: string;
@@ -73,14 +75,18 @@ export class CoursesEditComponent implements OnInit {
   allSkills: Skill[] = [];
   filteredSkills: Observable<string[]>;
   
+  currentUser: User;
+
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
+    public authservice: AuthService,
     private qcStorageService: QCStorageService,
     private ss: SkillsService,
     private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private cs: CoursesService) {
     //this.createForm();
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
@@ -181,7 +187,7 @@ selected(event: MatAutocompleteSelectedEvent): void {
     if (!this.userdata) {
       this.userdata = {id:0};
     }
- 
+    //console.log(this.currentUser.id);
 
     this.allSkills = [];
     this.ss.getSkills().subscribe(
@@ -383,10 +389,30 @@ selected(event: MatAutocompleteSelectedEvent): void {
               //console.log(res);
               var splitted = res.split("=", 2); 
               //console.log(splitted[1]);
+              let courseId = splitted[1];
+              console.log(courseId);
+              let dataToPost = {
+                "course_id": courseId,
+                "course_status": 'taught'
+                };
+              
+                this.cs
+                .enrollUser(this.currentUser.id, dataToPost).subscribe(
+                  data => {
+                    //console.log("enroll user!!");
+                    this.router.navigate(["/courses"]);
+                  },
+                error => {
+                  console.log("Error enrolling user");     
+                  this.router.navigate(["/courses"]);                 
+
+                }
+              );
+              //the user will be added as techer
               //after create the user 
               //window.location.href="/profiles";
               //this.router.navigate(["/profiles/"+this.userdata.id]);
-              this.router.navigate(["/courses"]);
+              //this.router.navigate(["/courses"]);
             },
             error => {
               alert("Error creating course!!");

@@ -171,7 +171,10 @@ export class JobsGetComponent implements OnInit {
         .getJob(id).subscribe(
           (dataJob: Job) => {
             //console.log("job in db");
-            //console.log(dataCourse);
+            //console.log(dataJob);
+            if(!dataJob.skillReq) {
+              dataJob.skillReq = [];
+            }
             this.jobData = dataJob;
           },
           error => {

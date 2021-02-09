@@ -51,6 +51,7 @@ export class CoursesGetComponent implements OnInit {
   
   currentUser: User;
   enrolledUsers: any[] = [];
+  enrolledProfessors: any[] = [];
   professorList = new MatTableDataSource([]);
   enrolledUsersStatusEnrolled = new MatTableDataSource([]);
   enrolledUsersStatusDone = new MatTableDataSource([]);
@@ -62,7 +63,7 @@ export class CoursesGetComponent implements OnInit {
   isUserAsTaught: boolean = false;
 
   grade: Number;
-
+ 
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
@@ -73,7 +74,10 @@ export class CoursesGetComponent implements OnInit {
     private translate: TranslateService,
     public dialog: MatDialog,
     public awardDialog: MatDialog,
-  ) { }
+  ) { 
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
 
   isLogged = this.appcomponent.isLogged;
   isAdmin = this.appcomponent.isAdmin;
@@ -151,7 +155,9 @@ export class CoursesGetComponent implements OnInit {
       this.grade = result;
 
       if (result>=0) {
-        this.relationUserCourse(courseId, 'add' ,'done', userId)
+console.log(result);
+        //this.relationUserCourse(courseId, 'delete' ,'enrolled', userId);
+        this.relationUserCourse(courseId, 'add' ,'done', userId);
       }
     });
   }
@@ -207,6 +213,39 @@ export class CoursesGetComponent implements OnInit {
       if (id>0) {
         //console.log(id);
 
+        //get the list of courses done by the user to know if he is in the list (used to hide/show buttons)
+        this.cs
+        .getCompletedCourseByUserId(this.currentUser.id)
+        .subscribe((coursesData: any[]) => {
+            //console.log(coursesData);
+            coursesData.forEach(element => {              
+              if (element.course.courseid==id) {
+                //this.userDoneThisCourse = true;
+                this.isUserAsDone = true;
+              }
+            });
+        },
+        error => {            
+          console.log("error getting courses by user id")
+        });
+
+        //get list of couses teached by the user to know if he is in the list
+        this.cs
+          .getTeachingCourseByUserId(this.currentUser.id)
+          .subscribe((data: any[]) => {
+            //console.log(data);
+            data.forEach((element, index) => {         
+                //console.log(element);
+                if (element.course.courseid==id) {
+                  this.isUserAsTaught = true;
+                }
+            });                        
+          },
+          error => {            
+            console.log("error getting courses toght by user id")
+          });
+          
+                
         this.cs
         .getCourse(id).subscribe(
           dataCourse => {
@@ -287,6 +326,9 @@ export class CoursesGetComponent implements OnInit {
   }
   
   getEnrolledUsersByCourse(courseId: Number) {
+
+
+    
     this.cs
     .getEnrolledUserByCourseId(courseId).subscribe(
     (dataEnrolledUsers: any[]) => {
@@ -300,7 +342,7 @@ export class CoursesGetComponent implements OnInit {
       console.log("error recovering enrolled users by course id")
     });
     
-
+/*
     this.cs.getUserEnrollmentStatusByCourseId(courseId, this.currentUser.id, 'done').subscribe(
       dataDone => {
         this.isUserAsDone = dataDone;
@@ -308,7 +350,8 @@ export class CoursesGetComponent implements OnInit {
       error => {
         this.isUserAsDone = false;    
       });
-
+*/
+/*
     this.cs.getUserEnrollmentStatusByCourseId(courseId, this.currentUser.id, 'taught').subscribe(
       dataTaught => {
         this.isUserAsTaught = dataTaught;
@@ -316,6 +359,7 @@ export class CoursesGetComponent implements OnInit {
       error => {
         this.isUserAsTaught = false;    
       });
+*/      
   }
 
   relationUserCourse(courseId: number, action: string, type: string, userId: number): void {
