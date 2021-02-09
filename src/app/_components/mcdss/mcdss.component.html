@@ -187,11 +187,11 @@
                 
                 <div class="row1">
                     <div class="col col-lg-12">
-                        <button class="btn btn-primary" (click)="addFormGroupItem($event, 'criteria')">
+                        <button class="btn btn-primary" (click)="addFormGroupItem($event, 'criteria', '')">
                             <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDSS.BUTTON.ADD_CRITERIA' | translate }}
                         </button>
                 
-                        <button [disabled]="t.controls.length==0" class="btn btn-primary" (click)="addFormGroupItem($event, 'alternative')">
+                        <button [disabled]="t.controls.length==0" class="btn btn-primary" (click)="addFormGroupItem($event, 'alternative', '')">
                             <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'MCDSS.BUTTON.ADD_ALTERNATIVE' | translate }}
                         </button>
                 

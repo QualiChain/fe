@@ -7,7 +7,7 @@
           <button *ngIf="((isProfessor && jobData.creator_id==currentUser.id) || (isRecruiter && jobData.creator_id==currentUser.id) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', jobData.id, 'edit']"></button>
 -->
 
-          <button class="btn btn-primary" *ngIf="((jobData.creator_id.toString()==':'+currentUser.id.toString()) && authservice.checkIfPermissionsExistsByUserRoles(['edit_job_post']))"
+          <button class="btn btn-primary" *ngIf="((jobData.creator_id==':'+currentUser.id.toString()) && authservice.checkIfPermissionsExistsByUserRoles(['edit_job_post']))"
           [routerLink]="['/jobs', jobData.id, 'edit']"
           >       
             <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
@@ -139,8 +139,8 @@
     
     <!--     
     <div class="col" [hidden]="!(isAdmin || isRecruiter)">
-    -->    
-    <div class="col" [hidden]="(jobData.creator_id.toString()!=':'+currentUser.id.toString()) && !isAdmin" *appCanAccess="['view_recruitment']">      
+    -->        
+    <div class="col" [hidden]="(jobData.creator_id!=':'+currentUser.id.toString()) && !isAdmin" *appCanAccess="['view_recruitment']">      
       <app-qc-job-candidates-management [jobId]="jobData.id"  [reload]="cntReloads"></app-qc-job-candidates-management>
     </div>
 

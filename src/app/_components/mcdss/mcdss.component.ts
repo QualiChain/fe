@@ -5,6 +5,7 @@ import { McdssService } from '../../_services/mcdss.service';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
+import { ActivatedRoute } from '@angular/router';
 
 export interface mcdssOutput {
   Alternative: string;
@@ -70,6 +71,10 @@ export class MCDSSComponent implements OnInit {
   dynamicForAlternatives: FormGroup;
   criteriaCtrl = new FormControl();
   
+  criteriasURL: string[];
+  alternativesURL: string[];
+  valuesURL: string[];
+  defaultValue: any[] = [];
   
  methodsTranslator = {'maut': 'MAUT', 'topsis': 'TOPSIS', 'electreI': 'ELECTRE I', 'prometheeII': 'PROMETHEE II'} 
  methods: any[] = [
@@ -107,12 +112,37 @@ export class MCDSSComponent implements OnInit {
 
 
   constructor(
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private McdssService: McdssService,
   ) { }
 
+  ngAfterViewInit() {
+    //console.log("ngAfterViewInit");
+    //load default values
+    if (this.valuesURL.length>0) {      
+      for (let i = 0; i < this.valuesURL.length ; i++) {                
+        this.defaultValue[i]=[];
+        let valuesAlternative = this.valuesURL[i];
+        let arrayValuesAlternative = valuesAlternative.split("|");        
+        for (let j = 0; j < arrayValuesAlternative.length ; j++) {          
+          this.defaultValue[i].push(arrayValuesAlternative[j]);
+          let newValue = arrayValuesAlternative[j];
+          (<HTMLInputElement>document.getElementById("value_"+i+"_"+j)).value=newValue;    
+          this.dynamicForAlternatives.value.Alternatives[i].Values[j].value = newValue;
+        }        
+      }
+    }
+
+   }
+
+
   ngOnInit(): void {
     
+    this.route.queryParamMap.subscribe(params => this.criteriasURL = params.getAll('criteria'));
+    this.route.queryParamMap.subscribe(params => this.alternativesURL = params.getAll('alternative'));
+    this.route.queryParamMap.subscribe(params => this.valuesURL = params.getAll('values'));
+
     this.dataSource.sort = this.sort;
     this.dataSourceElectre.sort = this.sort;
     
@@ -124,10 +154,33 @@ export class MCDSSComponent implements OnInit {
       Alternatives: new FormArray([])
     });
     
+    
+
     //init table
-    this.addFormGroupItem(null,'criteria');
-    this.addFormGroupItem(null,'alternative');
-    this.addFormGroupItem(null,'alternative');
+    if (this.criteriasURL.length==0) {
+      this.addFormGroupItem(null,'criteria', "");
+    }
+    else {
+      for (let i = 0; i < this.criteriasURL.length ; i++) {
+        //console.log(i);
+        this.addFormGroupItem(null,'criteria', this.criteriasURL[i]);        
+      }
+    }
+    
+    if (this.alternativesURL.length==0) {
+      this.addFormGroupItem(null,'alternative', "");
+      this.addFormGroupItem(null,'alternative', "");
+    }
+    else {
+      for (let i = 0; i < this.alternativesURL.length ; i++) {
+        this.addFormGroupItem(null,'alternative', this.alternativesURL[i]);
+      }
+    }
+
+    
+    
+    
+
   }
 
   trackByIdx(index: number, obj: any): any {
@@ -367,10 +420,10 @@ checkboxLabel(row: any): string {
   
   }
 
-  addFormGroupItem(e, type) {
+  addFormGroupItem(e, type, defaultValue) {
     if (type=='criteria') {
       this.t.push(this.formBuilder.group({
-        label: ['', [Validators.required]],
+        label: [defaultValue, [Validators.required]],
         weight: [1, Validators.required],
         type: [0, [Validators.required]],
         veto_thresholds: [0, [Validators.required]],
@@ -394,7 +447,7 @@ checkboxLabel(row: any): string {
     else if (type=='alternative') {
       this.alternative.push(
         this.formBuilder.group({
-          Name: ['', Validators.required],                              
+          Name: [defaultValue, Validators.required],                              
           //Values: this.formBuilder.array([this.createAlternativeValuesItem()]),
           Values: this.createAlternativeValuesItem(),
         }));

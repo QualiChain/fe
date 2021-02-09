@@ -11,6 +11,8 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-
 import { MatDialog } from '@angular/material/dialog';
 //import { MatDialogRef } from '@angular/material/dialog';
 import { CVDialog_modal } from '../../../_components/profiles/profiles-view/profiles-view.component';
+import {SelectionModel} from '@angular/cdk/collections';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-qc-job-candidates-management',
@@ -55,8 +57,11 @@ export class QcJobCandidatesManagementComponent implements OnInit {
 
   };
 
-  displayedColumns: string[] = ['candidateSurname', 'candidateName', 'available', 'expsalary', 'score', 'action'];
+  displayedColumns: string[] = ['checkbox', 'candidateSurname', 'candidateName', 'available', 'expsalary', 'score', 'action'];
   dataSource = new MatTableDataSource([]);
+  
+  selection = new SelectionModel<any>(true, []);
+
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
   pageSize: number = 5;
@@ -75,6 +80,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
     private translate: TranslateService,
     public dialogModal: MatDialog, 
     public CVDialog: MatDialog,
+    private route: ActivatedRoute, private router: Router
   ) { }
 
   isLogged = this.appcomponent.isLogged;
@@ -85,6 +91,51 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   isStudent = this.appcomponent.isStudent;
   isEmployee = this.appcomponent.isEmployee;   
   jobCandidates: any =[]
+  
+  selectedCandidates = [];
+
+  changCheckbox(event, row) {
+    if (event.checked) {
+      this.selectedCandidates.push(row);
+    }
+    else {
+      let posToDelte = 0;
+      let posFosFound = false;
+      for (let i = 0; i < this.selectedCandidates.length; i++) {
+        if (this.selectedCandidates[i].id==row.id) {
+          console.log("delete row")
+          posFosFound = true;
+          posToDelte = i;
+        }
+      }
+      if (posFosFound) {
+        this.selectedCandidates.splice(posToDelte, 1);
+      }      
+    }
+  }
+
+  openMCDSS() {       
+    let options = {};
+    options['criteria'] = ['salary', 'score'];
+    options['alternative'] = [];
+    options['values'] = [];
+
+    for (let i=0; i<this.selectedCandidates.length; i++) {
+     
+      let alternativeValue = "";
+      if ((this.selectedCandidates[i].candidateName=="") && (this.selectedCandidates[i].candidateSurname=="")) {
+        alternativeValue = this.selectedCandidates[i].name
+      }
+      else {
+        alternativeValue = this.selectedCandidates[i].candidateName+" "+this.selectedCandidates[i].candidateSurname;
+      }
+      options['alternative'].push(alternativeValue);
+      options['values'].push(this.selectedCandidates[i].expsalary+"|"+this.selectedCandidates[i].score);
+
+    }
+
+    this.router.navigate(['/MCDSS'], { queryParams: options });
+  }
 
   openUserCV(userId: number) {
     
@@ -168,7 +219,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   }
 
   getCandidates(jobId: any): void {
-    console.log(jobId);
+    //console.log(jobId);
     this.showSpinner = true;
     //only admin users or recuiters can load candidates list
     //if (this.isAdmin || this.isRecruiter) {
