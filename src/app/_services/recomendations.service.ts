@@ -31,28 +31,37 @@ export class RecomendationsService {
     let datatCVToSend = dataCVs;
     //console.log(datatCVToSend);
     let skillsCV = [];
-    dataCVs['skills'].forEach(element => {
-    //console.log(element);
-    skillsCV.push({
-                "label":element.label,
-                "comment":element.comment,
-                "proficiencyLevel":element.proficiencyLevel, 
-                "priorityLevel": element.priorityLevel,                
-                "uri": element.uri, 
-                "id": element.id});
-    });
+    if ( dataCVs.hasOwnProperty('skills') ) {
+      console.log("dins skills!");
+      dataCVs['skills'].forEach(element => {
+      //console.log(element);
+      skillsCV.push({
+                  "label":element.label,
+                  "comment":element.comment,
+                  "proficiencyLevel":element.proficiencyLevel, 
+                  "priorityLevel": element.priorityLevel,                
+                  "uri": element.uri, 
+                  "id": element.id});
+      });
+    }
     //console.log(skillsCV);
 
-    let educationCV = [];
-    dataCVs['education'].forEach(element => {
-      educationCV.push({"title":element.title,"from":element.from,"to":element.to,"organisation":element.organisation,"description":element.description});
-    });
+    let educationCV = [];    
+    if ( dataCVs.hasOwnProperty('education') ) {
+      console.log("dins education!");
+      dataCVs['education'].forEach(element => {
+        educationCV.push({"title":element.title,"from":element.from,"to":element.to,"organisation":element.organisation,"description":element.description});
+      });
+    }
     //console.log(educationCV);
 
     let workHistoryCV = [];
-    dataCVs['workHistory'].forEach(element => {
-      workHistoryCV.push({"title":element.position,"from":element.from,"to":element.to,"organisation":element.employer,"description":""});
-    });
+    if ( dataCVs.hasOwnProperty('workHistory') ) {
+      console.log("dins workHistory!");
+      dataCVs['workHistory'].forEach(element => {
+        workHistoryCV.push({"title":element.position,"from":element.from,"to":element.to,"organisation":element.employer,"description":""});
+      });
+    }
     //console.log(workHistoryCV);
 
     datatCVToSend = {

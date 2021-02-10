@@ -648,7 +648,8 @@
     "NO": "No",
     "YES": "Yes",
     "HELP": "Help",
-    "SEND": "Send"
+    "SEND": "Send",
+    "UNASSIGN": "Unassign"
   },
   "ACTION": "Action",
   "FILTER": "Filter",

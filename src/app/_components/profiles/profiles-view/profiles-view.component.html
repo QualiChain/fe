@@ -34,7 +34,7 @@
       </button>
     </span>
     <span *appCanAccess="['edit_other_profile']">
-      <button *ngIf="userId.toString()!=currentUser?.id.toString()" class="btn btn-primary" [routerLink]="['/profiles', userdata?.id, 'edit']">
+      <button *ngIf="(userId.toString()!=currentUser?.id.toString() && isAdmin)" class="btn btn-primary" [routerLink]="['/profiles', userdata?.id, 'edit']">
         <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
         {{ 'BUTTON.EDIT' | translate }}
       </button>
@@ -124,9 +124,12 @@
    #acc="ngbAccordion"
 -->
         <ngb-accordion *ngIf="userdata.role.toLowerCase()!='recruiter'">
-
           
+          <!--
                 <ngb-panel  id="toggle-0" title="{{ 'PROFILES.CARRER_PATH' | translate }}" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+          -->
+                <ngb-panel  id="toggle-0" title="{{ 'PROFILES.CARRER_PATH' | translate }}" 
+                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee))">
                   <ng-template ngbPanelContent>
                     <div class="">
                       <!--
@@ -138,72 +141,36 @@
                   </ng-template>
                 </ngb-panel>
 
+                <!--
                 <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+                -->
+                <ngb-panel id="toggle-1" title="{{ 'PROFILES.COMPLETED_COURSES' | translate }}" 
+                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee))">
                   <ng-template ngbPanelContent>
                       <div class="">
-                            <!--
-                            <ngb-tabset [justify]="currentJustify">
-                                    <ngb-tab id="tab-selectbyid-{{year}}"  title="Year {{year}}" *ngFor="let year of years; let i = index">
-                                      <ng-template ngbTabContent>
-                                            <div class="col-lg-4 completeCourseSectiontab">
-                                                    <div>
-                                                            <select class="form-control form-control-sm">
-                                                                    <option selected value="0">{{year}}.Specialisation Flow</option>
-                                                                    <option value="1">{{year}}.Specialisation Flow - One</option>
-                                                                    <option value="2">{{year}}.Specialisation Flow - Two</option>
-                                                                    <option value="3">{{year}}.Specialisation Flow - Three</option>
-                                                                  </select>
-                                                    </div>
-                                                    
-                                                    <div>
-                                                            <select class="form-control form-control-sm">
-                                                                    <option>Semester {{year}}.1</option>
-                                                                    <option>Semester {{year}}.2</option>
-                                                                    <option>Semester {{year}}.3</option>
-                                                                  </select>                                                
-        
-                                                    </div> 
-                                                
-                                            </div>
-                            -->                                            
-                                            <div class="completeCourseSectiontab" [ngClass]="{'col-lg-6':selectedCourse,'col-lg-12':!selectedCourse}">
-                                                
-                                                    <ul class="list-group list-group-flush">
-                                                        <li  *ngFor="let course of listOfCompletedCoursesByUser" class="list-group-item" >
-                                                          <a [routerLink]="" (click)="selectedCourse=course">{{course.course.name}}</a>
-                                                          <!--
-                                                          <table>
-                                                            <tr>
-                                                              <td><input type="checkbox" class="custom-control-input" id="check_box_course_{{course.course.courseid}}" value="{{course.course.courseid}}"> </td>
-                                                              <td><a [routerLink]="" (click)="selectedCourse=course">{{course.course.name}}</a></td>
-                                                            </tr>
-                                                          </table>  
-                                                          -->
-                                                        </li>
-                                                      </ul>
-                                            </div>
-                                            <div *ngIf="selectedCourse" class="col-lg-6 completeCourseSectiontab">
-                                              <div class=""><h3>{{selectedCourse.course.name}}</h3></div>
-                                              <div class="">{{selectedCourse.course.description}}</div>
-                                              <div class="">{{ 'COURSE.SCORE.LABEL' | translate }}: {{selectedCourse.grade}}</div>
-                                              <div class=""><br/><a class="btn btn-danger" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a> 
-                                               &nbsp; <a class="btn btn-success" [routerLink]="['/courses', selectedCourse.course.courseid]" >{{ 'BUTTON.VIEW_MORE' | translate }}</a>
-                                               
-                                              
-                                              </div>
-                                            </div>
-                          <!--
-                                      </ng-template>
-                                    </ngb-tab>
-                                    
-                                  </ngb-tabset>
-                          -->
+                        <div class="completeCourseSectiontab" [ngClass]="{'col-lg-6':selectedCourse,'col-lg-12':!selectedCourse}">
+                          <ul class="list-group list-group-flush">
+                            <li  *ngFor="let course of listOfCompletedCoursesByUser" class="list-group-item" >
+                              <a [routerLink]="" (click)="selectedCourse=course">{{course.course.name}}</a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div *ngIf="selectedCourse" class="col-lg-6 completeCourseSectiontab">
+                          <div class=""><h3>{{selectedCourse.course.name}}</h3></div>
+                          <div class="">{{selectedCourse.course.description}}</div>
+                          <div class="">{{ 'COURSE.SCORE.LABEL' | translate }}: {{selectedCourse.grade}}</div>
+                          <div class=""><br/><a class="btn btn-danger" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a> 
+                            &nbsp; <a class="btn btn-success" [routerLink]="['/courses', selectedCourse.course.courseid]" >{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+                          </div>
+                        </div>
                       </div>
-
                   </ng-template>
                 </ngb-panel>
-                
+                <!--
                 <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" *ngIf="userdata.role.toLowerCase()=='professor'">
+                -->                                
+                <ngb-panel id="toggle-2" title="{{ 'PROFILES.TEACHING_COURSES' | translate }}" 
+                  *ngIf="((userdata.id==currentUser.id) && (isProfessor))">
                   <ng-template ngbPanelContent>
                       <div class="">
                         <div class="row cv_add_course">
@@ -213,8 +180,6 @@
                             </button><br/>
                           </div>
                         </div>
-                        
-
                         <div class="accordion" id="accordionTeacherCourses">
                           <div class="card" *ngFor="let course of listOfCoursesByUser">
                             <div class="card-header" id="headingOne">
@@ -238,17 +203,6 @@
                                           <div><span *ngFor="let skill of skillsByCourseInfo[course.courseid]"><a href="/skills/{{skill.skill.id}}">{{skill.skill.name}}</a>, </span></div>
                                           <div *ngIf="skillsByCourseInfo[course.courseid].length==0">{{ 'COURSE.RELATED_SKILLS_NO_DATA' | translate }}</div>
                                       </div>
-                                      <!--
-                                      <div class="col-lg-6">
-                                          <div><h4>{{ 'COURSE.COURSE_BADGES' | translate }}</h4></div>                                            
-                                          <div>                                             
-                                             {{ 'COURSE.COURSE_BADGES_NO_DATA' | translate }}  &nbsp;
-                                      -->
-                                             <!--<span *ngFor="let badge of course.course_badges">{{badge}}, </span>-->
-                                      <!--
-                                          </div>                                      
-                                      </div>
-                                      -->
                                   </div>
                                   <div class="row ">&nbsp; </div>                                  
                                   <div *ngIf="userdata.id==currentUser.id" class="row courseActions">
@@ -285,7 +239,8 @@
                   </ng-template>
                 </ngb-panel>
 
-                <ngb-panel id="toggle-3" title="{{ 'PROFILES.SMART_BADGES' | translate }}">
+                <ngb-panel id="toggle-3" title="{{ 'PROFILES.SMART_BADGES' | translate }}"
+                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee || isProfessor))">
                   <ng-template ngbPanelContent>
                     <div class="col-lg-12 smartBudgesBody">
 
@@ -344,23 +299,21 @@
                               -->
                               
                     </div>
-                            
-                    
-                    
-                  
 
                   </ng-template>
                 </ngb-panel>
 
-                <ngb-panel id="toggle-4" title="{{ 'PROFILES.COMPETENCY_DEVELOPMENT' | translate }}" *ngIf="userdata.role.toLowerCase()=='professor' || userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+                <ngb-panel id="toggle-4" title="{{ 'PROFILES.COMPETENCY_DEVELOPMENT' | translate }}" 
+                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee || isProfessor))">
                   <ng-template ngbPanelContent>
                     <app-competency-development userId="{{userdata.id}}"></app-competency-development>
                   </ng-template>
                 </ngb-panel>
 
         </ngb-accordion>
+        
+        <div class="row careeradvisor" *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee))">
 
-        <div class="row careeradvisor" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
             <div class="col col-lg-8"> </div>
             <div class="col col-lg-2">
               
@@ -373,7 +326,7 @@
             
         </div>
 
-        <div class="row cv_gap_analysis" *ngIf="(userdata.role.toLowerCase()=='professor' && isProfessor)">
+        <div class="row cv_gap_analysis" *ngIf="(isProfessor)">
           <div class="col col-lg-8"> </div>
           <div class="col col-lg-2">            
             <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']">  
