@@ -328,7 +328,6 @@ export class ProfilesViewComponent implements OnInit {
       let authorizedViewOwnProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['view_own_profile']);
       let authorizedViewOtherProfile =  this.authservice.checkIfPermissionsExistsByUserRoles(['view_other_profile']);
 
-
       if (authorizedViewOtherProfile || (authorizedViewOwnProfile && (id.toString() == this.currentUser.id.toString()))) {
 
         //recover smart badges of the user
@@ -451,9 +450,9 @@ export class ProfilesViewComponent implements OnInit {
             //console.log("user in db");
             this.userdata = data;
             
-            console.log("curent user id:"+this.currentUser.id);
-            console.log("id user rec:"+this.userId);
-            console.log(this.currentUser);
+            //console.log("curent user id:"+this.currentUser.id);
+            //console.log("id user rec:"+this.userId);
+            //console.log(this.currentUser);
             if (this.userId.toString()==this.currentUser.id.toString()) {
               this.userdata['roles'] = this.currentUser['roles'];
             }
@@ -1105,33 +1104,38 @@ export class CVDialog_modal implements OnInit {
           this.skillsCV = data.skills;
           this.workHistoryCV = data.workHistory;
           this.educationHistoryCV = data.education;
+          if(data.skills){
            data.skills.forEach(element => {
             this.t.push(this.formBuilder.group({
               label: [element.label, [Validators.required]],
               proficiencyLevel: [element.proficiencyLevel, Validators.required],
               comment: [element.comment, [Validators.required]],      
             }));
-          });
-          data.workHistory
-          .forEach(element => {
-            this.w.push(this.formBuilder.group({
-              position: [element.position, Validators.required],
-              from: [element.from, [Validators.required]],
-              to: [element.to, [Validators.required]],
-              employer: [element.employer, [Validators.required]],
-            }));
-          });
-          data.education
-          .forEach(element => {
-            this.e.push(this.formBuilder.group({
-              title: [element.title, Validators.required],
-              from: [element.from, [Validators.required]],
-              to: [element.to, [Validators.required]],
-              organisation: [element.organisation, [Validators.required]],
-              description: [element.description, [Validators.required]],
-            }));
-          });  
-          
+            });
+          }
+          if(data.workHistory){
+            data.workHistory
+            .forEach(element => {
+              this.w.push(this.formBuilder.group({
+                position: [element.position, Validators.required],
+                from: [element.from, [Validators.required]],
+                to: [element.to, [Validators.required]],
+                employer: [element.employer, [Validators.required]],
+              }));
+            });
+          }
+          if(data.education){
+            data.education
+            .forEach(element => {
+              this.e.push(this.formBuilder.group({
+                title: [element.title, Validators.required],
+                from: [element.from, [Validators.required]],
+                to: [element.to, [Validators.required]],
+                organisation: [element.organisation, [Validators.required]],
+                description: [element.description, [Validators.required]],
+              }));
+            });  
+          }
           this.loadingSpinner = false;
         //}      
       },
@@ -1284,9 +1288,12 @@ addFormGroupItem(e, type) {
 onSubmit() {
   this.showError = false;
   this.loadingSpinner = true;
+  var userId: string = this.data.userId.toString();
+  var re = /:/gi;
+  var newsUserId: string = userId.replace(re, "");
 
   var dataToSend = {
-    'personURI': this.data.userId,
+    'personURI': ":"+newsUserId,
     'label':this.label,
     'targetSector': this.targetSector,
     'description': this.description,

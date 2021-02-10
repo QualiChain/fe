@@ -13,7 +13,10 @@ import { Role } from './_models/role';
 import { StorageService } from './_helpers/global';
 import { QCStorageService } from './_services/QC_storage.services';
 import { QCMatomoConnectorService} from './_services/qc-matomo-connector.service';
+import { allowedNodeEnvironmentFlags } from 'process';
 declare var $: any;
+import { CoursesService } from './_services/courses.service';
+import { JobsService } from './_services/jobs.service';
 
 // declare ga as a function to access the JS code in TS
 //declare let ga: Function;
@@ -36,6 +39,8 @@ export class AppComponent  implements OnInit {
   url = [];
 
   constructor(
+    private cs: CoursesService,
+    private js: JobsService,
     private mc: QCMatomoConnectorService,
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
@@ -119,6 +124,64 @@ export class AppComponent  implements OnInit {
     return hasTheRole;
   }
 
+  resolveAfter2Seconds(x) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(x);
+      }, 2000);
+    });
+  }
+
+  filterByCreator(userID) {
+    return function(element) {
+      return element.creator_id==":"+userID;
+    }
+  }
+
+  public listUsersICanView() {
+
+    
+      let listOfUsers = []
+      if ((this.isProfessor) || (this.isAcademicOrganisation)) {
+        //we need to recover my courses and all their learners 
+          this.cs
+             .getTeachingCourseByUserId(this.currentUser.id)
+             .subscribe((dataCourse: any[]) => {
+               dataCourse.forEach((elementCourse, index) => {  
+                  this.cs.getEnrolledUserByCourseId(elementCourse.course.courseid).subscribe((dataEnrolledUsers: any[]) => { 
+                     dataEnrolledUsers.forEach((elementEnrolled, index) => {  
+                       //console.log(elementEnrolled.user.id);
+                       listOfUsers[elementEnrolled.user.id] = true;
+                     });
+                 });
+               });
+             });
+      }
+   
+      if ((this.isRecruiter) || (this.isRecruitmentOrganisation)) {
+         //we need to recover the list of my job posts and their candidates
+          this.js.getJobs()
+          .subscribe((data: any[]) => {
+            let jobsFilteredList = [];
+            jobsFilteredList = (data.filter(this.filterByCreator(this.currentUser.id)));
+            jobsFilteredList.forEach((elementJob, index) => { 
+              console.log(elementJob);
+              this.js
+              .getJobCandidats(elementJob.id)
+              .subscribe((jobCandidates: any) => {
+                  jobCandidates.forEach((elementCandidate, index) => {    
+                    listOfUsers[elementCandidate.id] = true;
+                  });
+              });
+            });
+
+          });
+
+      }
+      return listOfUsers;
+    
+  }
+
   get isAdmin() {
     let isAdmin = false;
     let isAdministrator = false;
@@ -144,7 +207,21 @@ export class AppComponent  implements OnInit {
 
     let userIsRecruiter = (this.currentUser && (isAdmin || isRecruiter));
     //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
-    return isRecruiter;
+    return userIsRecruiter;
+  }
+
+  get isRecruitmentOrganisation() {
+    let isAdmin = false;
+    let isRecruitmentOrganisation = false;
+
+    isAdmin = this.currentUserHasThisRole(Role.admin.toLowerCase());
+    if (!isAdmin) {
+      isRecruitmentOrganisation = this.currentUserHasThisRole(Role['recruitment organisation'].toLowerCase());
+    }
+
+    let userIsRecruiterOrganisation = (this.currentUser && (isAdmin || isRecruitmentOrganisation));
+    //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.recruiter.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    return userIsRecruiterOrganisation;
   }
 
   get isProfessor() {
@@ -159,6 +236,20 @@ export class AppComponent  implements OnInit {
     let userIsProfessor = (this.currentUser && (isAdmin || isProfessor));
     //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.professor.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
     return userIsProfessor;
+  }
+
+  get isAcademicOrganisation() {
+    let isAdmin = false;
+    let isAcademicOrganisation = false;
+
+    isAdmin = this.currentUserHasThisRole(Role.admin.toLowerCase());
+    if (!isAdmin) {
+      isAcademicOrganisation = this.currentUserHasThisRole(Role['academic organization'].toLowerCase());
+    }
+
+    let userIsAcademicOrganisation = (this.currentUser && (isAdmin || isAcademicOrganisation));
+    //return this.currentUser && ((this.currentUser.role.toLowerCase() === Role.professor.toLowerCase()) || (this.currentUser.role.toLowerCase() === Role.admin.toLowerCase() || (this.currentUser.role.toLowerCase() === Role.administrator.toLowerCase())));
+    return userIsAcademicOrganisation;
   }
 
   get isStudent() {

@@ -7,7 +7,7 @@
       </button>          
       
       <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner"></mat-spinner>
-      --isUserAsDone:{{isUserAsDone}}--isUserAsEnrolled:{{isUserAsEnrolled}}---isUserAsTaught:{{isUserAsTaught}}--
+      
       <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && !isUserAsTaught && (isStudent || isEmployee)" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > assignment_turned_in </i> {{ 'COURSE.BUTTON.ENROLL_TO_COURSE' | translate }}
       </button>
@@ -94,8 +94,8 @@
                 <button class="btn btn-primary" [routerLink]="['/profiles', element.user.id]">
                   <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
-                <button *ngIf="(isAdmin || isProfessor)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', element.user.id)">
-                  <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
+                <button [disabled]="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==1" *ngIf="(isAdmin)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', element.user.id)">
+                  <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
                 </button>               
               </td>
             </ng-container>
@@ -129,7 +129,7 @@
                   <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
                 <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', element.user.id)">
-                  <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
+                  <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
                 </button>
 
                 <button *ngIf="(isAdmin || isProfessor)" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid, element.user.id)">
@@ -168,7 +168,7 @@
                   <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
                 <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', element.user.id)">
-                  <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.DELETE' | translate }}
+                  <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
                 </button>          
                 <button [hidden]="!isUserAsTaught && !isAdmin" *appCanAccess="['issue_smart_badge']" class="btn btn-primary" (click)="openAwardDialog(element.user.id, element)">
                   <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}

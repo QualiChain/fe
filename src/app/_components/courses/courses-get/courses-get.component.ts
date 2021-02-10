@@ -21,6 +21,8 @@ import { awardDialog_modal } from '../../../_components/award-smart-badge/award-
 
 export interface DialogData {
   grade: number;
+  courseId: number;
+  userId: number;
 }
 
 export interface DialogDataEnrollment {
@@ -111,6 +113,7 @@ export class CoursesGetComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       //console.log('The dialog was closed');  
       //console.log(result);
+/*
       if (result) {
 
         let dataToPost = {
@@ -138,7 +141,7 @@ export class CoursesGetComponent implements OnInit {
           
         });
       }
-      
+      */
       
     });
   }
@@ -147,17 +150,19 @@ export class CoursesGetComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogOverviewGradeDialog, {
       width: '450px',
       disableClose: true,
-      data: {grade: this.grade}
+      data: {courseId: courseId, userId: userId, grade: this.grade}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       //console.log('The dialog was closed');      
+      console.log(result);
       this.grade = result;
 
       if (result>=0) {
-console.log(result);
-        //this.relationUserCourse(courseId, 'delete' ,'enrolled', userId);
-        this.relationUserCourse(courseId, 'add' ,'done', userId);
+        console.log(result);  
+        this.getEnrolledUsersByCourse(courseId);
+        this.isUserAsEnrolled = true;
+        //this.relationUserCourse(courseId, 'add' ,'done', userId);
       }
     });
   }
@@ -459,9 +464,50 @@ console.log(result);
 })
 export class DialogOverviewGradeDialog {
 
+  showErrorMessage: boolean = false;
+  errorMessage: string = null;
+  showSpinner: boolean = false;
+
   constructor(
+    private cs: CoursesService,
     public dialogRef: MatDialogRef<DialogOverviewGradeDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+    setGradeToUser(courseId: number, userId: number): void {
+      console.log("setGradeToUser");
+      this.showSpinner = true;
+      this.errorMessage = null;
+      this.showErrorMessage = false;
+      let dataToPost = {
+          "course_id": courseId,
+          "course_status": "done",
+          "grade": +this.data.grade
+      };
+                    
+        this.cs
+        .enrollUser(userId, dataToPost).subscribe(
+          data => {
+            //console.log("enroll user!!");      
+            this.showSpinner = false;
+            this.dialogRef.close(true); 
+          },
+          error => {
+            console.log("Error enrolling user");                      
+            console.log(error);
+            this.showSpinner = false;
+            this.showErrorMessage = true;
+            this.errorMessage = error;
+          }
+        );
+  
+    }
+
+    sendGradeData() {
+      //console.log("sendGradeData");
+      //console.log(this.data.userId);
+      //console.log(this.data.courseId);
+      this.setGradeToUser(this.data.courseId, this.data.userId);      
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -505,6 +551,7 @@ export class DialogSelectUser {
     
 
   }
+
 
   enrollmentSelected(value) {
     //console.log(this.data.courseId);

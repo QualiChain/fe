@@ -13,6 +13,7 @@ import { AuthService } from '../../../_services';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { AppComponent } from '../../../app.component';
+import { CoursesService } from '../../../_services/courses.service';
 
 @Component({
   selector: 'app-profiles',
@@ -39,6 +40,7 @@ export class ProfilesComponent implements OnInit {
   currentUser: User;
   
   constructor(
+    private cs: CoursesService,
     private appcomponent: AppComponent,
     private translate: TranslateService,
     public dialog: MatDialog,
@@ -55,12 +57,14 @@ export class ProfilesComponent implements OnInit {
   isProfessor = this.appcomponent.isProfessor;
   isStudent = this.appcomponent.isStudent;
   isEmployee = this.appcomponent.isEmployee;
-    
-  displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
+  
+
+  //displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
+  displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource();
-  
+  canViewUser = [];
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
@@ -72,6 +76,9 @@ export class ProfilesComponent implements OnInit {
   }
   
   ngOnInit() {
+    console.log("this.listUsersICanView");
+    
+    this.canViewUser = this.appcomponent.listUsersICanView();
 
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){
@@ -80,13 +87,24 @@ export class ProfilesComponent implements OnInit {
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    
+
+    if (this.isRecruiter) {
+      //we need to recover the list of my job posts and their candidates
+
+    }
 
     this.us
       .getUsers()
       .subscribe((data: User[]) => {
         /*
-        ELEMENT_DATA.forEach(element => {
-          data.push(element);
+        data.forEach(element => {
+        //  data.push(element);
+          //this.canViewUser[element.id] = false;
+          if (this.isAdmin) {
+            this.canViewUser[element.id] = true;
+          }
+          //console.log(element);
         });
         */
         this.dataSource.data = data;
