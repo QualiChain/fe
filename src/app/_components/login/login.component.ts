@@ -8,6 +8,8 @@ import { UploadService } from '../../_services/upload.service';
 import { environment } from '../../../environments/environment';
 const downloadUrl = environment.downloadFilesUrl;
 import { QCStorageService } from '../../_services/QC_storage.services';
+import { StorageService } from '../../_helpers/global';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,16 +29,26 @@ export class LoginComponent implements OnInit {
   loadingLoginSpinner: boolean = false;
   loadingRequestPasswordSpinner: boolean = false;
   customErrorMessageLogin: string = "";
+  credentialsValidated: boolean = false;
+  paramRedirectUrl: string;
 
   constructor(
+    private route: ActivatedRoute,
+    public storageService: StorageService,
     private qcStorageService: QCStorageService,
     private us: UploadService,
     private modalService: ModalService, private el: ElementRef, private router: Router, private ls: AuthService) { 
     
+    this.route.queryParams.subscribe(params => {
+        this.paramRedirectUrl = params['returnUrl'];
+        
+    });
+
   }
   
   ngOnInit() {
     this.invalidCredentials = false;
+    this.credentialsValidated = false;
 
   }
 
@@ -87,7 +99,18 @@ export class LoginComponent implements OnInit {
     let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myObj));
     //localStorage.setItem('userdata', encryptedData);
     localStorage.setItem('userdataQC', encryptedData);
-    window.location.href="/";
+    this.storageService.setItem('userdataQC', encryptedData);
+    //window.location.href="/";
+    if (this.paramRedirectUrl) {
+      window.location.href = this.paramRedirectUrl;
+    }
+    else {
+      window.location.reload();
+    }
+    
+    //location.reload();
+    //location.href="/";
+    //this.router.navigate(["/"]);
   }
 
   openModal(id: string) {
@@ -130,12 +153,14 @@ export class LoginComponent implements OnInit {
     this.customErrorMessageLogin = "";
     this.loadingLoginSpinner = true;
     this.invalidCredentials = false;
+    this.credentialsValidated = false;
 
     let res:any = await this.ls.loginIAMAsync(this.name, this.password);
     //console.log(res);
     if (res['authenticated']) {
       //console.log("Valid credentials for the auth service");
-      this.invalidCredentials = false;            
+      this.invalidCredentials = false;  
+      this.credentialsValidated = true;          
       this.validCredentials(res);
     }
     else {            

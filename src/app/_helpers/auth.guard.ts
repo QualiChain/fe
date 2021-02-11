@@ -2,16 +2,24 @@
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { AuthService } from '../_services/auth.service';
+import { QCStorageService } from '../_services/QC_storage.services';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
-        private authenticationService: AuthService
+        private authenticationService: AuthService,
+        private qcStorageService: QCStorageService,
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const currentUser = this.authenticationService.currentUserValue;
+        //const currentUser = this.authenticationService.currentUserValue;
+        let currentUser = this.authenticationService.currentUserValue;
+
+        if (!currentUser) {
+            currentUser = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+          }
+
         if (currentUser) {
             // check if route is restricted by role           
             if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {

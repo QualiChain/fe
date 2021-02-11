@@ -104,6 +104,10 @@ export class AppComponent  implements OnInit {
     let hasTheRoleByArrayOfRoles = false;
     let hasTheRoleByRole = false;
 
+    if (!this.currentUser) {
+      this.currentUser = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+    }
+
     if (this.currentUser) {
       
       if (this.currentUser.hasOwnProperty('roles')) {
@@ -165,7 +169,7 @@ export class AppComponent  implements OnInit {
             let jobsFilteredList = [];
             jobsFilteredList = (data.filter(this.filterByCreator(this.currentUser.id)));
             jobsFilteredList.forEach((elementJob, index) => { 
-              console.log(elementJob);
+              //console.log(elementJob);
               this.js
               .getJobCandidats(elementJob.id)
               .subscribe((jobCandidates: any) => {

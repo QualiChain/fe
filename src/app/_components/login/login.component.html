@@ -6,7 +6,10 @@
       <mat-tab label="{{ 'LOGIN.TAB.LOGIN' | translate }}">
         <div class="col-md-12">&nbsp;</div>
         <div class="col-md-8 col-md-offset-2">
-          <mat-card class="mat-card">
+          <div *ngIf="credentialsValidated" class="alert alert-success" role="alert">
+            {{ 'LOGIN.LOGIN_INPROGRESS_MESSAGE' | translate }}<br>
+          </div>
+          <mat-card class="mat-card">            
             <div class="row" *ngIf="loadingLoginSpinner">
               <app-qc-spinner></app-qc-spinner>
             </div>                
@@ -15,13 +18,14 @@
                   {{ 'LOGIN.INVALID_CREDENTIALS_MESSAGE' | translate }}<br>
                   {{customErrorMessageLogin}}
               </div>
+                        
           
               <form #formLogin="ngForm" (ngSubmit)="processFormIAM()" class="userlogin-form">
                 <!-- name -->
                 <div class="form-group field" [class.has-error]="usernameInput.invalid">
                   <mat-form-field class="userlogin-full-width">
                     <mat-label>{{ 'LOGIN.USERNAME' | translate }}</mat-label>
-                    <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'LOGIN.USERNAME' | translate }}" #usernameInput="ngModel">
+                    <input matInput required [(ngModel)]="name" name="username" value="username" placeholder="{{ 'LOGIN.USERNAME' | translate }}" #usernameInput="ngModel">
                   </mat-form-field>
                   <div class="help is-error alert-warning" *ngIf="(usernameInput.invalid && usernameInput.dirty)  || (!name)">
                     {{ 'LOGIN.USERNAME_HELP' | translate }}
@@ -46,7 +50,7 @@
                   <!--
                   <button type="submit" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }}</button>        
                   -->
-                  <button type="submit"  (click)="processFormIAM()" class="btn btn-success" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }} </button>
+                  <button type="submit"  (click)="processFormIAM()" class="btn btn-success btn-login" [disabled]="formLogin.invalid">{{ 'LOGIN.BUTTON.LOGIN' | translate }} </button>
                 </div>         
               </form> 
             </div>              

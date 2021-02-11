@@ -276,36 +276,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     else {
       this.menuOptionsPerPilot = this.ps.getPilot(0);
     }
+
   }
 
-  ngOnInit() {
-    
-    
-    this.storageService.watchStorage().subscribe((data:string) => {
-      // this will call whenever your localStorage data changes
-      // use localStorage code here and set your data here for ngFor
-      //let userdata = JSON.parse(localStorage.getItem('userdata'));
-      let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
-
-      this.getTopMenus(userdata);
-      if (userdata) {
-        if (userdata.avatar_path!=this.currentUser.avatar_path) {            
-          this.currentUser.avatar_path = userdata.avatar_path;
-          this.getCurrentAvatarImage(userdata);
-        }
-        
-      }
-    })
-
-    //todo , replace this by the pilotid of the user
-    //console.log(this.currentUser);
+  loadHeader() {
     
 
-    
-    //console.log(this.menuOptionsPerPilot);
-
-    // Read item:
-    //let userdata = JSON.parse(localStorage.getItem('userdata'));
     let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
     
 
@@ -330,25 +306,60 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.openQCQuestionnaire('auto');
       });
 
-      //reload avatar image
-      /*
-      interval(3000).subscribe(x => {
-        // something
-        //let userdata = JSON.parse(localStorage.getItem('userdata'));
-        let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
-        if (userdata) {
-          if (userdata.avatar_path!=this.currentUser.avatar_path) {            
-            this.currentUser.avatar_path = userdata.avatar_path;
-          }
-        }
-      });
-      */
+
       
     }
     else {
       this.userdata = {'authenticated': false ,'role': 'anonymous'};
       this.getTopMenus(this.userdata);
     }
+
+  }
+  ngOnInit() {
+    
+    
+    this.storageService.watchStorage().subscribe((data:string) => {
+      
+      // this will call whenever your localStorage data changes
+      // use localStorage code here and set your data here for ngFor
+      //let userdata = JSON.parse(localStorage.getItem('userdata'));
+      let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+
+      this.getTopMenus(userdata);
+      if (userdata) {        
+        
+        if (!this.currentUser) {
+          this.currentUser = userdata;
+          this.isLogged = this.currentUser;
+          //console.log(this.isLogged)
+          this.isAdmin = this.appcomponent.isAdmin;
+          this.isRecruiter = this.appcomponent.isRecruiter;
+          //this.isTeacher = this.appcomponent.isTeacher;
+          this.isProfessor = this.appcomponent.isProfessor;
+          this.isStudent = this.appcomponent.isStudent;
+          this.isEmployee = this.appcomponent.isEmployee;
+          this.loadHeader();
+        }
+        else if (userdata.avatar_path!=this.currentUser.avatar_path) {            
+          this.currentUser.avatar_path = userdata.avatar_path;
+          this.getCurrentAvatarImage(userdata);
+        }
+        
+      }
+    })
+
+    //todo , replace this by the pilotid of the user
+    //console.log(this.currentUser);
+    
+
+    
+    //console.log(this.menuOptionsPerPilot);
+
+    // Read item:
+    //let userdata = JSON.parse(localStorage.getItem('userdata'));
+
+    this.loadHeader();
+    
     
   }
 

@@ -44,6 +44,7 @@ export class CoursesComponent implements OnInit {
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   currentUser: User;
+  canEditCourse = [];
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
@@ -130,11 +131,18 @@ export class CoursesComponent implements OnInit {
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
       }
 
+    this.cs.getTeachingCourseByUserId(this.currentUser.id).subscribe((myTeachingCourses: any[]) => {
+      //console.log(myTeachingCourses);
+      myTeachingCourses.forEach(element => {
+        this.canEditCourse[element.course.courseid] = true;
+      });
 
+    });
 
     this.cs
       .getCourses()
       .subscribe((data: Course[]) => {
+        //console.log(data);
         this.courses = data;                
         this.dataSource.data = data;        
         ELEMENT_DATA = data;

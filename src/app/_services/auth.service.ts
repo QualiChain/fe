@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { QCStorageService } from './QC_storage.services';
 //import { UsersService } from './users.service';
+import {GlobalApp, StorageService} from '../_helpers/global';
 
 //import { User } from '../_models/user';
 import User from '../_models/user';
@@ -31,11 +32,18 @@ export class AuthService {
 
   constructor(
     //private us: UsersService,
+    public storageService: StorageService,
     private qcStorageService: QCStorageService,
     private httpClient: HttpClient) {      
       //this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
       this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('currentUserQC'))));
+      
       this.currentUser = this.currentUserSubject.asObservable();
+      /*
+      this.storageService.watchStorage().subscribe((data:string) => {
+        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('currentUserQC'))));
+      })
+      */
   }
 
   public get currentUserValue(): User {
@@ -66,8 +74,9 @@ export class AuthService {
     surname: data.surname, email: data.email, 
     userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, roles: roles, 'pilotId': data.pilotId};
   
-    //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));        
+    //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));      
     let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
+    localStorage.setItem('currentUser', encryptedData);
     localStorage.setItem('currentUserQC', encryptedData);
     return myAuthObj;
   }
@@ -247,7 +256,7 @@ export class AuthService {
 
   async getUserAsyncInAuth(userId: any) {
     let headers = this.createQCAuthorizationHeader();
-console.log(headers);
+
     let data = await this.httpClient.get(`${this.uriUsers}/${userId}`, {headers:headers}).toPromise().catch(()=>
     {
         return {};
@@ -309,6 +318,11 @@ console.log(headers);
     let currentLogedUser: any;
     this.currentUser.subscribe(x => currentLogedUser = x);
       let authorized = false;
+
+      if (!currentLogedUser) {
+        currentLogedUser = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+      }
+
       if (currentLogedUser) {
           for (const elementV of value) {
             //let permissionsByRole = permissionsByRoleTest;

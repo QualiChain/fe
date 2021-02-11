@@ -94,6 +94,7 @@
       "REQUEST_YOUR_PASSWORD": "Request your password"
     },
     "INVALID_CREDENTIALS_MESSAGE": "Invalid credentials",
+    "LOGIN_INPROGRESS_MESSAGE": "Valid credentials, login in progress",
     "USERNAME": "Username",
     "USERNAME_HELP": "Username is required and needs to be at least 3 characters long.",
     "PASSWORD": "Password",

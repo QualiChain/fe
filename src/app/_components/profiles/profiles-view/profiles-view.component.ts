@@ -238,7 +238,7 @@ export class ProfilesViewComponent implements OnInit {
   }
 
   getSmartBadgesByUser(id) {
-    console.log(id);
+    console.log("getSmartBadgesByUser userid:"+id);
 /*    
           this.bs
           .getBadgesByUser(id)
