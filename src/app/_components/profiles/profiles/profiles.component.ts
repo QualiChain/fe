@@ -76,7 +76,7 @@ export class ProfilesComponent implements OnInit {
   }
   
   ngOnInit() {
-    console.log("this.listUsersICanView");
+    //console.log("this.listUsersICanView");
     
     this.canViewUser = this.appcomponent.listUsersICanView();
 

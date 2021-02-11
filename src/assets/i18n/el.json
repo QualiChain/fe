@@ -94,6 +94,7 @@
       "REQUEST_YOUR_PASSWORD": "Request your password"
     },    
     "INVALID_CREDENTIALS_MESSAGE": "Μη έγκυρα διαπιστευτήρια",
+    "LOGIN_INPROGRESS_MESSAGE": "Valid credentials, login in progress",
     "USERNAME": "Όνομα χρήστη",
     "USERNAME_HELP": "Το όνομα χρήστη απαιτείται και πρέπει να έχει μήκος τουλάχιστον 3 χαρακτήρων.",
     "PASSWORD": "Κωδικός πρόσβασης",

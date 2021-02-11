@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../_helpers/global';
 import { QCStorageService } from '../_services/QC_storage.services';
 
+
 @Directive({
   selector: '[appCanAccess]'
 })
@@ -19,6 +20,7 @@ export class CanAccessDirective implements OnInit, OnDestroy {
   currentUser: any;
 
   constructor(
+    private qcStorageService: QCStorageService,
     private router: Router,  
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
@@ -35,11 +37,12 @@ export class CanAccessDirective implements OnInit, OnDestroy {
   // if current user has permisions to this string (you can send an array of strings), the contet is displayed
   
   private applyPermission(value: string | string[] ): void {
+
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
+    
 
     let authorized: boolean = false;
-    
-    //console.log(this.currentUser);    
+
     authorized = this.authservice.checkIfPermissionsExistsByUserRoles(value);
 
     if (authorized) {
@@ -70,13 +73,19 @@ export class AuthGuardByPermission implements CanActivate {
     ) { }
     
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const currentUser = this.authenticationService.currentUserValue;
+        //const currentUser = this.authenticationService.currentUserValue;
+        let currentUser = this.authenticationService.currentUserValue;
         
+        if (!currentUser) {
+            currentUser = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
+          }
+
         if (currentUser) {
             let dataValidToken = await this.authenticationService.validateTokenIAMAsync();  
             
             if (!dataValidToken) {
                 let currentUserData = {'authenticated': false};
+
                 let encryptedDataCurrentUserData = this.qcStorageService.QCEncryptData(JSON.stringify(currentUserData));
                 this.storageService.setItem('userdataQC', encryptedDataCurrentUserData);
                 this.storageService.setItem('currentUserQC', encryptedDataCurrentUserData);
@@ -124,7 +133,8 @@ export class AuthGuardForAnonymous implements CanActivate {
         const currentUser = this.authenticationService.currentUserValue;
         
         if (currentUser) {
-            this.router.navigate(['/myprofile'], { queryParams: { } });
+            //this.router.navigate(['/myprofile'], { queryParams: { } });
+            this.router.navigate(['/'], { queryParams: { } });
             return false;
         }
         else {

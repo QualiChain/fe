@@ -65,6 +65,7 @@ export class CoursesGetComponent implements OnInit {
   isUserAsTaught: boolean = false;
 
   grade: Number;
+  canEditCourse = [];
  
   constructor(
     private appcomponent: AppComponent,
@@ -217,6 +218,14 @@ export class CoursesGetComponent implements OnInit {
 
       if (id>0) {
         //console.log(id);
+
+        this.cs.getTeachingCourseByUserId(this.currentUser.id).subscribe((myTeachingCourses: any[]) => {
+          //console.log(myTeachingCourses);
+          myTeachingCourses.forEach(element => {
+            this.canEditCourse[element.course.courseid] = true;
+          });
+    
+        });
 
         //get the list of courses done by the user to know if he is in the list (used to hide/show buttons)
         this.cs
