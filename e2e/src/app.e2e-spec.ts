@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging, protractor } from 'protractor';
+import { browser, logging, protractor, by, element, ExpectedConditions } from 'protractor';
 import { PublicPage } from './public/public.po';
 import { LoginPage } from './login/login.po';
 
@@ -34,22 +34,25 @@ describe('workspace-project App', () => {
   it('when user trying to login with wrong credentials he should stay on “login” page and see error notification', () => {
     loginPage.navigateTo();
     loginPage.fillCredentials(wrongCredentias);
-    expect(loginPage.getH1Text()).toEqual('Welcome to QualiChain');
+    loginPage.clickSignIn();
+    //expect(loginPage.getH1Text()).toEqual('Welcome to QualiChain');
     expect(loginPage.getErrorMessage()).toContain('Invalid credentials');
   });
 
-  /*
-  it('should login successfully', () => {
+  it('when user trying to login with valid credentials he should be redireted yo the main page', () => {
     loginPage.navigateTo();
-    loginPage.fillCredentials();    
-      
-    browser.wait(EC.visibilityOf(loginPage.title)).then(() => {
-      expect(loginPage.title.isPresent()).toBeTruthy();
-    });
-
+    loginPage.fillCredentials();
+    loginPage.clickSignIn();   
+    
+    browser.sleep(7500).then(
+      function(){
+         browser.waitForAngularEnabled(false);
+         expect(loginPage.getH1Text()).toEqual('Home');
+      }
+    )
   });
-  */
 
+  
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
