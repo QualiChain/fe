@@ -4,6 +4,7 @@ import { QualichainService} from '../../_services/recruiting/qualichain.service'
 import { HttpResponse, HttpEventType } from '@angular/common/http';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {TranslateService} from '@ngx-translate/core';
+import { QCMatomoConnectorService} from '../../_services/qc-matomo-connector.service';
 
 @Component({
   selector: 'app-recruiting',
@@ -33,6 +34,7 @@ export class RecruitingComponent implements OnInit {
   loadingSpinner: boolean = false;
   
   constructor(
+    private mc: QCMatomoConnectorService,
     private qualichainService: QualichainService,            
               private flashMessage: FlashMessagesService,
               private validateService: ValidateService,
@@ -100,8 +102,14 @@ export class RecruitingComponent implements OnInit {
           this.status = this.translate.instant('RECRUITING.STATUS.DONE');
 
           if('body' in data){
-
+            
+            let eventCategory = "Certificate Validation";
+            let eventAction = null;
+            let eventName = null;
+            let eventValue = null;
           if (data.body.succeeded) {
+                eventAction = 'Certificate Validation Success';
+                this.mc.sendMatomoEvent(eventCategory, eventAction, eventName, eventValue);
                 this.loadingSpinner = false;
                 this.error = false;
                 //this.validationStatus = 'Success';
@@ -110,6 +118,8 @@ export class RecruitingComponent implements OnInit {
                 //document.getElementById('responseBoxError').innerHTML = '';
                 this.errorMessage = '';
         }   else {
+                eventAction = 'Certificate Validation Failure';
+                this.mc.sendMatomoEvent(eventCategory, eventAction, eventName, eventValue);
                 this.loadingSpinner = false;
                 this.error = true;
                 //this.validationStatus = 'Error';
