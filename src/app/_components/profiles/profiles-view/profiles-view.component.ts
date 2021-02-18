@@ -125,6 +125,7 @@ export class ProfilesViewComponent implements OnInit {
 
   listOfSmartAwardsOU: any =[];
   profileAvatarImg: string = 'assets/img/no_avatar.jpg';
+  _reload: boolean = true;
   
   constructor(
     public dialog: MatDialog,
@@ -191,6 +192,15 @@ export class ProfilesViewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        //console.log(this.router.url);
+        //this.router.navigate([this.router.url])
+        //location.reload();
+        setTimeout(() => this._reload = false);
+        setTimeout(() => this._reload = true);
+
+      }
     });
     
   }
@@ -1320,7 +1330,7 @@ onSubmit() {
       //alert('Success!!');
       this.loadingSpinner = false;
       this.showError = false;
-      this.dialogRef.close();
+      this.dialogRef.close(true);
     },
     error => {
       //console.log("error sending CV data");
