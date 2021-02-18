@@ -1106,11 +1106,20 @@ export class CVDialog_modal implements OnInit {
           this.educationHistoryCV = data.education;
           if(data.skills){
            data.skills.forEach(element => {
-            this.t.push(this.formBuilder.group({
-              label: [element.label, [Validators.required]],
-              proficiencyLevel: [element.proficiencyLevel, Validators.required],
-              comment: [element.comment, [Validators.required]],      
-            }));
+            if (element.proficiencyLevel) {
+              this.t.push(this.formBuilder.group({
+                label: [element.label, [Validators.required]],
+                proficiencyLevel: [element.proficiencyLevel, Validators.required],
+                comment: [element.comment, [Validators.required]],      
+              }));
+            }
+            else {
+              this.t.push(this.formBuilder.group({
+                label: [element.label, [Validators.required]],
+                proficiencyLevel: [element.skillLevel, Validators.required],
+                comment: [element.comment, [Validators.required]],      
+              }));
+            }
             });
           }
           if(data.workHistory){

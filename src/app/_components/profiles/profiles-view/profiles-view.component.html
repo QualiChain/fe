@@ -28,7 +28,7 @@
     </button>
     -->
     <span *appCanAccess="['edit_own_profile']">
-      <button *ngIf="userId.toString()==currentUser?.id.toString()" class="btn btn-primary" [routerLink]="['/myprofile', 'edit']">
+      <button *ngIf="(userId.toString()==currentUser?.id.toString())" class="btn btn-primary" [routerLink]="['/myprofile', 'edit']">
         <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
         {{ 'BUTTON.EDIT' | translate }}
       </button>
@@ -39,17 +39,13 @@
         {{ 'BUTTON.EDIT' | translate }}
       </button>
     </span>
-    
-    <button *ngIf="(
-      ((userId.toString()==currentUser?.id.toString()) && (isEmployee || isStudent))
-      || (isAdmin)
-      )" class="btn btn-primary" [routerLink]="['/profiles', userdata?.id, 'dss-curriculum-re-design']">
+    <button *ngIf="(((userId.toString()==currentUser?.id.toString()) && (isEmployee || isStudent)))" class="btn btn-primary" [routerLink]="['/profiles', userdata?.id, 'dss-curriculum-re-design']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       {{ 'PROFILES.DSS_CV_RE_DESIGN' | translate }}
     </button>
 
     <span *appCanAccess="['delete_own_profile']">
-      <button *ngIf="userId.toString()==currentUser?.id.toString()" class="btn btn-danger" [routerLink]="" (click)="confirmDialog()">
+      <button *ngIf="(userId.toString()==currentUser?.id.toString())" class="btn btn-danger" [routerLink]="" (click)="confirmDialog()">
         <i _ngcontent-axy-c0="" class="material-icons small"> delete </i>
         {{ 'BUTTON.DELETE_OWN_PROFILE' | translate }}
       </button>

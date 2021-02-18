@@ -364,8 +364,7 @@ export class ProfilesAddComponent implements OnInit {
     const obj = {
       "userPath": "/home/"+this.userName,
       "role": this.role,
-      "pilotId": this.pilotId,
-      "userName": this.userName,
+      "pilotId": this.pilotId,      
       "fullName": this.fullName,
       "name": this.name,
       "surname": this.surname,
@@ -376,13 +375,14 @@ export class ProfilesAddComponent implements OnInit {
       "address": this.address,
       "zipCode": this.zipCode,
       "mobilePhone": this.mobilePhone,
-      "homePhone": this.homePhone,
-      "email": this.email
+      "homePhone": this.homePhone      
     };
     
     if (this.mode=='Create') {
 
-      obj['password']=this.password;
+      obj['password'] = this.password;
+      obj['email'] = this.email;
+      obj['userName'] = this.userName,
 
       this.userService.addUser(obj).subscribe(
         res => {

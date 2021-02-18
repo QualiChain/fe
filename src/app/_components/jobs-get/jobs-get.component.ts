@@ -115,7 +115,8 @@ export class JobsGetComponent implements OnInit {
             this.userHasAnApply = false;
           },
           error => {
-            console.log("Error deleting job apply data");
+            console.log("Error deleting job apply data for the job: "+jobId);
+            alert("Sorry, there was a problem deleting the job application");
             //console.log(error);
           }
         ); 
@@ -155,7 +156,7 @@ export class JobsGetComponent implements OnInit {
 
           appliesByuser.forEach(element => {
             //console.log(element);
-            if (element.jobURI=="saro:"+id) {
+            if ((element.jobURI=="saro:"+id) || (element.jobURI==":"+id) || (element.id==id)) {
               this.userHasAnApply = true;
               this.jobPostId = element.id;
             }

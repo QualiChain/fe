@@ -149,19 +149,17 @@ export class JobsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       //this.result = dialogResult;
-
       if (dialogResult) {
          //console.log("Under construction");
          this.js.deleteJob(id).subscribe(data => {
           //window.location.reload();
-
           let posI = this.dataSource.data.findIndex(function(job){ return job.id === id })
-             if (posI>0) {
+             if (posI>=0) {
                this.dataSource.data.splice(posI, 1);
                this.jobs.splice(posI, 1);
                this.dataSource._updateChangeSubscription();
               }
-              this.router.navigate(["/jobs"]);
+              //this.router.navigate(["/jobs"]);
 
         });
       }
