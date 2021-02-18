@@ -357,6 +357,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
           },
           error => {
             console.log("Error deleting job apply data");
+            alert("Sorry, there was a problem deleting the row");
             //console.log(error);
           }
         ); 

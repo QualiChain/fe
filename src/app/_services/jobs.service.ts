@@ -90,10 +90,10 @@ export class JobsService {
     applyJob(jobId: any, userId: any, dataIn: object) {
       //console.log(userId);
       //console.log(jobId);    
-      let headers = this.authService.createQCAuthorizationHeader();
-      //let headers = this.authService.createQCAuthorizationHeaderText();
+      //let headers = this.authService.createQCAuthorizationHeader();
+      let headers = this.authService.createQCAuthorizationHeaderText();
 
-      return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, JSON.stringify(dataIn), {headers:headers}).
+      return this.http.post(`${this.jobsURL}/${jobId}/apply/${userId}`, JSON.stringify(dataIn), {headers:headers, responseType: 'text'}).
       pipe(
          map((data: any) => {
            return data;
@@ -106,7 +106,8 @@ export class JobsService {
     deleteJobApply(jobId: any, userId: any) {   
       //console.log(jobId);console.log(userId);   
       //const headers = new HttpHeaders();
-      let headers = this.authService.createQCAuthorizationHeader();
+      //let headers = this.authService.createQCAuthorizationHeader();
+      let headers = this.authService.createQCAuthorizationHeaderText();
 
       return this.http.delete(`${this.jobsURL}/${jobId}/apply/${userId}`, { headers:headers, responseType: 'text'}).
       pipe(
@@ -135,9 +136,20 @@ export class JobsService {
     }
 
     deleteJob(jobId){
-      let headers = this.authService.createQCAuthorizationHeader();
+      //let headers = this.authService.createQCAuthorizationHeader();
+      let headers = this.authService.createQCAuthorizationHeaderText();
 
-      return this.http.delete(`${this.jobsURL}/${jobId}`, { headers:headers });
+      return this.http.delete(`${this.jobsURL}/${jobId}`, { headers:headers, responseType: 'text'}).      
+      pipe(
+         map((data: any) => {
+           //console.log(data);
+           return data;
+         }), catchError( error => {
+           console.log(error);
+           return throwError( 'Something went wrong!' );
+         })
+      )
+
     }
 
     getJobAppliesPerCandidat(userId: number) {

@@ -9,9 +9,6 @@
       <form #formLogin="ngForm" class="create-profile-form" (ngSubmit)="processForm()" >
         <!-- pilot -->
         <div class="form-group field" >
-          <!--
-          <label>{{ 'PROFILE.PILOT.LABEL' | translate }}</label>
-          -->
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.PILOT.SELECT_ONE' | translate }}</mat-label>
             <mat-select [(ngModel)]="pilotId" name="pilot" required ngDefaultControl>
@@ -24,117 +21,66 @@
               
         <!-- role -->
         <div class="form-group field" >
-          <!--
-          <label>{{ 'PROFILE.ROLE.LABEL' | translate }}</label>
-          -->
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.ROLE.SELECT_ONE' | translate }}</mat-label>
             <mat-select [(ngModel)]="role" name="role" required ngDefaultControl>
-              <!--
-              <mat-option *ngFor="let role of roles" [value]="role.value">
-                {{'ROLES.'+role.viewValue.toLowerCase() | translate}}
-              </mat-option>
-              orderTranslate
-            -->
               <mat-option *ngFor="let role of roles | orderTemplatePipe : 'viewValue' " [value]="role.value">
                 {{'ROLES.'+role.viewValue.toLowerCase() | translate}}
               </mat-option>
-
             </mat-select>
           </mat-form-field>
         </div>
               
         <!-- userName -->
         <div class="form-group field" [class.has-error]="usernameInput.invalid">
-          <!-- 
-            <label>{{ 'PROFILE.USERNAME.LABEL' | translate }}</label>
-          <input type="text" name="userName" class="form-control input" placeholder="{{ 'PROFILE.USERNAME.PLACEHOLDER' | translate }}"
-            [(ngModel)]="userName" required minlength="3" #usernameInput="ngModel"> 
-          -->
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.USERNAME.LABEL' | translate }}</mat-label>
-            <input matInput required [(ngModel)]="userName" name="userName" value="userName" placeholder="{{ 'PROFILE.USERNAME.PLACEHOLDER' | translate }}" #usernameInput="ngModel">
-          </mat-form-field>
-        
+            <input [disabled]="mode=='Edit'" matInput required [(ngModel)]="userName" name="userName" value="userName" placeholder="{{ 'PROFILE.USERNAME.PLACEHOLDER' | translate }}" #usernameInput="ngModel">
+          </mat-form-field>        
         </div>
-  
   
         <!-- password -->
         <div *ngIf="mode=='Create'" class="form-group field" [class.has-error]="passwordInput.invalid">
-  
-          <mat-form-field class="create-profile-full-width">
+            <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.PASSWORD.LABEL' | translate }}</mat-label>
             <input matInput required [(ngModel)]="password" name="password" value="pasword" [type]="hide ? 'password' : 'text'" #passwordInput="ngModel">
-            <!--
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            -->
           </mat-form-field>
-  
         </div>      
   
         <!-- fullName -->
         <div class="form-group field" [class.has-error]="fullnameInput.invalid">
-          <!--
-          <label>{{ 'PROFILE.FULLNAME.LABEL' | translate }}</label>        
-          <input type="text" name="fullName" class="form-control input" placeholder="{{ 'PROFILE.FULLNAME.PLACEHOLDER' | translate }}"
-            [(ngModel)]="fullName" required minlength="3" #fullnameInput="ngModel">
-          -->
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.FULLNAME.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="fullName" name="fullName" value="fullName" placeholder="{{ 'PROFILE.FULLNAME.PLACEHOLDER' | translate }}"  #fullnameInput="ngModel">
-            </mat-form-field>
-  
-          </div>
+            </mat-form-field>  
+        </div>
+
         <!-- name -->
-        <div class="form-group field" [class.has-error]="nameInput.invalid">
-          <!-- 
-          <label>{{ 'PROFILE.NAME.LABEL' | translate }}</label>
-          <input 
-            type="text" name="name" class="form-control input" placeholder="{{ 'PROFILE.NAME.PLACEHOLDER' | translate }}"
-            [(ngModel)]="name" required minlength="3" #nameInput="ngModel">
-          -->
-  
+        <div class="form-group field" [class.has-error]="nameInput.invalid"> 
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.NAME.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'PROFILE.NAME.PLACEHOLDER' | translate }}" #nameInput="ngModel">
-            </mat-form-field>
-  
+            </mat-form-field>  
         </div>
+
         <!-- surname -->
         <div class="form-group field" [class.has-error]="surnameInput.invalid">
-          <!-- 
-          <label>{{ 'PROFILE.SURNAME.LABEL' | translate }}</label>
-          <input type="text" name="surname" class="form-control input" placeholder="{{ 'PROFILE.SURNAME.PLACEHOLDER' | translate }}"
-            [(ngModel)]="surname" required minlength="3" #surnameInput="ngModel">
-        -->
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.SURNAME.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="surname" name="surname" value="surname" placeholder="{{ 'PROFILE.SURNAME.PLACEHOLDER' | translate }}" #surnameInput="ngModel">
-            </mat-form-field>
-  
+            </mat-form-field>  
         </div>
   
         <!-- email -->
         <div class="form-group field" [class.has-error]="emailInput.invalid">
-          <!-- 
-          <label>{{ 'PROFILE.EMAIL.LABEL' | translate }}</label>
-          <input type="email" name="email" class="form-control input" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}"
-            [(ngModel)]="email" required minlength="3" #emailInput="ngModel">
-        -->
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.EMAIL.LABEL' | translate }}</mat-label>
-              <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}" #emailInput="ngModel">
+              <input [disabled]="mode=='Edit'" matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}" #emailInput="ngModel">
             </mat-form-field>
-  
         </div>
   
         <!-- gender -->
         <div class="form-group field" >
-          <!--
-          <label>{{ 'PROFILE.GENDER.LABEL' | translate }}</label>
-          -->
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.GENDER.SELECT_ONE' | translate }}</mat-label>
             <mat-select [(ngModel)]="gender" name="gender" required ngDefaultControl>
@@ -212,11 +158,6 @@
   
         <!-- address -->
         <div class="form-group field" [class.has-error]="addressInput.invalid">
-          <!--
-          <label>{{ 'PROFILE.ADDRESS.LABEL' | translate }}</label>
-          <input type="text" name="address" class="form-control input" placeholder="{{ 'PROFILE.ADDRESS.PLACEHOLDER' | translate }}"
-            [(ngModel)]="address" required minlength="3" #addressInput="ngModel">
-        -->
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.ADDRESS.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="address" name="address" value="address" placeholder="{{ 'PROFILE.ADDRESS.PLACEHOLDER' | translate }}" #addressInput="ngModel">
@@ -226,11 +167,6 @@
   
         <!-- zipCode -->
         <div class="form-group field" [class.has-error]="zipCodeInput.invalid">
-          <!--
-          <label>{{ 'PROFILE.ZIPCODE.LABEL' | translate }}</label>
-          <input type="text" name="zipCode" class="form-control input" placeholder="{{ 'PROFILE.ZIPCODE.PLACEHOLDER' | translate }}"
-            [(ngModel)]="zipCode" required minlength="3" #zipCodeInput="ngModel">
-          -->
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.ZIPCODE.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="zipCode" name="zipCode" value="zipCode" placeholder="{{ 'PROFILE.ZIPCODE.PLACEHOLDER' | translate }}" #zipCodeInput="ngModel">
@@ -240,25 +176,14 @@
   
         <!-- mobilePhone -->
         <div class="form-group field" [class.has-error]="mobilePhoneInput.invalid">
-          <!-- 
-          <label>{{ 'PROFILE.MOBILEPHONE.LABEL' | translate }}</label>
-          <input type="text" name="mobilePhone" class="form-control input" placeholder="{{ 'PROFILE.MOBILEPHONE.PLACEHOLDER' | translate }}"
-            [(ngModel)]="mobilePhone" required minlength="3" #mobilePhoneInput="ngModel">
-          -->
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.MOBILEPHONE.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="mobilePhone" name="mobilePhone" value="mobilePhone" placeholder="{{ 'PROFILE.MOBILEPHONE.PLACEHOLDER' | translate }}" #mobilePhoneInput="ngModel">
-            </mat-form-field>
-  
+            </mat-form-field>  
         </div>
   
         <!-- homePhone -->
         <div class="form-group field" [class.has-error]="homePhoneInput.invalid">
-          <!-- 
-          <label>{{ 'PROFILE.HOMEPHONE.LABEL' | translate }}</label>
-          <input type="text" name="homePhone" class="form-control input" placeholder="{{ 'PROFILE.HOMEPHONE.PLACEHOLDER' | translate }}"
-            [(ngModel)]="homePhone" required minlength="3" #homePhoneInput="ngModel">
-          -->
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.HOMEPHONE.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="homePhone" name="homePhone" value="homePhone" placeholder="{{ 'PROFILE.HOMEPHONE.PLACEHOLDER' | translate }}" #homePhoneInput="ngModel">
