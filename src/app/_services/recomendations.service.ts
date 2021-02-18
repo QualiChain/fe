@@ -32,9 +32,10 @@ export class RecomendationsService {
     //console.log(datatCVToSend);
     let skillsCV = [];
     if ( dataCVs.hasOwnProperty('skills') ) {
-      console.log("dins skills!");
+     // console.log("dins skills!");
       dataCVs['skills'].forEach(element => {
       //console.log(element);
+      /*
       skillsCV.push({
                   "label":element.label,
                   "comment":element.comment,
@@ -42,13 +43,23 @@ export class RecomendationsService {
                   "priorityLevel": element.priorityLevel,                
                   "uri": element.uri, 
                   "id": element.id});
+                  */
+        
+      skillsCV.push({
+        "label":element.skillName,
+        "comment":element.comment,
+        "proficiencyLevel":element.skillLevel, 
+        "priorityLevel": element.skillLevel,
+        "uri": element.skillID, 
+        "id": element.skillID});
+
       });
     }
     //console.log(skillsCV);
 
     let educationCV = [];    
     if ( dataCVs.hasOwnProperty('education') ) {
-      console.log("dins education!");
+      //console.log("dins education!");
       dataCVs['education'].forEach(element => {
         educationCV.push({"title":element.title,"from":element.from,"to":element.to,"organisation":element.organisation,"description":element.description});
       });
@@ -57,7 +68,7 @@ export class RecomendationsService {
 
     let workHistoryCV = [];
     if ( dataCVs.hasOwnProperty('workHistory') ) {
-      console.log("dins workHistory!");
+      //console.log("dins workHistory!");
       dataCVs['workHistory'].forEach(element => {
         workHistoryCV.push({"title":element.position,"from":element.from,"to":element.to,"organisation":element.employer,"description":""});
       });
@@ -82,11 +93,18 @@ export class RecomendationsService {
     //console.log(datatCVToSend);
 
     let dataRecommendationByCV = await this.getRecomendationsByCV(datatCVToSend).toPromise();
-    //console.log(dataRecommendationByCV);
     let recomendedData = [];
 
     if ((type=='courses') || (type=='courses_and_skills')) {
-      recomendedData['recommended_courses'] = dataRecommendationByCV['recommended_courses'];
+      //recomendedData['recommended_courses'] = dataRecommendationByCV['recommended_courses'];
+      recomendedData['recommended_courses'] = [];
+      
+      if (dataRecommendationByCV) {
+        if (dataRecommendationByCV.hasOwnProperty('recommended_courses')) {
+          recomendedData['recommended_courses'] = dataRecommendationByCV['recommended_courses'];
+        }
+      }
+
       let posI = 0;
       for (const element of recomendedData['recommended_courses']) {
         try   
@@ -105,7 +123,13 @@ export class RecomendationsService {
     }
     if ((type=='skills') || (type=='courses_and_skills')) {
       recomendedData['recommended_skills'] = [];
-      let recomendedDataTmp = dataRecommendationByCV['recommended_skills'];
+      let recomendedDataTmp = [] ;
+      if (dataRecommendationByCV) {
+        if (dataRecommendationByCV.hasOwnProperty('recommended_skills')) {
+          recomendedDataTmp = dataRecommendationByCV['recommended_skills'];
+        }
+      }
+      
       let posI = 0;
       for (const element of recomendedDataTmp) {
         recomendedData['recommended_skills'].push({'id':element.id,'title': element.name ,'description': element.name, 'rating': null}); 
@@ -124,7 +148,10 @@ export class RecomendationsService {
        map((data: any) => {
          return data;
        }), catchError( error => {
-         return throwError( 'Something went wrong!' );
+         console.log("get recomendations by CV error")
+         console.log(error);
+         //return throwError( 'Something went wrong!' );
+         return [];
        })
     )
   }

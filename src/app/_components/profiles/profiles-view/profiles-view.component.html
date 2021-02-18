@@ -302,7 +302,9 @@
                 <ngb-panel id="toggle-4" title="{{ 'PROFILES.COMPETENCY_DEVELOPMENT' | translate }}" 
                 *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee || isProfessor))">
                   <ng-template ngbPanelContent>
-                    <app-competency-development userId="{{userdata.id}}"></app-competency-development>
+                    <div *ngIf="_reload">
+                      <app-competency-development userId="{{userdata.id}}"></app-competency-development>
+                    </div>
                   </ng-template>
                 </ngb-panel>
 
@@ -343,8 +345,8 @@
       <mat-accordion class="example-headers-align" multi>
         <app-thesis-summary *appCanAccess="['view_thesis_subjects', 'add_and_update_thesis']" userId="{{userdata.id}}"></app-thesis-summary>
         <app-recomended-jobs *appCanAccess="['get_job_recommendations']" userId="{{userdata.id}}"></app-recomended-jobs>
-        <app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{userdata.id}}"></app-recomended-courses>
-        <app-recomended-skills *appCanAccess="['get_skills_recomendations']" userId="{{userdata.id}}"></app-recomended-skills>
+        <div *ngIf="_reload"><app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{userdata.id}}"></app-recomended-courses></div>
+        <div *ngIf="_reload"><app-recomended-skills *appCanAccess="['get_skills_recomendations']" userId="{{userdata.id}}"></app-recomended-skills></div>
         <app-job-applications-by-user *appCanAccess="['get_their_job_applications']" userId="{{userdata.id}}"></app-job-applications-by-user>
       </mat-accordion>
 

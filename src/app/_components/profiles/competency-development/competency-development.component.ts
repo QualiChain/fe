@@ -425,7 +425,7 @@ export class ItemCDDialog_modal implements OnInit {
       
       this.cs.addSkilCompetence(this.data.userId, this.itemToPost).subscribe(
         res => {
-          console.log("competence created");
+          //console.log("competence created");
           //console.log(res);
           this.dialogRef.close(true);
         },

@@ -58,7 +58,7 @@ export class RecomendedCoursesComponent implements OnInit {
   public async recomendedCoursesByUserId(userId: number) {
 
     let dataTest = await this.rs.recomendedDataByCVByUserId(userId, 'courses');    
-    //console.log(dataTest);
+
     this.recomendedCourses = dataTest['recommended_courses'];
     this.dataSource.data = dataTest['recommended_courses'];
     this.loadingSpinner = false;
