@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DSSCurriculumReDesignService } from '../../_services/dss-curriculum-re-design.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../_services/users.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+
+let ELEMENT_DATA: any[] = []
 
 @Component({
   selector: 'app-dss-curriculum-re-design',
@@ -10,6 +15,14 @@ import { UsersService } from '../../_services/users.service';
   styleUrls: ['./dss-curriculum-re-design.component.css']
 })
 export class DSSCurriculumReDesignComponent implements OnInit {
+
+  displayedColumns: string[] = ['skill_title', 'related_courses'];
+
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  @ViewChild(MatPaginator, {static: true}) 
+  paginator: MatPaginator;  
+  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private DSSs: DSSCurriculumReDesignService,
@@ -49,6 +62,9 @@ export class DSSCurriculumReDesignComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.relatedCourses = [];
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
 
     this.route.params.subscribe(params => {
       
@@ -133,12 +149,15 @@ export class DSSCurriculumReDesignComponent implements OnInit {
     let labelsToPlot = [];
     this.relatedCourses = [];
 
-    
+    //console.log(missingSkill);
     for (let i = 0; i < missingSkill.scored_courses.length; i++) {
       dataToPlot.push(missingSkill.scored_courses[i].score);
       labelsToPlot.push(missingSkill.scored_courses[i].course_title);
       this.relatedCourses.push(missingSkill.scored_courses[i]);      
     }
+    
+    this.dataSource.data = missingSkill.relevant_skills;
+
     /*
     for (let i = 0; i < missingSkill.relevant_skills.length; i++) {
       
