@@ -191,14 +191,17 @@ export class createChangePasswordDialog_modal implements OnInit {
 
   ngOnInit() {
     
-    //console.log(this.data.userId);
+    console.log(this.data.userId);
         
     this.us
         .getUser(this.data.userId).subscribe(
           data => {
-            //console.log("user in db");      
-            this.userDataRec = data;
-            this.userName = data.userName;
+            console.log(data);
+            //console.log("user in db");  
+            if (data) {
+              this.userDataRec = data;
+              this.userName = data.userName;
+            }
           },
           error => {
             console.log("user not found in db");                        
