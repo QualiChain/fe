@@ -12,6 +12,7 @@ export class JobSkill {
     assign: string;
     priorityLevel: string;
     proficiencyLevel: string;
+    skillURI: string;
   }  
 
   export class WorkHistory {
@@ -21,7 +22,7 @@ export class JobSkill {
   }  
 
   export class Education {
-    title: string;
+    label: string;
     from: string;
     to: string;
     organisation: string;

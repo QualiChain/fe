@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,  FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobsService } from '../../_services/jobs.service';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../utils/confirm-dialog/confirm-dialog.component';
@@ -12,6 +12,10 @@ import {formatDate} from '@angular/common';
 import { AuthService } from '../../_services';
 import User from '../../_models/user';
 import { QCStorageService } from '../../_services/QC_storage.services';
+import {Observable} from 'rxjs';
+import { CVService } from '../../_services/cv.service';
+import {map, startWith} from 'rxjs/operators';
+
 //import { tap } from 'rxjs/operators';
 
 @Component({
@@ -21,6 +25,12 @@ import { QCStorageService } from '../../_services/QC_storage.services';
 })
 export class JobsAddComponent implements OnInit {
 
+    myControl = new FormControl();
+    form: FormGroup;
+
+    options: any[] = [];
+    filteredOptions: Observable<string[]>;
+
     currentUser: User;  
     angForm: FormGroup;
     result: string = '';
@@ -28,14 +38,41 @@ export class JobsAddComponent implements OnInit {
     jobId: string = '';
     mode: string = '';
     dataIn : Job;
+    jobDataToPost = {};
 
     constructor(      
+      private cs: CVService,
       private qcStorageService: QCStorageService,
       private authservice: AuthService,
       private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private js: JobsService, public dialog: MatDialog, private translate: TranslateService) {
 
         this.authservice.currentUser.subscribe(x => this.currentUser = x);
         this.createForm();      
+    }
+
+    private _filter(value: string): string[] {
+    
+      const filterValue = value.toString().toLowerCase();   
+  
+      return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    }
+
+    
+    OptionSelected(event, i){
+      //console.log(event);
+      console.log(event.option.id);
+      this.dataIn.skillReq[i]['label']=event.option.value;
+    }
+
+    SelectionChanged(value, i){
+
+      for (let j=1; j<this.options.length;j++) {
+        if (this.options[j].id==value) {
+          this.dataIn.skillReq[i]['label']=this.options[j].name;
+        }
+
+      }
+      
     }
 
     confirmDialog(): void {
@@ -75,6 +112,7 @@ export class JobsAddComponent implements OnInit {
 
     initSkill(): FormGroup {
       return this.fb.group({
+          uri: ['', Validators.required ],
           label: ['', Validators.required ],
           proficiencyLevel:  ['', Validators.required ],
           priorityLevel:  ['', Validators.required ]
@@ -108,7 +146,7 @@ export class JobsAddComponent implements OnInit {
 
     addEducation() {
       let newJobEducation = {} as Education;
-      newJobEducation.title = "";
+      newJobEducation.label = "";
       newJobEducation.description = ""; 
       if (!this.dataIn.educationReq)  {
         this.dataIn.educationReq = [newJobEducation];
@@ -165,23 +203,29 @@ export class JobsAddComponent implements OnInit {
     };
 */
 
+
+this.jobDataToPost = dataToSend;
+console.log(dataToSend);
+
       this.js.addJob(dataToSend).subscribe(
         res => {
-          //console.log("Job created");
+          console.log("Job created");
           //console.log(res);
           //after update the job
           //window.location.href="/jobs";
           this.router.navigate(["/jobs"]);
         },
         error => {
-		      this.router.navigate(["/jobs"]);
-          //alert("Error creating the job!!");
+          console.log("Error creating the job!!");
+		      this.router.navigate(["/jobs"]);          
         }
       );
 
     }
     
     updateJob(jobId: any) {
+      console.log(jobId);
+      console.log(this.dataIn);
 
       this.js.updateJob(jobId, this.dataIn).subscribe(
         res => {
@@ -209,6 +253,28 @@ export class JobsAddComponent implements OnInit {
         this.dataIn = dataObject;
       }
       */
+      let skillsData = [];
+      if (dataObject.skillReq.length>0) {
+        for (let i=0; i<dataObject.skillReq.length; i++) {
+          let newJobSkill = {} as JobSkill;
+          newJobSkill.label = dataObject.skillReq[i].label;
+          newJobSkill.priorityLevel = dataObject.skillReq[i].priorityLevel;
+          newJobSkill.proficiencyLevel = dataObject.skillReq[i].proficiencyLevel;
+          if ( dataObject.skillReq[i].hasOwnProperty('uri') ) {
+            newJobSkill.skillURI = dataObject.skillReq[i].uri;
+          }
+          else if ( dataObject.skillReq[i].hasOwnProperty('skillURI') ) {
+            newJobSkill.skillURI = dataObject.skillReq[i].skillURI;
+          }
+          skillsData.push(newJobSkill);
+          //dataObject.skillReq[i] = newJobSkill;
+        }
+
+        dataObject.skillReq = [];
+        dataObject['skillReq'] = skillsData;
+
+      }
+
       this.dataIn = dataObject;
 
 
@@ -224,6 +290,34 @@ export class JobsAddComponent implements OnInit {
     }
 
 
+    getSkillsList() {
+
+      this.cs
+     .getCompetencesSkills()
+     .subscribe((data: any[]) => {       
+       //this.options = data;
+       //console.log(data);
+       //console.log(typeof data);
+       let competencesList = [];
+       for (let i in data) {
+         //console.log(i);
+         //console.log(data[i]);
+         if (data[i]) {
+           //console.log(listOfCurrentSkillsIds);
+           //console.log(i)
+           //only skill we don't have          
+            competencesList.push({'id':i, 'name':data[i]})           
+         }
+         
+       }
+       competencesList.sort((a, b) => (a.name > b.name) ? 1 : -1)
+
+       this.options = competencesList;
+       //console.log(this.options);
+
+    });
+  }
+
   ngOnInit() {
 
     
@@ -232,6 +326,13 @@ export class JobsAddComponent implements OnInit {
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
       }  
     
+      this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
+    this.getSkillsList();
 
     this.dataIn = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",
     skillReq: [], workExperienceReq:[], educationReq:[]};
@@ -247,6 +348,7 @@ export class JobsAddComponent implements OnInit {
           res => {
             //console.log("Request OK");
             this.loadDataJob(res);
+            //console.log(res);
           },
           error => {
             //console.log("Error getting data");
