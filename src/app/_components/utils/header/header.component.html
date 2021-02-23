@@ -137,8 +137,9 @@
 											</li>
 
 											<li><a (click)="openQCQuestionnaire('manual')" [routerLink]="" >{{ 'MENU.QUESTIONNAIRE' | translate }}</a></li>
-
+<!--
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="openChangePasswordDialogFromHeader(currentUser?.id)"   >{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</a></li>
+-->
 											<li *ngIf="isLogged" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" ><a class="navbar-item" [routerLink]="" (click)="logout();">{{ 'MENU.LOGOUT' | translate }}</a></li>
 										</ul>
 									</div>

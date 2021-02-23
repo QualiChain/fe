@@ -4,8 +4,6 @@
   <div class="row">
 
           <form  #formEditJob="ngForm" class="create-job-form" novalidate>
-            
-
               <!-- title -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.TITLE.LABEL' | translate }}</mat-label>
@@ -47,7 +45,7 @@
                 </mat-select>
               </mat-form-field>
               <br/>
-              <!-- level -->
+              <!-- level -->              
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</mat-label>
                 <mat-select  [(ngModel)]="dataIn.seniorityLevel" name="level" required ngDefaultControl>
@@ -77,13 +75,40 @@
                         <div class="card-subtitle">      
                           <h3>{{ 'JOB.SKILL.TITLE' | translate }} {{i + 1}}</h3>                        
                         </div>
-                      
+                        
+                        <!-- SkillId -->
+                      <!--
+                        <mat-form-field class="create-job-full-width" >
+                          <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
+                          <input required type="text"                                
+                                 placeholder="Pick one"
+                                 matInput        
+                                 [formControl]="myControl"
+                                 [matAutocomplete]="auto">
+
+                          <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="OptionSelected($event, i)">
+                            <mat-option *ngFor="let opt of options of filteredOptions | async" [id]="opt.id" [value]="opt.name">
+                              {{opt.name}}
+                            </mat-option>
+                          </mat-autocomplete>
+                      </mat-form-field>
+                    -->
+                      <mat-form-field class="create-job-full-width" >
+                        <mat-select required ngDefaultControl [(ngModel)]="skill.skillURI" name="skillUri_{{i}}" placeholder="Pick one" (selectionChange)="SelectionChanged($event.value, i)">
+                          <mat-option *ngFor="let opt of options" [value]="opt.id">
+                            {{opt.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
                         <!-- SkillLabel -->
+                        <!--
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.SKILL.NAME.LABEL' | translate }}</mat-label>
                             <input matInput required [(ngModel)]="skill.label" name="label_{{i}}" value="label" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
                         </mat-form-field>
                         <br/>
+                        -->
                         <!-- proficiencyLevel -->
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</mat-label>
@@ -151,10 +176,10 @@
                           <h3>{{ 'JOB.EDUCATION.TITLE' | translate }} {{i + 1}}</h3>                        
                         </div>
                       
-                        <!-- title -->
+                        <!-- label -->
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.EDUCATION.NAME.LABEL' | translate }}</mat-label>
-                            <input matInput required [(ngModel)]="education.title" name="EducationTitle_{{i}}" value="EducationTitle" placeholder="{{ 'JOB.EDUCATION.NAME.PLACEHOLDER' | translate }}" #educationTitleInput="ngModel">
+                            <input matInput required [(ngModel)]="education.label" name="EducationLabel_{{i}}" value="EducationLabel" placeholder="{{ 'JOB.EDUCATION.NAME.PLACEHOLDER' | translate }}" #educationTitleInput="ngModel">
                         </mat-form-field>
                         <br/>
                         <!-- description -->

@@ -22,11 +22,12 @@ export class JobsService {
     //let headers = this.authService.createQCAuthorizationHeader();
     let headers = this.authService.createQCAuthorizationHeaderText();
 
-    return this.http.post(`${this.jobsURL}`, JSON.stringify(dataIn), {headers:headers}).
+    return this.http.post(`${this.jobsURL}`, JSON.stringify(dataIn), {headers:headers, responseType: 'text'}).
     pipe(
-       map((data: any) => {
+       map((data: any) => {         
          return data;
        }), catchError( error => {
+         console.log(error);
          return throwError( 'Something went wrong!' );
        })
     )
