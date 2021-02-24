@@ -25,7 +25,7 @@
 
         <mat-form-field class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.LEVEL' | translate }}</mat-label>
-            <mat-select required [(ngModel)]="item.skillLevel" name="level" value="level" (selectionChange)="OptionChanged($event)">
+            <mat-select required [(ngModel)]="item.proficiencyLevel" name="level" value="level" (selectionChange)="OptionChanged($event)">
               <mat-option *ngFor="let competencie of competencies" [value]="competencie.value">
                 {{ 'COMPETENCY_LEVEL.LEVELS.'+competencie.viewValue | uppercase | translate}}
               </mat-option>
@@ -63,11 +63,13 @@
             <mat-datepicker #pickerNextEvaluation startView="year" [startAt]="item.evalDate" format="DD-MM-YYYY"></mat-datepicker>
           </mat-form-field>
 
+          <!--
           <mat-form-field class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.LABEL' | translate }}</mat-label>
             <input matInput  [(ngModel)]="item.label" name="label" value="label" placeholder="{{ 'COMPETENCY_LEVEL.LABEL' | translate }}">
-        </mat-form-field>
-
+          </mat-form-field>
+          -->
+          
           <mat-form-field class="item-full-width">
             <mat-label>{{ 'COMPETENCY_LEVEL.COMMENT' | translate }}</mat-label>
             <textarea matInput [(ngModel)]="item.comment" name="comment" placeholder="{{ 'COMPETENCY_LEVEL.COMMENT' | translate }}"></textarea>
