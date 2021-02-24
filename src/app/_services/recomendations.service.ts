@@ -34,7 +34,7 @@ export class RecomendationsService {
     if ( dataCVs.hasOwnProperty('skills') ) {
      // console.log("dins skills!");
       dataCVs['skills'].forEach(element => {
-      //console.log(element);
+
       /*
       skillsCV.push({
                   "label":element.label,
@@ -46,12 +46,12 @@ export class RecomendationsService {
                   */
         
       skillsCV.push({
-        "label":element.skillName,
+        "label":element.label,
         "comment":element.comment,
-        "proficiencyLevel":element.skillLevel, 
+        "proficiencyLevel":element.proficiencyLevel, 
         "priorityLevel": element.skillLevel,
-        "uri": element.skillID, 
-        "id": element.skillID});
+        "uri": element.uri, 
+        "id": element.id});
 
       });
     }

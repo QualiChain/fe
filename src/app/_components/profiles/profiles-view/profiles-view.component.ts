@@ -43,6 +43,12 @@ import { environment } from '../../../../environments/environment';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 import { ConditionalExpr } from '@angular/compiler';
 const downloadUrl = environment.downloadFilesUrl;
+import { SkillsService } from '../../../_services/skills.service';
+import {  MatAutocompleteTrigger } from '@angular/material/autocomplete';
+//MatOptionSelectionChange
+
+import { Subscription } from 'rxjs';
+import { withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profiles-view',
@@ -192,7 +198,7 @@ export class ProfilesViewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      //console.log(result);
       if (result) {
         //console.log(this.router.url);
         //this.router.navigate([this.router.url])
@@ -1052,6 +1058,7 @@ export class CVDialog_modal implements OnInit {
   workHistoryCV: any = [];
   educationHistoryCV: any = [];
   showError: boolean = false;
+  fieldDisabled: boolean = true;
 
   competencies: CompetencyLevelValues[] = [
     {value: 'basic', viewValue: 'Basic'},
@@ -1116,15 +1123,23 @@ export class CVDialog_modal implements OnInit {
           this.educationHistoryCV = data.education;
           if(data.skills){
            data.skills.forEach(element => {
+            //console.log(element);
             if (element.proficiencyLevel) {
               this.t.push(this.formBuilder.group({
+                skillID: [element.id, [Validators.required]],
+                skillURI: [element.uri, [Validators.required]],
                 label: [element.label, [Validators.required]],
+                evalDate: [element.evalDate],
+                acquiredDate: [element.acquiredDate],
+                progress: [element.progress],
                 proficiencyLevel: [element.proficiencyLevel, Validators.required],
                 comment: [element.comment, [Validators.required]],      
               }));
             }
             else {
               this.t.push(this.formBuilder.group({
+                skillID: [element.id, [Validators.required]],
+                skillURI: [element.uri, [Validators.required]],
                 label: [element.label, [Validators.required]],
                 proficiencyLevel: [element.skillLevel, Validators.required],
                 comment: [element.comment, [Validators.required]],      
@@ -1243,14 +1258,18 @@ openAddNewItem(e, type) {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    //console.log(result);
+    console.log(result);
     if (result!=false) {
       if (type=='skillitem') {
-        this.t.push(this.formBuilder.group({
+        let newItem = {
+          skillID: [result.id.replace(":",""), [Validators.required]],
+          skillURI: [result.id, [Validators.required]],
           label: [result.label, [Validators.required]],
           proficiencyLevel: [result.proficiencyLevel, Validators.required],
           comment: [result.comment, [Validators.required]],      
-        }));
+        };
+        
+        this.t.push(this.formBuilder.group(newItem));
       }
       else if (type=='workitem') {
         this.w.push(this.formBuilder.group({
@@ -1277,6 +1296,8 @@ openAddNewItem(e, type) {
 addFormGroupItem(e, type) {
   if (type=='skillitem') {
     this.t.push(this.formBuilder.group({
+      skillID: ['', [Validators.required]],
+      skillURI: ['', [Validators.required]],
       label: ['', [Validators.required]],
       proficiencyLevel: ['', Validators.required],
       comment: ['', [Validators.required]],      
@@ -1322,6 +1343,7 @@ onSubmit() {
   };
 
   //console.log(this.data.userId);
+  //console.log(dataToSend);
 
   this.cvs.postCV(this.data.userId, dataToSend).subscribe(
     res => {
@@ -1424,6 +1446,7 @@ export interface AddItemDialogData {
 export class AddItemDialog_modal implements OnInit {
   
   //skill
+  skill_id: string = "";
   skill_label: string = "";
   skill_profiency_level: string = "";
   skill_comment: string = "";
@@ -1447,13 +1470,112 @@ export class AddItemDialog_modal implements OnInit {
     {value: 'advanced', viewValue: 'Advanced'}
   ];
 
+  //myControl = new FormControl();
+  myControl: FormControl;
+  filteredStates: any;
+  options: any[] = [];
+  filteredOptions: Observable<string[]>;
+  autocompletOption :any;
+  @ViewChild(MatAutocompleteTrigger) trigger: MatAutocompleteTrigger;
+  subscription: Subscription;
+
   constructor(
+    private ss: SkillsService,
+    private cs: CVService,
     private us: UtilsService,
     public dialogRef: MatDialogRef<AddItemDialog_modal>,
-    @Inject(MAT_DIALOG_DATA) public data: AddItemDialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: AddItemDialogData) {
+
+      this.myControl = new FormControl();
+      this.filteredStates = this.myControl.valueChanges
+      .pipe(
+      startWith(null),
+      map(name => this._filter(name))
+      );
+
+    }
+
+    private _filter(value: string): string[] {
+    
+      const filterValue = value.toString().toLowerCase();   
+  
+      return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    }
+
+    getSkillsList() {
+  
+       this.cs
+       .getCompetencesSkills()
+       .subscribe((data: any[]) => {       
+         //this.options = data;
+         //console.log(data);
+         //console.log(typeof data);
+         let competencesList = [];
+         for (let i in data) {
+           //console.log(i);
+           //console.log(data[i]);
+           if (data[i]) {
+             //console.log(listOfCurrentSkillsIds);
+             //console.log(i)
+             //only skill we don't have
+            
+              competencesList.push({'id':i, 'name':data[i]}) 
+            
+             
+           }
+           
+         }
+         competencesList.sort((a, b) => (a.name > b.name) ? 1 : -1)
+  
+         this.options = competencesList;
+  
+     });    
+      
+    }
+
+    OptionSelected($event: MatAutocompleteSelectedEvent){
+      //console.log($event);
+      this.skill_id = $event.option.id;
+      this.skill_label = $event.option.value;
+      this.myControl.setValue($event.option.value);
+    }
+  
+
+    ngAfterViewInit() {
+      this._subscribeToClosingActions();
+    }
+  
+    ngOnDestroy() {
+      if (!!this.subscription && !this.subscription.closed) {
+        this.subscription.unsubscribe();
+      }
+    }
+
+    private _subscribeToClosingActions() {
+      if (!!this.subscription && !this.subscription.closed) {
+        this.subscription.unsubscribe();
+      }
+
+      this.subscription = this.trigger.panelClosingActions
+          .subscribe(e => {
+            if (!(e && e.source)) {
+              this.myControl.setValue("")
+              this.skill_label = "";
+              this.trigger.closePanel()
+            }
+          })
+    }
 
     ngOnInit() {
       //console.log(this.data.type.toString());
+      this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
+      this.getSkillsList();
+
     }
 
     onSubmit() {
@@ -1463,6 +1585,7 @@ export class AddItemDialog_modal implements OnInit {
 
       if (this.data.type=='skillitem') {
         dataToReturn = {
+          'id': this.skill_id,
           "label": this.skill_label,
           "proficiencyLevel": this.skill_profiency_level,
           "comment": this.skill_comment

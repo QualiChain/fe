@@ -29,8 +29,8 @@ class competencyLevel {
   skillID: string;
   evalDate: string;
   acquiredDate: string;
-  skillName: string
-  skillLevel: string;
+  skillName?: string
+  proficiencyLevel: string;
   progress: number
 }
 
@@ -40,7 +40,7 @@ class competencyLevelToPost {
   "skillURI": string;
   "evalDate": string;
   "acquiredDate": string;
-  "skillLevel": string;
+  "proficiencyLevel": string;
   "progress": number;
 }
 
@@ -57,7 +57,8 @@ export class CompetencyDevelopmentComponent implements OnInit {
   currentUser: User;
 
   showLoading : boolean = true;
-  displayedColumns: string[] = ['skillName', 'skillLevel', 'progress', 'acquiredDate', 'evalDate', 'action'];
+  //displayedColumns: string[] = ['skillName', 'skillLevel', 'progress', 'acquiredDate', 'evalDate', 'action'];
+  displayedColumns: string[] = ['label', 'proficiencyLevel', 'progress', 'acquiredDate', 'evalDate', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   fromURL: boolean = false;
 
@@ -215,7 +216,7 @@ interface CompetencyLevelValues {
 })
 export class ItemCDDialog_modal implements OnInit {
   
-  item: competencyLevel = { id:null, label:null, comment:null, skillID:null, evalDate:null, acquiredDate:null, skillName: null, skillLevel: null, progress:null};
+  item: competencyLevel = { id:null, label:null, comment:null, skillID:null, evalDate:null, acquiredDate:null, skillName: null, proficiencyLevel: null, progress:null};
   mode: string = null;
   skills: any[];
   myControl = new FormControl();
@@ -232,7 +233,7 @@ export class ItemCDDialog_modal implements OnInit {
     "skillURI": null,
     "evalDate": null,
     "acquiredDate": null,
-    "skillLevel": null,
+    "proficiencyLevel": null,
     "progress": null,
   }
 
@@ -260,6 +261,37 @@ export class ItemCDDialog_modal implements OnInit {
     return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
+  getFinalSkillsList(listOfCurrentSkillsIds) {
+    this.cs
+    .getCompetencesSkills()
+    .subscribe((data: any[]) => {       
+      //this.options = data;
+      //console.log(data);
+      //console.log(typeof data);
+      let competencesList = [];
+      for (let i in data) {
+        //console.log(i);
+        //console.log(data[i]);
+        if (data[i]) {
+          //console.log(listOfCurrentSkillsIds);
+          //console.log(i)
+          //only skill we don't have
+         if (!listOfCurrentSkillsIds.includes(i.replace(":","")))
+         {
+           //console.log("in if");
+           competencesList.push({'id':i, 'name':data[i]}) 
+         }
+          
+        }
+        
+      }
+      competencesList.sort((a, b) => (a.name > b.name) ? 1 : -1)
+
+      this.options = competencesList;
+
+  });    
+  }
+
   getSkillsList() {
 
     this.cs.getCompetencesByUser(this.data.userId)
@@ -280,38 +312,13 @@ export class ItemCDDialog_modal implements OnInit {
       });
       */
 
-     this.cs
-     .getCompetencesSkills()
-     .subscribe((data: any[]) => {       
-       //this.options = data;
-       //console.log(data);
-       //console.log(typeof data);
-       let competencesList = [];
-       for (let i in data) {
-         //console.log(i);
-         //console.log(data[i]);
-         if (data[i]) {
-           //console.log(listOfCurrentSkillsIds);
-           //console.log(i)
-           //only skill we don't have
-          if (!listOfCurrentSkillsIds.includes(i.replace(":","")))
-          {
-            //console.log("in if");
-            competencesList.push({'id':i, 'name':data[i]}) 
-          }
-           
-         }
-         
-       }
-       competencesList.sort((a, b) => (a.name > b.name) ? 1 : -1)
-
-       this.options = competencesList;
-
-   });    
+      this.getFinalSkillsList(listOfCurrentSkillsIds);
+    
 
     },
     error => {
-      console.log("Error loading personal skills");                      
+      console.log("Error loading personal skills");  
+      this.getFinalSkillsList([]);                    
     }); 
 
     
@@ -319,7 +326,8 @@ export class ItemCDDialog_modal implements OnInit {
 
   OptionSelected(event){
     //console.log(event);
-    //this.itemToPost.label = event.option.value;
+    this.item.label = event.option.value;
+    this.itemToPost.label = event.option.value;
     this.itemToPost.skillURI = event.option.id;
   }
 
@@ -352,7 +360,7 @@ export class ItemCDDialog_modal implements OnInit {
       //console.log(this.data.element)
       //console.log(this.data.element);
       let dataAPI: any = this.data.element;
-     
+      //console.log(dataAPI);
       if (dataAPI.skillName) {
         //this.myControl.setValue('greek');
         this.myControl.setValue(dataAPI.skillName);
@@ -360,11 +368,12 @@ export class ItemCDDialog_modal implements OnInit {
       //this.itemToPost.label = dataAPI.label;
 
       this.label = dataAPI.label;
-      this.skillName = dataAPI.skillName;
+      this.skillName = dataAPI.label;
       this.itemToPost.label = dataAPI.label;
-      this.itemToPost.skillURI = ":"+dataAPI.skillID;
+      //this.itemToPost.skillURI = ":"+dataAPI.skillID;
+      this.itemToPost.skillURI = dataAPI.uri;
 
-      this.item.skillLevel = dataAPI.skillLevel;
+      this.item.proficiencyLevel = dataAPI.proficiencyLevel;
       this.item.progress = dataAPI.progress;
       this.item.comment = dataAPI.comment;
       this.item.label = dataAPI.label;
@@ -418,7 +427,7 @@ export class ItemCDDialog_modal implements OnInit {
       //let newDate = this.item.acquiredDate;
       this.itemToPost.acquiredDate = newDate.toString();
       
-      this.itemToPost.skillLevel = this.item.skillLevel;
+      this.itemToPost.proficiencyLevel = this.item.proficiencyLevel;
       this.itemToPost.progress = this.item.progress; 
 
       //console.log(this.itemToPost);
@@ -440,7 +449,9 @@ export class ItemCDDialog_modal implements OnInit {
       let itemToPut : any = {};
       itemToPut.label = this.item.label;
       itemToPut.comment = this.item.comment;
-      itemToPut.skillID = this.data.element['skillID'];
+      //itemToPut.skillID = this.data.element['skillID'];
+      itemToPut.id = this.data.element['id'];
+      itemToPut.skillURI = this.data.element['uri'];
       //let newEvalDate =this.datepipe.transform(this.item.evalDate, 'dd/MM/yyyy');
       //let newEvalDate =this.datepipe.transform(this.item.evalDate, 'MM/dd/yyyy');
       let newEvalDate =this.datepipe.transform(this.item.evalDate, 'MM/dd/yy');
@@ -454,7 +465,7 @@ export class ItemCDDialog_modal implements OnInit {
       itemToPut.acquiredDate = newDate.toString();
 
       itemToPut.skillName = this.data.element['skillName'];
-      itemToPut.skillLevel = this.item.skillLevel;
+      itemToPut.proficiencyLevel = this.item.proficiencyLevel;
       itemToPut.progress = this.item.progress.toString() 
       
       //console.log(itemToPut);

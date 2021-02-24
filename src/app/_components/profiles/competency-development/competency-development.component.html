@@ -46,16 +46,16 @@
       </ng-container>
     -->
 
-      <!-- competency Column -->
-      <ng-container matColumnDef="skillName">
+      <!-- label Column -->
+      <ng-container matColumnDef="label">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{element.skillName}}  </td>
+        <td mat-cell *matCellDef="let element"> {{element.label}}  </td>
       </ng-container>  
   
-      <!-- level Column -->
-      <ng-container matColumnDef="skillLevel">
+      <!-- proficiencyLevel Column -->
+      <ng-container matColumnDef="proficiencyLevel">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COMPETENCY_LEVEL.LEVEL' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{ 'COMPETENCY_LEVEL.LEVELS.'+element.skillLevel | uppercase | translate}} </td>
+        <td mat-cell *matCellDef="let element"> {{ 'COMPETENCY_LEVEL.LEVELS.'+element.proficiencyLevel | uppercase | translate}} </td>
       </ng-container>  
 
       <!-- progress Column -->
