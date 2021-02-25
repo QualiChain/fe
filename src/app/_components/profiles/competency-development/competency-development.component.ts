@@ -450,8 +450,11 @@ export class ItemCDDialog_modal implements OnInit {
       itemToPut.label = this.item.label;
       itemToPut.comment = this.item.comment;
       //itemToPut.skillID = this.data.element['skillID'];
-      itemToPut.id = this.data.element['id'];
-      itemToPut.skillURI = this.data.element['uri'];
+      //itemToPut.id = this.data.element['id'];
+      //itemToPut.skillURI = this.data.element['uri'];
+      itemToPut.id = this.data.element['skillID'];
+      itemToPut.skillURI = this.data.element['skillURI'];
+
       //let newEvalDate =this.datepipe.transform(this.item.evalDate, 'dd/MM/yyyy');
       //let newEvalDate =this.datepipe.transform(this.item.evalDate, 'MM/dd/yyyy');
       let newEvalDate =this.datepipe.transform(this.item.evalDate, 'MM/dd/yy');
