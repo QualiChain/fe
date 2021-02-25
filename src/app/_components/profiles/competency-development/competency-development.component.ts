@@ -340,7 +340,9 @@ export class ItemCDDialog_modal implements OnInit {
   }
 
   ngAfterViewInit() {
-    this._subscribeToClosingActions();
+    if (this.data.action=='create') {
+      this._subscribeToClosingActions();
+    }
   }
 
   ngOnDestroy() {
@@ -397,7 +399,7 @@ export class ItemCDDialog_modal implements OnInit {
       //console.log(this.data.element)
       //console.log(this.data.element);
       let dataAPI: any = this.data.element;
-      console.log(dataAPI);
+      //console.log(dataAPI);
       if (dataAPI.skillName) {
         //this.myControl.setValue('greek');
         this.myControl.setValue(dataAPI.skillName);
@@ -420,7 +422,7 @@ export class ItemCDDialog_modal implements OnInit {
       //let newDate = '31/01/2021'; 
       //console.log("-----acquiredDate---------")  
       let newDateAcquiredDate = dataAPI.acquiredDate;
-      var splitted = newDateAcquiredDate.split("/"); 
+      //var splitted = newDateAcquiredDate.split("/"); 
       //console.log(newDateAcquiredDate);
       //newDateAcquiredDate = splitted[1]+"/"+splitted[0]+"/"+splitted[2];
       //console.log(newDateAcquiredDate);
@@ -433,7 +435,7 @@ export class ItemCDDialog_modal implements OnInit {
       //set default dsate in evalDate
       //let newDate2 = '29/02/2020';
       let newDateEvalDate = dataAPI.evalDate;
-      var splitted2 = newDateEvalDate.split("/"); 
+      //var splitted2 = newDateEvalDate.split("/"); 
       //console.log(newDateEvalDate);
       //newDateEvalDate = splitted2[1]+"/"+splitted2[0]+"/"+splitted2[2];
       //console.log(newDateEvalDate);

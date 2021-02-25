@@ -379,7 +379,9 @@ export class ProfilesViewComponent implements OnInit {
           this.cs
           .getCompletedCourseByUserId(id)
           .subscribe((coursesData: Course[]) => {
+            //console.log(coursesData);
             this.listOfCompletedCoursesByUser = coursesData;
+            //this.listOfCompletedCoursesByUser = [{'course':{'id':1,'name':'test'}}]
           },
           error => {            
             console.log("error getting courses by user id")
