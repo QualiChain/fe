@@ -20,7 +20,12 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateAdapter } from '@angular/material/core'; 
 import { DatePipe } from '@angular/common'
 import { Validators} from '@angular/forms';
-import { SELECT_PANEL_INDENT_PADDING_X } from '@angular/material/select';
+//import { SELECT_PANEL_INDENT_PADDING_X } from '@angular/material/select';
+
+import {  MatAutocompleteTrigger } from '@angular/material/autocomplete';
+//MatOptionSelectionChange
+import { Subscription } from 'rxjs';
+import { withLatestFrom } from 'rxjs/operators';
 
 class competencyLevel {
   id?: number;
@@ -243,6 +248,9 @@ export class ItemCDDialog_modal implements OnInit {
     {value: 'advanced', viewValue: 'Advanced'}
   ];
 
+  @ViewChild(MatAutocompleteTrigger) trigger: MatAutocompleteTrigger;
+  subscription: Subscription;
+
   constructor(
     private ss: SkillsService,
     private cs: CVService,
@@ -331,6 +339,35 @@ export class ItemCDDialog_modal implements OnInit {
     this.itemToPost.skillURI = event.option.id;
   }
 
+  ngAfterViewInit() {
+    this._subscribeToClosingActions();
+  }
+
+  ngOnDestroy() {
+    if (!!this.subscription && !this.subscription.closed) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  private _subscribeToClosingActions() {
+    if (!!this.subscription && !this.subscription.closed) {
+      this.subscription.unsubscribe();
+    }
+
+    this.subscription = this.trigger.panelClosingActions
+        .subscribe(e => {
+          if (!(e && e.source)) {
+            this.myControl.setValue("")
+            
+            this.item.label = "";
+            this.itemToPost.label = "";
+            this.itemToPost.skillURI = "";
+
+            this.trigger.closePanel()
+          }
+        })
+  }
+
   numberFormControl = new FormControl('', [
     Validators.min(0),
     Validators.max(100),
@@ -360,7 +397,7 @@ export class ItemCDDialog_modal implements OnInit {
       //console.log(this.data.element)
       //console.log(this.data.element);
       let dataAPI: any = this.data.element;
-      //console.log(dataAPI);
+      console.log(dataAPI);
       if (dataAPI.skillName) {
         //this.myControl.setValue('greek');
         this.myControl.setValue(dataAPI.skillName);
@@ -375,7 +412,8 @@ export class ItemCDDialog_modal implements OnInit {
 
       this.item.proficiencyLevel = dataAPI.proficiencyLevel;
       this.item.progress = dataAPI.progress;
-      this.item.comment = dataAPI.comment;
+      //this.item.comment = dataAPI.comment;
+      this.item.comment = dataAPI.skillRefComment;
       this.item.label = dataAPI.label;
 
       //set default dsate in acquiredDate

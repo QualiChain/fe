@@ -144,21 +144,28 @@
                 *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee))">
                   <ng-template ngbPanelContent>
                       <div class="">
-                        <div class="completeCourseSectiontab" [ngClass]="{'col-lg-6':selectedCourse,'col-lg-12':!selectedCourse}">
-                          <ul class="list-group list-group-flush">
-                            <li  *ngFor="let course of listOfCompletedCoursesByUser" class="list-group-item" >
-                              <a [routerLink]="" (click)="selectedCourse=course">{{course.course.name}}</a>
-                            </li>
-                          </ul>
+                        <div *ngIf="listOfCompletedCoursesByUser.length==0; else elseBlockConpletedCourses" class="col-lg-8  smartBudge">                                
+                          {{ 'CAREER_ADVISOR.COMPLETED_COURSES.NO_DATA' | translate }}
                         </div>
-                        <div *ngIf="selectedCourse" class="col-lg-6 completeCourseSectiontab">
-                          <div class=""><h3>{{selectedCourse.course.name}}</h3></div>
-                          <div class="">{{selectedCourse.course.description}}</div>
-                          <div class="">{{ 'COURSE.SCORE.LABEL' | translate }}: {{selectedCourse.grade}}</div>
-                          <div class=""><br/><a class="btn btn-danger" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a> 
-                            &nbsp; <a class="btn btn-success" [routerLink]="['/courses', selectedCourse.course.courseid]" >{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+
+                        <ng-template #elseBlockConpletedCourses>
+                          <div class="completeCourseSectiontab" [ngClass]="{'col-lg-6':selectedCourse,'col-lg-12':!selectedCourse}">
+                          
+                            <ul class="list-group list-group-flush">
+                              <li  *ngFor="let course of listOfCompletedCoursesByUser" class="list-group-item" >
+                                <a [routerLink]="" (click)="selectedCourse=course">{{course.course.name}}</a>
+                              </li>
+                            </ul>
                           </div>
-                        </div>
+                          <div *ngIf="selectedCourse" class="col-lg-6 completeCourseSectiontab">
+                            <div class=""><h3>{{selectedCourse.course.name}}</h3></div>
+                            <div class="">{{selectedCourse.course.description}}</div>
+                            <div class="">{{ 'COURSE.SCORE.LABEL' | translate }}: {{selectedCourse.grade}}</div>
+                            <div class=""><br/><a class="btn btn-danger" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a> 
+                              &nbsp; <a class="btn btn-success" [routerLink]="['/courses', selectedCourse.course.courseid]" >{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+                            </div>
+                          </div>
+                        </ng-template>
                       </div>
                   </ng-template>
                 </ngb-panel>
