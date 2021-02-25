@@ -379,7 +379,9 @@ export class ProfilesViewComponent implements OnInit {
           this.cs
           .getCompletedCourseByUserId(id)
           .subscribe((coursesData: Course[]) => {
+            //console.log(coursesData);
             this.listOfCompletedCoursesByUser = coursesData;
+            //this.listOfCompletedCoursesByUser = [{'course':{'id':1,'name':'test'}}]
           },
           error => {            
             console.log("error getting courses by user id")
@@ -1126,23 +1128,26 @@ export class CVDialog_modal implements OnInit {
             //console.log(element);
             if (element.proficiencyLevel) {
               this.t.push(this.formBuilder.group({
-                skillID: [element.id, [Validators.required]],
-                skillURI: [element.uri, [Validators.required]],
+                skillID: [element.skillID, [Validators.required]],
+                skillURI: [element.skillURI, [Validators.required]],
                 label: [element.label, [Validators.required]],
                 evalDate: [element.evalDate],
                 acquiredDate: [element.acquiredDate],
                 progress: [element.progress],
                 proficiencyLevel: [element.proficiencyLevel, Validators.required],
-                comment: [element.comment, [Validators.required]],      
+                comment: [element.skillRefComment, [Validators.required]],      
               }));
             }
             else {
               this.t.push(this.formBuilder.group({
-                skillID: [element.id, [Validators.required]],
-                skillURI: [element.uri, [Validators.required]],
+                skillID: [element.skillID, [Validators.required]],
+                skillURI: [element.skillURI, [Validators.required]],
                 label: [element.label, [Validators.required]],
+                evalDate: [element.evalDate],
+                acquiredDate: [element.acquiredDate],
+                progress: [element.progress],
                 proficiencyLevel: [element.skillLevel, Validators.required],
-                comment: [element.comment, [Validators.required]],      
+                comment: [element.skillRefComment, [Validators.required]],      
               }));
             }
             });
