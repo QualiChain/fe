@@ -64,6 +64,21 @@ export class ThesisEditComponent implements OnInit {
             //console.log(dataThesis);
             this.thesis = dataThesis;
 
+            this.ts
+            .getAllThesisRequestsByThesisId(id).subscribe(
+              (dataRequestsThesis:any) => {
+                //console.log(dataRequestsThesis);
+                dataRequestsThesis.forEach(element => {
+                    this.dataFiltered.push(element.student);
+                });
+                this.dataFiltered.sort((a,b) => a.surname.toUpperCase().localeCompare(b.surname.toUpperCase()));
+                this.usersList = this.dataFiltered;
+              },
+              error => {
+                console.log("request thesis not found!!");
+              }
+            );   
+            /*
             this.us
             .getUsers()
             .subscribe((data: User[]) => {
@@ -79,6 +94,7 @@ export class ThesisEditComponent implements OnInit {
               this.usersList = this.dataFiltered;
 
             });
+            */
           },
           error => {
             this.router.navigate(["/not_found"]);            
@@ -116,6 +132,10 @@ export class ThesisEditComponent implements OnInit {
 
     }
     else if (this.mode=="Edit") {
+
+      if (this.thesis.status=='published') {
+        this.thesis.student_id = null;
+      }
 
       let objUpdate = {
         "title": this.thesis.title,

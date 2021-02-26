@@ -61,7 +61,7 @@
     <!-- description Column -->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'THESIS.DESCRIPTION.LABEL' | translate }} </th>
-      <td mat-cell *matCellDef="let element"> {{element.description | slice:0:80}} <span *ngIf="element.description.length>80">... </span></td>
+      <td mat-cell *matCellDef="let element"> {{element.description | slice:0:120}} <span *ngIf="element.description.length>120">... </span></td>
     </ng-container>  
 
     <!--  status Column -->
@@ -71,16 +71,19 @@
     </ng-container>    
 
     <!--  professor_id Column -->
+    <!--
     <ng-container matColumnDef="professor_id">
       <th mat-header-cell *matHeaderCellDef> {{ 'THESIS.PROFESSOR.LABEL' | translate }} </th>
-      <td mat-cell *matCellDef="let element"> <app-qc-user-name [userId]="element.professor_id"></app-qc-user-name> </td>
+      <td mat-cell *matCellDef="let element"> <app-qc-user-name *ngIf="element.professor_id" [userId]="element.professor_id"></app-qc-user-name> </td>
     </ng-container>  
-
+    -->
     <!--  student_id Column -->
+    <!--
     <ng-container matColumnDef="student_id">
       <th mat-header-cell *matHeaderCellDef> {{ 'THESIS.STUDENT.LABEL' | translate }} </th>
-      <td mat-cell *matCellDef="let element"> <app-qc-user-name [userId]="element.student_id"></app-qc-user-name> </td>
+      <td mat-cell *matCellDef="let element"> <app-qc-user-name *ngIf="element.student_id" [userId]="element.student_id"></app-qc-user-name> </td>
     </ng-container>  
+    -->
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

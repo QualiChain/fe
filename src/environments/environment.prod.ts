@@ -40,6 +40,7 @@ export const environment = {
   permissionsUrl: 'http://qualichain.epu.ntua.gr:5004/user_permissions',
   avatarURL: 'http://qualichain.epu.ntua.gr:5004/get',
   thesisURL: 'http://qualichain.epu.ntua.gr:5004/thesis',
+  thesisRequestURL: 'http://qualichain.epu.ntua.gr:5004/thesis_request',
   questionnaireURL: 'http://qualichain.epu.ntua.gr:5004/questionnaire',
   badging: 'https://blockchain21.kmi.open.ac.uk/badging'
 };

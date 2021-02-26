@@ -14,6 +14,7 @@ import { AuthService } from '../_services/auth.service';
 export class ThesisService {
  
   uri = environment.thesisURL;
+  uriThesisRequest = environment.thesisRequestURL
   //uri = 'http://localhost:4000/cvs';
 
 
@@ -89,5 +90,38 @@ export class ThesisService {
           })
       )
     }  
+
+    getAllThesisRequestsByThesisId(thesisId) {
+      let headers = this.authService.createQCAuthorizationHeader();
+      return this
+        .httpClient
+        .get(`${this.uriThesisRequest}?thesis_id=${thesisId}`, { headers: headers } );
+    } 
+
+    thesisRequest(dataIn: any) {
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.httpClient.post(`${this.uriThesisRequest}`, dataIn, {headers:headers}).
+      pipe(
+          map((data: any) => {
+              return data;
+          }), catchError( error => {
+              return throwError( 'Something went wrong!' );
+          })
+      )
+    }
+
+    deleteThesisRequest(thesisRequestId) {
+      let headers = this.authService.createQCAuthorizationHeader();
+  
+      return this.httpClient.delete(`${this.uriThesisRequest}?thesis_request_id=${thesisRequestId}`, {headers:headers}).
+      pipe(
+          map((data) => {
+              return data;
+          }), catchError( error => {
+              return throwError( 'Something went wrong!' );
+          })
+      )
+      }
 
 }
