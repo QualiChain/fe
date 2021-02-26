@@ -65,7 +65,8 @@ export class UtilsService {
   }
 
   sendTextTriples(textTriples: String){
-    let headers = this.authService.createQCAuthorizationHeader();
+    //let headers = this.authService.createQCAuthorizationHeader();
+    let headers = this.authService.createQCAuthorizationHeaderText();
 
     return this.http.post(`${this.uriTextTriples}`, textTriples, { headers:headers, responseType: 'text'}).
         pipe(

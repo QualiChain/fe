@@ -10,7 +10,16 @@ export class QCMatomoConnectorService {
   constructor() { }
   
   sendMatomoEvent(eventCategory: string, eventAction: string, eventName: string, eventValue: string) {
-    _paq.push(['trackEvent', eventCategory, eventAction, eventName, eventValue]);
+    if (eventName && eventValue) {
+      _paq.push(['trackEvent', eventCategory, eventAction, eventName, eventValue]);
+    }
+    else if (eventName) {
+      _paq.push(['trackEvent', eventCategory, eventAction, eventName]);
+    }
+    else{
+      _paq.push(['trackEvent', eventCategory, eventAction]);
+    }
+    
   }
 
 }

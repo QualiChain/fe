@@ -30,7 +30,7 @@ export class ThesisComponent implements OnInit {
 
   @Input() userId: number = null;
 
-  displayedColumns: string[] = ['title', 'description', 'status', 'professor_id', 'student_id', 'action'];
+  displayedColumns: string[] = ['title', 'description', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   currentUser: User;
   @ViewChild(MatPaginator, {static: true}) 
@@ -56,6 +56,9 @@ export class ThesisComponent implements OnInit {
   }
 
   isAdmin = this.appcomponent.isAdmin;
+  isStudent = this.appcomponent.isStudent;
+  isProfessor = this.appcomponent.isProfessor;
+
   newUserId: number = null;
 
   ngOnInit() {
@@ -74,23 +77,25 @@ export class ThesisComponent implements OnInit {
       //we recover data related with the usedId input
       this.newUserId = this.userId;
 
-      this.ts
-      .getThesisByProfessorId(this.newUserId)
-      .subscribe((data: any[]) => {
+      if (this.isProfessor || this.isAdmin) {
+        this.ts
+        .getThesisByProfessorId(this.newUserId)
+        .subscribe((data: any[]) => {
+          data.forEach(element => {
+            this.thesisList.push(element);
+          });
+        });   
+      }
 
-        data.forEach(element => {
-          this.thesisList.push(element);
+      if (this.isStudent) {
+        this.ts
+        .getThesisByStudentId(this.newUserId)
+        .subscribe((data: any[]) => {
+          data.forEach(element => {
+            this.thesisList.push(element);
+          });
         });
-        
-      });   
-
-      this.ts
-      .getThesisByStudentId(this.newUserId)
-      .subscribe((data: any[]) => {
-        data.forEach(element => {
-          this.thesisList.push(element);
-        });
-      });
+      }
 
     }
     else {

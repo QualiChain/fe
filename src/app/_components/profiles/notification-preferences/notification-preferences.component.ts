@@ -71,6 +71,7 @@ export class NotificationPreferencesComponent implements OnInit {
   allSpecializations: Specialization[] = [];
   specializationCtrl = new FormControl();
   filteredSpecializations: Observable<string[]>;
+  internal_reallocation_availability: boolean = false;
 
   @ViewChild('specializationsInput', {static: false}) specializationsInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
@@ -152,6 +153,10 @@ export class NotificationPreferencesComponent implements OnInit {
               //console.log("Request OK");
               //console.log(res);
               this.userPreferences = res;
+
+              if ((this.userPreferences.internal_reallocation_availability==false) || this.userPreferences.internal_reallocation_availability==true) {
+                this.internal_reallocation_availability = this.userPreferences.internal_reallocation_availability;
+              }
               
               if ('specializations' in this.userPreferences) {
                 let initialListOfSpecializations = this.userPreferences.specializations.split(",");
@@ -260,6 +265,9 @@ export class NotificationPreferencesComponent implements OnInit {
     }
   }
 
+  valueChange() {
+    this.internal_reallocation_availability = !this.internal_reallocation_availability;
+  }
   processForm() {
     //console.log(this);
     //console.log(this.userPreferences.id);
@@ -285,7 +293,8 @@ export class NotificationPreferencesComponent implements OnInit {
     let dataToPost = {
       "user_id": this.userId,
       "locations": listOfLocations,
-      "specializations": listOfSpecializations
+      "specializations": listOfSpecializations,
+      "internal_reallocation_availability": this.internal_reallocation_availability
       };
       //console.log(dataToPost);      
       this.saveData(dataToPost);
