@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 //import { MatDialogRef } from '@angular/material/dialog';
 //import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { QcSelectCityDialogComponent } from '../../../_components/utils/qc-select-city-dialog/qc-select-city-dialog.component';
+import { AppComponent } from '../../../app.component';
 
 export interface Location {
   name: string;
@@ -112,6 +113,7 @@ export class NotificationPreferencesComponent implements OnInit {
   }
 
   constructor(
+    private appcomponent: AppComponent,
     private qcStorageService: QCStorageService,
     private fb: FormBuilder,
     private router: Router,
@@ -129,6 +131,8 @@ export class NotificationPreferencesComponent implements OnInit {
 
   }
 
+  isEmployee = this.appcomponent.isEmployee;
+  
   ngOnInit(): void {
 
     if(!this.currentUser) {      
@@ -268,6 +272,7 @@ export class NotificationPreferencesComponent implements OnInit {
   valueChange() {
     this.internal_reallocation_availability = !this.internal_reallocation_availability;
   }
+  
   processForm() {
     //console.log(this);
     //console.log(this.userPreferences.id);
