@@ -14,6 +14,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AccessDeniedComponent } from '../../../_components/utils/access-denied/access-denied.component';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+import { AppComponent } from '../../../app.component';
 
 describe('NotificationPreferencesComponent', () => {
   let component: NotificationPreferencesComponent;
@@ -38,7 +39,7 @@ describe('NotificationPreferencesComponent', () => {
         HttpClientTestingModule,
         MatAutocompleteModule
       ],
-      providers: [QCStorageService]
+      providers: [AppComponent, QCStorageService]
     })
     .compileComponents();
   }));
