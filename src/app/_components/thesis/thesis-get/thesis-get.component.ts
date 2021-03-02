@@ -27,7 +27,7 @@ export class ThesisGetComponent implements OnInit {
   paginator: MatPaginator;  
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
+  thesisByProfessorId: any[] = [];
 
   constructor(
     private appcomponent: AppComponent,
@@ -40,7 +40,7 @@ export class ThesisGetComponent implements OnInit {
 
     }
 
-  thesisMainData: any = {};
+  thesisMainData: any = {'professor':{'id':null}};
   
   isStudent = this.appcomponent.isStudent;
 
@@ -139,6 +139,13 @@ export class ThesisGetComponent implements OnInit {
           dataThesis => {
             //console.log(dataThesis);
             this.thesisMainData = dataThesis;
+
+            this.ts
+            .getThesisByProfessorId(this.thesisMainData.professor.id)
+            .subscribe((thesisByProfessorId: any[]) => {
+              this.thesisByProfessorId = thesisByProfessorId;
+            });   
+
           },
           error => {
             this.router.navigate(["/not_found"]);            

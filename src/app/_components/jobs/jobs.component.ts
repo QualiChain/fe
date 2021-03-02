@@ -210,6 +210,27 @@ export class JobsComponent implements OnInit {
   ngOnInit() {
     this.getCompaniesList();
     this.getJobList();
+
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'employment_type': 
+          if (item.contractType) {
+            return this.translate.instant('JOB.EMPLOYMENT_TYPE.OPTIONS.'+item.contractType.toUpperCase( ));
+          }
+          else  {
+            return '';
+          }
+          case 'level': 
+          if (item.seniorityLevel) {
+            return this.translate.instant('JOB.EMPLOYMENT_LEVEL.OPTIONS.'+item.seniorityLevel.toUpperCase( ));
+          }
+          else  {
+            return '';
+          }                  
+        default: return item[property];
+      }
+    }; 
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 

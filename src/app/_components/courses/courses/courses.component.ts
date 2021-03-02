@@ -39,7 +39,8 @@ let ELEMENT_DATA: Course[] = [];
 
 
 export class CoursesComponent implements OnInit {
-  displayedColumns: string[] = ['courseid', 'name', 'semester', 'action'];
+  //displayedColumns: string[] = ['courseid', 'name', 'semester', 'action'];
+  displayedColumns: string[] = ['name', 'semester', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
