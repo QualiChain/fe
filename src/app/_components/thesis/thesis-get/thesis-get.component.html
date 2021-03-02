@@ -1,46 +1,48 @@
 <h1 >{{ 'THESIS.HEADER' | translate }}: {{thesisMainData.title}}</h1>
 
+
 <div class="container">
 
-    <div class="row">
-        <button  *appCanAccess="['view_thesis_subjects']" class="btn btn-primary" [routerLink]="['/thesis']">
-            <i _ngcontent-axy-c0="" class="material-icons small"> list </i> {{ 'THESIS.BUTTON.LIST' | translate }}
-        </button> 
+  <div class="col" [ngClass]="{'col-lg-12':thesisByProfessorId.length<2,'col-lg-8':thesisByProfessorId.length>=2}">
+    <div class="row" >
+          <button  *appCanAccess="['view_thesis_subjects']" class="btn btn-primary" [routerLink]="['/thesis']">
+              <i _ngcontent-axy-c0="" class="material-icons small"> list </i> {{ 'THESIS.BUTTON.LIST' | translate }}
+          </button> 
 
-        <button [hidden]="this.currentUser.id!=thesisMainData.professor_id" *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', thesisMainData.id, 'edit']">
-          <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
-        </button>
+          <button [hidden]="this.currentUser.id!=thesisMainData.professor.id" *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', thesisMainData.id, 'edit']">
+            <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
+          </button>
 
-        <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner; else noSpinner"></mat-spinner>
-        <ng-template #noSpinner>
-            <button *ngIf="(isStudent && !myRequestHasCreated && thesisMainData.status=='published' && !thesisMainData.student_id)" class="btn btn-primary" (click)="applayToThesis(thesisMainData.id)">
-                <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'THESIS_REQUEST.BUTTON.APPLY' | translate }}
-            </button>            
-            <button *ngIf="(myRequestHasCreated && thesisMainData.status=='published' && !thesisMainData.student_id)" class="btn btn-danger" (click)="deleteApplayToThesis(myThesisRequestId)">
-                <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'THESIS_REQUEST.BUTTON.DELETE_APPLY' | translate }}
-            </button>
-        </ng-template>
+          <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner; else noSpinner"></mat-spinner>
+          <ng-template #noSpinner>
+              <button *ngIf="(isStudent && !myRequestHasCreated && thesisMainData.status=='published' && !thesisMainData.student_id)" class="btn btn-primary" (click)="applayToThesis(thesisMainData.id)">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'THESIS_REQUEST.BUTTON.APPLY' | translate }}
+              </button>            
+              <button *ngIf="(myRequestHasCreated && thesisMainData.status=='published' && !thesisMainData.student_id)" class="btn btn-danger" (click)="deleteApplayToThesis(myThesisRequestId)">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'THESIS_REQUEST.BUTTON.DELETE_APPLY' | translate }}
+              </button>
+          </ng-template>
 
     </div>
-    <div class="row"><br></div>
+  <div class="row"><br></div>
     <div class="row">
         <div class="col col-lg-12">
             <div class="col ">
                 <div><span class="labelthesis">{{ 'THESIS.DESCRIPTION.LABEL' | translate }}:</span> {{thesisMainData.description}}</div> 
             </div>
+            <div class="col " *ngIf="thesisMainData.professor">
+            <div><span class="labelthesis">{{ 'THESIS.PROFESSOR.LABEL' | translate }}:</span> {{thesisMainData.professor.name}} {{thesisMainData.professor.surname}}</div> 
+            </div>
             <div class="col ">
-                <div><span class="labelthesis">{{ 'THESIS.STATUS.LABEL' | translate }}:</span> {{thesisMainData.status}}</div> 
+              <div><span class="labelthesis">{{ 'THESIS.STATUS.LABEL' | translate }}:</span> {{ 'THESIS.STATUS.OPTIONS.'+thesisMainData.status | uppercase  | translate}}</div> 
             </div>
-            <div class="col " [hidden]="this.currentUser.id!=thesisMainData.professor_id" *ngIf="thesisMainData.professor_id">
-            <div><span class="labelthesis">{{ 'THESIS.PROFESSOR.LABEL' | translate }}:</span>&nbsp;<app-qc-user-name [userId]="thesisMainData.professor_id"></app-qc-user-name></div> 
-            </div>
-            <div class="col " [hidden]="this.currentUser.id!=thesisMainData.professor_id" *ngIf="thesisMainData.student_id">
+            <div class="col " [hidden]="this.currentUser.id!=thesisMainData.professor.id" *ngIf="thesisMainData.student_id">
                 <div><span class="labelthesis">{{ 'THESIS.STUDENT.LABEL' | translate }}:</span>&nbsp;<app-qc-user-name [userId]="thesisMainData.student_id"></app-qc-user-name></div> 
             </div>
         </div>
     </div>
 
-    <div [hidden]="(this.currentUser.id!=thesisMainData.professor_id)">
+    <div [hidden]="(this.currentUser.id!=thesisMainData.professor.id)">
         <div><h2>{{ 'THESIS_REQUEST.REQUESTS' | translate }}</h2></div>
         <div *ngIf="listOfThesisRequests.data.length==0"> {{ 'THESIS_REQUEST.NO_REQUEST' | translate }}</div>
         
@@ -71,4 +73,52 @@
           </div>
 
     </div>
+
+  </div>
+
+  <div class="col-lg-4" *ngIf="thesisByProfessorId.length>=2">
+      <mat-expansion-panel  [expanded]="thesisByProfessorId.length>=2 ? true : false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ 'THESIS_REQUEST.THESIS_SAME_PROFESSOR' | translate }}</mat-panel-title>
+          <mat-panel-description></mat-panel-description>
+        </mat-expansion-panel-header>
+     
+        <mat-accordion *ngIf="thesisByProfessorId.length>=0" activeIds="thesis-0">
+          <mat-expansion-panel [hidden]="thesis.id==thesisMainData.id" id="thesis-{{i}}" *ngFor="let thesis of thesisByProfessorId | slice:0:5; let i = index">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{thesis.title}}
+              </mat-panel-title>
+              <mat-panel-description>
+                
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <div class="thesis-card">                    
+              <div class="thesis-card-body">                      
+                <div class="thesis-card-text">
+                  <div>{{thesis?.description}}</div>
+                  <div>{{ 'THESIS.STATUS.LABEL' | translate }}: {{ 'THESIS.STATUS.OPTIONS.'+thesis.status | uppercase  | translate}}</div>
+                  <span *ngIf="thesis.student_id">
+                    <div *appCanAccess="['add_and_update_thesis']">
+                      {{ 'THESIS.STUDENT.LABEL' | translate }}: <app-qc-user-name [userId]="thesis.student_id"></app-qc-user-name>
+                    </div>
+                  </span>
+                </div>
+                <br/>
+                <button *appCanAccess="['view_courses']" class="btn btn-primary" [routerLink]="['/thesis', thesis.id]">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                </button>
+      
+              </div>
+          </div>
+      
+      
+          </mat-expansion-panel>
+          
+        </mat-accordion>
+    </mat-expansion-panel>
+ 
+  </div>
+
 </div>

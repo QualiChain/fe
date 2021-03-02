@@ -14,7 +14,7 @@ class Thesis {
   id: number;
   title: string;
   description: string;
-  professor_id: number;
+  professor: any;
   student_id: number;
   status: string;
 }
@@ -30,7 +30,7 @@ export class ThesisComponent implements OnInit {
 
   @Input() userId: number = null;
 
-  displayedColumns: string[] = ['title', 'description', 'status', 'action'];
+  displayedColumns: string[] = ['title', 'description', 'professorname', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   currentUser: User;
   @ViewChild(MatPaginator, {static: true}) 
@@ -62,6 +62,15 @@ export class ThesisComponent implements OnInit {
   newUserId: number = null;
 
   ngOnInit() {
+
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'professorname': return item.professor.name;
+        case 'status': return this.translate.instant('THESIS.STATUS.OPTIONS.'+item.status.toUpperCase( ));
+        default: return item[property];
+      }
+    }; 
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
