@@ -3,7 +3,7 @@
 
 <div class="container">
 
-  <div class="col" [ngClass]="{'col-lg-12':thesisByProfessorId.length<2,'col-lg-8':thesisByProfessorId.length>=2}">
+  <div class="col col-lg-8">
     <div class="row" >
           <button  *appCanAccess="['view_thesis_subjects']" class="btn btn-primary" [routerLink]="['/thesis']">
               <i _ngcontent-axy-c0="" class="material-icons small"> list </i> {{ 'THESIS.BUTTON.LIST' | translate }}
@@ -76,8 +76,9 @@
 
   </div>
 
-  <div class="col-lg-4" *ngIf="thesisByProfessorId.length>=2">
-      <mat-expansion-panel  [expanded]="thesisByProfessorId.length>=2 ? true : false">
+  <div class="col-lg-4">
+    <mat-accordion class="example-headers-align" multi>    
+      <mat-expansion-panel *ngIf="((thesisMainData.professor.id!=currentUser.id) && thesisByProfessorId.length>=2)"  [expanded]="thesisByProfessorId.length>=2 ? true : false">
         <mat-expansion-panel-header>
           <mat-panel-title>{{ 'THESIS_REQUEST.THESIS_SAME_PROFESSOR' | translate }}</mat-panel-title>
           <mat-panel-description></mat-panel-description>
@@ -116,9 +117,12 @@
       
           </mat-expansion-panel>
           
-        </mat-accordion>
-    </mat-expansion-panel>
+        </mat-accordion>        
+
+      </mat-expansion-panel>
  
+      <app-thesis-summary *appCanAccess="['view_thesis_subjects', 'add_and_update_thesis']" userId="{{currentUser.id}}" [viewBottons]=false></app-thesis-summary>
+    </mat-accordion>
   </div>
 
 </div>

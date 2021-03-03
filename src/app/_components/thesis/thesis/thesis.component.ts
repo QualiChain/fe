@@ -29,6 +29,7 @@ let ELEMENT_DATA: Thesis[] = [];
 export class ThesisComponent implements OnInit {
 
   @Input() userId: number = null;
+  @Input() viewBottons: boolean = true;
 
   displayedColumns: string[] = ['title', 'description', 'professorname', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -62,7 +63,8 @@ export class ThesisComponent implements OnInit {
   newUserId: number = null;
 
   ngOnInit() {
-
+    //console.log(this.viewBottons);
+    //console.log(typeof this.viewBottons);
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch(property) {
         case 'professorname': return item.professor.name;
@@ -196,8 +198,5 @@ export class ThesisComponent implements OnInit {
   styleUrls: ['./thesis.component.css']
 })
 export class ThesisComponentSummaryPage extends ThesisComponent{
-
-
-
 
 }

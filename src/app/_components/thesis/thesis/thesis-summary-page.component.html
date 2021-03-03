@@ -1,6 +1,6 @@
 <mat-expansion-panel  [expanded]="thesisList.length>0 ? true : false">
     <mat-expansion-panel-header>
-      <mat-panel-title>{{ 'THESIS.HEADER' | translate }}</mat-panel-title>
+      <mat-panel-title>{{ 'THESIS_REQUEST.MY_THESIS' | translate }}</mat-panel-title>
       <mat-panel-description></mat-panel-description>
     </mat-expansion-panel-header>
   
@@ -42,7 +42,8 @@
     </mat-accordion>
   
     <br>
-    <div  class="col-lg-8">      
+
+    <div class="col-lg-8" *ngIf="viewBottons">
       <a [routerLink]="['/thesis']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
       &nbsp;
       <a *appCanAccess="['add_and_update_thesis']" [routerLink]="['/thesis/add']" class="btn btn-primary">{{ 'BUTTON.ADD' | translate }}</a>
