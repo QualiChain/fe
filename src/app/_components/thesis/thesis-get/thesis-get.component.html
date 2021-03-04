@@ -27,9 +27,11 @@
   <div class="row"><br></div>
     <div class="row">
         <div class="col col-lg-12">
+            <!--
             <div class="col ">
                 <div><span class="labelthesis">{{ 'THESIS.DESCRIPTION.LABEL' | translate }}:</span> {{thesisMainData.description}}</div> 
             </div>
+            -->
             <div class="col " *ngIf="thesisMainData.professor">
             <div><span class="labelthesis">{{ 'THESIS.PROFESSOR.LABEL' | translate }}:</span> {{thesisMainData.professor.name}} {{thesisMainData.professor.surname}}</div> 
             </div>
@@ -42,6 +44,14 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col col-lg-12">
+          <h2>{{ 'THESIS.DESCRIPTION.LABEL' | translate }}</h2>
+        </div>
+        <div class="col col-lg-12">
+          {{thesisMainData.description}}          
+        </div>
+    </div>
     <div [hidden]="(this.currentUser.id!=thesisMainData.professor.id)">
         <div><h2>{{ 'THESIS_REQUEST.REQUESTS' | translate }}</h2></div>
         <div *ngIf="listOfThesisRequests.data.length==0"> {{ 'THESIS_REQUEST.NO_REQUEST' | translate }}</div>
@@ -98,11 +108,12 @@
             <div class="thesis-card">                    
               <div class="thesis-card-body">                      
                 <div class="thesis-card-text">
-                  <div>{{thesis?.description}}</div>
-                  <div>{{ 'THESIS.STATUS.LABEL' | translate }}: {{ 'THESIS.STATUS.OPTIONS.'+thesis.status | uppercase  | translate}}</div>
+                  <div>{{thesis?.description | slice:0:120}}<span *ngIf="thesis?.description.length>120">... </span></div>
+                  <br>
+                  <div><label>{{ 'THESIS.STATUS.LABEL' | translate }}:</label> {{ 'THESIS.STATUS.OPTIONS.'+thesis.status | uppercase  | translate}}</div>
                   <span *ngIf="thesis.student_id">
                     <div *appCanAccess="['add_and_update_thesis']">
-                      {{ 'THESIS.STUDENT.LABEL' | translate }}: <app-qc-user-name [userId]="thesis.student_id"></app-qc-user-name>
+                    <label>{{ 'THESIS.STUDENT.LABEL' | translate }}:</label>&nbsp;<app-qc-user-name [userId]="thesis.student_id"></app-qc-user-name>
                     </div>
                   </span>
                 </div>

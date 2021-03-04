@@ -16,7 +16,9 @@
             <div class="form-group field" [class.has-error]="descriptionThesisInput.invalid">
                 <mat-form-field class="create-thesis-full-width">
                     <mat-label>{{ 'THESIS.DESCRIPTION.LABEL' | translate }}</mat-label>
-                    <textarea matInput required [(ngModel)]="thesis.description" name="thesisDescription" value="thesisDescription" placeholder="{{ 'THESIS.DESCRIPTION.PLACEHOLDER' | translate }}" #descriptionThesisInput="ngModel"></textarea>
+                    <textarea 
+                    matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=5
+                    matInput required [(ngModel)]="thesis.description" name="thesisDescription" value="thesisDescription" placeholder="{{ 'THESIS.DESCRIPTION.PLACEHOLDER' | translate }}" #descriptionThesisInput="ngModel"></textarea>
                 </mat-form-field>
             </div>
 

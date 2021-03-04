@@ -20,11 +20,14 @@
         <div class="thesis-card">                    
           <div class="thesis-card-body">                      
             <div class="thesis-card-text">
-              <div>{{thesis?.description}}</div>
-              <div>{{ 'THESIS.STATUS.LABEL' | translate }}: {{ 'THESIS.STATUS.OPTIONS.'+thesis.status | uppercase  | translate}}</div>
+              <div>
+                {{thesis?.description | slice:0:120}}<span *ngIf="thesis?.description.length>120">... </span>
+              </div>
+              <br>
+              <div><label>{{ 'THESIS.STATUS.LABEL' | translate }}:</label> {{ 'THESIS.STATUS.OPTIONS.'+thesis.status | uppercase  | translate}}</div>
               <span *ngIf="thesis.student_id">
                 <div *appCanAccess="['add_and_update_thesis']">
-                  {{ 'THESIS.STUDENT.LABEL' | translate }}: <app-qc-user-name [userId]="thesis.student_id"></app-qc-user-name>
+                <label>{{ 'THESIS.STUDENT.LABEL' | translate }}:</label>&nbsp;<app-qc-user-name [userId]="thesis.student_id"></app-qc-user-name>
                 </div>
               </span>
             </div>

@@ -11,7 +11,7 @@ class Thesis {
   id: number;
   title: string;
   description: string;
-  professor_id: number;
+  professor: any[];
   student_id: number;
   status: string;
 }
@@ -24,7 +24,7 @@ class Thesis {
 export class ThesisEditComponent implements OnInit {
 
   mode: string = '';
-  thesis: Thesis = {id: null, title: null, description: null, professor_id: null, student_id: null, status: null};
+  thesis: Thesis = {id: null, title: null, description: null, professor: [], student_id: null, status: null};
   usersList: User[] = [];
   dataFiltered: User[] = [];
   currentUser: User;
@@ -63,38 +63,27 @@ export class ThesisEditComponent implements OnInit {
           (dataThesis: Thesis) => {
             //console.log(dataThesis);
             this.thesis = dataThesis;
-
-            this.ts
-            .getAllThesisRequestsByThesisId(id).subscribe(
-              (dataRequestsThesis:any) => {
-                //console.log(dataRequestsThesis);
-                dataRequestsThesis.forEach(element => {
-                    this.dataFiltered.push(element.student);
-                });
-                this.dataFiltered.sort((a,b) => a.surname.toUpperCase().localeCompare(b.surname.toUpperCase()));
-                this.usersList = this.dataFiltered;
-              },
-              error => {
-                console.log("request thesis not found!!");
-              }
-            );   
-            /*
-            this.us
-            .getUsers()
-            .subscribe((data: User[]) => {
-              //console.log(data)
-              //this.usersList = data;              
-              data.forEach(element => {
-                if (element.role=="student") {
-                  this.dataFiltered.push(element);
+            
+            if (dataThesis.professor['id']!=this.currentUser.id) {
+              this.router.navigate(["/access_denied"]); 
+            }
+            else {
+              this.ts
+              .getAllThesisRequestsByThesisId(id).subscribe(
+                (dataRequestsThesis:any) => {
+                  //console.log(dataRequestsThesis);
+                  dataRequestsThesis.forEach(element => {
+                      this.dataFiltered.push(element.student);
+                  });
+                  this.dataFiltered.sort((a,b) => a.surname.toUpperCase().localeCompare(b.surname.toUpperCase()));
+                  this.usersList = this.dataFiltered;
+                },
+                error => {
+                  console.log("request thesis not found!!");
                 }
-              });
-
-              this.dataFiltered.sort((a,b) => a.surname.toUpperCase().localeCompare(b.surname.toUpperCase()));
-              this.usersList = this.dataFiltered;
-
-            });
-            */
+              );  
+            } 
+            
           },
           error => {
             this.router.navigate(["/not_found"]);            

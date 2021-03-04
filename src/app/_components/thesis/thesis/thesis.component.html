@@ -38,11 +38,11 @@
                   <i _ngcontent-axy-c0="" class="material-icons small"> details  </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
   
-                <button [hidden]="element.professor_id!=newUserId" *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', element.id, 'edit']">
+                <button [hidden]="element.professor.id!=newUserId" *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', element.id, 'edit']">
                   <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
                 </button>
   
-                <button [hidden]="element.professor_id!=newUserId" *appCanAccess="['add_and_update_thesis']" class="btn btn-danger" (click)="confirmDialog(element.id, element.title)">
+                <button [hidden]="element.professor.id!=newUserId" *appCanAccess="['add_and_update_thesis']" class="btn btn-danger" (click)="confirmDialog(element.id, element.title)">
                   <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
                 </button>
   
@@ -98,6 +98,8 @@
 
   </div>
   <div class="col col-lg-4">
-    <app-thesis-summary *appCanAccess="['view_thesis_subjects', 'add_and_update_thesis']" userId="{{currentUser.id}}" [viewBottons]=false></app-thesis-summary>
+    <span *appCanAccess="['view_thesis_subjects', 'add_and_update_thesis']">
+      <app-thesis-summary reloadData="{{cntReloads}}" userId="{{currentUser.id}}" [viewBottons]=false></app-thesis-summary>
+    </span>
   </div>
 </div>
