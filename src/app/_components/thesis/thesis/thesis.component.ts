@@ -30,6 +30,7 @@ export class ThesisComponent implements OnInit {
 
   @Input() userId: number = null;
   @Input() viewBottons: boolean = true;
+  @Input() reloadData: number = 0;
 
   displayedColumns: string[] = ['title', 'description', 'professorname', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -61,6 +62,7 @@ export class ThesisComponent implements OnInit {
   isProfessor = this.appcomponent.isProfessor;
 
   newUserId: number = null;
+  cntReloads: number = 0;
 
   ngOnInit() {
     //console.log(this.viewBottons);
@@ -80,10 +82,22 @@ export class ThesisComponent implements OnInit {
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
     }
 
+    this.loadData();
+  }
+
+  ngOnChanges(): void { 
+    if (this.reloadData) {
+      if (this.reloadData>0) {
+        this.loadData();
+      }
+    }
+    
+  }
     //console.log("isAdmin:"+this.isAdmin);
     //console.log("add_and_update_thesis:"+this.authservice.checkIfPermissionsExistsByUserRoles(['add_and_update_thesis']));    
     //console.log(this.userId);
-
+  loadData() {
+    this.thesisList = [];
     if (this.userId) {
       //we recover data related with the usedId input
       this.newUserId = this.userId;
@@ -168,14 +182,18 @@ export class ThesisComponent implements OnInit {
          this.ts
          .deleteThesis(id).subscribe(
            data => {
-             console.log("Thesis deleted!!");
+             //console.log("Thesis deleted!!");
+             this.cntReloads = this.cntReloads+1;
              let posI = this.dataSource.data.findIndex(function(thesis){ return thesis.id === id })
 
              if (posI>=0) {
                this.dataSource.data.splice(posI, 1);               
                this.dataSource._updateChangeSubscription();
+               //to force the reload of "My thesis" block               
+               
               }
               //this.router.navigate(["/courses"]);
+              
            },
            error => {
              alert("Error deleting the thesis");                      
