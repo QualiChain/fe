@@ -2,7 +2,10 @@
 
 <div class="card">
     <div class="card-body">
-        
+
+
+
+
         <form #formCreateThesis="ngForm" class="create-thesis-form" (ngSubmit)="processForm()">
 
             <!-- Title -->
@@ -12,8 +15,14 @@
                     <input matInput required [(ngModel)]="thesis.title" name="thesisTitle" value="thesisTitle" placeholder="{{ 'THESIS.TITLE.PLACEHOLDER' | translate }}"  #titleThesisInput="ngModel">
                 </mat-form-field>
             </div>
-            <!-- description -->
-            <div class="form-group field" [class.has-error]="descriptionThesisInput.invalid">
+            <!-- description -->      
+            
+            <div class="form-group field wysiwyw" >
+                <label>{{ 'THESIS.DESCRIPTION.LABEL' | translate }}</label>
+                <angular-editor name="thesisDescription" value="thesisDescription" [(ngModel)]="thesis.description" [config]="config"></angular-editor>
+            </div>
+            <!--
+            <div class="form-group field" >
                 <mat-form-field class="create-thesis-full-width">
                     <mat-label>{{ 'THESIS.DESCRIPTION.LABEL' | translate }}</mat-label>
                     <textarea 
@@ -21,7 +30,7 @@
                     matInput required [(ngModel)]="thesis.description" name="thesisDescription" value="thesisDescription" placeholder="{{ 'THESIS.DESCRIPTION.PLACEHOLDER' | translate }}" #descriptionThesisInput="ngModel"></textarea>
                 </mat-form-field>
             </div>
-
+            -->
             <!-- status -->
             <div *ngIf="mode=='Edit'" class="form-group field" [class.has-error]="statusThesisInput.invalid">
 

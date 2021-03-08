@@ -6,6 +6,8 @@ import { UsersService } from '../../../_services/users.service';
 import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 //import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { AuthService } from '../../../_services';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { TranslateService } from '@ngx-translate/core';
 
 class Thesis {
   id: number;
@@ -30,12 +32,43 @@ export class ThesisEditComponent implements OnInit {
   currentUser: User;
   toppings = new FormControl();
 
+  htmlContent = '';
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: this.translate.instant('THESIS.DESCRIPTION.PLACEHOLDER'),
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['insertImage','insertVideo','insertHorizontalRule']
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
+
   constructor(
     private authservice: AuthService,
     private us: UsersService,
     private ts: ThesisService,
     private route: ActivatedRoute,
-    private router: Router,) { 
+    private router: Router,
+    private translate: TranslateService) { 
 
       this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
@@ -63,6 +96,7 @@ export class ThesisEditComponent implements OnInit {
           (dataThesis: Thesis) => {
             //console.log(dataThesis);
             this.thesis = dataThesis;
+            this.htmlContent = this.thesis.description;
             
             if (dataThesis.professor['id']!=this.currentUser.id) {
               this.router.navigate(["/access_denied"]); 

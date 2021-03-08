@@ -32,7 +32,8 @@ export class ThesisComponent implements OnInit {
   @Input() viewBottons: boolean = true;
   @Input() reloadData: number = 0;
 
-  displayedColumns: string[] = ['title', 'description', 'professorname', 'status', 'action'];
+  //displayedColumns: string[] = ['title', 'description', 'professorname', 'status', 'action'];
+  displayedColumns: string[] = ['title', 'professorname', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   currentUser: User;
   @ViewChild(MatPaginator, {static: true}) 

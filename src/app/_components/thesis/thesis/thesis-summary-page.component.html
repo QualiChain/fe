@@ -20,10 +20,16 @@
         <div class="thesis-card">                    
           <div class="thesis-card-body">                      
             <div class="thesis-card-text">
+              <!--
+              <div [innerHTML]="thesis?.description | slice:0:120"><span *ngIf="thesis?.description.length>120">... </span></div>
+              -->
+              <!--
               <div>
                 {{thesis?.description | slice:0:120}}<span *ngIf="thesis?.description.length>120">... </span>
               </div>
               <br>
+              -->
+              
               <div><label>{{ 'THESIS.STATUS.LABEL' | translate }}:</label> {{ 'THESIS.STATUS.OPTIONS.'+thesis.status | uppercase  | translate}}</div>
               <span *ngIf="thesis.student_id">
                 <div *appCanAccess="['add_and_update_thesis']">
