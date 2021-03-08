@@ -180,6 +180,8 @@ import { QcSelectCityDialogComponent } from './_components/utils/qc-select-city-
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-use.component';
 
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -330,6 +332,7 @@ export function tokenGetter() {
     materialModules,
     BrowserModule,
     HttpClientModule,
+    AngularEditorModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
