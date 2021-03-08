@@ -26,7 +26,7 @@
             </button>
         </div>
 
-        <div class="row">
+        <div class="row" [@myTriggerName]="state">
             <ng-container *ngFor="let menuOption of menuOptionsToPlot.menu">
                 <div id="div-menu-home" *appCanAccess="menuOption.permissions" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                     

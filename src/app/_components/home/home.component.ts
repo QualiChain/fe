@@ -2,11 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../_services/index';
 import { QCStorageService } from '../../_services/QC_storage.services';
 import { PilotsService, HEADER_MENU } from '../../_services/pilots.services';
+import { trigger, animate, transition, style, state } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    // this here is our animation trigger that
+    // will contain our state change animations.
+    trigger('myTriggerName', [
+      // the styles defined for the `on` and `off`
+      // states declared below are persisted on the
+      // element once the animation completes.
+      state('on', style({ opacity: 1, transform: 'translateX(0)' })),
+      state('off', style({ opacity: 0, transform: 'translateX(+80%)' })),
+
+      // this here is our animation that kicks off when
+      // this state change jump is true
+      transition('off => on', [animate('0.5s ease-out')])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
   userdata: {id:'', authenticated: false};
@@ -15,6 +31,15 @@ export class HomeComponent implements OnInit {
   menuOptionsToPlot: HEADER_MENU;
   menuOptionSelected: any[] = [];
   selectedSubmenu: boolean = false;
+
+  state = 'off';
+  
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.state = 'on';
+    });
+  }
 
   constructor(
     private ps: PilotsService,
@@ -48,13 +73,21 @@ export class HomeComponent implements OnInit {
 
   selectSubMenu(option: any): void {
     this.selectedSubmenu = false;
+    this.state = 'off';   
+    
     if (option == 'home') {
       this.selectedSubmenu = false;
       this.menuOptionsToPlot = this.jsonCopy(this.menuOptionsPerPilot);
+      setTimeout(() => {
+        this.state = 'on';
+      });
     }
     else {
       this.selectedSubmenu = true;
       this.menuOptionsToPlot.menu = this.jsonCopy(option.submenu);
+      setTimeout(() => {
+        this.state = 'on';
+      });
     }
   }
 
