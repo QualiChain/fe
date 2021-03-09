@@ -19,7 +19,7 @@
             
             <div class="form-group field wysiwyw" >
                 <label>{{ 'THESIS.DESCRIPTION.LABEL' | translate }}</label>
-                <angular-editor name="thesisDescription" value="thesisDescription" [(ngModel)]="thesis.description" [config]="config"></angular-editor>
+                <angular-editor #descriptionThesisInput="ngModel" name="thesisDescription" value="thesisDescription" [(ngModel)]="thesis.description" [config]="config"></angular-editor>
             </div>
             <!--
             <div class="form-group field" >

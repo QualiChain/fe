@@ -116,6 +116,7 @@ export class JobsComponent implements OnInit {
     hiringOrg: ''
   };
 
+  showLoading : boolean = true;
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
@@ -270,10 +271,15 @@ export class JobsComponent implements OnInit {
     getJobList() {
       this.js
       .getJobs()
-      .subscribe((data: Job[]) => {
+      .subscribe((data: Job[]) => {        
         this.jobs = data;
         ELEMENT_DATA = data;
         this.dataSource.data = data;
+        this.showLoading = false;
+      },
+      error => {
+        console.log("Error loading jobs"); 
+        this.showLoading = false;                     
       });
     }
 

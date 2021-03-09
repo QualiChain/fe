@@ -39,6 +39,8 @@ export class ProfilesComponent implements OnInit {
 
   currentUser: User;
   
+  showLoading : boolean = true;
+
   constructor(
     private cs: CoursesService,
     private appcomponent: AppComponent,
@@ -108,7 +110,11 @@ export class ProfilesComponent implements OnInit {
         });
         */
         this.dataSource.data = data;
-
+        this.showLoading = false;
+    },
+    error => {
+      console.log("Error loading profiles");
+      this.showLoading = false;                     
     });
 
   }

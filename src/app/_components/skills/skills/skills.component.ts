@@ -43,7 +43,8 @@ export class SkillsComponent implements OnInit {
   }
 
   skills: any[];
-
+  showLoading : boolean = true;
+  
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
@@ -121,7 +122,12 @@ export class SkillsComponent implements OnInit {
         //console.log(data);
         
         this.dataSource.data = data;
+        this.showLoading = false;
 
+    },
+    error => {
+      console.log("Error loading skills");
+      this.showLoading = false;                     
     });
    
 
