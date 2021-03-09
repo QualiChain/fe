@@ -57,6 +57,7 @@ export class CoursesComponent implements OnInit {
   }
 
   courses: Course[];
+  showLoading : boolean = true;
   constructor(
     private appcomponent: AppComponent,
     private router: Router, private us: UsersService, public authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
@@ -147,6 +148,7 @@ export class CoursesComponent implements OnInit {
         this.courses = data;                
         this.dataSource.data = data;        
         ELEMENT_DATA = data;
+        this.showLoading = false;
         /*
         data.forEach(element => {
           //console.log(element.courseid);
@@ -174,7 +176,11 @@ export class CoursesComponent implements OnInit {
         
         });
         */
-    });
+    },
+           error => {
+            console.log("Error loading courses"); 
+             this.showLoading = false;                     
+           });
    
 
   }

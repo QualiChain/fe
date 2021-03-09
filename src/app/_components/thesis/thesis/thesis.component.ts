@@ -47,6 +47,7 @@ export class ThesisComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  showLoading : boolean = true;
   constructor(
     private appcomponent: AppComponent,
     private ts: ThesisService,
@@ -109,6 +110,11 @@ export class ThesisComponent implements OnInit {
         .subscribe((data: any[]) => {
           data.forEach(element => {
             this.thesisList.push(element);
+            this.showLoading = false;
+          },
+          error => {
+            console.log("Error thesis by professor id");
+            this.showLoading = false;                     
           });
         });   
       }
@@ -119,7 +125,12 @@ export class ThesisComponent implements OnInit {
         .subscribe((data: any[]) => {
           data.forEach(element => {
             this.thesisList.push(element);
+            this.showLoading = false;
           });
+        },
+        error => {
+          console.log("Error thesis by student id");
+          this.showLoading = false;                     
         });
       }
 
@@ -135,6 +146,11 @@ export class ThesisComponent implements OnInit {
           //console.log(data);
           this.dataSource.data = data;        
           ELEMENT_DATA = data;
+          this.showLoading = false;
+        },
+        error => {
+          console.log("Error loading all thesis"); 
+          this.showLoading = false;                     
         });      
       }
       else if (this.authservice.checkIfPermissionsExistsByUserRoles(['add_and_update_thesis'])) {
@@ -146,6 +162,11 @@ export class ThesisComponent implements OnInit {
           //console.log(data);
           this.dataSource.data = data;        
           ELEMENT_DATA = data;
+          this.showLoading = false;
+        },
+        error => {
+          console.log("Error loading all thesis"); 
+          this.showLoading = false;                     
         });      
       }
       else {
@@ -155,7 +176,12 @@ export class ThesisComponent implements OnInit {
         .subscribe((data: any[]) => {
           //console.log(data);
           this.dataSource.data = data;        
-          ELEMENT_DATA = data;        
+          ELEMENT_DATA = data;
+          this.showLoading = false;
+        },
+        error => {
+          console.log("Error loading all thesis"); 
+          this.showLoading = false;                     
         });      
       }
 
