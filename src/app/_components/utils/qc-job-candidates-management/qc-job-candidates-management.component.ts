@@ -57,7 +57,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
 
   };
 
-  displayedColumns: string[] = ['checkbox', 'candidateSurname', 'candidateName', 'available', 'expsalary', 'score', 'action'];
+  displayedColumns: string[] = ['checkbox', 'candidateSurname', 'candidateName', 'available', 'expsalary', 'score', 'aqcuired_badges', 'action'];
   dataSource = new MatTableDataSource([]);
   
   selection = new SelectionModel<any>(true, []);
@@ -71,6 +71,7 @@ export class QcJobCandidatesManagementComponent implements OnInit {
   //@ViewChild(MatSort) sort: MatSort;
   searchTxt: string = "";
   showSpinner: boolean = true;
+  showLoading: boolean = true;
 
   constructor(
     private appcomponent: AppComponent,
@@ -145,7 +146,8 @@ export class QcJobCandidatesManagementComponent implements OnInit {
     this.router.navigate(['/MCDSS'], { queryParams: options });
   }
 
-  openUserCV(userId: number) {
+  openUserCVInModalWindow(userId: number) {
+    console.log(userId);
     
     const dialogRef = this.CVDialog.open(CVDialog_modal, {
       disableClose: true,
@@ -283,10 +285,15 @@ export class QcJobCandidatesManagementComponent implements OnInit {
         this.jobCandidates = jobCandidates;  
         this.dataSource.data = this.jobCandidates;
         
+        this.showSpinner = false;
+      },
+      error => {
+        this.showSpinner = false;
+        console.log("error loading candidates");
       });
     //}
 
-    this.showSpinner = false;
+    
   }
 
   assignThisApply(jobId: any, userId: number): void {

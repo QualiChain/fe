@@ -90,7 +90,7 @@ export class BadgesService {
   deleteBadgeOfUser(userId: Number, badgeId: Number) {
     let headers = this.authService.createQCAuthorizationHeader();
 
-    return this.http.delete(`${this.uriUser}/badges?badgeid=${badgeId}&userid=${userId}`, { headers: headers } )
+    return this.http.delete(`${this.uriUser}/badges?badge_id=${badgeId}&user_id=${userId}`, { headers: headers } )
     .pipe(
        map((data: any) => {
          return data;

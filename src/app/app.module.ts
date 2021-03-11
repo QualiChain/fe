@@ -181,6 +181,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
 import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-use.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { QcSmartBadgesListByUserComponent } from './_components/utils/qc-smart-badges-list-by-user/qc-smart-badges-list-by-user.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -319,7 +320,7 @@ export function tokenGetter() {
     ThesisComponent, ThesisComponentSummaryPage,
     ThesisGetComponent,
     ThesisEditComponent,
-    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent
+    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent, QcSmartBadgesListByUserComponent
   ],
   imports: [
     MomentDateModule,
