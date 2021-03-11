@@ -39,8 +39,9 @@ export interface DialogDataEnrollment {
 })
 export class CoursesGetComponent implements OnInit {
 
-  displayedColumnsEnrolled: string[] = ['surname', 'name', 'action'];
-  displayedColumnsDoneBy: string[] = ['surname', 'name', 'course_grade', 'action'];
+  displayedColumnsProfessors: string[] = ['surname', 'name', 'action'];
+  displayedColumnsEnrolled: string[] = ['surname', 'name', 'aqcuired_badges', 'action'];
+  displayedColumnsDoneBy: string[] = ['surname', 'name', 'course_grade', 'aqcuired_badges', 'action'];
   //@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   @ViewChild('paginatorProfessor', {static: true, read: MatPaginator}) paginatorProfessor: MatPaginator;
@@ -66,7 +67,8 @@ export class CoursesGetComponent implements OnInit {
 
   grade: Number;
   canEditCourse = [];
- 
+  courseId: number;
+
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
@@ -99,7 +101,7 @@ export class CoursesGetComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
-      
+      this.getEnrolledUsersByCourse(this.courseId);
     });
     
   }
@@ -214,6 +216,7 @@ export class CoursesGetComponent implements OnInit {
       let id:number = 0;      
       if(params.hasOwnProperty('id')){
         id = +params.id;
+        this.courseId = id;
       }
 
       if (id>0) {

@@ -1,97 +1,114 @@
-<app-qc-spinner *ngIf="showSpinner"></app-qc-spinner>
-<div [hidden]="showSpinner">
+
     <div><h2>{{ 'JOB.CANDIDATES' | translate }}</h2></div>
 
+    <div *ngIf="showSpinner">
+        <div class="col-md-4 col-md-offset-4">
+          <app-qc-spinner ></app-qc-spinner>
+        </div>  
+      </div>
+      
+      <div [hidden]="showSpinner">
 
-    <div *ngIf="jobCandidates.length==0">{{ 'RECRUITMENT.NO_DATA' | translate }}</div>
-    <div [hidden]="jobCandidates.length==0">
+        <div *ngIf="dataSource.data.length==0">{{ 'RECRUITMENT.NO_DATA' | translate }}</div>
+        <div [hidden]="dataSource.data.length==0">
 
-        <button *appCanAccess="['access_MCDSS']" [disabled]="selectedCandidates.length<2" class="btn btn-primary" (click)="openMCDSS()" >  
-            <i _ngcontent-axy-c0="" class="material-icons small"> compare </i> {{ 'MENU.MCDSS' | translate }} 
-        </button>
-        
-        <div [hidden]="!dataSource.data.length" class="col-lg-12">  
-            <mat-form-field>
-                <input matInput [(ngModel)]="searchTxt" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
+            <button *appCanAccess="['access_MCDSS']" [disabled]="selectedCandidates.length<2" class="btn btn-primary" (click)="openMCDSS()" >  
+                <i _ngcontent-axy-c0="" class="material-icons small"> compare </i> {{ 'MENU.MCDSS' | translate }} 
+            </button>
+            
+            <div [hidden]="!dataSource.data.length" class="col-lg-12">  
+                <mat-form-field>
+                    <input matInput [(ngModel)]="searchTxt" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+
+            <table id="candidatestable" mat-table [dataSource]="dataSource" (matSortChange) = "sortList($event)" matSort class="table table-striped">
+                <ng-container matColumnDef="checkbox">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox *appCanAccess="['access_MCDSS']"
+                    (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null; changCheckbox($event, row)"
+                    [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+                    <td mat-cell *matCellDef="let element; let i=index" style="white-space: nowrap;">
+
+                        <button [disabled]="!element.candidateName"  class="btn btn-primary" (click)="openUserCVInModalWindow(element.id)" >  
+                            <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
+                        </button>
+
+                        <button [disabled]="!element.candidateName" class="btn btn-primary" [routerLink]="['/profiles', element.id]">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                        </button>
+                        <button [disabled]="(!element.candidateName || element.candidateSelected==1) " class="btn btn-info" (click)="assignThisApply(jobId, element.id)">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> done_outline </i> {{ 'BUTTON.ASSIGN' | translate }}
+                        </button>                
+                        <button [hidden]="!isAdmin" class="btn btn-danger" (click)="deleteThisApply(jobId, element.id, i)">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
+                        </button>
+                        <button class="btn btn-success" [hidden]="element.candidateSelected==0"> <i _ngcontent-axy-c0="" class="material-icons small"> assignment_turned_in </i> {{ 'JOB.ASSIGNED' | translate }} </button>
+                    </td>
+                </ng-container>
+
+                <!-- candidate surname -->
+                <ng-container matColumnDef="candidateSurname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.SURNAME' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.candidateSurname}} </td>
+                </ng-container>
+                <!-- candidate name -->
+                <ng-container matColumnDef="candidateName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.NAME' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <span *ngIf="element.candidateName">{{element.candidateName}}</span>
+                        <span *ngIf="!element.candidateName">{{element.name}}</span>
+                    </td>
+                </ng-container>
+                <!-- AVAILABLE column -->
+                <ng-container matColumnDef="available">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.available}} </td>
+                </ng-container>
+                <!-- EXPECTED_SALARY column -->
+                <ng-container matColumnDef="expsalary">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.expsalary}} </td>
+                </ng-container> 
+                <!-- SCORE column -->
+                <ng-container matColumnDef="score">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.SCORE' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> <!-- {{element.score}}  -->
+                        <div class="wrapperpiechart">
+                            <canvas id="canvas_pie_chart_{{element.id}}" baseChart
+                                [datasets]="[{ data: [element.score,(100-element.score)],label: 'Matching Score', backgroundColor: [
+                                'rgba(30, 144, 255, 1)',
+                                'rgba(0, 0, 0, 1)'
+                                ]}]"
+                                [labels]="chartLabels"
+                                [options]="chartOptions"
+                                [chartType]="chartType">
+                            </canvas>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Acquired Badges Column -->
+                <ng-container matColumnDef="aqcuired_badges">
+                    <th mat-header-cell *matHeaderCellDef > {{ 'PROFILES.SMART_BADGES' | translate }} </th>
+                    <td mat-cell *matCellDef="let element">  
+                        <app-qc-smart-badges-list-by-user [userId]="element.id" formatOutput="small"></app-qc-smart-badges-list-by-user>    
+                    </td>
+                </ng-container>
+
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
 
-        <table id="candidatestable" mat-table [dataSource]="dataSource" (matSortChange) = "sortList($event)" matSort class="table table-striped">
-            <ng-container matColumnDef="checkbox">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let row">
-                <mat-checkbox *appCanAccess="['access_MCDSS']"
-                (click)="$event.stopPropagation()"
-                (change)="$event ? selection.toggle(row) : null; changCheckbox($event, row)"
-                [checked]="selection.isSelected(row)">
-                </mat-checkbox>
-             </td>
-             </ng-container>
-             <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
-                <td mat-cell *matCellDef="let element; let i=index" style="white-space: nowrap;">
-
-                    <button [disabled]="!element.candidateName"  class="btn btn-primary" (click)="openUserCV(element.id)" >  
-                        <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
-                    </button>
-
-                    <button [disabled]="!element.candidateName" class="btn btn-primary" [routerLink]="['/profiles', element.id]">
-                        <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
-                    </button>
-                    <button [disabled]="(!element.candidateName || element.candidateSelected==1) " class="btn btn-info" (click)="assignThisApply(jobId, element.id)">
-                        <i _ngcontent-axy-c0="" class="material-icons small"> done_outline </i> {{ 'BUTTON.ASSIGN' | translate }}
-                    </button>                
-                    <button [hidden]="!isAdmin" class="btn btn-danger" (click)="deleteThisApply(jobId, element.id, i)">
-                        <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
-                    </button>
-                    <button class="btn btn-success" [hidden]="element.candidateSelected==0"> <i _ngcontent-axy-c0="" class="material-icons small"> assignment_turned_in </i> {{ 'JOB.ASSIGNED' | translate }} </button>
-                </td>
-            </ng-container>
-
-            <!-- candidate surname -->
-            <ng-container matColumnDef="candidateSurname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.SURNAME' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.candidateSurname}} </td>
-            </ng-container>
-            <!-- candidate name -->
-            <ng-container matColumnDef="candidateName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILES.NAME' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> 
-                    <span *ngIf="element.candidateName">{{element.candidateName}}</span>
-                    <span *ngIf="!element.candidateName">{{element.name}}</span>
-                </td>
-            </ng-container>
-            <!-- AVAILABLE column -->
-            <ng-container matColumnDef="available">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.AVAILABLE.TITLE' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.available}} </td>
-            </ng-container>
-            <!-- EXPECTED_SALARY column -->
-            <ng-container matColumnDef="expsalary">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.expsalary}} </td>
-            </ng-container> 
-            <!-- SCORE column -->
-            <ng-container matColumnDef="score">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB_APPLY.SCORE' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> <!-- {{element.score}}  -->
-                    <div class="wrapperpiechart">
-                        <canvas id="canvas_pie_chart_{{element.id}}" baseChart
-                            [datasets]="[{ data: [element.score,(100-element.score)],label: 'Matching Score', backgroundColor: [
-                            'rgba(30, 144, 255, 1)',
-                            'rgba(0, 0, 0, 1)'
-                            ]}]"
-                            [labels]="chartLabels"
-                            [options]="chartOptions"
-                            [chartType]="chartType">
-                        </canvas>
-                    </div>
-                </td>
-            </ng-container>
-        
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
-</div>
+

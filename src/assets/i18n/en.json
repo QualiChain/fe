@@ -1001,5 +1001,14 @@
     "REQUESTS": "Requests",
     "NO_REQUEST": "There are no request for this thesis"
   },
-  "INTERNAL_RELLOCATION_AVAILABILITY": "Internal rellocation availavility"
+  "INTERNAL_RELLOCATION_AVAILABILITY": "Internal rellocation availavility",
+  "BADGES_TYPES": {
+    "LABEL": "Type",
+    "OPTIONS": {
+      "PHD": "PHD",
+      "UNDERGRADUATE": "Undergraduate",
+      "POSTGRADUATE": "Postgraduate",
+      "OTHER": "Other"
+    }
+  }
 }
