@@ -3,7 +3,9 @@
 <mat-dialog-content class="mat-typography" id="top">
 
       <div *ngFor="let itemBadgeData of pagedListSB; let i = index" class="card">
-
+        <mat-card class="smart-badge-card">
+        <app-qc-smart-badge-card [awardId]="itemBadgeData.id"></app-qc-smart-badge-card>
+<!--
         <mat-card class="smart-badge-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image">
@@ -12,9 +14,6 @@
             <mat-card-title>{{itemBadgeData.name}}</mat-card-title>
             <mat-card-subtitle>{{itemBadgeData.issuer}}</mat-card-subtitle>
           </mat-card-header>
-          <!--
-          <img mat-card-image *ngIf="itemBadgeData.image" [src]="itemBadgeData.image">
-          -->
           <mat-card-content>
             <mat-accordion>
               <mat-expansion-panel>
@@ -80,9 +79,35 @@
                 <i _ngcontent-axy-c0="" class="material-icons small">  star  </i> {{ 'AWARD_SMART_BADGE.BUTTON.VALIDATE_AWARD' | translate }}
               </button>
             </div>
-
           </mat-card-actions>
         </mat-card>
+-->        
+
+
+    <mat-card-actions>
+      <div *ngIf="showErrorMessage && itemSelected==i" class="card-body">
+        <div class="col col-lg-12">
+          <div class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+        </div>
+      </div>
+      
+      <div class="float-righ">
+        <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==i"></mat-spinner>
+        <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=i" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
+          <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.REVOKE_AWARD' | translate }}
+        </button>              
+        <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=i" (click)="issueSmartBadge(itemBadgeData, i)" type="button" class="btn btn-primary">
+          <i _ngcontent-axy-c0="" class="material-icons small">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}
+        </button>
+        <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=i" (click)="verifySmartBadge(itemBadgeData, i)" type="button" class="btn btn-secondary">
+          <i _ngcontent-axy-c0="" class="material-icons small">  star  </i> {{ 'AWARD_SMART_BADGE.BUTTON.VALIDATE_AWARD' | translate }}
+        </button>
+      </div>
+    </mat-card-actions>
+
+</mat-card>
       </div>
 
       <div class="col-sm-12">

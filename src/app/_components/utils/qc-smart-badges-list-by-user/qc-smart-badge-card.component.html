@@ -1,0 +1,58 @@
+
+<mat-card class="smart-badge-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">          
+        <img style="width:30px" *ngIf="itemBadgeData?.oubadge?.image" [src]="itemBadgeData?.oubadge?.image" [title]="itemBadgeData?.oubadge.name" [alt]="itemBadgeData?.oubadge.name" >
+      </div>
+      <mat-card-title>{{itemBadgeData?.oubadge?.name}}</mat-card-title>
+      <mat-card-subtitle>{{itemBadgeData?.oubadge?.issuer?.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <!--
+    <img mat-card-image *ngIf="itemBadgeData.image" [src]="itemBadgeData.image">
+    -->
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'BADGES.BADGE.BADGE_MAIN_DATA' | translate }}
+            </mat-panel-title>                  
+          </mat-expansion-panel-header>
+          <div>
+            <div *ngIf="itemBadgeData?.type" class="col col-lg-12"><label>{{ 'BADGES_TYPES.LABEL' | translate }}:</label> {{'BADGES_TYPES.OPTIONS.'+itemBadgeData?.type.toUpperCase() | translate}} </div>
+            <div *ngIf="itemBadgeData?.oubadge?.description" class="col col-lg-12"><label>{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.description}} </div>
+            <div *ngIf="itemBadgeData?.oubadge?.version" class="col col-lg-12"><label>{{ 'BADGES.BADGE.VERSION.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.version}} </div>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'BADGES.BADGE.ISSUER.ISSUER_MAIN_DATA' | translate }}
+            </mat-panel-title>                  
+          </mat-expansion-panel-header>
+          <div>
+
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image">
+                  <img style="width:30px" *ngIf="(itemBadgeData?.oubadge?.issuer?.image && itemBadgeData?.oubadge?.issuer?.image!='NA')" [src]="itemBadgeData?.oubadge?.issuer?.image" [title]="itemBadgeData?.oubadge?.issuer?.name" [alt]="itemBadgeData?.oubadge?.issuer?.name" >
+                </div>
+                <mat-card-title>{{itemBadgeData?.oubadge?.issuer?.name}}</mat-card-title>
+                <mat-card-subtitle>{{itemBadgeData?.oubadge?.issuer?.type}}</mat-card-subtitle>
+              </mat-card-header>                    
+              <mat-card-content>
+                <div *ngIf="itemBadgeData?.oubadge?.issuer?.description"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.issuer?.description}}</div>
+                <div *ngIf="itemBadgeData?.oubadge?.issuer?.url"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.issuer?.url}}</div>
+                <div *ngIf="itemBadgeData?.oubadge?.issuer?.email"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.issuer?.email}}</div>
+                <div *ngIf="itemBadgeData?.oubadge?.issuer?.telephone"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_TELEPHONE.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.issuer?.telephone}}</div>
+              </mat-card-content>                    
+            </mat-card>
+
+            
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      
+    </mat-card-content>
+    
+  </mat-card>

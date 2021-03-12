@@ -39,3 +39,43 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   }
 
 }
+
+
+
+@Component({
+  selector: 'app-qc-smart-badge-card',
+  templateUrl: './qc-smart-badge-card.component.html',
+  styleUrls: ['./qc-smart-badges-list-by-user.component.css']
+})
+export class QcSmartBadgeCardComponent implements OnInit {
+
+  @Input() awardId: number;
+
+  
+  lodingspinner: boolean = true;
+  itemBadgeData: any = {};
+
+  constructor(
+    private bs: BadgesService
+  ) { }
+
+  ngOnInit(): void {
+    //console.log("this.awardId:"+this.awardId);
+
+    if (this.awardId) {
+      this.bs.getBadge(+this.awardId).subscribe(
+        badgeData => {
+          //console.log(badgeData);
+          this.itemBadgeData = badgeData;
+          this.lodingspinner = false;
+        },
+        error => {
+          console.log("error getting badge data");
+          this.lodingspinner = false;
+        }
+      );
+    }
+
+  }
+
+}

@@ -13,14 +13,17 @@
   </button>
   <br/>
 
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+  
+  <div *ngIf="dataSource.data.length==0"> <p>{{ 'COURSE.NO_DONE_BY_USERS' | translate }}</p></div>
+  <div [hidden]="dataSource.data.length==0">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
 
-  <div class="">  
-  <table id="userAwardList" mat-table [dataSource]="dataSource" matSort class="table" matSortActive="id" matSortDirection="asc">
+    <div class="">  
+      <table id="userAwardList" mat-table [dataSource]="dataSource" matSort class="table" matSortActive="id" matSortDirection="asc">
 
-    <!--- Note that these columns can be defined in any order.
+        <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
           <ng-container matColumnDef="action">
@@ -34,54 +37,54 @@
             </td>
           </ng-container>
 
-    <!-- id Column -->
-    <!--
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-    -->
-    
-    <!-- Student Column -->
-    <ng-container matColumnDef="student">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Student </th>
-      <td mat-cell *matCellDef="let element"> {{element.student}} </td>
-    </ng-container>
+          <!-- id Column -->
+          <!--
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+          -->
+          
+          <!-- Student Column -->
+          <ng-container matColumnDef="student">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Student </th>
+            <td mat-cell *matCellDef="let element"> {{element.student}} </td>
+          </ng-container>
 
-    <!-- Semester Column -->
-    <!--
-    <ng-container matColumnDef="semester">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Semester </th>
-      <td mat-cell *matCellDef="let element"> {{element.semester}} </td>
-    </ng-container>
-    -->
-    <!-- Grade Column -->
-    
-    <ng-container matColumnDef="grade">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Grade </th>
-      <td mat-cell *matCellDef="let element"> {{element?.grade}} </td>
-    </ng-container>
-    
-      <!-- Acquired Badges Column -->
-      <ng-container matColumnDef="aqcuired_badges">
-        <th mat-header-cell *matHeaderCellDef > {{ 'PROFILES.SMART_BADGES' | translate }} </th>
-        <td mat-cell *matCellDef="let element">    
-            <app-qc-smart-badges-list-by-user [userId]="element.id" formatOutput="small"></app-qc-smart-badges-list-by-user>    
-            <!--
-            <span *ngFor="let element_badge of element.aqcuired_badges; index as i">
-              <img style="width:30px" *ngIf="element_badge.badge.oubadge.image" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > 
-            </span>
-            -->
-        </td>
-      </ng-container>
+          <!-- Semester Column -->
+          <!--
+          <ng-container matColumnDef="semester">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Semester </th>
+            <td mat-cell *matCellDef="let element"> {{element.semester}} </td>
+          </ng-container>
+          -->
+          <!-- Grade Column -->
+          
+          <ng-container matColumnDef="grade">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Grade </th>
+            <td mat-cell *matCellDef="let element"> {{element?.grade}} </td>
+          </ng-container>
+          
+            <!-- Acquired Badges Column -->
+            <ng-container matColumnDef="aqcuired_badges">
+              <th mat-header-cell *matHeaderCellDef > {{ 'PROFILES.SMART_BADGES' | translate }} </th>
+              <td mat-cell *matCellDef="let element">    
+                  <app-qc-smart-badges-list-by-user [userId]="element.id" formatOutput="small"></app-qc-smart-badges-list-by-user>    
+                  <!--
+                  <span *ngFor="let element_badge of element.aqcuired_badges; index as i">
+                    <img style="width:30px" *ngIf="element_badge.badge.oubadge.image" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > 
+                  </span>
+                  -->
+              </td>
+            </ng-container>
 
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
   </div>
-
 
 </div>

@@ -98,7 +98,7 @@ export class AwardSmartBadgeComponent implements OnInit {
       }
 
       if (id>0) {
-        //console.log(id);
+        console.log(id);
 
         this.cs
         .getCourse(id).subscribe(
@@ -171,6 +171,8 @@ export class AwardSmartBadgeComponent implements OnInit {
         }
         
       });
+
+      this.showLoading = false;
     },
     error => {
       this.showLoading = false;
