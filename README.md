@@ -9,7 +9,7 @@ Migrated to version 10.0.1
     - Access to the main folder: cd qualichain
     - Install dependecies: npm i
 
-## Update custom config file
+## Update custom config file [deprecated]
 
 You must copy and rename the file /src/assets/config.tempate.json as /src/assets/config.json. Edit the file /src/assets/config.json and introduce valid credentials to be able to use OU APIs
 ```
