@@ -6,3 +6,7 @@
   .create-course-full-width {
     width: 100%;
   }
+
+  #courseAwardList img {
+    display: inline;
+}

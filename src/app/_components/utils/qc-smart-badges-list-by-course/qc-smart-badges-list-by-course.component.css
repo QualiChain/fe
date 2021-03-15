@@ -1,0 +1,7 @@
+#courseAwardList img {
+    display: inline;
+}
+
+#courseAwardList .mat-card {
+    margin: 3px;
+}

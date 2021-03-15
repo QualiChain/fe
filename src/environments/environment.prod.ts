@@ -4,6 +4,7 @@ export const environment = {
   recomendationsUrl : 'http://qualichain.epu.ntua.gr:5000/recommendations',
   recomendationsUrlByCV : 'http://qualichain.epu.ntua.gr:7000/recommend',
   coursesUrl: 'http://qualichain.epu.ntua.gr:5004/courses',
+  courseUrl: 'http://qualichain.epu.ntua.gr:5004/course',
   uploadFilesUrl : 'http://qualichain.epu.ntua.gr:5004/user',
   downloadFilesUrl : 'http://qualichain.epu.ntua.gr:5004/download',
   deleteFilesUrl : 'http://qualichain.epu.ntua.gr:5004/delete',

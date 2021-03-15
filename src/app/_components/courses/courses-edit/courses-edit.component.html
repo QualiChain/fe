@@ -126,6 +126,47 @@
               </mat-form-field>
         </div>
 
+        <!--Smart badges-->
+        <div class="form-group field">
+            <label>{{ 'PROFILES.SMART_BADGES' | translate }}</label>
+            <div id="courseAwardList">
+                <span *ngFor="let element_badge of listAllSmartBadges; index as i">
+                    <div class="col-lg-2 example-card" >
+                        <div>
+                            <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.oubadge.image}}");'>
+                            </div>
+                            <div>
+                                <mat-checkbox 
+                                    name="smartBadgesByCourse_{{element_badge.id}}" value="smartBadgesByCourse_{{element_badge.id}}"
+                                    [checked]="(smartBadgesByCourse.indexOf(element_badge.id)>=0)"  
+                                    (change)="updateSelectedBadges($event, element_badge.id)"                                 
+                                    >                                    
+                                    </mat-checkbox>
+                                <a href="" [routerLink]="" (click)="selectedBadge=element_badge" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_course'">
+                                    {{element_badge.name}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>         
+                </span>
+            </div>
+        </div>
+        <!--
+        <div class="form-group field" >        
+            <mat-form-field class="create-course-full-width">
+                --{{smartBadgesByCourse}}--
+                <mat-label>{{ 'PROFILES.SMART_BADGES' | translate }}</mat-label>
+                <mat-select  multiple [(ngModel)]="smartBadgesByCourse" name="smartBadgesByCourse" value="smartBadgesByCourse">
+                  <mat-option *ngFor="let element_badge of listAllSmartBadges" [value]="element_badge.id">
+                    <img style="width:30px" *ngIf="element_badge.oubadge.image" [src]="element_badge.oubadge.image" [title]="element_badge.name" [alt]="element_badge.name" >  
+                    {{element_badge.name}}
+                   </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        -->
+            <div class="row"><br>&nbsp;<br>&nbsp;</div>
+            <div class="row"><br>&nbsp;<br>&nbsp;</div>
 
             <div class="form-group">
 
@@ -146,3 +187,22 @@
         </form>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="smdesc_course" role="dialog">
+    <div class="modal-dialog"> 
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{selectedBadge?.name}}</h4>
+        </div>
+        <div class="modal-body">
+            <app-qc-smart-badge-card [awardId]="selectedBadge?.id"></app-qc-smart-badge-card>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                              
+        </div>
+      </div>
+    </div>
+</div>    
