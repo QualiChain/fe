@@ -18,6 +18,9 @@ import { QCStorageService } from '../../../_services/QC_storage.services';
 import { AuthService } from '../../../_services/auth.service';
 import User from '../../../_models/user';
 
+import { BadgesService } from '../../../_services/badges.service';
+import { exit } from 'process';
+
 export interface Skill {
   name: string;
   id: number;
@@ -77,10 +80,16 @@ export class CoursesEditComponent implements OnInit {
   
   currentUser: User;
 
+  listAllSmartBadges : any[] = [];
+  smartBadgesByCourse:  any[] = [];
+  initialListSmartBadgesByCourse: any[] = [];
+  selectedBadge: any = null;
+  listSmartBagesRelated = [];
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
+    private bs: BadgesService,
     public authservice: AuthService,
     private qcStorageService: QCStorageService,
     private ss: SkillsService,
@@ -123,7 +132,7 @@ add(event: MatChipInputEvent): void {
 }
 
 remove(skill: string): void {
-  console.log(skill);
+  //console.log(skill);
   /*
   const index = this.skills.indexOf({'name':skill});
 
@@ -189,6 +198,19 @@ selected(event: MatAutocompleteSelectedEvent): void {
     }
     //console.log(this.currentUser.id);
 
+
+    this.bs.getBadges().subscribe(
+      badgeData => {
+        //console.log(badgeData);
+        this.listAllSmartBadges = badgeData;
+      },
+      error => {
+        console.log("error getting badges data");
+      }
+    );
+
+
+
     this.allSkills = [];
     this.ss.getSkills().subscribe(
       resSkills => {
@@ -230,6 +252,19 @@ selected(event: MatAutocompleteSelectedEvent): void {
         this.mode = "Edit";
         this.courseId = id;
         //this.course = this.listOfCourses[(params['id'])];
+
+        this.bs.getBadgesByCourseId(+id).subscribe(
+          badgeData => {
+            //console.log(badgeData);
+            for (let index = 0; index < badgeData.length; index++) {
+              this.smartBadgesByCourse.push(badgeData[index].badge.id);
+              this.initialListSmartBadgesByCourse.push(badgeData[index].badge.id);
+            }    
+          },
+          error => {
+            console.log("error getting badges by course id");
+          }
+        );
 
         this.cs.getCourse(+id).subscribe(
           res => {
@@ -285,7 +320,20 @@ selected(event: MatAutocompleteSelectedEvent): void {
   });
   }
 
+  
 
+  updateSelectedBadges(event, value) {
+    if (event.checked) {
+      this.smartBadgesByCourse.push(value)
+    }
+    else {
+      let position = this.smartBadgesByCourse.indexOf(value);
+      if (position>=0) {
+        this.smartBadgesByCourse.splice(position, 1);
+      }      
+    }
+    console.log(this.smartBadgesByCourse);
+  }
 
   addEvent(event: MatChipInputEvent): void {
     const input = event.input;
@@ -347,7 +395,7 @@ selected(event: MatAutocompleteSelectedEvent): void {
   }
   
   processForm() {
-    
+        
     
     let finalSkillList = [];
 
@@ -391,6 +439,10 @@ selected(event: MatAutocompleteSelectedEvent): void {
               //console.log(splitted[1]);
               let courseId = splitted[1];
               console.log(courseId);
+
+
+              this.addSmartBadgesRelations(courseId);
+
               let dataToPost = {
                 "course_id": courseId,
                 "course_status": 'taught'
@@ -429,6 +481,28 @@ selected(event: MatAutocompleteSelectedEvent): void {
               //after update the user 
               //window.location.href="/profiles/"+this.profileId;
               //this.router.navigate(["/profiles/"+this.userdata.id]);
+              
+              //we delete the items that are not in the final list and are in the intitial
+
+              console.log(this.initialListSmartBadgesByCourse);
+              for (let index = 0; index < this.initialListSmartBadgesByCourse.length; index++) {
+
+                  this.bs.deleteBadgeToCourse( this.courseId, this.initialListSmartBadgesByCourse[index]).subscribe(
+                    res => {
+                      console.log("relation smart badge course deleted ");
+                      console.log(res);
+                    },
+                    error => {
+                      console.log("error deleting relation smart badge course")
+                      console.log(error);
+                    });
+
+              }
+
+              console.log(this.smartBadgesByCourse);
+              this.addSmartBadgesRelations(this.courseId);
+              
+
               this.router.navigate(["/courses"]);
             },
             error => {
@@ -444,8 +518,30 @@ selected(event: MatAutocompleteSelectedEvent): void {
       
     
     
-    
-    
+      addSmartBadgesRelations(courseId) {
+
+        for (let index = 0; index < this.smartBadgesByCourse.length; index++) {
+          let smartBadgeId = this.smartBadgesByCourse[index];
+          
+          let objectSBRelation = {"course_id": courseId, "badge_id": smartBadgeId}
+          
+          if (this.listSmartBagesRelated.indexOf(smartBadgeId)==-1) {
+
+            this.bs.addBadgeToCourse(objectSBRelation).subscribe(
+              res => {
+                console.log("smart Badge course relation created");
+                console.log(res);
+                this.listSmartBagesRelated.push(smartBadgeId);
+              },
+              error => {
+                console.log("error creating relation smart badge course")
+                console.log(error);
+              });
+
+            }
+
+        }
+      }
 
 
 

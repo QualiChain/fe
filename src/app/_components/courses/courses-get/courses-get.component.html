@@ -80,7 +80,16 @@
       </div>
     </div>
 
-    
+    <div class="row">
+      <div><h2>{{ 'PROFILES.SMART_BADGES' | translate }}</h2></div>
+      <div>
+        <!--
+        <app-qc-smart-badges-list-by-course [courseId]="courseData.courseid" formatOutput="small"></app-qc-smart-badges-list-by-course>
+        -->
+        <app-qc-smart-badges-list-by-course [courseId]="courseData.courseid" formatOutput="card"></app-qc-smart-badges-list-by-course>
+      </div>
+    </div>
+
     <div class="row">
 
       <!-- professors users -->

@@ -1,0 +1,61 @@
+<div id="courseAwardList">
+    <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid; else loadEnd"></mat-spinner>
+
+    <ng-template #loadEnd>
+
+        <div *ngIf="aqcuired_badges_by_course.length==0; else courseHasBadges" class="col-lg-8  smartBudge">                                
+            {{ 'COURSE.COURSE_BADGES_NO_DATA' | translate }}
+        </div>
+        <ng-template #courseHasBadges>
+
+            <div *ngIf="formatOutput=='small'">
+                <span *ngFor="let element_badge of aqcuired_badges_by_course; index as i">
+                    <a href="" (click)="selectedBadge=element_badge" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_course'"><img style="width:30px" *ngIf="element_badge.badge.oubadge.image" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > </a>
+                </span>
+            </div>
+    
+            <div *ngIf="formatOutput=='card'">
+                                    
+                <span *ngFor="let element_badge of aqcuired_badges_by_course; index as j">
+    
+                    <mat-card class="col-lg-3 example-card" >
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.badge.oubadge.image}}");'></div>
+                            <mat-card-title>
+                                <a href="" (click)="selectedBadge=element_badge" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_course'">
+                                    {{element_badge.badge.name}}
+                                </a>
+                            </mat-card-title>
+                        </mat-card-header>
+    
+                        <mat-card-content>                                                              
+                            <div><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}:</label> {{element_badge.badge.issuer}}</div>                            
+                        </mat-card-content>
+                    </mat-card>                    
+                </span>
+    
+            </div>
+
+        </ng-template>
+
+    </ng-template>
+</div>
+
+<!--Modal-->
+<div class="modal fade" id="smdesc_course" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">
+            {{selectedBadge?.badge?.name}}</h4>                                              
+        </div>
+        <div class="modal-body">
+            <app-qc-smart-badge-card [awardId]="selectedBadge?.badge?.id"></app-qc-smart-badge-card>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                              
+        </div>
+      </div>
+    </div>
+</div> 

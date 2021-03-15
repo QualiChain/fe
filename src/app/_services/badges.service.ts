@@ -15,6 +15,7 @@ export class BadgesService {
   
   private uriBadges = environment.badgesUrl;
   private uriUser = environment.userUrl;
+  private uriCourse = environment.courseUrl;
 
   constructor(
     private authService: AuthService,
@@ -91,6 +92,45 @@ export class BadgesService {
     let headers = this.authService.createQCAuthorizationHeader();
 
     return this.http.delete(`${this.uriUser}/badges?badge_id=${badgeId}&user_id=${userId}`, { headers: headers } )
+    .pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }  
+
+  addBadgeToCourse(obj: Object) {
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.post(`${this.uriCourse}/badges`, obj, { headers: headers } ).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
+
+  getBadgesByCourseId(courseId: Number) {
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.uriCourse}/badges?courseid=${courseId}`, { headers: headers } ).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+  }
+
+  deleteBadgeToCourse(courseId: Number, badgeId: Number) {
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.delete(`${this.uriCourse}/badges?badge_id=${badgeId}&course_id=${courseId}`, { headers: headers } )
     .pipe(
        map((data: any) => {
          return data;

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BadgesService } from '../../../_services/badges.service';
+import { SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-qc-smart-badges-list-by-user',
@@ -59,21 +60,38 @@ export class QcSmartBadgeCardComponent implements OnInit {
     private bs: BadgesService
   ) { }
 
+  loadDatraSmartBadge() {
+    this.bs.getBadge(+this.awardId).subscribe(
+      badgeData => {
+        //console.log(badgeData);
+        this.itemBadgeData = badgeData;
+        this.lodingspinner = false;
+      },
+      error => {
+        console.log("error getting badge data");
+        this.lodingspinner = false;
+      }
+    );
+  }
+
   ngOnInit(): void {
     //console.log("this.awardId:"+this.awardId);
 
     if (this.awardId) {
-      this.bs.getBadge(+this.awardId).subscribe(
-        badgeData => {
-          //console.log(badgeData);
-          this.itemBadgeData = badgeData;
-          this.lodingspinner = false;
-        },
-        error => {
-          console.log("error getting badge data");
-          this.lodingspinner = false;
-        }
-      );
+      this.loadDatraSmartBadge();
+    } else {
+      this.lodingspinner = false;
+    }
+
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //console.log(changes);
+    if (this.awardId) {
+      this.loadDatraSmartBadge();
+    } else {
+      this.lodingspinner = false;
     }
 
   }
