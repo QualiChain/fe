@@ -8,7 +8,7 @@
 
 <div [hidden]="showLoading">
   <div class="row">
-    <div class="col" [ngClass]="{'col-lg-8':authservice.checkIfPermissionsExistsByUserRoles(['get_courses_recomendations'])}">
+    <div class="col" [ngClass]="{'col-lg-8':authservice.checkIfPermissionsExistsByUserRoles(['add_course', 'get_courses_recomendations'])}">
       <div class="" *appCanAccess="['add_course']">
         <button class="btn btn-primary" [routerLink]="['/courses/add']">
           <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'COURSES.BUTTON.CREATE_COURSE' | translate }}
@@ -79,8 +79,11 @@
       </div>
     </div>
 
-    <div class="col col-lg-4" *appCanAccess="['get_courses_recomendations']">
-      <app-recomended-courses userId="{{currentUser.id}}"></app-recomended-courses>
+    <div class="col col-lg-4" *appCanAccess="['add_course','get_courses_recomendations']">
+      <mat-accordion class="example-headers-align" multi>
+        <app-coursess-touch-by-user *appCanAccess="['add_course']" userId="{{currentUser.id}}"></app-coursess-touch-by-user>
+        <app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{currentUser.id}}"></app-recomended-courses>
+      </mat-accordion>
     </div>
   </div>
 

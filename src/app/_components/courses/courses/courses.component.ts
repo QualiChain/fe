@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Inject} from '@angular/core';
+import {Component, OnInit, ViewChild, Inject, Input } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -189,4 +189,43 @@ export class CoursesComponent implements OnInit {
     this.excelService.exportAsExcelFile(ELEMENT_DATA, 'list_of_coursess');
   }
 
+}
+
+
+@Component({
+  selector: 'app-coursess-touch-by-user',
+  templateUrl: './coursesTouchByUser.html',
+  styleUrls: ['./courses.component.css']
+})
+
+
+export class CoursesTouchByUserComponent implements OnInit {
+
+  @Input() userId: number;
+  myCourses : any[] = [];
+  lodingspinner : boolean = false;
+  constructor(
+    private cs: CoursesService
+  ) { }
+
+  ngOnInit(): void {
+
+    if (this.userId) {
+
+      this.cs.getTeachingCourseByUserId(+this.userId).subscribe(
+        coursesByUser => {
+          
+          //console.log(badgesByUser);
+          this.myCourses = coursesByUser;
+          this.lodingspinner = false;
+          
+        },
+        error => {
+          this.lodingspinner = false;
+          console.log("error getting courses per user");
+        }
+      );
+
+    }
+  }
 }
