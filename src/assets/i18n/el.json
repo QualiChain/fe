@@ -1,503 +1,503 @@
 {
   "LANGUAGE_SELECTOR": {
-    "SELECT": "Αλλαξε γλώσσα",
+    "SELECT": "Αλλαγή γλώσσας",
     "en": "Αγγλικά",
     "pt": "Πορτογαλικά",
-    "el": "ελληνικά"    
+    "el": "Ελληνικά"    
   },
   "ROLES": {
-    "authenticated": "Authenticated",
-    "student": "Student",
-    "employee": "Employee",
-    "teacher": "Professor",
-    "professor": "Professor",
-    "recruiter": "Recruiter",
-    "administrator": "Administrator",
-    "admin": "Administrator",
-    "life long learner": "Life long learner",
-    "academic organisation": "Academic organisation",
-    "recruitment organisation": "Recruitment organisation",
-    "job seeker": "Job seeker"
+    "authenticated": "Πιστοποιημένος",
+    "student": "Φοιτητής",
+    "employee": "Εργαζόμενος",
+    "teacher": "Δάσκαλος",
+    "professor": "Καθηγητής",
+    "recruiter": "Υπεύθυνος ανθρώπινου δυναμικού",
+    "administrator": "Διαχειριστής",
+    "admin": "Διαχειριστής",
+    "life long learner": "Δια βίου μαθητής",
+    "academic organisation": "Ακαδημαϊκός οργανισμός",
+    "recruitment organisation": "Οργανισμός προσλήψεων",
+    "job seeker": "Αιτών/ουσα εργασία"
   },
   "MENU": {
-    "HOME": "Home",
-    "JOBS": "Εργασία",
-    "JOBS_HELP_TEXT": "Here you can find the list of available jobs",
-    "CVS": "Cvs",
+    "HOME": "Αρχική",
+    "JOBS": "Θέσεις εργασίας",
+    "JOBS_HELP_TEXT": "Εδώ μπορείτε να βρείτε τη λίστα των διαθέσιμων θέσεων εργασίας",
+    "CVS": "Βιογραφικά",
     "COURSES": "Μαθήματα",
-    "COURSES_HELP_TEXT": "Here you can find the list of available courses",
+    "COURSES_HELP_TEXT": "Εδώ μπορείτε να βρείτε τη λίστα των διαθέσιμων μαθημάτων",
     "PROFILES": "Προφίλ",
-    "PROFILES_HELP_TEXT": "Here you can find the list of user profiles",
-    "LOGIN": "Login",    
-    "LOGOUT": "Logout",
-    "WELCOME_MESSAGE": "καλως ΗΡΘΑΤΕ",
+    "PROFILES_HELP_TEXT": "Εδώ μπορείτε να βρείτε τη λίστα με τα προφίλ των χρηστών",
+    "LOGIN": "Σύνδεση",
+    "LOGOUT": "Αποσύνδεση",
+    "WELCOME_MESSAGE": "Καλώς ήρθατε",
     "PROFILE": "Προφίλ",
     "RECRUITMENT": "Προσλήψεις",
-    "RECRUITMENT_HELP_TEXT": "The recruitment application is available here",
+    "RECRUITMENT_HELP_TEXT": "Η αίτηση πρόσληψης είναι διαθέσιμη εδώ",
     "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",
-    "CERTIFICATE_VALIDATION_HELP_TEXT": "The certificate validation application is available here",
-    "MCDSS": "MCDSS",
-    "MCDSS_HELP_TEXT": "The Multicriteria Decision Support System tool is available here",
-    "SKILLS": "Skills",
-    "SKILLS_HELP_TEXT": "Here you can find the list of skills",
-    "NOTIFICATION_PREFERENCES": "Notification Preferences",
-    "PERSONAL_FILES_REPOSITORY": "Files Repository",
-    "QUESTIONNAIRE": "Questionnaire",
+    "CERTIFICATE_VALIDATION_HELP_TEXT": "Η αίτηση επικύρωσης πιστοποιητικού είναι διαθέσιμη εδώ",
+    "MCDSS": "Πολυκριτηριακή Υποστήριξη Αποφάσεων",
+    "MCDSS_HELP_TEXT": " Το εργαλείο  Πολυκριτηριακής Υποστήριξης Αποφάσεων είναι διαθέσιμο εδώ",
+    "SKILLS": "Δεξιότητες",
+    "SKILLS_HELP_TEXT": "Εδώ μπορείτε να βρείτε τη λίστα δεξιοτήτων",
+    "NOTIFICATION_PREFERENCES": "Προτιμήσεις ειδοποιήσεων",
+    "PERSONAL_FILES_REPOSITORY": "Αποθετήριο αρχείων",
+    "QUESTIONNAIRE": "Ερωτηματολόγιο",
     "THESIS": "Thesis",
     "THESIS_HELP_TEXT": "Here you can find the list of available thesis"
   },
   "PERSONAL_FILES_REPOSITORY": {
-    "TITLE": "Personal files repository",
-    "DELETE_MESSAGE": "Are you sure you want to delete this file?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "ERROR_DELETING_FILE": "Sorry, there was an error deleting the file. The file '{{fileName}}' cannot be deleted."
+    "TITLE": "Αποθετήριο προσωπικών αρχείων",
+    "DELETE_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το αρχείο;",
+    "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας",
+    "ERROR_DELETING_FILE": "Δυστυχώς παρουσιάστηκε σφάλμα κατά τη διαγραφή του αρχείου. Η διαγραφή του αρχείου '{{fileName}}' δεν είναι δυνατή."
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Επικύρωση πιστοποιητικού",
-    "CHOOSE_FILE": "Choose File",
+    "CHOOSE_FILE": "Επιλογή αρχείου",
     "INPUTDID": {
       "LABEL": "DID",
-      "PLACEHOLDER": "IssuerID (Smart contract address WITHOUT did:ethr:)"
+      "PLACEHOLDER": "Ταυτότητα εκδότη (Διεύθυνση έξυπνου συμβολαίου ΧΩΡΙΣ did:ethr:) "
     },
     "INPUTCIVILID": {
-      "LABEL": "CivilID",
-      "PLACEHOLDER": "CivilID (e.g., 12345678)"
+      "LABEL": "Αστυνομική Ταυτότητα",
+      "PLACEHOLDER": "Αστυνομική Ταυτότητα (π.χ., ΑΙ 123456)"
     },
     "BUTTON": {
-      "VERIFY_CERTIFICATE": "Verify Certificate"
+      "VERIFY_CERTIFICATE": "Επαλήθευση πιστοποιητικού"
     },
     "INSTRUCTIONS": {
       "TITLE": "Οδηγίες",
-      "STEP_1": "1. Input the address of the account used to upload the certificate ('0x2CefB619218825C0c670D8E77f7039e0693E1dDC' by default).",
-      "STEP_2": "2. Input the civil ID. The Civil ID should be the same as the name of the certificate (pdf file) (e.g., 12345678)",
-      "STEP_3": "3. Select the certificate to validate (e.g., 12345678.pdf)"
+      "STEP_1": "1. Εισάγετε τη διεύθυνση λογαριασμού που χρησιμοποιείται για την μεταφόρτωση του πιστοποιητικού ('0x2CefB619218825C0c670D8E77f7039e0693E1dDC' προεπιλογή).",
+      "STEP_2": "2. Εισάγετε τον αριθμό Αστυνομικής ταυτότητας. Ο αριθμός πρέπει να είναι ίδιος με το όνομα του πιστοποιητικού (pdf file) (π.χ., ΑΙ 123456).",
+      "STEP_3": "3. Επιλέξτε το πιστοποιητικό για επικύρωση (π.χ., ΑΙ 123456.pdf)."
     },
     "STATUS": {
-      "WAITING": "Awaiting validation..",
+      "WAITING": "Αναμονή επικύρωσης..",
       "DONE": "Ολοκληρώθηκε",
       "SUCCESS": "Επιτυχία",
-      "ERROR": "Λάθος"
+      "ERROR": "Σφάλμα"
     },
-    "CERTIFICATE_HASH": " - Certificate hash is: ",
+    "CERTIFICATE_HASH": " - Το hash του πιστοποιητικού είναι: ", 
     "WARNING": {
-      "INVALID_ADDRESS": "Please insert a valid address (see examples)",
-      "INVALID_CIVIL_ID": "Please insert a valid Civil ID (integer)",
-      "INVALID_CERTIFICATE": "Please insert a valid certificate (.pdf)"
+      "INVALID_ADDRESS": "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση (δείτε παραδείγματα)",
+      "INVALID_CIVIL_ID": "Παρακαλώ εισάγετε μια έγκυρη Αστυνομική Ταυτότητα(γραμματα, ακέραιοι αριθμοί)",
+      "INVALID_CERTIFICATE": "Παρακαλώ εισάγετε ένα έγκυρο πιστοποιητικό (.pdf)"
     }
-  },  
+  },
   "HOME": {
-    "TITLE": "Home",
+    "TITLE": "Αρχική",
     "BODY": "Αυτή είναι η αρχική σελίδα του QualiChain FE"
   },
   "LOGIN": {
-    "TITLE": "Welcome to QualiChain",
+    "TITLE": "Καλώς ήρθατε στο QualiChain",
     "TAB": {
-      "LOGIN": "Log in",
-      "REQUEST_YOUR_PASSWORD": "Request your password"
+      "LOGIN": "Σύνδεση",
+      "REQUEST_YOUR_PASSWORD": "Ζητήστε τον κωδικό πρόσβασης σας"
     },    
     "INVALID_CREDENTIALS_MESSAGE": "Μη έγκυρα διαπιστευτήρια",
-    "LOGIN_INPROGRESS_MESSAGE": "Valid credentials, login in progress",
+    "LOGIN_INPROGRESS_MESSAGE": "Έγκυρα διαπιστευτήρια, σύνδεση σε εξέλιξη",
     "USERNAME": "Όνομα χρήστη",
     "USERNAME_HELP": "Το όνομα χρήστη απαιτείται και πρέπει να έχει μήκος τουλάχιστον 3 χαρακτήρων.",
     "PASSWORD": "Κωδικός πρόσβασης",
     "PASSWORD_HELP": "Ο κωδικός πρόσβασης απαιτείται και πρέπει να έχει μήκος τουλάχιστον 3 χαρακτήρων.",
-    "EMAIL": "Your email address",
-    "EMAIL_HELP": "Write your email here",
-    "VALID_REQUEST_CREDANTIALS_MESSAGE": "The request has been done.",
-    "INVALID_REQUEST_CREDANTIALS_MESSAGE": "The request has not been done.",
+    "EMAIL": "Η ηλεκτρονική σας διεύθυνση",
+    "EMAIL_HELP": "Γράψτε εδώ την ηλεκτρονική σας διεύθυνση",
+    "VALID_REQUEST_CREDANTIALS_MESSAGE": "Το αίτημα έχει ολοκληρωθεί.",
+    "INVALID_REQUEST_CREDANTIALS_MESSAGE": "Το αίτημα δεν έχει ολοκληρωθεί.",
     "BUTTON": {
-      "LOGIN": "Log in",
-      "SUBMIT": "Submit"
+      "LOGIN": "Σύνδεση",
+      "SUBMIT": "Υποβολή"
     }
-  },  
+  },   
   "COURSES": {
-    "DELETE_MESSAGE": "Are you sure you want to delete this course?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "TITLE": "Courses",
+    "DELETE_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το μάθημα;",
+    "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας",
+    "TITLE": "Μαθήματα",
     "BUTTON": {
-      "CREATE_COURSE": "Create Course"
+      "CREATE_COURSE": "Δημιουργία Μαθήματος"
     }
   },
   "JOBS_APPLICATIONS": {
-    "TITLE": "Job applications",
-    "NO_DATA": "There are no job applications",
+    "TITLE": "Αιτήσεις εργασίας",
+    "NO_DATA": "Δεν υπάρχουν αιτήσεις εργασίας",
     "BUTTON": {
-      "VIEW_JOB": "View job"
+      "VIEW_JOB": "Προβολή θέσης εργασίας"
     }
   },
   "JOBS": {
-    "TITLE": "Εργασία",
-    "NO_JOBS_AVAILABLE": "There are no jobs available",
-    "NONE": "None",
+    "TITLE": "Εργασία", 
+    "NO_JOBS_AVAILABLE": "Δεν υπάρχουν διαθέσιμες θέσεις εργασίας",
+    "NONE": "Καμία",
     "FILTER": {
-      "TITLE": "by title",
-      "ORGANIZATION": "by organization"
+      "TITLE": "με βάση τον τίτλο",
+      "ORGANIZATION": "με βάση τον οργανισμό"
     },    
-    "REQUIRED_SKILLS": "Required Skills",
-    "REQUIRED_SKILLS_NOT_AVAILABLE": "There are not required skills available",
-    "REQUIRED_EDUCATIONS": "Required Degrees",
-    "REQUIRED_EDUCATIONS_NOT_AVAILABLE": "There are not required degrees available",
-    "REQUIRED_EXPERIENCE": "Required Experience",
-    "REQUIRED_EXPERIENCES": "Required Experiences",
-    "REQUIRED_EXPERIENCES_NOT_AVAILABLE": "There are not required experiences available",
-    "ORGANIZATION": "Organization",
+    "REQUIRED_SKILLS": "Απαιτούμενες δεξιότητες",
+    "REQUIRED_SKILLS_NOT_AVAILABLE": "Δεν υπάρχουν διαθέσιμες απαιτούμενες δεξιότητες",
+    "REQUIRED_EDUCATIONS": "Απαιτούμενα Πτυχία",
+    "REQUIRED_EDUCATIONS_NOT_AVAILABLE": "Δεν υπάρχουν διαθέσιμα απαιτούμενα πτυχία",
+    "REQUIRED_EXPERIENCE": "Απαιτούμενη Εμπειρία",
+    "REQUIRED_EXPERIENCES": "Απαιτούμενες Εμπειρίες",
+    "REQUIRED_EXPERIENCES_NOT_AVAILABLE": "Δεν υπάρχουν διαθέσιμες απαιτούμενες εμπειρίες",
+    "ORGANIZATION": "Οργανισμός",
     "BUTTON": {
-      "ADD_SKILL": "Add Skill",
-      "DELETE_SKILL": "Delete Skill",
-      "ADD_EXPERIENCE": "Add Experience",
-      "DELETE_EXPERIENCE": "Delete Experience",
-      "ADD_EDUCATION": "Add Degree",
-      "DELETE_EDUCATION": "Delete Degree",
-      "CREATE_JOB": "Create Job",
-      "UPDATE_JOB": "Update Job",
-      "CANCEL": "Cancel"
+      "ADD_SKILL": "Προσθήκη Δεξιότητας",
+      "DELETE_SKILL": "Διαγραφή Δεξιότητας",
+      "ADD_EXPERIENCE": "Προσθήκη Εμπειρίας",
+      "DELETE_EXPERIENCE": "Διαγραφή Εμπειρίας",
+      "ADD_EDUCATION": "Προσθήκη Πτυχίου",
+      "DELETE_EDUCATION": "Διαγραφή Πτυχίου",
+      "CREATE_JOB": "Δημιουργία θέσης εργασίας",
+      "UPDATE_JOB": "Ενημέρωση θέσης εργασίας",
+      "CANCEL": "Ματαίωση"
     },
-    "CONFIRM_ACTION": "Confirm Action",
-    "DELETE_MESSAGE": "Are you sure you want to delete this job?",
-    "CANCEL_MESSAGE": "Are you sure you want to do this?"
+    "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας",
+    "DELETE_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την εργασία;",
+    "CANCEL_MESSAGE": "Είστε βέβαιοι ότι θέλετε αυτή την ενέργεια;"
   },
   "JOB": {
-    "HEADER_TITLE": "Job",
-    "CANDIDATES": "Candidates",
-    "ASSIGNED": "Assigned",
-    "NO_CANDIDATES": "There are not candidates for this Job",
-    "SELECT_USER_APPLY_MESSAGE": "Are you sure you want to select this candidate?",
-    "DELETE_APPLY_MESSAGE": "Are you sure you want delete to this apply?",
-    "ORGANIZATION": "Organization",
+    "HEADER_TITLE": "Έργασία",
+    "CANDIDATES": "Υποψήφιοι",
+    "ASSIGNED": "Ανατεθειμένη",
+    "NO_CANDIDATES": "Δεν υπάρχουν υποψήφιοι γι' αυτή την θέση εργασίας",
+    "SELECT_USER_APPLY_MESSAGE": "Είστε βέβαιοι ότι θέλετε να επιλέξετε αυτόν τον υποψήφιο;",
+    "DELETE_APPLY_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την αίτηση;",
+    "ORGANIZATION": "Οργανισμός",
     "TITLE": {
-      "LABEL": "Title",
-      "PLACEHOLDER": "Position"
+      "LABEL": "Τίτλος",
+      "PLACEHOLDER": "Θέση"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Περιγραφή",
+      "PLACEHOLDER": "Περιγραφή"
     },
     "DEPARTMENT": {
-      "LABEL": "Deparment",
-      "PLACEHOLDER": "Deparment"
+      "LABEL": "Τμήμα",
+      "PLACEHOLDER": "Τμήμα"
     },
     "EMPLOYMENT_TYPE": {
-      "LABEL": "Employment type",
-      "PLACEHOLDER": "Select one",
+      "LABEL": "Είδος Απασχόλησης",
+      "PLACEHOLDER": "Επιλέξτε ένα",
       "OPTIONS": {
-        "FULL_TIME": "Full-time",
-        "PART_TIME": "Part-time",
-        "CONTRACT": "Contract",
-        "TEMPORARY": "Temporary",
-        "VOLUNTEER": "Volunteer",
-        "INTERNSHIP": "Internership"
+        "FULL_TIME": "Πλήρους απασχόλησης",
+        "PART_TIME": "Μερικής απασχόλησης",
+        "CONTRACT": "Συμβόλαιο",
+        "TEMPORARY": "Προσωρινή",
+        "VOLUNTEER": "Εθελοντική",
+        "INTERNSHIP": "Πρακτική"
       }
     },    
     "EMPLOYMENT_LEVEL": {
-      "LABEL": "Seniority Level",
-      "PLACEHOLDER": "Select one",
+      "LABEL": "Επίπεδο εξειδίκευσης",
+      "PLACEHOLDER": "Επιλέξτε ένα",
       "OPTIONS": {
-        "INTERNERSHIP": "Internship",
-        "ENTITY_LEVEL": "Entity level",
-        "ASSOCIATE": "Associate",
-        "MID_SENIOR_LEVEL": "Mid-Senior level",
-        "SENIOR_LEVEL": "Senior",
-        "EXPERT": "Expert",
-        "DIRECTOR": "Director",
-        "EXECUTIVE": "Executive",
-        "NOT_APPLICABLE": "Not Applicable"
+        "INTERNERSHIP": "Πρακτική",
+        "ENTITY_LEVEL": " Αρχάριος",
+        "ASSOCIATE": "Συνέταιρος",
+        "MID_SENIOR_LEVEL": "Μεσαίας εξειδίκευσης",
+        "SENIOR_LEVEL": "Ανώτερης εξειδίκευσης",
+        "EXPERT": "Ειδικός",
+        "DIRECTOR": "Επικεφαλής",
+        "EXECUTIVE": "Στέλεχος",
+        "NOT_APPLICABLE": "Άνευ αντικειμένου"
       }
     },
     "EMPLOYMENT_DESCRIPTION": {
-      "LABEL": "Job Description",
-      "PLACEHOLDER": "Briefly explain the type of job you're offering."
+      "LABEL": "Περιγραφή Καθηκόντων",
+      "PLACEHOLDER": "Εξηγήστε εν συντομία τον τύπο εργασίας που προσφέρετε."
     },
     "REQUIRED_SKILLS": {
-      "LABEL": "Required Skills"
+      "LABEL": "Απαιτούμενες δεξιότητες"
     },
     "START_DATE" : {
-      "LABEL": "Start date",
-      "PLACEHOLDER": "Start date"
+      "LABEL": "Ημερομηνία έναρξης",
+      "PLACEHOLDER": "Ημερομηνία έναρξης"
     },
     "END_DATE" : {
-      "LABEL": "End date",
-      "PLACEHOLDER": "End date"
+      "LABEL": "Ημερομηνία λήξης",
+      "PLACEHOLDER": "Ημερομηνία λήξης"
     },
     "EXPERIENCE": {
-      "TITLE": "Work Experience",
+      "TITLE": "Προϋπηρεσία",
       "NAME" : {
-        "LABEL": "Position",
-        "PLACEHOLDER": "Position title"
+        "LABEL": "Θέση",
+        "PLACEHOLDER": "Τίτλος θέσης"
       },
       "DESCRIPTION" : {
-        "LABEL": "Description",
-        "PLACEHOLDER": "Position description"
+        "LABEL": "Περιγραφή",
+        "PLACEHOLDER": "Περιγραφή θέσης"
       }
     },
     "EDUCATION": {
-      "TITLE": "Degree",
+      "TITLE": "Πτυχίο",
       "NAME" : {
-        "LABEL": "Title",
-        "PLACEHOLDER": "Degree title"
+        "LABEL": "Τίτλος",
+        "PLACEHOLDER": "Τίτλος πτυχίου"
       },
       "DESCRIPTION" : {
-        "LABEL": "Description",
-        "PLACEHOLDER": "Degree description"
+        "LABEL": "Περιγραφή",
+        "PLACEHOLDER": "Περιγραφή πτυχίου"
       }
     },
     "SKILL": {
-      "TITLE": "Skill",
+      "TITLE": "Δεξιότητα",
       "NAME" : {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Skill name"
+        "LABEL": "Όνομα",
+        "PLACEHOLDER": "Όνομα δεξιότητας"
       },
       "ASSIGN" : {
-        "LABEL": "Assign",
-        "PLACEHOLDER": "Assign"
+        "LABEL": "Αναθέστε",
+        "PLACEHOLDER": "Ανθέστε"
       },
       "LEVEL" : {
-        "LABEL": "Level",
-        "PLACEHOLDER": "Select one",
+        "LABEL": "Επίπεδο",
+        "PLACEHOLDER": "Επιλέξτε ένα",
         "OPTIONS": {
-          "BASIC": "Basic",
-          "INTERMEDIATE": "Intermediate",
-          "ADVANCED": "Advanced",
-          "EXPERT": "Expert"
+          "BASIC": "Βασικό",
+          "INTERMEDIATE": "Μεσαίο",
+          "ADVANCED": "Προχωρημένο",
+          "EXPERT": "Άριστο"
         }
       },
       "PRIORITY" : {
-        "LABEL": "Priority",
-        "PLACEHOLDER": "Select one",
+        "LABEL": "Προτεραιότητα",
+        "PLACEHOLDER": "Επιλέξτε μία",
         "OPTIONS": {
-          "LOW": "Low",
-          "MEDIUM": "Medium",
-          "HIGH": "High"
+          "LOW": "Χαμηλή",
+          "MEDIUM": "Μέτρια",
+          "HIGH": "Υψηλή"
         }
       }
     },
     "APPLY" : {
-      "TITLE" : "Apply for this job",
+      "TITLE" : "Υποβολή αίτησης για αυτήν την εργασία",
       "BUTTON" : {
-        "APPLY": "Apply"
+        "APPLY": "Υποβολή"
       }
     }
-  },  
+  },
   "JOB_APPLY": {
     "AVAILABLE": {
-      "TITLE": "Available",
-      "PLACEHOLDER": "Available"
+      "TITLE": "Διαθέσιμη",
+      "PLACEHOLDER": "Διαθέσιμη"
     },
     "EXPECTED_SALARY": {
-      "TITLE": "Expected Salary",
-      "PLACEHOLDER": "Expected Salary"
+      "TITLE": "Αναμενόμενος μισθός",
+      "PLACEHOLDER": "Αναμενόμενος μισθός"
     },
-    "SCORE": "Score",
-    "ROLE": "Role"
+    "SCORE": "Βαθμός",
+    "ROLE": "Ρόλος"
   },  
   "CVS": {
-    "TITLE": "CVs"
+    "TITLE": "Βιογραφικά"
   },
   "PROFILE": {
-    "MY_PROFILE": "My profile",
+    "MY_PROFILE": "Το προφίλ μου",
     "CREATE_PROFILE": {
-      "TITLE" : "Create new profile"
+      "TITLE" : "Δημιουργία νέου προφίλ"
     },
     "EDIT_PROFILE": {
-      "TITLE" : "Edit profile"
+      "TITLE" : "Επεξεργασία προφίλ"
     },
     "PILOT": {
-      "LABEL": "Pilot",
-      "SELECT_ONE": "Select one pilot"
+      "LABEL": "Πιλότος",
+      "SELECT_ONE": "Επιλέξτε έναν πιλότο"
     },
     "ROLE": {
-      "LABEL": "Role",
-      "SELECT_ONE": "Select one role"
+      "LABEL": "Ρόλος",
+      "SELECT_ONE": "Επιλέξτε έναν ρόλο"
     },
     "USERNAME": {
-      "LABEL": "Username",
-      "PLACEHOLDER": "Write your username"
+      "LABEL": "Όνομα χρήστη",
+      "PLACEHOLDER": "Γράψτε το όνομα χρήστη σας"
     },
     "PASSWORD": {
-      "LABEL": "Password",
-      "PLACEHOLDER": "Write your password"
+      "LABEL": "Κωδικός πρόσβασης",
+      "PLACEHOLDER": "Γράψτε τον κωδικό πρόσβασης σας"
     },
     "FULLNAME": {
-      "LABEL": "Full name",
-      "PLACEHOLDER": "Full name"
+      "LABEL": "Πλήρες όνομα",
+      "PLACEHOLDER": "Πλήρες όνομα"
     },
     "NAME": {
-      "LABEL": "Name",
-      "PLACEHOLDER": "Name"
+      "LABEL": "Όνομα",
+      "PLACEHOLDER": "Όνομα"
     },
     "SURNAME": {
-      "LABEL": "Surname",
-      "PLACEHOLDER": "Surname"
+      "LABEL": "Επώνυμο",
+      "PLACEHOLDER": "Επώνυμο"
     },
     "EMAIL": {
-      "LABEL": "Email",
-      "PLACEHOLDER": "Email"
+      "LABEL": "Ηλεκτρονική διεύθυνση",
+      "PLACEHOLDER": "Ηλεκτρονική διεύθυνση"
     },
     "GENDER": {
-      "LABEL": "Gender",
-      "PLACEHOLDER": "Gender",
-      "SELECT_ONE": "Select one gender",
+      "LABEL": "Φύλο",
+      "PLACEHOLDER": "Φύλο",
+      "SELECT_ONE": "Επιλέξτε ένα φύλο",
       "TYPE": {
-        "MALE": "Male",
-        "FEMALE": "Female",
-        "OTHER": "Other"
+        "MALE": "Άνδρας",
+        "FEMALE": "Γυναίκα",
+        "OTHER": "Άλλο"
       }
     },
     "BIRTHDATE": {
-      "LABEL": "Birthdate",
-      "PLACEHOLDER": "Choose a birthdate date"
+      "LABEL": "Ημερομηνία γέννησης",
+      "PLACEHOLDER": "Επιλέξτε ημερομηνία γέννησης"
     },
     "COUNTRY": {
-      "LABEL": "Country",
-      "PLACEHOLDER": "Country"
+      "LABEL": "Χώρα",
+      "PLACEHOLDER": "Χώρα"
     },
     "STATE": {
-      "LABEL": "State",
-      "PLACEHOLDER": "State"
+      "LABEL": "Νομός",
+      "PLACEHOLDER": "Νομός"
     },
     "CITY": {
-      "LABEL": "City",
-      "PLACEHOLDER": "City"
+      "LABEL": "Πόλη",
+      "PLACEHOLDER": "Πόλη"
     },
     "ADDRESS": {
-      "LABEL": "Address",
-      "PLACEHOLDER": "Address"
+      "LABEL": "Διεύθυνση",
+      "PLACEHOLDER": "Διεύθυνση"
     },
     "ZIPCODE": {
-      "LABEL": "Zip code",
-      "PLACEHOLDER": "Zip code"
+      "LABEL": "Ταχυδρομικός κώδικας",
+      "PLACEHOLDER": "Ταχυδρομικός κώδικας"
     },
     "MOBILEPHONE": {
-      "LABEL": "Mobile Phone",
+      "LABEL": "Κινητό τηλέφωνο",
       "PLACEHOLDER": "666666666"
     },
     "HOMEPHONE": {
-      "LABEL": "Home Phone",
+      "LABEL": "Σταθερό τηλέφωνο",
       "PLACEHOLDER": "999999999"
     },
-    "NO_SMART_BADGE_YET": "This user does not have any smart badge yet."
+    "NO_SMART_BADGE_YET": "Αυτός ο χρήστης δεν διαθέτει ακόμη κάποιο smart badge."
   },
   "CHANGE_PASSWORD": {
-    "TITLE": "Change user password",
+    "TITLE": "Αλλαγή κωδικού χρήστη",
     "WARNING_MESSAGE" : {
-      "PASSWORD_MATCH" : "Passwords match: To change the current user password, enter the new password in both fields.",
-      "PASSWORD_LENGTH" : "Passwords length: 8 characters minimum."
+      "PASSWORD_MATCH" : "Οι κωδικοί ταιριάζουν: Για να αλλάξετε τον τρέχοντα κωδικό πρόσβασης χρήστη, εισάγετε το νέο κωδικό και στα δύο πεδία.",
+      "PASSWORD_LENGTH" : "Μήκος κωδικού πρόσβασης: τουλάχιστον 8 χαρακτήρες."
     },
     "NEW_PASSWORD": {
-      "LABEL": "New password",
-      "PLACEHOLDER": "New password"
+      "LABEL": "Νέος κωδικός πρόσβασης",
+      "PLACEHOLDER": "Νέος κωδικός πρόσβασης"
     },
     "REPEAT_PASSWORD":  {
-      "LABEL": "Repeat new password",
-      "PLACEHOLDER": "Repeat new password"
+      "LABEL": "Επαναλάβετε το νέο κωδικό πρόσβασης",
+      "PLACEHOLDER": "Επαναλάβετε το νέο κωδικό πρόσβασης"
     }
   },
   "PROFILES": {
     "TITLE": "Προφίλ",
-    "STUDENT_PROFILE": "Προφίλ σπουδαστών",
+    "STUDENT_PROFILE": "Προφίλ Φοιτητών",
     "TEACHER_PROFILE": "Προφίλ Καθηγητή",
-    "EMPLOYEE_PROFILE": "Employee Profile",
+    "EMPLOYEE_PROFILE": "Προφίλ Εργαζομένου",
     "PROFILE": "Προφίλ",
     "USERNAME": "Όνομα χρήστη",
-    "NAME": "Πλήρες όνομα",
-    "SURNAME": "Πανεπιστήμιο",
-    "UNIVERSITY": "University",
-    "EMAIL": "Email",
-    "ROLE": "Role",
-    "ROLES": "Roles",
-    "GENDER": "Gender",
+    "NAME": "Όνομα",
+    "SURNAME": "Επώνυμο",
+    "UNIVERSITY": "Πανεπιστήμιο",
+    "EMAIL": "Ηλεκτρονική διεύθυνση",
+    "ROLE": "Ρόλος", 
+    "ROLES": "Ρόλοι",
+    "GENDER": "Φύλο",
     "COMPLETED_COURSES": "Ολοκληρωμένα μαθήματα",
     "TEACHING_COURSES": "Εκπαιδευτικά μαθήματα",
     "SMART_BADGES": "Έξυπνες ετικέτες",
-    "CV": "CV",
-    "DSS_CV_RE_DESIGN": "Curriculum Redesign",
-    "BEST_CAREER_OPTIONS": "Best Career Options",
-    "CAREER_ADVISOR": "Career Advisor",
-    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
-    "DELETE_MESSAGE": "Are you sure you want to delete this user?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "CARRER_PATH": "Career path",
-    "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?",
-    "CURRENT_JOB_POSITION": "Current job position",
-    "DELETE_OWN_PROFILE": "Delete own profile",
-    "DELETE_OWN_PROFILE_HELP_MESSAGE": "You are going to delete your user account, this action cannot be undone. All your data will be lost.",
-    "COMPETENCY_DEVELOPMENT": "Competency Development"
+    "CV": "Βιογραφικό", 
+    "DSS_CV_RE_DESIGN": "Επανασχεδιασμός προγράμματος σπουδών",
+    "BEST_CAREER_OPTIONS": "Καλύτερες επαγγελματικές επιλογές",
+    "CAREER_ADVISOR": "Σύμβουλος σταδιοδρομίας",
+    "CV_GAP_ANALYSIS": "Εντοπισμός ελλείψεων στο πρόγραμμα σπουδών",
+    "DELETE_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον χρήστη;", 
+    "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας",
+    "CARRER_PATH": "Σταδιοδρομία",
+    "DELETE_AVATAR_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την εικόνα προφίλ;",
+    "CURRENT_JOB_POSITION": "Τρέχουσα θέση εργασίας",
+    "DELETE_OWN_PROFILE": "Διαγραφή του προφίλ σας",
+    "DELETE_OWN_PROFILE_HELP_MESSAGE": "Πρόκειται να διαγράψετε τον λογαριασμό σας, δεν είναι δυνατή η αναίρεση αυτής της ενέργειας. Όλα τα δεδομένα σας θα χαθούν.",
+    "COMPETENCY_DEVELOPMENT": "Ανάπτυξη ικανοτήτων"
   },
   "BCO": {
-    "TITLE": "Best Career Options",
-    "DESCRIPTION": "Description",
-    "STATISITICS": "Statisitics",
-    "ADDITIONAL_COURSES": "Additional Courses",
-    "RECOMMENDATIONS": "Recommendations",
-    "NO_DATA": "There are no recommendations available",
+    "TITLE": "Καλύτερες επαγγελματικές επιλογές",
+    "DESCRIPTION": "Περιγραφή",
+    "STATISITICS": "Στατιστικά",
+    "ADDITIONAL_COURSES": "Πρόσθετα μαθήματα",
+    "RECOMMENDATIONS": "Συστάσεις",
+    "NO_DATA": "Δεν υπάρχουν διαθέσιμες συστάσεις",
     "BUTTON": {
-      "COURSE_RECOMMENDATION": "Course Recommendation",
-      "SKILL_RECOMMENDATION": "Skill Recommendation"
+      "COURSE_RECOMMENDATION": "Σύσταση μαθήματος",
+      "SKILL_RECOMMENDATION": "Σύσταση δεξιοτήτων"
     }
   },
   "DSS_CV_RE_DESIGN": {
-    "TITLE": "Curriculum Redesign",
-    "FOOTER_BAR_CHART": "Course Suitability Rating for skill ({{skill_title}})",
-    "MISSING_SKILLS": "Missing Skills",
-    "RECOMMENDED_COURSES": "Recommended Courses",
-    "RELATED_SKILLS": "Related skills",
-    "CURRICULUM_IS_UP_TO_DATE": "Curriculum is {{value}}% up-to-date",
-    "NO_DATA": "No information available"
+    "TITLE": "Επανασχεδιασμός προγράμματος σπουδών",
+    "FOOTER_BAR_CHART": "Βαθμολογία καταλληλότητας μαθήματος για δεξιότητες ({{skill_title}})",
+    "MISSING_SKILLS": "Έλλειψη δεξιοτήτων",
+    "RECOMMENDED_COURSES": "Προτεινόμενα μαθήματα",
+    "RELATED_SKILLS": "Σχετικές δεξιότητες",
+    "CURRICULUM_IS_UP_TO_DATE": "Το πρόγραμμα σπουδών είναι {{value}}% ενημερωμένο",
+    "NO_DATA": "Δεν υπάρχουν διαθέσιμες πληροφορίες"
   },
   "CAREER_ADVISOR": {
-    "TITLE": "Career Advisor",
-    "FOOTER_PIE_CHART": "Accumulative Job Demand",
-    "FOOTER_BAR_CHART": "Comparative between Demand and Actual Employment",
+    "TITLE": "Σύμβουλος σταδιοδρομίας", 
+    "FOOTER_PIE_CHART": "Σωρευτική ζήτηση εργασίας",
+    "FOOTER_BAR_CHART": "Σύγκριση μεταξύ ζήτησης και πραγματικής απασχόλησης",
     "TARGETED_JOB_TITLES": {
-      "TITLE": "Targeted Job Titles",
-      "PLACEHOLDER": "Please, type targeted job titles...",
-      "CHART_HELP_TEXT": "Select at least two targeted titles"
+      "TITLE": "Στοχευμένοι τίτλοι εργασίας",
+      "PLACEHOLDER": "Παρακαλώ, πληκτρολογήστε στοχευμένους τίτλους εργασίας...",
+      "CHART_HELP_TEXT": "Επιλέξτε τουλάχιστον δυο στοχευμένους τίτλους"
     },
     "COMPLETED_COURSES": {
-      "TITLE": "Completed Courses",
-      "NO_DATA": "No courses completed"
+      "TITLE": "Ολοκληρωμένα μαθήματα",
+      "NO_DATA": "Δεν υπάρχουν ολοκληρωμένα μαθήματα"
     },
     "BUTTON": { 
-      "RECOMMEND": "Recommend",
-      "SHOW_EDUCATION_PLAN": "Show Education Plan"
+      "RECOMMEND": "Προτάσεις",
+      "SHOW_EDUCATION_PLAN": "Εμφάνιση εκπαιδευτικού πλάνου"
     },
     "TABS": {
       "COURSES_RECOMMENDATION": {
-        "TITLE": "Courses Recommendation",
-        "HELP_TEXT": "Please select courses that you find interesting (you may choose as many as you like):",
-        "NO_DATA": "No courses recomendations",
-        "SELECTED_CNT": "You have selected {{value}}% courses"
+        "TITLE": "Σύσταση μαθημάτων",
+        "HELP_TEXT": "Επιλέξτε μαθήματα που σας ενδιαφέρουν (μπορείτε να επιλέξετε όσα θέλετε):",
+        "NO_DATA": "Δεν υπάρχουν προτάσεις μαθημάτων",
+        "SELECTED_CNT": "Έχετε επιλέξει {{value}}% μαθημάτων"
       },
       "SKILLS_RECOMMENDATION": {
-        "TITLE": "Skills Recommendation",
-        "HELP_TEXT": "Please select skills that you find interesting (you may choose as many as you like):",
-        "NO_DATA": "No skills recomendations",
-        "SELECTED_CNT": "You have selected {{value}}% skills"
+        "TITLE": "Σύσταση δεξιοτήτων",
+        "HELP_TEXT": "Επιλέξτε δεξιότητες που θεωρείτε ενδιαφέρουσες (μπορείτε να επιλέξετε όσες θέλετε):",
+        "NO_DATA": "Δεν υπάρχουν προτάσεις δεξιοτήτων",
+        "SELECTED_CNT": "Έχετε επιλέξει {{value}}% δεξιοτήτων"
       },
-      "PERCENTATGE_RELATION_WITH_JOB_TILES": "{{value}}% relation with targetted job titles",
-      "PERCENTATGE_RELATED_WITH_YOUR_INTERESTS": "{{value}}% relation with your interests",
-      "NUMBER_STUDENTS_SIMILAR_PROFILE": "{{value}} students with similar profile also find it interesting",
-      "YOU_HAVE_SELECTED_N_COURSES": "You have selected {{value}} courses",
-      "YOU_HAVE_SELECTED_N_SKILLS": "You have selected {{value}} skills",
-      "STATISTICS": "Statistics"
+      "PERCENTATGE_RELATION_WITH_JOB_TILES": "{{value}}% συσχέτιση με στοχευμένους τίτλους εργασίας",
+      "PERCENTATGE_RELATED_WITH_YOUR_INTERESTS": "{{value}}% συσχέτιση με τα ενδιαφέροντά σας",
+      "NUMBER_STUDENTS_SIMILAR_PROFILE": "{{value}} φοιτητές με παρόμοιο προφίλ το βρίσκουν επίσης ενδιαφέρον",
+      "YOU_HAVE_SELECTED_N_COURSES": "Έχετε επιλέξει {{value}} μαθήματα",
+      "YOU_HAVE_SELECTED_N_SKILLS": "Έχετε επιλέξει {{value}} δεξιότητες",
+      "STATISTICS": "Στατιστικά"
     }
   },
   "SKILLS": {
-    "TITLE": "Skills",
+    "TITLE": "Δεξιότητες",
     "BUTTON": {
-      "CREATE_SKILL": "Create Skill"
+      "CREATE_SKILL": "Δημιουργία δεξιότητας"
     },    
-    "DELETE_MESSAGE": "Are you sure you want to delete this skill?",
-    "CONFIRM_ACTION": "Confirm Action"
+    "DELETE_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την δεξιότητα;",
+    "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας"
   },
   "SKILL": {
-    "TITLE": "Skill",
+    "TITLE": "Δεξιότητα",
     "NAME": {
-      "LABEL": "Name",
-      "PLACEHOLDER": "Name"
+      "LABEL": "Όνομα",
+      "PLACEHOLDER": "Όνομα"
     },
     "TYPE": {
-      "LABEL": "Type",
-      "PLACEHOLDER": "Type"
+      "LABEL": "Τύπος",
+      "PLACEHOLDER": "Τύπος"
     },
     "HARD_SKILL": {
       "LABEL": "Hard skill",
@@ -505,102 +505,102 @@
     }
   },
   "COURSE"  : {
-    "TITLE": "Course",
+    "TITLE": "Μάθημα",
     "NAME" : {
-      "LABEL": "Name",
-      "PLACEHOLDER": "Name"
+      "LABEL": "Όνομα",
+      "PLACEHOLDER": "Όνομα"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Περιγραφή",
+      "PLACEHOLDER": "Περιγραφή"
     },
     "SKILLS": {
-      "LABEL": "Related Skills",
-      "PLACEHOLDER": "Skill name"
+      "LABEL": "Σχετικές δεξιότητες",
+      "PLACEHOLDER": "Όνομα δεξιότητας"
     },
     "EVENTS": {
-      "LABEL": "Related Events",
-      "PLACEHOLDER": "Event name"
+      "LABEL": "Σχετικές εκδηλώσεις",
+      "PLACEHOLDER": "Όνομα εκδήλωσης"
     },
     "SEMESTER": {
-      "LABEL": "Semester",
-      "PLACEHOLDER": "Semester"
+      "LABEL": "Εξάμηνο",
+      "PLACEHOLDER": "Εξάμηνο"
     },
     "STARTDATE": {
-      "LABEL": "Start date"
+      "LABEL": "Ημερομηνία έναρξης"
     },
     "ENDDATE": {
-      "LABEL": "End date"
+      "LABEL": "Ημερομηνία λήξης"
     },        
-    "RELATED_SKILLS": "Related Skills",
-    "RELATED_SKILLS_NO_DATA": "There are not available skills for this course.",
-    "COURSE_BADGES": "Course Badges",
-    "COURSE_BADGES_NO_DATA": "This course does not have any smart badge yet.",
-    "UPDATE": "Update",
-    "AWARD_SMART_BADGE": "Award Smart Badge",
-    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
+    "RELATED_SKILLS": "Σχετικές δεξιότητες",
+    "RELATED_SKILLS_NO_DATA": "Δεν υπάρχουν διαθέσιμες εξιότητες για αυτό το μάθημα",
+    "COURSE_BADGES": "Έξυπνες ετικέτες",
+    "COURSE_BADGES_NO_DATA": "Αυτό το μάθημα δεν διαθέτει ακόμα κάποια έξυπνη ετικέτα",
+    "UPDATE": "Ενημέρωση",
+    "AWARD_SMART_BADGE": "Απονομή έξυπνης ετικέτας",
+    "CV_GAP_ANALYSIS": "Εντοπισμός ελλείψεων στο πρόγραμμα σπουδών",
     "BUTTON": {
-      "ENROLL_TO_COURSE" : "Enroll me to the course",
-      "UNENROLL_TO_COURSE" : "Leave course",
-      "TOUGH_THE_COURSE" : "Set me as teacher",
-      "UNTOUGH_THE_COURSE" : "Delete me from the teacher of this course",
-      "COURSE_DONE" : "Set as done",
-      "COURSE_UNDONE": "Delete me from the users that did this course",
-      "ADD_NEW_RELATION": "Add new user relation"
+      "ENROLL_TO_COURSE" : "Εγγραφή στο μάθημα",
+      "UNENROLL_TO_COURSE" : "Αποχώρηση από το μάθημα",
+      "TOUGH_THE_COURSE" : "Ορισμός ως καθηγητής",
+      "UNTOUGH_THE_COURSE" : "Διαγραφή από καθηγητής αυτού του μαθήματος",
+      "COURSE_DONE" : "Ορισμός ως ολοκληρομένο",
+      "COURSE_UNDONE": "Διαγραφή από τους χρήστες που έκαναν αυτό το μάθημα",
+      "ADD_NEW_RELATION": "Προσθήκη νέας σχέσης χρήστη"
     },
-    "SCORE_TITLE": "Which is your score?",
+    "SCORE_TITLE": "Ποιος είναι ο βαθμός σας;",
     "SCORE": {
-      "LABEL": "Score",
-      "PLACEHOLDER": "A number between 0 and 10"
+      "LABEL": "Βαθμός",
+      "PLACEHOLDER": "Ένας αριθμός μεταξύ 0 και 10"
     },
     "USERS": "Users",
-    "NO_USERS_AVAILABLE": "No users available",
-    "ENROLL_USER_TITLE": "Enroll users",
+    "NO_USERS_AVAILABLE": "Δεν υπάρχουν διαθέσιμοι χρήστες",
+    "ENROLL_USER_TITLE": "Εγγραφή χρηστών",
     "ENROLLMENT_STATUS": {
-      "LABEL": "Enrollent status",
+      "LABEL": "Κατάσταση εγγραφής",
       "OPTIONS": {
-        "ENROLLED": "Enrolled",
-        "TAUGHT": "Taught",
-        "DONE": "Done"
+        "ENROLLED": "Εγγεγραμένος/η",
+        "TAUGHT": "Παρακολουθεί το μάθημα",
+        "DONE": "Έχει ολοκληρώσει το μάθημα"
       },
-      "WARNING_ALL_USERS_SAME_SCORE": "All selected users will receive the same score"
+      "WARNING_ALL_USERS_SAME_SCORE": "Όλοι οι επιλεγμένοι χρήστες θα λάβουν την ίδια βαθμολογία"
     },
-    "NO_DONE_BY_USERS": "No users",
-    "DONE_BY": "Done by",
-    "NO_ENROLLED_USERS": "No enrolled users",
-    "ENROLLED_USERS": "Enrolled users",
-    "NO_TEACHERS": "No professors",
-    "PROFESSORS": "Professors"
+    "NO_DONE_BY_USERS": "Δεν υπάρχουν χρήστες που να έχουν ολοκληρώσει το μάθημα",
+    "DONE_BY": "Έγινε από",
+    "NO_ENROLLED_USERS": "Χωρίς εγγεγραμένους χρήστες",
+    "ENROLLED_USERS": "Εγγεγραμένοι χρήστες",
+    "NO_TEACHERS": "Δεν υπάρχουν καθηγητές για το παρόν μάθημα",
+    "PROFESSORS": "Καθηγητές"
   },
   "RECRUITMENT"  : {
     "TITLE": "Προσλήψεις",
-    "NO_DATA": "There are no candidates for this job",
-    "SEARCH_LABEL" : "Select a Job",
-    "CV-JOB-MATCHING": "CV-JOB Matching",
-    "NAME": "Name",
-    "ROLE_APPLIED": "Role applied",
-    "AVAILABLE_AT": "Available at",
-    "EXPECTED_SALARY": "Expected Salary",
-    "MATCHING_SCORE": "Matching Score",
-    "CV": "Profile",
+    "NO_DATA": "Δεν υπάρχουν υποψήφιοι για αυτήν την θέση.",
+    "SEARCH_LABEL" : "Επιλέξετε μια θέση εργασίας",
+    "CV-JOB-MATCHING": "Αντιστοίχηση Βιογραφικού-Εργασίας",
+    "NAME": "Όνομα",
+    "ROLE_APPLIED": "Ο ρόλος εφαρμόστηκε",
+    "AVAILABLE_AT": "Διαθέσιμος σε",
+    "EXPECTED_SALARY": "Αναμενόμενος μισθός",
+    "MATCHING_SCORE": "Βαθμός αντιστοίχησης",
+    "CV": "Προφίλ",
     "BUTTON" : {
-      "VIEW_CV": "View CV",
-      "SEARCH": "Search"
+      "VIEW_CV": "Προβολή βιογραφικού",
+      "SEARCH": "Αναζήτηση"
     }
   },
   "AWARD_SMART_BADGE" : {
-    "TITLE": "Award Smart Badge",
-    "CREATE_BADGE": "Create new badge",
-    "NO_SMART_BADGES_AVAILABE" : "No smart awards available",
-    "SELECTED_BADGES": "Selected Badges",
+    "TITLE": "Απονομή έξυπνης ετικέτας",
+    "CREATE_BADGE": "Δημιουργία νέας ετικέτας",
+    "NO_SMART_BADGES_AVAILABE" : "Δεν υπάρχουν διαθέσιμες έξυπνες ετικέτες",
+    "SELECTED_BADGES": "Επιλεγμένες ετικέτες",
     "BUTTON" : {
-      "AWARD": "Award",
-      "REVOKE_AWARD": "Revoke",
-      "UNASSIGN_AWARD": "Unassign",
-      "ASSIGN_AWARD": "Assign",
-      "VALIDATE_AWARD": "Validate",
-      "AWARD_COURSE": "Award Course",
-      "AWARD_LEARNERS": "Award Learners"
+      "AWARD": "Βραβείο",
+      "REVOKE_AWARD": "Ανάκληση",
+      "UNASSIGN_AWARD": "Αφαίρεση",
+      "ASSIGN_AWARD": "Ανάθεση",
+      "VALIDATE_AWARD": "Επικύρωση",
+      "AWARD_COURSE": "Ανάθεση smart badge σε μάθημα",
+      "AWARD_LEARNERS": "Ανάθεση smart badge σε δια βίου μαθητές"
     }
   },
   "ACCESS_DENIED": {
@@ -608,237 +608,237 @@
     "BODY": "Ορισμένα περιεχόμενα αυτού του ιστότοπου είναι περιορισμένα και δεν έχετε αρκετά δικαιώματα πρόσβασης."
   },
   "NOT_FOUND": {
-    "TITLE": "404 - Page not found",
-    "BODY": "Unfortunately, the requested page could not be found."
+    "TITLE": "404 -Η σελίδα δεν βρέθηκε",
+    "BODY": "Δυστυχώς δεν ήταν δυνατή η εύρεση της σελίδας που ζητήθηκε."
   },  
   "RECOMENDED_COURSES": {
-    "TITLE": "Recommended courses",
-    "NO_DATA": "This user does not have any recomended course yet.",
-    "SCORE": "Score"
+    "TITLE": "Προτεινόμενα μαθήματα",
+    "NO_DATA": "Αυτός ο χρήστης δεν διαθέτει ακόμη προτεινόμενα μαθήματα.",
+    "SCORE": "Βαθμολογία"
   },
   "RECOMENDED_JOBS": {
-    "TITLE": "Recommended jobs",
-    "NO_DATA": "This user does not have any recomended job yet.",
-    "MATCH": "Match"
+    "TITLE": "Προτεινόμενες θέσεις εργασίας",
+    "NO_DATA": "Αυτός ο χρήστης δεν διαθέτει ακόμη προτεινόμενες θέσεις εργασίας.",
+    "MATCH": "Αντιστοίχηση"
   },
   "RECOMENDED_SKILLS": {
-    "TITLE": "Recommended skills",
-    "NO_DATA": "This user does not have any recomended skill yet."
+    "TITLE": "Προτεινόμενες δεξιότητες",
+    "NO_DATA": "Αυτός ο χρήστης δεν διαθέτει ακόμη προτεινόμενες δεξιότητες."
   },
   "BUTTON": {
-    "OPEN_PDF": "Open PDF",
-    "DOWNLOAD_PDF": "Download PDF",
-    "PRINT_PDF": "Print PDF",
-    "EXPORT_TO_EXCEL": "Export to Excel",
-    "ADD": "Add",
-    "CREATE": "Create",
-    "EDIT": "Edit",
-    "DELETE": "Delete",
-    "CANCEL": "Cancel",
-    "CLOSE": "Close",
-    "VIEW": "View",
-    "SAVE": "Save",
-    "UPDATE": "Update",
-    "LEARN_MORE": "Learn more",
-    "APPLY_JOB": "Apply for this job",
-    "DELETE_APPLY_JOB": "Delete job application",
-    "CHANGE_PASSWORD": "Change password",
-    "VIEW_MORE": "View more",
-    "BACK_TO_USER_PROFILE": "Back to user profile",
-    "BACK": "Back",
-    "ASSIGN": "Assign",
-    "DELETE_OWN_PROFILE": "Delete own profile",
-    "NO": "No",
-    "YES": "Yes",
-    "HELP": "Help",
-    "SEND": "Send",
-    "UNASSIGN": "Unassign"
+    "OPEN_PDF": "Άνοιγμα PDF",
+    "DOWNLOAD_PDF": "Λήψη PDF",
+    "PRINT_PDF": "Εκτύπωση PDF",
+    "EXPORT_TO_EXCEL": "Εξαγωγή στο Excel",
+    "ADD": "Προσθήκη",
+    "CREATE": "Δημιουργία",
+    "EDIT": "Επεξεργασία",
+    "DELETE": "Διαγραφή",
+    "CANCEL": "Ματαίωση",
+    "CLOSE": "Κλείσιμο",
+    "VIEW": "Προβολή",
+    "SAVE": "Αποθήκευση",
+    "UPDATE": "Ενημέρωση",
+    "LEARN_MORE": "Μάθετε περισσότερα",
+    "APPLY_JOB": "Υποβάλετε αίτηση για αυτήν την εργασία",
+    "DELETE_APPLY_JOB": "Διαγραφή της αίτησης εργασίας",
+    "CHANGE_PASSWORD": "Αλλαγή κωδικού πρόσβασης",
+    "VIEW_MORE": "Δείτε περισσότερα",
+    "BACK_TO_USER_PROFILE": "Πίσω στο προφίλ χρήστη",
+    "BACK": "Πίσω",
+    "ASSIGN": "Ανάθεση",
+    "DELETE_OWN_PROFILE": "Διαγραφή του προφίλ σας",
+    "NO": "Όχι",
+    "YES": "Ναι",
+    "HELP": "Βοήθεια",
+    "SEND": "Αποστολή",
+    "UNASSIGN": "Αφαίρεση"
   },
   "ACTION": "Action",
-  "FILTER": "Filter",
+  "FILTER": "Φίλτρο",
   "NOTIFICATIONS": {
-    "NOTIFICATIONS": "Notifications",
-    "NO_NOTIFICATIONS_AVAILABLE" : "There are not notifications available",
-    "SET_AS_READ" : "Set as read",
-    "SET_AS_UNREAD" : "Set as unread"
+    "NOTIFICATIONS": "Ειδοποιήσεις",
+    "NO_NOTIFICATIONS_AVAILABLE" : "Δεν υπάρχουν διαθέσιμες ειδοποιήσεις",
+    "SET_AS_READ" : "Ορίστε ως αναγνωσμένο",
+    "SET_AS_UNREAD" : "Ορίστε ως μη αναγνωσμένο"
   },
   "CV": {
-    "ERROR_SAVING_DATA": "Sorry, there was an error saving the data",
+    "ERROR_SAVING_DATA": "Δυστυχώς παρουσιάστηκε σφάλμα κατά την αποθήκευση των δεδομένων",
     "TITLE": {
-      "LABEL": "Title",
-      "PLACEHOLDER": "Title"
+      "LABEL": "Τίτλος",
+      "PLACEHOLDER": "Τίτλος"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Περιγραφή",
+      "PLACEHOLDER": "Περιγραφή"
     },
     "TARGET_SECTOR": {
-      "LABEL": "Tarjet sector",
-      "PLACEHOLDER": "Tarjet sector"
+      "LABEL": "Τομέας ενδιαφέροντος",
+      "PLACEHOLDER": "Τομέας ενδιαφέροντος"
     },
-    "SKILLS": "Skills",
-    "SKILL": "Skill",
-    "SKILL_LABEL": "Label",
-    "SKILL_PROFIENCY_LEVEL": "Proficiency level",
-    "SKILL_COMMENT": "Comment",
-    "WORK_HISTORY": "Work history",
-    "WORK": "Work",
-    "WORK_POSITION": "Position",
-    "WORK_FROM": "From",
-    "WORK_TO": "To",
-    "WORK_EMPLOYER": "Employer",
-    "EDUCATION_HISTORY": "Education history",
-    "EDUCATION": "Education",
-    "EDUCATION_TITLE": "Title",
-    "EDUCATION_FROM": "From",
-    "EDUCATION_TO": "To",
-    "EDUCATION_ORGANISATION": "Organisation",
-    "EDUCATION_DESCRIPTION": "Description"
+    "SKILLS": "Δεξιότητες",
+    "SKILL": "Δεξιότητα",
+    "SKILL_LABEL": "Ετικέτα",
+    "SKILL_PROFIENCY_LEVEL": "Επίπεδο επάρκειας",
+    "SKILL_COMMENT": "Σχόλιο",
+    "WORK_HISTORY": "Ιστορικό εργασίας",
+    "WORK": "Εργασία",
+    "WORK_POSITION": "Θέση",
+    "WORK_FROM": "Από",
+    "WORK_TO": "Προς",
+    "WORK_EMPLOYER": "Εργοδότης",
+    "EDUCATION_HISTORY": "Ιστορικό εκπαίδευσης",
+    "EDUCATION": "Εκπαίδευση",
+    "EDUCATION_TITLE": "Τίτλος",
+    "EDUCATION_FROM": "Από",
+    "EDUCATION_TO": "Προς",
+    "EDUCATION_ORGANISATION": "Οργανισμός",
+    "EDUCATION_DESCRIPTION": "Περιγραφή"
   },
   "MCDSS": {
-    "TITLE": "Multicriteria Decision Support System",
+    "TITLE": "Σύστημα πολυκριτηριακής υποστήριξης αποφάσεων", 
     "TAB": {
-      "MANUAL": "Manual input",
-      "FILE": "File input"
+      "MANUAL": "Μη αυτόματη εισαγωγή",
+      "FILE": "Εισαγωγή αρχείου"
     },
     "COMPARE": {
-      "TITLE": "Compare alternatives",
-      "FINAL_SCORE": "Final score"
+      "TITLE": "Συγκρίνετε εναλλακτικές λύσεις",
+      "FINAL_SCORE": "Τελική βαθμολογία"
     },    
     "RESULTS": {
-      "TITLE": "Results",
-      "ALTERNATIVE": "Alternative",
-      "RANKING": "Ranking",
-      "SCORE": "Score"
+      "TITLE": "Αποτελέσματα",
+      "ALTERNATIVE": "Εναλλακτική",
+      "RANKING": "Σειρά κατάταξης",
+      "SCORE": "Βαθμολογία"
     },
     "BUTTON": {
-      "ADD_CRITERIA": "Add criteria",
-      "ADD_ALTERNATIVE": "Add alternative",
-      "SEND": "Send data",
-      "SEND_FILES": "Send files data",
-      "COMPARE": "Compare"
+      "ADD_CRITERIA": "Προσθήκη κριτηρίων",
+      "ADD_ALTERNATIVE": "Προσθήκη εναλλακτικής",
+      "SEND": "Αποστολή δεδομένων",
+      "SEND_FILES": "Αποστολή δεδομένων αρχείων",
+      "COMPARE": "Σύγκριση"
     },
     "METHOD": {
-      "TITLE": "Method",
-      "PLACEHOLDER": "Select a method"
+      "TITLE": "Μέθοδος",
+      "PLACEHOLDER": "Επιλέξτε μια μέθοδο"
     },
     "AGREEMENT_THRESHOLD": {
-      "LABEL": "Weight",
-      "PLACEHOLDER": "a number"
+      "LABEL": "Σημαντικότητα",
+      "PLACEHOLDER": "ένας αριθμός"
      },
      "CRITERIAL": {
       "NAME": {
-        "LABEL": "Criterial name",
-        "PLACEHOLDER": "Criterial name"
+        "LABEL": "Όνομα κριτηρίου",
+        "PLACEHOLDER": "Όνομα κριτηρίου"
       },
       "WEIGHT":  {
-        "LABEL": "Weight",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Σημαντικότητα",
+        "PLACEHOLDER": "ένας αριθμός"
        },
       "TYPE":  {
-        "LABEL": "Type",
-        "PLACEHOLDER": "0 or 1"
+        "LABEL": "Τύπος",
+        "PLACEHOLDER": "0 ή 1"
        },
        "VETO":  {
-        "LABEL": "Veto",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Βέτο",
+        "PLACEHOLDER": "ένας αριθμός"
        },
        "PREFERENCE":  {
-        "LABEL": "Preference",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Προτίμηση",
+        "PLACEHOLDER": "ένας αριθμός"
        },
        "INDIFFERENCE":  {
-        "LABEL": "Indifferance",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Αδιαφορία",
+        "PLACEHOLDER": "ένας αριθμός"
        },
        "CRITERIA":  {
-        "LABEL": "Criteria",
-        "PLACEHOLDER": "the criteria ('linear with indifference threshold', 'usual', 'level')"
+        "LABEL": "Κριτήρια",
+        "PLACEHOLDER": "Τα κριτήρια ('γραμμικό με κατώφλι αδιαφορίας', 'συνηθισμένο', 'επίπεδο')"
        }
      },
      "ALTERNATIVE": {
       "NAME": {
-        "LABEL": "Alternative name",
-        "PLACEHOLDER": "Alternative name"
+        "LABEL": "Εναλλακτικό όνομα",
+        "PLACEHOLDER": "Εναλλακτικό όνομα"
       },
       "VALUE": {
-        "LABEL": "Value",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Τιμή",
+        "PLACEHOLDER": "ένας αριθμός"
       }
     },
     "CHOOSE_FILE": {
       "DECISION_MATRIX": {
-        "LABEL": "Choose file",
-        "PLACEHOLDER": "Choose a csv file for the Decision Matrix data",
-        "ERROR_MESSAGE" : "The file {{file_name}} is not a valid file to load the decision matrix data. Only application/vnd.ms-excel files are valid"
+        "LABEL": "Επιλογή φακέλου",
+        "PLACEHOLDER": "Επιλέξτε ένα αρχείο csv για τα δεδομένα του Πίνακα Αποφάσεων",
+        "ERROR_MESSAGE" : "Tο αρχείο {{file_name}} δεν είναι έγκυρο αρχείο για την φόρτωση των δεδομένων του πίνακα αποφάσεων. Μόνο αρχεία application/vnd.ms-excel είναι έγκυρα"
       },
       "CRITERIA_DETAILS_MATRIX": {
-        "LABEL": "Choose file",
-        "PLACEHOLDER": "Choose a csv file for the Criteria Details data",
-        "ERROR_MESSAGE" : "The file {{file_name}} is not a valid file to load criteria detaill data. Only application/vnd.ms-excel files are valid"
+        "LABEL": "Επιλογή φακέλου",
+        "PLACEHOLDER": "Επίλεξε αρχείο csv για τα δεδομένα του εκάστοτε κριτηρίου",
+        "ERROR_MESSAGE" : "Το αρχείο {{file_name}} δεν είναι έγκυρο για τη φόρτωση δεδομένων για τα κριτήρια. Μόνο application/vnd.ms-excel αρχέια είναι έγκυρα"
       }
     }
   },
   "NOTIFICATION_PREFERENCES": {
-    "TITLE": "Notifications preferences",
-    "ERROR_MESSAGE": "Error saving your preferences",
-    "CONFIRM_MESSAGE": "Your preferences has been saved",
+    "TITLE": "Προτιμήσεις ειδοποιήσεων",
+    "ERROR_MESSAGE": "Σφάλμα κατά την αποθήκευση των προτιμήσεων σας",
+    "CONFIRM_MESSAGE": "Οι προτιμήσεις σας έχουν αποθηκευτεί",
     "LOCATIONS": {
-      "LABEL": "Locations",
-      "PLACEHOLDER": "Locations"
+      "LABEL": "Τοποθεσίες",
+      "PLACEHOLDER": "Τοποθεσίες"
     },
     "SPECIALIZATIONS": {
-      "LABEL": "Specializations",
-      "PLACEHOLDER": "Specializations"
+      "LABEL": "Ειδικεύσεις",
+      "PLACEHOLDER": "Ειδικεύσεις"
     }
   },
   "FILE": {
-    "TYPE": "Type",
-    "SIZE": "Size"
+    "TYPE": "Τύπος",
+    "SIZE": "Μέγεθος"
   },
   "UPLOAD_CV_KG": {
-    "BUTTON": "Upload CV",
-    "TITLE": "Upload CV",
-    "DESCRIPTION": "Here you can upload your CV in txt format",
-    "CV_PROCESSED_MESSAGE": "The CV has been procesed"
+    "BUTTON": "Ανέβασε βιογραφικό",
+    "TITLE": "Ανέβασε βιογραφικό",
+    "DESCRIPTION": "Εδώ μπορείτε να ανεβάσετε το βιογραφικό σας σε μορφή κειμένου",
+    "CV_PROCESSED_MESSAGE": "Το βιογραφικό έχει υποβληθεί σε επεξεργασία"
   },
   "UPLOAD_FILES": {
     "AVATAR": {
-      "TITLE": "Upload an avatar"
+      "TITLE": "Ανέβασε εικόνα προφίλ"
     },
     "FILES": {
-      "TITLE": "Upload files"
+      "TITLE": "Ανέβασμα αρχείων"
     },
-    "ALLOWED_TYPES": "Allowed types",
-    "DRAG_AND_DROP_HERE": "Drag and drop file here",
-    "OR": "or",
-    "BROWSE_FOR_FILE": "Browse for file",
-    "ERROR_LOADING_FILE": "Error loading file",
-    "NOT_VALID_FILE": "This file is not valid to be uploaded",
+    "ALLOWED_TYPES": "Επιτρεπόμενοι τύποι",
+    "DRAG_AND_DROP_HERE": "Μεταφέρετε και αποθέστε το αρχείο εδώ",
+    "OR": "ή",
+    "BROWSE_FOR_FILE": "Αναζήτηση αρχείου",
+    "ERROR_LOADING_FILE": "Σφάλμα κατά την φόρτωση του αρχείου",
+    "NOT_VALID_FILE": "Αυτό το αρχείο δεν είναι έγκυρο για μεταφόρτωση",
     "BUTTON": {
-      "UPLOAD_PENDING_FILES": "Upload pending files"
+      "UPLOAD_PENDING_FILES": "Μεταφόρτωση εκκρεμών αρχείων"
     }
   },
   "CV_GAP_ANALYSIS": {
-    "TITLE": "Curriculum Gap Analysis",
-    "FOOTER_PIE_CHART": "Accumulative Job Demand",
-    "FOOTER_RADAR_CHART": "Curriculum Skills Gap Analysis",
-    "FOOTER_LINE_CHART": "Skill Demand Timeseries",
-    "CURRENTLY_MISSING_SKILLS": "Currently Missing Skills",
-    "RELATION_TO_COURSES": "Relation to Courses",
+    "TITLE": "Εντοπισμός ελλείψεων προγράμματος σπουδών",
+    "FOOTER_PIE_CHART": "Σωρευτική ζήτηση εργασίας",
+    "FOOTER_RADAR_CHART": "Εντοπισμός ελλείψεψν σε δεξιότητες που διδάσκονται στο πρόγραμμα σπουδών",
+    "FOOTER_LINE_CHART": "Line chart ζήτησης δεξιοτήτων",
+    "CURRENTLY_MISSING_SKILLS": "Δεξιότητες που λείπουν από το πρόγραμμα σπουδών",
+    "RELATION_TO_COURSES": "Συσχέτιση με μαθήματα",
     "BUTTON": {
-      "SHOW_RESULTS": "Show Results"
+      "SHOW_RESULTS": "Εμφάνιση αποτελεσμάτων"
     }
   },
   "EDUCATION_PLAN": {
-    "TITLE": "Education Plan",
-    "COURSES": "Courses",
-    "SKILLS": "Skills",
-    "RATING": "Rating"
+    "TITLE": "Εκπαιδευτικό πλάνο",
+    "COURSES": "Μαθήματα",
+    "SKILLS": "Δεξιότητες",
+    "RATING": "Αξιολόγηση"
   },
   "PAGINATOR": {
     "ITEMS_PER_PAGE": "Αντικείμενα ανά σελίδα",
-    "OF": "of",
+    "OF": "από",
     "NEXT_PAGE": "Επόμενη σελίδα",
     "PREVIOUS_PAGE": "Προηγούμενη σελίδα",
     "FIRST_PAGE": "Πρώτη σελίδα",
@@ -846,150 +846,150 @@
   },
   "HELP": {
     "VISUALISATION": {
-      "HEADER": "Visualisation help",
+      "HEADER": "Βοήθεια Οπτικοποίησης",
       "BODY": {
-        "USER_SKILLS_JOB_SKILLS": "The derived radar chart demonstrates user skills coverage to job application required skillset.",
-        "USER_GRADES": "The derived Bar chart demonstrates User grades in courses which have completed.",
-        "AVERAGE_GRADE_IN_COURSES": "The chart demonstrates average grades in provided courses.",
-        "ENROLLED_COURSES_SKILLS_COVERED_TO_USERS": "This chart demonstrates how much the skills that belong to the user's enrolled courses cover the skills in jobs that this user has applied.",
-        "CAREER_PATH_TRAJECTORY": "This charts shows the user career path trajectory.",
-        "USER_SKILLSET_COVERAGE_TO_APPLIED_JOB_SKILLS": "This chart demonstrates the coverage percentage resulting from the common skills between user’s skills and job required skills.",
-        "MARKET_DEMAND": "This chart shows the demand according to job postings for each specialization.",
-        "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": "This chart demonstrates the demand in job postings for a provided skill in a provided visualization.",
-        "CURRICULUM_UP_TO_DATE": "This visualisation shows how up to date the current curriculum of the school is.",
-        "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "This chart is used to demonstrate the demand in job postings for provided job specializations.",
-        "MOST_POPULAR_SKILLS": "This chart shows the most popular skills in the job market at the moment according to the available job postings. (It shows the number of job postings related to specific skills).",
-        "MOST_POPULAR_COURSES": "This chart shows the most popular courses related to popular skills required in the job market at the moment. (also counted in job postings)."
+        "USER_SKILLS_JOB_SKILLS": "Το προκύπτον radar chart επιδεικνύει την κάλυψη των δεξιοτήτων του χρήστη όσον αφορά το απαιτόυμενο σύνολο δεξιοτήτων για αίτηση εργασίας.",
+        "USER_GRADES": "Το προκύπτον ραβδόγραμμα επιδεικνύει τους βαθμούς Χρηστών σε μαθήματα που έχουν ολοκληρώσει.",
+        "AVERAGE_GRADE_IN_COURSES": "Το γράφημα επιδεικνύει τους μέσους βαθμούς στα παρεχόμενα μαθήματα.",
+        "ENROLLED_COURSES_SKILLS_COVERED_TO_USERS": "Αυτό το γράφημα επιδεικνύει πόσο οι δεξιότητες που ανήκουν στα εγγεγραμμένα μαθήματα του χρήστη καλύπτουν τις δεξιότητες σε θέσεις εργασίας στις οποίες ο χρήστης έχει κάνει αίτηση.",
+        "CAREER_PATH_TRAJECTORY": "Αυτό το γράφημα παρουσιάζει την πιθανή πορεία της σταδιοδρομίας του χρήστη.",
+        "USER_SKILLSET_COVERAGE_TO_APPLIED_JOB_SKILLS": "Αυτό το γράφημα επιδεικνύει το ποσοστό κάλυψης που προκύπτει από τις κοινές δεξιότητες μεταξύ δεξιοτήτων χρήστη και απαιτούμενων δεξιοτήτων για εργασία.",
+        "MARKET_DEMAND": "Αυτό το γράφημα παρουσιάζει τη ζήτηση σύμφωνα με τις θέσεις εργασίας για κάθε εξειδίκευση.",
+        "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": "Αυτό το γράφημα επιδεικνύει τη ζήτηση σε θέσεις εργασίας για μια δοσμένη δεξιότητα σε μια δοσμένη εξειδίκευση.",
+        "CURRICULUM_UP_TO_DATE": "Αυτή η απεικόνιση παρουσιάζει πόσο ενημερωμένο είναι το τρέχον πρόγραμμα σπουδών της σχολής.",
+        "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "Αυτό το γράφημα χρησιμοποιείται για να δείξει τη ζήτηση σε θέσεις εργασίας για δοσμένες εξειδικεύσεις εργασίας.",
+        "MOST_POPULAR_SKILLS": "Αυτό το γράφημα παρουσιάζει τις πιο δημοφιλείς δεξιότητες στην αγορά εργασίας αυτή τη στιγμή σύμφωνα με τις διαθέσιμες θέσεις εργασίας (δείχνει τον αριθμό θέσεων εργασίας που σχετίζονται με συγκεκριμένες δεξιότητες).",
+        "MOST_POPULAR_COURSES": "Αυτό το διάγραμμα παρουσιάζει τα πιο δημοφιλή μαθήματα που σχετίζονται με δημοφιλείς δεξιότητες που απαιτούνται στην αγορά εργασίας αυτή τη στιγμή.(με βάση τον αριθμό θέσεων εργασίας)."
       }
     }
   },
   "QUESTIONNAIRE": {
-    "TITLE": "Questionnaire",
-    "HELP_MESSAGE": "The answer to this questionnaire is anonymous",
-    "QUESTION": "How satisfied have you been today/ recently with the performance of QualiChain on a scale of 1 to 5?",
-    "THAKS_MESSAGE": "Thanks for your feedback!!!",
+    "TITLE": "Ερωτηματολόγιο",
+    "HELP_MESSAGE": "Η απάντηση σε αυτό το ερωτηματολόγιο είναι ανώνυμη",
+    "QUESTION": "Πόσο ικανοποιημένοι ήσασταν σήμερα/ πρόσφατα με την απόδοση του QualiChain σε κλίμακα από 1 έως 5;",
+    "THAKS_MESSAGE": "Ευχαριστούμε για την ανταπόκριση σας!!!",
     "ANSWER": {
-      "VERY_DISSATISFIED": "Very dissatisfied",
-      "DISSATISFIED": "Dissatisfied",
-      "NEUTRAL": "Neutral",
-      "SATISFIED": "Satisfied",
-      "VERY_SATISFIED": "Very satisfied"
+      "VERY_DISSATISFIED": "Πολύ δυσαρεστημένος/η",
+      "DISSATISFIED": "Δυσαρεστημένος/η",
+      "NEUTRAL": "Ουδέτερος/η",
+      "SATISFIED": "Ικανοποιημένος/η",
+      "VERY_SATISFIED": "Πολύ ικανοποιημένος/η"
     },
-    "TELL_US": "Give us your free text feedback",
-    "ERROR_SAVING_DATA": "Sorry, there was an error saving the data"
+    "TELL_US": "Δώστε μας σε ελεύθερο κείμενο τα σχόλια σας",
+    "ERROR_SAVING_DATA": "Δυστυχώς παρουσιάστηκε σφάλμα κατά την αποθήκευση των δεδομένων"
   },
   "THESIS": {
-    "HEADER": "Thesis",
-    "NO_DATA": "There are no thesis",
-    "NO_LINKED_THESIS": "This user does not have any thesis yet.",
-    "DELETE_MESSAGE": "Are you sure you want to delete this thesis?",
-    "CONFIRM_ACTION": "Confirm Action",
+    "HEADER": "Διπλωματική εργασία",
+    "NO_DATA": "Δεν υπάρχει διπλωματική εργασία",
+    "NO_LINKED_THESIS": "Αυτός ο χρήστης δεν διαθέτει ακόμη διπλωματική εργασία",
+    "DELETE_MESSAGE": "Είστε βέβαιοι πως θέλετε να διαγράψετε αυτή την διπλωματική εργασία;",
+    "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας",
     "TITLE": {
-      "LABEL": "Title",
-      "PLACEHOLDER": "Title"
+      "LABEL": "Τίτλος",
+      "PLACEHOLDER": "Τίτλος"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Περιγραφή",
+      "PLACEHOLDER": "Περιγραφή"
     },
     "STATUS": {
-      "LABEL": "Status",
-      "PLACEHOLDER": "Status",
+      "LABEL": "Κατάσταση",
+      "PLACEHOLDER": "Κατάσταση",
       "OPTIONS": {
-        "PUBLISHED": "Published",
-        "ASSIGNED": "Assigned",
-        "COMPLETED": "Completed"
+        "PUBLISHED": "Δημοσιευμένη",
+        "ASSIGNED": "Ανατεθειμένη",
+        "COMPLETED": "Ολοκληρωμένη"
       }
     },
     "PROFESSOR": {
-      "LABEL": "Professor",
-      "PLACEHOLDER": "Professor"
+      "LABEL": "Καθηγητής",
+      "PLACEHOLDER": "Καθηγητής"
     },
     "STUDENT": {
-      "LABEL": "Student",
-      "PLACEHOLDER": "Student"
+      "LABEL": "Φοιτητής",
+      "PLACEHOLDER": "Φοιτητής"
     },
     "BUTTON": {
-      "LIST": "Thesis list"
+      "LIST": "Λίστα διπλωματικών εργασιών"
     }
   },
   "COMPETENCY_LEVEL": {
-    "HEADER": "Competency Level",
-    "COMPETENCY": "Competency",
-    "LEVEL": "Level",
-    "PROGRESS": "Progress",
-    "PROGRESS_MIN_VALUE_ERROR": "The value is lower than the minimum (0)",
-    "PROGRESS_MAX_VALUE_ERROR": "The value is greater than the maximum (100)",
-    "NEXT_EVALUATION": "Next evaluation",
-    "ACQUIRED_DATE": "Acquired date",
-    "LABEL": "Label",
-    "COMMENT": "Comment",
-    "DELETE_MESSAGE": "Are you sure you want to delete this competence?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "NO_COMPETENCES_YET": "This user does not have any competence yet.",
+    "HEADER": "Επίπεδο επάρκειας",
+    "COMPETENCY": "Επάρκεια",
+    "LEVEL": "Επίπεδο",
+    "PROGRESS": "Πρόοδος",
+    "PROGRESS_MIN_VALUE_ERROR": "Η τιμή είναι μικρότερη από το ελάχιστο (0)",
+    "PROGRESS_MAX_VALUE_ERROR": "Η τιμή είναι μεγαλύτερη από το μέγιστο (100)",
+    "NEXT_EVALUATION": "Επόμενη αξιολόγηση",
+    "ACQUIRED_DATE": "Ημερομηνία απόκτησης",
+    "LABEL": "Ετικέτα",
+    "COMMENT": "Σχόλιο",
+    "DELETE_MESSAGE": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την επάρκεια;",
+    "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας",
+    "NO_COMPETENCES_YET": "Αυτός ο χρήστης δεν διαθέτει ακόμη κάποια επάρκεια.",
     "LEVELS": {
-      "BASIC": "Basic",
-      "MEDIUM": "Medium",
-      "ADVANCED": "Advanced",
-      "EXPERT": "Expert"
+      "BASIC": "Βασικό",
+      "MEDIUM": "Μεσαίο",
+      "ADVANCED": "Προχωρημένο",
+      "EXPERT": "Άριστο"
     }
   },
   "BADGES": {
     "BADGE": {
-      "BADGE_MAIN_DATA": "Badge main data",
+      "BADGE_MAIN_DATA": "Κύρια δεδομένα smart badge",
       "TITLE": {
-        "LABEL": "Title",
-        "PLACEHOLDER": "Title"
+        "LABEL": "Τίτλος",
+        "PLACEHOLDER": "Τίτλος"
       },
       "DESCRIPTION": {
-        "LABEL": "Description",
-        "PLACEHOLDER": "Description"
+        "LABEL": "Περιγραφή",
+        "PLACEHOLDER": "Περιγραφή"
       },
       "ISSUER": {
-        "ISSUER_MAIN_DATA": "Issuer main data",
+        "ISSUER_MAIN_DATA": "Κύρια δεδομένα εκδότη",
         "ISSUER_NAME": {
-          "LABEL": "Issuer name",
-          "PLACEHOLDER": "Issuer name"
+          "LABEL": "Όνομα εκδότη",
+          "PLACEHOLDER": "Όνομα εκδότη"
         },
         "ISSUER_URL": {
-          "LABEL": "Issuer URL",
-          "PLACEHOLDER": "Issuer URL"
+          "LABEL": "URL Εκδότη",
+          "PLACEHOLDER": "URL Εκδότη"
         },
         "ISSUER_EMAIL": {
-          "LABEL": "Issuer Email",
-          "PLACEHOLDER": "Issuer Email"
+          "LABEL": "Ηλεκτρονική διεύθυνση εκδότη",
+          "PLACEHOLDER": "Ηλεκτρονική διεύθυνση εκδότη"
         },
         "ISSUER_TELEPHONE": {
-          "LABEL": "Issuer telephone",
-          "PLACEHOLDER": "Issuer telephone"
+          "LABEL": "Τηλέφωνο εκδότη",
+          "PLACEHOLDER": "Τηλέφωνο εκδότη"
         },
         "ISSUER_DESCRIPTION": {
-          "LABEL": "Issuer description",
-          "PLACEHOLDER": "Issuer description"
+          "LABEL": "Περιγραφή εκδότη",
+          "PLACEHOLDER": "Περιγραφή εκδότη"
         },
         "ISSUER_IMAGE_URL": {
-          "LABEL": "Issuer image URL",
-          "PLACEHOLDER": "Issuer image URL"
+          "LABEL": "URL εικόνας εκδότη",
+          "PLACEHOLDER": " URL εικόνας εκδότη"
         }
       },
       "SKILLS": {
-        "LABEL": "Skills",
-        "PLACEHOLDER": "Skills"
+        "LABEL": "Δεξιότητες",
+        "PLACEHOLDER": "Δεξιότητες"
       },
       "VERSION": {
-        "LABEL": "Version",
-        "PLACEHOLDER": "Version"
+        "LABEL": "Έκδοση",
+        "PLACEHOLDER": "Έκδοση"
       },
       "IMAGEURL": {
-        "LABEL": "Image",
-        "PLACEHOLDER": "Write the image URL. Full path, example: 'https://qualichain-project.eu/quali-data/uploads/2019/04/training.png'"
+        "LABEL": "Εικόνα",
+        "PLACEHOLDER": "Αναφέρετε τη διεύθυνση URL της εικόνας. Πλήρης διαδρομή, παράδειγμα: 'https://qualichain-project.eu/quali-data/uploads/2019/04/training.png'" 
       }
     }
   },
   "TERMS_OF_USE": {
-    "FOOTER_LINK": "Terms of use",
-    "TITLE": "Terms of use",
-    "BODY": "<div>Please read these Terms of Use (\"Terms\", \"Terms of Use\") carefully before using the http://qualichain.epu.ntua.gr/ operated by the QualiChain consortium.</div><div>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</div><div><b>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</b></div><div>Minors or people below 18 years old are not allowed to use this website.</div><div><b><u>Intellectual Property Rights</u></b><br>Other than the content you own, under these Terms, Company Name and/or its licensors own all the intellectual property rights and materials contained in this Website.</div><div><b><u>Restrictions</u></b><br>You are specifically restricted from all of the following:</div><div><ul><li>selling, sublicensing and/or otherwise commercialising any Website material;</li><li>using this Website in any way that is or may be damaging to this Website;</li><li>using this Website in any way that impacts user access to this Website;</li><li>using this Website contrary to applicable laws and regulations, or in any way may cause harm to the Website, or to any person or business entity;</li><li>engaging in any data mining, data harvesting, data extracting or any other similar activity in relation to this Website;</li></ul></div><div>Certain areas of this Website are restricted from being accessed by you and QualiChain may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.</div><div><b><u>Purchases</u></b></div><div>If you wish to subscribe or purchase any service made available through the Service (\"Purchase\"), you may be asked to supply certain information relevant to your Purchase including, without limitation, your: </div><div><ul><li>Billing information</li><li>Name</li><li>Country and postal code</li><li>E-mail address</li></ul></div><div><b><u>Termination</u></b></div><div>We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</div><div>All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.</div><div><b><u>Content</u></b></div><div>Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material (\"Content\"). “Your Content” shall mean any text, images or other material you choose to display on this Website. Your Content must be your own and must not be invading any third-party's rights. Company Name reserves the right to remove any of Your Content from this Website at any time without notice.</div><div><b><u>Links to Other Web Sites</u></b></div><div>Our Service may contain links to third-party web sites or services that are not owned, controlled or part of the QualiChain consortium.</div><div>QualiChain has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that QualiChain shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</div><div><b><u>Changes</u></b></div><div>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is materialised, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</div><div><b><u>Indemnification</u></b></div><div>You hereby indemnify to the fullest extent QualiChain from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.</div><div><b><u>Contact Us</u></b></div><div>If you have any questions about these Terms, please <a href=\"https://qualichain-project.eu/contact/\" target=\"_blanck\">contact us</a>.</div>"
+    "FOOTER_LINK": "Όροι χρήσης",
+    "TITLE": "Όροι χρήσης",
+    "BODY": "<div>Διαβάστε αυτούς τους Όρους Χρήσης (\"Όροι\", \"Όροι Χρήσης\") προσεκτικά πρωτού χρησιμοποιήσετε το http://qualichain.epu.ntua.gr/ που λειτουργεί από την κοινοπραξία Qualichain.</div><div>Η πρόσβαση σας και η χρήση της υπηρεσίας εξαρτάται από την αποδοχή και συμμόρφωση με αυτούς τους όρους. Αυτοί οι όροι ισχύουν για όλους τους επισκέπτες, τους χρήστες και άλλους που έχουν πρόσβαση ή χρησιμοποιούν την υπηρεσία.</div><div><b>Με την πρόσβαση ή τη χρήση της υπηρεσίας συμφωνείτε ότι δεσμέυεστε από αυτούς τους όρους. Εάν διαφωνείτε με οποιοδήποτε μέρος των όρων, τότε ενδέχεται να μην έχετε πρόσβαση στην υπηρεσία.</b></div><div>Οι ανήλικοι ή τα άτομα κάτω των 18 ετών δεν επιτρέπεται να χρησιμοποιούν αυτόν τον ιστότοπο.</div><div><b><u>Δικαιώματα Πνευματικής Ιδιοκτησίας</u></b><br>Εκτός από το περιεχόμενο που σας ανήκει, σύμφωνα με αυτούς τους όρους, το όνομα της εταιρίας ή/ και οι δικαιοπάροχοι της κατέχουν όλα τα δικαιώματα πνευματικής ιδιοκτησίας και το υλικό που περιέχεται σε αυτόν τον ιστότοπο.</div><div><b><u>Περιορισμοί</u></b><br>Περιορίζεστε συγκεκριμένα από τα ακόλουθα:</div><div><ul><li>πώληση, αδειοδότηση ή/ και εμπορευματοποίηση άλλου υλικού Ιστοσελίδας;</li><li>χρήση αυτού του ιστότοπου με οποιονδήποτε τρόπο που είναι ή μπορεί να είναι επιβλαβής για αυτόν τον ιστότοπο;</li><li>χρήση αυτού του ιστότοπου με οποιονδήποτε τρόπο που επηρεάζει την πρόσβαση των χρηστών σε αυτόν τον ιστότοπο;</li><li>χρήση αυτού του ιστότοπου αντίθετα με τους ισχύοντες νόμους και κανονισμούς ή με οποιονδήποτε τρόπο μπορεί να προκαλέσει βλάβη στον ιστότοπο ή σε οποιοδήποτε πρόσωπο ή επιχειρηματική οντότητα;</li><li>συμμετοχή σε οποιαδήποτε εξόρυξη δεδομένων, συλλογή δεδομένων, εξαγωγή δεδομένων ή οποιαδήποτε άλλη παρόμοια δραστηριότητα σε σχέση με αυτόν τον ιστότοπο;</li></ul></div><div>Σε ορισμένες περιοχές αυτού του ιστότοπου δεν επιτρέπεται η πρόσβαση από εσάς και το QualiChain ενδέχεται να περιορίσει περαιτέρω την πρόσβαση από εσάς σε οποιαδήποτε περιοχή αυτού του ιστότοπου, ανά πάσα στιγμή, κατά απόλυτη διακριτική ευχέρεια. Οποιοδήποτε αναγνωριστικό χρήστη και κωδικό πρόσβασης μπορεί να έχετε για αυτόν τον ιστότοπο είναι εμπιστευτικά και πρέπει επίσης να διατηρήσετε το απόρρητο.</div><div><b><u>Αγορές</u></b></div><div>Εάν επιθυμείτε να εγγραφείτε ή να αγοράσετε οποιαδήποτε υπηρεσία που διατίθεται μέσω της Υπηρεσίας (\"Αγορές\"), ενδέχεται να σας ζητηθεί να παρέχετε ορισμένες πληροφορίες σχετικές με την Αγορά σας, συμπεριλαμβανομένων, χωρίς περιορισμό, των εξής: </div><div><ul><li>Στοιχεία χρέωσης</li><li>Όνομα</li><li>Χώρα και ταχυδρομικό κώδικα</li><li>Ηλεκτρονική διεύθυνση</li></ul></div><div><b><u>Τερματισμός</u></b></div><div>Μπορούμε να τερματίσουμε ή να αναστείλουμε την πρόσβαση στην Υπηρεσία μας αμέσως, χωρίς προηγούμενη ειδοποίηση ή ευθύνη, για οποιονδήποτε λόγο, χωρίς περιορισμό εάν παραβιάσετε τους Όρους.</div><div>Όλες οι διατάξεις των όρων που από τη φύση τους θα πρέπει να επιβιώσουν από τον τερματισμό πρέπει να επιβιώσουν, συμπεριλαμβανομένων, χωρίς περιορισμό, των διατάξεων ιδιοκτησίας, των αποποιήσεων εγγύησης, της αποζημίωσης και των περιορισμών ευθύνης.</div><div><b><u>Περιεχόμενο</u></b></div><div>Η υπηρεσία μας σάς επιτρέπει να δημοσιεύετε, να συνδέετε, να αποθηκεύετε, να μοιράζεστε και να διαθέτετε με άλλο τρόπο ορισμένες πληροφορίες, κείμενο, γραφικά, βίντεο ή άλλο υλικό (\"Περιεχόμενο \"). (\"Το περιεχόμενό σας \") σημαίνει οποιοδήποτε κείμενο, εικόνες ή άλλο υλικό που επιλέγετε να εμφανίζεται σε αυτόν τον ιστότοπο. Το περιεχόμενό σας πρέπει να είναι δικό σας και δεν πρέπει να προσβάλλει δικαιώματα τρίτων. Το όνομα της εταιρείας διατηρεί το δικαίωμα να αφαιρέσει οποιοδήποτε από τα περιεχόμενά σας από αυτόν τον ιστότοπο ανά πάσα στιγμή χωρίς προειδοποίηση.</div><div><b><u>Σύνδεσμοι προς άλλους ιστότοπους</u></b></div><div>Η υπηρεσία μας ενδέχεται να περιέχει συνδέσμους προς ιστότοπους ή υπηρεσίες τρίτων που δεν ανήκουν, ελέγχονται ή αποτελούν μέρος της κοινοπραξίας QualiChain.</div><div>Το QualiChain δεν έχει κανέναν έλεγχο και δεν αναλαμβάνει καμία ευθύνη για το περιεχόμενο, τις πολιτικές απορρήτου ή τις πρακτικές οποιωνδήποτε ιστότοπων ή υπηρεσιών τρίτων. Επιπλέον, αναγνωρίζετε και συμφωνείτε ότι το QualiChain δεν θα είναι υπεύθυνο ή υπόλογο, άμεσα ή έμμεσα, για οποιαδήποτε ζημία ή απώλεια που προκλήθηκε ή φέρεται να προκαλείται από ή σε σχέση με τη χρήση ή την εξάρτηση από οποιοδήποτε τέτοιο περιεχόμενο, αγαθά ή υπηρεσίες που διατίθενται μέσω ή σε οποιεσδήποτε τέτοιες ιστοσελίδες ή υπηρεσίες.</div><div><b><u>Αλλαγές</u></b></div><div>Διατηρούμε το δικαίωμα, κατά τη διακριτική μας ευχέρεια, να τροποποιήσουμε ή να αντικαταστήσουμε αυτούς τους όρους ανά πάσα στιγμή. Εάν πραγματοποιηθεί μια αναθεώρηση, θα προσπαθήσουμε να παρέχουμε ειδοποίηση τουλάχιστον 30 ημερών πριν από την έναρξη ισχύος νέων όρων. Αυτό που συνιστά σημαντική αλλαγή θα καθοριστεί κατά την απόλυτη κρίση μας.</div><div><b><u>Αποζημίωση</u></b></div><div>Αποζημιώνετε στο μέγιστο βαθμό το QualiChain από και έναντι οποιωνδήποτε ή / και όλων των υποχρεώσεων, κόστους, απαιτήσεων, αιτιών δράσης, ζημιών και εξόδων που προκύπτουν με οποιονδήποτε τρόπο που σχετίζεται με την παραβίαση οποιασδήποτε από τις διατάξεις αυτών των όρων.</div><div><b><u>Επικοινωνήστε μαζί μας</u></b></div><div>Εάν έχετε απορίες σχετικά με αυτούς τους όρους, παρακαλώ <a href=\"https://qualichain-project.eu/contact/\" target=\"_blanck\">επικοινωνήστε μαζί μας</a>.</div>"
   },
   "THESIS_REQUEST": {
     "MY_THESIS": "My thesis",
