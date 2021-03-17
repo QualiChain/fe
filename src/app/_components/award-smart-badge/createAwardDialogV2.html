@@ -46,9 +46,9 @@
         <mat-form-field class="create-award-full-width">
             <mat-label>{{ 'BADGES.BADGE.IMAGEURL.LABEL' | translate }}</mat-label>
             <input matInput required 
-            type="url" [pattern]="myreg"
+            type="url"
             [(ngModel)]="badgeimageurl" name="badgeimageurl" value="badgeimageurl" placeholder="{{ 'BADGES.BADGE.IMAGEURL.PLACEHOLDER' | translate }}">
-            
+<!-- [pattern]="myreg2" -->            
         </mat-form-field>        
         <img *ngIf="badgeimageurl" [src]="badgeimageurl">
         
@@ -64,9 +64,9 @@
         <mat-form-field class="create-award-full-width">
             <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.LABEL' | translate }}</mat-label>
             <input matInput 
-            type="url" [pattern]="myreg"
+            type="url" 
             [(ngModel)]="badgeissuerurl" name="badgeissuerurl" value="badgeissuerurl" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.PLACEHOLDER' | translate }}">
-
+<!-- [pattern]="myreg" -->
         </mat-form-field>
         <!-- badge issuer issueremail -->
         <mat-form-field class="create-award-full-width">
@@ -89,9 +89,9 @@
         <mat-form-field class="create-award-full-width">
             <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_IMAGE_URL.LABEL' | translate }}</mat-label>
             <input matInput 
-            type="url" [pattern]="myreg"
+            type="url"
             [(ngModel)]="badgeissuerimageurl" name="badgeissuerimageurl" value="badgeissuerimageurl" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_IMAGE_URL.PLACEHOLDER' | translate }}">
-
+<!-- [pattern]="myreg2" --> 
         </mat-form-field>
         <img *ngIf="badgeissuerimageurl" [src]="badgeissuerimageurl">
 
