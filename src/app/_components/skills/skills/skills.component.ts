@@ -27,7 +27,8 @@ let ELEMENT_DATA: any[] = [];
 })
 export class SkillsComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'type', 'hard_skill', 'action'];
+  //displayedColumns: string[] = ['name', 'type', 'hard_skill', 'action'];
+  displayedColumns: string[] = ['name', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
