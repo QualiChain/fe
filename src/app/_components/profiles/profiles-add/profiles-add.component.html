@@ -20,7 +20,7 @@
         </div>
               
         <!-- role -->
-        <div class="form-group field" >
+        <div *ngIf="(mode=='Edit')" class="form-group field" >
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.ROLE.SELECT_ONE' | translate }}</mat-label>
             <mat-select [(ngModel)]="role" name="role" required ngDefaultControl>

@@ -362,8 +362,7 @@ export class ProfilesAddComponent implements OnInit {
     //let birth_date_transform =this.datepipe.transform(this.birthDate, 'dd-MM-yyyy');
 
     const obj = {
-      "userPath": "/home/"+this.userName,
-      "role": this.role,
+      "userPath": "/home/"+this.userName,      
       "pilotId": this.pilotId,      
       "fullName": this.fullName,
       "name": this.name,
@@ -380,6 +379,7 @@ export class ProfilesAddComponent implements OnInit {
     
     if (this.mode=='Create') {
 
+      obj['role'] = this.role;
       obj['password'] = this.password;
       obj['email'] = this.email;
       obj['userName'] = this.userName,
