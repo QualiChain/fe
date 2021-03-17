@@ -17,6 +17,10 @@ import {map, startWith} from 'rxjs/operators';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 import { AuthService } from '../../../_services/auth.service';
 import User from '../../../_models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { createAwardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
 
 import { BadgesService } from '../../../_services/badges.service';
 import { exit } from 'process';
@@ -89,6 +93,7 @@ export class CoursesEditComponent implements OnInit {
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
+    public createAwardDialog: MatDialog,
     private bs: BadgesService,
     public authservice: AuthService,
     private qcStorageService: QCStorageService,
@@ -191,6 +196,20 @@ selected(event: MatAutocompleteSelectedEvent): void {
     });
   }
 */
+
+openCreateAwardDialog() {
+
+  const dialogRef = this.createAwardDialog.open(createAwardDialog_modal, {
+    disableClose: true,
+    width: '550px',
+    data: {badgesList:this.listAllSmartBadges}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+  });
+  
+} 
+
   ngOnInit() {
         
     if (!this.userdata) {

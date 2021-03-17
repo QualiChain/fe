@@ -130,6 +130,10 @@
         <div class="form-group field">
             <label>{{ 'PROFILES.SMART_BADGES' | translate }}</label>
             <div id="courseAwardList">
+                <button type="button" *appCanAccess="['create_smart_badge']" class="btn btn-primary" (click)="openCreateAwardDialog()">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
+                  </button>
+                <br/>
                 <span *ngFor="let element_badge of listAllSmartBadges; index as i">
                     <div class="col-lg-2 example-card" >
                         <div>
