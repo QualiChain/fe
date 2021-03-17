@@ -62,7 +62,7 @@ export class ProfilesComponent implements OnInit {
   
 
   //displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
-  displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'action'];
+  displayedColumns: string[] = ['userName', 'name', 'surname', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource();

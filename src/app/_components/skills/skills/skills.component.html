@@ -65,17 +65,19 @@
           </ng-container>
 
           <!-- Type Column -->
+          <!--
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'SKILL.TYPE.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element.type}} </td>
           </ng-container>
-      
+          -->
           <!-- hard Column -->
+          <!--
           <ng-container matColumnDef="hard_skill">
             <th mat-header-cell *matHeaderCellDef > {{ 'SKILL.HARD_SKILL.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{ element.hard_skill }} </td>
           </ng-container>
-      
+          -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
