@@ -12,11 +12,11 @@
       <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && !isUserAsTaught && (isStudent || isEmployee)" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'enrolled', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > assignment_turned_in </i> {{ 'COURSE.BUTTON.ENROLL_TO_COURSE' | translate }}
       </button>
-      <button *ngIf="!loadSpinner && isUserAsEnrolled && (isStudent || isEmployee)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', this.currentUser.id)">
+      <button *ngIf="!loadSpinner && (isUserAsEnrolled || isUserAsDone) && (isStudent || isEmployee)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNENROLL_TO_COURSE' | translate }}
       </button>
 
-      <button *ngIf="!loadSpinner && !isUserAsDone && !isUserAsEnrolled && !isUserAsTaught && (isStudent || isEmployee)" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid, this.currentUser.id)">
+      <button *ngIf="!loadSpinner && !isUserAsDone && !isUserAsTaught && (isStudent || isEmployee)" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid, this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > done </i> {{ 'COURSE.BUTTON.COURSE_DONE' | translate }}
       </button>
       <!--
@@ -28,7 +28,7 @@
       <button *ngIf="!loadSpinner && !isUserAsEnrolled && !isUserAsDone && !isUserAsTaught && isProfessor" class="btn btn-primary" (click)="relationUserCourse(courseData.courseid, 'add' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > book </i> {{ 'COURSE.BUTTON.TOUGH_THE_COURSE' | translate }}
       </button>
-      <button *ngIf="!loadSpinner && isUserAsTaught && isProfessor" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', this.currentUser.id)">
+      <button *ngIf="!loadSpinner && isUserAsTaught && isUserAsTaught && isProfessor" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', this.currentUser.id)">
         <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'COURSE.BUTTON.UNTOUGH_THE_COURSE' | translate }}
       </button>
       
@@ -39,6 +39,27 @@
     </div>
 
     <div class="row"><br></div>
+
+    <div class="row" *ngIf="(isUserAsEnrolled || isUserAsDone || isUserAsTaught)">
+      <mat-card  class="card">
+        <mat-card-content>
+          <div class=" ">
+            <div><span class="labelcourse">{{ 'COURSE.ENROLLMENT_STATUS.LABEL' | translate }}:</span>
+              <span *ngIf="(isUserAsEnrolled && !isUserAsDone)"> {{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.ENROLLED' | translate }}</span>
+              <span *ngIf="(isUserAsDone)"> {{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.DONE' | translate }}</span>
+              <span *ngIf="(isUserAsTaught)"> {{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.TAUGHT' | translate }}</span>
+            </div> 
+          </div>
+
+          <div *ngIf="(isUserAsDone && userGrade)" class=" ">
+            <div><span class="labelcourse">{{ 'COURSE.SCORE.LABEL' | translate }}:</span> 
+                {{userGrade}}
+            </div> 
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <br>
+    </div>
 
     <div class="row">
 
@@ -67,6 +88,7 @@
                 </span>
             </div> 
           </div>
+          
           <!--
           <div *ngIf="courseData.events.length>0" class="col ">
             <div><span class="labelcourse">{{ 'COURSE.EVENTS.LABEL' | translate }}:</span> 
@@ -138,6 +160,8 @@
                 <button class="btn btn-primary" [routerLink]="['/profiles', element.user.id]">
                   <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
+
+                <!--
                 <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'enrolled', element.user.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
                 </button>
@@ -145,6 +169,7 @@
                 <button *ngIf="(isAdmin || isProfessor)" class="btn btn-primary" (click)="openDialogGrade(courseData.courseid, element.user.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > done </i> {{ 'COURSE.BUTTON.COURSE_DONE' | translate }}
                 </button>
+                -->
 
               </td>
             </ng-container>
@@ -186,12 +211,14 @@
                 <button class="btn btn-primary" [routerLink]="['/profiles', element.user.id]">
                   <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
+                <!--
                 <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', element.user.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
                 </button>          
                 <button [hidden]="!isUserAsTaught && !isAdmin" *appCanAccess="['issue_smart_badge']" class="btn btn-primary" (click)="openAwardDialog(element.user.id, element)">
                   <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
                 </button>
+                -->
               </td>
             </ng-container>
             <!-- surname Column -->
