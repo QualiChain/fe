@@ -63,6 +63,7 @@ export class CoursesGetComponent implements OnInit {
 
   isUserAsEnrolled: boolean = false;
   isUserAsDone: boolean = false;
+  userGrade: Number = null;
   isUserAsTaught: boolean = false;
 
   grade: Number;
@@ -149,7 +150,8 @@ export class CoursesGetComponent implements OnInit {
     });
   }
 
-  openDialogGrade(courseId: number, userId: number): void {
+  openDialogGrade(courseId: number, userId: number): void {    
+    
     const dialogRef = this.dialog.open(DialogOverviewGradeDialog, {
       width: '450px',
       disableClose: true,
@@ -158,15 +160,20 @@ export class CoursesGetComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       //console.log('The dialog was closed');      
-      console.log(result);
-      this.grade = result;
+      
+      //console.log(result);      
 
       if (result>=0) {
-        console.log(result);  
+        //console.log(result);  
         this.getEnrolledUsersByCourse(courseId);
-        this.isUserAsEnrolled = true;
+        this.isUserAsDone = true;
+        this.userGrade = result;
+        //this.userGrade = ;
         //this.relationUserCourse(courseId, 'add' ,'done', userId);
       }
+
+      
+      this.loadSpinner = false;
     });
   }
 
@@ -239,6 +246,8 @@ export class CoursesGetComponent implements OnInit {
               if (element.course.courseid==id) {
                 //this.userDoneThisCourse = true;
                 this.isUserAsDone = true;
+                this.userGrade = element.grade;
+                //console.log(element);
               }
             });
         },
@@ -349,7 +358,7 @@ export class CoursesGetComponent implements OnInit {
     this.cs
     .getEnrolledUserByCourseId(courseId).subscribe(
     (dataEnrolledUsers: any[]) => {
-      //console.log(dataEnrolledUsers);
+      console.log(dataEnrolledUsers);
       this.enrolledUsers = dataEnrolledUsers;
       this.enrolledUsersStatusDone.data = (dataEnrolledUsers.filter(this.filterByDoneStatus));
       this.enrolledUsersStatusEnrolled.data = (dataEnrolledUsers.filter(this.filterByEnrolledStatus));
@@ -442,6 +451,11 @@ export class CoursesGetComponent implements OnInit {
           //console.log("enroll user deleted!!");
           this.getEnrolledUsersByCourse(courseId);
           this.loadSpinner = false;
+          this.isUserAsEnrolled = false;
+          this.isUserAsTaught = false;
+          this.isUserAsDone = false;
+          this.userGrade = null;
+          /*
           if (type=='enrolled'){
             this.isUserAsEnrolled = false;
           }
@@ -451,6 +465,7 @@ export class CoursesGetComponent implements OnInit {
           else if (type=='done'){
             this.isUserAsDone = false;
           }
+          */
         },
         error => {
           console.log("Error deleting enrolling user");                      
@@ -501,7 +516,7 @@ export class DialogOverviewGradeDialog {
           data => {
             //console.log("enroll user!!");      
             this.showSpinner = false;
-            this.dialogRef.close(true); 
+            this.dialogRef.close(this.data.grade); 
           },
           error => {
             console.log("Error enrolling user");                      
