@@ -229,3 +229,40 @@ export class CoursesTouchByUserComponent implements OnInit {
     }
   }
 }
+
+@Component({
+  selector: 'app-courses-enrollment-by-user',
+  templateUrl: './coursesEnrollmentByUser.html',
+  styleUrls: ['./courses.component.css']
+})
+
+export class CoursesEnrollmentByUserComponent implements OnInit {
+
+  @Input() userId: number;
+  myCourses : any[] = [];
+  lodingspinner : boolean = false;
+  constructor(
+    private cs: CoursesService
+  ) { }
+
+  ngOnInit(): void {
+
+    if (this.userId) {
+
+      this.cs.getCompletedCourseByUserId(+this.userId).subscribe(
+        coursesCompletedByUser => {
+          
+          console.log(coursesCompletedByUser);
+          this.myCourses = coursesCompletedByUser;
+          this.lodingspinner = false;
+          
+        },
+        error => {
+          this.lodingspinner = false;
+          console.log("error getting courses per user");
+        }
+      );
+
+    }
+  }
+}

@@ -1010,5 +1010,9 @@
       "POSTGRADUATE": "Postgraduate",
       "OTHER": "Other"
     }
+  },
+  "MY_COURSES": {
+    "HEADER": "My assigned courses",
+    "NO_DATA": "There are no assignments"
   }
 }

@@ -112,7 +112,7 @@ import { CareerAdvisorComponent } from './_components/career-advisor/career-advi
 import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_components/recomended-skills/recomended-skills.component';
-import { CoursesComponent, CoursesTouchByUserComponent } from './_components/courses/courses/courses.component';
+import { CoursesComponent, CoursesTouchByUserComponent, CoursesEnrollmentByUserComponent } from './_components/courses/courses/courses.component';
 import { CoursesGetComponent, DialogOverviewGradeDialog, DialogSelectUser } from './_components/courses/courses-get/courses-get.component';
 import { CoursesEditComponent } from './_components/courses/courses-edit/courses-edit.component';
 import { ProgressComponent } from './_components/utils/progress/progress.component';
@@ -287,7 +287,7 @@ export function tokenGetter() {
     RecomendedCoursesComponent, RecomendedCoursesComponentPage,
     RecomendedJobsComponent, RecomendedJobsComponentPage,
     RecomendedSkillsComponent, RecomendedSkillsComponentPage,
-    CoursesComponent, CoursesTouchByUserComponent,
+    CoursesComponent, CoursesTouchByUserComponent, CoursesEnrollmentByUserComponent,
     CoursesGetComponent, DialogOverviewGradeDialog, DialogSelectUser,
     CoursesEditComponent,
     EmploymentTypePipe,

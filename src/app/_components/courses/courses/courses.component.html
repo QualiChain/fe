@@ -83,6 +83,7 @@
       <mat-accordion class="example-headers-align" multi>
         <app-coursess-touch-by-user *appCanAccess="['add_course']" userId="{{currentUser.id}}"></app-coursess-touch-by-user>
         <app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{currentUser.id}}"></app-recomended-courses>
+        <app-courses-enrollment-by-user  *ngIf="isStudent || isEmployee"   userId="{{currentUser.id}}"></app-courses-enrollment-by-user>
       </mat-accordion>
     </div>
   </div>

@@ -1010,5 +1010,9 @@
       "POSTGRADUATE": "Postgraduate",
       "OTHER": "Other"
     }
+  },
+  "MY_COURSES": {
+    "HEADER": "Τα μαθήματα που μου έχουν ανατεθεί",
+    "NO_DATA": "Δεν υπάρχουν εργασίες"
   }
 }
