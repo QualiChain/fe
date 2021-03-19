@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from '../../../app.component';
 import { AuthService } from '../../../_services';
 import { QCStorageService } from '../../../_services/QC_storage.services';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('QcSmartBadgesListByUserComponent', () => {
   let component: QcSmartBadgesListByUserComponent;
@@ -14,7 +15,8 @@ describe('QcSmartBadgesListByUserComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ QcSmartBadgesListByUserComponent ],
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatDialogModule
         ],
       providers: [AppComponent, AuthService, QCStorageService]
     })

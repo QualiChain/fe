@@ -39,7 +39,7 @@ export interface DialogDataEnrollment {
 })
 export class CoursesGetComponent implements OnInit {
 
-  displayedColumnsProfessors: string[] = ['surname', 'name', 'action'];
+  displayedColumnsProfessors: string[] = ['surname', 'name', 'aqcuired_badges', 'action'];
   displayedColumnsEnrolled: string[] = ['surname', 'name', 'aqcuired_badges', 'action'];
   displayedColumnsDoneBy: string[] = ['surname', 'name', 'course_grade', 'aqcuired_badges', 'action'];
   //@ViewChild(MatSort, {static: true}) sort: MatSort;

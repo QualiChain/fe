@@ -2,7 +2,15 @@
 <div id="userAwardList">
     <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid; else loadEnd"></mat-spinner>
     <ng-template #loadEnd>
-        
+
+        <div *ngIf="formatOutput=='card'">
+            <div *appCanAccess="['issue_smart_badge']" class="col-lg-12 ">
+                <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(+userId, aqcuired_badges_by_user)">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> Award
+                </button>
+            </div> 
+        </div>
+
         <div *ngIf="aqcuired_badges_by_user.length==0; else userHasBadges" class="col-lg-8  smartBudge">                                
             {{ 'PROFILE.NO_SMART_BADGE_YET' | translate }}
         </div>
