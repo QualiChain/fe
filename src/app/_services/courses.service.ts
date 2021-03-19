@@ -115,6 +115,20 @@ export class CoursesService {
             )
         }
 
+        
+        getTeachersOfACourse(courseId: Number) {
+            let headers = this.authService.createQCAuthorizationHeader();
+
+            return this.http.get(`${this.coursesURL}/${courseId}/status/taught`, {headers:headers}).
+            pipe(
+                map((data: Course[]) => {
+                    return data;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+        }
+
         getSkillsByCourseId(courseId: Number) {
             let headers = this.authService.createQCAuthorizationHeader();
 

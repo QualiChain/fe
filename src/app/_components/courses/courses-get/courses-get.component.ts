@@ -184,8 +184,8 @@ export class CoursesGetComponent implements OnInit {
     
     this.professorList.sortingDataAccessor = (item, property) => {
       switch(property) {
-        case 'name': return item.user.name;
-        case 'surname': return item.user.surname;
+        case 'name': return item.user_id.name;
+        case 'surname': return item.user_id.surname;
         default: return item[property];
       }
     };    
@@ -353,21 +353,30 @@ export class CoursesGetComponent implements OnInit {
   
   getEnrolledUsersByCourse(courseId: Number) {
 
-
+    this.cs.
+    getTeachersOfACourse(courseId).subscribe(
+      (dataProfessors: any[]) => {
+        //console.log(dataProfessors);   
+        this.professorList.data = dataProfessors;
+      },
+      error => {
+        console.log("error recovering enrolled users by course id")
+      });
     
-    this.cs
-    .getEnrolledUserByCourseId(courseId).subscribe(
-    (dataEnrolledUsers: any[]) => {
-      console.log(dataEnrolledUsers);
-      this.enrolledUsers = dataEnrolledUsers;
-      this.enrolledUsersStatusDone.data = (dataEnrolledUsers.filter(this.filterByDoneStatus));
-      this.enrolledUsersStatusEnrolled.data = (dataEnrolledUsers.filter(this.filterByEnrolledStatus));
-      this.professorList.data = (dataEnrolledUsers.filter(this.filterByProfessorStatus));
-    },
-    error => {
-      console.log("error recovering enrolled users by course id")
-    });
-    
+      if (this.isProfessor || this.isAdmin) {
+        this.cs
+        .getEnrolledUserByCourseId(courseId).subscribe(
+        (dataEnrolledUsers: any[]) => {
+          //console.log(dataEnrolledUsers);
+          this.enrolledUsers = dataEnrolledUsers;
+          this.enrolledUsersStatusDone.data = (dataEnrolledUsers.filter(this.filterByDoneStatus));
+          this.enrolledUsersStatusEnrolled.data = (dataEnrolledUsers.filter(this.filterByEnrolledStatus));
+          //this.professorList.data = (dataEnrolledUsers.filter(this.filterByProfessorStatus));
+        },
+        error => {
+          console.log("error recovering enrolled users by course id")
+        });
+      }
 /*
     this.cs.getUserEnrollmentStatusByCourseId(courseId, this.currentUser.id, 'done').subscribe(
       dataDone => {
