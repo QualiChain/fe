@@ -56,23 +56,20 @@ export class JobApplicationsByUserComponent implements OnInit {
           //console.log("list of jobs applies per user");
           data.forEach(element => {
 
-
-
-            this.js
-            .getJob(element.jobURI).subscribe(
-              (dataJob: Job) => {
-                //console.log("job in db");
-                //console.log(dataCourse);
-                this.jobsApplies.push({'label':dataJob.label, 'jobURI': element.jobURI,'availability':element.availability, 'expectedSalary':element.expectedSalary});
-              this.dataSource.data = this.jobsApplies;
-              },
-              error => {
-                console.log("error getting job data");            
-              }
-            );
-
-
-
+            if (element.jobURI){
+              this.js
+              .getJob(element.jobURI).subscribe(
+                (dataJob: Job) => {
+                  //console.log("job in db");
+                  //console.log(dataCourse);
+                  this.jobsApplies.push({'label':dataJob.label, 'jobURI': element.jobURI,'availability':element.availability, 'expectedSalary':element.expectedSalary});
+                this.dataSource.data = this.jobsApplies;
+                },
+                error => {
+                  console.log("error getting job data");            
+                }
+              );
+            }
           });
         },
         error => {
