@@ -252,7 +252,7 @@ export class CoursesEnrollmentByUserComponent implements OnInit {
       this.cs.getCompletedCourseByUserId(+this.userId).subscribe(
         coursesCompletedByUser => {
           
-          console.log(coursesCompletedByUser);
+          //console.log(coursesCompletedByUser);
           this.myCourses = coursesCompletedByUser;
           this.lodingspinner = false;
           

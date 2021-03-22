@@ -298,12 +298,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       //reload nortifications
       interval(60000).subscribe(x => {
         // something
-        this.reloadNotifications(userdata.id);
+        if (this.isLogged){
+          this.reloadNotifications(userdata.id);
+        }
       });
 
       interval(300000).subscribe(x => {
         // something
-        this.openQCQuestionnaire('auto');
+        if (this.isLogged){
+          this.openQCQuestionnaire('auto');
+        }
       });
 
 
