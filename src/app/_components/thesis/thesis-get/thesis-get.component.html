@@ -15,7 +15,7 @@
 
           <mat-spinner diameter="20" color="warn" *ngIf="loadSpinner; else noSpinner"></mat-spinner>
           <ng-template #noSpinner>
-              <button *ngIf="(isStudent && !myRequestHasCreated && thesisMainData.status=='published' && !thesisMainData.student_id)" class="btn btn-primary" (click)="applayToThesis(thesisMainData.id)">
+              <button *ngIf="(!hideApplyForThesis && isStudent && !myRequestHasCreated && thesisMainData.status=='published' && !thesisMainData.student_id)" class="btn btn-primary" (click)="applayToThesis(thesisMainData.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'THESIS_REQUEST.BUTTON.APPLY' | translate }}
               </button>            
               <button *ngIf="(myRequestHasCreated && thesisMainData.status=='published' && !thesisMainData.student_id)" class="btn btn-danger" (click)="deleteApplayToThesis(myThesisRequestId)">

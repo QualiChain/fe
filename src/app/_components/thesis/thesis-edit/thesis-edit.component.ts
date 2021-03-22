@@ -29,6 +29,7 @@ export class ThesisEditComponent implements OnInit {
   thesis: Thesis = {id: null, title: null, description: null, professor: [], student_id: null, status: null};
   usersList: User[] = [];
   dataFiltered: User[] = [];
+  usersThatHasARequestButAreAssignedInOtherThesis: User[] = [];
   currentUser: User;
   toppings = new FormControl();
 
@@ -105,9 +106,36 @@ export class ThesisEditComponent implements OnInit {
               this.ts
               .getAllThesisRequestsByThesisId(id).subscribe(
                 (dataRequestsThesis:any) => {
-                  //console.log(dataRequestsThesis);
+                  console.log(dataRequestsThesis);
                   dataRequestsThesis.forEach(element => {
-                      this.dataFiltered.push(element.student);
+
+                      //console.log(element.student.id);
+                      this.ts
+                      .getThesisByStudentId(element.student.id)
+                      .subscribe((data: any[]) => {
+                        let canAddThisUser = true;
+                        data.forEach(elementThesis => {
+                          //console.log(elementThesis);
+                          
+                          if ((elementThesis.status=="assigned") && (elementThesis.id!= id)) {
+                            canAddThisUser = false;
+                          }
+                        });
+                        
+                        if (canAddThisUser) {
+                          this.dataFiltered.push(element.student);
+                        }
+                        else {
+                          this.usersThatHasARequestButAreAssignedInOtherThesis.push(element.student);
+                        }
+                        
+                      },
+                      error => {
+                        console.log("Error thesis by user id");
+                      });
+
+
+                      
                   });
                   this.dataFiltered.sort((a,b) => a.surname.toUpperCase().localeCompare(b.surname.toUpperCase()));
                   this.usersList = this.dataFiltered;
