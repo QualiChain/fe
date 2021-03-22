@@ -194,6 +194,7 @@
       "OPTIONS": {
         "INTERNERSHIP": "Internship",
         "ENTITY_LEVEL": "Entity level",
+        "ENTRY_LEVEL": "Entry level",
         "ASSOCIATE": "Associate",
         "MID_SENIOR_LEVEL": "Mid-Senior level",
         "SENIOR_LEVEL": "Senior",
