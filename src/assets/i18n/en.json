@@ -885,6 +885,7 @@
     "NO_LINKED_THESIS": "This user does not have any thesis yet.",
     "DELETE_MESSAGE": "Are you sure you want to delete this thesis?",
     "CONFIRM_ACTION": "Confirm Action",
+    "MESSAGE_REQUESTS_USERS_THAT_HAS_THESIS": "Users that has an apply but there had been assigned to another Thesis",
     "TITLE": {
       "LABEL": "Title",
       "PLACEHOLDER": "Title"

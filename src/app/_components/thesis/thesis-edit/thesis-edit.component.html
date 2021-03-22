@@ -61,6 +61,15 @@
                 </mat-form-field>
             </div>
 
+            <div *ngIf="usersThatHasARequestButAreAssignedInOtherThesis.length>0">
+                {{ 'THESIS.MESSAGE_REQUESTS_USERS_THAT_HAS_THESIS' | translate }}
+                <ul>
+                    <li  *ngFor="let user of usersThatHasARequestButAreAssignedInOtherThesis" class="list-group-item" >
+                        {{user.name}} {{user.surname}}
+                    </li>
+                </ul>
+            </div>
+
 
             <div class="form-group">
 

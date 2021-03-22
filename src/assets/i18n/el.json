@@ -885,6 +885,7 @@
     "NO_LINKED_THESIS": "Αυτός ο χρήστης δεν διαθέτει ακόμη διπλωματική εργασία",
     "DELETE_MESSAGE": "Είστε βέβαιοι πως θέλετε να διαγράψετε αυτή την διπλωματική εργασία;",
     "CONFIRM_ACTION": "Επιβεβαίωση ενέργειας",
+    "MESSAGE_REQUESTS_USERS_THAT_HAS_THESIS": "Users that has an apply but there had been assigned to another Thesis",
     "TITLE": {
       "LABEL": "Τίτλος",
       "PLACEHOLDER": "Τίτλος"

@@ -43,6 +43,7 @@ export class ThesisGetComponent implements OnInit {
   thesisMainData: any = {'professor':{'id':null}};
   
   isStudent = this.appcomponent.isStudent;
+  hideApplyForThesis : boolean = false;
 
   deleteApplayToThesis(requestThesisId) {
     this.loadSpinner = true;
@@ -62,7 +63,7 @@ export class ThesisGetComponent implements OnInit {
   }
 
   applayToThesis(thesisId) {
-    console.log(thesisId);
+    //console.log(thesisId);
     this.loadSpinner = true;
     let obj = {
       "thesis_id": thesisId,
@@ -71,7 +72,7 @@ export class ThesisGetComponent implements OnInit {
 
     this.ts.thesisRequest(obj).subscribe(
       res => {
-        console.log(res)
+        //console.log(res)
         let dataRes = res.split("=");
         this.loadSpinner = false;
         this.myRequestHasCreated = true;
@@ -112,7 +113,23 @@ export class ThesisGetComponent implements OnInit {
       }
       
       if (id>0) {
+
         
+          this.ts
+          .getThesisByStudentId(this.currentUser.id)
+          .subscribe((data: any[]) => {
+            data.forEach(element => {
+              //console.log(element);
+              if (element.status=="assigned") {
+                this.hideApplyForThesis = true;
+              }
+            });
+          },
+          error => {
+            console.log("Error thesis by user id");
+          });
+        
+
         this.ts
         .getAllThesisRequestsByThesisId(id).subscribe(
           (dataRequestsThesis:any) => {
