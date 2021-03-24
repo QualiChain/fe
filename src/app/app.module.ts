@@ -143,7 +143,7 @@ import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { DSSCurriculumReDesignComponent } from './_components/dss-curriculum-re-design/dss-curriculum-re-design.component';
 import { CurriculumGapAnalysisComponent } from './_components/curriculum-gap-analysis/curriculum-gap-analysis.component';
-import { MCDSSComponent } from './_components/mcdss/mcdss.component';
+import { MCDSSComponent, MCDSSDialogContent } from './_components/mcdss/mcdss.component';
 import { SkillsComponent } from './_components/skills/skills/skills.component';
 import { SkillsGetComponent } from './_components/skills/skills-get/skills-get.component';
 import { SkillsEditComponent } from './_components/skills/skills-edit/skills-edit.component';
@@ -257,7 +257,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  entryComponents: [QcEvaluationQuestionnaireComponent, VisualisationHelperDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal],
+  entryComponents: [QcEvaluationQuestionnaireComponent, VisualisationHelperDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal, MCDSSDialogContent],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -302,7 +302,7 @@ export function tokenGetter() {
     RecruitingComponent,
     DSSCurriculumReDesignComponent,
     CurriculumGapAnalysisComponent,
-    MCDSSComponent,
+    MCDSSComponent, MCDSSDialogContent,
     SkillsComponent,
     SkillsGetComponent,
     SkillsEditComponent,

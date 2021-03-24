@@ -862,6 +862,18 @@
         "MOST_POPULAR_SKILLS": "Αυτό το γράφημα παρουσιάζει τις πιο δημοφιλείς δεξιότητες στην αγορά εργασίας αυτή τη στιγμή σύμφωνα με τις διαθέσιμες θέσεις εργασίας (δείχνει τον αριθμό θέσεων εργασίας που σχετίζονται με συγκεκριμένες δεξιότητες).",
         "MOST_POPULAR_COURSES": "Αυτό το διάγραμμα παρουσιάζει τα πιο δημοφιλή μαθήματα που σχετίζονται με δημοφιλείς δεξιότητες που απαιτούνται στην αγορά εργασίας αυτή τη στιγμή.(με βάση τον αριθμό θέσεων εργασίας)."
       }
+    },
+    "MCDSS": {
+      "HEADER": "Βοήθεια Σύστημα πολυκριτηριακής υποστήριξης αποφάσεων",
+      "BODY": ["The Multi-Criteria Decision Support System facilitates the decision-making process by taking into account all the meaningful criteria.",
+              "The implemented methods are the following: <strong>MAUT, Topsis, Electre I and Promethee II</strong>.",
+              "Optimization types can only take values of 0 or 1, with 0 denoting that the criterion is profit maximization and 1 denoting that it is cost minimization.",
+              "The criteria types, used in Promethee II, can only take the following values: usual, quasi, linear, linear with indifference threshold, and level.",              
+              "All thresholds can only take nonnegative value.",
+              "Each method requires a specific set of criteria details to be configured.",
+              "<ul><li>In case the preferred method is either “Maut” or “Topsis”, users should insert information about the number of criteria, the weights, and the optimization types.</li><li>In case the preferred method is “Electre I”, users should insert information about the number of criteria, the weights, the optimization types, the agreement threshold, and the veto thresholds.</li><li>In case the preferred method is “Promethee II”, users should insert information about the number of criteria, the weights, the optimization types, the preference thresholds, the indifference thresholds, and the criteria types.</li></ul>",
+              "If you use the “File Input” functionality you can download some files examples from <a target='_blank' href='https://github.com/QualiChain/MCDSS/tree/master/Input_Templates/csv_examples'>here</a>."
+              ]
     }
   },
   "QUESTIONNAIRE": {
