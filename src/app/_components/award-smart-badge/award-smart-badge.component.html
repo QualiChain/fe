@@ -17,7 +17,7 @@
   <div *ngIf="dataSource.data.length==0"> <p>{{ 'COURSE.NO_DONE_BY_USERS' | translate }}</p></div>
   <div [hidden]="dataSource.data.length==0">
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
     </mat-form-field>
 
     <div class="">  
@@ -47,7 +47,7 @@
           
           <!-- Student Column -->
           <ng-container matColumnDef="student">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Student </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ROLES.student' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element.student}} </td>
           </ng-container>
 
@@ -61,7 +61,7 @@
           <!-- Grade Column -->
           
           <ng-container matColumnDef="grade">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Grade </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.SCORE.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element?.grade}} </td>
           </ng-container>
           

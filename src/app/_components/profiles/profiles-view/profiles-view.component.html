@@ -291,9 +291,8 @@
             
         </div>
 
-        <div class="row cv_gap_analysis" *ngIf="((userdata.id==currentUser.id) && isProfessor)">
-          <div class="col col-lg-8"> </div>
-          <div class="col col-lg-2">            
+        <div class="row cv_gap_analysis" *ngIf="((userdata.id==currentUser.id) && isProfessor)">          
+          <div class="col col-lg-12" style="display: flex; justify-content: flex-end">            
             <button class="btn btn-success" [routerLink]="['/profiles', userdata.id,'cv-gap-analysis']">  
               <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.CV_GAP_ANALYSIS' | translate }}
             </button>
