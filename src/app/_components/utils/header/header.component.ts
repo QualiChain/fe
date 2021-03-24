@@ -375,7 +375,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.isQuestionnaireOpen = true;
         const dialogRef = this.dialog.open(QcEvaluationQuestionnaireComponent, {
-          maxWidth: "600px",
+          maxWidth: "750px", 
+          width: "750px",
           disableClose: true,
           data: {}      
         });
