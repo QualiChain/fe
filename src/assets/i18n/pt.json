@@ -862,6 +862,18 @@
         "MOST_POPULAR_SKILLS": "This chart shows the most popular skills in the job market at the moment according to the available job postings. (It shows the number of job postings related to specific skills).",
         "MOST_POPULAR_COURSES": "This chart shows the most popular courses related to popular skills required in the job market at the moment. (also counted in job postings)."
       }
+    },
+    "MCDSS": {
+      "HEADER": "Multicriteria Decision Support System help",
+      "BODY": ["The Multi-Criteria Decision Support System facilitates the decision-making process by taking into account all the meaningful criteria.",
+              "The implemented methods are the following: <strong>MAUT, Topsis, Electre I and Promethee II</strong>.",
+              "Optimization types can only take values of 0 or 1, with 0 denoting that the criterion is profit maximization and 1 denoting that it is cost minimization.",
+              "The criteria types, used in Promethee II, can only take the following values: usual, quasi, linear, linear with indifference threshold, and level.",              
+              "All thresholds can only take nonnegative value.",
+              "Each method requires a specific set of criteria details to be configured.",
+              "<ul><li>In case the preferred method is either “Maut” or “Topsis”, users should insert information about the number of criteria, the weights, and the optimization types.</li><li>In case the preferred method is “Electre I”, users should insert information about the number of criteria, the weights, the optimization types, the agreement threshold, and the veto thresholds.</li><li>In case the preferred method is “Promethee II”, users should insert information about the number of criteria, the weights, the optimization types, the preference thresholds, the indifference thresholds, and the criteria types.</li></ul>",
+              "If you use the “File Input” functionality you can download some files examples from <a target='_blank' href='https://github.com/QualiChain/MCDSS/tree/master/Input_Templates/csv_examples'>here</a>."
+              ]
     }
   },
   "QUESTIONNAIRE": {

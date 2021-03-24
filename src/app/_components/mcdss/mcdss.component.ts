@@ -6,6 +6,9 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface mcdssOutput {
   Alternative: string;
@@ -115,7 +118,18 @@ export class MCDSSComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private McdssService: McdssService,
+    public dialog: MatDialog
   ) { }
+
+  showHelpDialog() {
+    const dialogRef = this.dialog.open(MCDSSDialogContent,
+      {width: "550px"}
+      );
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
+    });
+  }
 
   ngAfterViewInit() {
     //console.log("ngAfterViewInit");
@@ -615,3 +629,31 @@ checkboxLabel(row: any): string {
 
 }
 
+
+
+@Component({
+  selector: 'MCDSSS-dialog-content',
+  templateUrl: 'MCDSS-dialog-content.html',
+})
+export class MCDSSDialogContent implements OnInit {
+  title: string;
+  message: string;
+  
+  constructor() {
+  }
+
+  ngOnInit() {
+    
+  }
+
+  onConfirm(): void {
+    // Close the dialog, return true
+    
+  }
+
+  onDismiss(): void {
+    // Close the dialog, return false    
+    
+  }
+
+}
