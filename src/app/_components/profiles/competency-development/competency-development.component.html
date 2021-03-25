@@ -49,13 +49,15 @@
       <!-- label Column -->
       <ng-container matColumnDef="label">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{element.label}}  </td>
+        <td mat-cell *matCellDef="let element"> {{element?.label}}  </td>
       </ng-container>  
   
       <!-- proficiencyLevel Column -->
       <ng-container matColumnDef="proficiencyLevel">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COMPETENCY_LEVEL.LEVEL' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{ 'COMPETENCY_LEVEL.LEVELS.'+element.proficiencyLevel | uppercase | translate}} </td>
+        <td mat-cell *matCellDef="let element"> 
+          <span *ngIf="element?.proficiencyLevel">{{ 'COMPETENCY_LEVEL.LEVELS.'+element?.proficiencyLevel | uppercase | translate}}</span> 
+        </td>
       </ng-container>  
 
       <!-- progress Column -->
@@ -63,7 +65,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COMPETENCY_LEVEL.PROGRESS' | translate }} </th>
         <td mat-cell *matCellDef="let element">             
             <div class="progress" >
-                <div title="{{+element.progress}}%" class="progress-bar" role="progressbar" [ngStyle]="{'width.%':((+element.progress)/1)}" attr.aria-valuenow="{{+element.progress}}"  aria-valuemin="0" aria-valuemax="100"><span>{{+element.progress}}%</span></div>
+                <div *ngIf="element?.progress" title="{{+element?.progress}}%" class="progress-bar" role="progressbar" [ngStyle]="{'width.%':((+element?.progress)/1)}" attr.aria-valuenow="{{+element?.progress}}"  aria-valuemin="0" aria-valuemax="100"><span>{{+element?.progress}}%</span></div>
             </div>
             
         </td>
@@ -72,13 +74,13 @@
       <!-- acquiredDate Column -->
       <ng-container matColumnDef="acquiredDate">
         <th mat-header-cell *matHeaderCellDef > {{ 'COMPETENCY_LEVEL.ACQUIRED_DATE' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{element.acquiredDate | date:'dd/MM/yyyy' }} </td>
+        <td mat-cell *matCellDef="let element"> {{element?.acquiredDate | date:'dd/MM/yyyy' }} </td>
       </ng-container>
 
       <!-- next_evaluation Column -->
       <ng-container matColumnDef="evalDate">
         <th mat-header-cell *matHeaderCellDef > {{ 'COMPETENCY_LEVEL.NEXT_EVALUATION' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{element.evalDate | date:'dd/MM/yyyy' }} </td>
+        <td mat-cell *matCellDef="let element"> {{element?.evalDate | date:'dd/MM/yyyy' }} </td>
       </ng-container>
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

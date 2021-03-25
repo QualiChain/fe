@@ -126,7 +126,11 @@ export class CompetencyDevelopmentComponent implements OnInit {
       this.cs.getCompetencesByUser(sUId)
       .subscribe((data: any[]) => {
         //console.log(data);
-        let dataTmp = data;
+        const filteredData = data.filter(row => row != null);
+        //console.log(filteredData);
+
+        //let dataTmp = data;
+        let dataTmp = filteredData;
         this.dataSource.data = dataTmp;        
         ELEMENT_DATA = dataTmp; 
         this.showLoading = false;

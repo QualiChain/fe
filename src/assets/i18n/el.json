@@ -1061,6 +1061,14 @@
       "X": {
         "AXIS_TITLE": "Μάθημα"
       }
-    } 
+    },
+    "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": {
+      "Y": {
+        "VAR_UNIT": "Δημοσίευση εργασίας"
+      },
+      "X": {
+        "AXIS_TITLE": "χρόνος"
+      }  
+    }
   }
 }
