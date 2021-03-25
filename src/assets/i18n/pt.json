@@ -1061,6 +1061,14 @@
       "X": {
         "AXIS_TITLE": "Course"
       }
+    },
+    "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": {
+      "Y": {
+        "VAR_UNIT": "Job posting"
+      },
+      "X": {
+        "AXIS_TITLE": "Time"
+      }  
     }
   }
 }
