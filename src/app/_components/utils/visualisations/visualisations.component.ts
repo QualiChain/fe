@@ -179,8 +179,13 @@ export class VisualisationsUserGradesChartComponent extends VisualisationsCompon
     
   }
   ngOnChanges(): void {
+
+    let Y_TITLE = this.translate.instant('CHARTS.USER_GRADES.Y.TITLE');
+    let Y_VAR_TITLE = this.translate.instant('CHARTS.USER_GRADES.Y.VAR_TITLE');    
+    let X_AXIS_TITLE = this.translate.instant('CHARTS.USER_GRADES.X.AXIS_TITLE');
+    
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(urlVisualisations+"/show_column_chart?y_var_names[]=grade&y_var_titles[]=Grade&y_var_units[]=&x_axis_type=name&x_axis_name=name&x_axis_title=Course&y_axis_title=Grades&color_list_request[]=blue&color_list_request[]=red&color_list_request[]=green&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=user_grades&user_id="+this.userId);
-    this.urlSafe = urlVisualisations+"/show_column_chart?y_var_names[]=grade&y_var_titles[]=Grade&y_var_units[]=&x_axis_type=name&x_axis_name=name&x_axis_title=Course&y_axis_title=Grades&color_list_request[]=blue&color_list_request[]=red&color_list_request[]=green&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=user_grades&user_id="+this.userId;
+    this.urlSafe = urlVisualisations+"/show_column_chart?y_var_names[]=grade&y_var_titles[]="+Y_VAR_TITLE+"&y_var_units[]=&x_axis_type=name&x_axis_name=name&x_axis_title="+X_AXIS_TITLE+"&y_axis_title="+Y_TITLE+"&color_list_request[]=blue&color_list_request[]=red&color_list_request[]=green&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=user_grades&user_id="+this.userId;
   }
 
 }
@@ -288,9 +293,12 @@ export class VisualisationsCarrerPathTrajectoryChartComponent extends Visualisat
   }
   ngOnChanges(): void {    
     
+    //let chartTitle = "Career Path Trajectory";
+    let chartTitle = this.translate.instant('CHARTS.CARRER_PATH_TRAJECTORY.TITLE');
+
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(urlVisualisations+"/show_sankey_diagram?pass_value=pass_value&use_def_colors=false&chart_title=Career%20Path%20Trajectory&node_list[]=Programmer&node_list[]=senior%20developer&node_list[]=software%20architect&node_list[]=project%20manager&node_list[]=cto&node_list[]=product%20manager&node_list[]=lead%20developer&node_list[]=development%20manager&color_node_list[]=blue&color_node_list[]=violet&color_node_list[]=purple&color_node_list[]=fuchsia&color_node_list[]=red&color_node_list[]=ceramic&color_node_list[]=gold&color_node_list[]=black&color_node_list[]=gray&base_query=career_path_trajectory");
     //this.urlSafe = urlVisualisations+"/show_sankey_diagram?pass_value=pass_value&use_def_colors=false&chart_title=Career%20Path%20Trajectory&node_list[]=Programmer&node_list[]=senior%20developer&node_list[]=software%20architect&node_list[]=project%20manager&node_list[]=cto&node_list[]=product%20manager&node_list[]=lead%20developer&node_list[]=development%20manager&color_node_list[]=blue&color_node_list[]=violet&color_node_list[]=purple&color_node_list[]=fuchsia&color_node_list[]=red&color_node_list[]=ceramic&color_node_list[]=gold&color_node_list[]=black&color_node_list[]=gray&base_query=career_path_trajectory";
-    this.urlSafe = urlVisualisations+"/show_sankey_diagram?pass_value=pass_value&use_def_colors=false&chart_title=Career%20Path%20Trajectory&&color_node_list%5b%5d=blue&color_node_list%5b%5d=violet&color_node_list%5b%5d=purple&color_node_list%5b%5d=fuchsia&color_node_list%5b%5d=red&color_node_list%5b%5d=ceramic&color_node_list%5b%5d=gold&color_node_list%5b%5d=black&color_node_list%5b%5d=gray&base_query=career_path_trajectory&user_id="+this.userId;
+    this.urlSafe = urlVisualisations+"/show_sankey_diagram?pass_value=pass_value&use_def_colors=false&chart_title="+chartTitle+"&color_node_list%5b%5d=blue&color_node_list%5b%5d=violet&color_node_list%5b%5d=purple&color_node_list%5b%5d=fuchsia&color_node_list%5b%5d=red&color_node_list%5b%5d=ceramic&color_node_list%5b%5d=gold&color_node_list%5b%5d=black&color_node_list%5b%5d=gray&base_query=career_path_trajectory&user_id="+this.userId;
 
     
   }
@@ -407,7 +415,7 @@ export class VisualisationsSkillsDemandInTimePerSpecialization extends Visualisa
     .getSkill(+this.skillId).subscribe(
       dataSkill => {
         //console.log("skille in db");
-        console.log(dataSkill);
+        //console.log(dataSkill);
         let skillName = dataSkill.name;
         let tmpURL = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d="+skillName+"&y_var_units%5b%5d=Job%20posting&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId
         if (this.specialization) {
@@ -538,8 +546,13 @@ export class VisualisationsMostPopularSkillsInTheJobMarker extends Visualisation
 
   ngOnInit(): void {
 
+    let Y_TITLE = this.translate.instant('CHARTS.MOST_POPULAR_SKILLS.Y.TITLE');
+    let Y_VAR_TITLE = this.translate.instant('CHARTS.MOST_POPULAR_SKILLS.Y.VAR_TITLE');
+    let Y_VAR_UNIT = this.translate.instant('CHARTS.MOST_POPULAR_SKILLS.Y.VAR_UNIT');
+    let X_AXIS_TITLE = this.translate.instant('CHARTS.MOST_POPULAR_SKILLS.X.AXIS_TITLE');
+
     let tmpURL = '';    
-    tmpURL = urlVisualisations+"/show_column_chart?y_var_names[]=count&y_var_titles[]=Job%20postings&y_var_units[]=number%20of%20job%20postings&x_axis_type=text&x_axis_name=skill_name&x_axis_title=Skill&y_axis_title=Demand%20in%20Job%20Market&color_list_request[]=blue&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=popular_skills_market&asc=True&limit_skills=10";
+    tmpURL = urlVisualisations+"/show_column_chart?y_var_names[]=count&y_var_titles[]="+Y_VAR_TITLE+"&y_var_units[]="+Y_VAR_UNIT+"&x_axis_type=text&x_axis_name=skill_name&x_axis_title="+X_AXIS_TITLE+"&y_axis_title="+Y_TITLE+"&color_list_request[]=blue&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=popular_skills_market&asc=True&limit_skills=10";
     //console.log(tmpURL);
     this.urlSafe = tmpURL;
 
@@ -571,8 +584,12 @@ export class VisualisationsMostPopularCourses extends VisualisationsComponent {
 
   ngOnInit(): void {
 
+    let Y_TITLE = this.translate.instant('CHARTS.MOST_POPULAR_COURSES.Y.TITLE');
+    let Y_VAR_TITLE = this.translate.instant('CHARTS.MOST_POPULAR_COURSES.Y.VAR_TITLE');
+    let Y_VAR_UNIT = this.translate.instant('CHARTS.MOST_POPULAR_COURSES.Y.VAR_UNIT');
+    let X_AXIS_TITLE = this.translate.instant('CHARTS.MOST_POPULAR_COURSES.X.AXIS_TITLE');
     let tmpURL = '';    
-    tmpURL = urlVisualisations+"/show_column_chart?y_var_names[]=count&y_var_titles[]=Job%20postings&y_var_units[]=number%20of%20job%20postings&x_axis_type=text&x_axis_name=course_name&x_axis_title=Course&y_axis_title=Demand%20in%20Job%20Market&color_list_request[]=blue&color_list_request[]=red&color_list_request[]=green&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=popular_courses_market&asc=True&limit_courses=10";
+    tmpURL = urlVisualisations+"/show_column_chart?y_var_names[]=count&y_var_titles[]="+Y_VAR_TITLE+"&y_var_units[]="+Y_VAR_UNIT+"&x_axis_type=text&x_axis_name=course_name&x_axis_title="+X_AXIS_TITLE+"&y_axis_title="+Y_TITLE+"&color_list_request[]=blue&color_list_request[]=red&color_list_request[]=green&use_default_colors=false&chart_3d=true&use_default_colors=false&base_query=popular_courses_market&asc=True&limit_courses=10";
     //console.log(tmpURL);
     this.urlSafe = tmpURL;
 

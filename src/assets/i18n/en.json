@@ -1028,5 +1028,39 @@
   "MY_COURSES": {
     "HEADER": "My assigned courses",
     "NO_DATA": "There are no assignments"
+  },
+  "CHARTS": {
+    "CARRER_PATH_TRAJECTORY": {
+      "TITLE": "Career Path Trajectory"
+    },
+    "MOST_POPULAR_COURSES": {
+      "Y": {
+        "TITLE": "Demand in Job Market",
+        "VAR_TITLE": "Job postings",
+        "VAR_UNIT": "number of job postings"
+      },
+      "X": {
+        "AXIS_TITLE": "Course"
+      }      
+    },
+    "MOST_POPULAR_SKILLS": {
+      "Y": {
+        "TITLE": "Demand in Job Market",
+        "VAR_TITLE": "Job postings",
+        "VAR_UNIT": "number of job postings"
+      },
+      "X": {
+        "AXIS_TITLE": "Skill"
+      }      
+    },
+    "USER_GRADES": {
+      "Y": {
+        "TITLE": "Grades",
+        "VAR_TITLE": "Grade"
+      },
+      "X": {
+        "AXIS_TITLE": "Course"
+      }      
+    }
   }
 }

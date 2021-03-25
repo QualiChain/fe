@@ -1028,5 +1028,39 @@
   "MY_COURSES": {
     "HEADER": "Τα μαθήματα που μου έχουν ανατεθεί",
     "NO_DATA": "Δεν υπάρχουν εργασίες"
+  },
+  "CHARTS": {
+    "CARRER_PATH_TRAJECTORY": {
+      "TITLE": "Σταδιοδρομία"
+    },
+    "MOST_POPULAR_COURSES": {
+      "Y": {
+        "TITLE": "Ζήτηση στην αγορά εργασίας",
+        "VAR_TITLE": "Θέσεις εργασίας",
+        "VAR_UNIT": "αριθμός θέσεων εργασίας"
+      },
+      "X": {
+        "AXIS_TITLE": "Μάθημα"
+      }      
+    },
+    "MOST_POPULAR_SKILLS": {
+      "Y": {
+        "TITLE": "Ζήτηση στην αγορά εργασίας",
+        "VAR_TITLE": "Θέσεις εργασίας",
+        "VAR_UNIT": "αριθμός θέσεων εργασίας"
+      },
+      "X": {
+        "AXIS_TITLE": "Δεξιότητα"
+      }      
+    },
+    "USER_GRADES": {
+      "Y": {
+        "TITLE": "Grades",
+        "VAR_TITLE": "Grade"
+      },
+      "X": {
+        "AXIS_TITLE": "Μάθημα"
+      }
+    } 
   }
 }
