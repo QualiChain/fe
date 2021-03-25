@@ -54,21 +54,21 @@
                   <div *ngIf="jobData.skillReq.length==0">{{ 'JOBS.REQUIRED_SKILLS_NOT_AVAILABLE' | translate }}</div>
                   <div *ngIf="jobData.skillReq.length>0" class="col col-lg-8">
                     <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{{ 'JOB.SKILL.NAME.LABEL' | translate }}</th>
-                            <th scope="col">{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</th>
-                            <th scope="col">{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</th>
+                        <thead role="rowgroup">
+                          <tr class="mat-header-row cdk-header-row ng-star-inserted">
+                            <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">#</th>
+                            <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">{{ 'JOB.SKILL.NAME.LABEL' | translate }}</th>
+                            <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</th>
+                            <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</th>
                             <!--<th scope="col">{{ 'JOB.SKILL.ASSIGN.LABEL' | translate }}</th>-->
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr *ngFor="let skill of jobData.skillReq; let i=index">
-                            <th scope="row">{{i+1}}</th>
-                            <td>{{skill.label}}</td>
-                            <td>{{ 'JOB.SKILL.PRIORITY.OPTIONS.'+skill.priorityLevel | uppercase | translate }}</td>
-                            <td>{{ 'JOB.SKILL.LEVEL.OPTIONS.'+skill.proficiencyLevel | uppercase | translate }}</td>
+                        <tbody role="rowgroup">
+                          <tr *ngFor="let skill of jobData.skillReq; let i=index" class="mat-row cdk-row ng-star-inserted" >
+                            <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{i+1}}</td>
+                            <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{skill.label}}</td>
+                            <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted"><span *ngIf="skill.priorityLevel">{{ 'JOB.SKILL.PRIORITY.OPTIONS.'+skill.priorityLevel | uppercase | translate }}</span></td>
+                            <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted"><span *ngIf="skill.proficiencyLevel">{{ 'JOB.SKILL.LEVEL.OPTIONS.'+skill.proficiencyLevel | uppercase | translate }}</span></td>
                             <!--<td>{{skill.assign}}</td>-->
                           </tr>                  
                         </tbody>
@@ -87,18 +87,18 @@
                   <div *ngIf="jobData.educationReq.length==0">{{ 'JOBS.REQUIRED_EDUCATIONS_NOT_AVAILABLE' | translate }}</div>
                   <div *ngIf="jobData.educationReq.length>0" class="col col-lg-12">
                     <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">{{ 'JOB.EDUCATION.NAME.LABEL' | translate }}</th>
-                          <th scope="col">{{ 'JOB.EDUCATION.DESCRIPTION.LABEL' | translate }}</th>
+                      <thead role="rowgroup">
+                        <tr class="mat-header-row cdk-header-row ng-star-inserted">
+                          <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">#</th>
+                          <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">{{ 'JOB.EDUCATION.NAME.LABEL' | translate }}</th>
+                          <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">{{ 'JOB.EDUCATION.DESCRIPTION.LABEL' | translate }}</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr *ngFor="let education of jobData.educationReq; let i=index">
-                          <th scope="row">{{i+1}}</th>
-                          <td>{{education.label}}</td>
-                          <td>{{education.description}}</td>
+                      <tbody role="rowgroup">
+                        <tr *ngFor="let education of jobData.educationReq; let i=index" class="mat-row cdk-row ng-star-inserted" >
+                          <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{i+1}}</td>
+                          <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{education.label}}</td>
+                          <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{education.description}}</td>
                         </tr>                  
                       </tbody>
                     </table>
@@ -113,18 +113,18 @@
                 <div *ngIf="jobData.workExperienceReq.length==0">{{ 'JOBS.REQUIRED_EXPERIENCES_NOT_AVAILABLE' | translate }}</div>
                 <div *ngIf="jobData.workExperienceReq.length>0" class="col col-lg-12">
                   <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">{{ 'JOB.EXPERIENCE.NAME.LABEL' | translate }}</th>
-                        <th scope="col">{{ 'JOB.EXPERIENCE.DESCRIPTION.LABEL' | translate }}</th>
+                    <thead role="rowgroup">
+                      <tr class="mat-header-row cdk-header-row ng-star-inserted">
+                        <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">#</th>
+                        <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">{{ 'JOB.EXPERIENCE.NAME.LABEL' | translate }}</th>
+                        <th scope="col" class="mat-header-cell cdk-header-cell cdk-column-label mat-column-label ng-star-inserted">{{ 'JOB.EXPERIENCE.DESCRIPTION.LABEL' | translate }}</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr *ngFor="let experience of jobData.workExperienceReq; let i=index">
-                        <th scope="row">{{i+1}}</th>
-                        <td>{{experience.position}}</td>
-                        <td>{{experience.comment}}</td>
+                    <tbody role="rowgroup">
+                      <tr *ngFor="let experience of jobData.workExperienceReq; let i=index" class="mat-row cdk-row ng-star-inserted" >
+                        <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{i+1}}</td>
+                        <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{experience.position}}</td>
+                        <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{experience.comment}}</td>
                       </tr>                  
                     </tbody>
                   </table>
