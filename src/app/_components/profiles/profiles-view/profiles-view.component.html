@@ -39,7 +39,7 @@
         {{ 'BUTTON.EDIT' | translate }}
       </button>
     </span>
-    <button *ngIf="(((userId.toString()==currentUser?.id.toString()) && (isEmployee)))" class="btn btn-primary" [routerLink]="['/profiles', userdata?.id, 'dss-curriculum-re-design']">
+    <button *ngIf="(((userId.toString()==currentUser?.id.toString()) && (isProfessor)))" class="btn btn-primary" [routerLink]="['/profiles', userdata?.id, 'dss-curriculum-re-design']">
       <i _ngcontent-axy-c0="" class="material-icons small"> edit </i>
       {{ 'PROFILES.DSS_CV_RE_DESIGN' | translate }}
     </button>
