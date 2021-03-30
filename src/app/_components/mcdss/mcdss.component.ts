@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import { McdssService } from '../../_services/mcdss.service';
@@ -79,6 +79,10 @@ export class MCDSSComponent implements OnInit {
   valuesURL: string[];
   defaultValue: any[] = [];
   
+  //defaultTypeSelected = 0;
+  //defaultCriteriaSelected = '';
+    
+  
  methodsTranslator = {'maut': 'MAUT', 'topsis': 'TOPSIS', 'electreI': 'ELECTRE I', 'prometheeII': 'PROMETHEE II'} 
  methods: any[] = [
   {id: 'maut', name: 'MAUT'},
@@ -120,6 +124,16 @@ export class MCDSSComponent implements OnInit {
     private McdssService: McdssService,
     public dialog: MatDialog
   ) { }
+
+  showHelpDialogForField(fieldName: string) {
+    const dialogRef = this.dialog.open(MCDSSDialogContentForField,
+      {width: "550px", data: {'field':fieldName}}
+      );
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
+    });
+  }
 
   showHelpDialog() {
     const dialogRef = this.dialog.open(MCDSSDialogContent,
@@ -439,7 +453,7 @@ checkboxLabel(row: any): string {
       this.t.push(this.formBuilder.group({
         label: [defaultValue, [Validators.required]],
         weight: [1, Validators.required],
-        type: [0, [Validators.required]],
+        type: ['0', [Validators.required]],
         veto_thresholds: [0, [Validators.required]],
         preference_thresholds: [0, [Validators.required]],
         indifference_thresholds: [0, [Validators.required]],
@@ -656,4 +670,45 @@ export class MCDSSDialogContent implements OnInit {
     
   }
 
+}
+
+
+
+@Component({
+  selector: 'MCDSSS-dialog-content-for-field',
+  templateUrl: 'MCDSS-dialog-content-for-field.html',
+})
+export class MCDSSDialogContentForField implements OnInit {
+  field: string;
+  
+
+  constructor(
+    public dialogRef: MatDialogRef<MCDSSDialogContentForField>,
+    @Inject(MAT_DIALOG_DATA) public data: MCDSSDialogContentForFieldModel) {
+
+      this.field = data.field;
+      
+  }
+
+  ngOnInit() {
+    console.log(this.field);
+    
+  }
+
+  onConfirm(): void {
+    // Close the dialog, return true
+    
+  }
+
+  onDismiss(): void {
+    // Close the dialog, return false    
+    
+  }
+  
+}
+
+export class MCDSSDialogContentForFieldModel {
+
+  constructor(public field: string) {
+  }
 }

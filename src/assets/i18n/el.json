@@ -873,7 +873,13 @@
         "Για κάθε μέθοδο πρέπει να ρυθμιστεί ένα συγκεκριμένο σύνολο κριτηρίων.",
         "<ul><li>Σε περίπτωση που η επιλεγμένη μέθοδος είναι η “Maut” ή η “Topsis”, οι χρήστες πρέπει να εισάγουν πληροφορία για τον αριθμό κριτηρίων, τα βάρη, και τους τύπους βελτιστοποίησης. </li><li>Σε περίπτωση που επιλεγεί η “Electre I”, οι χρήστες πρέπει να εισάγουν πληροφορία για τον αριθμό κριτηρίων, τα βάρη, τον τύπο βελτιστοποίησης, το κατώφλι συμφωνίας και το βέτο. </li><li> Σε περίπτωση που η επιλεγμένη μέθοδος είναι η “Promethee II”, οι χρήστες πρέπει να εισάγουν πληροφορία για τον αριθμό κριτηρίων, τα βάρη, και τους τύπους βελτιστοποίησης, τα κατώφλια προτίμησης και αδιαφορίας, και τους τύπους κριτηρίων.</li></ul>",
         "Σε περίπτωση χρήσης της λειτουργικότητας “Αρχείου εισόδου” μπορείτε να κατεβάσετε μερικά παραδείγματα από  <a target='_blank' href='https://github.com/QualiChain/MCDSS/tree/master/Input_Templates/csv_examples'>εδώ</a>."
-        ]
+        ],
+      "FIELD": {
+        "TYPE": "Select 0 for maximization of the criterion and 1 for minimization.",
+        "VETO": "Set a veto threshold for this criterion.",
+        "PREFERENCE": "Set a preference threshold to denote the preference for this criterion.",
+        "INDIFFERENCE": "Set an indifference threshold to denote the minimum level of difference that is not negligible for this criterion."
+      }        
     }
   },
   "QUESTIONNAIRE": {
