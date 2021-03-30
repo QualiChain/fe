@@ -873,7 +873,13 @@
               "Each method requires a specific set of criteria details to be configured.",
               "<ul><li>In case the preferred method is either “Maut” or “Topsis”, users should insert information about the number of criteria, the weights, and the optimization types.</li><li>In case the preferred method is “Electre I”, users should insert information about the number of criteria, the weights, the optimization types, the agreement threshold, and the veto thresholds.</li><li>In case the preferred method is “Promethee II”, users should insert information about the number of criteria, the weights, the optimization types, the preference thresholds, the indifference thresholds, and the criteria types.</li></ul>",
               "If you use the “File Input” functionality you can download some files examples from <a target='_blank' href='https://github.com/QualiChain/MCDSS/tree/master/Input_Templates/csv_examples'>here</a>."
-              ]
+              ],
+      "FIELD": {
+        "TYPE": "Select 0 for maximization of the criterion and 1 for minimization.",
+        "VETO": "Set a veto threshold for this criterion.",
+        "PREFERENCE": "Set a preference threshold to denote the preference for this criterion.",
+        "INDIFFERENCE": "Set an indifference threshold to denote the minimum level of difference that is not negligible for this criterion."
+      }               
     }
   },
   "QUESTIONNAIRE": {

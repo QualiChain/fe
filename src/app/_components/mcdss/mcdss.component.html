@@ -277,54 +277,82 @@
                                     </div>
                                     <br>
                                     <div class="criteria-div">
-                                        &nbsp;
-                                        <mat-form-field class="citeria_field">
+                                        &nbsp;                                        
+                                    <!--
+                                        <mat-form-field class="citeria_field">                                                                                        
                                             <mat-label>{{ 'MCDSS.CRITERIAL.TYPE.LABEL' | translate }}</mat-label> 
+                                            <a class="noborder float-right" [routerLink]="" (click)="showHelpDialogForField('type')" ><mat-icon>help_outline</mat-icon> </a>
                                             <input matInput required 
-                                            type="number" 
+                                            type="number"                                             
                                             min="0" 
                                             max="1"
-                                            formControlName="type" placeholder="{{ 'MCDSS.CRITERIAL.TYPE.PLACEHOLDER' | translate }}" >
+                                            formControlName="type" placeholder="{{ 'MCDSS.CRITERIAL.TYPE.PLACEHOLDER' | translate }}" >                                            
                                         </mat-form-field>
+                                    -->
+                                        <mat-form-field style="max-width:70px" class="citeria_field">                                                                                        
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.TYPE.LABEL' | translate }}</mat-label>                                             
+                                            <mat-select required placeholder="{{ 'MCDSS.CRITERIAL.TYPE.PLACEHOLDER' | translate }}"
+                                            formControlName="type" ngDefaultControl>
+                                              <mat-option value=0>0</mat-option>
+                                              <mat-option value=1>1</mat-option>
+                                            </mat-select>                                            
+                                          </mat-form-field>
+                                          <a class="noborder float-right" [routerLink]="" (click)="showHelpDialogForField('type')" ><mat-icon class="smallHelp">help_outline</mat-icon> </a>                                        
                                     </div>
             
-                                    <div *ngIf="selectedMethod=='electreI'" class="criteria-div">
-                                        <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDSS.CRITERIAL.VETO.LABEL' | translate }}</mat-label> 
+                                    <div *ngIf="selectedMethod=='electreI'" class="criteria-div">                                        
+                                        <mat-form-field style="max-width:70px" class="citeria_field">
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.VETO.LABEL' | translate }}</mat-label>                                            
                                             <input matInput required 
                                             type="number" 
                                             min="0" 
                                             formControlName="veto_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.VETO.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
+                                        <a class="noborder float-right" [routerLink]="" (click)="showHelpDialogForField('veto')" ><mat-icon class="smallHelp">help_outline</mat-icon> </a> 
                                     </div>
 
                                     <div [hidden]="selectedMethod!='prometheeII'" class="criteria-div">
-                                        <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDSS.CRITERIAL.PREFERENCE.LABEL' | translate }}</mat-label> 
+                                        <mat-form-field style="max-width:70px" class="citeria_field">
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.PREFERENCE.LABEL' | translate }}</mat-label>                                             
                                             <input matInput required 
                                             type="number" 
                                             min="0" 
                                             formControlName="preference_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.PREFERENCE.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
+                                        <a class="noborder float-right" [routerLink]="" (click)="showHelpDialogForField('preference')" ><mat-icon class="smallHelp">help_outline</mat-icon> </a>                                         
                                     </div>
 
                                     <div [hidden]="selectedMethod!='prometheeII'" class="criteria-div">
-                                        <mat-form-field class="citeria_field">
-                                            <mat-label>{{ 'MCDSS.CRITERIAL.INDIFFERENCE.LABEL' | translate }}</mat-label> 
+                                        <mat-form-field style="max-width:70px" class="citeria_field">
+                                            <mat-label>{{ 'MCDSS.CRITERIAL.INDIFFERENCE.LABEL' | translate }}</mat-label>                                             
                                             <input matInput required 
                                             type="number" 
                                             min="0" 
                                             formControlName="indifference_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.INDIFFERENCE.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
+                                        <a class="noborder float-right" [routerLink]="" (click)="showHelpDialogForField('indifference')" ><mat-icon class="smallHelp">help_outline</mat-icon> </a> 
                                     </div>
 
                                     <div [hidden]="selectedMethod!='prometheeII'" class="criteria-div">
+                                    <!--
                                         <mat-form-field class="citeria_field">
                                             <mat-label>{{ 'MCDSS.CRITERIAL.CRITERIA.LABEL' | translate }}</mat-label> 
                                             <input matInput required 
                                             type="text" 
                                             formControlName="criteria_thresholds" placeholder="{{ 'MCDSS.CRITERIAL.CRITERIA.PLACEHOLDER' | translate }}" >
                                         </mat-form-field>
+                                    -->
+                                        <mat-form-field>
+                                            <mat-select placeholder="{{ 'MCDSS.CRITERIAL.CRITERIA.PLACEHOLDER' | translate }}"
+                                            formControlName="criteria_thresholds" ngDefaultControl>
+                                              <mat-option value="usual">usual</mat-option>
+                                              <mat-option value="quasi">quasi</mat-option>
+                                              <mat-option value="linear">linear</mat-option>
+                                              <mat-option value="linear with indifference threshold">linear with indifference threshold</mat-option>
+                                              <mat-option value="level">level</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
                                     </div>
                                     
                                 </div>          
