@@ -1076,5 +1076,6 @@
         "AXIS_TITLE": "Time"
       }  
     }
-  }
+  },
+  "ERROR": "Error"
 }
