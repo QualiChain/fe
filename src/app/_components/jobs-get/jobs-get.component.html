@@ -14,14 +14,23 @@
           </button>
 
           <span *appCanAccess="['apply_for_a_job_position']">
-            <button *ngIf="!userHasAnApply" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">
+            <button [hidden]="!isJobApplyanceOpened" *ngIf="!userHasAnApply && currentUserHasCV" class="btn btn-primary" (click)="openApllyJobDialog(jobData.id, jobData)">
               <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'BUTTON.APPLY_JOB' | translate }}
             </button>
+            <div [hidden]="!isJobApplyanceOpened" *ngIf="!currentUserHasCV" class="alert alert-danger" role="alert">
+              <span [innerHTML]=" 'JOB.APPLY.NO_CV_MESSAGE' | translate "></span>
+            </div>
+            <div *ngIf="!isJobApplyanceOpened" class="alert alert-danger" role="alert">
+              {{'JOB.APPLY.NOT_OPENED_TO_RECEIVE_APPLIES' | translate }}
+            </div>
+            
           </span>
 
-          <button *ngIf="userHasAnApply" class="btn btn-danger" (click)="deleteThisApply(jobData.id, currentUser.id, -1)">
-            <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
-          </button>
+          <span *ngIf="isJobApplyanceOpened">
+            <button *ngIf="userHasAnApply" class="btn btn-danger" (click)="deleteThisApply(jobData.id, currentUser.id, -1)">
+              <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE_APPLY_JOB' | translate }}
+            </button>
+          </span>
       </div>
       <div class="row"><br></div>
 
@@ -44,7 +53,7 @@
             <div class="col ">
                 <div><span class="labeljob">{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+jobData.seniorityLevel | uppercase | translate }}</div> 
             </div>
-            <div class="col ">
+            <div class="col " *ngIf="jobData?.hiringOrg">
               <div><span class="labeljob">{{ 'JOB.ORGANIZATION' | translate }}:</span> {{ jobData?.hiringOrg }} </div> 
             </div>
             
