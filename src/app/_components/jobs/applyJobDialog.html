@@ -2,6 +2,12 @@
 
 <mat-dialog-content class="mat-typography">
 
+
+  <div *ngIf="showErorMessage" class="alert alert-danger" role="alert">
+    {{ 'ERROR' | translate }}:<br>
+    {{errorMessage}}
+  </div>
+
   <form #formAddAward="ngForm" class="apply-job-award-form" (ngSubmit)="onSubmitApplyJobModal()">
     <!-- role label 
     <mat-form-field class="apply-job-full-width">

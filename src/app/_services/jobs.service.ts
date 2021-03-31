@@ -99,7 +99,14 @@ export class JobsService {
          map((data: any) => {
            return data;
          }), catchError( error => {
-           return throwError( 'Something went wrong!' );
+           //console.log(error);
+           if (error.hasOwnProperty('error')) {
+            return throwError(error['error']);
+           }
+           else {
+            return throwError( 'Something went wrong!' );
+           }
+           
          })
       )
     }
