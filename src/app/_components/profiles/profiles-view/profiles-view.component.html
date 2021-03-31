@@ -89,7 +89,10 @@
             <div *ngIf="currentJobPosition"><span class="profileLabel">{{ 'PROFILES.CURRENT_JOB_POSITION' | translate }}:</span>&nbsp;{{currentJobPosition}}</div>
 
             <div class="row"><br></div>
+            <!--
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
+            -->
+            <div class="row" *ngIf="isStudent || isEmployee">
 
               <div>
                   <button *ngIf="canViewCV" class="btn btn-primary" (click)="openUserCV(userdata.id)" >  
