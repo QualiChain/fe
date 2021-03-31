@@ -276,7 +276,9 @@
       "BUTTON" : {
         "APPLY": "Apply"
       }
-    }
+    },
+    "NO_CV_MESSAGE": "If you wish to apply for this job, please update first your CV in your user profile <a href='/myprofile'>here</a>.",
+    "NOT_OPENED_TO_RECEIVE_APPLIES": "This job is not opened to receive applies"
   },
   "JOB_APPLY": {
     "AVAILABLE": {

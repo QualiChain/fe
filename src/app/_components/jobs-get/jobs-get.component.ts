@@ -16,6 +16,7 @@ import { AppComponent } from '../../app.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import { CVService } from '../../_services/cv.service';
 
 @Component({
   selector: 'app-jobs-get',
@@ -55,6 +56,8 @@ export class JobsGetComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   cntReloads: number = 0;
+  currentUserHasCV: boolean = false;
+  isJobApplyanceOpened: boolean = false;
 
   constructor(
     private appcomponent: AppComponent,
@@ -64,7 +67,8 @@ export class JobsGetComponent implements OnInit {
     private js: JobsService,
     private us: UsersService,
     private translate: TranslateService,
-    public authservice: AuthService
+    public authservice: AuthService,
+    private cvs: CVService
   ) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
@@ -150,6 +154,17 @@ export class JobsGetComponent implements OnInit {
       if (id) {
         //console.log(id);
 
+        console.log("this.currentUser.id:"+this.currentUser.id);
+        this.cvs
+          .getCV(this.currentUser.id.toString())
+          .subscribe((data: any) => {
+            //console.log(data);
+            this.currentUserHasCV = true;
+          },
+          error => {            
+            console.log("error");
+          });
+
         this.us
         .getJobApplisByUser(this.currentUser.id)
         .subscribe((appliesByuser: any[]) => {
@@ -173,6 +188,20 @@ export class JobsGetComponent implements OnInit {
           (dataJob: Job) => {
             //console.log("job in db");
             //console.log(dataJob);
+            let newStartDate = new Date(dataJob.startDate);
+            let newEndDate = new Date(dataJob.endDate);
+            var today = new Date();
+            
+            if (today > newStartDate && today < newEndDate ){
+              //console.log('Correct Date')
+              this.isJobApplyanceOpened = true;
+            }
+            else{
+              //console.log('Out Side range !!')
+              this.isJobApplyanceOpened = false;
+            }
+
+
             if(!dataJob.skillReq) {
               dataJob.skillReq = [];
             }
