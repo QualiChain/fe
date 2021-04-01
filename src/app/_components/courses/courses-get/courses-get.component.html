@@ -223,11 +223,12 @@
                 <!--
                 <button class="btn btn-danger" *ngIf="(isAdmin || isProfessor)" (click)="relationUserCourse(courseData.courseid, 'delete' ,'done', element.user.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
-                </button>          
+                </button>  
+                -->        
                 <button [hidden]="!isUserAsTaught && !isAdmin" *appCanAccess="['issue_smart_badge']" class="btn btn-primary" (click)="openAwardDialog(element.user.id, element)">
                   <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
                 </button>
-                -->
+                
               </td>
             </ng-container>
             <!-- surname Column -->
