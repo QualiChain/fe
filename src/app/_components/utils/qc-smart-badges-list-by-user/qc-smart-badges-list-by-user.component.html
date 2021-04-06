@@ -17,7 +17,7 @@
         <ng-template #userHasBadges>
             <div *ngIf="formatOutput=='small'">
                 <span *ngFor="let element_badge of aqcuired_badges_by_user; index as i">
-                    <a href="" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId"><img style="width:30px" *ngIf="element_badge.badge.oubadge.image" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > </a>
+                    <a href="" class="noborder" (click)="intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId"><img style="width:30px" *ngIf="element_badge.badge.oubadge.image" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > </a>
                 </span>
             </div>
             <div *ngIf="formatOutput=='card'">
@@ -28,7 +28,7 @@
                         <mat-card-header>
                             <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.oubadge_user.badge.image}}");'></div>
                             <mat-card-title>
-                                <a href="" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
+                                <a href="" class="noborder" (click)="intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
                                     {{element_badge.badge.name}}
                                 </a>
                             </mat-card-title>
@@ -61,28 +61,29 @@
             {{element_badge.badge.name}}</h4>                                              
         </div>
         <div class="modal-body">
-            <app-qc-smart-badge-card [awardId]="element_badge.badge.id"></app-qc-smart-badge-card>
-<!--
-          <div>
-            <h2 class="mat-dialog-title">{{ 'BADGES.BADGE.BADGE_MAIN_DATA' | translate }}</h2>
-          </div>
-          <div *ngIf="element_badge.badge.type"><label>{{ 'BADGES_TYPES.LABEL' | translate }}:</label> {{element_badge.badge.type}}</div>
-          <div *ngIf="element_badge.badge.description"><label>{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}:</label> {{element_badge.badge.description}}</div>
-          <div *ngIf="element_badge.oubadge_user.badge.version"><label>{{ 'BADGES.BADGE.VERSION.LABEL' | translate }}:</label> {{element_badge.oubadge_user.badge.version}}</div>
-          <div>
-              <h2 class="mat-dialog-title">{{ 'BADGES.BADGE.ISSUER.ISSUER_MAIN_DATA' | translate }}</h2>
-          </div>
-          <div><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}:</label> {{element_badge.oubadge_user.badge.issuer.name}}</div>
-          <div *ngIf="element_badge.oubadge_user.badge.description"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}:</label> {{element_badge.oubadge_user.badge.description}}</div>
-          <div *ngIf="element_badge.oubadge_user.badge.issuer.url"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.LABEL' | translate }}:</label> {{element_badge.oubadge_user.badge.issuer.url}}</div>
-          <div *ngIf="element_badge.oubadge_user.badge.issuer.email"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.LABEL' | translate }}:</label> {{element_badge.oubadge_user.badge.issuer.email}}</div>
-          <div *ngIf="element_badge.oubadge_user.badge.issuer.telephone"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_TELEPHONE.LABEL' | translate }}:</label> {{element_badge.oubadge_user.badge.issuer.telephone}}</div>
-          <div *ngIf="element_badge.oubadge_user.badge.issuer.image"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_IMAGE_URL.LABEL' | translate }}:</label> 
-            <img style="width:30px" *ngIf="element_badge.badge.oubadge.image" [src]="element_badge.oubadge_user.badge.issuer.image">
-          </div>
--->
+
+
+            <div class="row" *ngIf="loadingLoginSpinner">
+                <app-qc-spinner></app-qc-spinner>
+            </div>   
+
+            <div [hidden]="loadingLoginSpinner">
+                <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
+                    {{errorMessage}}
+                </div>
+                <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
+                    Validation Success
+                </div>
+
+                <app-qc-smart-badge-card [awardId]="element_badge.badge.id"></app-qc-smart-badge-card>
+
+            </div>
+
         </div>
         <div class="modal-footer">
+          <button [hidden]="loadingLoginSpinner" (click)="verifySmartBadge(element_badge)" type="button" class="btn btn-secondary">
+                <i _ngcontent-axy-c0="" class="material-icons small">  star  </i> {{ 'AWARD_SMART_BADGE.BUTTON.VALIDATE_AWARD' | translate }}
+          </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'BUTTON.CLOSE' | translate }}</button>                                              
         </div>
       </div>
