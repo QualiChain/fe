@@ -1038,6 +1038,9 @@
     "NO_DATA": "Δεν υπάρχουν εργασίες"
   },
   "CHARTS": {
+    "USER_SKILLS_JOB_SKILLS": {
+      "TITLE": "Επιπεδο ΙΚΑΝΟΤΗΤΑΣ"
+    },
     "CARRER_PATH_TRAJECTORY": {
       "TITLE": "Σταδιοδρομία"
     },
