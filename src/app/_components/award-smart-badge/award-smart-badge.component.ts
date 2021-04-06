@@ -71,7 +71,7 @@ export class AwardSmartBadgeComponent implements OnInit {
 
   //displayedColumns: string[] = ['id', 'student', 'semester', 'grade', 'aqcuired_badges', 'action'];
   //displayedColumns: string[] = ['id', 'student', 'grade', 'action'];
-  displayedColumns: string[] = ['student', 'grade', 'aqcuired_badges', 'action'];
+  displayedColumns: string[] = ['surname', 'name', 'status', 'grade', 'aqcuired_badges', 'action'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource<listOfStudents>([]);
@@ -133,7 +133,8 @@ export class AwardSmartBadgeComponent implements OnInit {
     dataEnrolledUsers => {
       //console.log(dataEnrolledUsers);
       dataEnrolledUsers.forEach(element => {
-        if ((element.course_status=='done')) {
+        //console.log(element.course_status);
+        if ((element.course_status=='done') || (element.course_status=='enrolled')) {
          
             let aqcuired_badges_by_user = [];
 
@@ -155,8 +156,12 @@ export class AwardSmartBadgeComponent implements OnInit {
               }
             );
             */
-
-            let dataToPlot = {id: element.user.id , student: element.user.surname+", "+element.user.name, semester: '-', grade: (0+element.course_grade), origin: 'external', aqcuired_badges: []}
+            
+            let grade = null;
+            if (element.course_grade) {
+              grade = 0 + element.course_grade;
+            }
+            let dataToPlot = {id: element.user.id , surname: element.user.surname, name: element.user.name, student: element.user.surname+", "+element.user.name, semester: '-', grade: grade, origin: 'external', status: element.course_status, aqcuired_badges: []}
 
             dataListUsers.push(dataToPlot);
             ELEMENT_DATA.push(dataToPlot);

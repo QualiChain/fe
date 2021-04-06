@@ -142,10 +142,12 @@ export class VisualisationsUserSkillsJobSkillsChartComponent extends Visualisati
   }
   ngOnChanges(): void {
 
+    let TITLE = this.translate.instant('CHARTS.USER_SKILLS_JOB_SKILLS.TITLE');
+
     this.jobId = this.jobId.toLowerCase().replace("job", "");
 
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(urlVisualisations+"/show_radar_chart?y_var_names[]=skil_level&y_var_titles[]=skill_level&x_axis_name=name&x_axis_title=Name&use_default_colors=false&chart_3d=false&color_list_request[]=red&color_list_request[]=blue&base_query=user_job_skills&user_id="+this.userId+"&job_id="+this.jobId);
-    this.urlSafe = urlVisualisations+"/show_radar_chart?y_var_names[]=skil_level&y_var_titles[]=skill_level&x_axis_name=name&x_axis_title=Name&use_default_colors=false&chart_3d=false&color_list_request[]=red&color_list_request[]=blue&base_query=user_job_skills&user_id="+this.userId+"&job_id="+this.jobId;
+    this.urlSafe = urlVisualisations+"/show_radar_chart?y_var_names[]=skil_level&y_var_titles[]="+TITLE+"&x_axis_name=name&x_axis_title=Name&use_default_colors=false&chart_3d=false&color_list_request[]=red&color_list_request[]=blue&base_query=user_job_skills&user_id="+this.userId+"&job_id="+this.jobId;
   }
 
 }

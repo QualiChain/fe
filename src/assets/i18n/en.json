@@ -1038,6 +1038,9 @@
     "NO_DATA": "There are no assignments"
   },
   "CHARTS": {
+    "USER_SKILLS_JOB_SKILLS": {
+      "TITLE": "Skill level"
+    },
     "CARRER_PATH_TRAJECTORY": {
       "TITLE": "Career Path Trajectory"
     },
