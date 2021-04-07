@@ -222,6 +222,10 @@
     },
     "EXPERIENCE": {
       "TITLE": "Προϋπηρεσία",
+      "LABEL" : {
+        "LABEL": "Τίτλος",
+        "PLACEHOLDER": "Τίτλος"
+      },
       "NAME" : {
         "LABEL": "Θέση",
         "PLACEHOLDER": "Τίτλος θέσης"
