@@ -33,7 +33,7 @@ export class VisualisationHelperDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    console.log(this.data);
   }
 
   onConfirm(): void {
@@ -82,6 +82,27 @@ export class VisualisationsComponent implements OnInit {
     this.cnt = this.cnt + 1;    
   }
 
+  openInNewWindow(urlIn: string) {
+    
+    const dialogData = new VisualisationModalWindowDialogModel('', urlIn);
+
+    const dialogRef = this.dialog.open(VisualisationModalWindowDialogComponent, {
+      width: "100%",
+      height: "70vh%",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      //this.result = dialogResult;
+
+      if (dialogResult) {
+         console.log("Under construction");
+
+      }
+    });
+    
+  }
+
   showHelpDialog(helpId: string): void {
 
     
@@ -98,7 +119,7 @@ export class VisualisationsComponent implements OnInit {
       //this.result = dialogResult;
 
       if (dialogResult) {
-         console.log("Under construction");
+         //console.log("Under construction");
 
       }
     });
@@ -598,6 +619,55 @@ export class VisualisationsMostPopularCourses extends VisualisationsComponent {
     //console.log(tmpURL);
     this.urlSafe = tmpURL;
 
+  }
+
+}
+
+
+export class VisualisationModalWindowDialogModel {
+
+  constructor(public title: string, public url: string) {
+  }
+}
+
+@Component({
+  selector: 'app-visualisations-modal-window-dialog',
+  templateUrl: './visulisations-modal-window.component.html',
+  styleUrls: ['./visualisations.component.css'],
+})
+export class VisualisationModalWindowDialogComponent implements OnInit {
+  title: string;
+  
+
+  constructor(
+    public dialogRef: MatDialogRef<VisualisationModalWindowDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: VisualisationModalWindowDialogModel) {
+    // Update view with given values
+    this.title = data.title;
+    this.urlSafe = data.url;
+  }
+
+  cnt: number = 0;
+  urlSafe: string = "";
+  extraClass: string = "";
+
+  loadEvent(event) {
+    this.cnt = this.cnt + 1;    
+  }
+  
+  ngOnInit() {
+    
+  }
+
+  onConfirm(): void {
+    // Close the dialog, return true
+    this.dialogRef.close(true);
+  }
+
+  onDismiss(): void {
+    // Close the dialog, return false
+    this.dialogRef.close(false);
+    
   }
 
 }
