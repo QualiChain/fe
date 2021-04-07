@@ -16,21 +16,57 @@
                 <textarea matInput required [(ngModel)]="dataIn.jobDescription" name="job_description" value="job_description" placeholder="{{ 'JOB.DESCRIPTION.PLACEHOLDER' | translate }}"></textarea>
               </mat-form-field>
               <br/>
+
+              <mat-form-field class="create-job-full-width">
+                <mat-label>{{ 'JOB.SPECIALIZATION' | translate }}</mat-label>
+                <mat-select required [(ngModel)]="dataIn.specialization" name="specialization">
+                  <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization.title">
+                    {{specialization.title}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>              
+              <br>
+
               <!-- start_date -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.START_DATE.PLACEHOLDER' | translate }}</mat-label>
-                <input matInput [matDatepicker]="pickerStartDate" name="start_date" [(ngModel)]="dataIn.startDate" #startDateInput="ngModel" required>
+                <input matInput 
+                #resultPickerStartDateModel="ngModel"
+                [matDatepicker]="pickerStartDate" [min]="" [max]="dataIn.endDate" name="start_date" [(ngModel)]="dataIn.startDate" #startDateInput="ngModel" required>
                 <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerStartDate startView="year" [startAt]="dataIn.startDate" format="DD-MM-YYYY"></mat-datepicker>
+                
+                <mat-error *ngIf="resultPickerStartDateModel.hasError('matDatepickerParse')">
+                  "{{resultPickerStartDateModel.getError('matDatepickerParse').text}}"
+                  {{ 'ERRORS.IS_NOT_A_VALID_DATE' | translate }}
+                </mat-error>
+                <mat-error *ngIf="resultPickerStartDateModel.hasError('matDatepickerMax')">
+                  {{ 'ERRORS.MAXIMUM_DATE_SHOULD_BE' | translate }} {{dataIn.endDate | date }}
+                </mat-error> 
+
               </mat-form-field>
               <br/>
               <!-- end_date -->
               <mat-form-field class="create-job-full-width">
                 <mat-label>{{ 'JOB.END_DATE.PLACEHOLDER' | translate }}</mat-label>
-                <input matInput [matDatepicker]="pickerEndDate" name="end_date" [(ngModel)]="dataIn.endDate" #endDateInput="ngModel" required>
+                <input matInput 
+                #resultPickerEndDateModel="ngModel"
+                [matDatepicker]="pickerEndDate" [min]="dataIn.startDate" [max]="" name="end_date" [(ngModel)]="dataIn.endDate" #endDateInput="ngModel" required>
                 <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEndDate startView="year" [startAt]="dataIn.endDate"></mat-datepicker>
+
+                <mat-error *ngIf="resultPickerEndDateModel.hasError('matDatepickerParse')">
+                  "{{resultPickerEndDateModel.getError('matDatepickerParse').text}}"
+                  {{ 'ERRORS.IS_NOT_A_VALID_DATE' | translate }}
+                </mat-error>
+                <mat-error *ngIf="resultPickerEndDateModel.hasError('matDatepickerMin')">
+                  {{ 'ERRORS.MINIMUM_DATE_SHOULD_BE' | translate }} {{dataIn.startDate | date }}
+                </mat-error> 
+
               </mat-form-field>
+              
+              
+
               <br/>
               <!-- employment_type -->
               <mat-form-field class="create-job-full-width">

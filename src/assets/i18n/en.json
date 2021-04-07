@@ -158,6 +158,7 @@
   },
   "JOB": {
     "HEADER_TITLE": "Job",
+    "SPECIALIZATION": "Specialization",
     "CANDIDATES": "Candidates",
     "ASSIGNED": "Assigned",
     "NO_CANDIDATES": "There are not candidates for this Job",
@@ -508,7 +509,7 @@
     }
   },
   "COURSE"  : {
-    "TITLE": "Course",
+    "TITLE": "Course",    
     "NAME" : {
       "LABEL": "Name",
       "PLACEHOLDER": "Name"
@@ -1082,5 +1083,10 @@
       }  
     }
   },
-  "ERROR": "Error"
+  "ERROR": "Error",
+  "ERRORS": {
+    "IS_NOT_A_VALID_DATE": "is not a valid date!",
+    "MINIMUM_DATE_SHOULD_BE": "Minimum date should be",
+    "MAXIMUM_DATE_SHOULD_BE": "Maximum date should be"
+  }
 }
