@@ -233,6 +233,10 @@
     },
     "EDUCATION": {
       "TITLE": "Degree",
+      "LABEL" : {
+        "LABEL": "Title",
+        "PLACEHOLDER": "Title"
+      },
       "NAME" : {
         "LABEL": "Title",
         "PLACEHOLDER": "Degree title"

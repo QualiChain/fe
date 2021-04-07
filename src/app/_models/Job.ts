@@ -16,6 +16,7 @@ export class JobSkill {
   }  
 
   export class WorkHistory {
+    label: string;
     position: string;
     duration: string;
     comment: string;
@@ -45,6 +46,7 @@ export class JobSkill {
     endDate: string;
     hiringOrg?: string;
     specialization?: string;
+    coursesReq?: [];
    /* id: number;
     creator_id: number;
     date: string;

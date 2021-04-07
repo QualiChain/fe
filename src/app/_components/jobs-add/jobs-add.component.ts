@@ -171,6 +171,7 @@ export class JobsAddComponent implements OnInit {
 
     addExperience() {
       let newExperience = {} as WorkHistory;
+      newExperience.label = "";
       newExperience.position = "";
       newExperience.duration = ""; 
       if (!this.dataIn.workExperienceReq)  {
@@ -195,8 +196,10 @@ export class JobsAddComponent implements OnInit {
       let dataToSend = this.dataIn;
       dataToSend.creator_id =  ":"+this.currentUser.id.toString();
 
-
+      
       delete dataToSend.id;
+      
+
 /*	  
      let dataToSend = {
         "title": this.dataIn.title,
@@ -232,8 +235,10 @@ export class JobsAddComponent implements OnInit {
     }
     
     updateJob(jobId: any) {
-      console.log(jobId);
-      console.log(this.dataIn);
+      //console.log(jobId);
+      delete this.dataIn.coursesReq;
+
+      //console.log(this.dataIn);
 
       this.js.updateJob(jobId, this.dataIn).subscribe(
         res => {
@@ -340,7 +345,7 @@ export class JobsAddComponent implements OnInit {
             this.allSpecializations.push(data)                           
           });       
           this.allSpecializations.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
-          console.log(this.allSpecializations);
+          //console.log(this.allSpecializations);
         },
         error => {
             console.log("Error getting data");            

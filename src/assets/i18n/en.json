@@ -222,6 +222,10 @@
     },
     "EXPERIENCE": {
       "TITLE": "Work Experience",
+      "LABEL" : {
+        "LABEL": "Title",
+        "PLACEHOLDER": "Title"
+      },
       "NAME" : {
         "LABEL": "Position",
         "PLACEHOLDER": "Position title"

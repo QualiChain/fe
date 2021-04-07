@@ -86,7 +86,10 @@
                 <mat-label>{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}</mat-label>
                 <mat-select  [(ngModel)]="dataIn.seniorityLevel" name="level" required ngDefaultControl>
                   <mat-option value="internership">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.INTERNERSHIP' | translate }}</mat-option>
+                  <!--
                   <mat-option value="entity_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTITY_LEVEL' | translate }}</mat-option>
+                  -->
+                  <mat-option value="entry_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ENTRY_LEVEL' | translate }}</mat-option>
                   <mat-option value="associate">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.ASSOCIATE' | translate }}</mat-option>
                   <mat-option value="mid_senior_level">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.MID_SENIOR_LEVEL' | translate }}</mat-option>
                   <mat-option value="director">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.DIRECTOR' | translate }}</mat-option>
@@ -264,7 +267,15 @@
                         <div class="card-subtitle">      
                           <h3>{{ 'JOB.EXPERIENCE.TITLE' | translate }} {{i + 1}}</h3>                        
                         </div>
-                      
+
+                        <!-- label -->
+                        <!--
+                        <mat-form-field class="create-job-full-width">
+                          <mat-label>{{ 'JOB.EXPERIENCE.LABEL.LABEL' | translate }}</mat-label>
+                            <input matInput required [(ngModel)]="experience.label" name="LabelPosition_{{i}}" value="ExperiencePosition" placeholder="{{ 'JOB.EXPERIENCE.LABEL.PLACEHOLDER' | translate }}" #experiencePositionInput="ngModel">
+                        </mat-form-field>
+                        <br/>
+                        -->
                         <!-- title -->
                         <mat-form-field class="create-job-full-width">
                           <mat-label>{{ 'JOB.EXPERIENCE.NAME.LABEL' | translate }}</mat-label>
