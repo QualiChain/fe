@@ -41,6 +41,9 @@
             <div class="col ">
                 <div><span class="labeljob">{{ 'JOB.DESCRIPTION.LABEL' | translate }}:</span> {{jobData.jobDescription}}</div> 
             </div>
+            <div class="col " *ngIf="jobData.specialization">
+              <div><span class="labeljob">{{ 'JOB.SPECIALIZATION' | translate }}:</span> {{jobData.specialization}}</div> 
+          </div>            
             <div class="col ">
                 <div><span class="labeljob">{{ 'JOB.START_DATE.LABEL' | translate }}:</span> {{jobData.startDate | date }}</div> 
             </div>

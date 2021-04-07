@@ -89,8 +89,8 @@ export class JobsComponent implements OnInit {
 
  
 
-  //displayedColumns: string[] = ['id', 'title', 'employment_type', 'level', 'action'];
-  displayedColumns: string[] = ['label', 'employment_type', 'level', 'hiringOrg', 'action'];
+  //displayedColumns: string[] = ['label', 'employment_type', 'level', 'hiringOrg', 'action'];
+  displayedColumns: string[] = ['label', 'employment_type', 'level', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -257,7 +257,7 @@ export class JobsComponent implements OnInit {
     }
 
     selectCompany(value: any) {
-      console.log(value);
+      //console.log(value);
     }
 
     getCompaniesList() {

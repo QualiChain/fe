@@ -158,6 +158,7 @@
   },
   "JOB": {
     "HEADER_TITLE": "Έργασία",
+    "SPECIALIZATION": "Ειδίκευση",
     "CANDIDATES": "Υποψήφιοι",
     "ASSIGNED": "Ανατεθειμένη",
     "NO_CANDIDATES": "Δεν υπάρχουν υποψήφιοι γι' αυτή την θέση εργασίας",
@@ -1082,5 +1083,10 @@
       }  
     }
   },
-  "ERROR": "Σφάλμα"
+  "ERROR": "Σφάλμα",
+  "ERRORS": {
+    "IS_NOT_A_VALID_DATE": "is not a valid date!",
+    "MINIMUM_DATE_SHOULD_BE": "Minimum date should be",
+    "MAXIMUM_DATE_SHOULD_BE": "Maximum date should be"
+  }
 }

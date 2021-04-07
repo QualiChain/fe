@@ -15,8 +15,13 @@ import { QCStorageService } from '../../_services/QC_storage.services';
 import {Observable} from 'rxjs';
 import { CVService } from '../../_services/cv.service';
 import {map, startWith} from 'rxjs/operators';
+import { SpecializationsService } from '../../_services/specializations.service'
 
 //import { tap } from 'rxjs/operators';
+export interface Specialization {
+  title: string;
+  id: number;
+}
 
 @Component({
   selector: 'app-jobs-add',
@@ -39,8 +44,11 @@ export class JobsAddComponent implements OnInit {
     mode: string = '';
     dataIn : Job;
     jobDataToPost = {};
+    allSpecializations: Specialization[] = [];
+    selectedSpecializationValue: string = null;
 
     constructor(      
+      private ss: SpecializationsService,
       private cs: CVService,
       private qcStorageService: QCStorageService,
       private authservice: AuthService,
@@ -204,8 +212,8 @@ export class JobsAddComponent implements OnInit {
 */
 
 
-this.jobDataToPost = dataToSend;
-console.log(dataToSend);
+      this.jobDataToPost = dataToSend;
+      //console.log(dataToSend);
 
       this.js.addJob(dataToSend).subscribe(
         res => {
@@ -318,6 +326,27 @@ console.log(dataToSend);
     });
   }
 
+  getSpecializations() {
+    //this.selectedSpecializationValue = "Mobile Developer";
+    this.allSpecializations = [];
+        this.ss.getSpecializations().subscribe(
+        resSpecializations => {
+          //console.log("Request OK");
+          //console.log(resSpecializations); 
+        
+          resSpecializations.forEach(element => {
+            //console.log(element.title);
+            let data: Specialization = {title:element.title, id:element.id};
+            this.allSpecializations.push(data)                           
+          });       
+          this.allSpecializations.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+          console.log(this.allSpecializations);
+        },
+        error => {
+            console.log("Error getting data");            
+        });
+  }
+
   ngOnInit() {
 
     
@@ -333,6 +362,7 @@ console.log(dataToSend);
       );
 
     this.getSkillsList();
+    this.getSpecializations();
 
     this.dataIn = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",
     skillReq: [], workExperienceReq:[], educationReq:[]};

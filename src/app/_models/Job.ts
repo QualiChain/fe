@@ -44,6 +44,7 @@ export class JobSkill {
     startDate: string;
     endDate: string;
     hiringOrg?: string;
+    specialization?: string;
    /* id: number;
     creator_id: number;
     date: string;
