@@ -18,3 +18,7 @@
 .float-right {
     float: right!important;
 }
+
+.most_popular_courses {
+    height: 550px;
+}
