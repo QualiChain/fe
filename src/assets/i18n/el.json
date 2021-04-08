@@ -1089,28 +1089,28 @@
   },
   "ERROR": "Σφάλμα",
   "ERRORS": {
-    "IS_NOT_A_VALID_DATE": "is not a valid date!",
-    "MINIMUM_DATE_SHOULD_BE": "Minimum date should be",
-    "MAXIMUM_DATE_SHOULD_BE": "Maximum date should be"
+    "IS_NOT_A_VALID_DATE": "Μη έγκυρη ημερομηνία",
+    "MINIMUM_DATE_SHOULD_BE": "Η νωρίτερη επιτρεπόμενη ημερομηνία είναι",
+    "MAXIMUM_DATE_SHOULD_BE": "Η αργότερη επιτρεπόμενη ημερομηνία είναι"
   },
   "SMART_BADGE": {
     "MAIN_DATA_TAB": {
-      "TITLE": "Main data",
+      "TITLE": "Βασικά δεδομένα",
       "MESSAGES": {
-        "VALIDATION_OK": "Validation Success",
-        "VALIDATION_KO": "The validation cannot be done"
+        "VALIDATION_OK": "Έγκυρο",
+        "VALIDATION_KO": "Άκυρο"
       }
     },
     "DOWNLOAD_TAB": {
-      "TITLE": "Download",
-      "HELP": "Here you can add the Smart Badge data to a PNG image.<br>You need to upload a PNG image and press download.",
+      "TITLE": "Μεταφόρτωση",
+      "HELP": "Εδώ μπορείς να προσθέσεις τα δεδομένα για το Smart Badge σε μία εικόνα PNG.<br>Ανέβασε μια εικόνα και πάτα Μεταφόρτωση.",
       "BUTTONS": {
-        "UPLOAD_PNG_IMAGE": "Add a PNG image",
-        "DOWNLOAD": "Download"
+        "UPLOAD_PNG_IMAGE": "Πρόσθεσε μια PNG εικόνα",
+        "DOWNLOAD": "Μεταφόρτωση"
       },
       "MESSAGES": {
-        "NOT_VALID_FILE": "The file '{{file_name}}' is not valid, please select another one.",
-        "ERROR_DOWNLOADING_PNG_FILE": "Sorry, there is some problem dowloading the file"
+        "NOT_VALID_FILE": "Το αρχείο '{{file_name}}' δεν είναι έγκυρο, παρακαλώ επιλέξτε ένα άλλο.",
+        "ERROR_DOWNLOADING_PNG_FILE": "Δυστυχώς προέκυψε πρόβλημα κατά την μεταφόρτωση του αρχείου."
       }
     }
   }
