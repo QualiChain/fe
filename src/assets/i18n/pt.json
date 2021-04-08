@@ -1092,5 +1092,26 @@
     "IS_NOT_A_VALID_DATE": "is not a valid date!",
     "MINIMUM_DATE_SHOULD_BE": "Minimum date should be",
     "MAXIMUM_DATE_SHOULD_BE": "Maximum date should be"
+  },
+  "SMART_BADGE": {
+    "MAIN_DATA_TAB": {
+      "TITLE": "Main data",
+      "MESSAGES": {
+        "VALIDATION_OK": "Validation Success",
+        "VALIDATION_KO": "The validation cannot be done"
+      }
+    },
+    "DOWNLOAD_TAB": {
+      "TITLE": "Download",
+      "HELP": "Here you can add the Smart Badge data to a PNG image.<br>You need to upload a PNG image and press download.",
+      "BUTTONS": {
+        "UPLOAD_PNG_IMAGE": "Add a PNG image",
+        "DOWNLOAD": "Download"
+      },
+      "MESSAGES": {
+        "NOT_VALID_FILE": "The file '{{file_name}}' is not valid, please select another one.",
+        "ERROR_DOWNLOADING_PNG_FILE": "Sorry, there is some problem dowloading the file"
+      }
+    }
   }
 }
