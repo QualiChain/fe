@@ -121,6 +121,27 @@ export class AuthService {
       )
   }
 
+  createQCAuthorizationHeaderForFormDataReturnBlob(){
+    let token = localStorage.getItem('token');      
+    //let token = "AABBCCCDDD";
+    let dataToReturn: any = null;
+
+    if (token) {
+      let headers = new HttpHeaders()
+        .set('Accept','image/jpeg')
+        .set('Authorization', token);
+
+        dataToReturn = headers;
+    }
+    else {
+      let headers = new HttpHeaders();
+
+      dataToReturn = headers;
+    }
+
+    return dataToReturn;
+  }
+
   createQCAuthorizationHeaderForFormData() {
     let token = localStorage.getItem('token');      
     //let token = "AABBCCCDDD";

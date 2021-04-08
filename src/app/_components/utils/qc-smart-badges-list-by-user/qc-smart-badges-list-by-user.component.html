@@ -61,29 +61,75 @@
             {{element_badge.badge.name}}</h4>                                              
         </div>
         <div class="modal-body">
-
-
+                  
             <div class="row" *ngIf="loadingLoginSpinner">
                 <app-qc-spinner></app-qc-spinner>
             </div>   
 
             <div [hidden]="loadingLoginSpinner">
+                <br *ngIf="showErrorMessage || validationSuccess">
                 <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
-                    {{errorMessage}}
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO' | translate }}
                 </div>
                 <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
-                    Validation Success
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK' | translate }}
                 </div>
 
                 <app-qc-smart-badge-card [awardId]="element_badge.badge.id"></app-qc-smart-badge-card>
-
             </div>
 
+            <div *ngIf="isAdmin || isProfessor || isAcademicOrganisation">
+                <br>
+                <mat-accordion class="example-headers-align">
+                    <mat-expansion-panel  hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ 'SMART_BADGE.DOWNLOAD_TAB.TITLE' | translate }}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+            
+                        <br>
+                        <div [innerHTML]="'SMART_BADGE.DOWNLOAD_TAB.HELP' | translate"></div>
+                        <br>
+                        <button class="btn btn-primary" type="button" mat-raised-button (click)="fileInputCD.click()">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> attach_file </i> {{ 'SMART_BADGE.DOWNLOAD_TAB.BUTTONS.UPLOAD_PNG_IMAGE' | translate }}
+                        </button>
+                        <input hidden required #fileInputCD name="pngFile" ngModel type="file" (change)="handleFile($event.target.files)">
+                        <br>
+                        <div *ngIf="invalidDetailsFile">
+                            <div class="alert alert-danger">
+                                {{ 'SMART_BADGE.DOWNLOAD_TAB.MESSAGES.NOT_VALID_FILE' | translate: {file_name: messageErrorDetailsFile } }}
+                            </div>
+                        </div>  
+                        <div *ngIf="fileToUploadDetails" >
+                            <div class="alert alert-success">
+                                <h4 class="name">{{ fileToUploadDetails?.name }}</h4>
+                                <p class="size"> {{ 'FILE.SIZE' | translate }}: {{ formatBytes(fileToUploadDetails?.size) }} {{ 'FILE.TYPE' | translate }}: {{fileToUploadDetails?.type}}</p>                                
+                            </div>
+
+                            <div *ngIf="showErrorDowloadingPNG">
+                                <div class="alert alert-danger">
+                                    {{ 'SMART_BADGE.DOWNLOAD_TAB.MESSAGES.ERROR_DOWNLOADING_PNG_FILE' | translate }}
+                                </div>
+                            </div> 
+
+                            <button class="btn btn-primary" type="button" mat-raised-button (click)="downloadBadgeAsPNG(element_badge)">                            
+                            <i _ngcontent-axy-c0="" class="material-icons small"> download </i> {{ 'SMART_BADGE.DOWNLOAD_TAB.BUTTONS.DOWNLOAD' | translate }}
+                            </button>
+                        </div>
+
+                    </mat-expansion-panel>
+
+                </mat-accordion>
+            </div>
+            
+
+
         </div>
-        <div class="modal-footer">
-          <button [hidden]="loadingLoginSpinner" (click)="verifySmartBadge(element_badge)" type="button" class="btn btn-secondary">
+        <div class="modal-footer">    
+           <button [hidden]="loadingLoginSpinner" (click)="verifySmartBadge(element_badge)" type="button" class="btn btn-secondary">
                 <i _ngcontent-axy-c0="" class="material-icons small">  star  </i> {{ 'AWARD_SMART_BADGE.BUTTON.VALIDATE_AWARD' | translate }}
-          </button>
+           </button>     
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'BUTTON.CLOSE' | translate }}</button>                                              
         </div>
       </div>

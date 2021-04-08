@@ -4,6 +4,7 @@ import { SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { awardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
 import { OUService } from '../../../_services/ou.service'
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-qc-smart-badges-list-by-user',
@@ -24,11 +25,24 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   loadingLoginSpinner: boolean = false;
   validationSuccess: boolean = false;
 
+  fileToUploadDetails: File = null;
+  uploadedDetails: boolean = false;
+  invalidDetailsFile: boolean = false;
+  messageErrorDetailsFile: string = null;
+
+  downloadPNGImage: any = null;
+  showErrorDowloadingPNG: boolean = false;
+
   constructor(
+    private appcomponent: AppComponent,
     private bs: BadgesService,
     public awardDialog: MatDialog,
     private ous: OUService
   ) { }
+
+  isAdmin = this.appcomponent.isAdmin;
+  isProfessor = this.appcomponent.isProfessor;
+  isAcademicOrganisation = this.appcomponent.isAcademicOrganisation;
 
   intialerts() {
     this.errorMessage = "";
@@ -62,12 +76,7 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
 
   }
 
-  verifySmartBadge(smartBadgeData) {
-    this.loadingLoginSpinner = true;
-    this.validationSuccess = false;
-    //console.log("verifySmartBadge");
-    //console.log("data In:");
-    //console.log(smartBadgeData);
+  createBadgeDataToSend(smartBadgeData) {
 
     let dataBadgetStored = {
       "badge": smartBadgeData.badge.oubadge,
@@ -108,7 +117,19 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
     };
 
     //console.log("--data to post to validate signature---");
-    //console.log(dataToPost);
+    return dataToPost;
+  }
+
+  verifySmartBadge(smartBadgeData) {
+    this.loadingLoginSpinner = true;
+    this.validationSuccess = false;
+    //console.log("verifySmartBadge");
+    //console.log("data In:");
+    //console.log(smartBadgeData);
+
+    let dataToPost = this.createBadgeDataToSend(smartBadgeData);
+    
+    console.log(dataToPost);
     this.ous
           .verifySmartBadgeV2(dataToPost).subscribe(
           res => {
@@ -152,6 +173,83 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
     
   }
 
+  downloadBadgeAsPNG(smartBadgeData) {
+    this.downloadPNGImage = null;
+    this.showErrorDowloadingPNG = false;
+    let dataToPost = this.createBadgeDataToSend(smartBadgeData);
+
+    this.ous
+            .addSmartBadgeToImage(dataToPost, this.fileToUploadDetails).subscribe(
+            (res:any) => {
+              //console.log("res OK!!!");
+              //console.log(res);      
+              this.downloadPNGImage = res;   
+              
+              var newBlob = new Blob([res], { type: "image/png" });
+
+              // IE doesn't allow using a blob object directly as link href
+              // instead it is necessary to use msSaveOrOpenBlob
+              if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(newBlob);
+                return;
+              }
+
+              const data = window.URL.createObjectURL(newBlob);
+
+              var link = document.createElement('a');
+              link.href = data;
+              //link.download = "smartBadge.png";
+              link.download = this.fileToUploadDetails?.name;
+              // this is necessary as link.click() does not work on the latest firefox
+              link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+  
+              setTimeout(function () {
+                  // For Firefox it is necessary to delay revoking the ObjectURL
+                  window.URL.revokeObjectURL(data);
+                  link.remove();
+              }, 100);
+            },
+            error => {
+              console.log("ERROR!!!");
+              this.downloadPNGImage = null;
+              console.log(error);           
+              this.showErrorDowloadingPNG = true;
+            }
+          );  
+
+
+  }
+
+  formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) {
+      return "0 Bytes";
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals;
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+  }
+
+  handleFile(files: FileList) {
+    this.invalidDetailsFile = false;
+    this.messageErrorDetailsFile = null;
+    this.uploadedDetails = false;
+    //console.log(files[0].type);
+    if (files[0].type=="image/png") {
+      //console.log("if");
+      this.fileToUploadDetails = files.item(0);
+      this.uploadedDetails = true;
+    }
+    else {
+      //console.log("else");
+      this.invalidDetailsFile = true;
+      this.messageErrorDetailsFile = files[0].name;
+      this.fileToUploadDetails = null;
+    }
+  }
+
+
 }
 
 
@@ -165,7 +263,6 @@ export class QcSmartBadgeCardComponent implements OnInit {
 
   @Input() awardId: number;
 
-  
   lodingspinner: boolean = true;
   itemBadgeData: any = {};
 

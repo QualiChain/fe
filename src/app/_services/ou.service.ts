@@ -11,6 +11,8 @@ import User from '../_models/user';
 import { CustomConfigEnvironmentDataService } from './customConfigEnvironmentData.service';
 import { AuthService } from '../_services/auth.service';
 
+//import {  HttpEventType, HttpResponse } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -326,6 +328,39 @@ export class OUService {
          return throwError( error );
        })
     )
+  }
+
+
+  addSmartBadgeToImage(badge:{}, png: any) {
+
+    //let headers = this.authService.createQCAuthorizationHeader();
+    //let headers = this.authService.createQCAuthorizationHeaderForFormData();
+    let headers = this.authService.createQCAuthorizationHeaderForFormDataReturnBlob();
+
+    let endPoint = this.badgingURI;
+
+    const formData: FormData = new FormData();
+    formData.append('png', png, png.name);
+    //formData.append('badge', JSON.stringify(badge));
+    let newBadge = new Blob([JSON.stringify(badge)], {type : 'application/json'});
+    formData.append('badge', newBadge);
+
+    //console.log(endPoint);        
+
+    //return this.httpClient.post(`${endPoint}/addSmartBadgeToImage`, formData, {headers: headers, responseType: 'text'});
+//responseType: 'blob' as 'json'
+    return this.httpClient.post(`${endPoint}/addSmartBadgeToImage`, formData, {headers: headers, 
+      responseType: 'blob'
+      })
+    .pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( error );
+       })
+    )
+
+   
   }
 
 }
