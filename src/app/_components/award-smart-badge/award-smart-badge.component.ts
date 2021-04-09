@@ -822,11 +822,15 @@ export class awardDialog_modal implements OnInit {
           .verifySmartBadgeV2(dataToPost).subscribe(
           res => {
             console.log("smart badget verification finished, status:"+res);
-            if (res) {
+            if (res) {              
+              this.errorMessage = "SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK";
+              this.showErrorMessage = true;
+              this.itemSelected = i;
               this.lodingspinnerid = null;
             }
             else {
-              this.errorMessage = "The validation cannot be done!!!";
+              //this.errorMessage = "The validation cannot be done!!!";
+              this.errorMessage = "SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO";
               this.showErrorMessage = true;
               this.itemSelected = i;
               this.lodingspinnerid = null;
