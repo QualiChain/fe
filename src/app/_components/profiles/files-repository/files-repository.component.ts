@@ -127,6 +127,7 @@ export class FilesRepositoryComponent implements OnInit {
 
 
   downLoadFile(fileId: number, fileName: string, action:string) {
+    this.showError = false;
     if (action=='open') {
         //window.open(downloadUrl+'/file/'+fileId);
         this.us.getFile(fileId).subscribe(
@@ -141,6 +142,11 @@ export class FilesRepositoryComponent implements OnInit {
               //console.log(url);
               window.open(url);
 
+          },
+          error => {
+            //console.log(error);
+            this.showError = true;
+            this.errorMessage = this.translate.instant('PERSONAL_FILES_REPOSITORY.ERROR_DOWNLOADING_FILE', {fileName:fileName});
           }
         )
     }
@@ -170,6 +176,11 @@ export class FilesRepositoryComponent implements OnInit {
                 iframe.contentWindow.print();
             }
 
+          }
+          ,
+          error => {
+            this.showError = true;
+            this.errorMessage = this.translate.instant('PERSONAL_FILES_REPOSITORY.ERROR_DOWNLOADING_FILE', {fileName:fileName});
           }
         )
   }

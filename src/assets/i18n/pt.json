@@ -50,7 +50,8 @@
     "TITLE": "Personal files repository",
     "DELETE_MESSAGE": "Are you sure you want to delete this file?",
     "CONFIRM_ACTION": "Confirm Action",
-    "ERROR_DELETING_FILE": "Sorry, there was an error deleting the file. The file '{{fileName}}' cannot be deleted."
+    "ERROR_DELETING_FILE": "Sorry, there was an error deleting the file. The file '{{fileName}}' cannot be deleted.",
+    "ERROR_DOWNLOADING_FILE": "Sorry, there was an error downloading the file. The file '{{fileName}}' cannot be downloaded."
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Validação de Certificado",
