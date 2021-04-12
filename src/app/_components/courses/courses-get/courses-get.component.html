@@ -88,7 +88,13 @@
                 </span>
             </div> 
           </div>
-          
+
+          <div class="col " *ngIf="nameAcademicOrganisation">
+            <div><span class="labelcourse">{{ 'COURSE.ACADEMIC_ORGANIZATION.LABEL' | translate }}:</span> {{nameAcademicOrganisation}}
+            <span> - {{descriptionAcademicOrganisation}}</span>
+            </div> 
+          </div>
+
           <!--
           <div *ngIf="courseData.events.length>0" class="col ">
             <div><span class="labelcourse">{{ 'COURSE.EVENTS.LABEL' | translate }}:</span> 

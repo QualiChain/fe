@@ -17,6 +17,9 @@ import { CVService } from '../../_services/cv.service';
 import {map, startWith} from 'rxjs/operators';
 import { SpecializationsService } from '../../_services/specializations.service'
 
+import RecruitmentOrganisation from '../../_models/recruitmentorganisation';
+import { RecruitmentOrganisationService } from '../../_services/recruitmentorganisation.services';
+
 //import { tap } from 'rxjs/operators';
 export interface Specialization {
   title: string;
@@ -46,8 +49,11 @@ export class JobsAddComponent implements OnInit {
     jobDataToPost = {};
     allSpecializations: Specialization[] = [];
     selectedSpecializationValue: string = null;
+    listAllRecruitmentOrganizations: RecruitmentOrganisation[] = [];
+    jobRecruitmentOrganization: number = null;
 
     constructor(      
+      private ros: RecruitmentOrganisationService,
       private ss: SpecializationsService,
       private cs: CVService,
       private qcStorageService: QCStorageService,
@@ -238,7 +244,7 @@ export class JobsAddComponent implements OnInit {
       //console.log(jobId);
       delete this.dataIn.coursesReq;
 
-      //console.log(this.dataIn);
+      console.log(this.dataIn);
 
       this.js.updateJob(jobId, this.dataIn).subscribe(
         res => {
@@ -354,6 +360,17 @@ export class JobsAddComponent implements OnInit {
 
   ngOnInit() {
 
+    
+    this.ros.getRecruitmentOrganisations().subscribe(
+      recruitmentOrganizationsData => {
+        //console.log(recruitmentOrganizationsData);
+        recruitmentOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+        this.listAllRecruitmentOrganizations = recruitmentOrganizationsData;
+      },
+      error => {
+        console.log("error getting recruitment organisations data");
+      }
+    );
     
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){

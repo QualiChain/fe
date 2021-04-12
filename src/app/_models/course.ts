@@ -7,6 +7,7 @@ export default class Course {
     startDate: string;
     endDate: string;
     updateDate: string;
+    academic_organisation?: number;
     skills: [];
     events: []
 }

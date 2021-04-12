@@ -24,6 +24,8 @@ import { createAwardDialog_modal } from '../../../_components/award-smart-badge/
 
 import { BadgesService } from '../../../_services/badges.service';
 import { exit } from 'process';
+import AcademicOrganisation from '../../../_models/academicorganisation';
+import { AcademicOrganisationService } from '../../../_services/academicorganisation.services';
 
 export interface Skill {
   name: string;
@@ -89,10 +91,14 @@ export class CoursesEditComponent implements OnInit {
   initialListSmartBadgesByCourse: any[] = [];
   selectedBadge: any = null;
   listSmartBagesRelated = [];
+  listAllAcademicOrganizations: AcademicOrganisation[] = [];
+  courseAcademicOrganization: number;
+
   @ViewChild('skillInput', {static: false}) skillInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
+    public aos: AcademicOrganisationService,
     public createAwardDialog: MatDialog,
     private bs: BadgesService,
     public authservice: AuthService,
@@ -217,18 +223,27 @@ openCreateAwardDialog() {
     }
     //console.log(this.currentUser.id);
 
+    this.aos.getAcademicOrganizations().subscribe(
+      academicOrganizationsData => {
+        //console.log(academicOrganizationsData);
+        academicOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+        this.listAllAcademicOrganizations = academicOrganizationsData;
+      },
+      error => {
+        console.log("error getting academic organisations data");
+      }
+    );
 
     this.bs.getBadges().subscribe(
       badgeData => {
         //console.log(badgeData);
+        badgeData.sort((a,b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : ((b.name.toUpperCase() > a.name.toUpperCase()) ? -1 : 0))
         this.listAllSmartBadges = badgeData;
       },
       error => {
         console.log("error getting badges data");
       }
     );
-
-
 
     this.allSkills = [];
     this.ss.getSkills().subscribe(
@@ -297,6 +312,7 @@ openCreateAwardDialog() {
             this.endDate = res.endDate;
             this.skills = res.skills;
             this.events = res.events;
+            this.courseAcademicOrganization = res.academic_organisation;
             
             if (!res.hasOwnProperty("skills")) {
               this.skills = [];
@@ -351,7 +367,7 @@ openCreateAwardDialog() {
         this.smartBadgesByCourse.splice(position, 1);
       }      
     }
-    console.log(this.smartBadgesByCourse);
+    //console.log(this.smartBadgesByCourse);
   }
 
   addEvent(event: MatChipInputEvent): void {
@@ -437,12 +453,20 @@ openCreateAwardDialog() {
           "events": this.events
         };
         */
+
+
+        let orgID = null
+        if (this.courseAcademicOrganization) {
+          orgID= this.courseAcademicOrganization;
+        } 
+        
        const obj = {
         "name": this.courseName,
         "description": this.courseDescription,
         "semester": this.courseSemester,
         "skills": finalSkillList,
         "events": this.events,
+        "academic_organisation": orgID,
         "updatedDate": newDateToday
         };       
         //console.log(obj);
@@ -457,8 +481,7 @@ openCreateAwardDialog() {
               var splitted = res.split("=", 2); 
               //console.log(splitted[1]);
               let courseId = splitted[1];
-              console.log(courseId);
-
+              //console.log(courseId);
 
               this.addSmartBadgesRelations(courseId);
 
@@ -495,7 +518,7 @@ openCreateAwardDialog() {
           //console.log(this.courseId);
           this.cs.updateCourse(+this.courseId, obj).subscribe(
             res => {
-              console.log("course updated");
+              //console.log("course updated");
               //console.log(res);
               //after update the user 
               //window.location.href="/profiles/"+this.profileId;
@@ -503,13 +526,13 @@ openCreateAwardDialog() {
               
               //we delete the items that are not in the final list and are in the intitial
 
-              console.log(this.initialListSmartBadgesByCourse);
+              //console.log(this.initialListSmartBadgesByCourse);
               for (let index = 0; index < this.initialListSmartBadgesByCourse.length; index++) {
 
                   this.bs.deleteBadgeToCourse( this.courseId, this.initialListSmartBadgesByCourse[index]).subscribe(
                     res => {
                       console.log("relation smart badge course deleted ");
-                      console.log(res);
+                      //console.log(res);
                     },
                     error => {
                       console.log("error deleting relation smart badge course")
@@ -518,7 +541,7 @@ openCreateAwardDialog() {
 
               }
 
-              console.log(this.smartBadgesByCourse);
+              //console.log(this.smartBadgesByCourse);
               this.addSmartBadgesRelations(this.courseId);
               
 
