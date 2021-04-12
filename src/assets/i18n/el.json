@@ -159,6 +159,9 @@
   },
   "JOB": {
     "HEADER_TITLE": "Έργασία",
+    "RECRUITMENT_ORGANIZATION": {
+      "LABEL": "Οργάνωση προσλήψεων"
+    },
     "SPECIALIZATION": "Ειδίκευση",
     "CANDIDATES": "Υποψήφιοι",
     "ASSIGNED": "Ανατεθειμένη",
@@ -515,6 +518,9 @@
   },
   "COURSE"  : {
     "TITLE": "Μάθημα",
+    "ACADEMIC_ORGANIZATION": {
+      "LABEL": "Ακαδημαϊκός Οργανισμός"
+    },    
     "NAME" : {
       "LABEL": "Όνομα",
       "PLACEHOLDER": "Όνομα"

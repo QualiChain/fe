@@ -20,7 +20,7 @@
         </div>
               
         <!-- role -->
-        <div *ngIf="(mode=='Edit')" class="form-group field" >
+        <div *ngIf="(mode=='Create')" class="form-group field" >
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.ROLE.SELECT_ONE' | translate }}</mat-label>
             <mat-select [(ngModel)]="role" name="role" required ngDefaultControl>
@@ -30,7 +30,34 @@
             </mat-select>
           </mat-form-field>
         </div>
-              
+        
+        <!-- AcademicOrganization -->
+        <!--
+        <div *ngIf="(mode=='Create')" class="form-group field" >
+          <mat-form-field class="create-profile-full-width">
+              <mat-label>{{ 'COURSE.ACADEMIC_ORGANIZATION.LABEL' | translate }}</mat-label>
+              <mat-select name="academicorganisation" multiple ngDefaultControl>
+                  <mat-option *ngFor="let academicOrganization of listAllAcademicOrganizations" [value]="academicOrganization.id">
+                      {{academicOrganization.title}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>       
+        </div>
+        -->
+        <!-- RecruitmentcOrganization -->
+        <!--
+        <div *ngIf="(mode=='Create')" class="form-group field" >
+          <mat-form-field class="create-profile-full-width">
+              <mat-label>{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}</mat-label>
+              <mat-select name="recruitmentorganisation" ngDefaultControl>
+                  <mat-option></mat-option>
+                  <mat-option *ngFor="let recruitmentOrganization of listAllRecruitmentOrganizations" [value]="recruitmentOrganization.id">
+                      {{recruitmentOrganization.title}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>       
+        </div>
+        -->
         <!-- userName -->
         <div class="form-group field" [class.has-error]="usernameInput.invalid">
           <mat-form-field class="create-profile-full-width">

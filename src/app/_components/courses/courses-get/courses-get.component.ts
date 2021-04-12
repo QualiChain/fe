@@ -18,6 +18,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator'
 import { awardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
+import AcademicOrganisation from '../../../_models/academicorganisation';
+import { AcademicOrganisationService } from '../../../_services/academicorganisation.services';
 
 export interface DialogData {
   grade: number;
@@ -69,8 +71,11 @@ export class CoursesGetComponent implements OnInit {
   grade: Number;
   canEditCourse = [];
   courseId: number;
+  nameAcademicOrganisation: string = null;
+  descriptionAcademicOrganisation: string = null;
 
   constructor(
+    public aos: AcademicOrganisationService,
     private appcomponent: AppComponent,
     private router: Router,
     private authservice: AuthService,
@@ -280,6 +285,20 @@ export class CoursesGetComponent implements OnInit {
             this.courseData = dataCourse;
 
             this.reloadUserStatus(id);
+
+            if (this.courseData.academic_organisation) {
+              this.aos
+                .getAcademicOrganization(this.courseData.academic_organisation).subscribe(
+                dataAcademicOrganisation => {
+                  //console.log(dataAcademicOrganisation);
+                  this.nameAcademicOrganisation = dataAcademicOrganisation.title;
+                  this.descriptionAcademicOrganisation = dataAcademicOrganisation.description;
+              },
+              error => {
+                console.log("error recovering data academic organisation by id")
+              });
+
+            }
 
             if (!this.courseData.hasOwnProperty("skills")) {
               this.courseData['skills'] = [];

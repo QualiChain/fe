@@ -25,6 +25,20 @@
                 <input matInput required [(ngModel)]="courseSemester" name="courseSemester" value="courseSemester" placeholder="{{ 'COURSE.SEMESTER.PLACEHOLDER' | translate }}"  #courseSemesterInput="ngModel">
             </mat-form-field>
         </div>
+
+        <!-- CourseAcademicOrganization -->
+        <div class="form-group field" >
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.ACADEMIC_ORGANIZATION.LABEL' | translate }}</mat-label>
+                <mat-select name="academicorganisation" [(ngModel)]="courseAcademicOrganization" ngDefaultControl>
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let academicOrganization of listAllAcademicOrganizations" [value]="academicOrganization.id">
+                        {{academicOrganization.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>       
+        </div>
+
         <!-- startDate -->      
         <!--
         <div class="form-group field" [class.has-error]="startDateInput.invalid">         
@@ -133,7 +147,7 @@
                 <button type="button" *appCanAccess="['create_smart_badge']" class="btn btn-primary" (click)="openCreateAwardDialog()">
                     <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
                   </button>
-                <br/>
+                <br/><br/>
                 <span *ngFor="let element_badge of listAllSmartBadges; index as i">
                     <div class="col-lg-2 example-card" >
                         <div>

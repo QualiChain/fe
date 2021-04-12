@@ -33,6 +33,12 @@ import { StorageService } from '../../../_helpers/global';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 //import { FlashMessagesService } from 'angular2-flash-messages';
 
+import RecruitmentOrganisation from '../../../_models/recruitmentorganisation';
+import { RecruitmentOrganisationService } from '../../../_services/recruitmentorganisation.services';
+import AcademicOrganisation from '../../../_models/academicorganisation';
+import { AcademicOrganisationService } from '../../../_services/academicorganisation.services';
+
+
 @Component({
   selector: 'app-profiles-add',
   templateUrl: './profiles-add.component.html',
@@ -97,8 +103,13 @@ export class ProfilesAddComponent implements OnInit {
   errorMessage: string = null;
   profileAvatarImg: string = 'assets/img/no_avatar.jpg';
 
+  listAllRecruitmentOrganizations: RecruitmentOrganisation[] = [];
+  listAllAcademicOrganizations: AcademicOrganisation[] = [];
+
   constructor(
     //private flashMessage: FlashMessagesService,
+    private ros: RecruitmentOrganisationService,
+    private aos: AcademicOrganisationService,
     private qcStorageService: QCStorageService,
     public storageService: StorageService,
     public dialog: MatDialog,
@@ -163,7 +174,30 @@ export class ProfilesAddComponent implements OnInit {
           }
         }
       }
+
       
+      this.ros.getRecruitmentOrganisations().subscribe(
+        recruitmentOrganizationsData => {
+          //console.log(recruitmentOrganizationsData);
+          recruitmentOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+          this.listAllRecruitmentOrganizations = recruitmentOrganizationsData;
+        },
+        error => {
+          console.log("error recruitment organisations data");
+        }
+      );
+      
+      this.aos.getAcademicOrganizations().subscribe(
+        academicOrganizationsData => {
+          //console.log(academicOrganizationsData);
+          academicOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+          this.listAllAcademicOrganizations = academicOrganizationsData;
+        },
+        error => {
+          console.log("error getting academic organisations data");
+        }
+      );
+
       //console.log(this.userId );
 
       this.mode = "Create";

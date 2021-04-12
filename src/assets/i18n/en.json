@@ -159,6 +159,9 @@
   },
   "JOB": {
     "HEADER_TITLE": "Job",
+    "RECRUITMENT_ORGANIZATION": {
+      "LABEL": "Recruitment organisation"
+    },
     "SPECIALIZATION": "Specialization",
     "CANDIDATES": "Candidates",
     "ASSIGNED": "Assigned",
@@ -514,7 +517,10 @@
     }
   },
   "COURSE"  : {
-    "TITLE": "Course",    
+    "TITLE": "Course",
+    "ACADEMIC_ORGANIZATION": {
+      "LABEL": "Academic Organization"
+    },
     "NAME" : {
       "LABEL": "Name",
       "PLACEHOLDER": "Name"

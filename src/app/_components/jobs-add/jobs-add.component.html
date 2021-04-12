@@ -99,6 +99,19 @@
                 </mat-select>
               </mat-form-field>
               <br/>
+
+              <!-- JobRecruitmentOrganization -->
+              <mat-form-field class="create-job-full-width">
+                <mat-label>{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}</mat-label>
+                <mat-select name="recruitmentorganisation" [(ngModel)]="dataIn.recruitment_organisation" ngDefaultControl>
+                  <mat-option></mat-option>
+                  <mat-option *ngFor="let recruitmentOrganization of listAllRecruitmentOrganizations" [value]="recruitmentOrganization.id">
+                      {{recruitmentOrganization.title}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <br/>     
+
               <!-- skills -->
               <div class="form-group">
                 <br/>          
