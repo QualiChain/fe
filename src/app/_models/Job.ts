@@ -44,9 +44,9 @@ export class JobSkill {
     educationReq: Education[];
     startDate: string;
     endDate: string;
-    hiringOrg?: string;
+    //hiringOrg?: string;
     specialization?: string;
-    recruitment_organisation?: number;
+    hiringOrganization?: string;
     coursesReq?: [];
    /* id: number;
     creator_id: number;
