@@ -56,8 +56,8 @@
             <div class="col ">
                 <div><span class="labeljob">{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+jobData.seniorityLevel | uppercase | translate }}</div> 
             </div>
-            <div class="col " *ngIf="jobData?.hiringOrg">
-              <div><span class="labeljob">{{ 'JOB.ORGANIZATION' | translate }}:</span> {{ jobData?.hiringOrg }} </div> 
+            <div class="col " *ngIf="jobData?.hiringOrganization">
+              <div><span class="labeljob">{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}:</span> {{ jobData?.hiringOrganization }} </div> 
             </div>
             
             <div class="col ">
