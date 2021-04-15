@@ -35,7 +35,8 @@ export class QcSmartBadgesListByCourseComponent implements OnInit {
     if (+this.courseId>0) {
       this.bs.getBadgesByCourseId(+this.courseId).subscribe(
         badgesByCourse => {
-          //console.log(badgesByUser);
+          //console.log(badgesByCourse);
+          badgesByCourse.sort((a, b) => a.badge.name.localeCompare(b.badge.name));
           this.aqcuired_badges_by_course = badgesByCourse;
           this.lodingspinnerid = false;
         },

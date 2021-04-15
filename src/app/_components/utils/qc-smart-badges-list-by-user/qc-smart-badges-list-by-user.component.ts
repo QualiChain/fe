@@ -55,6 +55,8 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
     this.lodingspinnerid = true;
     this.bs.getBadgesByUser(+this.userId).subscribe(
       badgesByUser => {
+        //console.log(badgesByUser);
+        badgesByUser.sort((a, b) => a.badge.name.localeCompare(b.badge.name));
         this.aqcuired_badges_by_user = badgesByUser;
         this.lodingspinnerid = false;
         
@@ -98,6 +100,26 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
 
     let dataToPost = {
       "@context": dataBadgetStored.badge['@context'],
+      "type":"Assertion",
+      "recipient": recipient,
+      "badge": {
+        "type":"BadgeClass",
+        "name": dataBadgetStored.badge.name,
+        "description": dataBadgetStored.badge.description,
+        "image": dataBadgetStored.badge.image,
+        "version": dataBadgetStored.badge.version,
+        "criteria":  dataBadgetStored.badge.criteria,
+        "issuer": dataBadgetStored.badge.issuer
+      },
+      "issuedOn": smartBadgeData.oubadge_user.issuedOn,
+      "verification": {
+        "type": "MerQLVerification2020" 
+        },
+      "signature": signature
+    }
+    /*
+    let dataToPost = {
+      "@context": dataBadgetStored.badge['@context'],
       "type":"BadgeClass",
       "name": dataBadgetStored.badge.name,
       "description": dataBadgetStored.badge.description,
@@ -115,7 +137,7 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
         },
       "signature": signature
     };
-
+*/
     //console.log("--data to post to validate signature---");
     return dataToPost;
   }
