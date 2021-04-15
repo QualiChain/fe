@@ -217,8 +217,15 @@
         <mat-tab-group [(selectedIndex)]="selectedTabIndex">
             <mat-tab label="{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.TITLE' | translate }}">
                 <br>
-                <div class="" *ngIf="recomendedCourses.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.NO_DATA' | translate }}</div></div>
-                <div class="" *ngIf="recomendedCourses.length>0" >
+                
+                <div *ngIf="showLoadingRecomendedCourses">
+                    <div class="col-md-4 col-md-offset-4">
+                      <app-qc-spinner ></app-qc-spinner>
+                    </div>                  
+                </div>
+
+                <div class="" *ngIf="!showLoadingRecomendedCourses && recomendedCourses.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.NO_DATA' | translate }}</div></div>
+                <div class="" *ngIf="!showLoadingRecomendedCourses && recomendedCourses.length>0" >
                     <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.COURSES_RECOMMENDATION.HELP_TEXT' | translate }}</div>
                     <div class="col-sm-12" >
                         <div class="col-sm-6 recomendedBox" *ngFor="let recommendedCourse of pagedListRC; let i = index;">
@@ -312,12 +319,16 @@
             
             </mat-tab>
             <mat-tab label="{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.TITLE' | translate }}">
+                <br>
 
-                <br/>                    
-                <div class="" *ngIf="recommendedSkills.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.NO_DATA' | translate }}</div></div>
-                
-                
-                <div class="" *ngIf="recommendedSkills.length>0">
+                <div *ngIf="showLoadingRecomendedSkills">
+                    <div class="col-md-4 col-md-offset-4">
+                      <app-qc-spinner ></app-qc-spinner>
+                    </div>                  
+                </div>
+
+                <div class="" *ngIf="!showLoadingRecomendedSkills && recommendedSkills.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.NO_DATA' | translate }}</div></div>
+                <div class="" *ngIf="!showLoadingRecomendedSkills && recommendedSkills.length>0">
                     <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.HELP_TEXT' | translate }}</div>
 
                     <div class="col-sm-12" >
