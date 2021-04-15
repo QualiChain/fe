@@ -67,6 +67,7 @@
             </div>   
 
             <div [hidden]="loadingLoginSpinner">
+                <!--
                 <br *ngIf="showErrorMessage || validationSuccess">
                 <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
                     {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO' | translate }}
@@ -74,7 +75,7 @@
                 <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
                     {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK' | translate }}
                 </div>
-
+                -->
                 <app-qc-smart-badge-card [awardId]="element_badge.badge.id"></app-qc-smart-badge-card>
             </div>
 
@@ -123,7 +124,15 @@
                 </mat-accordion>
             </div>
             
-
+            <div [hidden]="loadingLoginSpinner">
+                <br *ngIf="showErrorMessage || validationSuccess">
+                <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO' | translate }}
+                </div>
+                <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK' | translate }}
+                </div>
+            </div>
 
         </div>
         <div class="modal-footer">    
