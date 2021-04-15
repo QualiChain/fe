@@ -22,6 +22,7 @@
             <div *ngIf="itemBadgeData?.type" class="col col-lg-12"><label>{{ 'BADGES_TYPES.LABEL' | translate }}:</label> {{'BADGES_TYPES.OPTIONS.'+itemBadgeData?.type.toUpperCase() | translate}} </div>
             <div *ngIf="itemBadgeData?.oubadge?.description" class="col col-lg-12"><label>{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.description}} </div>
             <div *ngIf="itemBadgeData?.oubadge?.version" class="col col-lg-12"><label>{{ 'BADGES.BADGE.VERSION.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.version}} </div>
+            <div *ngIf="itemBadgeData?.oubadge?.criteria?.skills" class="col col-lg-12"><label>{{ 'BADGES.BADGE.SKILLS.LABEL' | translate }}:</label> {{itemBadgeData?.oubadge?.criteria?.skills}} </div>
           </div>
         </mat-expansion-panel>
         <mat-expansion-panel>
