@@ -8,6 +8,7 @@ import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from '../../../_services';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { TranslateService } from '@ngx-translate/core';
+import { AppComponent } from '../../../app.component';
 
 class Thesis {
   id: number;
@@ -64,6 +65,7 @@ export class ThesisEditComponent implements OnInit {
   };
 
   constructor(
+    private appcomponent: AppComponent,
     private authservice: AuthService,
     private us: UsersService,
     private ts: ThesisService,
@@ -74,6 +76,8 @@ export class ThesisEditComponent implements OnInit {
       this.authservice.currentUser.subscribe(x => this.currentUser = x);
 
     }
+
+    isAdmin = this.appcomponent.isAdmin;
 
   ngOnInit(): void {
 
@@ -99,7 +103,7 @@ export class ThesisEditComponent implements OnInit {
             this.thesis = dataThesis;
             this.htmlContent = this.thesis.description;
             
-            if (dataThesis.professor['id']!=this.currentUser.id) {
+            if ((dataThesis.professor['id']!=this.currentUser.id) && !this.isAdmin) {
               this.router.navigate(["/access_denied"]); 
             }
             else {
