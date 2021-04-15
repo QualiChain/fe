@@ -548,7 +548,7 @@ openCreateAwardDialog() {
               this.router.navigate(["/courses"]);
             },
             error => {
-              alert("Error updating user!!");
+              alert("Error updating course!!");
             }
           );
           
