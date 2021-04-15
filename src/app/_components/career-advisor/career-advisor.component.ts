@@ -71,8 +71,8 @@ export class CareerAdvisorComponent implements OnInit {
 
   showRecommend: Boolean = false;
   
-
-
+  showLoadingRecomendedSkills: Boolean = false;
+  showLoadingRecomendedCourses: Boolean = false;
   recomendedCourses = [];
   pagedListRC = [];
   recommendedSkills = [];
@@ -196,11 +196,13 @@ export class CareerAdvisorComponent implements OnInit {
     } 
 
     public async recomendedDataByUserId(userId: number) {
-
+      this.showLoadingRecomendedCourses = true;
+      this.showLoadingRecomendedSkills = true;
       let datarecommendedData = await this.rs.recomendedDataByCVByUserId(userId, 'courses_and_skills');
       //console.log(datarecommendedData);
       this.recomendedCourses = datarecommendedData['recommended_courses'];
-      
+      this.showLoadingRecomendedCourses = false;
+
       datarecommendedData['recommended_courses'].forEach(element => {
 
         this.cs
@@ -219,8 +221,8 @@ export class CareerAdvisorComponent implements OnInit {
       });
 
 
-      this.recommendedSkills = datarecommendedData['recommended_skills'];   
-      
+      this.recommendedSkills = datarecommendedData['recommended_skills'];
+      this.showLoadingRecomendedSkills = false;
       this.lengthRC = this.recomendedCourses.length;
       this.pagedListRC = this.recomendedCourses.slice(0, 4);
 
@@ -283,8 +285,8 @@ export class CareerAdvisorComponent implements OnInit {
               this.rs
               .getRecomendationsByCV(datatCVToSend).subscribe(
                 dataRecommendationByCV => {
-                  console.log("list of recomended courses by CV");
-                  console.log(dataRecommendationByCV);            
+                  //console.log("list of recomended courses by CV");
+                  //console.log(dataRecommendationByCV);            
                   this.recomendedCourses = dataRecommendationByCV['recommended_courses'];                  
                   
                   dataRecommendationByCV['recommended_courses'].forEach(element => {
@@ -369,8 +371,8 @@ export class CareerAdvisorComponent implements OnInit {
     else if (typeParam=="skills") {
       this.selectedTabIndex = 1;
       if (idsParam) {        
-        //this.selectedSkills = idsParam.split(",").map(Number);
-        this.selectedSkills = idsParam.split(",");
+        this.selectedSkills = idsParam.split(",").map(Number);
+        //this.selectedSkills = idsParam.split(",");
       }
     }
 
