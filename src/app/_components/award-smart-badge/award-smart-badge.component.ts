@@ -22,7 +22,8 @@ import Course from '../../_models/course';
 import User from '../../_models/user';
 import { QCStorageService } from '../../_services/QC_storage.services';
 import {PageEvent} from '@angular/material/paginator';
-
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../utils/confirm-dialog/confirm-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-award-smart-badge',
@@ -593,6 +594,8 @@ export class awardDialog_modal implements OnInit {
   pageSizeOptionsSB: number[] = [this.pageSizeSB];
   
   constructor(
+    private translate: TranslateService,
+    public dialog: MatDialog,
     private router: Router,
     public createAwardDialog: MatDialog,
     private us: UsersService,
@@ -613,18 +616,10 @@ export class awardDialog_modal implements OnInit {
       
       
     }
-    
-  ngOnInit() {
+  
+  recoverSB() {
 
-    this.selectedUserAwards=[];
-    
-    
-    this.listOfSmartAwards=[];
-
-    this.currentlistOfBadges = [];
-
-    //console.log(this.data);
-    //getBadgesByUser
+    this.listOfSmartAwards = [];
     this.bs.getBadges()
       .subscribe(( dataSmatBadges: any) => {
         //console.log (dataSmatBadges);
@@ -696,7 +691,22 @@ export class awardDialog_modal implements OnInit {
       error => {
         console.log("error recovering smart badges")
       }
-    );    
+    );
+  }
+
+  ngOnInit() {
+
+    this.selectedUserAwards=[];
+    
+    
+    this.listOfSmartAwards=[];
+
+    this.currentlistOfBadges = [];
+
+    //console.log(this.data);
+    //getBadgesByUser
+
+    this.recoverSB();
     
 
     //console.log(this.data);
@@ -726,7 +736,7 @@ export class awardDialog_modal implements OnInit {
             this.pageTitle = this.courseDataRec.name;
           },
           error => {
-            console.log("couse not found in db");                        
+            console.log("course not found in db");                        
           }
         );
       }
@@ -947,6 +957,43 @@ export class awardDialog_modal implements OnInit {
           
       
   
+  }
+
+  deleteSB(smartBadgeId, smartAwardBadgeData) {
+    console.log(smartBadgeId);
+    console.log(smartAwardBadgeData);
+  
+    
+    //const message = `Are you sure you want to do this?`;
+    const message = this.translate.instant('SMART_BADGE.DELETE_MESSAGE') + " ("+smartAwardBadgeData.name+")";
+    
+    const dialogData = new ConfirmDialogModel(this.translate.instant('SMART_BADGE.CONFIRM_DELETE_ACTION'), message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      //this.result = dialogResult;
+
+      if (dialogResult) {
+         console.log("Under construction");
+
+         this.bs
+         .deleteBadge(smartBadgeId).subscribe(
+           data => {
+             console.log("smart badge deleted!!");  
+             this.recoverSB();           
+           },
+           error => {
+             console.log("Error deleting the smart badge");                      
+           }
+         );
+
+
+      }
+    });
   }
 
   updateSmartAwardStatusOU(smartBadgeId, posI, smartAwardBadgeData, action) {

@@ -95,9 +95,14 @@
       
       <div class="float-righ">
         <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==i"></mat-spinner>
+
+        <button *appCanAccess="['issue_smart_badge']" (click)="deleteSB(itemBadgeData.id, itemBadgeData)" type="button" class="btn btn-danger">
+          <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'SMART_BADGE.BUTTON.DELETE' | translate }}
+        </button>
+
         <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=i" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
           <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.REVOKE_AWARD' | translate }}
-        </button>              
+        </button>
         <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=i" (click)="issueSmartBadge(itemBadgeData, i)" type="button" class="btn btn-primary">
           <i _ngcontent-axy-c0="" class="material-icons small">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}
         </button>
