@@ -1103,12 +1103,17 @@
     "MAXIMUM_DATE_SHOULD_BE": "Η αργότερη επιτρεπόμενη ημερομηνία είναι"
   },
   "SMART_BADGE": {
+    "DELETE_MESSAGE": "Are you sure you want to remove this Smart badge from the system?",
+    "CONFIRM_DELETE_ACTION":  "Confirm Action",
+    "BUTTON": { 
+      "DELETE": "Rremove this Smart Badge"
+    },
     "MAIN_DATA_TAB": {
       "TITLE": "Βασικά δεδομένα",
       "MESSAGES": {
         "VALIDATION_OK": "Έγκυρο",
         "VALIDATION_KO": "Άκυρο"
-      }
+      }      
     },
     "DOWNLOAD_TAB": {
       "TITLE": "Μεταφόρτωση",

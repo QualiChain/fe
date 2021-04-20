@@ -49,6 +49,20 @@ export class BadgesService {
       )
     }
 
+    deleteBadge(badgeId: Number) {
+
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.delete(`${this.uriBadges}/${badgeId}`, { headers: headers }).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           return throwError( 'Something went wrong!' );
+         })
+      )
+    }
+
   addBadge(obj: Object) {
     let headers = this.authService.createQCAuthorizationHeader();
 
