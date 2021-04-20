@@ -16,6 +16,7 @@ export class UsersService {
   private uriJobs = environment.jobsUrl;
   private jobsProfilesURL = environment.jobsProfilesUrl;
   private avatarURL = environment.avatarURL;
+  private uriUsersIAM = environment.createUsreIAMUrl;
 
   constructor(
     private authService: AuthService,
@@ -76,6 +77,23 @@ export class UsersService {
       });
       return data;    
     }    
+
+    addUserIAM(formData: FormData) {
+
+      let headers = this.authService.createQCAuthorizationHeaderForFormData();
+  
+      //return this.http.post(`${this.uriUsersIAM}`, JSON.stringify(obj), {headers: headers}).
+      return this.http.post(`${this.uriUsersIAM}`, formData, {headers: headers}).
+      pipe(
+         map((data: any) => {
+           return data;
+         }), catchError( error => {
+           console.log(error);
+           //return throwError( 'Something went wrong!' );
+           return throwError({'message':error.message,'succeeded':false});
+         })
+      )
+    }
 
   addUser(obj: Object) {
 

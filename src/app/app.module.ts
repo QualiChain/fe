@@ -105,7 +105,7 @@ import { ConfirmDialogComponent } from './_components/utils/confirm-dialog/confi
 import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 import { ProfilesViewComponent, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal } from './_components/profiles/profiles-view/profiles-view.component';
-import { ProfilesAddComponent } from './_components/profiles/profiles-add/profiles-add.component';
+import { ProfilesAddComponent, privacyPolicy_modal, ProfilesAddIAMUserComponent } from './_components/profiles/profiles-add/profiles-add.component';
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
 import { CareerAdvisorComponent } from './_components/career-advisor/career-advisor.component';
@@ -281,7 +281,7 @@ export function tokenGetter() {
     ConfirmDialogComponent,
     ProfilesViewComponent, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal,
     createChangePasswordDialog_modal,
-    ProfilesAddComponent,
+    ProfilesAddComponent, privacyPolicy_modal, ProfilesAddIAMUserComponent,
     RecruitmentViewComponent,
     BestCareerOptionsComponent,
     CareerAdvisorComponent,
