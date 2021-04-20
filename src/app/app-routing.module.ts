@@ -13,7 +13,7 @@ import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
 import { ProfilesComponent } from './_components/profiles/profiles/profiles.component';
 import { RecruitmentComponent } from './_components/recruitment/recruitment.component';
 import { ProfilesViewComponent } from './_components/profiles/profiles-view/profiles-view.component';
-import { ProfilesAddComponent } from './_components/profiles/profiles-add/profiles-add.component';
+import { ProfilesAddComponent, ProfilesAddIAMUserComponent } from './_components/profiles/profiles-add/profiles-add.component';
 
 import { RecruitmentViewComponent } from './_components/recruitment-view/recruitment-view.component';
 import { BestCareerOptionsComponent } from './_components/best-career-options/best-career-options.component';
@@ -164,7 +164,8 @@ const routes: Routes = [
   },
   {
     path: 'profiles/add',
-    component: ProfilesAddComponent,
+    //component: ProfilesAddComponent,
+    component: ProfilesAddIAMUserComponent,
     //canActivate: [AuthGuard],
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.admin, Role.administrator ],

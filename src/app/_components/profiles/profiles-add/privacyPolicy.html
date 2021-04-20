@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{ 'PRIVACY_POLICY.TITLE' | translate }} </h1>
+
+<mat-dialog-content class="mat-typography" id="termsOfUseDialog">
+    
+    <div class="bodyTermsOfUse">                
+        <p>
+          {{ 'PRIVACY_POLICY.BODY' | translate }}          
+        </p>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <div class="modal-footer">      
+      <button type="button" class="btn btn-danger" [mat-dialog-close]="true" id="closeTermsAndConditions">
+        <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
+      </button>
+    </div>
+</mat-dialog-actions>

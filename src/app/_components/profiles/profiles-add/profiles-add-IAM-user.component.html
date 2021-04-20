@@ -1,0 +1,163 @@
+<h1 *ngIf="+userId>0">{{ 'PROFILE.CREATE_PROFILE.TITLE' | translate }}</h1>
+
+
+<div class="containerProfile">
+
+    <div class="row" *ngIf="loadingLoginSpinnerCreateUserIAM">
+        <app-qc-spinner></app-qc-spinner>
+    </div>      
+    
+    <div *ngIf="!loadingLoginSpinnerCreateUserIAM">
+
+
+        <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">            
+            {{errorMessage}}                                
+         </div>
+
+        <div  *ngIf="showUserCreatedMessage" class="alert alert-danger" role="alert">            
+            The user has been created
+            <br>           
+        </div>
+
+        <button *ngIf="showUserCreatedMessage" type="submit" (click)="showUserCreatedMessage=!showUserCreatedMessage" class="btn btn-success" >
+            <i _ngcontent-axy-c0=""  class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }} 
+        </button>
+
+        <form *ngIf="!showUserCreatedMessage" #formUserProfile="ngForm" class="create-profile-form" (ngSubmit)="processForm()" >
+
+            <!-- userName -->
+            <!--
+            <div class="form-group field" [class.has-error]="usernameInput.invalid">
+                <mat-form-field class="create-profile-full-width">
+                    <mat-label>{{ 'PROFILE.USERNAME.LABEL' | translate }}</mat-label>
+                    <input  matInput required [(ngModel)]="userName" name="userName" value="userName" placeholder="{{ 'PROFILE.USERNAME.PLACEHOLDER' | translate }}" #usernameInput="ngModel">
+                </mat-form-field>        
+            </div>
+            -->
+            <!-- name -->
+            <div class="form-group field" [class.has-error]="nameInput.invalid"> 
+                <mat-form-field class="create-profile-full-width">
+                <mat-label>{{ 'PROFILE.NAME.LABEL' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="name" name="name" value="name" placeholder="{{ 'PROFILE.NAME.PLACEHOLDER' | translate }}" #nameInput="ngModel">
+                </mat-form-field>  
+            </div>
+
+            <!-- password -->
+            <mat-form-field class="create-profile-full-width">
+                <mat-label>{{ 'CHANGE_PASSWORD.NEW_PASSWORD.LABEL' | translate }}</mat-label>
+                <input autocomplete="on" required minlength="8" matInput [(ngModel)]="password" name="password" value="password" [type]="hidePassword ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <div *ngIf="password.length<8">{{ 'CHANGE_PASSWORD.WARNING_MESSAGE.PASSWORD_LENGTH' | translate }}</div>
+            </mat-form-field>
+    
+            <!-- repeat password -->
+            <mat-form-field class="create-profile-full-width">
+                <mat-label>{{ 'CHANGE_PASSWORD.REPEAT_PASSWORD.LABEL' | translate }}</mat-label>
+                <input autocomplete="off" required minlength="8" matInput [(ngModel)]="repeatPassword" name="repeatPassword" value="repeatPassword" [type]="hideRepeatPassword ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hideRepeatPassword = !hideRepeatPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepeatPassword">
+                    <mat-icon>{{hideRepeatPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <div *ngIf="repeatPassword.length<8">{{ 'CHANGE_PASSWORD.WARNING_MESSAGE.PASSWORD_LENGTH' | translate }}</div>
+                <div *ngIf="password!=repeatPassword">Passwords are different</div>
+            </mat-form-field>
+
+            <!-- email -->
+            <div class="form-group field" [class.has-error]="emailInput.invalid">
+                <mat-form-field class="create-profile-full-width">
+                    <mat-label>{{ 'PROFILE.EMAIL.LABEL' | translate }}</mat-label>
+                    <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}" #emailInput="ngModel">
+                </mat-form-field>
+            </div>
+
+            <!-- new role management -->        
+            <div class="form-group field" >
+                <hr>
+                <div class="create-profile-full-width">
+                <label>{{ 'PROFILES.ROLES' | translate }} *</label>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="academicRole" ngDefaultControl name="academicRole" (change)="onChangeAcademicRoleCheckbox($event.checked)">Academic organisation</mat-checkbox>
+                    <div *ngIf="academicRole">              
+                        <!-- UserAcademicRoles -->
+                        <div class="col col-lg-6" >
+                            <mat-form-field class="create-profile-full-width">
+                                <mat-label>{{ 'PROFILES.ROLES' | translate }}</mat-label>
+                                <mat-select required name="academicRoles" ngDefaultControl multiple [(ngModel)]="userAcademicRoles">
+                                    <mat-option *ngFor="let role of rolesType | FilterArrayByValueGetList : 'type' : 'academic'" [value]="role.value">
+                                        {{'ROLES.'+role.viewValue.toLowerCase() | translate}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>           
+                        <!-- UserAcademicOrganization -->
+                        <div class="col col-lg-6" >
+                            <mat-form-field class="create-profile-full-width">
+                                <mat-label>{{ 'COURSE.ACADEMIC_ORGANIZATION.LABEL' | translate }}</mat-label>
+                                <mat-select name="academicorganisation" ngDefaultControl multiple [(ngModel)]="userAcademicOrganisation">
+                                    <mat-option *ngFor="let academicOrganization of listAllAcademicOrganizations" [value]="academicOrganization.id">
+                                        {{academicOrganization.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="recruitmentRole" ngDefaultControl name="recruitmentRole" (change)="onChangeRecruitmentRoleCheckbox($event.checked)" >Recruitment organisation</mat-checkbox>
+                    <div *ngIf="recruitmentRole">
+                        <!-- UserRecruitmentRoles -->
+                        <div class="col col-lg-6" >
+                            <mat-form-field class="create-profile-full-width">
+                                <mat-label>{{ 'PROFILES.ROLES' | translate }}</mat-label>
+                                <mat-select required name="recruitmentRoles" ngDefaultControl multiple [(ngModel)]="userRecruiterRoles">
+                                    <mat-option *ngFor="let role of rolesType | FilterArrayByValueGetList : 'type' : 'recruitment'" [value]="role.value">
+                                        {{'ROLES.'+role.viewValue.toLowerCase() | translate}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- UserRecruiterOrganization -->
+                        <div class="col col-lg-6" >
+                            <mat-form-field class="create-profile-full-width">
+                                <mat-label>{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}</mat-label>
+                                <mat-select name="recruiterorganisation" ngDefaultControl multiple [(ngModel)]="userRecruiterOrganisation">
+                                    <mat-option *ngFor="let recruitmentOrganization of listAllRecruitmentOrganizations" [value]="recruitmentOrganization.title">
+                                        {{recruitmentOrganization.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--
+                    <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="employeeRole" ngDefaultControl name="employeeRole" (change)="onChangeEmployeeRoleCheckbox($event.checked)" >Employee</mat-checkbox>
+                    <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="administratorRole" ngDefaultControl name="administratorRole" (change)="onChangeAdministratorRoleCheckbox($event.checked)" >Administrator</mat-checkbox>
+                    -->
+                </section>
+            </div>
+            </div>
+            <hr>
+
+
+            <!-- termsAndConditions -->
+            <div *ngIf="+userId==0" class="form-group field" >         
+                <mat-checkbox class="example-margin" [(ngModel)]="termsAndConditions" ngDefaultControl name="termsAndConditions" (change)="onChangeTermsAndConditions($event.checked)" >
+                    {{ 'TERMS_OF_USE.ACCEPT_TERMS_OF_USE' | translate }}</mat-checkbox>
+                    <!--
+                    <a (click)="openPrivacyPolicyDialog()">{{ 'PRIVACY_POLICY.LINK' | translate}}</a>
+                    -->
+            </div>
+
+            <button *ngIf="+userId==0" type="submit" class="btn btn-success" [disabled]="((password!=repeatPassword) ||(termsAndConditions==false) || (formUserProfile.invalid) || (academicRole==false && recruitmentRole==false && employeeRole==false && administratorRole==false))">
+                <i _ngcontent-axy-c0="" class="material-icons"> </i> {{ 'LOGIN.TAB.CREATE_NEW_ACCOUNT' | translate }} 
+            </button>
+
+            <button *ngIf="+userId>0" type="submit" class="btn btn-success" [disabled]="((password!=repeatPassword) || (formUserProfile.invalid) || (academicRole==false && recruitmentRole==false && employeeRole==false && administratorRole==false))">
+                <i _ngcontent-axy-c0="" class="material-icons"> </i> {{ 'LOGIN.TAB.CREATE_NEW_ACCOUNT' | translate }} 
+            </button>
+
+        </form>
+    </div>
+
+</div>

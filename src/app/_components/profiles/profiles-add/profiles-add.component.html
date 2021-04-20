@@ -1,13 +1,16 @@
 <h1 *ngIf="(mode=='Create' && (userId.toString()!=currentUser?.id.toString()))">{{ 'PROFILE.CREATE_PROFILE.TITLE' | translate }}</h1>
 <h1 *ngIf="(mode=='Edit' && (userId.toString()!=currentUser?.id.toString()))">{{ 'PROFILE.EDIT_PROFILE.TITLE' | translate }}</h1>
-<h1 *ngIf="userId.toString()==currentUser?.id.toString()">{{ 'PROFILE.MY_PROFILE' | translate }}</h1>
+<h1 *ngIf="+userId>0 && userId.toString()==currentUser?.id.toString()">{{ 'PROFILE.MY_PROFILE' | translate }}</h1>
 
-<div class="container">
-  <div class="row">
 
-    <div class="col col-lg-6">
-      <form #formLogin="ngForm" class="create-profile-form" (ngSubmit)="processForm()" >
+<div class="containerProfile">
+  <div class="col">
+
+    <div  class="col" [ngClass]="{'col-lg-6': (mode=='Edit'), 'col-lg-12': (mode=='Create')}">
+      <form #formUserProfile="ngForm" class="create-profile-form" (ngSubmit)="processForm()" >
+        
         <!-- pilot -->
+        <!--
         <div class="form-group field" >
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.PILOT.SELECT_ONE' | translate }}</mat-label>
@@ -18,8 +21,9 @@
             </mat-select>
           </mat-form-field>
         </div>
-              
+        -->
         <!-- role -->
+        <!--
         <div *ngIf="(mode=='Create')" class="form-group field" >
           <mat-form-field class="create-profile-full-width">
             <mat-label>{{ 'PROFILE.ROLE.SELECT_ONE' | translate }}</mat-label>
@@ -30,34 +34,8 @@
             </mat-select>
           </mat-form-field>
         </div>
-        
-        <!-- AcademicOrganization -->
-        <!--
-        <div *ngIf="(mode=='Create')" class="form-group field" >
-          <mat-form-field class="create-profile-full-width">
-              <mat-label>{{ 'COURSE.ACADEMIC_ORGANIZATION.LABEL' | translate }}</mat-label>
-              <mat-select name="academicorganisation" multiple ngDefaultControl>
-                  <mat-option *ngFor="let academicOrganization of listAllAcademicOrganizations" [value]="academicOrganization.id">
-                      {{academicOrganization.title}}
-                  </mat-option>
-              </mat-select>
-          </mat-form-field>       
-        </div>
         -->
-        <!-- RecruitmentcOrganization -->
-        <!--
-        <div *ngIf="(mode=='Create')" class="form-group field" >
-          <mat-form-field class="create-profile-full-width">
-              <mat-label>{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}</mat-label>
-              <mat-select name="recruitmentorganisation" ngDefaultControl>
-                  <mat-option></mat-option>
-                  <mat-option *ngFor="let recruitmentOrganization of listAllRecruitmentOrganizations" [value]="recruitmentOrganization.id">
-                      {{recruitmentOrganization.title}}
-                  </mat-option>
-              </mat-select>
-          </mat-form-field>       
-        </div>
-        -->
+
         <!-- userName -->
         <div class="form-group field" [class.has-error]="usernameInput.invalid">
           <mat-form-field class="create-profile-full-width">
@@ -119,24 +97,17 @@
         </div>
         
         <!-- birthDate -->            
-        <div class="form-group field" [class.has-error]="birthDateInput.invalid">
-          <!--
-          <label>{{ 'PROFILE.BIRTHDATE.LABEL' | translate }}</label>          
-          <input type="date" name="birthdate" class="form-control input" 
-            [(ngModel)]="birthDate" required minlength="3" #birthDateInput="ngModel">
-        -->
-        
-        <mat-form-field class="create-profile-full-width">
-          <mat-label>{{ 'PROFILE.BIRTHDATE.PLACEHOLDER' | translate }}</mat-label>
-          <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="birthDate" #birthDateInput="ngModel" required>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="year" [startAt]="birthDate" format="DD-MM-YYYY"></mat-datepicker>
-        </mat-form-field>
-  
-        </div>      
+        <div class="form-group field" [class.has-error]="birthDateInput.invalid">       
+          <mat-form-field class="create-profile-full-width">
+            <mat-label>{{ 'PROFILE.BIRTHDATE.PLACEHOLDER' | translate }}</mat-label>
+            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="birthDate" #birthDateInput="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="birthDate" format="DD-MM-YYYY"></mat-datepicker>
+          </mat-form-field>
+        </div>
   
         <!-- country -->
-        <div class="form-group field" [class.has-error]="countryInput.invalid">
+        <div *ngIf="+userId>0" class="form-group field" [class.has-error]="countryInput.invalid">
           <input [hidden]="true" matInput required [(ngModel)]="country" name="country" value="country" #countryInput="ngModel">
           <!-- Passing parent form, options list and control name to use -->
           <app-qc-location-country [parentForm]="profileForm" [defaultValue]="country" [requiredValue]="true" formInnerControlName="selectCtrl">
@@ -215,18 +186,20 @@
               <mat-label>{{ 'PROFILE.HOMEPHONE.LABEL' | translate }}</mat-label>
               <input matInput required [(ngModel)]="homePhone" name="homePhone" value="homePhone" placeholder="{{ 'PROFILE.HOMEPHONE.PLACEHOLDER' | translate }}" #homePhoneInput="ngModel">
             </mat-form-field>
-  
         </div>
-  
-        <button *ngIf="mode=='Create'" type="submit" class="btn btn-success" [disabled]="formLogin.invalid">
+
+        
+
+
+        <button *ngIf="mode=='Create' && +userId>0" type="submit" class="btn btn-success" [disabled]="formUserProfile.invalid">
           <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }} 
         </button>
-  
-        <button *ngIf="mode=='Edit'" type="submit" class="btn btn-success" [disabled]="formLogin.invalid">
+
+        <button *ngIf="mode=='Edit'" type="submit" class="btn btn-success" [disabled]="formUserProfile.invalid">
           <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.UPDATE' | translate }} 
         </button>
   
-        <button class="btn btn-danger" [routerLink]="['/profiles/',profileId]">
+        <button *ngIf="+userId>0" class="btn btn-danger" [routerLink]="['/profiles/',profileId]">
           <i _ngcontent-axy-c0="" class="material-icons"> cancel </i> {{ 'BUTTON.CANCEL' | translate }}
         </button>
   

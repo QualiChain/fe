@@ -70,6 +70,27 @@ export class ProfilesAddComponent implements OnInit {
     {value: 'recruitment organisation', viewValue: 'Recruitment organisation'}
   ];
 
+  rolesType: RoleType[] = [
+    //{value: 'academic organisation', viewValue: 'Academic organisation', type: 'academic'},
+    {value: 'administrator', viewValue: 'Administrator', type: ''},
+    {value: 'employee', viewValue: 'Employee', type: ''},
+    {value: 'life long learner', viewValue: 'Life long learner', type: 'academic'},
+    {value: 'professor', viewValue: 'Professor', type: 'academic'},
+    {value: 'student', viewValue: 'Student', type: 'academic'},    
+    {value: 'recruiter', viewValue: 'Recruiter', type: 'recruitment'},
+    //{value: 'recruitment organisation', viewValue: 'Recruitment organisation', type: 'recruitment'}
+  ];
+  
+  academicRole: boolean = false;
+  recruitmentRole: boolean = false;
+  employeeRole: boolean = false;
+  administratorRole: boolean = false;
+  termsAndConditions: boolean = false;
+  userAcademicRoles: any;
+  userAcademicOrganisation: any;
+  userRecruiterRoles: any;
+  userRecruiterOrganisation: any;
+
   public currentValue: string = null;
   
   hide = true;
@@ -103,11 +124,8 @@ export class ProfilesAddComponent implements OnInit {
   errorMessage: string = null;
   profileAvatarImg: string = 'assets/img/no_avatar.jpg';
 
-  listAllRecruitmentOrganizations: RecruitmentOrganisation[] = [];
-  listAllAcademicOrganizations: AcademicOrganisation[] = [];
-
-  constructor(
-    //private flashMessage: FlashMessagesService,
+   constructor(
+    //private flashMessage: FlashMessagesService,    
     private ros: RecruitmentOrganisationService,
     private aos: AcademicOrganisationService,
     private qcStorageService: QCStorageService,
@@ -144,9 +162,17 @@ export class ProfilesAddComponent implements OnInit {
     {
       this.city = value;
     });    
+    
+    this.createForm(); 
 
   }
  
+  createForm() {
+  
+  }
+
+  
+
 
   ngOnInit() {
 
@@ -174,29 +200,7 @@ export class ProfilesAddComponent implements OnInit {
           }
         }
       }
-
-      
-      this.ros.getRecruitmentOrganisations().subscribe(
-        recruitmentOrganizationsData => {
-          //console.log(recruitmentOrganizationsData);
-          recruitmentOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
-          this.listAllRecruitmentOrganizations = recruitmentOrganizationsData;
-        },
-        error => {
-          console.log("error recruitment organisations data");
-        }
-      );
-      
-      this.aos.getAcademicOrganizations().subscribe(
-        academicOrganizationsData => {
-          //console.log(academicOrganizationsData);
-          academicOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
-          this.listAllAcademicOrganizations = academicOrganizationsData;
-        },
-        error => {
-          console.log("error getting academic organisations data");
-        }
-      );
+   
 
       //console.log(this.userId );
 
@@ -253,7 +257,8 @@ export class ProfilesAddComponent implements OnInit {
           }
         }
         else {
-          this.router.navigate(["/access_denied"]);
+          //this.router.navigate(["/access_denied"]);
+
         }
                
       }
@@ -485,4 +490,219 @@ interface Pilot {
 interface Role {
   value: string;
   viewValue: string;
+}
+
+interface RoleType {
+  value: string;
+  viewValue: string;
+  type: string;
+}
+
+
+@Component({
+  selector: 'privacyPolicy_modal',
+  templateUrl: './privacyPolicy.html',
+  styleUrls: ['./profiles-add.component.css']
+})
+export class privacyPolicy_modal implements OnInit {
+
+  constructor() {}
+
+
+  ngOnInit() {
+
+    
+
+  }
+
+}
+
+
+
+@Component({
+  selector: 'app-profiles-add-IAM-user',
+  templateUrl: './profiles-add-IAM-user.component.html',
+  styleUrls: ['./profiles-add.component.css'],
+  providers: [DatePipe]
+})
+export class ProfilesAddIAMUserComponent implements OnInit {
+
+  userId: number = 0;
+  currentUser: User;
+  showUserCreatedMessage: boolean = false;
+  loadingLoginSpinnerCreateUserIAM: boolean = false;
+  showErrorMessage: boolean = false;
+  errorMessage: string = "";
+  hidePassword: boolean = true;
+  hideRepeatPassword: boolean = true;
+
+  name: string = "";
+  userName: string = "";
+  password: string = "";
+  repeatPassword: string = "";
+  email: string = "";
+
+  //name: string = "testStudent";
+  //userName: string = "testStudent";
+  //password: string = "12345678";
+  //repeatPassword: string = "12345678";
+  //email: string = "testStudent@test.com";
+  
+  academicRole: boolean = false;
+  recruitmentRole: boolean = false;
+  employeeRole: boolean = false;
+  administratorRole: boolean = false;
+  termsAndConditions: boolean = false;
+  userAcademicRoles: any;
+  userAcademicOrganisation: any;
+  userRecruiterRoles: any;
+  userRecruiterOrganisation: any;
+
+  listAllRecruitmentOrganizations: RecruitmentOrganisation[] = [];
+  listAllAcademicOrganizations: AcademicOrganisation[] = [];
+
+  rolesType: RoleType[] = [
+    //{value: 'academic organisation', viewValue: 'Academic organisation', type: 'academic'},
+    {value: 'administrator', viewValue: 'Administrator', type: ''},
+    {value: 'employee', viewValue: 'Employee', type: ''},
+    {value: 'life long learner', viewValue: 'Life long learner', type: 'academic'},
+    {value: 'professor', viewValue: 'Professor', type: 'academic'},
+    {value: 'student', viewValue: 'Student', type: 'academic'},    
+    {value: 'recruiter', viewValue: 'Recruiter', type: 'recruitment'},
+    //{value: 'recruitment organisation', viewValue: 'Recruitment organisation', type: 'recruitment'}
+  ];
+
+  constructor(
+    private authservice: AuthService,
+    private ros: RecruitmentOrganisationService,
+    private aos: AcademicOrganisationService,
+    private userService: UsersService,
+    public privacyPolicyDialog: MatDialog
+  ) {
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
+
+  onChangeTermsAndConditions(checked: boolean) {
+    this.termsAndConditions = checked;
+    if (checked) {
+      this.openPrivacyPolicyDialog();
+    }
+  }
+  onChangeAcademicRoleCheckbox(checked: boolean) {
+    this.academicRole = checked;
+  }
+  onChangeRecruitmentRoleCheckbox(checked: boolean) {
+    this.recruitmentRole = checked;
+  }
+  onChangeEmployeeRoleCheckbox(checked: boolean) {
+    this.employeeRole = checked;
+  }
+  onChangeAdministratorRoleCheckbox(checked: boolean) {
+    this.administratorRole = checked;
+  }
+
+  openPrivacyPolicyDialog() {
+    console.log("openPrivacyPolicyDialog");
+
+    const dialogRef = this.privacyPolicyDialog.open(privacyPolicy_modal, {
+      disableClose: false,
+      width: '600px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    
+  }
+
+  processForm() {
+    //console.log(this);
+    this.loadingLoginSpinnerCreateUserIAM = true;
+    this.showErrorMessage = false;
+    this.errorMessage = "";
+    
+    let userRoles = [];
+    if (this.academicRole) {
+      if (this.userAcademicRoles){
+        this.userAcademicRoles.forEach(element => {
+          userRoles.push(element);
+        });
+      }
+    }
+    if (this.recruitmentRole) {
+      if (this.userRecruiterRoles){
+        this.userRecruiterRoles.forEach(element => {
+          userRoles.push(element);
+        });
+      }
+    }
+    
+    const formData: FormData = new FormData();
+    formData.append('name', this.name);
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+    formData.append('organization', 'teeeeeeeest');
+    formData.append('userType',JSON.stringify(userRoles));
+
+    this.userService.addUserIAM(formData).subscribe(    
+      res => {
+        console.log("Add user IAM response");
+        console.log(res);
+        
+        this.loadingLoginSpinnerCreateUserIAM = false;
+        if (!res.succeeded) {
+          this.showErrorMessage = true;
+          this.errorMessage = res.message;  
+        }
+        else {
+          this.showUserCreatedMessage = true;
+        }
+      },
+      error => {        
+        console.log("Error creating user!!");
+        this.loadingLoginSpinnerCreateUserIAM = false;
+        this.showErrorMessage = true;
+        this.errorMessage = error.message;
+      }
+    );
+    
+
+  }
+
+  ngOnInit() {
+
+    this.userId = 0;
+    if (this.currentUser) {
+      if(this.currentUser.hasOwnProperty('id')) { 
+        let id = this.currentUser.id;
+        this.userId = id;
+      }
+    }
+
+    this.ros.getRecruitmentOrganisations().subscribe(
+      recruitmentOrganizationsData => {
+        //console.log(recruitmentOrganizationsData);
+        recruitmentOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+        this.listAllRecruitmentOrganizations = recruitmentOrganizationsData;
+      },
+      error => {
+        console.log("error recruitment organisations data");
+      }
+    );
+    
+    this.aos.getAcademicOrganizations().subscribe(
+      academicOrganizationsData => {
+        //console.log(academicOrganizationsData);
+        academicOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+        this.listAllAcademicOrganizations = academicOrganizationsData;
+      },
+      error => {
+        console.log("error getting academic organisations data");
+      }
+    );
+
+  }
+
 }

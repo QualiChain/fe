@@ -13,6 +13,7 @@ export const environment = {
   IAMtokenvalidation : true,
   IAMAuthUrl : 'https://qualichain.herokuapp.com/users',
   IAMValidateTokenUrl : 'https://qualichain.herokuapp.com/auth/validateToken',
+  createUsreIAMUrl: 'https://qualichain.herokuapp.com/users/register',
   usersUrl : 'http://qualichain.epu.ntua.gr:5004/users',
   userUrl : 'http://qualichain.epu.ntua.gr:5004/user',
   jobsUrl : 'http://knowledgebizvpn.ddns.net:8000/jobs',
