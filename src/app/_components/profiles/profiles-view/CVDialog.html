@@ -204,9 +204,9 @@
                     <div class="form-group col-6">
                         <mat-form-field class="cv-full-width" *ngIf="canEditCV">
                             <mat-label>{{ 'CV.EDUCATION_TITLE' | translate }}</mat-label>                            
-                            <input matInput required type="text" formControlName="title"  >
+                            <input matInput required type="text" formControlName="label"  >
                         </mat-form-field>
-                        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.EDUCATION_TITLE' | translate }}</span> {{educationHistoryCV[i].title}}</span>
+                        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.EDUCATION_TITLE' | translate }}</span> {{educationHistoryCV[i].label}}</span>
                     </div>
                     <div class="form-group col-6">
                         <mat-form-field class="cv-full-width" *ngIf="canEditCV">
@@ -225,9 +225,9 @@
                     <div class="form-group col-6">
                         <mat-form-field class="cv-full-width" *ngIf="canEditCV">
                             <mat-label>{{ 'CV.EDUCATION_ORGANISATION' | translate }}</mat-label>                            
-                            <input matInput required type="text" formControlName="organisation"  >
+                            <input matInput required type="text" formControlName="organization"  >
                         </mat-form-field>
-                        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.EDUCATION_ORGANISATION' | translate }}</span> {{educationHistoryCV[i].organisation}}</span>
+                        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.EDUCATION_ORGANISATION' | translate }}</span> {{educationHistoryCV[i].organization}}</span>
                     </div>
                     <div class="form-group col-6">
                         <mat-form-field class="cv-full-width" *ngIf="canEditCV">

@@ -75,7 +75,7 @@
     }">
 
       <div class="row">
-        <div class="col col-lg-8">
+        <div class="col" [ngClass]="{'col-lg-6':(canViewCV && (isStudent || isEmployee)) , 'col-lg-8':!(canViewCV && (isStudent || isEmployee))}">
             <div><span class="profileLabel">{{ 'PROFILES.USERNAME' | translate }}:</span>&nbsp;{{userdata.userName}}</div>            
             <div><span class="profileLabel">{{ 'PROFILES.NAME' | translate }}:</span>&nbsp;{{userdata.name}}</div>
             <div><span class="profileLabel">{{ 'PROFILES.SURNAME' | translate }}:</span>&nbsp;{{userdata.surname}}</div>
@@ -84,7 +84,7 @@
             <div *ngIf="userdata.roles">
               <span *ngIf="(userdata.roles.length==1)" class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>
               <span *ngIf="(userdata.roles.length>1)" class="profileLabel">{{ 'PROFILES.ROLES' | translate }}:</span>
-              &nbsp;<span *ngFor="let role of userdata.roles;  let i = index">{{ 'ROLES.'+role | translate}}<span *ngIf="(i<userdata.roles.length-1)">,&nbsp;</span></span></div>
+              <span *ngFor="let role of userdata.roles;  let i = index"><span>&nbsp;</span>{{ 'ROLES.'+role | translate}}<span *ngIf="(i<userdata.roles.length-1)">,&nbsp;</span></span></div>
             <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span> <span *ngIf="userdata.gender"> {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</span></div>
             <div *ngIf="currentJobPosition"><span class="profileLabel">{{ 'PROFILES.CURRENT_JOB_POSITION' | translate }}:</span>&nbsp;{{currentJobPosition}}</div>
 
@@ -92,31 +92,52 @@
             <!--
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
             -->
-            <div class="row" *ngIf="isStudent || isEmployee">
-
-              <div>
-                  <button *ngIf="canViewCV" class="btn btn-primary" (click)="openUserCV(userdata.id)" >  
-                    <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
-                  </button>
-                  
-                  <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" (click)="uploadUserCVKG(userdata.id)" >  
-                    <i _ngcontent-axy-c0="" class="material-icons small">  cloud_upload </i> {{ 'UPLOAD_CV_KG.BUTTON' | translate }} 
-                  </button>
-                  
-                  <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
-                    <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
-                  </button>
-                </div>
-            </div>
+            
         </div>
-        <div class="col col-lg-2">
-            <div>
+        <div class="col" [ngClass]="{'col-lg-6':(canViewCV && (isStudent || isEmployee)), 'col-lg-2':!((canViewCV && (isStudent || isEmployee)))}">
+          <div class="col " [ngClass]="{'col-lg-4':(canViewCV && (isStudent || isEmployee)), 'col-lg-8':!(canViewCV && (isStudent || isEmployee))}">
               <div *ngIf="userdata.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(' + profileAvatarImg + ')'}"> </div>
               <div *ngIf="!userdata.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(assets/img/no_avatar.jpg)'}"> </div>
+          </div>
+          <div  *ngIf="(canViewCV && (isStudent || isEmployee))" class="col col-lg-4 cv_comp">
+                <div class="wrapperpiechart2">
+                  <canvas id="canvas_pie_chart" baseChart
+                      [datasets]="[{ data: [CvPercentatge,(100-CvPercentatge)],
+                        label: 'PROFILES.COMPLETENESS' | translate , backgroundColor: [
+                      completenessColor,
+                      'rgba(0, 0, 0, 1)'
+                      ]}]"
+                      [labels]="chartLabels"
+                      [options]="chartOptions"
+                      [chartType]="chartType">
+                  </canvas>
+                  <p class="profileLabel">{{ 'PROFILES.CV_COMPLETENESS' | translate }}</p>
+                </div>
+
             </div>
             
         </div>
     </div>
+
+    <div class="col" *ngIf="isStudent || isEmployee">
+      <div class="row">
+        <br>
+        <div>
+            <button *ngIf="canViewCV" class="btn btn-primary" (click)="openUserCV(userdata.id)" >  
+              <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
+            </button>
+            
+            <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-primary" (click)="uploadUserCVKG(userdata.id)" >  
+              <i _ngcontent-axy-c0="" class="material-icons small">  cloud_upload </i> {{ 'UPLOAD_CV_KG.BUTTON' | translate }} 
+            </button>
+            
+            <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
+              <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
+            </button>
+          </div>
+      </div>
+    </div>
+
     <div class="row"><br></div>
     <div class="row">
 <!-- 
@@ -272,7 +293,7 @@
                 </ngb-panel>
 
                 <ngb-panel id="toggle-4" title="{{ 'PROFILES.COMPETENCY_DEVELOPMENT' | translate }}" 
-                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee || isProfessor))">
+                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee))">
                   <ng-template ngbPanelContent>
                     <div *ngIf="_reload">
                       <app-competency-development userId="{{userdata.id}}"></app-competency-development>
