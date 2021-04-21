@@ -433,7 +433,10 @@
     "CURRENT_JOB_POSITION": "Τρέχουσα θέση εργασίας",
     "DELETE_OWN_PROFILE": "Διαγραφή του προφίλ σας",
     "DELETE_OWN_PROFILE_HELP_MESSAGE": "Πρόκειται να διαγράψετε τον λογαριασμό σας, δεν είναι δυνατή η αναίρεση αυτής της ενέργειας. Όλα τα δεδομένα σας θα χαθούν.",
-    "COMPETENCY_DEVELOPMENT": "Ανάπτυξη ικανοτήτων"
+    "COMPETENCY_DEVELOPMENT": "Ανάπτυξη ικανοτήτων",
+    "COMPLETENESS": "Πληρότητα",
+    "NOT_COMPLETENESS": "Όχι πληρότητα",
+    "CV_COMPLETENESS": "Πληρότητα βιογραφικού"
   },
   "BCO": {
     "TITLE": "Καλύτερες επαγγελματικές επιλογές",

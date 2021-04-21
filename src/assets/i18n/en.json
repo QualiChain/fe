@@ -433,7 +433,10 @@
     "CURRENT_JOB_POSITION": "Current job position",
     "DELETE_OWN_PROFILE": "Delete own profile",
     "DELETE_OWN_PROFILE_HELP_MESSAGE": "You are going to delete your user account, this action cannot be undone. All your data will be lost.",
-    "COMPETENCY_DEVELOPMENT": "Competency Development"
+    "COMPETENCY_DEVELOPMENT": "Competency Development",
+    "COMPLETENESS": "Completeness",
+    "NOT_COMPLETENESS": "Not completeness",
+    "CV_COMPLETENESS": "CV completeness"
   },
   "BCO": {
     "TITLE": "Best Career Options",

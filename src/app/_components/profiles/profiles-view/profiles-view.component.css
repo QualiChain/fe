@@ -87,3 +87,21 @@ div.cv_add_course {
     border: 1px solid #edf1f7;
     box-sizing: border-box;
 }
+
+.wrapperpiechart {
+    width: 100px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+
+.wrapperpiechart2 {
+    width: 250px;
+    vertical-align: middle;
+}
+
+.cv_comp .profileLabel {
+    text-align: center;
+    font-size: 1.3rem;
+    margin: 0px 0 7px 0;
+}

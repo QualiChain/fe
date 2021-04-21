@@ -31,8 +31,17 @@ export class CVService {
     return this
       .httpClient
       .get(`${this.uri}/${userId}`, { headers: headers } );
-    }   
+  }   
+
+  getPercentatgeCompletenessCV(userId: any) {
+
+    let headers = this.authService.createQCAuthorizationHeader();
   
+    return this
+      .httpClient
+      .get(`${this.uri}/${userId}/percentage`, { headers: headers } );
+  }  
+
   postCV(userId, dataIn:any) {
     //userId is not needed  into the URL
     //the content type must be text/plain

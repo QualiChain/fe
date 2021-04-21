@@ -159,6 +159,44 @@ export class ProfilesViewComponent implements OnInit {
   isStudent = this.appcomponent.isStudent;
   isEmployee = this.appcomponent.isEmployee;
 
+  completenessColor: string = "";
+  public chartType = 'pie';
+
+  public chartLabels: Array<any> = [this.translate.instant('PROFILES.COMPLETENESS'), this.translate.instant('PROFILES.NOT_COMPLETENESS')];
+
+  public chartOptions: any = {
+    responsive: true,
+    tooltips: {
+      enabled: true,
+      mode: 'single',
+      callbacks: {
+        label: function (tooltipItems, data) {
+          return data.labels[tooltipItems.index]+": "+data.datasets[0].data[tooltipItems.index] + ' %';
+          //return data.datasets[0].data[tooltipItems.index] + ' %';
+        }
+      }
+    },
+      plugins: {
+      datalabels: {
+        display: true,
+        align: 'top',
+        anchor: 'end',
+        //color: "#2756B3",
+        color: "#222",
+        font: {
+          family: 'FontAwesome',
+          size: 14
+        },
+      
+      },
+      deferred: false,
+      legend: false,
+    },
+
+  };
+  
+  CvPercentatge; number = 0;
+
   openAwardDialogInUserProfile(userId: number, element: any) {
      
     const dialogRef = this.awardDialog.open(awardDialog_modal, {
@@ -203,6 +241,7 @@ export class ProfilesViewComponent implements OnInit {
         //console.log(this.router.url);
         //this.router.navigate([this.router.url])
         //location.reload();
+        this.getPercentageCVByUser(userId);
         setTimeout(() => this._reload = false);
         setTimeout(() => this._reload = true);
 
@@ -251,6 +290,34 @@ export class ProfilesViewComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.allSkills.filter(skill => skill.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  getPercentageCVByUser(id) {
+    this.cvs
+    .getPercentatgeCompletenessCV(id)
+    .subscribe((dataPercentatgeCompletenessCV: any) => {
+
+      //color it like red for lower numbers from 0 to 20, 
+      //and blue for 20 to 70
+      // and green for 70 to 100 is perferct
+      this.CvPercentatge = dataPercentatgeCompletenessCV.completeness;
+
+      this.completenessColor= 'rgba(30, 144, 255, 1)';
+      if (this.CvPercentatge < 20) {
+        this.completenessColor= '#d9534f';
+      }
+      else if (this.CvPercentatge < 70) {
+        this.completenessColor= '#337ab7';
+      }
+      else if (this.CvPercentatge >= 70) {
+        this.completenessColor= '#4cae4c';
+      }
+
+      
+    },
+    error => {            
+      console.log("error recovering getPercentatgeCompletenessCV")
+    })
   }
 
   getSmartBadgesByUser(id) {
@@ -341,7 +408,10 @@ export class ProfilesViewComponent implements OnInit {
         //recover smart badges of the user
         //if (id>0) {
         if (id) {
-          this.getSmartBadgesByUser(id);          
+          this.getSmartBadgesByUser(id);
+
+          this.getPercentageCVByUser(id);
+
         }
 
         //load demo data for testing proposes
@@ -451,7 +521,7 @@ export class ProfilesViewComponent implements OnInit {
         else if (authorizedViewRecruitment) {
           this.canViewCV = true;
         }
-        
+        //this.canViewCV = false;
         
 
         this.us
@@ -1163,10 +1233,12 @@ export class CVDialog_modal implements OnInit {
             data.education
             .forEach(element => {
               this.e.push(this.formBuilder.group({
-                title: [element.title, Validators.required],
+                //title: [element.title, Validators.required],
+                label: [element.label, Validators.required],
                 from: [element.from, [Validators.required]],
                 to: [element.to, [Validators.required]],
-                organisation: [element.organisation, [Validators.required]],
+                //organisation: [element.organisation, [Validators.required]],
+                organization: [element.organization, [Validators.required]],
                 description: [element.description, [Validators.required]],
               }));
             });  
@@ -1259,7 +1331,7 @@ openAddNewItem(e, type) {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log(result);
+    //console.log(result);
     if (result!=false) {
       if (type=='skillitem') {
         let newItem = {
@@ -1282,10 +1354,12 @@ openAddNewItem(e, type) {
       }
       else if (type=='educationitem') {
         this.e.push(this.formBuilder.group({
-          title: [result.title, Validators.required],
+          //title: [result.title, Validators.required],
+          label: [result.label, Validators.required],
           from: [result.from, [Validators.required]],
           to: [result.to, [Validators.required]],
-          organisation: [result.organisation, [Validators.required]],
+          //organisation: [result.organisation, [Validators.required]],
+          organization: [result.organization, [Validators.required]],
           description: [result.description, [Validators.required]],
         }));
       }
@@ -1314,10 +1388,12 @@ addFormGroupItem(e, type) {
   }
   else if (type=='educationitem') {
     this.e.push(this.formBuilder.group({
-      title: ['', Validators.required],
+      //title: ['', Validators.required],
+      label: ['', Validators.required],
       from: ['', [Validators.required]],
       to: ['', [Validators.required]],
-      organisation: ['', [Validators.required]],
+      //organisation: ['', [Validators.required]],
+      organization: ['', [Validators.required]],
       description: ['', [Validators.required]],
     }));
   }
@@ -1459,10 +1535,12 @@ export class AddItemDialog_modal implements OnInit {
   work_employer: string = "";
 
   //education
-  education_title: string = "";
+  //education_title: string = "";
+  education_label: string = "";
   education_from: string = "";
   education_to: string = "";
-  education_organisation: string = "";
+  //education_organisation: string = "";
+  education_organization: string = "";
   education_description: string = "";
 
   competencies: CompetencyLevelValues[] = [
@@ -1602,10 +1680,12 @@ export class AddItemDialog_modal implements OnInit {
       }
       else if (this.data.type=='educationitem') {
         dataToReturn = {
-          "title": this.education_title,
+          //"title": this.education_title,
+          "label": this.education_label,
           "from": this.education_from,
           "to": this.education_to,
-          "organisation": this.education_organisation,
+          //"organisation": this.education_organisation,
+          "organization": this.education_organization,
           "description": this.education_description
         }
       }
