@@ -38,7 +38,6 @@ import { RecruitmentOrganisationService } from '../../../_services/recruitmentor
 import AcademicOrganisation from '../../../_models/academicorganisation';
 import { AcademicOrganisationService } from '../../../_services/academicorganisation.services';
 
-
 @Component({
   selector: 'app-profiles-add',
   templateUrl: './profiles-add.component.html',
@@ -69,18 +68,18 @@ export class ProfilesAddComponent implements OnInit {
     {value: 'academic organisation', viewValue: 'Academic organisation'},
     {value: 'recruitment organisation', viewValue: 'Recruitment organisation'}
   ];
-
+  /*
   rolesType: RoleType[] = [
     //{value: 'academic organisation', viewValue: 'Academic organisation', type: 'academic'},
     {value: 'administrator', viewValue: 'Administrator', type: ''},
     {value: 'employee', viewValue: 'Employee', type: ''},
-    {value: 'life long learner', viewValue: 'Life long learner', type: 'academic'},
+    {value: 'life long learner', viewValue: 'Life long learner', type: ''},
     {value: 'professor', viewValue: 'Professor', type: 'academic'},
     {value: 'student', viewValue: 'Student', type: 'academic'},    
     {value: 'recruiter', viewValue: 'Recruiter', type: 'recruitment'},
     //{value: 'recruitment organisation', viewValue: 'Recruitment organisation', type: 'recruitment'}
   ];
-  
+  */
   academicRole: boolean = false;
   recruitmentRole: boolean = false;
   employeeRole: boolean = false;
@@ -540,7 +539,7 @@ export class ProfilesAddIAMUserComponent implements OnInit {
   userName: string = "";
   password: string = "";
   repeatPassword: string = "";
-  email: string = "";
+  email: string = "";  
 
   //name: string = "testStudent";
   //userName: string = "testStudent";
@@ -565,14 +564,23 @@ export class ProfilesAddIAMUserComponent implements OnInit {
     //{value: 'academic organisation', viewValue: 'Academic organisation', type: 'academic'},
     {value: 'administrator', viewValue: 'Administrator', type: ''},
     {value: 'employee', viewValue: 'Employee', type: ''},
-    {value: 'life long learner', viewValue: 'Life long learner', type: 'academic'},
+    {value: 'life long learner', viewValue: 'Life long learner', type: ''},
     {value: 'professor', viewValue: 'Professor', type: 'academic'},
     {value: 'student', viewValue: 'Student', type: 'academic'},    
     {value: 'recruiter', viewValue: 'Recruiter', type: 'recruitment'},
     //{value: 'recruitment organisation', viewValue: 'Recruitment organisation', type: 'recruitment'}
   ];
 
+  paramRedirectUrl: string;
+  showloadingSpinner: boolean = false;
+  showErrorAutoLogin: boolean = false;
+
   constructor(
+    private route: ActivatedRoute,
+    private qcStorageService: QCStorageService,
+    public storageService: StorageService,
+    private ups: UploadService,
+    private router: Router,
     private authservice: AuthService,
     private ros: RecruitmentOrganisationService,
     private aos: AcademicOrganisationService,
@@ -581,6 +589,11 @@ export class ProfilesAddIAMUserComponent implements OnInit {
   ) {
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    this.route.queryParams.subscribe(params => {
+      this.paramRedirectUrl = params['returnUrl'];
+      
+  });
 
   }
 
@@ -617,6 +630,60 @@ export class ProfilesAddIAMUserComponent implements OnInit {
     
   }
 
+
+  storeQCUserObject(myObj:{}) {
+    //console.log(myObj);
+    let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myObj));
+    //localStorage.setItem('userdata', encryptedData);
+    localStorage.setItem('userdataQC', encryptedData);
+    this.storageService.setItem('userdataQC', encryptedData);
+    //window.location.href="/";
+    if (this.paramRedirectUrl) {
+      window.location.href = this.paramRedirectUrl;
+    }
+    else {
+      window.location.reload();
+    }
+    
+    //location.reload();
+    //location.href="/";
+    //this.router.navigate(["/"]);
+  }
+
+  validCredentialsQCUser(data) {
+    //console.log(data);
+    //console.log(this.name);
+    let myObj = {};
+
+    //console.log("else");
+      if (data) {
+
+        console.log(data.id);
+        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role, roles: data.roles};
+        myObj['avatar_path'] = "assets/img/no_avatar.jpg";
+        this.storeQCUserObject(myObj);
+      }
+      else {
+        this.storeQCUserObject(myObj);
+      }
+  }
+
+  async loginForm() {
+    this.showloadingSpinner = true;
+    let res:any = await this.authservice.loginIAMAsync(this.email, this.password);
+    //console.log(res);
+    if (res['authenticated']) {
+      //console.log("Valid credentials for the auth service");               
+      this.validCredentialsQCUser(res);
+    }
+    else {            
+      this.showloadingSpinner = false;
+      this.showErrorAutoLogin = true;
+      console.log("invalid credentials")          
+    }
+
+  }
+
   processForm() {
     //console.log(this);
     this.loadingLoginSpinnerCreateUserIAM = true;
@@ -624,40 +691,62 @@ export class ProfilesAddIAMUserComponent implements OnInit {
     this.errorMessage = "";
     
     let userRoles = [];
+    let userOrganizations = [];
     if (this.academicRole) {
       if (this.userAcademicRoles){
         this.userAcademicRoles.forEach(element => {
           userRoles.push(element);
         });
       }
+      if (this.userAcademicOrganisation) {
+        this.userAcademicOrganisation.forEach(element => {
+          userOrganizations.push(element);
+        });
+      }      
     }
+
     if (this.recruitmentRole) {
+      /*
       if (this.userRecruiterRoles){
         this.userRecruiterRoles.forEach(element => {
           userRoles.push(element);
         });
       }
+      */
+      userRoles.push('recruiter');
+      if (this.userRecruiterOrganisation) {
+        this.userRecruiterOrganisation.forEach(element => {
+          userOrganizations.push(element);
+        });
+      }
+
     }
     
     const formData: FormData = new FormData();
     formData.append('name', this.name);
     formData.append('email', this.email);
     formData.append('password', this.password);
-    formData.append('organization', 'teeeeeeeest');
-    formData.append('userType',JSON.stringify(userRoles));
-
+    formData.append('organization', JSON.stringify(userOrganizations));
+    formData.append('userType', JSON.stringify(userRoles));
+    
     this.userService.addUserIAM(formData).subscribe(    
       res => {
-        console.log("Add user IAM response");
-        console.log(res);
-        
+        //console.log("Add user IAM response");
+        //console.log(res);        
         this.loadingLoginSpinnerCreateUserIAM = false;
         if (!res.succeeded) {
           this.showErrorMessage = true;
           this.errorMessage = res.message;  
         }
         else {
-          this.showUserCreatedMessage = true;
+          
+          if (this.userId>0) {
+            this.router.navigate(["/profiles/"]);
+          }
+          else {
+            this.showUserCreatedMessage = true;
+            this.loginForm();
+          }
         }
       },
       error => {        
@@ -667,6 +756,7 @@ export class ProfilesAddIAMUserComponent implements OnInit {
         this.errorMessage = error.message;
       }
     );
+
     
 
   }
