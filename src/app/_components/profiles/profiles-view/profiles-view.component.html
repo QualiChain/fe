@@ -85,7 +85,7 @@
               <span *ngIf="(userdata.roles.length==1)" class="profileLabel">{{ 'PROFILES.ROLE' | translate }}:</span>
               <span *ngIf="(userdata.roles.length>1)" class="profileLabel">{{ 'PROFILES.ROLES' | translate }}:</span>
               <span *ngFor="let role of userdata.roles;  let i = index"><span>&nbsp;</span>{{ 'ROLES.'+role | translate}}<span *ngIf="(i<userdata.roles.length-1)">,&nbsp;</span></span></div>
-            <div><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span> <span *ngIf="userdata.gender"> {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</span></div>
+            <div *ngIf="userdata.gender && userdata.gender!='unknown'" ><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span> <span *ngIf="userdata.gender"> {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</span></div>
             <div *ngIf="currentJobPosition"><span class="profileLabel">{{ 'PROFILES.CURRENT_JOB_POSITION' | translate }}:</span>&nbsp;{{currentJobPosition}}</div>
 
             <div class="row"><br></div>
