@@ -33,7 +33,7 @@ export class VisualisationHelperDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
+    //console.log(this.data);
   }
 
   onConfirm(): void {

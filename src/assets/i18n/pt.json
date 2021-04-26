@@ -1,290 +1,290 @@
 {
   "LANGUAGE_SELECTOR": {
-    "SELECT": "Alterar idioma",
+    "SELECT": "Selecionar idioma",
     "en": "Inglês",
     "pt": "Português",
     "el": "Grego"   
   },
   "ROLES": {
-    "authenticated": "Authenticated",
-    "student": "Student",
-    "employee": "Employee",
+    "authenticated": "Autenticado",
+    "student": "Estudante",
+    "employee": "Colaborador",
     "teacher": "Professor",
     "professor": "Professor",
-    "recruiter": "Recruiter",
-    "administrator": "Administrator",
-    "admin": "Administrator",
-    "life long learner": "Life long learner",
-    "academic organisation": "Academic organisation",
-    "recruitment organisation": "Recruitment organisation",
-    "job seeker": "Job seeker"    
+    "recruiter": "Recrutador",
+    "administrator": "Administrador",
+    "admin": "Administrador",
+    "life long learner": "Aprendizagem contínua",
+    "academic organisation": "Organização académica",
+    "recruitment organisation": "Organização de recrutamento",
+    "job seeker": "Candidato a emprego"    
   },
   "MENU": {
     "HOME": "Home",
     "JOBS": "Empregos",
-    "JOBS_HELP_TEXT": "Aqui você encontra a lista de empregos disponíveis",
+    "JOBS_HELP_TEXT": "Aqui encontra a lista de empregos disponíveis",
     "CVS": "Cvs",
     "COURSES": "Cursos",
-    "COURSES_HELP_TEXT": "Aqui você encontra a lista de cursos disponíveis",
+    "COURSES_HELP_TEXT": "Aqui encontra a lista de cursos disponíveis",
     "PROFILES": "Perfis",
-    "PROFILES_HELP_TEXT": "Aqui você pode encontrar a lista de perfis de usuário",
+    "PROFILES_HELP_TEXT": "Aqui encontra a lista de perfis de usuário",
     "LOGIN": "Login",
     "LOGOUT": "Logout",
-    "WELCOME_MESSAGE": "Bem vinda",
+    "WELCOME_MESSAGE": "Bem vindo/a",
     "PROFILE": "Perfil",
     "RECRUITMENT": "Recrutamento",
     "RECRUITMENT_HELP_TEXT": "O formulário de recrutamento está disponível aqui",
-    "CERTIFICATE_VALIDATION_HELP_TEXT": "The certificate validation application is available here",
-    "CERTIFICATE_VALIDATION": "Validação de Certificado",
+    "CERTIFICATE_VALIDATION_HELP_TEXT": "O formulário de certificado de validação está disponível aqui", 
+    "CERTIFICATE_VALIDATION": "Certificado de validação",
     "MCDSS": "MCDSS",
     "MCDSS_HELP_TEXT": "A ferramenta 'Multicriteria Decision Support System' está disponível aqui",
-    "SKILLS": "Skills",
-    "SKILLS_HELP_TEXT": "Aqui você pode encontrar a lista de habilidades",
-    "NOTIFICATION_PREFERENCES": "Notification Preferences",
-    "PERSONAL_FILES_REPOSITORY": "Repositório de Arquivos",
-    "QUESTIONNAIRE": "Questionnaire",
-    "THESIS": "Thesis",
-    "THESIS_HELP_TEXT": "Here you can find the list of available thesis"
+    "SKILLS": "Competências",
+    "SKILLS_HELP_TEXT": "Aqui encontra a lista de competências",
+    "NOTIFICATION_PREFERENCES": "Preferências de notificações",
+    "PERSONAL_FILES_REPOSITORY": "Repositório de arquivos",
+    "QUESTIONNAIRE": "Questionário",
+    "THESIS": "Tese",
+    "THESIS_HELP_TEXT": "Aqui encontra a lista de teses disponíveis"
   },
   "PERSONAL_FILES_REPOSITORY": {
-    "TITLE": "Personal files repository",
-    "DELETE_MESSAGE": "Are you sure you want to delete this file?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "ERROR_DELETING_FILE": "Sorry, there was an error deleting the file. The file '{{fileName}}' cannot be deleted.",
+    "TITLE": "Arquivo de ficheiros pessoais",
+    "DELETE_MESSAGE": "Tem a certeza que quer remover o ficheiro?",
+    "CONFIRM_ACTION": "Confirmar",
+    "ERROR_DELETING_FILE": "Desculpe, houve um erro a remover o ficheiro. O ficheiro '{{fileName}}' não pode ser apagado.",
     "ERROR_DOWNLOADING_FILE": "Sorry, there was an error downloading the file. The file '{{fileName}}' cannot be downloaded."
   },
   "RECRUITING": {
     "CERTIFICATE_VALIDATION": "Validação de Certificado",
-    "CHOOSE_FILE": "Choose File",
+    "CHOOSE_FILE": "Escolha o ficheiro",
     "INPUTDID": {
       "LABEL": "DID",
       "PLACEHOLDER": "IssuerID (Smart contract address WITHOUT did:ethr:)"
     },
     "INPUTCIVILID": {
       "LABEL": "CivilID",
-      "PLACEHOLDER": "CivilID (e.g., 12345678)"
+      "PLACEHOLDER": "CivilID (ex., 12345678)"
     },
     "BUTTON": {
-      "VERIFY_CERTIFICATE": "Verify Certificate"
+      "VERIFY_CERTIFICATE": "Verificar certificado"
     },
     "INSTRUCTIONS": {
       "TITLE": "Instruções",
-      "STEP_1": "1. Input the address of the account used to upload the certificate ('0x2CefB619218825C0c670D8E77f7039e0693E1dDC' by default).",
-      "STEP_2": "2. Input the civil ID. The Civil ID should be the same as the name of the certificate (pdf file) (e.g., 12345678)",
-      "STEP_3": "3. Select the certificate to validate (e.g., 12345678.pdf)"
+      "STEP_1": "1. Insira a conta utilizada para a inserção do certificado ('0x2CefB619218825C0c670D8E77f7039e0693E1dDC' por defeito).",        
+      "STEP_2": "2. Insira o numero civil. O numero civil deve ser o mesmo do nome do certificado (ficheiro pdf) (e.g., 12345678)",
+      "STEP_3": "3. Selecione o certificado para ser validado (e.g., 12345678.pdf)"
     },
     "STATUS": {
-      "WAITING": "Awaiting validation..",
-      "DONE": "Feito",
+      "WAITING": "A aguardar validação..",
+      "DONE": "Processo completo",
       "SUCCESS": "Sucesso",
       "ERROR": "Erro"
     },
-    "CERTIFICATE_HASH": " - Certificate hash is: ",
+    "CERTIFICATE_HASH": " - O hash do certificado é: ",
     "WARNING": {
-      "INVALID_ADDRESS": "Please insert a valid address (see examples)",
-      "INVALID_CIVIL_ID": "Please insert a valid Civil ID (integer)",
-      "INVALID_CERTIFICATE": "Please insert a valid certificate (.pdf)"
+      "INVALID_ADDRESS": "Por favor, insira uma conta válida (ver os exemplos)",
+      "INVALID_CIVIL_ID": "Por favor, insira um numero civil válido (Numero)",
+      "INVALID_CERTIFICATE": "Por favor, insira um certificado válido (.pdf)"
     }
   },
   "HOME": {
     "TITLE": "Home",
-    "BODY": "Esta é a página inicial do QualiChain FE"
+    "BODY": "Página inicial do QualiChain FE"
   },
   "LOGIN": {
-    "TITLE": "Welcome to QualiChain",
+    "TITLE": "Bem vindo ao Qualichain",
     "TAB": {
       "LOGIN": "Log in",
-      "REQUEST_YOUR_PASSWORD": "Request your password",
+      "REQUEST_YOUR_PASSWORD": "Solicitar senha",
       "CREATE_NEW_ACCOUNT": "Create new account"
     },    
     "INVALID_CREDENTIALS_MESSAGE": "Credenciais inválidas",
-    "LOGIN_INPROGRESS_MESSAGE": "Valid credentials, login in progress",
+    "LOGIN_INPROGRESS_MESSAGE": "Credenciais válidas, a entrar",
     "USERNAME": "Nome de usuário",
     "USERNAME_HELP": "O nome de usuário é obrigatório e precisa ter pelo menos três caracteres.",
     "PASSWORD": "Senha",
     "PASSWORD_HELP": "A senha é necessária e precisa ter pelo menos três caracteres.",
-    "EMAIL": "Your email address",
-    "EMAIL_HELP": "Write your email here",
-    "VALID_REQUEST_CREDANTIALS_MESSAGE": "The request has been done",
-    "INVALID_REQUEST_CREDANTIALS_MESSAGE": "The request has not been done",
+    "EMAIL": "Endereço de email",
+    "EMAIL_HELP": "Insira o seu email aqui",
+    "VALID_REQUEST_CREDANTIALS_MESSAGE": "O seu pedido foi aceite",
+    "INVALID_REQUEST_CREDANTIALS_MESSAGE": "O seu pedido não foi aceite",
     "BUTTON": {
       "LOGIN": "Log in",
-      "SUBMIT": "Submit"
+      "SUBMIT": "Submeter"
     }
-  },  
+  }, 
   "COURSES": {
-    "DELETE_MESSAGE": "Are you sure you want to delete this course?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "TITLE": "Courses",
+    "DELETE_MESSAGE": "Tem a certeza que quer remover este curso?",
+    "CONFIRM_ACTION": "Confirmar",
+    "TITLE": "Cursos",
     "BUTTON": {
-      "CREATE_COURSE": "Create Course"
+      "CREATE_COURSE": "Criar curso"
     }
   },
   "JOBS_APPLICATIONS": {
-    "TITLE": "Job applications",
-    "NO_DATA": "There are no job applications",
+    "TITLE": "Candidaturas",
+    "NO_DATA": "Não há candidaturas para este anúncio de trabalho",
     "BUTTON": {
-      "VIEW_JOB": "View job"
+      "VIEW_JOB": "Ver anúncio de trabalho"
     }
   },
   "JOBS": {
     "TITLE": "Empregos",
-    "NO_JOBS_AVAILABLE": "There are no jobs available",
-    "NONE": "None",
+    "NO_JOBS_AVAILABLE": "Não há empregos disponíveis",
+    "NONE": "Vazio",
     "FILTER": {
-      "TITLE": "by title",
-      "ORGANIZATION": "by organization"
+      "TITLE": "Por título",
+      "ORGANIZATION": "Por organização"
     },    
-    "REQUIRED_SKILLS": "Required Skills",
-    "REQUIRED_SKILLS_NOT_AVAILABLE": "There are not required skills available",
-    "REQUIRED_EDUCATIONS": "Required Degrees",
-    "REQUIRED_EDUCATIONS_NOT_AVAILABLE": "There are not required degrees available",
-    "REQUIRED_EXPERIENCE": "Required Experience",
-    "REQUIRED_EXPERIENCES": "Required Experiences",
-    "REQUIRED_EXPERIENCES_NOT_AVAILABLE": "There are not required experiences available",
-    "ORGANIZATION": "Organization",
+    "REQUIRED_SKILLS": "Competências Obrigatórias",
+    "REQUIRED_SKILLS_NOT_AVAILABLE": "Não há competências obrigatórias",
+    "REQUIRED_EDUCATIONS": "Graus Académicos Obrigatórios",
+    "REQUIRED_EDUCATIONS_NOT_AVAILABLE": "Não existem graus académicos obrigatórios",
+    "REQUIRED_EXPERIENCE": "Experiência Obrigatória",
+    "REQUIRED_EXPERIENCES": "Experiências Obrigatórias",
+    "REQUIRED_EXPERIENCES_NOT_AVAILABLE": "Não existem experiências obrigatórias",
+    "ORGANIZATION": "Organização",
     "BUTTON": {
-      "ADD_SKILL": "Add Skill",
-      "DELETE_SKILL": "Delete Skill",
-      "ADD_EXPERIENCE": "Add Experience",
-      "DELETE_EXPERIENCE": "Delete Experience",
-      "ADD_EDUCATION": "Add Degree",
-      "DELETE_EDUCATION": "Delete Degree",
-      "CREATE_JOB": "Create Job",
-      "UPDATE_JOB": "Update Job",
-      "CANCEL": "Cancel"
+      "ADD_SKILL": "Adicionar Competência",
+      "DELETE_SKILL": "Remover Competência",
+      "ADD_EXPERIENCE": "Adicionar Experiência",
+      "DELETE_EXPERIENCE": "Remover Experiência",
+      "ADD_EDUCATION": "Adicionar grau académico",
+      "DELETE_EDUCATION": "Remover grau académico",
+      "CREATE_JOB": "Criar lista de empregos",
+      "UPDATE_JOB": "Atualizar lista de empregos",
+      "CANCEL": "Cancelar"
     },
-    "CONFIRM_ACTION": "Confirm Action",
-    "DELETE_MESSAGE": "Are you sure you want to delete this job?",
-    "CANCEL_MESSAGE": "Are you sure you want to do this?"
+    "CONFIRM_ACTION": "Confirmar",
+    "DELETE_MESSAGE": "Tem a certeza que quer remover esta lista de empregos?",
+    "CANCEL_MESSAGE": "Tem a certeza que quer cancelar esta ação?"
   },
   "JOB": {
-    "HEADER_TITLE": "Job",
+    "HEADER_TITLE": "Emprego",
     "SPECIALIZATION": "Specialization",
     "RECRUITMENT_ORGANIZATION": {
       "LABEL": "Recruitment organisation"
     },
-    "CANDIDATES": "Candidates",    
-    "ASSIGNED": "Assigned",
-    "NO_CANDIDATES": "There are not candidates for this Job",
-    "SELECT_USER_APPLY_MESSAGE": "Are you sure you want to select this candidate?",
-    "DELETE_APPLY_MESSAGE": "Are you sure you want to delete this apply?",
-    "ORGANIZATION": "Organization",
+    "CANDIDATES": "Candidatos",    
+    "ASSIGNED": "Atribuído",
+    "NO_CANDIDATES": "Não existem candidatos para este emprego",
+    "SELECT_USER_APPLY_MESSAGE": "Tem a certeza que quer selecionar este candidato?",
+    "DELETE_APPLY_MESSAGE": "Tem a certeza que quer remover esta candidatura?",
+    "ORGANIZATION": "Organização",
     "TITLE": {
-      "LABEL": "Title",
-      "PLACEHOLDER": "Position"
+      "LABEL": "Título",
+      "PLACEHOLDER": "Posição"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Descrição",
+      "PLACEHOLDER": "Descrição"
     },
     "DEPARTMENT": {
-      "LABEL": "Deparment",
-      "PLACEHOLDER": "Deparment"
+      "LABEL": "Departamento",
+      "PLACEHOLDER": "Departamento"
     },
     "EMPLOYMENT_TYPE": {
-      "LABEL": "Employment type",
+      "LABEL": "Tipo de contrato",
       "PLACEHOLDER": "Selecione um",
       "OPTIONS": {
-        "FULL_TIME": "Full-time",
-        "PART_TIME": "Part-time",
-        "CONTRACT": "Contract",
-        "TEMPORARY": "Temporary",
-        "VOLUNTEER": "Volunteer",
-        "INTERNSHIP": "Internership"
+        "FULL_TIME": "Tempo inteiro",
+        "PART_TIME": "Tempo parcial",
+        "CONTRACT": "Contrato",
+        "TEMPORARY": "Temporário",
+        "VOLUNTEER": "Voluntário",
+        "INTERNSHIP": "Estágio"
       }
-    },    
+    },      
     "EMPLOYMENT_LEVEL": {
-      "LABEL": "Seniority Level",
+      "LABEL": "Nivel de Antiguidade",
       "PLACEHOLDER": "Selecione um",
       "OPTIONS": {
-        "INTERNERSHIP": "Internship",
-        "ENTITY_LEVEL": "Entity level",
-        "ENTRY_LEVEL": "Entry level",
-        "ASSOCIATE": "Associate",
-        "MID_SENIOR_LEVEL": "Mid-Senior level",
-        "SENIOR_LEVEL": "Senior",
-        "EXPERT": "Expert",
-        "DIRECTOR": "Director",
-        "EXECUTIVE": "Executive",
-        "NOT_APPLICABLE": "Not Applicable"
+        "INTERNERSHIP": "Estagiário",
+        "ENTITY_LEVEL": "Nivel de entidade",
+        "ENTRY_LEVEL": "Nivel básico",
+        "ASSOCIATE": "Associado/a",
+        "MID_SENIOR_LEVEL": "Sénior nível médio",
+        "SENIOR_LEVEL": "Sénior",
+        "EXPERT": "Especialista",
+        "DIRECTOR": "Diretor",
+        "EXECUTIVE": "Executivo",
+        "NOT_APPLICABLE": "Não aplicável"
       }
     },
     "EMPLOYMENT_DESCRIPTION": {
-      "LABEL": "Job Description",
-      "PLACEHOLDER": "Briefly explain the type of job you're offering."
+      "LABEL": "Descrição do emprego",
+      "PLACEHOLDER": "Descreva brevemente o tipo de emprego que está a oferecer."
     },
     "REQUIRED_SKILLS": {
-      "LABEL": "Required Skills"
+      "LABEL": "Competências obrigatórias"
     },
     "START_DATE" : {
-      "LABEL": "Start date",
-      "PLACEHOLDER": "Start date"
+      "LABEL": "Data de início",
+      "PLACEHOLDER": "Data de início"
     },
     "END_DATE" : {
-      "LABEL": "End date",
-      "PLACEHOLDER": "End date"
+      "LABEL": "Data de fim",
+      "PLACEHOLDER": "Data de fim"
     },
     "EXPERIENCE": {
-      "TITLE": "Work Experience",
+      "TITLE": "Exepriência de trabalho",
       "NAME" : {
-        "LABEL": "Position",
-        "PLACEHOLDER": "Position title"
+        "LABEL": "Posição",
+        "PLACEHOLDER": "Titulo da posição"
       },
       "DESCRIPTION" : {
-        "LABEL": "Description",
-        "PLACEHOLDER": "Position description"
+        "LABEL": "Descrição",
+        "PLACEHOLDER": "Descrição da posição"
       }
     },
     "EDUCATION": {
-      "TITLE": "Degree",
+      "TITLE": "Grau Académico",
       "LABEL" : {
-        "LABEL": "Title",
-        "PLACEHOLDER": "Title"
+        "LABEL": "Titulo",
+        "PLACEHOLDER": "Titulo"
       },
       "NAME" : {
-        "LABEL": "Title",
-        "PLACEHOLDER": "Degree title"
+        "LABEL": "Titulo",
+        "PLACEHOLDER": "Título do grau académico"
       },
       "DESCRIPTION" : {
-        "LABEL": "Description",
-        "PLACEHOLDER": "Degree description"
+        "LABEL": "Descrição",
+        "PLACEHOLDER": "Descrição do grau académico"
       }
     },
     "SKILL": {
-      "TITLE": "Skill",
+      "TITLE": "Competências",
       "NAME" : {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Skill name"
+        "LABEL": "Nome",
+        "PLACEHOLDER": "Nome da competência"
       },
       "ASSIGN" : {
-        "LABEL": "Assign",
-        "PLACEHOLDER": "Assign"
+        "LABEL": "Atribuir",
+        "PLACEHOLDER": "Atribuir"
       },
       "LEVEL" : {
-        "LABEL": "Level",
+        "LABEL": "Nivel",
         "PLACEHOLDER": "Selecione um",
         "OPTIONS": {
-          "BASIC": "Basic",
-          "INTERMEDIATE": "Intermediate",
-          "ADVANCED": "Advanced",
-          "EXPERT": "Expert"
+          "BASIC": "Básico",
+          "INTERMEDIATE": "Intermédio",
+          "ADVANCED": "Avançado",
+          "EXPERT": "Especialista"
         }
       },
       "PRIORITY" : {
-        "LABEL": "Priority",
-        "PLACEHOLDER": "Selecione um",
+        "LABEL": "Prioridade",
+        "PLACEHOLDER": "Selecione uma",
         "OPTIONS": {
-          "LOW": "Low",
-          "MEDIUM": "Medium",
-          "HIGH": "High"
+          "LOW": "Baixa",
+          "MEDIUM": "Média",
+          "HIGH": "Alta"
         }
       }
     },
     "APPLY" : {
-      "TITLE" : "Apply for this job",
+      "TITLE" : "Candidatar a este emprego",
       "BUTTON" : {
-        "APPLY": "Apply"
+        "APPLY": "Candidatar"
       }
     },
     "NO_CV_MESSAGE": "If you wish to apply for this job, please update first your CV in your user profile <a href='/myprofile'>here</a>.",
@@ -292,568 +292,568 @@
   },
   "JOB_APPLY": {
     "AVAILABLE": {
-      "TITLE": "Available",
-      "PLACEHOLDER": "Available"
+      "TITLE": "Disponível",
+      "PLACEHOLDER": "Disponível"
     },
     "EXPECTED_SALARY": {
-      "TITLE": "Expected Salary",
-      "PLACEHOLDER": "Expected Salary"
+      "TITLE": "Salário esperado",
+      "PLACEHOLDER": "Salário esperado"
     },
-    "SCORE": "Score",
-    "ROLE": "Role"
+    "SCORE": "Pontuação",
+    "ROLE": "Função"
   },  
   "CVS": {
     "TITLE": "CVs"
   },
   "PROFILE": {
-    "MY_PROFILE": "My profile",
+    "MY_PROFILE": "O meu perfil",
     "CREATE_PROFILE": {
-      "TITLE" : "Create new profile"
+      "TITLE" : "Criar perfil"
     },
     "EDIT_PROFILE": {
-      "TITLE" : "Edit profile"
+      "TITLE" : "Editar perfil"
     },
     "PILOT": {
-      "LABEL": "Pilot",
-      "SELECT_ONE": "Select one pilot"
+      "LABEL": "Guia",
+      "SELECT_ONE": "Escolha um guia" 
     },
     "ROLE": {
-      "LABEL": "Role",
-      "SELECT_ONE": "Select one role"
+      "LABEL": "Função",
+      "SELECT_ONE": "Selecione uma função"
     },
     "USERNAME": {
-      "LABEL": "Username",
-      "PLACEHOLDER": "Write your username"
+      "LABEL": "Nome de usuário",
+      "PLACEHOLDER": "Escreva o seu nome de usuário"
     },
     "PASSWORD": {
-      "LABEL": "Password",
-      "PLACEHOLDER": "Write your password"
-    },    
+      "LABEL": "Palavra chave",
+      "PLACEHOLDER": "Escreva a sua palavra chave"
+    },  
     "FULLNAME": {
-      "LABEL": "Full name",
-      "PLACEHOLDER": "Full name"
+      "LABEL": "Nome completo",
+      "PLACEHOLDER": "Nome completo"
     },    
     "NAME": {
-      "LABEL": "Name",
-      "PLACEHOLDER": "Name"
+      "LABEL": "Nome",
+      "PLACEHOLDER": "Nome"
     },
     "SURNAME": {
-      "LABEL": "Surname",
-      "PLACEHOLDER": "Surname"
+      "LABEL": "Apelido",
+      "PLACEHOLDER": "Apelido"
     },
     "EMAIL": {
       "LABEL": "Email",
       "PLACEHOLDER": "Email"
     },
     "GENDER": {
-      "LABEL": "Gender",
-      "PLACEHOLDER": "Gender",
-      "SELECT_ONE": "Select one gender",
+      "LABEL": "Género",
+      "PLACEHOLDER": "Género",
+      "SELECT_ONE": "Selecione género",
       "TYPE": {
-        "MALE": "Male",
-        "FEMALE": "Female",
-        "OTHER": "Other"
+        "MALE": "Masculino",
+        "FEMALE": "Feminino",
+        "OTHER": "Outro"
       }
     },
     "BIRTHDATE": {
-      "LABEL": "Birthdate",
-      "PLACEHOLDER": "Choose a birthdate date"
+      "LABEL": "Data de nascimento",
+      "PLACEHOLDER": "Escolha a data de nascimento"
     },
     "COUNTRY": {
-      "LABEL": "Country",
-      "PLACEHOLDER": "Country"
+      "LABEL": "País",
+      "PLACEHOLDER": "País"
     },
     "STATE": {
-      "LABEL": "State",
-      "PLACEHOLDER": "State"
+      "LABEL": "Distrito",
+      "PLACEHOLDER": "Distrito"
     },
     "CITY": {
-      "LABEL": "City",
-      "PLACEHOLDER": "City"
+      "LABEL": "Cidade",
+      "PLACEHOLDER": "Cidade"
     },
     "ADDRESS": {
-      "LABEL": "Address",
-      "PLACEHOLDER": "Address"
+      "LABEL": "Morada",
+      "PLACEHOLDER": "Morada"
     },
     "ZIPCODE": {
-      "LABEL": "Zip code",
-      "PLACEHOLDER": "Zip code"
+      "LABEL": "Código postal",
+      "PLACEHOLDER": "Código postal"
     },
     "MOBILEPHONE": {
-      "LABEL": "Mobile Phone",
+      "LABEL": "Número de télemovel",
       "PLACEHOLDER": "666666666"
     },
     "HOMEPHONE": {
-      "LABEL": "Home Phone",
+      "LABEL": "Número de telefone",
       "PLACEHOLDER": "999999999"
     },
-    "NO_SMART_BADGE_YET": "This user does not have any smart badge yet."
+    "NO_SMART_BADGE_YET": "Este usuário ainda não tem um selo inteligente."
   },
   "CHANGE_PASSWORD": {
-    "TITLE": "Change user password",
+    "TITLE": "Alterar palavra-chave",
     "WARNING_MESSAGE" : {
-      "PASSWORD_MATCH" : "Passwords match: To change the current user password, enter the new password in both fields.",
-      "PASSWORD_LENGTH" : "Passwords length: 8 characters minimum."
+      "PASSWORD_MATCH" : "Palavras-chave correspondem: Para alterar palavra-chave, insira a nova em ambos os campos.", 
+      "PASSWORD_LENGTH" : "Comprimento da palavra-chave: Pelo menos 8 carateres."
     },
     "NEW_PASSWORD": {
-      "LABEL": "New password",
-      "PLACEHOLDER": "New password"
+      "LABEL": "Nova palavra-chave",
+      "PLACEHOLDER": "Nova palavra-chave"
     },
     "REPEAT_PASSWORD":  {
-      "LABEL": "Repeat new password",
-      "PLACEHOLDER": "Repeat new password"
+      "LABEL": "Repita nova palavra-chave",
+      "PLACEHOLDER": "Repita nova palavra-chave"
     }
   },
   "PROFILES": {
     "TITLE": "Perfis",
-    "STUDENT_PROFILE": "Perfil do aluno",
-    "TEACHER_PROFILE": "Perfil do professor",
-    "EMPLOYEE_PROFILE": "Employee Profile",
+    "STUDENT_PROFILE": "Perfil de aluno",
+    "TEACHER_PROFILE": "Perfil de professor",
+    "EMPLOYEE_PROFILE": "Perfil de funcionário",
     "PROFILE": "Perfil",
     "USERNAME": "Nome de usuário",
     "NAME": "Nome",
-    "SURNAME": "Surname",
+    "SURNAME": "Último nome",
     "UNIVERSITY": "Universidade",
     "EMAIL": "Email",
-    "ROLE": "Role",
-    "ROLES": "Roles",
-    "GENDER": "Gender",
+    "ROLE": "Função",
+    "ROLES": "Funções",
+    "GENDER": "Género",
     "COMPLETED_COURSES": "Cursos concluídos",
     "TEACHING_COURSES": "Cursos de Ensino",
     "SMART_BADGES": "Selos inteligentes",
     "CV": "CV",
-    "DSS_CV_RE_DESIGN": "Curriculum Redesign",
-    "BEST_CAREER_OPTIONS": "Best Career Options",
-    "CAREER_ADVISOR": "Career Advisor",
-    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
-    "DELETE_MESSAGE": "Are you sure you want to delete this user?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "CARRER_PATH": "Career path",
-    "DELETE_AVATAR_MESSAGE": "Are you sure you want to delete this avatar?",
-    "CURRENT_JOB_POSITION": "Current job position",
-    "DELETE_OWN_PROFILE": "Delete own profile",
-    "DELETE_OWN_PROFILE_HELP_MESSAGE": "You are going to delete your user account, this action cannot be undone. All your data will be lost.",
-    "COMPETENCY_DEVELOPMENT": "Competency Development",
+    "DSS_CV_RE_DESIGN": "Redefinir Currículo",
+    "BEST_CAREER_OPTIONS": "Melhores opções de carreira",
+    "CAREER_ADVISOR": "Conselheiro de carreira",
+    "CV_GAP_ANALYSIS": "Análise de lacunas do currículo",
+    "DELETE_MESSAGE": "Tem a certeza que pretende apagar este usuário?",
+    "CONFIRM_ACTION": "Confirmar ação",
+    "CARRER_PATH": "Plano de carreira",
+    "DELETE_AVATAR_MESSAGE": "Tem a certeza que pretende apagar este avatar?",
+    "CURRENT_JOB_POSITION": "Cargo atual",
+    "DELETE_OWN_PROFILE": "Apagar perfil próprio",
+    "DELETE_OWN_PROFILE_HELP_MESSAGE": "Vai apagar a sua conta, esta ação é irreversível. Todos os dados serão perdidos.",
+    "COMPETENCY_DEVELOPMENT": "Desenvolvimento de competências",
     "COMPLETENESS": "Completeness",
     "NOT_COMPLETENESS": "Not completeness",
     "CV_COMPLETENESS": "CV completeness"
   },
   "BCO": {
-    "TITLE": "Best Career Options",
-    "DESCRIPTION": "Description",
-    "STATISITICS": "Statisitics",
-    "ADDITIONAL_COURSES": "Additional Courses",
-    "RECOMMENDATIONS": "Recommendations",
-    "NO_DATA": "There are no recommendations available",
+    "TITLE": "Melhores opções de carreira",
+    "DESCRIPTION": "Descrição",
+    "STATISITICS": "Estatísticas",
+    "ADDITIONAL_COURSES": "Cursos adicionais",
+    "RECOMMENDATIONS": "Recomendações",
+    "NO_DATA": "Não há recomendações disponíveis",
     "BUTTON": {
-      "COURSE_RECOMMENDATION": "Course Recommendation",
-      "SKILL_RECOMMENDATION": "Skill Recommendation"
+      "COURSE_RECOMMENDATION": "Recomendação de curso",
+      "SKILL_RECOMMENDATION": "Recomendação de competência"
     }
   },
   "DSS_CV_RE_DESIGN": {
-    "TITLE": "Curriculum Redesign",
-    "FOOTER_BAR_CHART": "Course Suitability Rating for skill ({{skill_title}})",
-    "MISSING_SKILLS": "Missing Skills",
-    "RECOMMENDED_COURSES": "Recommended Courses",
-    "RELATED_SKILLS": "Related skills",
-    "CURRICULUM_IS_UP_TO_DATE": "Curriculum is {{value}}% up-to-date",
-    "NO_DATA": "No information available"
+    "TITLE": "Redefinir currículo",
+    "FOOTER_BAR_CHART": "Classificação de aptidão do curso por competência ({{skill_title}})",
+    "MISSING_SKILLS": "Falta de competências",
+    "RECOMMENDED_COURSES": "Cursos recomendados",
+    "RELATED_SKILLS": "Competências relacionadas",
+    "CURRICULUM_IS_UP_TO_DATE": "Currículo está {{value}}% atualizado",
+    "NO_DATA": "Sem informação disponível"
   },
   "CAREER_ADVISOR": {
-    "TITLE": "Career Advisor",
-    "FOOTER_PIE_CHART": "Accumulative Job Demand",
-    "FOOTER_BAR_CHART": "Comparative between Demand and Actual Employment",
+    "TITLE": "Orientador de carreira",
+    "FOOTER_PIE_CHART": "Procura de trabalho acumulativa",
+    "FOOTER_BAR_CHART": "Comparação entre Procura e Emprego existente",
     "TARGETED_JOB_TITLES": {
-      "TITLE": "Targeted Job Titles",
-      "PLACEHOLDER": "Please, type targeted job titles...",
-      "CHART_HELP_TEXT": "Select at least two targeted titles"
+      "TITLE": "Título de emprego alvo",
+      "PLACEHOLDER": "Por favor, insira títulos de emprego alvo...",
+      "CHART_HELP_TEXT": "Selecione pelo menos 2 títulos alvo"
     },
     "COMPLETED_COURSES": {
-      "TITLE": "Completed Courses",
-      "NO_DATA": "No courses completed"
+      "TITLE": "Cursos completos",
+      "NO_DATA": "Sem cursos completos"
     },
     "BUTTON": { 
-      "RECOMMEND": "Recommend",
-      "SHOW_EDUCATION_PLAN": "Show Education Plan"
+      "RECOMMEND": "Recomendado",
+      "SHOW_EDUCATION_PLAN": "Mostrar Plano de Educação"
     },
     "TABS": {
       "COURSES_RECOMMENDATION": {
-        "TITLE": "Courses Recommendation",
-        "HELP_TEXT": "Please select courses that you find interesting (you may choose as many as you like):",
-        "NO_DATA": "No courses recomendations",
-        "SELECTED_CNT": "You have selected {{value}}% courses"
+        "TITLE": "Recomendação de cursos",
+        "HELP_TEXT": "Selecione os cursos mais interessantes (pode escolher mais do que uma opção):",
+        "NO_DATA": "Sem recomendações de cursos",
+        "SELECTED_CNT": "Selecionou {{value}}% cursos"
       },
       "SKILLS_RECOMMENDATION": {
-        "TITLE": "Skills Recommendation",
-        "HELP_TEXT": "Please select skills that you find interesting (you may choose as many as you like):",
-        "NO_DATA": "No skills recomendations",
-        "SELECTED_CNT": "You have selected {{value}}% skills"
+        "TITLE": "Recomendação de competências",
+        "HELP_TEXT": "Selecione as competências mais interessantes (pode escolher mais do que uma opção):",
+        "NO_DATA": "Sem recomendações de competências",
+        "SELECTED_CNT": "Selecionou {{value}}% competências"
       },
-      "PERCENTATGE_RELATION_WITH_JOB_TILES": "{{value}}% relation with targetted job titles",
-      "PERCENTATGE_RELATED_WITH_YOUR_INTERESTS": "{{value}}% relation with your interests",
-      "NUMBER_STUDENTS_SIMILAR_PROFILE": "{{value}} students with similar profile also find it interesting",
-      "YOU_HAVE_SELECTED_N_COURSES": "You have selected {{value}} courses",
-      "YOU_HAVE_SELECTED_N_SKILLS": "You have selected {{value}} skills",
-      "STATISTICS": "Statistics"
+      "PERCENTATGE_RELATION_WITH_JOB_TILES": "{{value}}% relação com títulos de emprego alvo",
+      "PERCENTATGE_RELATED_WITH_YOUR_INTERESTS": "{{value}}% relação com os seus interesses",
+      "NUMBER_STUDENTS_SIMILAR_PROFILE": "{{value}} estudantes com perfil semelhante também consideram interessante",
+      "YOU_HAVE_SELECTED_N_COURSES": "Selecionou {{value}} cursos",
+      "YOU_HAVE_SELECTED_N_SKILLS": "Selecionou{{value}} competências",
+      "STATISTICS": "Estatísticas"
     }
   },
   "SKILLS": {
-    "TITLE": "Skills",
+    "TITLE": "Competências",
     "BUTTON": {
-      "CREATE_SKILL": "Create Skill"
+      "CREATE_SKILL": "Criar competência"
     },
-    "DELETE_MESSAGE": "Are you sure you want to delete this skill?",
-    "CONFIRM_ACTION": "Confirm Action"
+    "DELETE_MESSAGE": "Tem a certeza que pretende apagar esta competência?",
+    "CONFIRM_ACTION": "Confirmar ação"
   },
   "SKILL": {
-    "TITLE": "Skill",
+    "TITLE": "Competência",
     "NAME": {
-      "LABEL": "Name",
-      "PLACEHOLDER": "Name"
+      "LABEL": "Nome",
+      "PLACEHOLDER": "Nome"
     },
     "TYPE": {
-      "LABEL": "Type",
-      "PLACEHOLDER": "Type"
+      "LABEL": "Tipo",
+      "PLACEHOLDER": "Tipo"
     },
     "HARD_SKILL": {
-      "LABEL": "Hard skill",
-      "PLACEHOLDER": "Hard skill"
+      "LABEL": "Competência relevante", 
+      "PLACEHOLDER": "Competência relevante"
     }
   },
   "COURSE"  : {
-    "TITLE": "Course",
+    "TITLE": "Curso",
     "ACADEMIC_ORGANIZATION": {
       "LABEL": "Academic Organization"
     },
     "NAME" : {
-      "LABEL": "Name",
-      "PLACEHOLDER": "Name"
+      "LABEL": "Nome",
+      "PLACEHOLDER": "Nome"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Descrição",
+      "PLACEHOLDER": "Descrição"
     },
     "SKILLS": {
-      "LABEL": "Related Skills",
-      "PLACEHOLDER": "Skill name"
+      "LABEL": "Competências relacionadas",
+      "PLACEHOLDER": "Nome da competência"
     },
     "EVENTS": {
-      "LABEL": "Related Events",
-      "PLACEHOLDER": "Event name"
+      "LABEL": "Evento relacionado",
+      "PLACEHOLDER": "Nome do evento"
     },
     "SEMESTER": {
-      "LABEL": "Semester",
-      "PLACEHOLDER": "Semester"
+      "LABEL": "Semestre",
+      "PLACEHOLDER": "Semestre"
     },
     "STARTDATE": {
-      "LABEL": "Start date"
+      "LABEL": "Data de início"
     },
     "ENDDATE": {
-      "LABEL": "End date"
-    },        
-    "RELATED_SKILLS": "Related Skills",
-    "RELATED_SKILLS_NO_DATA": "There are not available skills for this course.",
+      "LABEL": "Data de fim"
+    },       
+    "RELATED_SKILLS": "Competências relacionadas",
+    "RELATED_SKILLS_NO_DATA": "Não existem competências relacionadas para este curso.",
     "COURSE_BADGES": "Course Badges",
-    "COURSE_BADGES_NO_DATA": "This course does not have any smart badge yet.",
-    "UPDATE": "Update",
-    "AWARD_SMART_BADGE": "Award Smart Badge",
-    "CV_GAP_ANALYSIS": "Curriculum Gap Analysis",
+    "COURSE_BADGES_NO_DATA": "Este curso ainda não tem selo inteligente.",
+    "UPDATE": "Atualizar",
+    "AWARD_SMART_BADGE": "Atribuir Selo Inteligente",
+    "CV_GAP_ANALYSIS": "Análise de lacuna do currículo",
     "BUTTON": {
-      "ENROLL_TO_COURSE" : "Enroll me to the course",
-      "UNENROLL_TO_COURSE" : "Leave course",
-      "TOUGH_THE_COURSE" : "Set me as teacher",
-      "UNTOUGH_THE_COURSE" : "Delete me from the teacher of this course",
-      "COURSE_DONE" : "Set as done",
-      "COURSE_UNDONE": "Delete me from the users that did this course",
-      "ADD_NEW_RELATION": "Add new user relation"
+      "ENROLL_TO_COURSE" : "Inscrever no curso",
+      "UNENROLL_TO_COURSE" : "Sair do curso",
+      "TOUGH_THE_COURSE" : "Definir-me como professor",
+      "UNTOUGH_THE_COURSE" : "Apagar-me como professor deste curso",
+      "COURSE_DONE" : "Definir como feito",
+      "COURSE_UNDONE": "Excluir-me dos utilizadores que realizaram este curso",
+      "ADD_NEW_RELATION": "Adicionar nova relação de utilizador"
     },
-    "SCORE_TITLE": "Which is your score?",
+    "SCORE_TITLE": "Qual a tua pontuação?",
     "SCORE": {
-      "LABEL": "Score",
-      "PLACEHOLDER": "A number between 0 and 10"
+      "LABEL": "Pontuação",
+      "PLACEHOLDER": "Um número de 0 a 10"
     },
-    "USERS": "Users",
-    "NO_USERS_AVAILABLE": "No users available",
-    "ENROLL_USER_TITLE": "Enroll users",
+    "USERS": "Utilizadores",
+    "NO_USERS_AVAILABLE": "Sem utilizadores disponíveis",
+    "ENROLL_USER_TITLE": "Inscrever utilizadores",
     "ENROLLMENT_STATUS": {
-      "LABEL": "Enrollent status",
+      "LABEL": "Estado da inscrição",
       "OPTIONS": {
-        "ENROLLED": "Enrolled",
-        "TAUGHT": "Taught",
-        "DONE": "Done"
+        "ENROLLED": "Inscritos",
+        "TAUGHT": "Formados",
+        "DONE": "Concluído"
       },
-      "WARNING_ALL_USERS_SAME_SCORE": "All selected users will receive the same score"
+      "WARNING_ALL_USERS_SAME_SCORE": "Os utilizadores selecionados terão a mesma pontuação"
     },
-    "NO_DONE_BY_USERS": "No users",
-    "DONE_BY": "Done by",
-    "NO_ENROLLED_USERS": "No enrolled users",
-    "ENROLLED_USERS": "Enrolled users",
-    "NO_TEACHERS": "No professors",
-    "PROFESSORS": "Professors"
+    "NO_DONE_BY_USERS": "Sem utilizadores",
+    "DONE_BY": "Concluído por",
+    "NO_ENROLLED_USERS": "Sem utilizadores inscritos",
+    "ENROLLED_USERS": "Utilizadores inscritos",
+    "NO_TEACHERS": "Sem professores",
+    "PROFESSORS": "Professores"
   },
   "RECRUITMENT"  : {
     "TITLE": "Recrutamento",
-    "NO_DATA": "There are no candidates for this job",
-    "SEARCH_LABEL" : "Select a Job",
-    "CV-JOB-MATCHING": "Correspondência CV-JOB",
-    "NAME": "Nome",
+    "NO_DATA": "Não há candidatos para este emprego",
+    "SEARCH_LABEL" : "Selecione um Emprego",
+    "CV-JOB-MATCHING": "Correspondência CV-EMPREGO",
+    "NAME": "Nameme",
     "ROLE_APPLIED": "Função aplicada",
     "AVAILABLE_AT": "Disponível em",
     "EXPECTED_SALARY": "Salário esperado",
-    "MATCHING_SCORE": "Matching Score",
-    "CV": "Profile",
+    "MATCHING_SCORE": "Pontuação semelhante",
+    "CV": "Perfil",
     "BUTTON" : {
-      "VIEW_CV": "View CV",
-      "SEARCH": "Search"
+      "VIEW_CV": "Ver CV",
+      "SEARCH": "Procurar"
     }
   },
   "AWARD_SMART_BADGE" : {
-    "TITLE": "Award Smart Badge",
-    "CREATE_BADGE": "Create new badge",
-    "NO_SMART_BADGES_AVAILABE" : "No smart awards available",
-    "SELECTED_BADGES": "Selected Badges",
+    "TITLE": "Atribuir Selo Inteligente",
+    "CREATE_BADGE": "Criar novo selo",
+    "NO_SMART_BADGES_AVAILABE" : "Selos inteligentes não disponíveis",
+    "SELECTED_BADGES": "Selos selecionados",
     "BUTTON" : {
-      "AWARD": "Award",
-      "REVOKE_AWARD": "Revoke",
-      "UNASSIGN_AWARD": "Unassign",
-      "ASSIGN_AWARD": "Assign",
-      "VALIDATE_AWARD": "Validate",
-      "AWARD_COURSE": "Award Course",
-      "AWARD_LEARNERS": "Award Learners"
+      "AWARD": "Prémio",
+      "REVOKE_AWARD": "Anular",
+      "UNASSIGN_AWARD": "Anular prémio",
+      "ASSIGN_AWARD": "Atribuir",
+      "VALIDATE_AWARD": "Validar",
+      "AWARD_COURSE": "Atribuir curso",
+      "AWARD_LEARNERS": "Award Learners" 
     }
   },
   "ACCESS_DENIED": {
     "TITLE": "ACESSO NEGADO",
-    "BODY": "Alguns conteúdos deste site são restritos e você não tem permissões suficientes para acessá-lo."
+    "BODY": "Não tem permissões para aceder a estes conteúdos."
   },
   "NOT_FOUND": {
     "TITLE": "404 - Página Não Encontrada",
-    "BODY": "Unfortunately, the requested page could not be found."
+    "BODY": "Infelizmente, a página solicitada não pode ser encontrada."
   },  
   "RECOMENDED_COURSES": {
-    "TITLE": "Recommended courses",
-    "NO_DATA": "This user does not have any recomended course yet.",
-    "SCORE": "Score"
+    "TITLE": "Cursos recomendados",
+    "NO_DATA": "Este utilizador ainda não tem cursos recomendados.",
+    "SCORE": "Pontuação"
   },
   "RECOMENDED_JOBS": {
-    "TITLE": "Recommended jobs",
-    "NO_DATA": "This user does not have any recomended job yet.",
-    "MATCH": "Match"
+    "TITLE": "Empregos recomendados",
+    "NO_DATA": "Este utilizador ainda não tem empregos recomendados.",
+    "MATCH": "Correspondência"
   },
   "RECOMENDED_SKILLS": {
-    "TITLE": "Recommended skills",
-    "NO_DATA": "This user does not have any recomended skill yet."
+    "TITLE": "Competências recomendadas",
+    "NO_DATA": "Este utilizador ainda não tem competências recomendadas."
   },
   "BUTTON": {
-    "OPEN_PDF": "Open PDF",
+    "OPEN_PDF": "Abrir PDF",
     "DOWNLOAD_PDF": "Download PDF",
-    "PRINT_PDF": "Print PDF",
-    "EXPORT_TO_EXCEL": "Export to Excel",
-    "ADD": "Add",
-    "CREATE": "Create",
-    "EDIT": "Edit",
-    "DELETE": "Delete",
-    "CANCEL": "Cancel",
-    "CLOSE": "Close",
-    "VIEW": "View",
-    "SAVE": "Save",
-    "UPDATE": "Update",
-    "LEARN_MORE": "Learn more",
-    "APPLY_JOB": "Apply for this job",
-    "DELETE_APPLY_JOB": "Delete job application",
-    "CHANGE_PASSWORD": "Change password",
-    "VIEW_MORE": "View more",
-    "BACK_TO_USER_PROFILE": "Back to user profile",
-    "BACK": "Back",
-    "ASSIGN": "Assign",
-    "DELETE_OWN_PROFILE": "Delete own profile",
-    "NO": "No",
-    "YES": "Yes",
-    "HELP": "Help",
-    "SEND": "Send",
-    "UNASSIGN": "Unassign"
+    "PRINT_PDF": "Imprimir PDF",
+    "EXPORT_TO_EXCEL": "Exportar para Excel",
+    "ADD": "Adicionar",
+    "CREATE": "Criar",
+    "EDIT": "Editar",
+    "DELETE": "Apagar",
+    "CANCEL": "Cancelar",
+    "CLOSE": "Fechar",
+    "VIEW": "Ver",
+    "SAVE": "Gravar",
+    "UPDATE": "Atualizar",
+    "LEARN_MORE": "Saber mais",
+    "APPLY_JOB": "Candidatar a este emprego",
+    "DELETE_APPLY_JOB": "Apagar candidatura",
+    "CHANGE_PASSWORD": "Alterar palavra-chave",
+    "VIEW_MORE": "Ver mais",
+    "BACK_TO_USER_PROFILE": "Voltar ao perfil do utilizador",
+    "BACK": "Voltar",
+    "ASSIGN": "Subscrever",
+    "DELETE_OWN_PROFILE": "Apagar perfil",
+    "NO": "Não",
+    "YES": "Sim",
+    "HELP": "Ajuda",
+    "SEND": "Enviar",
+    "UNASSIGN": "Cancelar subscrição"
   },
-  "ACTION": "Action",
-  "FILTER": "Filter",
+  "ACTION": "Ação",
+  "FILTER": "Filtro",
   "NOTIFICATIONS": {
-    "NOTIFICATIONS": "Notifications",
-    "NO_NOTIFICATIONS_AVAILABLE" : "There are not notifications available",
-    "SET_AS_READ" : "Set as read",
-    "SET_AS_UNREAD" : "Set as unread"
+    "NOTIFICATIONS": "Notificações",
+    "NO_NOTIFICATIONS_AVAILABLE" : "Não há notificações disponíveis",
+    "SET_AS_READ" : "Marcar como lido",
+    "SET_AS_UNREAD" : "Marcar como não-lido"
   },
   "CV": {
-    "ERROR_SAVING_DATA": "Sorry, there was an error saving the data",
+    "ERROR_SAVING_DATA": "Desculpe, houve um erro ao salvar os dados",
     "TITLE": {
-      "LABEL": "Title",
-      "PLACEHOLDER": "Title"
+      "LABEL": "Título",
+      "PLACEHOLDER": "Título"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Descrição",
+      "PLACEHOLDER": "Descrição"
     },
     "TARGET_SECTOR": {
-      "LABEL": "Tarjet sector",
-      "PLACEHOLDER": "Tarjet sector"
+      "LABEL": "Setor alvo",
+      "PLACEHOLDER": "Setor alvo"
     },
-    "SKILLS": "Skills",
-    "SKILL": "Skill",
-    "SKILL_LABEL": "Label",
-    "SKILL_PROFIENCY_LEVEL": "Proficiency level",
-    "SKILL_COMMENT": "Comment",
-    "WORK_HISTORY": "Work history",
-    "WORK": "Work",
-    "WORK_POSITION": "Position",
-    "WORK_FROM": "From",
-    "WORK_TO": "To",
-    "WORK_EMPLOYER": "Employer",
-    "EDUCATION_HISTORY": "Education history",
-    "EDUCATION": "Education",
-    "EDUCATION_TITLE": "Title",
-    "EDUCATION_FROM": "From",
-    "EDUCATION_TO": "To",
-    "EDUCATION_ORGANISATION": "Organisation",
-    "EDUCATION_DESCRIPTION": "Description"
+    "SKILLS": "Competências",
+    "SKILL": "Competência",
+    "SKILL_LABEL": "Rótulo",
+    "SKILL_PROFIENCY_LEVEL": "Nivel de competência",
+    "SKILL_COMMENT": "Comentário",
+    "WORK_HISTORY": "Histórico de trabalho",
+    "WORK": "Trabalhobalho",
+    "WORK_POSITION": "Posição",
+    "WORK_FROM": "De",
+    "WORK_TO": "Para",
+    "WORK_EMPLOYER": "Empregador",
+    "EDUCATION_HISTORY": "Histórico de educação",
+    "EDUCATION": "Educação",
+    "EDUCATION_TITLE": "Título",
+    "EDUCATION_FROM": "De",
+    "EDUCATION_TO": "Para",
+    "EDUCATION_ORGANISATION": "Organisação",
+    "EDUCATION_DESCRIPTION": "Descrição"
   },
   "MCDSS": {
-    "TITLE": "Multicriteria Decision Support System",
+    "TITLE": "Sistema multicritério de suporte à decisão",
     "TAB": {
-      "MANUAL": "Manual input",
-      "FILE": "File input"
+      "MANUAL": "Entrada manual",
+      "FILE": "Entrada de arquivo"
     },
     "COMPARE": {
-      "TITLE": "Compare alternatives",
-      "FINAL_SCORE": "Final score"
-    },    
+      "TITLE": "Comparar alternativas",
+      "FINAL_SCORE": "Pontuação final"
+    },     
     "RESULTS": {
-      "TITLE": "Results",
-      "ALTERNATIVE": "Alternative",
-      "RANKING": "Ranking",
-      "SCORE": "Score"
-    },    
+      "TITLE": "Resultados",
+      "ALTERNATIVE": "Alternativa",
+      "RANKING": "Ranking", 
+      "SCORE": "Pontuação"
+    },   
     "BUTTON": {
-      "ADD_CRITERIA": "Add criteria",
-      "ADD_ALTERNATIVE": "Add alternative",
-      "SEND": "Send data",
-      "SEND_FILES": "Send files data",
-      "COMPARE": "Compare"
+      "ADD_CRITERIA": "Adicionar critério",
+      "ADD_ALTERNATIVE": "Adicionar alternativa",
+      "SEND": "Enviar dados",
+      "SEND_FILES": "Enviar ficheiros de dados",
+      "COMPARE": "Comparar"
     },
     "METHOD": {
-      "TITLE": "Method",
-      "PLACEHOLDER": "Select a method"
+      "TITLE": "Método",
+      "PLACEHOLDER": "Selecionar um método"
     },
     "AGREEMENT_THRESHOLD": {
-      "LABEL": "Weight",
-      "PLACEHOLDER": "a number"
+      "LABEL": "Peso",
+      "PLACEHOLDER": "um número"
      },
      "CRITERIAL": {
       "NAME": {
-        "LABEL": "Criterial name",
-        "PLACEHOLDER": "Criterial name"
+        "LABEL": "Nome do critério",
+        "PLACEHOLDER": "Nome do critério"
       },
       "WEIGHT":  {
-        "LABEL": "Weight",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Peso",
+        "PLACEHOLDER": "um número"
        },
       "TYPE":  {
-        "LABEL": "Type",
-        "PLACEHOLDER": "0 or 1"
+        "LABEL": "Tipo",
+        "PLACEHOLDER": "0 ou 1"
        },
        "VETO":  {
         "LABEL": "Veto",
-        "PLACEHOLDER": "a number"
+        "PLACEHOLDER": "um número"
        },
        "PREFERENCE":  {
-        "LABEL": "Preference",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Preferência",
+        "PLACEHOLDER": "um número"
        },
        "INDIFFERENCE":  {
-        "LABEL": "Indifferance",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Indiferência",
+        "PLACEHOLDER": "um número"
        },
        "CRITERIA":  {
-        "LABEL": "Criteria",
-        "PLACEHOLDER": "the criteria ('linear with indifference threshold', 'usual', 'level')"
+        "LABEL": "Critério",
+        "PLACEHOLDER": "o critério ('linear with indifference threshold', 'usual', 'level')"
        }
      },
      "ALTERNATIVE": {
       "NAME": {
-        "LABEL": "Alternative name",
-        "PLACEHOLDER": "Alternative name"
+        "LABEL": "Nome alternativo",
+        "PLACEHOLDER": "Nome alternativo"
       },
       "VALUE": {
-        "LABEL": "Value",
-        "PLACEHOLDER": "a number"
+        "LABEL": "Valor",
+        "PLACEHOLDER": "um número"
       }
     },
     "CHOOSE_FILE": {
       "DECISION_MATRIX": {
-        "LABEL": "Choose file",
-        "PLACEHOLDER": "Choose a csv file for the Decision Matrix data",
-        "ERROR_MESSAGE" : "The file {{file_name}} is not a valid file to load the decision matrix data. Only application/vnd.ms-excel files are valid"
+        "LABEL": "Selecione ficheiro",
+        "PLACEHOLDER": "Selecione um ficheiro csv para a Matrix de Dados de Decisão",
+        "ERROR_MESSAGE" : "O ficheiro {{file_name}} não é válido para carregar a matrix de dados de decisão. Só são válidos ficheiros application/vnd.ms-excel"
       },
       "CRITERIA_DETAILS_MATRIX": {
-        "LABEL": "Choose file",
-        "PLACEHOLDER": "Choose a csv file for the Criteria Details data",
-        "ERROR_MESSAGE" : "The file {{file_name}} is not a valid file to load criteria detaill data. Only application/vnd.ms-excel files are valid"
+        "LABEL": "Selecione ficheiro",
+        "PLACEHOLDER": "Selecione um ficheiro csv para os dados de Critérios Detalhados",
+        "ERROR_MESSAGE" : "O ficheiro {{file_name}} não é válido para para carregar os dados de critérios detalhados. Só são válidos ficheiros application/vnd.ms-excel"
       }
     }
   },
   "NOTIFICATION_PREFERENCES": {
-    "TITLE": "Notifications preferences",
-    "ERROR_MESSAGE": "Error saving your preferences",
-    "CONFIRM_MESSAGE": "Your preferences has been saved",
+    "TITLE": "Preferencias de notificações",
+    "ERROR_MESSAGE": "Erro ao gravar as suas preferências",
+    "CONFIRM_MESSAGE": "As suas preferências foram gravadas",
     "LOCATIONS": {
-      "LABEL": "Locations",
-      "PLACEHOLDER": "Locations"
+      "LABEL": "Localizações",
+      "PLACEHOLDER": "Localizações"
     },
     "SPECIALIZATIONS": {
-      "LABEL": "Specializations",
-      "PLACEHOLDER": "Specializations"
+      "LABEL": "Especializações",
+      "PLACEHOLDER": "Especializações"
     }
   },
   "FILE": {
-    "TYPE": "Type",
-    "SIZE": "Size"
+    "TYPE": "Tipo",
+    "SIZE": "Tamanho"
   },
   "UPLOAD_CV_KG": {
     "BUTTON": "Upload CV",
     "TITLE": "Upload CV",
-    "DESCRIPTION": "Here you can upload your CV in txt format",
-    "CV_PROCESSED_MESSAGE": "The CV has been procesed"
+    "DESCRIPTION": "Aqui pode fazer o upload do seu CV no formato txt",
+    "CV_PROCESSED_MESSAGE": "o CV foi processado"
   },
   "UPLOAD_FILES": {
     "AVATAR": {
-      "TITLE": "Upload an avatar"
+      "TITLE": "Upload um avatar"
     },
     "FILES": {
-      "TITLE": "Upload files"
+      "TITLE": "Upload ficheiros"
     },
-    "ALLOWED_TYPES": "Allowed types",
-    "DRAG_AND_DROP_HERE": "Drag and drop file here",
-    "OR": "or",
-    "BROWSE_FOR_FILE": "Browse for file",
-    "ERROR_LOADING_FILE": "Error loading file",
-    "NOT_VALID_FILE": "This file is not valid to be uploaded",
+    "ALLOWED_TYPES": "Tipos permitidos",
+    "DRAG_AND_DROP_HERE": "Arraste e solte o ficheiro aqui",
+    "OR": "ou",
+    "BROWSE_FOR_FILE": "Procurar ficheiro",
+    "ERROR_LOADING_FILE": "Erro ao carregar ficheiro",
+    "NOT_VALID_FILE": "Este ficheiro não é válido para ser carregado",
     "BUTTON": {
-      "UPLOAD_PENDING_FILES": "Upload pending files"
+      "UPLOAD_PENDING_FILES": "A carregar ficheiros pendentes"
     }
   },
   "CV_GAP_ANALYSIS": {
-    "TITLE": "Curriculum Gap Analysis",
-    "FOOTER_PIE_CHART": "Accumulative Job Demand",
-    "FOOTER_RADAR_CHART": "Curriculum Skills Gap Analysis",
-    "FOOTER_LINE_CHART": "Skill Demand Timeseries",
-    "CURRENTLY_MISSING_SKILLS": "Currently Missing Skills",
-    "RELATION_TO_COURSES": "Relation to Courses",
+    "TITLE": "Análise de lacunas do currículo",
+    "FOOTER_PIE_CHART": "Procura acumulativa de emprego",
+    "FOOTER_RADAR_CHART": "Análise de lacunas de competências curriculares",
+    "FOOTER_LINE_CHART": "Procura de competência Timeseries",
+    "CURRENTLY_MISSING_SKILLS": "Competências em falta",
+    "RELATION_TO_COURSES": "Relação com cursos",
     "BUTTON": {
-      "SHOW_RESULTS": "Show Results"
+      "SHOW_RESULTS": "Mostrar resultados"
     }
   },
   "EDUCATION_PLAN": {
-    "TITLE": "Education Plan",
-    "COURSES": "Courses",
-    "SKILLS": "Skills",
-    "RATING": "Rating"
+    "TITLE": "Plano de educação",
+    "COURSES": "Cursos",
+    "SKILLS": "Competências",
+    "RATING": "Avaliação"
   },
   "PAGINATOR": {
     "ITEMS_PER_PAGE": "Itens por página",
@@ -865,32 +865,32 @@
   },
   "HELP": {
     "VISUALISATION": {
-      "HEADER": "Visualisation help",
+      "HEADER": "Ajuda de visualização",
       "BODY": {
-        "USER_SKILLS_JOB_SKILLS": "The derived radar chart demonstrates user skills coverage to job application required skillset.",
-        "USER_GRADES": "The derived Bar chart demonstrates User grades in courses which have completed.",
-        "AVERAGE_GRADE_IN_COURSES": "The chart demonstrates average grades in provided courses.",
-        "ENROLLED_COURSES_SKILLS_COVERED_TO_USERS": "This chart demonstrates how much the skills that belong to the user's enrolled courses cover the skills in jobs that this user has applied.",
-        "CAREER_PATH_TRAJECTORY": "This charts shows the user career path trajectory.",
-        "USER_SKILLSET_COVERAGE_TO_APPLIED_JOB_SKILLS": "This chart demonstrates the coverage percentage resulting from the common skills between user’s skills and job required skills.",
-        "MARKET_DEMAND": "This chart shows the demand according to job postings for each specialization.",
-        "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": "This chart demonstrates the demand in job postings for a provided skill in a provided visualization.",
-        "CURRICULUM_UP_TO_DATE": "This visualisation shows how up to date the current curriculum of the school is.",
-        "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "This chart is used to demonstrate the demand in job postings for provided job specializations.",
-        "MOST_POPULAR_SKILLS": "This chart shows the most popular skills in the job market at the moment according to the available job postings. (It shows the number of job postings related to specific skills).",
-        "MOST_POPULAR_COURSES": "This chart shows the most popular courses related to popular skills required in the job market at the moment. (also counted in job postings)."
+        "USER_SKILLS_JOB_SKILLS": "O resultado do gráfico de radar demonstra a cobertura das competências do utilizador para o conjunto de requisitos necessários ao preenchimento da vaga de emprego.",
+        "USER_GRADES": "O resultado do gráfico de barras demonstra a classificação utilizador em cursos concluídos.",
+        "AVERAGE_GRADE_IN_COURSES": "O gráfico demonstra classificações médias nos cursos disponíveis.",
+        "ENROLLED_COURSES_SKILLS_COVERED_TO_USERS": "Este gráfico mostra a abrangência das competências dos cursos escolhidos pelo utilizador e as competências dos empregos aos quais o utilizador concorreu.",
+        "CAREER_PATH_TRAJECTORY": "Este gráfico mostra a trajetória de carreira do utilizador.",
+        "USER_SKILLSET_COVERAGE_TO_APPLIED_JOB_SKILLS": "Este gráfico mostra a percentagem de competências comuns entre o utilizador e as competências necessárias para a vaga de emprego.",
+        "MARKET_DEMAND": "Este gráfico mostra a procura de acordo com as ofertas de emprego para cada especialização.",
+        "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": "Este gráfico mostra a procura de anúncios de emprego para uma determinada competência numa visualização fornecida.",
+        "CURRICULUM_UP_TO_DATE": "Esta visualização mostra quanto o currículo da escola está atualizado.",
+        "SPECIALIZATION_DEMAND_IN_FUNCTION_OF_TIME": "Este gráfico é usado para demonstrar a procura de anúncios de emprego para especializações de trabalho fornecidas.",
+        "MOST_POPULAR_SKILLS": "Este gráfico mostra as competências mais populares no mercado de trabalho atual, de acordo com as ofertas de emprego disponíveis (mostra o número de ofertas de emprego relacionadas com competências específicas.",
+        "MOST_POPULAR_COURSES": "Este gráfico mostra os cursos mais populares relacionados com as competências mais populares exigidas no mercado de trabalho atual (também contado nas ofertas de emprego)."
       }
     },
     "MCDSS": {
-      "HEADER": "Multicriteria Decision Support System help",
-      "BODY": ["The Multi-Criteria Decision Support System facilitates the decision-making process by taking into account all the meaningful criteria.",
-              "The implemented methods are the following: <strong>MAUT, Topsis, Electre I and Promethee II</strong>.",
-              "Optimization types can only take values of 0 or 1, with 0 denoting that the criterion is profit maximization and 1 denoting that it is cost minimization.",
-              "The criteria types, used in Promethee II, can only take the following values: usual, quasi, linear, linear with indifference threshold, and level.",              
-              "All thresholds can only take nonnegative value.",
-              "Each method requires a specific set of criteria details to be configured.",
-              "<ul><li>In case the preferred method is either “Maut” or “Topsis”, users should insert information about the number of criteria, the weights, and the optimization types.</li><li>In case the preferred method is “Electre I”, users should insert information about the number of criteria, the weights, the optimization types, the agreement threshold, and the veto thresholds.</li><li>In case the preferred method is “Promethee II”, users should insert information about the number of criteria, the weights, the optimization types, the preference thresholds, the indifference thresholds, and the criteria types.</li></ul>",
-              "If you use the “File Input” functionality you can download some files examples from <a target='_blank' href='https://github.com/QualiChain/MCDSS/tree/master/Input_Templates/csv_examples'>here</a>."
+      "HEADER": "Ajuda do Sistema de Apoio à Decisão Multicritério",
+      "BODY": ["O Sistema de Apoio à Decisão Multicritério facilita o processo de tomada de decisão levando em consideração todos os critérios significativos.",
+              "Os critérios implementados são os seguintes: <strong>MAUT, Topsis, Electre I and Promethee II</strong>.",
+              "Os tipos de otimização só podem assumir valores de 0 e 1, com o 0 denotando que o critério é a maximização do lucro e 1 denotando que é a minimização do custo.",
+              "Os tipos de critérios, usados no Promethee II, só podem apresentar os seguintes valores: usual, quasi, linear, linear com limiar de indiferença, e nível.",              
+              "Todos os limites só podem assumir valores não negativos.",
+              "Cada método necessita de um conjunto específico de critérios a serem configurados.",
+              "<ul><li>Caso o método preferido seja “Maut” ou “Topsis”, os utlizadores devem inserir informações sobre o número de critérios, os pesos e os tipos de otimização.</li><li>No caso do método preferido ser “Electre I”, os utilizadores deve inserir informação sobre o número de critérios, os pesos, os tipos de otimização, o limite de acordo e os limites de veto.</li><li>No caso do método preferido ser “Promethee II”, os utilizadores devem inserir informação sobre o número de critérios, os pesos, os tipos de otimização, os limites preferidos, os limites de diferença e os tipos de critérios. </li></ul>",
+              "Se utilizar a funcionalidade “File Input”  poderá baixar alguns exemplos de ficheiros de <a target='_blank' href='https://github.com/QualiChain/MCDSS/tree/master/Input_Templates/csv_examples'>here</a>."
               ],
       "FIELD": {
         "TYPE": "Select 0 for maximization of the criterion and 1 for minimization.",
@@ -901,42 +901,42 @@
     }
   },
   "QUESTIONNAIRE": {
-    "TITLE": "Questionnaire",
-    "HELP_MESSAGE": "The answer to this questionnaire is anonymous",
-    "QUESTION": "How satisfied have you been today/ recently with the performance of QualiChain on a scale of 1 to 5?",
-    "THAKS_MESSAGE": "Thanks for your feedback!!!",
+    "TITLE": "Questionário",
+    "HELP_MESSAGE": "A resposta a este questionário é anónima",
+    "QUESTION": "Quão satisfeito está hoje/ recentemente com a performance do Qualichain numa escala de 1 a 5?",
+    "THAKS_MESSAGE": "Obrigado pelo seu feedback!!!",
     "ANSWER": {
-      "VERY_DISSATISFIED": "Very dissatisfied",
-      "DISSATISFIED": "Dissatisfied",
-      "NEUTRAL": "Neutral",
-      "SATISFIED": "Satisfied",
-      "VERY_SATISFIED": "Very satisfied"
+      "VERY_DISSATISFIED": "Muito insastifeito",
+      "DISSATISFIED": "Insatisfeito",
+      "NEUTRAL": "Indiferente",
+      "SATISFIED": "Satisfeito",
+      "VERY_SATISFIED": "Muito satisfeito"
     },
-    "TELL_US": "Give us your free text feedback",
-    "ERROR_SAVING_DATA": "Sorry, there was an error saving the data"
+    "TELL_US": "Envie-nos os seus comentários",
+    "ERROR_SAVING_DATA": "Desculpe, houve um erro al guardar os dados."
   },
   "THESIS": {
-    "HEADER": "Thesis",
-    "NO_DATA": "There are no thesis",
-    "NO_LINKED_THESIS": "This user does not have any thesis yet.",
-    "DELETE_MESSAGE": "Are you sure you want to delete this thesis?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "MESSAGE_REQUESTS_USERS_THAT_HAS_THESIS": "Users that has an apply but there had been assigned to another Thesis",
+    "HEADER": "Tese",
+    "NO_DATA": "Não há teses",
+    "NO_LINKED_THESIS": "Este utilizador ainda não tem teses.",
+    "DELETE_MESSAGE": "Tem a certeza que pretende apagar esta tese?",
+    "CONFIRM_ACTION": "Confirmar ação",
+    "MESSAGE_REQUESTS_USERS_THAT_HAS_THESIS": "Utilizadores que têm uma candidatura, mas que foram designados para outra tese",
     "TITLE": {
-      "LABEL": "Title",
-      "PLACEHOLDER": "Title"
+      "LABEL": "Título",
+      "PLACEHOLDER": "Título"
     },
     "DESCRIPTION": {
-      "LABEL": "Description",
-      "PLACEHOLDER": "Description"
+      "LABEL": "Descrição",
+      "PLACEHOLDER": "Descrição"
     },
     "STATUS": {
-      "LABEL": "Status",
-      "PLACEHOLDER": "Status",
+      "LABEL": "Estado",
+      "PLACEHOLDER": "Estado",
       "OPTIONS": {
-        "PUBLISHED": "Published",
-        "ASSIGNED": "Assigned",
-        "COMPLETED": "Completed"
+        "PUBLISHED": "Publicado",
+        "ASSIGNED": "Atribuído",
+        "COMPLETED": "Completo"
       }      
     },
     "PROFESSOR": {
@@ -944,158 +944,158 @@
       "PLACEHOLDER": "Professor"
     },
     "STUDENT": {
-      "LABEL": "Student",
-      "PLACEHOLDER": "Student"
+      "LABEL": "Estudante",
+      "PLACEHOLDER": "Estudante"
     },
     "BUTTON": {
-      "LIST": "Thesis list"
+      "LIST": "Lista de teses"
     }
   },
   "COMPETENCY_LEVEL": {
-    "HEADER": "Competency Level",
-    "COMPETENCY": "Competency",
-    "LEVEL": "Level",
-    "PROGRESS": "Progress",
-    "PROGRESS_MIN_VALUE_ERROR": "The value is lower than the minimum (0)",
-    "PROGRESS_MAX_VALUE_ERROR": "The value is greater than the maximum (100)",
-    "NEXT_EVALUATION": "Next evaluation",
-    "ACQUIRED_DATE": "Acquired date",
-    "LABEL": "Label",
-    "COMMENT": "Comment",
-    "DELETE_MESSAGE": "Are you sure you want to delete this competence?",
-    "CONFIRM_ACTION": "Confirm Action",
-    "NO_COMPETENCES_YET": "This user does not have any competence yet.",
+    "HEADER": "Nivel de competência",
+    "COMPETENCY": "Competência",
+    "LEVEL": "Nível",
+    "PROGRESS": "Progresso",
+    "PROGRESS_MIN_VALUE_ERROR": "O valor é inferior ao mínimo (0)",
+    "PROGRESS_MAX_VALUE_ERROR": "O valor é maior que o máximo (100)",
+    "NEXT_EVALUATION": "Próxima avaliação",
+    "ACQUIRED_DATE": "Data de Aquisição",
+    "LABEL": "Rótulo",
+    "COMMENT": "Comentário",
+    "DELETE_MESSAGE": "Tem a certeza que pretende apagar esta competência?",
+    "CONFIRM_ACTION": "Confirmar ação",
+    "NO_COMPETENCES_YET": "Este utilizador ainda não tem nenhuma competência.",
     "LEVELS": {
-      "BASIC": "Basic",
-      "MEDIUM": "Medium",
-      "ADVANCED": "Advanced",
-      "EXPERT": "Expert"
+      "BASIC": "Basico",
+      "MEDIUM": "Médio",
+      "ADVANCED": "Avançado",
+      "EXPERT": "Especialista"
     }
   },
   "BADGES": {
     "BADGE": {
-      "BADGE_MAIN_DATA": "Badge main data",
+      "BADGE_MAIN_DATA": "Dados principais do selo",
       "TITLE": {
-        "LABEL": "Title",
-        "PLACEHOLDER": "Title"
+        "LABEL": "Título",
+        "PLACEHOLDER": "Título"
       },
       "DESCRIPTION": {
-        "LABEL": "Description",
-        "PLACEHOLDER": "Description"
+        "LABEL": "Descrição",
+        "PLACEHOLDER": "Descrição"
       },
       "ISSUER": {
-        "ISSUER_MAIN_DATA": "Issuer main data",
+        "ISSUER_MAIN_DATA": "Dados principais do emissor",
         "ISSUER_NAME": {
-          "LABEL": "Issuer name",
-          "PLACEHOLDER": "Issuer name"
+          "LABEL": "Nome do emissor",
+          "PLACEHOLDER": "Nome do emissor"
         },
         "ISSUER_URL": {
-          "LABEL": "Issuer URL",
-          "PLACEHOLDER": "Issuer URL"
+          "LABEL": "URL do emissor",
+          "PLACEHOLDER": "URL do emissor"
         },
         "ISSUER_EMAIL": {
-          "LABEL": "Issuer Email",
-          "PLACEHOLDER": "Issuer Email"
+          "LABEL": "Email do emissor",
+          "PLACEHOLDER": "Email do emissor"
         },
         "ISSUER_TELEPHONE": {
-          "LABEL": "Issuer telephone",
-          "PLACEHOLDER": "Issuer telephone"
+          "LABEL": "Telefone do emissor",
+          "PLACEHOLDER": "Telefone do emissor"
         },
         "ISSUER_DESCRIPTION": {
-          "LABEL": "Issuer description",
-          "PLACEHOLDER": "Issuer description"
+          "LABEL": "Descrição do emisssor",
+          "PLACEHOLDER": "Descrição do emisssor"
         },
         "ISSUER_IMAGE_URL": {
-          "LABEL": "Issuer image URL",
-          "PLACEHOLDER": "Issuer image URL"
+          "LABEL": "Imagem do emissor URL",
+          "PLACEHOLDER": "Imagem do emissor URL"
         }
       },
       "SKILLS": {
-        "LABEL": "Skills",
-        "PLACEHOLDER": "Skills"
+        "LABEL": "Competências",
+        "PLACEHOLDER": "Competências"
       },
       "VERSION": {
-        "LABEL": "Version",
-        "PLACEHOLDER": "Version"
+        "LABEL": "Versão",
+        "PLACEHOLDER": "Versão"
       },
       "IMAGEURL": {
-        "LABEL": "Image",
-        "PLACEHOLDER": "Write the image URL. Full path, example: 'https://qualichain-project.eu/quali-data/uploads/2019/04/training.png'"
+        "LABEL": "Imagem",
+        "PLACEHOLDER": "Escreva o URL da imagem. Caminho completo, exemplo: 'https://qualichain-project.eu/quali-data/uploads/2019/04/training.png'"
       }
     }
   },
   "TERMS_OF_USE": {
     "ACCEPT_TERMS_OF_USE":  "I have read the privacy policy, and the terms and conditions.",
-    "FOOTER_LINK": "Terms of use",
-    "TITLE": "Terms of use",
-    "BODY": "<div>Please read these Terms of Use (\"Terms\", \"Terms of Use\") carefully before using the http://qualichain.epu.ntua.gr/ operated by the QualiChain consortium.</div><div>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</div><div><b>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</b></div><div>Minors or people below 18 years old are not allowed to use this website.</div><div><b><u>Intellectual Property Rights</u></b><br>Other than the content you own, under these Terms, Company Name and/or its licensors own all the intellectual property rights and materials contained in this Website.</div><div><b><u>Restrictions</u></b><br>You are specifically restricted from all of the following:</div><div><ul><li>selling, sublicensing and/or otherwise commercialising any Website material;</li><li>using this Website in any way that is or may be damaging to this Website;</li><li>using this Website in any way that impacts user access to this Website;</li><li>using this Website contrary to applicable laws and regulations, or in any way may cause harm to the Website, or to any person or business entity;</li><li>engaging in any data mining, data harvesting, data extracting or any other similar activity in relation to this Website;</li></ul></div><div>Certain areas of this Website are restricted from being accessed by you and QualiChain may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.</div><div><b><u>Purchases</u></b></div><div>If you wish to subscribe or purchase any service made available through the Service (\"Purchase\"), you may be asked to supply certain information relevant to your Purchase including, without limitation, your: </div><div><ul><li>Billing information</li><li>Name</li><li>Country and postal code</li><li>E-mail address</li></ul></div><div><b><u>Termination</u></b></div><div>We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</div><div>All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.</div><div><b><u>Content</u></b></div><div>Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material (\"Content\"). “Your Content” shall mean any text, images or other material you choose to display on this Website. Your Content must be your own and must not be invading any third-party's rights. Company Name reserves the right to remove any of Your Content from this Website at any time without notice.</div><div><b><u>Links to Other Web Sites</u></b></div><div>Our Service may contain links to third-party web sites or services that are not owned, controlled or part of the QualiChain consortium.</div><div>QualiChain has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that QualiChain shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</div><div><b><u>Changes</u></b></div><div>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is materialised, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</div><div><b><u>Indemnification</u></b></div><div>You hereby indemnify to the fullest extent QualiChain from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.</div><div><b><u>Contact Us</u></b></div><div>If you have any questions about these Terms, please <a href=\"https://qualichain-project.eu/contact/\" target=\"_blanck\">contact us</a>.</div>"
+    "FOOTER_LINK": "Termos de uso",
+    "TITLE": "Termos de uso",
+    "BODY": "<div>Por favor, leia os termos de uso (\"Terms\", \"Terms of Use\") com atenção antes de usar o http://qualichain.epu.ntua.gr/ operado pelo consórcio do Qualichain.</div><div>O seu acesso e uso deste serviço estão condicionados à aceitação e conformidade com estes Termos. Estes termos aplicam-se a todos os visitantes, utilizadores e outras pessoas que acedam ou utilizem este serviço.</div><div><b>Ao aceder ou utilizar este serviço, está a concordar com os termos de utilização. Se discordar de qualquer parte dos termos, não poderá aceder ao serviço.</b></div><div>Menores de idade ou menores de 18 anos não estão autorizados a utlizar este site.</div><div><b><u>Direitos de Propriedade Intelectual</u></b><br>Além do conteúdo que o utilizador detém, de acordo com estes termos, o Qualichain e/ou seus licenciados possuem todos os direitos de propriedade intelectual e materiais contidos neste site.</div><div><b><u>Restrições</u></b><br>Está especificamente restrito a todos os seguintes:</div><div><ul><li>venda, sublicenciar e/ ou comercializar qualquer material do site;</li><li>usar este site de alguma forma que seja ou possa ser prejudicial ao mesmo;</li><li>usar este site de qualquer forma que afete o acesso do utilizador ao site;</li><li>usar este site contra as leis e regulamentos aplicáveis, ou de qualquer forma que possa causar dados ao site, a qualquer pessoa ou entidade empresarial;</li><li>envolver-se em qualquer prospeção, coleção ou extração de dados ou qualquer outra atividade semelhante em relação a este site;</li></ul></div><div>Certas áreas deste site estão proíbidas de serem acedidas e o Qualichain pode restringir o acesso a qualquer área, a qualquer momento, em absoluta discrição. Qualquer ID de utilizador assim como palavra-chave relativos a este site são confidenciais e deverá ser mantida a confidencialidade por qualquer utilizador.</div><div><b><u>Aquisição</u></b></div><div>Se deseja assinar ou adquirir qualquer serviço disponibilizado pelo Serviço (\"Purchase\"), poderá ter que fornecer certas informações relevantes para a sua aquisição, incluindo, e sem limitação, o seu:</div><div><ul><li>Informações de pagamento</li><li>Nome</li><li>País e código postal</li><li>Endereço de email</li></ul></div><div><b><u>Termo</u></b></div><div>Poderemos encerrar ou suspender o acesso ao nosso Serviço imediatamente, sem aviso prévio ou responsabilidade, por qualquer motivo, incluindo sem limitação se o os Termos de Utilização forem violados.</div><div>Todas as disposições dos Termos que, por sua natureza, devam sobreviver à rescisão, sobreviverão à rescisão, incluindo, e sem limitações, disposições de propriedade, isenções de responsabilidade de garantia, indemnização e limitações de responsabilidade.</div><div><b><u>Conteúdo</u></b></div><div>O nosso Serviço permite inserir comentários, criar um link, armazenar, compartilhar e de alguma forma disponibilizar determinadas informações, textos, gráficos, vídeos ou outro material (\"Content\"). “Your Content” significa qualquer texto, imagem ou outro material que deseje exibir neste site. O seu conteúdo deve ser seu e não deverá invadir os direitos de terceiros. Qualichain reserva-se o direito de remover qualquer parte do seu conteúdo deste site a qualquer momento, sem aviso prévio.</div><div><b><u>Ligações a outros sites</u></b></div><div>O nosso Serviço poderá conter ligações para outros sites ou serviços que não são de propriedade, controlados ou parte do consórcio Qualichain.</div><div>O QualiChain não tem controlo e não assume qualquer responsabilidade pelo conteúdo, políticas de privacidade ou práticas de quaisquer sites ou serviços de terceiros. Você também reconhece e concorda que o QualiChain não será responsável, direta ou indiretamente, por qualquer dano ou perda causado ou alegadamente causado por ou em conexão com o uso ou dependência de qualquer conteúdo, bens ou serviços disponíveis em, ou através qualquer um desses sites ou serviços.</div><div><b><u>Alterações</u></b></div><div>O Qualichain reserva-se o direito, a seu exclusivo critério, de modificar ou substituir estes Termos a qualquer momento. Se houver necessidade de uma revisão, será fornecido um aviso com pelo menos 30 dias de antecedência da entrada em vigor de quaisquer novos termos. O que constituir uma mudança material será determinado a nosso exclusivo critério.</div><div><b><u>Identificação</u></b></div><div>O utilizador, por meio deste, indemniza em toda a extensão a QualiChain de, e contra qualquer e / ou todas as responsabilidades, custos, procuras, causas de ação, danos e despesas decorrentes de qualquer forma relacionada com a violação de qualquer uma das disposições destes Termos.</div><div><b><u>Contacte-nos</u></b></div><div>Se tiver alguma dúvida sobre estes Termos, por favor <a href=\"https://qualichain-project.eu/contact/\" target=\"_blanck\">contact us</a>.</div>"
   },
   "THESIS_REQUEST": {
-    "MY_THESIS": "My thesis",
-    "THESIS_SAME_PROFESSOR": "More thesis from the same professor",
+    "MY_THESIS": "A minha tese",
+    "THESIS_SAME_PROFESSOR": "Mais teses do mesmo professor",
     "BUTTON": {
-      "APPLY": "Apply for this thesis",
-      "DELETE_APPLY": "Delete apply for this thesis"
+      "APPLY": "Candidatar-me a esta tese",
+      "DELETE_APPLY": "Cancelar candidatura a esta tese"
     },
-    "REQUESTS": "Requests",
-    "NO_REQUEST": "There are no request for this thesis"
+    "REQUESTS": "Pedidos",
+    "NO_REQUEST": "Não há pedidos para esta tese"
   },
-  "INTERNAL_RELLOCATION_AVAILABILITY": "Internal rellocation availavility",
+  "INTERNAL_RELLOCATION_AVAILABILITY": "Disponibilidade de realocação interna",
   "BADGES_TYPES": {
-    "LABEL": "Type",
+    "LABEL": "Tipo",
     "OPTIONS": {
       "PHD": "PHD",
-      "UNDERGRADUATE": "Undergraduate",
-      "POSTGRADUATE": "Postgraduate",
-      "OTHER": "Other"
+      "UNDERGRADUATE": "Undergraduate", 
+      "POSTGRADUATE": "Pós-graduação",
+      "OTHER": "Outra"
     }
   },
   "MY_COURSES": {
-    "HEADER": "My assigned courses",
-    "NO_DATA": "There are no assignments"
+    "HEADER": "Os meus cursos atribuídos",
+    "NO_DATA": "Sem cursos atribuídos"
   },
   "CHARTS": {
     "USER_SKILLS_JOB_SKILLS": {
       "TITLE": "Skill level"
     },
     "CARRER_PATH_TRAJECTORY": {
-      "TITLE": "Career Path Trajectory"
+      "TITLE": "Tarjetória da carreira"
     },
     "MOST_POPULAR_COURSES": {
       "Y": {
-        "TITLE": "Demand in Job Market",
-        "VAR_TITLE": "Job postings",
-        "VAR_UNIT": "number of job postings"
+        "TITLE": "Procura no Mercado de Trabalho",
+        "VAR_TITLE": "Ofertas de trabalho",
+        "VAR_UNIT": "número de ofertas de trabalho"
       },
       "X": {
-        "AXIS_TITLE": "Course"
+        "AXIS_TITLE": "Curso"
       }      
     },
     "MOST_POPULAR_SKILLS": {
       "Y": {
-        "TITLE": "Demand in Job Market",
-        "VAR_TITLE": "Job postings",
-        "VAR_UNIT": "number of job postings"
+        "TITLE": "Procura no Mercado de Trabalho",
+        "VAR_TITLE": "Ofertas de trabalho",
+        "VAR_UNIT": "número de ofertas de trabalho"
       },
       "X": {
-        "AXIS_TITLE": "Skill"
+        "AXIS_TITLE": "Competência"
       }      
     },
     "USER_GRADES": {
       "Y": {
-        "TITLE": "Grades",
-        "VAR_TITLE": "Grade"
+        "TITLE": "Notas",
+        "VAR_TITLE": "Nota"
       },
       "X": {
-        "AXIS_TITLE": "Course"
+        "AXIS_TITLE": "Curso"
       }
     },
     "SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION": {
       "Y": {
-        "VAR_UNIT": "Job posting"
+        "VAR_UNIT": "Ofertas de trabalho"
       },
       "X": {
-        "AXIS_TITLE": "Time"
+        "AXIS_TITLE": "Tempo"
       }  
     }
   },
@@ -1109,7 +1109,7 @@
     "DELETE_MESSAGE": "Are you sure you want to remove this Smart badge from the system?",
     "CONFIRM_DELETE_ACTION":  "Confirm Action",
     "BUTTON": { 
-      "DELETE": "Rremove this Smart Badge"
+      "DELETE": "Remove this Smart Badge"
     },
     "MAIN_DATA_TAB": {
       "TITLE": "Main data",
@@ -1127,7 +1127,7 @@
       },
       "MESSAGES": {
         "NOT_VALID_FILE": "The file '{{file_name}}' is not valid, please select another one.",
-        "ERROR_DOWNLOADING_PNG_FILE": "Sorry, there is some problem dowloading the file"
+        "ERROR_DOWNLOADING_PNG_FILE": "Sorry, there is some problem downloading the file"
       }
     }
   },
@@ -1137,7 +1137,7 @@
     "BODY": "Privacy Policy Who we are Our website address is: https://qualichain-project.eu. DATA CONTROLLER Controller for the purposes of the General Data Protection Regulation (GDPR), other data protection laws applicable in Member states of the European Union and other provisions related to data protection is: Knowledge Media Institute The Open University Walton Hall Milton Keynes MK7 6AA United Kingdom Tel: +44 (0)1908 653800 Website: kmi.open.ac.uk What personal data we collect and why we collect it COMMENTS When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor’s IP address and browser user agent string to help spam detection. An anonymised string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment. MEDIA If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website. COOKIES If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year. If you have an account and you log in to this site, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser. When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select “Remember Me”, your login will persist for two weeks. If you log out of your account, the login cookies will be removed. If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day. SUBSCRIPTION TO OUR NEWSLETTER Users are given the opportunity to subscribe to the QualiChain newsletter. The input mask used for this purpose determines what personal data are transmitted, as well as when the newsletter is ordered from the Controller. QualiChain informs its contacts regularly by means of a newsletter about its activities. The newsletter may only be received by the data subject if (1) the data subject has a valid e-mail address and (2) the data subject registers for the newsletter shipping. A confirmation e-mail will be sent to the e-mail address registered by a data subject for the first time for newsletter shipping, for legal reasons, in the double opt-in procedure. This confirmation e-mail is used to prove whether the owner of the e-mail address as the data subject is authorised to receive the newsletter. During the registration for the newsletter, we also store the IP address of the computer system assigned by the Internet service provider (ISP) and used by the data subject at the time of the registration, as well as the date and time of the registration. The collection of this data is necessary in order to understand the (possible) misuse of the e-mail address of a data subject at a later date, and it therefore serves the aim of the legal protection of the Controller. The personal data collected as part of a registration for the newsletter will only be used to send our newsletter. In addition, subscribers to the newsletter may be informed by e-mail, as long as this is necessary for the operation of the newsletter service or a registration in question, as this could be the case in the event of modifications to the newsletter offer, or in the event of a change in technical circumstances. There will be no transfer of personal data collected by the newsletter service to third parties. The subscription to our newsletter may be terminated by the data subject at any time. The consent to the storage of personal data, which the data subject has given for shipping the newsletter, may be revoked at any time. For the purpose of revocation of consent, a corresponding link is found in each newsletter. It is also possible to unsubscribe from the newsletter at any time directly on the website of the Controller, or to communicate this to the Controller in a different way. NEWSLETTER TRACKING The QualiChain newsletter contains so-called tracking pixels. A tracking pixel is a miniature graphic embedded in such e-mails, which are sent in HTML format to enable log file recording and analysis. This allows a statistical analysis of the success or failure of online marketing campaigns. Based on the embedded tracking pixel, the Controller may see if and when an e-mail was opened by a data subject, and which links in the e-mail were called up by data subjects. Such personal data collected in the tracking pixels contained in the newsletters are stored and analyzed by the Controller in order to optimize the shipping of the newsletter, as well as to adapt the content of future newsletters even better to the interests of the data subject. These personal data will not be passed on to third parties. Data subjects are at any time entitled to revoke the respective separate declaration of consent issued by means of the double-opt-in procedure. After a revocation, these personal data will be deleted by the Controller. The Controller automatically regards a withdrawal from the receipt of the newsletter as a revocation. EMBEDDED CONTENT FROM OTHER WEBSITES Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website. These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website. How long we retain your data If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognise and approve any follow-up comments automatically instead of holding them in a moderation queue. For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information. What rights you have over your data If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes. Where we send your data Visitor comments may be checked through an automated spam detection service."
   },
   "EXTERNAL_LINK_USERS_REGISTRATION": "To create a new account please click <a href='https://qualichain.herokuapp.com/register' target='NEW'>here</a>.",
-  "NEW_USER_HAS_BEEN_CREATED": "Your acount has been created",
+  "NEW_USER_HAS_BEEN_CREATED": "Your account has been created",
   "UNEXPECTED_ERROR": "Unexpected error",
   "PASSWORDS_DO_NOT_MATCH": "Passwords do not match"
 }
