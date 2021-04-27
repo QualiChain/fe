@@ -22,6 +22,7 @@
           
               <form #formLogin="ngForm" (ngSubmit)="processFormIAM()" class="userlogin-form">
                 <!-- name -->
+                <!--
                 <div class="form-group field" [class.has-error]="usernameInput.invalid">
                   <mat-form-field class="userlogin-full-width">
                     <mat-label>{{ 'LOGIN.USERNAME' | translate }}</mat-label>
@@ -31,7 +32,17 @@
                     {{ 'LOGIN.USERNAME_HELP' | translate }}
                   </div>
                 </div>
-                      
+                -->
+                <!-- email -->
+                <div class="form-group field" [class.has-error]="emailInput.invalid">
+                  <mat-form-field class="userlogin-full-width">
+                    <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
+                    <input matInput pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email" name="email" value="email" placeholder="{{ 'LOGIN.EMAIL' | translate }}" #emailInput="ngModel">
+                  </mat-form-field>
+                  <div class="help is-error alert-warning" *ngIf="(emailInput.invalid && emailInput.dirty)  || (!email)">
+                    {{ 'LOGIN.EMAIL_HELP' | translate }}
+                  </div>
+                </div>
                 <!-- password -->
                 <div class="form-group field" [class.has-error]="passwordInput.invalid" id="loginpasswordQC">  
                   <mat-form-field appearance="fill" class="userlogin-full-width">

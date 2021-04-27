@@ -155,7 +155,8 @@ export class LoginComponent implements OnInit {
     this.invalidCredentials = false;
     this.credentialsValidated = false;
 
-    let res:any = await this.ls.loginIAMAsync(this.name, this.password);
+    //let res:any = await this.ls.loginIAMAsync(this.name, this.password);
+    let res:any = await this.ls.loginIAMAsync(this.email, this.password);
     //console.log(res);
     if (res['authenticated']) {
       //console.log("Valid credentials for the auth service");
