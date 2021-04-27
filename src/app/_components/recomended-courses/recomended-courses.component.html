@@ -10,7 +10,12 @@
     <mat-expansion-panel  id="course-{{i}}" *ngFor="let course of recomendedCourses | slice:0:5; let i = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{course.course_title}}
+          <mat-checkbox *appCanAccess="['access_MCDSS']"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(course) : null; changCheckbox($event, course)"
+          [checked]="selection.isSelected(course)">
+          &nbsp;{{course.course_title}}                       
+          </mat-checkbox>
         </mat-panel-title>
         <mat-panel-description>
           
@@ -45,10 +50,15 @@
     
   </mat-accordion>
 
-
-  <div *ngIf="recomendedCourses.length>5" class="col-lg-8">
+  <div *ngIf="recomendedCourses.length>0" class="col-lg-12">
     <br>
-    <a [routerLink]="['/profiles',userId,'recomended','courses']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+    <div *ngIf="recomendedCourses.length>5" class="col-lg-6">      
+      <a [routerLink]="['/profiles',userId,'recomended','courses']" class="btn btn-primary">{{ 'BUTTON.VIEW_MORE' | translate }}</a>
+    </div>
+    <div *ngIf="recomendedCourses.length>0" class="col-lg-6">
+      <button *appCanAccess="['access_MCDSS']" [disabled]="selectedCourses.length<2" class="btn btn-primary" (click)="openMCDSS()" >  
+        <i _ngcontent-axy-c0="" class="material-icons small"> compare </i> {{ 'MENU.MCDSS' | translate }} 
+      </button>
+    </div>
   </div>
-
 </mat-expansion-panel>
