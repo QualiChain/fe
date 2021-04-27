@@ -286,9 +286,9 @@ export class CoursesGetComponent implements OnInit {
 
             this.reloadUserStatus(id);
 
-            if (this.courseData.academic_organisation) {
+            if (this.courseData.academic_organisation_id) {
               this.aos
-                .getAcademicOrganization(this.courseData.academic_organisation).subscribe(
+                .getAcademicOrganization(this.courseData.academic_organisation_id).subscribe(
                 dataAcademicOrganisation => {
                   //console.log(dataAcademicOrganisation);
                   this.nameAcademicOrganisation = dataAcademicOrganisation.title;

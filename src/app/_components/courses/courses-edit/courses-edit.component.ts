@@ -312,7 +312,7 @@ openCreateAwardDialog() {
             this.endDate = res.endDate;
             this.skills = res.skills;
             this.events = res.events;
-            this.courseAcademicOrganization = res.academic_organisation;
+            this.courseAcademicOrganization = res.academic_organisation_id;
             
             if (!res.hasOwnProperty("skills")) {
               this.skills = [];
@@ -466,7 +466,7 @@ openCreateAwardDialog() {
         "semester": this.courseSemester,
         "skills": finalSkillList,
         "events": this.events,
-        "academic_organisation": orgID,
+        "academic_organisation_id": orgID,
         "updatedDate": newDateToday
         };       
         //console.log(obj);
