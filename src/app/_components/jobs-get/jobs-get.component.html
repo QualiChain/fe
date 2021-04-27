@@ -62,7 +62,7 @@
             
             <div class="col ">
                 <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</h2></div> 
-                <div>
+                <div class="col col-lg-12">
                   <div *ngIf="jobData.skillReq.length==0">{{ 'JOBS.REQUIRED_SKILLS_NOT_AVAILABLE' | translate }}</div>
                   <div *ngIf="jobData.skillReq.length>0" class="col col-lg-8">
                     <table class="table table-striped">
@@ -86,7 +86,7 @@
                         </tbody>
                     </table>
                   </div>  
-                  <div *ngIf="jobData.skillReq.length>0" class="col col-lg-4">
+                  <div *ngIf="jobData.skillReq.length>0 && !isRecruiter" class="col col-lg-4">
                     <app-visualisations-user-skills-job-skills-chart [userId]="currentUser.id" [jobId]="jobData.id"></app-visualisations-user-skills-job-skills-chart>
                   </div>
                     
