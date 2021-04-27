@@ -7,7 +7,7 @@ import Course from '../../_models/course';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-recomended-courses',
@@ -24,7 +24,7 @@ export class RecomendedCoursesComponent implements OnInit {
 
 
   //displayedColumns: string[] = ['course_title', 'course_decription', 'action'];
-  displayedColumns: string[] = ['course_title', 'data.description', 'score', 'action'];
+  displayedColumns: string[] = ['checkbox', 'course_title', 'data.description', 'score', 'action'];
   
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -54,6 +54,55 @@ export class RecomendedCoursesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private rs: RecomendationsService, private cvss: CVService, private cs: CoursesService ) { }
+
+    selectedCourses = [];
+    selection = new SelectionModel<any>(true, []);
+
+    openMCDSS() {       
+      let options = {};
+      options['criteria'] = ['score'];
+      options['alternative'] = [];
+      options['values'] = [];
+  
+      for (let i=0; i<this.selectedCourses.length; i++) {
+       
+        let alternativeValue = "";
+        
+        alternativeValue = this.selectedCourses[i].course_title
+        
+        options['alternative'].push(alternativeValue);
+
+        let score = 0;
+        if (this.selectedCourses[i].score) {
+          score= this.selectedCourses[i].score
+        }
+        options['values'].push(score);
+  
+      }
+  
+      this.router.navigate(['/MCDSS'], { queryParams: options });
+    }
+
+    changCheckbox(event, row) {
+      if (event.checked) {
+        this.selectedCourses.push(row);
+      }
+      else {
+        let posToDelte = 0;
+        let posFosFound = false;
+        for (let i = 0; i < this.selectedCourses.length; i++) {
+          if (this.selectedCourses[i].id==row.id) {
+            console.log("delete row")
+            posFosFound = true;
+            posToDelte = i;
+          }
+        }
+        if (posFosFound) {
+          this.selectedCourses.splice(posToDelte, 1);
+        }      
+      }
+    }
+
 
   public async recomendedCoursesByUserId(userId: number) {
 
@@ -161,6 +210,7 @@ export class RecomendedCoursesComponent implements OnInit {
 
     //console.log(this.userId);  
 
+    
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
