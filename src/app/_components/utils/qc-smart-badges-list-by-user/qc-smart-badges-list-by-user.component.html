@@ -2,7 +2,7 @@
 <div id="userAwardList">
     <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid; else loadEnd"></mat-spinner>
     <ng-template #loadEnd>
-
+<!--
         <div *ngIf="formatOutput=='card'">
             <div *appCanAccess="['issue_smart_badge']" class="col-lg-12 ">
                 <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(+userId, aqcuired_badges_by_user)">
@@ -10,7 +10,7 @@
                 </button>
             </div> 
         </div>
-
+-->
         <div *ngIf="aqcuired_badges_by_user.length==0; else userHasBadges" class="col-lg-8  smartBudge">                                
             {{ 'PROFILE.NO_SMART_BADGE_YET' | translate }}
         </div>
@@ -26,10 +26,11 @@
 
                     <mat-card class="col-lg-6 example-card" >
                         <mat-card-header>
-                            <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.oubadge_user.badge.image}}");'></div>
+                            <div mat-card-avatar title="{{element_badge.badge.name}}" class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.oubadge_user.badge.image}}");'></div>
                             <mat-card-title>
                                 <a href="" class="noborder" (click)="intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
-                                    {{element_badge.badge.name}}
+                                    <span *ngIf="element_badge.badge.name.length<=20">{{element_badge.badge.name}}</span>
+                                    <span *ngIf="element_badge.badge.name.length>20">{{element_badge.badge.name | slice:0:20}} ...</span>
                                 </a>
                             </mat-card-title>
                         </mat-card-header>
