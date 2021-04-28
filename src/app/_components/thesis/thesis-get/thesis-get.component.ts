@@ -44,6 +44,9 @@ export class ThesisGetComponent implements OnInit {
   
   isStudent = this.appcomponent.isStudent;
   hideApplyForThesis : boolean = false;
+  assignedThesisId: number = null;
+  userHasAThesisiAssigned : boolean = false;
+  thesisId: number = null;
 
   deleteApplayToThesis(requestThesisId) {
     this.loadSpinner = true;
@@ -114,6 +117,7 @@ export class ThesisGetComponent implements OnInit {
       
       if (id>0) {
 
+        this.thesisId = id;
         
           this.ts
           .getThesisByStudentId(this.currentUser.id)
@@ -122,6 +126,8 @@ export class ThesisGetComponent implements OnInit {
               //console.log(element);
               if (element.status=="assigned") {
                 this.hideApplyForThesis = true;
+                this.userHasAThesisiAssigned = true;
+                this.assignedThesisId = element.id;
               }
             });
           },

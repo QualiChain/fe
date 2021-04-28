@@ -342,7 +342,15 @@ export class applyJobDialog_modal implements OnInit {
     };
 
     
-    this.js
+
+    this.js.getLastJobApplicationId().subscribe(
+      res => {
+        //console.log("get last job application id");
+        //console.log(res);
+        objectToSend['id']= res;
+        //console.log(objectToSend);
+
+        this.js
         .applyJob(this.data.jobId, this.currentUser.id, objectToSend).subscribe(
           data => {
             //console.log("Apply done!!");
@@ -357,10 +365,18 @@ export class applyJobDialog_modal implements OnInit {
             //alert("Error appling for the job");                      
           }
         );
-    
-    
 
-  }
+      },
+      error => {          
+        console.log("Error getting last job id!!");
+        console.log(error);
+        this.showErorMessage = true;
+        this.errorMessage = error;
+        //this.router.navigate(["/jobs"]);          
+      }
+    );
+
+}
   
 
 }

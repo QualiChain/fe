@@ -182,6 +182,22 @@
       "LABEL": "Departamento",
       "PLACEHOLDER": "Departamento"
     },
+    "LOCATION": {
+      "LABEL": "Localização",
+      "PLACEHOLDER": "Localização"
+    },
+    "COUNTRY": {
+      "LABEL": "País",
+      "PLACEHOLDER": "País"
+    }, 
+    "STATE": {
+      "LABEL": "Estado",
+      "PLACEHOLDER": "Estado"
+    },    
+    "CITY": {
+      "LABEL": "Cidade",
+      "PLACEHOLDER": "Cidade"
+    },
     "EMPLOYMENT_TYPE": {
       "LABEL": "Tipo de contrato",
       "PLACEHOLDER": "Selecione um",
@@ -917,6 +933,8 @@
   },
   "THESIS": {
     "HEADER": "Tese",
+    "MESSAGE_THESIS_ASSIGNED_TO_YOU": "Esta tese foi atribuída a você",
+    "MESSAGE_YOU_HAVE_OTHER_THESIS_ASSIGNED": "Você não pode se inscrever para esta tese porque foi designado para outra. Clique <a href='/thesis/{{thesisId}}'>aqui</a> para acessar.",
     "NO_DATA": "Não há teses",
     "NO_LINKED_THESIS": "Este utilizador ainda não tem teses.",
     "DELETE_MESSAGE": "Tem a certeza que pretende apagar esta tese?",

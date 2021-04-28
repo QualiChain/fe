@@ -48,6 +48,9 @@ export class JobSkill {
     specialization?: string;
     hiringOrganization?: string;
     coursesReq?: [];
+    country?: string;
+    state?: string;
+    city?: string;
    /* id: number;
     creator_id: number;
     date: string;

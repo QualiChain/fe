@@ -13,10 +13,38 @@ export class JobsService {
   //uri = 'http://localhost:4000/jobs';
   private jobsURL = environment.jobsUrl;
   private jobsProfilesURL = environment.jobsProfilesUrl;
+  private lastJobIdUrl = environment.getLastJobIdUrl;
+  private lastJobApplicationIdUrl = environment.getLastJobApplicationIdUrl;
 
   constructor(
     private authService: AuthService,
     private http: HttpClient) { }
+
+  getLastJobApplicationId() {
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    return this.http.get(`${this.lastJobApplicationIdUrl}`, {headers:headers}).
+    pipe(
+        map((data: {}) => {
+            return data['id'];
+        }), catchError( error => {
+            return throwError( 'Something went wrong!' );
+        })
+    )
+  }
+
+  getLastJobId() {
+      let headers = this.authService.createQCAuthorizationHeader();
+
+      return this.http.get(`${this.lastJobIdUrl}`, {headers:headers}).
+      pipe(
+          map((data: {}) => {
+              return data['id'];
+          }), catchError( error => {
+              return throwError( 'Something went wrong!' );
+          })
+      )
+  }  
 
   addJob(dataIn: any) {
     //let headers = this.authService.createQCAuthorizationHeader();
@@ -28,7 +56,8 @@ export class JobsService {
          return data;
        }), catchError( error => {
          console.log(error);
-         return throwError( 'Something went wrong!' );
+         return throwError( error.error);
+         //return throwError( 'Something went wrong!' );
        })
     )
   }  

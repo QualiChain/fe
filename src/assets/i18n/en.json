@@ -182,6 +182,22 @@
       "LABEL": "Deparment",
       "PLACEHOLDER": "Deparment"
     },
+    "LOCATION": {
+      "LABEL": "Location",
+      "PLACEHOLDER": "Location"
+    },
+    "COUNTRY": {
+      "LABEL": "Country",
+      "PLACEHOLDER": "Country"
+    }, 
+    "STATE": {
+      "LABEL": "State",
+      "PLACEHOLDER": "State"
+    },    
+    "CITY": {
+      "LABEL": "City",
+      "PLACEHOLDER": "City"
+    },
     "EMPLOYMENT_TYPE": {
       "LABEL": "Employment type",
       "PLACEHOLDER": "Select one",
@@ -917,6 +933,8 @@
   },
   "THESIS": {
     "HEADER": "Thesis",
+    "MESSAGE_THESIS_ASSIGNED_TO_YOU": "This thesis has been assigned to you",
+    "MESSAGE_YOU_HAVE_OTHER_THESIS_ASSIGNED": "You cannot apply for this thesis because you have been assigned to another one. Click <a href='/thesis/{{thesisId}}'>here</a> to access to it.",
     "NO_DATA": "There are no thesis",
     "NO_LINKED_THESIS": "This user does not have any thesis yet.",
     "DELETE_MESSAGE": "Are you sure you want to delete this thesis?",

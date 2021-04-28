@@ -46,5 +46,7 @@ export const environment = {
   questionnaireURL: 'http://qualichain.epu.ntua.gr:5004/questionnaire',
   badging: 'https://blockchain21.kmi.open.ac.uk/badging',
   academicorganisationUrl: 'http://qualichain.epu.ntua.gr:5004/academicorganisation',
-  recruitmentorganisationUrl: 'http://qualichain.epu.ntua.gr:5004/recruitmentorganisation'
+  recruitmentorganisationUrl: 'http://qualichain.epu.ntua.gr:5004/recruitmentorganisation',
+  getLastJobIdUrl: 'http://qualichain.epu.ntua.gr:5004/getlastjobid',
+  getLastJobApplicationIdUrl: 'http://qualichain.epu.ntua.gr:5004/getlastjobapplicationid'
 };
