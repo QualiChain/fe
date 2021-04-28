@@ -59,7 +59,20 @@
             <div class="col " *ngIf="jobData?.hiringOrganization">
               <div><span class="labeljob">{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}:</span> {{ jobData?.hiringOrganization }} </div> 
             </div>
-            
+
+            <div class="col " *ngIf="jobData?.jobLocation">
+              <div><span class="labeljob">{{ 'JOB.LOCATION.LABEL' | translate }}:</span> {{ jobData?.jobLocation }} </div> 
+            </div>
+            <div class="col " *ngIf="jobData?.country">
+              <div><span class="labeljob">{{ 'JOB.COUNTRY.LABEL' | translate }}:</span> {{ jobData?.country }} </div> 
+            </div>
+            <div class="col " *ngIf="jobData?.state">
+              <div><span class="labeljob">{{ 'JOB.STATE.LABEL' | translate }}:</span> {{ jobData?.state }} </div> 
+            </div>
+            <div class="col " *ngIf="jobData?.city">
+              <div><span class="labeljob">{{ 'JOB.CITY.LABEL' | translate }}:</span> {{ jobData?.city }} </div> 
+            </div>
+
             <div class="col ">
                 <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</h2></div> 
                 <div class="col col-lg-12">

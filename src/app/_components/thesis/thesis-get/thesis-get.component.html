@@ -22,10 +22,18 @@
                   <i _ngcontent-axy-c0="" class="material-icons small"> assignment_ind </i> {{ 'THESIS_REQUEST.BUTTON.DELETE_APPLY' | translate }}
               </button>
           </ng-template>
-
     </div>
-  <div class="row"><br></div>
-    <div class="row">
+    <div *ngIf="userHasAThesisiAssigned" class="row">
+      <br>
+      <div  class="alert alert-danger" role="alert"> 
+        <span *ngIf="thesisId==assignedThesisId" [innerHTML]=" 'THESIS.MESSAGE_THESIS_ASSIGNED_TO_YOU' | translate "></span>
+        <span *ngIf="thesisId!=assignedThesisId" [innerHTML]=" 'THESIS.MESSAGE_YOU_HAVE_OTHER_THESIS_ASSIGNED' | translate : {thesisId: assignedThesisId } "></span>        
+      </div>
+  </div>
+  
+  <div class="col"><br></div>
+  
+    <div class="col">
         <div class="col col-lg-12">
             <!--
             <div class="col ">

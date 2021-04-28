@@ -39,6 +39,9 @@ export class JobsAddComponent implements OnInit {
     options: any[] = [];
     filteredOptions: Observable<string[]>;
 
+    showError: boolean = false;
+    errorMessage: string = '';
+
     currentUser: User;  
     angForm: FormGroup;
     result: string = '';
@@ -195,6 +198,9 @@ export class JobsAddComponent implements OnInit {
 
 
     addJob() {
+      this.showError = false;
+      this.errorMessage = '';
+
       //let userdata = JSON.parse(localStorage.getItem('userdata'));
       let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
       let dateToday = formatDate(new Date(), 'dd-MM-yyyy', 'en');
@@ -224,19 +230,37 @@ export class JobsAddComponent implements OnInit {
       this.jobDataToPost = dataToSend;
       //console.log(dataToSend);
 
-      this.js.addJob(dataToSend).subscribe(
+      this.js.getLastJobId().subscribe(
         res => {
-          console.log("Job created");
-          //console.log(res);
-          //after update the job
-          //window.location.href="/jobs";
-          this.router.navigate(["/jobs"]);
+          console.log("get last job id");
+          console.log(res);
+          dataToSend['id']= res;
+          console.log(dataToSend);
+          this.js.addJob(dataToSend).subscribe(
+            res => {
+              console.log("Job created");
+              //console.log(res);
+              //after update the job
+              //window.location.href="/jobs";
+              this.router.navigate(["/jobs"]);
+            },
+            error => {
+              console.log("Error creating the job!!");
+              console.log(error);
+              this.showError = true;
+              this.errorMessage = error;
+              //this.router.navigate(["/jobs"]);          
+            }
+          );
         },
-        error => {
-          console.log("Error creating the job!!");
-		      this.router.navigate(["/jobs"]);          
+        error => {          
+          console.log("Error getting last job id!!");
+          console.log(error);
+		      //this.router.navigate(["/jobs"]);          
         }
       );
+
+
 
     }
     
