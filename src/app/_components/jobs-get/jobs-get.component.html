@@ -105,10 +105,10 @@
                     
                 </div> 
             </div>
-
+            <br>
             <div class="col ">
               <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EDUCATIONS' | translate }}</h2></div>
-              <div>
+              <div class="col col-lg-12">
                   <div *ngIf="jobData.educationReq.length==0">{{ 'JOBS.REQUIRED_EDUCATIONS_NOT_AVAILABLE' | translate }}</div>
                   <div *ngIf="jobData.educationReq.length>0" class="col col-lg-12">
                     <table class="table table-striped">
@@ -131,10 +131,10 @@
                   
               </div> 
           </div>
-
+          <br>
           <div class="col ">
             <div class="labeljob"><h2>{{ 'JOBS.REQUIRED_EXPERIENCE' | translate }}</h2></div>
-            <div>
+            <div class="col col-lg-12">
                 <div *ngIf="jobData.workExperienceReq.length==0">{{ 'JOBS.REQUIRED_EXPERIENCES_NOT_AVAILABLE' | translate }}</div>
                 <div *ngIf="jobData.workExperienceReq.length>0" class="col col-lg-12">
                   <table class="table table-striped">
@@ -165,8 +165,10 @@
     <!--     
     <div class="col" [hidden]="!(isAdmin || isRecruiter)">
     -->        
-    <div class="col" [hidden]="(jobData.creator_id!=':'+currentUser.id.toString()) && !isAdmin" *appCanAccess="['view_recruitment']">      
-      <app-qc-job-candidates-management [jobId]="jobData.id"  [reload]="cntReloads"></app-qc-job-candidates-management>
+    <div class="row" [hidden]="(jobData.creator_id!=':'+currentUser.id.toString()) && !isAdmin" *appCanAccess="['view_recruitment']">      
+      <div class="col col-lg-12 ">
+        <app-qc-job-candidates-management [jobId]="jobData.id"  [reload]="cntReloads"></app-qc-job-candidates-management>
+      </div>
     </div>
 
 </div>
