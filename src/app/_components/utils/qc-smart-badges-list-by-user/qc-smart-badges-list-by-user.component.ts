@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { awardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
 import { OUService } from '../../../_services/ou.service'
 import { AppComponent } from '../../../app.component';
+import { QCMatomoConnectorService} from '../../../_services/qc-matomo-connector.service';
 
 @Component({
   selector: 'app-qc-smart-badges-list-by-user',
@@ -34,6 +35,7 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   showErrorDowloadingPNG: boolean = false;
 
   constructor(
+    private mc: QCMatomoConnectorService,
     private appcomponent: AppComponent,
     private bs: BadgesService,
     public awardDialog: MatDialog,
@@ -145,20 +147,41 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   verifySmartBadge(smartBadgeData) {
     this.loadingLoginSpinner = true;
     this.validationSuccess = false;
+
+    let StartTime = + new Date();
+    //console.log("StartTime");
+    //console.log(StartTime);
+
     //console.log("verifySmartBadge");
     //console.log("data In:");
     //console.log(smartBadgeData);
 
     let dataToPost = this.createBadgeDataToSend(smartBadgeData);
     
-    console.log(dataToPost);
+    //console.log(dataToPost);
     this.ous
           .verifySmartBadgeV2(dataToPost).subscribe(
           res => {
 
             this.loadingLoginSpinner = false;
-            console.log("smart badget verification finished, status:"+res);
+            //console.log("smart badget verification finished, status:"+res);
             if (res) {
+
+              let EndTime = + new Date();
+              //console.log("EndTime");
+              //console.log(EndTime);
+              let resolution = EndTime - StartTime;
+              //in seconds
+              var resolutionTime = (resolution / 1000);
+              //var resolutionTime = (((resolution / 1000) / 60)/ 60)
+              //console.log("resolutionTime");
+              //console.log(resolutionTime);
+              let eventCategory = "Smart Badge Verification"
+              let eventAction = 'Verification Success';
+              let eventName = 'Time Spent';
+              let eventValue = String(resolution);
+              this.mc.sendMatomoEvent(eventCategory, eventAction, eventName, eventValue);
+
               this.validationSuccess = true;
               this.showErrorMessage = false;
             }
