@@ -54,6 +54,7 @@ export class JobsAddComponent implements OnInit {
     selectedSpecializationValue: string = null;
     listAllRecruitmentOrganizations: RecruitmentOrganisation[] = [];
     jobRecruitmentOrganization: number = null;
+    showLoading : boolean = true;
 
     constructor(      
       private ros: RecruitmentOrganisationService,
@@ -268,7 +269,7 @@ export class JobsAddComponent implements OnInit {
       //console.log(jobId);
       delete this.dataIn.coursesReq;
 
-      console.log(this.dataIn);
+      //console.log(this.dataIn);
 
       this.js.updateJob(jobId, this.dataIn).subscribe(
         res => {
@@ -303,11 +304,12 @@ export class JobsAddComponent implements OnInit {
           newJobSkill.label = dataObject.skillReq[i].label;
           newJobSkill.priorityLevel = dataObject.skillReq[i].priorityLevel;
           newJobSkill.proficiencyLevel = dataObject.skillReq[i].proficiencyLevel;
-          if ( dataObject.skillReq[i].hasOwnProperty('uri') ) {
-            newJobSkill.skillURI = dataObject.skillReq[i].uri;
-          }
-          else if ( dataObject.skillReq[i].hasOwnProperty('skillURI') ) {
+          
+          if (dataObject.skillReq[i].hasOwnProperty('skillURI') ) {
             newJobSkill.skillURI = dataObject.skillReq[i].skillURI;
+          }
+          else if ( dataObject.skillReq[i].hasOwnProperty('uri') ) {
+            newJobSkill.skillURI = dataObject.skillReq[i].uri;
           }
           skillsData.push(newJobSkill);
           //dataObject.skillReq[i] = newJobSkill;
@@ -357,6 +359,7 @@ export class JobsAddComponent implements OnInit {
 
        this.options = competencesList;
        //console.log(this.options);
+       this.showLoading = false;
 
     });
   }
@@ -435,6 +438,7 @@ export class JobsAddComponent implements OnInit {
       }
       else {
         this.mode = "Create";
+        this.showLoading = false;
       }
 
     });

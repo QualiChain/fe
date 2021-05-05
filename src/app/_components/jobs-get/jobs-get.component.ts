@@ -154,7 +154,8 @@ export class JobsGetComponent implements OnInit {
       if (id) {
         //console.log(id);
 
-        console.log("this.currentUser.id:"+this.currentUser.id);
+        //console.log("this.currentUser.id:"+this.currentUser.id);
+        
         this.cvs
           .getCV(this.currentUser.id.toString())
           .subscribe((data: any) => {
@@ -162,9 +163,10 @@ export class JobsGetComponent implements OnInit {
             this.currentUserHasCV = true;
           },
           error => {            
-            console.log("error");
+            this.currentUserHasCV = false;
+            //console.log("error no cv for user:"+this.currentUser.id);
           });
-
+        
         this.us
         .getJobApplisByUser(this.currentUser.id)
         .subscribe((appliesByuser: any[]) => {
