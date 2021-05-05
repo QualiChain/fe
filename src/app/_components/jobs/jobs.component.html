@@ -63,7 +63,7 @@
                     </button>    
 
                     <span *appCanAccess="['edit_job_post']">
-                      <button *ngIf="((element.creator_id==':'+currentUser.id.toString()) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
+                      <button *ngIf="((element.creator_id==currentUser.id.toString()) || (element.creator_id==':'+currentUser.id.toString()) || isAdmin)" class="btn btn-primary" [routerLink]="['/jobs', element.id, 'edit']">
                         <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
                       </button>    
                     </span>
