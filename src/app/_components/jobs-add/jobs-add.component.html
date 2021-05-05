@@ -1,6 +1,12 @@
 <h1>{{ 'JOBS.TITLE' | translate }} - <span *ngIf="mode=='Create'">Create</span><span *ngIf="mode=='Edit'">Edit</span></h1>
 
-<div class="container">
+<div *ngIf="showLoading">
+  <div class="col-md-4 col-md-offset-4">
+    <app-qc-spinner ></app-qc-spinner>
+  </div>  
+</div>
+
+<div [hidden]="showLoading" class="container">
   <div class="row">
 
           <form  #formEditJob="ngForm" class="create-job-form" novalidate>
