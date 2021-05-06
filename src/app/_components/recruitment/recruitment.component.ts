@@ -236,7 +236,7 @@ filterByCreator(element, userID)
 */
 filterByCreator(userID) {
   return function(element) {
-    return element.creator_id==":"+userID;
+    return ((element.creator_id==userID) || (element.creator_id==":"+userID));
   }
 }
 
@@ -254,6 +254,7 @@ getAvailableJobs() {
       jobsFilteredList = (data.filter(this.filterByCreator(this.currentUser.id)));
     }
     
+    jobsFilteredList.sort((a, b) => (a.label.toUpperCase() > b.label.toUpperCase() ) ? 1 : -1);
     //console.log(jobsFilteredList);
 
     //this.jobs = data;

@@ -165,7 +165,7 @@
     <!--     
     <div class="col" [hidden]="!(isAdmin || isRecruiter)">
     -->        
-    <div class="row" [hidden]="(jobData.creator_id!=':'+currentUser.id.toString()) && !isAdmin" *appCanAccess="['view_recruitment']">      
+    <div class="row" [hidden]="((jobData.creator_id!=currentUser.id.toString()) && (jobData.creator_id!=':'+currentUser.id.toString())) && !isAdmin" *appCanAccess="['view_recruitment']">      
       <div class="col col-lg-12 ">
         <app-qc-job-candidates-management [jobId]="jobData.id"  [reload]="cntReloads"></app-qc-job-candidates-management>
       </div>
