@@ -156,31 +156,37 @@ export class JobsGetComponent implements OnInit {
 
         //console.log("this.currentUser.id:"+this.currentUser.id);
         
-        this.cvs
-          .getCV(this.currentUser.id.toString())
-          .subscribe((data: any) => {
-            //console.log(data);
-            this.currentUserHasCV = true;
-          },
-          error => {            
-            this.currentUserHasCV = false;
-            //console.log("error no cv for user:"+this.currentUser.id);
-          });
+        if (this.isStudent || this.isEmployee) {
+          this.cvs
+            .getCV(this.currentUser.id.toString())
+            .subscribe((data: any) => {
+              //console.log(data);
+              this.currentUserHasCV = true;
+            },
+            error => {            
+              this.currentUserHasCV = false;
+              //console.log("error no cv for user:"+this.currentUser.id);
+            });
+
+            this.us
+            .getJobApplisByUser(this.currentUser.id)
+            .subscribe((appliesByuser: any[]) => {
+
+              appliesByuser.forEach(element => {
+                //console.log(element);
+                if ((element.jobURI=="saro:"+id) || (element.jobURI==":"+id) || (element.id==id)) {
+                  this.userHasAnApply = true;
+                  this.jobPostId = element.id;
+                }
+              });
+            });
+
+        }
+        else  {
+          this.currentUserHasCV = false;
+        }
+
         
-        this.us
-        .getJobApplisByUser(this.currentUser.id)
-        .subscribe((appliesByuser: any[]) => {
-
-          appliesByuser.forEach(element => {
-            //console.log(element);
-            if ((element.jobURI=="saro:"+id) || (element.jobURI==":"+id) || (element.id==id)) {
-              this.userHasAnApply = true;
-              this.jobPostId = element.id;
-            }
-          });
-          
-
-        });
 
         this.getCandidates(id);
 
