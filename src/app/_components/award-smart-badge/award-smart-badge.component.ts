@@ -594,7 +594,10 @@ export class awardDialog_modal implements OnInit {
   pagedListSB = [];
   pageSizeOptionsSB: number[] = [this.pageSizeSB];
   
+  currentUser: any;
+
   constructor(
+    private authservice: AuthService,
     private mc: QCMatomoConnectorService,
     private translate: TranslateService,
     public dialog: MatDialog,
@@ -606,7 +609,11 @@ export class awardDialog_modal implements OnInit {
     private ous: OUService,
     private cs: CoursesService,
     public dialogRef: MatDialogRef<awardDialog_modal>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+      this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+    }
 
     OnPageChangeSB(event: PageEvent){
       let startIndex = event.pageIndex * event.pageSize;
@@ -718,17 +725,32 @@ export class awardDialog_modal implements OnInit {
     }
 
       if (this.data.userId) {
-        this.us
-        .getUser(this.data.userId).subscribe(
-          data => {
-            //console.log("user in db");      
-            this.userDataRec = data;
-            this.pageTitle = this.userDataRec.userName;
-          },
-          error => {
-            console.log("user not found in db");                        
+
+        let getName = true;
+        
+        if (this.data.element) {
+          if (this.data.element.user) {
+            if (this.data.element.user.userName) {
+              this.userDataRec = this.data.element.user;
+              this.pageTitle =  this.data.element.user.userName;                
+              getName = false;
+            } 
           }
-        );
+        }
+
+        if (getName) {
+          this.us
+          .getUser(this.data.userId).subscribe(
+            data => {
+              //console.log("user in db");      
+              this.userDataRec = data;
+              this.pageTitle = this.userDataRec.userName;
+            },
+            error => {
+              console.log("user not found in db");                        
+            }
+          );
+        }
       }
       else if (this.data.courseId) {
         this.cs
@@ -897,12 +919,17 @@ export class awardDialog_modal implements OnInit {
     this.resetErrorMessages(i);    
     
     let dataToPost = {};
+    //console.log(this.data.userId);
     if (this.data.userId) {
       
       dataToPost = {
         "badge":smartBadgeData.oubadge,
         "recipient":{"name": this.userDataRec.fullName, "email": this.userDataRec.email}
         };
+
+        //console.log(this.currentUser.email);
+        //if we need to replace issueremail by the email of the current user uncomment next line
+        dataToPost['badge']['issuer']['email'] = this.currentUser.email;
 
     }
     else if (this.data.courseId) {

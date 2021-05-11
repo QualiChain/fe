@@ -100,6 +100,11 @@ export class CoursesGetComponent implements OnInit {
 
   openAwardDialog(userId: number, element: any) {
      
+     if (element.hasOwnProperty('user_id')) {
+        element['user'] = element['user_id'];
+     }
+     //console.log(element);
+
     const dialogRef = this.awardDialog.open(awardDialog_modal, {
       width: '550px',
       data: {userId: userId, element: element, source: 'profile'}

@@ -130,12 +130,18 @@
             <ng-container matColumnDef="action" >
               <th [hidden]="(!isProfessor)" mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
               <td [hidden]="(!isProfessor)" mat-cell *matCellDef="let element" style=" white-space: nowrap;">
-                <button class="btn btn-primary" [routerLink]="['/profiles', element.user_id.id]">
+                <button [hidden]="(!isProfessor)" class="btn btn-primary" [routerLink]="['/profiles', element.user_id.id]">
                   <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
-                <button [disabled]="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==1" *ngIf="(isAdmin)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', element.user_id.id)">
+                <button [hidden]="(!isProfessor)" [disabled]="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==1" *ngIf="(isAdmin)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', element.user_id.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
-                </button>               
+                </button>        
+                <!--
+                <button [hidden]="(!isUserAsEnrolled && !isUserAsDone)" class="btn btn-primary" (click)="openAwardDialog(element.user_id.id, element)">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
+                </button>
+                -->
+
               </td>
             </ng-container>
             <!-- surname Column -->
