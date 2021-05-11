@@ -929,7 +929,7 @@ export class awardDialog_modal implements OnInit {
 
         //console.log(this.currentUser.email);
         //if we need to replace issueremail by the email of the current user uncomment next line
-        dataToPost['badge']['issuer']['email'] = this.currentUser.email;
+        //dataToPost['badge']['issuer']['email'] = this.currentUser.email;
 
     }
     else if (this.data.courseId) {
