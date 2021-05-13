@@ -64,6 +64,28 @@ export class CVService {
     
     }
 
+    updateCVByUserId(userId, dataIn:any) {
+      //userId is not needed  into the URL
+      //the content type must be text/plain
+      //the response of the API is text
+      let headers = this.authService.createQCAuthorizationHeaderText();
+  
+      const obj = dataIn;
+      //return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn), { headers: headers} ).
+      return this.httpClient.put(`${this.uri}/${userId}`, dataIn, { headers: headers, responseType: 'text'} ).    
+      pipe(
+         map((data: any) => {
+             //console.log("post OK");
+             //console.log(data);
+           return data;
+         }), catchError( error => {
+          console.log("post KO");
+           return throwError( 'Something went wrong!' );
+         })
+      )
+      
+    }    
+
     getCompetencesByUser(userId:string) {
       let headers = this.authService.createQCAuthorizationHeader();
 
