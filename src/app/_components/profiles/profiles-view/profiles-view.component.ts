@@ -1127,6 +1127,8 @@ export class CVDialog_modal implements OnInit {
   educationHistoryCV: any = [];
   showError: boolean = false;
   fieldDisabled: boolean = true;
+  userHasCV: boolean = false;
+  uriCV: string = ""
 
   competencies: CompetencyLevelValues[] = [
     {value: 'basic', viewValue: 'Basic'},
@@ -1177,11 +1179,12 @@ export class CVDialog_modal implements OnInit {
       );
     }
     
-
     getUserCV(id:string) {
       this.cvs
       .getCV(id)
       .subscribe((data: any) => {
+          this.userHasCV = true;
+          this.uriCV = data.uri;
 
           this.label = data.label;
           this.description = data.description;
@@ -1403,6 +1406,7 @@ addFormGroupItem(e, type) {
 
 
 onSubmit() {
+  //console.log(this.userHasCV);
   this.showError = false;
   this.loadingSpinner = true;
   var userId: string = this.data.userId.toString();
@@ -1422,22 +1426,45 @@ onSubmit() {
   //console.log(this.data.userId);
   //console.log(dataToSend);
 
-  this.cvs.postCV(this.data.userId, dataToSend).subscribe(
-    res => {
-      //console.log(res);
-      //console.log("CV sended correctly");
-      //alert('Success!!');
-      this.loadingSpinner = false;
-      this.showError = false;
-      this.dialogRef.close(true);
-    },
-    error => {
-      //console.log("error sending CV data");
-      //alert('Error sending data!!!');
-      this.loadingSpinner = false;
-      this.showError = true;
-    }
-  );
+  if (this.userHasCV) {
+
+    dataToSend['uri']=this.uriCV;
+
+    this.cvs.updateCVByUserId(this.data.userId, dataToSend).subscribe(
+      res => {
+        //console.log(res);
+        //console.log("CV sended correctly");
+        //alert('Success!!');
+        this.loadingSpinner = false;
+        this.showError = false;
+        this.dialogRef.close(true);
+      },
+      error => {
+        //console.log("error sending CV data");
+        //alert('Error sending data!!!');
+        this.loadingSpinner = false;
+        this.showError = true;
+      }
+    );
+  }
+  else {
+    this.cvs.postCV(this.data.userId, dataToSend).subscribe(
+      res => {
+        //console.log(res);
+        //console.log("CV sended correctly");
+        //alert('Success!!');
+        this.loadingSpinner = false;
+        this.showError = false;
+        this.dialogRef.close(true);
+      },
+      error => {
+        //console.log("error sending CV data");
+        //alert('Error sending data!!!');
+        this.loadingSpinner = false;
+        this.showError = true;
+      }
+    );
+  }
 
 
   
