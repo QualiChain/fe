@@ -726,9 +726,11 @@ export class ProfilesAddIAMUserComponent implements OnInit {
     formData.append('name', this.name);
     formData.append('email', this.email);
     formData.append('password', this.password);
-    formData.append('organization', JSON.stringify(userOrganizations));
-    formData.append('userType', JSON.stringify(userRoles));
-    
+    //formData.append('organization', JSON.stringify(userOrganizations));
+    formData.append('organization', userOrganizations.toString());
+    //formData.append('userType', JSON.stringify(userRoles));
+    formData.append('userType', userRoles.toString());
+
     this.userService.addUserIAM(formData).subscribe(    
       res => {
         //console.log("Add user IAM response");
