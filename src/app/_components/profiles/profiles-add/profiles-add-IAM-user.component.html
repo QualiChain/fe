@@ -52,6 +52,14 @@
                 </mat-form-field>  
             </div>
 
+            <!-- email -->
+            <div class="form-group field" [class.has-error]="emailInput.invalid">
+                <mat-form-field class="create-profile-full-width">
+                    <mat-label>{{ 'PROFILE.EMAIL.LABEL' | translate }}</mat-label>
+                    <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}" #emailInput="ngModel">
+                </mat-form-field>
+            </div>
+
             <!-- password -->
             <mat-form-field class="create-profile-full-width">
                 <mat-label>{{ 'CHANGE_PASSWORD.NEW_PASSWORD.LABEL' | translate }}</mat-label>
@@ -79,13 +87,7 @@
                     {{ 'PASSWORDS_DO_NOT_MATCH' | translate }}
                 </div>           
 
-            <!-- email -->
-            <div class="form-group field" [class.has-error]="emailInput.invalid">
-                <mat-form-field class="create-profile-full-width">
-                    <mat-label>{{ 'PROFILE.EMAIL.LABEL' | translate }}</mat-label>
-                    <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}" #emailInput="ngModel">
-                </mat-form-field>
-            </div>
+
 
             <!-- new role management -->        
             <div class="form-group field" >
