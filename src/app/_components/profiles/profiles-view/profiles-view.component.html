@@ -99,7 +99,7 @@
               <div *ngIf="userdata.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(' + profileAvatarImg + ')'}"> </div>
               <div *ngIf="!userdata.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(assets/img/no_avatar.jpg)'}"> </div>
           </div>
-          <div  *ngIf="(canViewCV && (isStudent || isEmployee))" class="col col-lg-4 cv_comp">
+          <div  *ngIf="(canViewCV && (isStudent || isEmployee || isRecruiter))" class="col col-lg-4 cv_comp">
                 <div class="wrapperpiechart2">
                   <canvas id="canvas_pie_chart" baseChart
                       [datasets]="[{ data: [CvPercentatge,(100-CvPercentatge)],
@@ -119,7 +119,7 @@
         </div>
     </div>
 
-    <div class="col" *ngIf="isStudent || isEmployee">
+    <div class="col" *ngIf="isStudent || isEmployee || isRecruiter">
       <div class="row">
         <br>
         <div>
@@ -131,7 +131,7 @@
               <i _ngcontent-axy-c0="" class="material-icons small">  cloud_upload </i> {{ 'UPLOAD_CV_KG.BUTTON' | translate }} 
             </button>
             
-            <button *ngIf="((userdata.id==currentUser.id) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
+            <button *ngIf="((userdata.id==currentUser.id && (isStudent || isEmployee)) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata.id,'best-career-options']">  
               <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
             </button>
           </div>
@@ -293,7 +293,7 @@
                 </ngb-panel>
 
                 <ngb-panel id="toggle-4" title="{{ 'PROFILES.COMPETENCY_DEVELOPMENT' | translate }}" 
-                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee))">
+                *ngIf="((userdata.id==currentUser.id) && (isStudent || isEmployee || isRecruiter))">
                   <ng-template ngbPanelContent>
                     <div *ngIf="_reload">
                       <app-competency-development userId="{{userdata.id}}"></app-competency-development>
