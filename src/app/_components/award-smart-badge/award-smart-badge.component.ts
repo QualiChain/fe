@@ -136,7 +136,7 @@ export class AwardSmartBadgeComponent implements OnInit {
       //console.log(dataEnrolledUsers);
       dataEnrolledUsers.forEach(element => {
         //console.log(element.course_status);
-        if ((element.course_status=='done') || (element.course_status=='enrolled')) {
+        if ((element.course_status=='assisted') || (element.course_status=='done') || (element.course_status=='enrolled')) {
          
             let aqcuired_badges_by_user = [];
 
@@ -982,7 +982,7 @@ export class awardDialog_modal implements OnInit {
                 },
                 error => {
                   console.log(error);
-                  this.errorMessage = error.message;
+                  this.errorMessage = error;
                   this.showErrorMessage = true;
                   this.itemSelected = i;
                   this.lodingspinnerid = null;                      

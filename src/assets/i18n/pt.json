@@ -605,7 +605,9 @@
     "NO_ENROLLED_USERS": "Sem utilizadores inscritos",
     "ENROLLED_USERS": "Utilizadores inscritos",
     "NO_TEACHERS": "Sem professores",
-    "PROFESSORS": "Professores"
+    "PROFESSORS": "Professores",
+    "PHD_STUDENTS": "PhD Students",
+    "ASSISTED": "PhD/Assisted"
   },
   "RECRUITMENT"  : {
     "TITLE": "Recrutamento",
@@ -687,7 +689,9 @@
     "YES": "Sim",
     "HELP": "Ajuda",
     "SEND": "Enviar",
-    "UNASSIGN": "Cancelar subscrição"
+    "UNASSIGN": "Cancelar subscrição",
+    "SET_AS_PHD": "Set as PhD",
+    "REVERT_PHD_STUDENT": "Delete from PhD students"
   },
   "ACTION": "Ação",
   "FILTER": "Filtro",

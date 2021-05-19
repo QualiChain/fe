@@ -60,6 +60,7 @@ export class CoursesGetComponent implements OnInit {
   professorList = new MatTableDataSource([]);
   enrolledUsersStatusEnrolled = new MatTableDataSource([]);
   enrolledUsersStatusDone = new MatTableDataSource([]);
+  enrolledUsersStatusAssisted = new MatTableDataSource([]);
   loadSpinner: boolean = false;
   errorRelation: boolean = false;
 
@@ -67,6 +68,8 @@ export class CoursesGetComponent implements OnInit {
   isUserAsDone: boolean = false;
   userGrade: Number = null;
   isUserAsTaught: boolean = false;
+  isUserAsAssisted: boolean = false;
+  //isUserAsAssisted: boolean = true;
 
   grade: Number;
   canEditCourse = [];
@@ -224,6 +227,16 @@ export class CoursesGetComponent implements OnInit {
     this.enrolledUsersStatusDone.sort = this.DoneSort;
     this.enrolledUsersStatusDone.paginator = this.paginatorUsersStatusDone;
 
+    
+    this.enrolledUsersStatusAssisted.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'name': return item.user.name;
+        case 'surname': return item.user.surname;
+        default: return item[property];
+      }
+    };
+    this.enrolledUsersStatusAssisted.sort = this.DoneSort;
+    this.enrolledUsersStatusAssisted.paginator = this.paginatorUsersStatusDone;
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
     this.courseData = {courseid: 0, name: "", description: "", semester: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
@@ -256,6 +269,11 @@ export class CoursesGetComponent implements OnInit {
               if (element.course.courseid==id) {
                 //this.userDoneThisCourse = true;
                 this.isUserAsDone = true;
+                //console.log(element);
+                if (element.course_status=='assisted') {
+                  this.isUserAsAssisted = true;
+                }
+                
                 this.userGrade = element.grade;
                 //console.log(element);
               }
@@ -374,6 +392,10 @@ export class CoursesGetComponent implements OnInit {
   {  
        return element.course_status==='taught'; 
   }
+  filterByAssistedStatus(element, index, array) 
+  {  
+       return element.course_status==='assisted'; 
+  }
   
   getEnrolledUsersByCourse(courseId: Number) {
 
@@ -395,6 +417,7 @@ export class CoursesGetComponent implements OnInit {
           this.enrolledUsers = dataEnrolledUsers;
           this.enrolledUsersStatusDone.data = (dataEnrolledUsers.filter(this.filterByDoneStatus));
           this.enrolledUsersStatusEnrolled.data = (dataEnrolledUsers.filter(this.filterByEnrolledStatus));
+          this.enrolledUsersStatusAssisted.data = (dataEnrolledUsers.filter(this.filterByAssistedStatus));
           //this.professorList.data = (dataEnrolledUsers.filter(this.filterByProfessorStatus));
         },
         error => {
@@ -419,6 +442,13 @@ export class CoursesGetComponent implements OnInit {
         this.isUserAsTaught = false;    
       });
 */      
+  }
+
+  revertPhD(courseId: number, userId: number, grade: number) {
+
+    this.grade = grade;
+    this.relationUserCourse(courseId, 'add', 'done', userId);    
+
   }
 
   relationUserCourse(courseId: number, action: string, type: string, userId: number): void {
@@ -467,6 +497,9 @@ export class CoursesGetComponent implements OnInit {
           else if (type=='done'){
             this.isUserAsDone = true;
           }
+          else if (type=='assisted'){
+            this.isUserAsAssisted = true;
+          }
         },
         error => {
           console.log("Error enrolling user");                      
@@ -487,6 +520,7 @@ export class CoursesGetComponent implements OnInit {
           this.isUserAsEnrolled = false;
           this.isUserAsTaught = false;
           this.isUserAsDone = false;
+          this.isUserAsAssisted = false;
           this.userGrade = null;
           /*
           if (type=='enrolled'){

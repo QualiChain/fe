@@ -18,12 +18,12 @@
                                     
                 <span *ngFor="let element_badge of aqcuired_badges_by_course; index as j">
     
-                    <mat-card class="col-lg-3 example-card" >
-                        <mat-card-header>
-                            <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.badge.oubadge.image}}");'></div>
+                    <mat-card class="col-lg-3 example-card" style="height: 120px">
+                        <mat-card-header style="height: 60px">
+                            <div mat-card-avatar class="example-header-image" title="{{element_badge.badge.name}}" style='background-size: cover;background-image: url("{{element_badge.badge.oubadge.image}}");'></div>
                             <mat-card-title>
-                                <a href="" (click)="selectedBadge=element_badge" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_course'">
-                                    {{element_badge.badge.name}}
+                                <a title="{{element_badge.badge.name}}" href="" (click)="selectedBadge=element_badge" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_course'">
+                                    {{element_badge.badge.name.substr(0,20)}} <span *ngIf="element_badge.badge.name.length>20">...</span>
                                 </a>
                             </mat-card-title>
                         </mat-card-header>

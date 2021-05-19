@@ -151,17 +151,17 @@
                 <span *ngFor="let element_badge of listAllSmartBadges; index as i">
                     <div class="col-lg-2 example-card" >
                         <div>
-                            <div mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.oubadge.image}}");'>
+                            <div title="{{element_badge.name}}" mat-card-avatar class="example-header-image" style='background-size: cover;background-image: url("{{element_badge.oubadge.image}}");'>
                             </div>
-                            <div>
+                            <div style="height:60px">
                                 <mat-checkbox 
                                     name="smartBadgesByCourse_{{element_badge.id}}" value="smartBadgesByCourse_{{element_badge.id}}"
                                     [checked]="(smartBadgesByCourse.indexOf(element_badge.id)>=0)"  
                                     (change)="updateSelectedBadges($event, element_badge.id)"                                 
                                     >                                    
                                     </mat-checkbox>
-                                <a href="" [routerLink]="" (click)="selectedBadge=element_badge" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_course'">
-                                    {{element_badge.name}}
+                                <a title="{{element_badge.name}}" href="" [routerLink]="" (click)="selectedBadge=element_badge" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_course'">
+                                    {{element_badge.name.substr(0,20)}} <span *ngIf="element_badge.name.length>20">...</span>
                                 </a>
                             </div>
                         </div>
