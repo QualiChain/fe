@@ -595,6 +595,7 @@ export class awardDialog_modal implements OnInit {
   pageSizeOptionsSB: number[] = [this.pageSizeSB];
   
   currentUser: any;
+  showLoading = true;
 
   constructor(
     private authservice: AuthService,
@@ -627,36 +628,37 @@ export class awardDialog_modal implements OnInit {
     }
   
   recoverSB() {
-
+    this.showLoading = true;
+    //console.log(this.currentUser.email);
     this.listOfSmartAwards = [];
     this.bs.getBadges()
       .subscribe(( dataSmatBadges: any) => {
         //console.log (dataSmatBadges);
-
         dataSmatBadges.forEach(element => {
-          //console.log(element);
-          this.listOfSmartAwards.push(
-            {
-            id: element.id,
-            name: element.name,
-            type: element.type,
-            description: element.description,
-            issuer: element.issuer,
-            image: element.oubadge.image,
-            oubadge: element.oubadge,
-            assigned: false,
-            status: '',
-            awardedId: '',
-            oubadge_user: {},
-            ou_metadata: {}
-            }
-          );
-          this.listOfSmartAwards.sort((a, b) => a.name.localeCompare(b.name));
+          //console.log(element.oubadge.issuer.email);
+          if (this.currentUser.email.toUpperCase()==element.oubadge.issuer.email.toUpperCase()) {
+            this.listOfSmartAwards.push(
+              {
+              id: element.id,
+              name: element.name,
+              type: element.type,
+              description: element.description,
+              issuer: element.issuer,
+              image: element.oubadge.image,
+              oubadge: element.oubadge,
+              assigned: false,
+              status: '',
+              awardedId: '',
+              oubadge_user: {},
+              ou_metadata: {}
+              }
+            );
+            this.listOfSmartAwards.sort((a, b) => a.name.localeCompare(b.name));
 
-          this.SBList = this.listOfSmartAwards;
-          this.lengthSB = this.SBList.length;
-          this.pagedListSB = this.SBList.slice(0, this.pageSizeSB);
-
+            this.SBList = this.listOfSmartAwards;
+            this.lengthSB = this.SBList.length;
+            this.pagedListSB = this.SBList.slice(0, this.pageSizeSB);
+          }
         });
 
         //recover the list of smart badges of the user
@@ -691,13 +693,17 @@ export class awardDialog_modal implements OnInit {
             
           });
 
+          this.showLoading = false;
+
         }, 
         error => {
+          this.showLoading = false;
           console.log("error recovering list of smart badges per user")
         });
         
       },
       error => {
+        this.showLoading = false;
         console.log("error recovering smart badges")
       }
     );
@@ -826,11 +832,12 @@ export class awardDialog_modal implements OnInit {
 
     //console.log("dataBadgetStored");
     //console.log(dataBadgetStored);  
-    
+    /*
     this.resetErrorMessages(i); 
     this.us
     .getUser(this.data.userId).subscribe(
       dataUser => {
+    */
         //console.log("----dataUser----");
         //console.log(dataUser);
         //console.log("----dataBadgetStored----");
@@ -901,7 +908,7 @@ export class awardDialog_modal implements OnInit {
           }
         );
         
-          
+     /*     
       },
       error => {
         console.log("user not found in db");  
@@ -911,6 +918,7 @@ export class awardDialog_modal implements OnInit {
         this.lodingspinnerid = null;                      
       }
     );
+    */
   }
 
   issueSmartBadge(smartBadgeData, i) {
@@ -1007,9 +1015,9 @@ export class awardDialog_modal implements OnInit {
   
   }
 
-  deleteSB(smartBadgeId, smartAwardBadgeData) {
-    console.log(smartBadgeId);
-    console.log(smartAwardBadgeData);
+  deleteSB(smartBadgeId, smartAwardBadgeData, i) {
+    //console.log(smartBadgeId);
+    //console.log(smartAwardBadgeData);
   
     
     //const message = `Are you sure you want to do this?`;
@@ -1026,16 +1034,24 @@ export class awardDialog_modal implements OnInit {
       //this.result = dialogResult;
 
       if (dialogResult) {
-         console.log("Under construction");
-
+         //console.log("Under construction");
+         this.showErrorMessage = false;
+         this.errorMessage = "";
+         this.itemSelected = null;
+         this.lodingspinnerid = i;
+         
          this.bs
          .deleteBadge(smartBadgeId).subscribe(
            data => {
-             console.log("smart badge deleted!!");  
+             //console.log("smart badge deleted!!");  
              this.recoverSB();           
            },
            error => {
-             console.log("Error deleting the smart badge");                      
+             console.log("Error deleting the smart badge");
+             this.showErrorMessage = true;
+             this.errorMessage = error;
+             this.itemSelected = i;
+             this.lodingspinnerid = null;
            }
          );
 
@@ -1295,6 +1311,9 @@ export class awardDialog_modal implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.recoverSB();
+      
     });
     
   } 

@@ -108,7 +108,7 @@ export class AcademicOrganisationService {
 
             return this.http.get(`${this.userURL}/academicorganisation/${academicOrganisationId}`, {headers:headers}).
             pipe(
-                map((data: AcademicOrganisation) => {
+                map((data: any[]) => {
                     return data;
                 }), catchError( error => {
                 return throwError( 'Something went wrong!' );
@@ -136,7 +136,7 @@ export class AcademicOrganisationService {
 
             return this.http.get(`${this.academicorganisationURL}/user/${userId}`, {headers:headers}).
             pipe(
-                map((data: AcademicOrganisation) => {
+                map((data: any[]) => {
                     return data;
                 }), catchError( error => {
                     return throwError( 'Something went wrong!' );

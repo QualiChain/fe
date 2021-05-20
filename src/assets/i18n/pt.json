@@ -44,7 +44,8 @@
     "PERSONAL_FILES_REPOSITORY": "Repositório de arquivos",
     "QUESTIONNAIRE": "Questionário",
     "THESIS": "Tese",
-    "THESIS_HELP_TEXT": "Aqui encontra a lista de teses disponíveis"
+    "THESIS_HELP_TEXT": "Aqui encontra a lista de teses disponíveis",
+    "MY_COLLEAGUES_NETWORK": "My Colleagues"
   },
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Arquivo de ficheiros pessoais",
@@ -1161,5 +1162,10 @@
   "EXTERNAL_LINK_USERS_REGISTRATION": "To create a new account please click <a href='https://qualichain.herokuapp.com/register' target='NEW'>here</a>.",
   "NEW_USER_HAS_BEEN_CREATED": "Your account has been created",
   "UNEXPECTED_ERROR": "Unexpected error",
-  "PASSWORDS_DO_NOT_MATCH": "Passwords do not match"
+  "PASSWORDS_DO_NOT_MATCH": "Passwords do not match",
+  "MY_COLLEAGUES": {
+    "TITLE": "My colleagues",
+    "NO_DATA": "No data available",
+    "ORGANIZATIONS": "Organizations"
+  }
 }

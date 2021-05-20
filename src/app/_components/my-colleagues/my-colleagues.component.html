@@ -1,0 +1,67 @@
+<h1>{{ 'MY_COLLEAGUES.TITLE' | translate }}</h1>
+
+<div *ngIf="showLoading">
+  <div class="col-md-4 col-md-offset-4">
+    <app-qc-spinner ></app-qc-spinner>
+  </div>  
+</div>
+
+<div [hidden]="showLoading">
+    <div class="row">
+        <div *ngIf="dataSource.data.length==0">{{ 'MY_COLLEAGUES.NO_DATA' | translate }} </div>
+
+        <div [hidden]="dataSource.data.length==0">
+
+            <div>
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
+                </mat-form-field>
+            </div>
+
+            <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+                    <td mat-cell *matCellDef="let element" style=" white-space: nowrap;">
+                        <button class="btn btn-primary" (click)="openAwardDialog(element.id, element)">
+                            <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
+                        </button>
+                    </td>
+                </ng-container>       
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.NAME.LABEL' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+                </ng-container>
+                <!-- surname Column -->
+                <ng-container matColumnDef="surname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.SURNAME.LABEL' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.surname}} </td>
+                </ng-container>
+
+                <!-- organizations Column -->
+                <ng-container matColumnDef="organizations">
+                    <th mat-header-cell *matHeaderCellDef > {{'MY_COLLEAGUES.ORGANIZATIONS' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <span *ngFor="let element of element?.organizations; index as i">
+                            <span *ngIf="i>0">, </span>{{element}}
+                        </span>
+                    </td>
+                </ng-container>
+
+                <!-- Acquired Badges Column -->
+                <ng-container matColumnDef="aqcuired_badges">
+                    <th mat-header-cell *matHeaderCellDef > {{ 'PROFILES.SMART_BADGES' | translate }} </th>
+                    <td mat-cell *matCellDef="let element">  
+                        <app-qc-smart-badges-list-by-user [userId]="element.id" formatOutput="small"></app-qc-smart-badges-list-by-user>    
+                    </td>
+              </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

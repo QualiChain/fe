@@ -658,8 +658,10 @@ export class ProfilesAddIAMUserComponent implements OnInit {
     //console.log("else");
       if (data) {
 
-        console.log(data.id);
-        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role, roles: data.roles};
+        //console.log(data.id);
+        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role, roles: data.roles, organizations: data.organizations};
+
+        //console.log(myObj);
         myObj['avatar_path'] = "assets/img/no_avatar.jpg";
         this.storeQCUserObject(myObj);
       }

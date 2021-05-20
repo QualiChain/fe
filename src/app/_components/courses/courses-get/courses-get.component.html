@@ -129,12 +129,12 @@
         <div [hidden]="professorList.data.length==0" class="col col-lg-12">      
           <table #ProfessorSort="matSort"  mat-table [dataSource]="professorList " class="table table-striped" matSort>            
             <ng-container matColumnDef="action" >
-              <th [hidden]="(!isProfessor) && (!isUserAsAssisted)" mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
-              <td [hidden]="(!isProfessor) && (!isUserAsAssisted)" mat-cell *matCellDef="let element" style=" white-space: nowrap;">
-                <button [hidden]="(!isProfessor)" class="btn btn-primary" [routerLink]="['/profiles', element.user_id.id]">
+              <th [hidden]="(!isUserAsTaught) && (!isUserAsAssisted)" mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+              <td [hidden]="(!isUserAsTaught) && (!isUserAsAssisted)" mat-cell *matCellDef="let element" style=" white-space: nowrap;">
+                <button [hidden]="(!isUserAsTaught)" class="btn btn-primary" [routerLink]="['/profiles', element.user_id.id]">
                   <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
                 </button>
-                <button [hidden]="(!isProfessor)" [disabled]="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==1" *ngIf="(isAdmin)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', element.user_id.id)">
+                <button [hidden]="(!isUserAsTaught)" [disabled]="(enrolledUsers | FilterArrayByValue : 'course_status' : 'taught')==1" *ngIf="(isAdmin)" class="btn btn-danger" (click)="relationUserCourse(courseData.courseid, 'delete' ,'taught', element.user_id.id)">
                   <i _ngcontent-axy-c0="" class="material-icons small" > delete </i> {{ 'BUTTON.UNASSIGN' | translate }}
                 </button>        
                 
@@ -172,7 +172,7 @@
       </div>
 
       <!-- enrolled users -->
-      <div [hidden]="(!isAdmin && !isProfessor)">
+      <div [hidden]="(!isAdmin && !isUserAsTaught)">
         <div><h2>{{ 'COURSE.ENROLLED_USERS' | translate }}</h2></div>
         <div class="col col-lg-12" *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'enrolled')==0"> {{ 'COURSE.NO_ENROLLED_USERS' | translate }}<br>&nbsp;</div>
         <div [hidden]="enrolledUsersStatusEnrolled.data.length==0" class="col col-lg-12">     
@@ -226,7 +226,7 @@
       </div>
 
       <!-- done users -->
-      <div [hidden]="(!isAdmin && !isProfessor)">
+      <div [hidden]="(!isAdmin && !isUserAsTaught)">
         <div><h2>{{ 'COURSE.DONE_BY' | translate }}</h2></div>
         <div class="col col-lg-12" *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'done')==0"> {{ 'COURSE.NO_DONE_BY_USERS' | translate }}<br>&nbsp;</div>
         <div [hidden]="enrolledUsersStatusDone.data.length==0" class="col col-lg-12">
@@ -285,7 +285,7 @@
 
 
       <!--PhD-->
-      <div [hidden]="(!isAdmin && !isProfessor)">
+      <div [hidden]="(!isAdmin && !isUserAsTaught)">
         <div><h2>{{ 'COURSE.PHD_STUDENTS' | translate }}</h2></div>
         <div class="col col-lg-12" *ngIf="(enrolledUsers | FilterArrayByValue : 'course_status' : 'assisted')==0"> {{ 'COURSE.NO_DONE_BY_USERS' | translate }}<br>&nbsp;</div>
         <div [hidden]="enrolledUsersStatusAssisted.data.length==0" class="col col-lg-12">

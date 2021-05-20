@@ -49,6 +49,7 @@ import { ThesisGetComponent } from './_components/thesis/thesis-get/thesis-get.c
 import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edit.component';
 import { CompetencyDevelopmentComponent } from './_components/profiles/competency-development/competency-development.component';
 import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-use.component';
+import { MyColleaguesComponent } from './_components/my-colleagues/my-colleagues.component';
 
 const routes: Routes = [
   {
@@ -420,6 +421,12 @@ const routes: Routes = [
     component: TermsOfUseComponent,
     data: {title: 'Terms of use'}
   },
+  {
+    path: 'mycolleagues',
+    component: MyColleaguesComponent,
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.authenticated], title: 'My colleagues'}
+  },  
   {
     path: 'access_denied',
     component: AccessDeniedComponent,
