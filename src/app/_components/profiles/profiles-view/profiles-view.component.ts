@@ -537,37 +537,39 @@ export class ProfilesViewComponent implements OnInit {
               this.userdata['roles'] = this.currentUser['roles'];
             }
 
-            if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
-              this.userdata.avatar_path = 'assets/img/no_avatar.jpg';
-              
-            } 
-
-            this.uploads.getUserFiles(data.id).subscribe(
-              res => {                
-                res.files.forEach(element => {
-                  var index = element.filename.indexOf(data.id+"_avatar_" ); 
-                  if (index==0) {                
-                    this.userdata.avatar_path =  downloadUrl+"/file/"+element.file_id;
-                    let finalURL = downloadUrl+"/file/"+element.file_id;
-                    //console.log(finalURL);
-                    this.uploads.getFileURL(finalURL).subscribe(
-                      (response: any) =>{
-                        //console.log(response);
-                          let dataType = response.type;
-                          let binaryData = [];
-                          binaryData.push(response);
-                          let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-                          this.profileAvatarImg = url;
-                      }
-                    )
-                  }
-                });
-                                
-              },
-              error => {
-                console.log("Error recovering files");                
+            if (this.userdata) {
+              if ((this.userdata.avatar_path=='') || (!this.userdata.avatar_path)){
+                this.userdata.avatar_path = 'assets/img/no_avatar.jpg';              
               }
-            );
+            }
+            if (data) {
+              this.uploads.getUserFiles(data.id).subscribe(
+                res => {                
+                  res.files.forEach(element => {
+                    var index = element.filename.indexOf(data.id+"_avatar_" ); 
+                    if (index==0) {                
+                      this.userdata.avatar_path =  downloadUrl+"/file/"+element.file_id;
+                      let finalURL = downloadUrl+"/file/"+element.file_id;
+                      //console.log(finalURL);
+                      this.uploads.getFileURL(finalURL).subscribe(
+                        (response: any) =>{
+                          //console.log(response);
+                            let dataType = response.type;
+                            let binaryData = [];
+                            binaryData.push(response);
+                            let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+                            this.profileAvatarImg = url;
+                        }
+                      )
+                    }
+                  });
+                                  
+                },
+                error => {
+                  console.log("Error recovering files");                
+                }
+              );
+            }
 
             //Start OU connexion 
             //this.connectToOU();
@@ -635,6 +637,7 @@ export class ProfilesViewComponent implements OnInit {
     //console.log("getUserCurrentJobPosition-"+id);
     this.us.getUserProfileInJobEndPoint(+id).subscribe(
       data => {
+        console.log(data);
         if ( data ) {
           if ( data.hasOwnProperty('currentJobURI') ) {
             if (data.currentJobURI) {
