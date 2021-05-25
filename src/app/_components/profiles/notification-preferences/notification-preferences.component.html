@@ -10,7 +10,7 @@
     </div> 
     
     <form #formNotPref="ngForm" class="notification-form" (ngSubmit)="processForm()" >
-        <div *ngIf="isEmployee" class="row">   
+        <div *ngIf="isEmployee || isStudent" class="row">   
             <div class="form-group field" >
             <mat-checkbox class="example-margin"
                     [checked]="internal_reallocation_availability" 

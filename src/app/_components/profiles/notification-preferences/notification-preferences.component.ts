@@ -132,6 +132,7 @@ export class NotificationPreferencesComponent implements OnInit {
   }
 
   isEmployee = this.appcomponent.isEmployee;
+  isStudent = this.appcomponent.isStudent;
   
   ngOnInit(): void {
 
