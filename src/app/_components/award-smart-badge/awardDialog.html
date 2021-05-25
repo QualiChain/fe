@@ -27,9 +27,11 @@
             <div class="float-righ">
               <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==i"></mat-spinner>
 
-              <button *ngIf="lodingspinnerid!=i" (click)="deleteSB(itemBadgeData.id, itemBadgeData, i)" type="button" class="btn btn-danger">
-                <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'SMART_BADGE.BUTTON.DELETE' | translate }}
-              </button>
+              <div *ngIf="isAdmin">
+                <button *ngIf="lodingspinnerid!=i" (click)="deleteSB(itemBadgeData.id, itemBadgeData, i)" type="button" class="btn btn-danger">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'SMART_BADGE.BUTTON.DELETE' | translate }}
+                </button>
+              </div>
 
               <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=i" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
                 <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.REVOKE_AWARD' | translate }}

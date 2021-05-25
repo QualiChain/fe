@@ -596,6 +596,7 @@ export class awardDialog_modal implements OnInit {
   
   currentUser: any;
   showLoading = true;
+  isAdmin: boolean = false;
 
   constructor(
     private authservice: AuthService,
@@ -710,6 +711,15 @@ export class awardDialog_modal implements OnInit {
   }
 
   ngOnInit() {
+
+    if (this.currentUser.hasOwnProperty('roles')) {
+      if (this.currentUser.roles.indexOf('ADMIN')>=0) {
+        this.isAdmin = true;
+      }
+      else if (this.currentUser.roles.indexOf('ADMINISTRATOR')>=0) {
+        this.isAdmin = true;
+      }
+    } 
 
     this.selectedUserAwards=[];
     

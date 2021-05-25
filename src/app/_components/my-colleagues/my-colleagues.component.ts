@@ -140,6 +140,9 @@ export class MyColleaguesComponent implements OnInit {
     .getAllUserRecruitmentOrganizationByUserId(id).subscribe(
       data => {
         //console.log(data);
+        if (data.length==0) {
+          this.showLoading = false;
+        }
         data.forEach((element, index) => {
           
           let roid = element.recruitment_organisation.id;
@@ -189,6 +192,7 @@ export class MyColleaguesComponent implements OnInit {
           );
 
         });
+        
       },
       error => {
         this.showLoading = false;
