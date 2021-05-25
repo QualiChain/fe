@@ -2,76 +2,40 @@
 
 <mat-dialog-content class="mat-typography" id="top">
 
+  <div *ngIf="showLoading">
+    <div class="col-md-4 col-md-offset-4">
+      <app-qc-spinner ></app-qc-spinner>
+    </div>  
+  </div>
+  <div [hidden]="showLoading">
+    <div *ngIf="pagedListSB.length==0">Att his moment you don't have any SB in your list of available smart badges.<br>&nbsp;</div>
+    <div [hidden]="pagedListSB.length==0">
       <div *ngFor="let itemBadgeData of pagedListSB; let i = index" class="card">
         <mat-card class="smart-badge-card">
-        <app-qc-smart-badge-card [awardId]="itemBadgeData.id"></app-qc-smart-badge-card>
-<!--
-        <mat-card class="smart-badge-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image">
-              <img style="width:30px" *ngIf="itemBadgeData.image" [src]="itemBadgeData.image" [title]="itemBadgeData.name" [alt]="itemBadgeData.name" >
-            </div>
-            <mat-card-title>{{itemBadgeData.name}}</mat-card-title>
-            <mat-card-subtitle>{{itemBadgeData.issuer}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-accordion>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    {{ 'BADGES.BADGE.BADGE_MAIN_DATA' | translate }}
-                  </mat-panel-title>                  
-                </mat-expansion-panel-header>
-                <div>
-                  <div *ngIf="itemBadgeData.type" class="col col-lg-12"><label>{{ 'BADGES_TYPES.LABEL' | translate }}:</label> {{'BADGES_TYPES.OPTIONS.'+itemBadgeData.type.toUpperCase() | translate}} </div>
-                  <div *ngIf="itemBadgeData.description" class="col col-lg-12"><label>{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}:</label> {{itemBadgeData.description}} </div>
-                  <div *ngIf="itemBadgeData.oubadge.version" class="col col-lg-12"><label>{{ 'BADGES.BADGE.VERSION.LABEL' | translate }}:</label> {{itemBadgeData.oubadge.version}} </div>
-                </div>
-              </mat-expansion-panel>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    {{ 'BADGES.BADGE.ISSUER.ISSUER_MAIN_DATA' | translate }}
-                  </mat-panel-title>                  
-                </mat-expansion-panel-header>
-                <div>
+          <app-qc-smart-badge-card [awardId]="itemBadgeData.id"></app-qc-smart-badge-card>
 
-                  <mat-card class="example-card">
-                    <mat-card-header>
-                      <div mat-card-avatar class="example-header-image">
-                        <img style="width:30px" *ngIf="(itemBadgeData.oubadge.issuer.image && itemBadgeData.oubadge.issuer.image!='NA')" [src]="itemBadgeData.oubadge.issuer.image" [title]="itemBadgeData.oubadge.issuer.name" [alt]="itemBadgeData.oubadge.issuer.name" >
-                      </div>
-                      <mat-card-title>{{itemBadgeData.oubadge.issuer.name}}</mat-card-title>
-                      <mat-card-subtitle>{{itemBadgeData.oubadge.issuer.type}}</mat-card-subtitle>
-                    </mat-card-header>                    
-                    <mat-card-content>
-                      <div *ngIf="itemBadgeData.oubadge.issuer.description"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}:</label> {{itemBadgeData.oubadge.issuer.description}}</div>
-                      <div *ngIf="itemBadgeData.oubadge.issuer.url"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.LABEL' | translate }}:</label> {{itemBadgeData.oubadge.issuer.url}}</div>
-                      <div *ngIf="itemBadgeData.oubadge.issuer.email"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.LABEL' | translate }}:</label> {{itemBadgeData.oubadge.issuer.email}}</div>
-                      <div *ngIf="itemBadgeData.oubadge.issuer.telephone"><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_TELEPHONE.LABEL' | translate }}:</label> {{itemBadgeData.oubadge.issuer.telephone}}</div>
-                    </mat-card-content>                    
-                  </mat-card>
-
-                  
-                </div>
-              </mat-expansion-panel>
-            </mat-accordion>
-            
-          </mat-card-content>
           <mat-card-actions>
+
             <div *ngIf="showErrorMessage && itemSelected==i" class="card-body">
               <div class="col col-lg-12">
                 <div class="alert alert-danger">
-                  {{errorMessage}}
+                  {{errorMessage | translate}}
                 </div>
               </div>
             </div>
             
             <div class="float-righ">
               <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==i"></mat-spinner>
+
+              <div *ngIf="isAdmin">
+                <button *ngIf="lodingspinnerid!=i" (click)="deleteSB(itemBadgeData.id, itemBadgeData, i)" type="button" class="btn btn-danger">
+                  <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'SMART_BADGE.BUTTON.DELETE' | translate }}
+                </button>
+              </div>
+
               <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=i" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
                 <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.REVOKE_AWARD' | translate }}
-              </button>              
+              </button>
               <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=i" (click)="issueSmartBadge(itemBadgeData, i)" type="button" class="btn btn-primary">
                 <i _ngcontent-axy-c0="" class="material-icons small">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}
               </button>
@@ -80,39 +44,8 @@
               </button>
             </div>
           </mat-card-actions>
+
         </mat-card>
--->        
-
-
-    <mat-card-actions>
-      <div *ngIf="showErrorMessage && itemSelected==i" class="card-body">
-        <div class="col col-lg-12">
-          <div class="alert alert-danger">
-            {{errorMessage | translate}}
-          </div>
-        </div>
-      </div>
-      
-      <div class="float-righ">
-        <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid==i"></mat-spinner>
-
-        <button *appCanAccess="['issue_smart_badge']" (click)="deleteSB(itemBadgeData.id, itemBadgeData)" type="button" class="btn btn-danger">
-          <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'SMART_BADGE.BUTTON.DELETE' | translate }}
-        </button>
-
-        <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=i" (click)="updateSmartAwardStatusOU(itemBadgeData.id, i, itemBadgeData, 'delete')" type="button" class="btn btn-danger">
-          <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'AWARD_SMART_BADGE.BUTTON.REVOKE_AWARD' | translate }}
-        </button>
-        <button *ngIf="!itemBadgeData.assigned && lodingspinnerid!=i" (click)="issueSmartBadge(itemBadgeData, i)" type="button" class="btn btn-primary">
-          <i _ngcontent-axy-c0="" class="material-icons small">  emoji_events  </i> {{ 'AWARD_SMART_BADGE.BUTTON.ASSIGN_AWARD' | translate }}
-        </button>
-        <button *ngIf="(itemBadgeData.status=='issued') && lodingspinnerid!=i" (click)="verifySmartBadge(itemBadgeData, i)" type="button" class="btn btn-secondary">
-          <i _ngcontent-axy-c0="" class="material-icons small">  star  </i> {{ 'AWARD_SMART_BADGE.BUTTON.VALIDATE_AWARD' | translate }}
-        </button>
-      </div>
-    </mat-card-actions>
-
-</mat-card>
       </div>
 
       <div class="col-sm-12">
@@ -123,7 +56,8 @@
             (page)="OnPageChangeSB($event)">
         </mat-paginator>
       </div>
-
+    </div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

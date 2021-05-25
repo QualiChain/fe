@@ -21,6 +21,7 @@ export default class User {
     address?: string;
     zipCode?: string;
     mobilePhone?: string;
-    homePhone?: string
+    homePhone?: string;
+    organizations?: string[]
 }
 

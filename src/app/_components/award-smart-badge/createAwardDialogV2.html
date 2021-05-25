@@ -71,7 +71,7 @@
         <!-- badge issuer issueremail -->
         <mat-form-field class="create-award-full-width">
             <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.LABEL' | translate }}</mat-label>
-            <input matInput
+            <input matInput disabled
             type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="badgeissueremail" name="badgeissueremail" value="badgeissueremail" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.PLACEHOLDER' | translate }}">
 
         </mat-form-field>

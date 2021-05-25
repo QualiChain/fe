@@ -184,6 +184,7 @@ import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-u
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent } from './_components/utils/qc-smart-badges-list-by-user/qc-smart-badges-list-by-user.component';
 import { QcSmartBadgesListByCourseComponent } from './_components/utils/qc-smart-badges-list-by-course/qc-smart-badges-list-by-course.component';
+import { MyColleaguesComponent } from './_components/my-colleagues/my-colleagues.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -322,7 +323,7 @@ export function tokenGetter() {
     ThesisComponent, ThesisComponentSummaryPage,
     ThesisGetComponent,
     ThesisEditComponent,
-    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent, QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent, QcSmartBadgesListByCourseComponent
+    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent, QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent, QcSmartBadgesListByCourseComponent, MyColleaguesComponent
   ],
   imports: [
     MomentDateModule,

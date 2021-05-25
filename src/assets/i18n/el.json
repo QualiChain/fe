@@ -44,7 +44,8 @@
     "PERSONAL_FILES_REPOSITORY": "Αποθετήριο αρχείων",
     "QUESTIONNAIRE": "Ερωτηματολόγιο",
     "THESIS": "Διπλωματική εργασία",
-    "THESIS_HELP_TEXT": "Εδώ μπορείτε να βρείτε τη λίστα των Διπλωματική εργασία"
+    "THESIS_HELP_TEXT": "Εδώ μπορείτε να βρείτε τη λίστα των Διπλωματική εργασία",
+    "MY_COLLEAGUES_NETWORK": "My Colleagues"
   },
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Αποθετήριο προσωπικών αρχείων",
@@ -1161,5 +1162,10 @@
   "EXTERNAL_LINK_USERS_REGISTRATION": "Για να δημιουργήσετε έναν νέο λογαριασμό κάντε κλικ <a href='https://qualichain.herokuapp.com/register' target='NEW'>εδώ</a>.",
   "NEW_USER_HAS_BEEN_CREATED": "Your acount has been created",
   "UNEXPECTED_ERROR": "Unexpected error",
-  "PASSWORDS_DO_NOT_MATCH": "Passwords do not match"
+  "PASSWORDS_DO_NOT_MATCH": "Passwords do not match",
+  "MY_COLLEAGUES": {
+    "TITLE": "My colleagues",
+    "NO_DATA": "No data available",
+    "ORGANIZATIONS": "Organizations"
+  }
 }

@@ -130,10 +130,14 @@
 												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/myprofile'}" routerLink="/myprofile" (click)="route='/myprofile'" >{{ 'MENU.PROFILE' | translate }}</a>
 											</li>
 											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser?.id}">
-												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser?.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a>
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser?.id+'/notifications-preferences'}" routerLink="/profiles/{{currentUser?.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser?.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a>
 											</li>
 											<li *appCanAccess="['retrieve_own_files']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser?.id}">
-												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/preferences/'+currentUser?.id}" routerLink="/profiles/{{currentUser?.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser?.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a>
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser?.id+'/personal-files-repository'}" routerLink="/profiles/{{currentUser?.id}}/personal-files-repository" (click)="route='/profiles/'+currentUser?.id+'/personal-files-repository'" >{{ 'MENU.PERSONAL_FILES_REPOSITORY' | translate }}</a>
+											</li>
+
+											<li class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/myprofile'}">
+												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/mycolleagues'}" routerLink="/mycolleagues" (click)="route='/mycolleagues'">{{ 'MENU.MY_COLLEAGUES_NETWORK' | translate }}</a>
 											</li>
 
 											<li><a (click)="openQCQuestionnaire('manual')" [routerLink]="" >{{ 'MENU.QUESTIONNAIRE' | translate }}</a></li>

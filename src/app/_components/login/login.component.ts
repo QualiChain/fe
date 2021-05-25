@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     
       //console.log("else");
       if (data) {
-        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role, roles: data.roles};
+        myObj = { authenticated: true, name: data.name, surname: data.surname, email: data.email, username: data.userName, id: data.id , 'avatar_path': '', role: data.role, roles: data.roles, organizations: data.organizations};
 
         this.us.getUserFiles(data.id).subscribe(
           res => {
@@ -107,7 +107,6 @@ export class LoginComponent implements OnInit {
     else {
       window.location.reload();
     }
-    
     //location.reload();
     //location.href="/";
     //this.router.navigate(["/"]);
@@ -157,7 +156,6 @@ export class LoginComponent implements OnInit {
 
     //let res:any = await this.ls.loginIAMAsync(this.name, this.password);
     let res:any = await this.ls.loginIAMAsync(this.email, this.password);
-    //console.log(res);
     if (res['authenticated']) {
       //console.log("Valid credentials for the auth service");
       this.invalidCredentials = false;  

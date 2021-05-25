@@ -71,9 +71,16 @@ export class AuthService {
     if (data.hasOwnProperty('roles')){
       roles = data.roles;
     }
+    let organizations = [];
+    if (data.hasOwnProperty('organizations')){
+      if (typeof data.organizations=='object') {
+        organizations = data.organizations;
+      }      
+    }
+
     myAuthObj = { authenticated: true,  password:'******', name: data.name, 
     surname: data.surname, email: data.email, 
-    userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, roles: roles, 'pilotId': data.pilotId};
+    userName: data.userName, id: data.id , 'avatar_path': '', 'role': data.role, roles: roles, 'pilotId': data.pilotId, 'organizations': organizations};
   
     //localStorage.setItem('currentUser', JSON.stringify(myAuthObj));      
     let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(myAuthObj));
@@ -257,6 +264,7 @@ export class AuthService {
       let userID = data.response_data.user.id;
       let userQCData: any = await this.getUserAsyncInAuth(userID);
       userQCData['roles'] = data.response_data.user.roles;
+      userQCData['organizations'] = data.response_data.user.organizations;
       
       if (userQCData.hasOwnProperty('id')){
         myAuthObj = this.createCurentUserData(userQCData);
