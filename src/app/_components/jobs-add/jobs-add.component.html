@@ -38,7 +38,7 @@
                 <mat-label>{{ 'JOB.START_DATE.PLACEHOLDER' | translate }}</mat-label>
                 <input matInput 
                 #resultPickerStartDateModel="ngModel"
-                [matDatepicker]="pickerStartDate" [min]="" [max]="dataIn.endDate" name="start_date" [(ngModel)]="dataIn.startDate" #startDateInput="ngModel" required>
+                [matDatepicker]="pickerStartDate" [min]="" [max]="dataIn.endDate" name="start_date" [(ngModel)]="dataIn.startDate" #startDateInput="ngModel" >
                 <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerStartDate startView="year" [startAt]="dataIn.startDate" format="DD-MM-YYYY"></mat-datepicker>
                 
@@ -57,7 +57,7 @@
                 <mat-label>{{ 'JOB.END_DATE.PLACEHOLDER' | translate }}</mat-label>
                 <input matInput 
                 #resultPickerEndDateModel="ngModel"
-                [matDatepicker]="pickerEndDate" [min]="dataIn.startDate" [max]="" name="end_date" [(ngModel)]="dataIn.endDate" #endDateInput="ngModel" required>
+                [matDatepicker]="pickerEndDate" [min]="dataIn.startDate" [max]="" name="end_date" [(ngModel)]="dataIn.endDate" #endDateInput="ngModel" >
                 <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEndDate startView="year" [startAt]="dataIn.endDate"></mat-datepicker>
 

@@ -200,6 +200,8 @@ export class JobsGetComponent implements OnInit {
             let newEndDate = new Date(dataJob.endDate);
             var today = new Date();
             
+            this.isJobApplyanceOpened = true;
+            /*
             if (today > newStartDate && today < newEndDate ){
               //console.log('Correct Date')
               this.isJobApplyanceOpened = true;
@@ -208,7 +210,7 @@ export class JobsGetComponent implements OnInit {
               //console.log('Out Side range !!')
               this.isJobApplyanceOpened = false;
             }
-
+            */
 
             if(!dataJob.skillReq) {
               dataJob.skillReq = [];

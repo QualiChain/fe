@@ -44,10 +44,10 @@
             <div class="col " *ngIf="jobData.specialization">
               <div><span class="labeljob">{{ 'JOB.SPECIALIZATION' | translate }}:</span> {{jobData.specialization}}</div> 
           </div>            
-            <div class="col ">
+            <div *ngIf="jobData.startDate" class="col ">
                 <div><span class="labeljob">{{ 'JOB.START_DATE.LABEL' | translate }}:</span> {{jobData.startDate | date }}</div> 
             </div>
-            <div class="col ">
+            <div *ngIf="jobData.endDate" class="col ">
                 <div><span class="labeljob">{{ 'JOB.END_DATE.LABEL' | translate }}:</span> {{jobData.endDate | date }}</div> 
             </div>
             <div class="col ">
