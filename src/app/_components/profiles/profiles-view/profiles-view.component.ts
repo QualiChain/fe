@@ -637,7 +637,7 @@ export class ProfilesViewComponent implements OnInit {
     //console.log("getUserCurrentJobPosition-"+id);
     this.us.getUserProfileInJobEndPoint(+id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         if ( data ) {
           if ( data.hasOwnProperty('currentJobURI') ) {
             if (data.currentJobURI) {
