@@ -4,107 +4,112 @@
     <div *ngIf="showErrorMessage" class="alert alert-danger">
         {{errorMessage}}
     </div>
-    <form #formAddAward="ngForm" class="create-award-form" (ngSubmit)="onSubmitCreateNewAwardsModal()">
 
-        <h2 class="mat-dialog-title">{{ 'BADGES.BADGE.BADGE_MAIN_DATA' | translate }}</h2>
+    <div [hidden]="showErrorMessage">
+        <form  #formAddAward="ngForm" class="create-award-form" (ngSubmit)="onSubmitCreateNewAwardsModal()">
 
-        <!-- badge type -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES_TYPES.LABEL' | translate }}</mat-label>
-            <mat-select [(ngModel)]="smartBadgeType" name="smartBadgeType" value="smartBadgeType" required ngDefaultControl>
-                <mat-option *ngFor="let type of smartBadgesTypes" [value]="type.value">
-                  {{'BADGES_TYPES.OPTIONS.'+type.viewValue.toUpperCase() | translate}}
-                </mat-option>
-              </mat-select>
-        </mat-form-field>  
+            <h2 class="mat-dialog-title">{{ 'BADGES.BADGE.BADGE_MAIN_DATA' | translate }}</h2>
 
-        <!-- badge title -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.TITLE.LABEL' | translate }}</mat-label>
-            <input matInput required [(ngModel)]="badgetitle" name="badgetitle" value="badgetitle" placeholder="{{ 'BADGES.BADGE.TITLE.PLACEHOLDER' | translate }}">
-        </mat-form-field>        
+            <!-- badge type -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES_TYPES.LABEL' | translate }}</mat-label>
+                <mat-select [(ngModel)]="smartBadgeType" name="smartBadgeType" value="smartBadgeType" required ngDefaultControl>
+                    <mat-option *ngFor="let type of smartBadgesTypes" [value]="type.value">
+                    {{'BADGES_TYPES.OPTIONS.'+type.viewValue.toUpperCase() | translate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>  
 
-        <!-- badge description -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}</mat-label>
-            <textarea matInput required [(ngModel)]="badgedescription" name="badgedescription" value="badgedescription" placeholder="{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}"></textarea>
-        </mat-form-field>
+            <!-- badge title -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.TITLE.LABEL' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="badgetitle" name="badgetitle" value="badgetitle" placeholder="{{ 'BADGES.BADGE.TITLE.PLACEHOLDER' | translate }}">
+            </mat-form-field>        
 
-        <!-- badge skills -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.SKILLS.LABEL' | translate }}</mat-label>
-            <input matInput [(ngModel)]="badgeskills" name="badgeskills" value="badgeskills" placeholder="{{ 'BADGES.BADGE.SKILLS.PLACEHOLDER' | translate }}">
-        </mat-form-field>
+            <!-- badge description -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}</mat-label>
+                <textarea matInput required [(ngModel)]="badgedescription" name="badgedescription" value="badgedescription" placeholder="{{ 'BADGES.BADGE.DESCRIPTION.LABEL' | translate }}"></textarea>
+            </mat-form-field>
 
-        <!-- badge version -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.VERSION.LABEL' | translate }}</mat-label>
-            <input matInput required [(ngModel)]="badgeversion" name="badgeversion" value="badgeversion" placeholder="{{ 'BADGES.BADGE.VERSION.PLACEHOLDER' | translate }}">
-        </mat-form-field>
+            <!-- badge skills -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.SKILLS.LABEL' | translate }}</mat-label>
+                <input matInput [(ngModel)]="badgeskills" name="badgeskills" value="badgeskills" placeholder="{{ 'BADGES.BADGE.SKILLS.PLACEHOLDER' | translate }}">
+            </mat-form-field>
 
-        <!-- badge imageurl -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.IMAGEURL.LABEL' | translate }}</mat-label>
-            <input matInput required 
-            type="url"
-            [(ngModel)]="badgeimageurl" name="badgeimageurl" value="badgeimageurl" placeholder="{{ 'BADGES.BADGE.IMAGEURL.PLACEHOLDER' | translate }}">
-<!-- [pattern]="myreg2" -->            
-        </mat-form-field>        
-        <img *ngIf="badgeimageurl" [src]="badgeimageurl">
-        
+            <!-- badge version -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.VERSION.LABEL' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="badgeversion" name="badgeversion" value="badgeversion" placeholder="{{ 'BADGES.BADGE.VERSION.PLACEHOLDER' | translate }}">
+            </mat-form-field>
 
-        <h2 class="mat-dialog-title">{{ 'BADGES.BADGE.ISSUER.ISSUER_MAIN_DATA' | translate }}</h2>
+            <!-- badge imageurl -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.IMAGEURL.LABEL' | translate }}</mat-label>
+                <input matInput required 
+                type="url"
+                [(ngModel)]="badgeimageurl" name="badgeimageurl" value="badgeimageurl" placeholder="{{ 'BADGES.BADGE.IMAGEURL.PLACEHOLDER' | translate }}">
+    <!-- [pattern]="myreg2" -->            
+            </mat-form-field>        
+            <img *ngIf="badgeimageurl" [src]="badgeimageurl">
+            
 
-        <!-- badge issuer issuername -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}</mat-label>
-            <input matInput required [(ngModel)]="badgeissuername" name="badgeissuername" value="badgeissuername" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.PLACEHOLDER' | translate }}">
-        </mat-form-field>        
-        <!-- badge issuer issuerurl -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.LABEL' | translate }}</mat-label>
-            <input matInput 
-            type="url" 
-            [(ngModel)]="badgeissuerurl" name="badgeissuerurl" value="badgeissuerurl" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.PLACEHOLDER' | translate }}">
-<!-- [pattern]="myreg" -->
-        </mat-form-field>
-        <!-- badge issuer issueremail -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.LABEL' | translate }}</mat-label>
-            <input matInput disabled
-            type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="badgeissueremail" name="badgeissueremail" value="badgeissueremail" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.PLACEHOLDER' | translate }}">
+            <h2 class="mat-dialog-title">{{ 'BADGES.BADGE.ISSUER.ISSUER_MAIN_DATA' | translate }}</h2>
 
-        </mat-form-field>
-        <!-- badge issuer issuertelephone -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_TELEPHONE.LABEL' | translate }}</mat-label>
-            <input matInput [(ngModel)]="badgeissuertelephone" name="badgeissuertelephone" value="badgeissuertelephone" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_TELEPHONE.PLACEHOLDER' | translate }}">
-        </mat-form-field>
-        <!-- badge issuer issuerdescription -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}</mat-label>
-            <textarea matInput required [(ngModel)]="badgeissuerdescription" name="badgeissuerdescription" value="badgeissuerdescription" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}"></textarea>
-        </mat-form-field>
-        <!-- badge issuer issuerimageurl -->
-        <mat-form-field class="create-award-full-width">
-            <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_IMAGE_URL.LABEL' | translate }}</mat-label>
-            <input matInput 
-            type="url"
-            [(ngModel)]="badgeissuerimageurl" name="badgeissuerimageurl" value="badgeissuerimageurl" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_IMAGE_URL.PLACEHOLDER' | translate }}">
-<!-- [pattern]="myreg2" --> 
-        </mat-form-field>
-        <img *ngIf="badgeissuerimageurl" [src]="badgeissuerimageurl">
+            <!-- badge issuer issuername -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="badgeissuername" name="badgeissuername" value="badgeissuername" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.PLACEHOLDER' | translate }}">
+            </mat-form-field>        
+            <!-- badge issuer issuerurl -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.LABEL' | translate }}</mat-label>
+                <input matInput 
+                type="url" 
+                [(ngModel)]="badgeissuerurl" name="badgeissuerurl" value="badgeissuerurl" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_URL.PLACEHOLDER' | translate }}">
+    <!-- [pattern]="myreg" -->
+            </mat-form-field>
+            <!-- badge issuer issueremail -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.LABEL' | translate }}</mat-label>
+                <input matInput disabled
+                type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="badgeissueremail" name="badgeissueremail" value="badgeissueremail" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_EMAIL.PLACEHOLDER' | translate }}">
 
-    </form>
+            </mat-form-field>
+            <!-- badge issuer issuertelephone -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_TELEPHONE.LABEL' | translate }}</mat-label>
+                <input matInput [(ngModel)]="badgeissuertelephone" name="badgeissuertelephone" value="badgeissuertelephone" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_TELEPHONE.PLACEHOLDER' | translate }}">
+            </mat-form-field>
+            <!-- badge issuer issuerdescription -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}</mat-label>
+                <textarea matInput required [(ngModel)]="badgeissuerdescription" name="badgeissuerdescription" value="badgeissuerdescription" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_DESCRIPTION.LABEL' | translate }}"></textarea>
+            </mat-form-field>
+            <!-- badge issuer issuerimageurl -->
+            <mat-form-field class="create-award-full-width">
+                <mat-label>{{ 'BADGES.BADGE.ISSUER.ISSUER_IMAGE_URL.LABEL' | translate }}</mat-label>
+                <input matInput 
+                type="url"
+                [(ngModel)]="badgeissuerimageurl" name="badgeissuerimageurl" value="badgeissuerimageurl" placeholder="{{ 'BADGES.BADGE.ISSUER.ISSUER_IMAGE_URL.PLACEHOLDER' | translate }}">
+    <!-- [pattern]="myreg2" --> 
+            </mat-form-field>
+            <img *ngIf="badgeissuerimageurl" [src]="badgeissuerimageurl">
+
+        </form>
+    </div>
 
 </div>
+
+
 <mat-dialog-actions align="end">
     <!--
     <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
     -->
     <div class="modal-footer">
 
-        <button (click)="onSubmitCreateNewAwardsModal()" type="button" class="btn btn-success" [disabled]="formAddAward.invalid" id="saveCreateAwardModal">
+        <button *ngIf="!showErrorMessage" (click)="onSubmitCreateNewAwardsModal()" type="button" class="btn btn-success" [disabled]="formAddAward.invalid" id="saveCreateAwardModal">
             <i _ngcontent-axy-c0="" class="material-icons"> save </i> {{ 'BUTTON.SAVE' | translate }}
         </button>
     

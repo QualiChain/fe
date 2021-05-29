@@ -8,7 +8,7 @@
     </div>  
   </div>
   <div [hidden]="showLoading">
-    <div *ngIf="pagedListSB.length==0">Att his moment you don't have any SB in your list of available smart badges.<br>&nbsp;</div>
+    <div *ngIf="pagedListSB.length==0">{{ 'NO_AWARDS_AVAILABLE_FOR_BE_USED' | translate }} <br>&nbsp;</div>
     <div [hidden]="pagedListSB.length==0">
       <div *ngFor="let itemBadgeData of pagedListSB; let i = index" class="card">
         <mat-card class="smart-badge-card">
@@ -62,7 +62,8 @@
 
 <mat-dialog-actions align="end">
     <div class="modal-footer">      
-      <button *appCanAccess="['create_smart_badge']" class="btn btn-primary" (click)="openCreateAwardDialogInModal()">
+      <!--*appCanAccess="['create_smart_badge']"-->
+      <button  class="btn btn-primary" (click)="openCreateAwardDialogInModal()">
         <i _ngcontent-axy-c0="" class="material-icons"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
       </button>
       <button type="button" class="btn btn-danger" [mat-dialog-close]="true" id="closeAwardModalWindow">

@@ -475,7 +475,8 @@ export class createAwardDialog_modal implements OnInit {
               },
               error => {
                 //console.log(error);
-                this.errorMessage = error.message;
+                //this.errorMessage = error.message;
+                this.errorMessage = "Sorry there was an error during the creation of the smart badge";
                 this.showErrorMessage = true;
                 
               });
