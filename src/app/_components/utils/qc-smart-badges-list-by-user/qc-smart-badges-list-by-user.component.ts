@@ -52,12 +52,28 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
     this.loadingLoginSpinner = false;
     this.validationSuccess = false;
   }
+  modalClass: string = "";
+
+  whatClassIsIt= function(transactionhash: string){
+    //element_badge.oubadge_user.signature.account    
+    if ((transactionhash=="0xB6b4BD366c8985318FF3aE46a4B73085E0fEf8E1") || transactionhash=="0")
+           return "studentBadge"
+    else if ((transactionhash=="0x121F308D181183571775d651eB1D006Cb328E4CE") || transactionhash=="1")
+        return "recruiterBadge";
+    else if ((transactionhash=="0x4EcA68c7D114396F78ACE6672666CDbcf5Ce7943") || transactionhash=="2")
+        return "professorBadge";
+    else if ((transactionhash=="0xB2017b2e31759180B9848A140A58FBE1309B8189") || transactionhash=="3")
+        return "administratorBadge";        
+    else if ((transactionhash=="0x080618F2B190070fB8ad2C7BAf41418C6159ac34") || transactionhash=="4")
+        return "defaultBadge";        
+    else
+        return "defaultBadge";
+   }
 
   loadUserBadges() {
     this.lodingspinnerid = true;
     this.bs.getBadgesByUser(+this.userId).subscribe(
       badgesByUser => {
-        //console.log(badgesByUser);
         badgesByUser.sort((a, b) => a.badge.name.localeCompare(b.badge.name));
         this.aqcuired_badges_by_user = badgesByUser;
         this.lodingspinnerid = false;

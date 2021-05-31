@@ -2,3 +2,60 @@
 #userAwardList img {
     display: inline;
 }
+
+.sbbox {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+}
+
+.sbbox img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.studentBadge {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ecbc8d;
+    background-color: #ecbc8d;
+}
+
+.recruiterBadge {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #84b8de;
+    background-color: #84b8de;
+}
+
+.professorBadge {
+    border-width: 2px;
+    border-style: solid;
+    border-color: silver;
+    background-color: silver;    
+}
+
+.administratorBadge {
+    border-width: 2px;
+    border-style: solid;
+    border-color: gold;
+    background-color: gold;
+}
+
+.defaultBadge {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #87e7ca;
+    background-color:#87e7ca;
+}
+

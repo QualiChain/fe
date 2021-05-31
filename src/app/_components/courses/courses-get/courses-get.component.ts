@@ -44,15 +44,18 @@ export class CoursesGetComponent implements OnInit {
   displayedColumnsProfessors: string[] = ['surname', 'name', 'aqcuired_badges', 'action'];
   displayedColumnsEnrolled: string[] = ['surname', 'name', 'aqcuired_badges', 'action'];
   displayedColumnsDoneBy: string[] = ['surname', 'name', 'course_grade', 'aqcuired_badges', 'action'];
+  displayedColumnsAssisted: string[] = ['surname', 'name', 'course_grade', 'aqcuired_badges', 'action'];
   //@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   @ViewChild('paginatorProfessor', {static: true, read: MatPaginator}) paginatorProfessor: MatPaginator;
   @ViewChild('paginatorUsersStatusEnrolled', {static: true, read: MatPaginator}) paginatorUsersStatusEnrolled: MatPaginator;
   @ViewChild('paginatorUsersStatusDone', {static: true, read: MatPaginator}) paginatorUsersStatusDone: MatPaginator;
+  @ViewChild('paginatorUsersStatusAssisted', {static: true, read: MatPaginator}) paginatorUsersStatusAssisted: MatPaginator;
 
   @ViewChild('ProfessorSort', {static: true}) ProfessorSort: MatSort;
   @ViewChild('EnrolledSort', {static: true}) EnrolledSort: MatSort;
   @ViewChild('DoneSort', {static: true}) DoneSort: MatSort;
+  @ViewChild('AssistedSort', {static: true}) AssistedSort: MatSort;
   
   currentUser: User;
   enrolledUsers: any[] = [];
@@ -235,8 +238,9 @@ export class CoursesGetComponent implements OnInit {
         default: return item[property];
       }
     };
-    this.enrolledUsersStatusAssisted.sort = this.DoneSort;
-    this.enrolledUsersStatusAssisted.paginator = this.paginatorUsersStatusDone;
+    //this.enrolledUsersStatusAssisted = this.sort;
+    this.enrolledUsersStatusAssisted.sort = this.AssistedSort;
+    this.enrolledUsersStatusAssisted.paginator = this.paginatorUsersStatusAssisted;
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
     this.courseData = {courseid: 0, name: "", description: "", semester: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
