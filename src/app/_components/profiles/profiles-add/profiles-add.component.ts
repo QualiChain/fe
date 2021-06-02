@@ -708,20 +708,16 @@ export class ProfilesAddIAMUserComponent implements OnInit {
     }
 
     if (this.recruitmentRole) {
-      /*
-      if (this.userRecruiterRoles){
-        this.userRecruiterRoles.forEach(element => {
-          userRoles.push(element);
-        });
-      }
-      */
-      userRoles.push('recruiter');
-      if (this.userRecruiterOrganisation) {
-        this.userRecruiterOrganisation.forEach(element => {
-          userOrganizations.push(element);
-        });
-      }
 
+      userRoles.push('recruiter');
+
+
+    }
+
+    if (this.userRecruiterOrganisation) {
+      this.userRecruiterOrganisation.forEach(element => {
+        userOrganizations.push(element);
+      });
     }
     
     const formData: FormData = new FormData();

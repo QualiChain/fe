@@ -1168,5 +1168,9 @@
     "NO_DATA": "No data available",
     "ORGANIZATIONS": "Organizations"
   },
-  "NO_AWARDS_AVAILABLE_FOR_BE_USED": "At this moment you don't have any SB in your list of available smart badges"
+  "NO_AWARDS_AVAILABLE_FOR_BE_USED": "At this moment you don't have any SB in your list of available smart badges",
+  "ROLES_IAM": {
+    "ACADEMIC": "University student",
+    "RECRUITER": "Recruiter"
+  }
 }
