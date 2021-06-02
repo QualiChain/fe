@@ -88,14 +88,28 @@
                 </div>           
 
 
-
             <!-- new role management -->        
             <div class="form-group field" >
                 <hr>
+
+                        <!-- UserRecruiterOrganization -->
+
+                        <div class="create-profile-full-width">
+                            <mat-form-field class="create-profile-full-width">
+                                <mat-label>{{ 'JOBS.ORGANIZATION' | translate }}</mat-label>
+                                <mat-select name="recruiterorganisation" ngDefaultControl multiple [(ngModel)]="userRecruiterOrganisation">
+                                    <mat-option *ngFor="let recruitmentOrganization of listAllRecruitmentOrganizations" [value]="recruitmentOrganization.title">
+                                        {{recruitmentOrganization.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
                 <div class="create-profile-full-width">
                 <label>{{ 'PROFILES.ROLES' | translate }} *</label>
                 <section class="example-section">
-                    <mat-checkbox class="example-margin" [(ngModel)]="academicRole" ngDefaultControl name="academicRole" (change)="onChangeAcademicRoleCheckbox($event.checked)">Academic organisation</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="academicRole" ngDefaultControl name="academicRole" (change)="onChangeAcademicRoleCheckbox($event.checked)">{{ 'ROLES_IAM.ACADEMIC' | translate }}</mat-checkbox>
                     <div *ngIf="academicRole">              
                         <!-- UserAcademicRoles -->
                         <div class="col col-lg-6" >
@@ -121,7 +135,7 @@
                         </div>
                     </div>
                     <br>
-                    <mat-checkbox class="example-margin" [(ngModel)]="recruitmentRole" ngDefaultControl name="recruitmentRole" (change)="onChangeRecruitmentRoleCheckbox($event.checked)" >Recruitment organisation</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="recruitmentRole" ngDefaultControl name="recruitmentRole" (change)="onChangeRecruitmentRoleCheckbox($event.checked)">{{ 'ROLES_IAM.RECRUITER' | translate }}</mat-checkbox>
                     <div *ngIf="recruitmentRole">
                         <!-- UserRecruitmentRoles -->
                         <!--
@@ -136,17 +150,7 @@
                             </mat-form-field>
                         </div>
                         -->
-                        <!-- UserRecruiterOrganization -->
-                        <div class="col col-lg-6" >
-                            <mat-form-field class="create-profile-full-width">
-                                <mat-label>{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}</mat-label>
-                                <mat-select name="recruiterorganisation" ngDefaultControl multiple [(ngModel)]="userRecruiterOrganisation">
-                                    <mat-option *ngFor="let recruitmentOrganization of listAllRecruitmentOrganizations" [value]="recruitmentOrganization.title">
-                                        {{recruitmentOrganization.title}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+
                     </div>
 
                     <!--
