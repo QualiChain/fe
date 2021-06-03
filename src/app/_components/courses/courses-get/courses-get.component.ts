@@ -256,14 +256,25 @@ export class CoursesGetComponent implements OnInit {
       if (id>0) {
         //console.log(id);
 
+        this.cs.checkIfUserIsInACourseInSpecificStatus(this.currentUser.id, id, 'taught').subscribe(isProfessorOfThisCourse => {
+          //console.log(myTeachingCourses);
+            if (isProfessorOfThisCourse===true) {
+              this.canEditCourse[id] = true;
+              this.isUserAsTaught = true;
+            }    
+          },
+          error => {
+            this.canEditCourse[id] = false;
+          }
+        );
+/*
         this.cs.getTeachingCourseByUserId(this.currentUser.id).subscribe((myTeachingCourses: any[]) => {
           //console.log(myTeachingCourses);
           myTeachingCourses.forEach(element => {
             this.canEditCourse[element.course.courseid] = true;
-          });
-    
+          });    
         });
-
+*/
         //get the list of courses done by the user to know if he is in the list (used to hide/show buttons)
         this.cs
         .getCompletedCourseByUserId(this.currentUser.id)
@@ -288,6 +299,7 @@ export class CoursesGetComponent implements OnInit {
         });
 
         //get list of couses teached by the user to know if he is in the list
+        /*
         this.cs
           .getTeachingCourseByUserId(this.currentUser.id)
           .subscribe((data: any[]) => {
@@ -302,7 +314,7 @@ export class CoursesGetComponent implements OnInit {
           error => {            
             console.log("error getting courses toght by user id")
           });
-          
+          */
                 
         this.cs
         .getCourse(id).subscribe(
@@ -414,19 +426,36 @@ export class CoursesGetComponent implements OnInit {
       });
     
       if (this.isProfessor || this.isAdmin) {
-        this.cs
-        .getEnrolledUserByCourseId(courseId).subscribe(
-        (dataEnrolledUsers: any[]) => {
-          //console.log(dataEnrolledUsers);
-          this.enrolledUsers = dataEnrolledUsers;
-          this.enrolledUsersStatusDone.data = (dataEnrolledUsers.filter(this.filterByDoneStatus));
-          this.enrolledUsersStatusEnrolled.data = (dataEnrolledUsers.filter(this.filterByEnrolledStatus));
-          this.enrolledUsersStatusAssisted.data = (dataEnrolledUsers.filter(this.filterByAssistedStatus));
-          //this.professorList.data = (dataEnrolledUsers.filter(this.filterByProfessorStatus));
-        },
-        error => {
-          console.log("error recovering enrolled users by course id")
-        });
+
+        this.cs.checkIfUserIsInACourseInSpecificStatus(this.currentUser.id, courseId, 'taught').subscribe(isProfessorOfThisCourse => {
+          //console.log(myTeachingCourses);
+            if (isProfessorOfThisCourse===true) {
+
+              this.cs
+              .getEnrolledUserByCourseId(courseId).subscribe(
+              (dataEnrolledUsers: any[]) => {
+                //console.log(dataEnrolledUsers);
+                this.enrolledUsers = dataEnrolledUsers;
+                this.enrolledUsersStatusDone.data = (dataEnrolledUsers.filter(this.filterByDoneStatus));
+                this.enrolledUsersStatusEnrolled.data = (dataEnrolledUsers.filter(this.filterByEnrolledStatus));
+                this.enrolledUsersStatusAssisted.data = (dataEnrolledUsers.filter(this.filterByAssistedStatus));
+                //this.professorList.data = (dataEnrolledUsers.filter(this.filterByProfessorStatus));
+              },
+              error => {
+                console.log("error recovering enrolled users by course id")
+              });
+
+            }
+            else {
+              //console.log("is not professor of this course");
+            }
+          },
+          error => {
+            console.log("error checking if user taught the course")
+          }
+        );
+
+        
       }
 /*
     this.cs.getUserEnrollmentStatusByCourseId(courseId, this.currentUser.id, 'done').subscribe(

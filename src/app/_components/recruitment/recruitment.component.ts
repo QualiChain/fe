@@ -39,8 +39,9 @@ const ELEMENT_DATA: listOfCandidates[] = [
 
 export class RecruitmentComponent implements OnInit {
   
-  jobs: Job[];
-  users: User[];
+  showLoading: boolean = true;
+  jobs: Job[] = [];
+  users: User[] = [];
   displayMessage = false;
   //recruits = [];
   /*
@@ -241,6 +242,8 @@ filterByCreator(userID) {
 }
 
 getAvailableJobs() {
+  this.showLoading = true;
+
   this.jobService.getJobs()
   .subscribe((data: Job[]) => {
     //console.log(data);
@@ -270,9 +273,11 @@ getAvailableJobs() {
       }
     }
     */
+    this.showLoading = false;
   },
   err => {
     console.log(err);
+    this.showLoading = false;;
   });
 }
 

@@ -195,5 +195,18 @@ export class CoursesService {
                     return throwError( 'Something went wrong!' );
                 })
             )
-        }        
+        } 
+        
+        checkIfUserIsInACourseInSpecificStatus(userId: Number, courseId: Number, status:string) {
+            let headers = this.authService.createQCAuthorizationHeader();
+    
+            return this.http.get(`${this.coursesURL}/${courseId}/users/${userId}/status/${status}`, {headers:headers}).
+            pipe(
+                map((data: any) => {
+                    return data.exists;
+                }), catchError( error => {
+                    return throwError( 'Something went wrong!' );
+                })
+            )
+            }        
 }
