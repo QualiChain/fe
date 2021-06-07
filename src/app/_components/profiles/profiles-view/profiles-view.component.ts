@@ -1053,7 +1053,8 @@ async generatePdf(action = 'open') {
             {image: await this.getBase64ImageFromURL(
               this.userdata.avatar_path
             ),
-            height: 100
+            height: 130,
+            width: 130            
             }
           ]
          ]      
