@@ -122,7 +122,7 @@
 															{{ 'MENU.WELCOME_MESSAGE' | translate }}
 													</div>
 													<div class="user-authenticated-name">
-															{{currentUser?.name}} {{currentUser?.surname}}
+															{{currentUser?.name}} <span *ngIf="currentUser?.name!=currentUser?.surname">{{currentUser?.surname}}</span>
 															<hr>
 													</div>															
 											</li>										
