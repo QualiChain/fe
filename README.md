@@ -55,7 +55,7 @@ docker build -t qualichain-fe-app .
 
 - Run the docker container with:
 ```
-docker run --name ng-app-qualichain-fe -d -p 80:80 qualichain-fe-app
+docker run --name ng-app-qualichain-fe -d -p 90:90 qualichain-fe-app
 ```
 
 - In your browser, navigate to 'http://localhost'

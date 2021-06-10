@@ -1,7 +1,8 @@
+//recomendationsUrl : 'http://qualichain.epu.ntua.gr:5000/recommendations',
+
 export const environment = {
   production: true,
-  localStorageSecretKey: 'QC_secret_key_to_be_replaced',
-  recomendationsUrl : 'http://qualichain.epu.ntua.gr:5000/recommendations',
+  localStorageSecretKey: 'QC_secret_key_to_be_replaced',  
   recomendationsUrlByCV : 'http://qualichain.epu.ntua.gr:7000/recommend',
   coursesUrl: 'http://qualichain.epu.ntua.gr:5004/courses',
   courseUrl: 'http://qualichain.epu.ntua.gr:5004/course',
