@@ -13,7 +13,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RecomendationsService {
 
-  private uriRecomendations = environment.recomendationsUrl;
+  //private uriRecomendations = environment.recomendationsUrl;
   private uriRecomendationsByCV = environment.recomendationsUrlByCV;
   private uriRecomendationsJobsByCV = environment.cvUrl
 
@@ -155,7 +155,7 @@ export class RecomendationsService {
        })
     )
   }
-  
+  /*
   getRecomendationsSkills(userId: Number) {    
     let headers = this.authService.createQCAuthorizationHeader();
 
@@ -168,6 +168,7 @@ export class RecomendationsService {
        })
     )
   }
+  */
 /*
   getRecomendationsCourses(userId: Number) {    
     let headers = this.authService.createQCAuthorizationHeader();
