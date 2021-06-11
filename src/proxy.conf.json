@@ -6,6 +6,34 @@
         "logLevel": "debug",
         "pathRewrite": {"^/proxyKBZ" : ""}
     },
+    "/ntuaAPI5004/*": {
+        "target": "http://qualichain.epu.ntua.gr:5004",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/ntuaAPI5004" : ""}    
+    },
+    "/ntuaAPI7000/*": {
+        "target": "http://qualichain.epu.ntua.gr:7000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/ntuaAPI7000" : ""}    
+    },        
+    "/ntuaAPI7070/*": {
+        "target": "http://qualichain.epu.ntua.gr:7070",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/ntuaAPI7070" : ""}    
+    },              
+    "/ntuaAPI8080/*": {
+        "target": "http://qualichain.epu.ntua.gr:8080",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/ntuaAPI8080" : ""}    
+    },        
     "/proxyKBZ/*": {
         "target": "http://knowledgebizvpn.ddns.net:8000",
         "secure": false,
