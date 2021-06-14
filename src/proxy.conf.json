@@ -6,6 +6,22 @@
         "logLevel": "debug",
         "pathRewrite": {"^/proxyKBZ" : ""}
     },
+
+    "/ntuaViz/*": {
+        "target": "http://qualichain.epu.ntua.gr:8000/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/ntuaViz" : "visualiser"}
+    },
+    "/static/*": {
+        "target": "http://qualichain.epu.ntua.gr:8000/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/static" : "/static"}
+    },    
+    
     "/ntuaAPI5004/*": {
         "target": "http://qualichain.epu.ntua.gr:5004",
         "secure": false,
