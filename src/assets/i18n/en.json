@@ -1179,6 +1179,8 @@
   "NO_AWARDS_AVAILABLE_FOR_BE_USED": "At this moment you don't have any SB in your list of available smart badges",
   "ROLES_IAM": {
     "ACADEMIC": "University student",
-    "RECRUITER": "Recruiter"
+    "RECRUITER": "Recruiter",
+    "JOB_SEEKER_LEARNER": "Job seeker / Learner",
+    "PROFESSOR": "Professor"
   }
 }

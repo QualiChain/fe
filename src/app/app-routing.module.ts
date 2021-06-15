@@ -56,7 +56,7 @@ const routes: Routes = [
    path: '',
    pathMatch: 'full',
    component: HomeComponent,
-   canActivate: [AuthGuard],
+   //canActivate: [AuthGuard],
    data: {title: 'Home'}
   },
   {

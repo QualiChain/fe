@@ -6,8 +6,12 @@
 <app-pilot-home></app-pilot-home>
 -->
 
-<div *ngIf="isauthenticated">
+<div>
     <h1>{{ 'HOME.TITLE' | translate }}</h1>
+
+    <div *ngIf="!isauthenticated">
+        <p>	{{ 'HOME.BODY' | translate }} </p>
+    </div>
 <!--
     <div class="row">
         For demo purposes<br/>
@@ -19,7 +23,7 @@
 <!--
     </div>
 -->
-    
+    <div *ngIf="isauthenticated">
         <div>
             <button *ngIf="selectedSubmenu" class="btn btn-primary" (click)="selectSubMenu('home')">
                 <i _ngcontent-axy-c0="" class="material-icons small">  arrow_back  </i> {{ 'BUTTON.BACK' | translate}}
@@ -64,6 +68,6 @@
                 </div>
             </ng-container>
         </div>
-    
+    </div>
 
 </div>

@@ -547,6 +547,8 @@ export class ProfilesAddIAMUserComponent implements OnInit {
   //repeatPassword: string = "12345678";
   //email: string = "testStudent@test.com";
   
+  professorRole: boolean = false;
+  jobSeekerLearnerRole: boolean = false;
   academicRole: boolean = false;
   recruitmentRole: boolean = false;
   employeeRole: boolean = false;
@@ -554,6 +556,7 @@ export class ProfilesAddIAMUserComponent implements OnInit {
   termsAndConditions: boolean = false;
   userAcademicRoles: any;
   userAcademicOrganisation: any;
+  professoracademicorganisation: any;
   userRecruiterRoles: any;
   userRecruiterOrganisation: any;
 
@@ -603,9 +606,16 @@ export class ProfilesAddIAMUserComponent implements OnInit {
       this.openPrivacyPolicyDialog();
     }
   }
+
+  onChangeProfessorRoleCheckbox(checked: boolean) {
+    this.professorRole = checked;
+  }
   onChangeAcademicRoleCheckbox(checked: boolean) {
     this.academicRole = checked;
   }
+  onChangeJobSeekerLearnerRoleCheckbox(checked: boolean) {
+    this.jobSeekerLearnerRole = checked;
+  }  
   onChangeRecruitmentRoleCheckbox(checked: boolean) {
     this.recruitmentRole = checked;
   }
@@ -695,31 +705,64 @@ export class ProfilesAddIAMUserComponent implements OnInit {
     let userRoles = [];
     let userOrganizations = [];
     if (this.academicRole) {
+      userRoles.push('student');
+      /*
       if (this.userAcademicRoles){
         this.userAcademicRoles.forEach(element => {
           userRoles.push(element);
         });
       }
+      */
       if (this.userAcademicOrganisation) {
         this.userAcademicOrganisation.forEach(element => {
-          userOrganizations.push(element);
+          if (userOrganizations.indexOf(element) > -1) {
+          }
+          else {
+            userOrganizations.push(element);
+          }
+          
         });
       }      
     }
 
+    
+    if (this.professorRole) {
+      userRoles.push('professor');
+      if (this.professoracademicorganisation) {
+        this.professoracademicorganisation.forEach(element => {
+          if (userOrganizations.indexOf(element) > -1) {
+          }
+          else {
+            userOrganizations.push(element);
+          }
+        });
+      }      
+    }    
+
     if (this.recruitmentRole) {
-
       userRoles.push('recruiter');
-
-
     }
 
     if (this.userRecruiterOrganisation) {
       this.userRecruiterOrganisation.forEach(element => {
-        userOrganizations.push(element);
+        if (userOrganizations.indexOf(element) > -1) {
+        }
+        else {
+          userOrganizations.push(element);
+        }
       });
     }
-    
+
+    if (this.jobSeekerLearnerRole) {
+      if (userRoles.indexOf('student') > -1) {
+        //role is in the list
+      }
+      else {
+        userRoles.push('student');
+      }
+      
+    }
+
     const formData: FormData = new FormData();
     formData.append('name', this.name);
     formData.append('email', this.email);
