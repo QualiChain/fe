@@ -29,7 +29,7 @@
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
         </mat-form-field>
   -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <strong>{{ 'FILTER' | translate }}:</strong>
           
           &nbsp;
@@ -37,7 +37,7 @@
           <mat-form-field>
             <input matInput [formControl]="nameFilter" placeholder="{{ 'JOBS.FILTER.TITLE' | translate }}">
           </mat-form-field>
-          <!--
+          
           &nbsp;
           <mat-form-field>
             <mat-select [formControl]="organizationFilter" placeholder="{{ 'JOBS.FILTER.ORGANIZATION' | translate }}" (selectionChange)="selectCompany($event.value)">          
@@ -45,12 +45,41 @@
               <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
             </mat-select>
           </mat-form-field>
-        -->          
+
+          &nbsp;
+          <mat-form-field>
+            <mat-label>{{'JOB.SUBMISSION_START_DATE.PLACEHOLDER' | translate}} (>=)</mat-label>
+            <input #dateRangeStart matInput [matDatepicker]="picker1" (dateChange)="dateRangeChangeStart(dateRangeStart)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field>
+            <mat-label>{{'JOB.SUBMISSION_END_DATE.PLACEHOLDER' | translate}} (<=)</mat-label>
+            <input #dateRangeEnd matInput [matDatepicker]="picker2" (dateChange)="dateRangeChangeEnd(dateRangeEnd)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+<!--
+          &nbsp;
+          <mat-form-field id=selectDates>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="{{'JOB.START_DATE.PLACEHOLDER' | translate}}" #dateRangeStart>
+              <input matEndDate placeholder="{{'JOB.END_DATE.PLACEHOLDER' | translate}}"  #dateRangeEnd
+              (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)"
+              >
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        -->                  
         </div>
       </div>
 
       <div class="" [hidden]="dataSource.data.length==0">  
-        <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+        <table mat-table [dataSource]="dataSource" matSort class="table table-striped" (matSortChange)="sortData($event)">
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
         
@@ -89,44 +118,40 @@
           -->
           <!-- Label Column -->
           <ng-container matColumnDef="label">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.TITLE.LABEL' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="label"> {{ 'JOB.TITLE.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element.label}} </td>
           </ng-container>
         
         
           <!-- employmentType Column -->
-          <ng-container matColumnDef="employment_type">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }} </th>
+          <ng-container matColumnDef="contractType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="contractType"> {{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> <span *ngIf="element.contractType">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+element.contractType | uppercase | translate }} </span></td>
           </ng-container>
       
           <!-- level Column -->
           <ng-container matColumnDef="level">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="seniorityLevel"> {{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> <span *ngIf="element.seniorityLevel">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+element.seniorityLevel | uppercase | translate }}</span> </td>
           </ng-container>
           
-          <!-- hiringOrg Column -->
-          <!--
-          <ng-container matColumnDef="hiringOrg">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.ORGANIZATION' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element?.hiringOrg }} </td>
+          <!-- hiringOrganization Column -->          
+          <ng-container matColumnDef="hiringOrganization">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="hiringOrganization"> {{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{element?.hiringOrganization }} </td>
           </ng-container>
-          -->
+          
           <!-- startDate Column -->
-          <!--
           <ng-container matColumnDef="startDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.START_DATE.PLACEHOLDER' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element?.startDate }} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="startDate"> {{ 'JOB.SUBMISSION_START_DATE.PLACEHOLDER' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{element?.startDate | date }} </td>
           </ng-container>
-          -->
           <!-- endDate Column -->
-          <!--
           <ng-container matColumnDef="endDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'JOB.END_DATE.PLACEHOLDER' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element?.endDate }} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="endDate"> {{ 'JOB.SUBMISSION_END_DATE.PLACEHOLDER' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{element?.endDate | date }} </td>
           </ng-container>
-          -->
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
