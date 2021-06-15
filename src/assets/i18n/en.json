@@ -242,6 +242,14 @@
       "LABEL": "End date",
       "PLACEHOLDER": "End date"
     },
+    "SUBMISSION_START_DATE" : {
+      "LABEL": "Submission start date",
+      "PLACEHOLDER": "Submission start date"
+    },
+    "SUBMISSION_END_DATE" : {
+      "LABEL": "Submission end date",
+      "PLACEHOLDER": "Submission end date"
+    },        
     "EXPERIENCE": {
       "TITLE": "Work Experience",
       "LABEL" : {

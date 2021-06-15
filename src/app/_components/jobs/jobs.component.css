@@ -1,3 +1,7 @@
+#selectDates input {
+  min-height: 100%;
+}
+
 .apply-job-award-form {
     min-width: 150px;
     max-width: 500px;

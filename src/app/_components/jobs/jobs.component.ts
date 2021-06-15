@@ -90,7 +90,7 @@ export class JobsComponent implements OnInit {
  
 
   //displayedColumns: string[] = ['label', 'employment_type', 'level', 'hiringOrg', 'action'];
-  displayedColumns: string[] = ['label', 'employment_type', 'level', 'action'];
+  displayedColumns: string[] = ['label', 'contractType', 'level', 'hiringOrganization', 'startDate', 'endDate', 'action'];
 
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -106,17 +106,44 @@ export class JobsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  jobs: Job[];
+    jobs: Job[];
 
   nameFilter = new FormControl('');
   organizationFilter = new FormControl('');
+  datesFilter = new FormControl('');
+
 
   filterValues = {
     label: '',
-    hiringOrg: ''
+    hiringOrganization: '',
+    startDate: '',
+    endDate: ''
   };
 
   showLoading : boolean = true;
+  sortedData: Job[];
+
+  //dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
+  dateRangeChangeStart(dateRangeStart: HTMLInputElement) {
+    if (dateRangeStart.value) {
+      this.filterValues.startDate = dateRangeStart.value;
+    }
+    else {
+      this.filterValues.startDate = '';
+    }
+    this.dataSource.filter = JSON.stringify(this.filterValues);
+  }
+  
+  dateRangeChangeEnd(dateRangeEnd: HTMLInputElement) {
+    if (dateRangeEnd.value) {
+      this.filterValues.endDate = dateRangeEnd.value;
+    }
+    else {
+      this.filterValues.endDate = '';
+    }
+    this.dataSource.filter = JSON.stringify(this.filterValues);
+  }
+
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
@@ -129,6 +156,31 @@ export class JobsComponent implements OnInit {
 
     }
 
+
+
+    sortData(sort: MatSort) {
+      const data = this.dataSource.data.slice();
+      if (!sort.active || sort.direction === '') {
+        this.sortedData = data;
+        return;
+      }
+  
+      this.sortedData = data.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'label': return compare(a.label, b.label, isAsc);
+          case 'contractType': return compare(this.translate.instant('JOB.EMPLOYMENT_TYPE.OPTIONS.'+a.contractType), this.translate.instant('JOB.EMPLOYMENT_TYPE.OPTIONS.'+b.contractType), isAsc);
+          case 'seniorityLevel': return compare(this.translate.instant('JOB.EMPLOYMENT_LEVEL.OPTIONS.'+a.seniorityLevel), this.translate.instant('JOB.EMPLOYMENT_LEVEL.OPTIONS.'+b.seniorityLevel), isAsc);
+          case 'hiringOrganization': return compare(a.hiringOrganization, b.hiringOrganization, isAsc);
+          case 'startDate': return compare(a.startDate, b.startDate, isAsc);
+          case 'endDate': return compare(a.endDate, b.endDate, isAsc);
+          default: return 0;
+        }
+      });
+    }
+
+
+
     isLogged = this.appcomponent.isLogged;
     isAdmin = this.appcomponent.isAdmin;
     isRecruiter = this.appcomponent.isRecruiter;
@@ -136,6 +188,8 @@ export class JobsComponent implements OnInit {
     isProfessor = this.appcomponent.isProfessor;
     isStudent = this.appcomponent.isStudent;
     isEmployee = this.appcomponent.isEmployee;
+
+
 
   confirmDialog(id, title): void {
     //const message = `Are you sure you want to do this?`;
@@ -186,24 +240,86 @@ export class JobsComponent implements OnInit {
     let filterFunction = function(data, filter): boolean {
       let searchTerms = JSON.parse(filter);
 
-      if ( data.hiringOrg ) {
-        if (searchTerms.hiringOrg) {
+      let dataToReturn : boolean = true;
+
+      if (searchTerms.label) {
+        dataToReturn = data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1;
+      }
+      
+      if (dataToReturn) {
+        if ( data.hiringOrganization ) {
+          if (searchTerms.hiringOrganization) {
+            dataToReturn = (data.hiringOrganization.toString().toLowerCase().indexOf(searchTerms.hiringOrganization.toLowerCase()) !== -1);
+            if (data.hiringOrganization?.toString().toLowerCase().indexOf(searchTerms.hiringOrganization.toLowerCase()) !== -1) {
+              dataToReturn = true;
+            }
+            else {
+              dataToReturn = false;
+            }
+          }
+          else {
+            dataToReturn = true;
+          }
+        }
+        else {
+          if (searchTerms.hiringOrganization) {
+            dataToReturn = false;
+          }
+        }
+      }
+      
+      if (dataToReturn) {      
+        if (searchTerms.startDate) {  
+          if ( data.startDate ) {
+            if(new Date(data.startDate).getTime() >= new Date(searchTerms.startDate).getTime()){
+              dataToReturn = true;
+            }
+            else {
+              dataToReturn = false;
+            }
+          }      
+          else {
+            dataToReturn = false;
+          }
+        }
+      }
+      if (dataToReturn) {
+        if (searchTerms.endDate) {
+          if ( data.endDate ) {
+            if(new Date(data.endDate).getTime() <= new Date(searchTerms.endDate).getTime()){
+              dataToReturn = true;
+            }
+            else {
+              dataToReturn = false;
+            }
+          }      
+          else {
+            dataToReturn = false;
+          }
+        }
+      }
+
+      return dataToReturn;
+      /*
+      if ( data.hiringOrganization ) {
+        if (searchTerms.hiringOrganization) {
           return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1
-          && data.hiringOrg.toString().toLowerCase().indexOf(searchTerms.hiringOrg.toLowerCase()) !== -1;
+          && data.hiringOrganization.toString().toLowerCase().indexOf(searchTerms.hiringOrganization.toLowerCase()) !== -1;
         }
         else {
           return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1;
         }        
       }
       else {
-        if (searchTerms.hiringOrg) {
+        if (searchTerms.hiringOrganization) {
           return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1
-          && (data.hiringOrg)!= null;
+          && (data.hiringOrganization)!= null;
         }
         else {
           return data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1;
         }        
-      }      
+      }    
+      */  
     }
     return filterFunction;
   }
@@ -244,11 +360,13 @@ export class JobsComponent implements OnInit {
     )
   this.organizationFilter.valueChanges
     .subscribe(
-      hiringOrg => {
-        this.filterValues.hiringOrg = hiringOrg;
+      hiringOrganization => {
+        this.filterValues.hiringOrganization = hiringOrganization;
         this.dataSource.filter = JSON.stringify(this.filterValues);
       }
     )
+
+
 
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){
@@ -289,6 +407,9 @@ export class JobsComponent implements OnInit {
 
 }
 
+function compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
 
 @Component({
   selector: 'applyJobDialog',

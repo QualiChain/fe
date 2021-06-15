@@ -35,7 +35,7 @@
 
               <!-- start_date -->
               <mat-form-field class="create-job-full-width">
-                <mat-label>{{ 'JOB.START_DATE.PLACEHOLDER' | translate }}</mat-label>
+                <mat-label>{{ 'JOB.SUBMISSION_START_DATE.PLACEHOLDER' | translate }}</mat-label>
                 <input matInput 
                 #resultPickerStartDateModel="ngModel"
                 [matDatepicker]="pickerStartDate" [min]="" [max]="dataIn.endDate" name="start_date" [(ngModel)]="dataIn.startDate" #startDateInput="ngModel" >
@@ -54,7 +54,7 @@
               <br/>
               <!-- end_date -->
               <mat-form-field class="create-job-full-width">
-                <mat-label>{{ 'JOB.END_DATE.PLACEHOLDER' | translate }}</mat-label>
+                <mat-label>{{ 'JOB.SUBMISSION_END_DATE.PLACEHOLDER' | translate }}</mat-label>
                 <input matInput 
                 #resultPickerEndDateModel="ngModel"
                 [matDatepicker]="pickerEndDate" [min]="dataIn.startDate" [max]="" name="end_date" [(ngModel)]="dataIn.endDate" #endDateInput="ngModel" >

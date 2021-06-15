@@ -192,8 +192,8 @@
       "PLACEHOLDER": "Χώρα"
     }, 
     "STATE": {
-      "LABEL": "κατάσταση",
-      "PLACEHOLDER": "κατάσταση"
+      "LABEL": "Περιφέρεια",
+      "PLACEHOLDER": "Περιφέρεια"
     },    
     "CITY": {
       "LABEL": "Πόλη",
@@ -242,6 +242,14 @@
       "LABEL": "Ημερομηνία λήξης",
       "PLACEHOLDER": "Ημερομηνία λήξης"
     },
+    "SUBMISSION_START_DATE" : {
+      "LABEL": "Ημερομηνία έναρξης αιτήσεων",
+      "PLACEHOLDER": "Ημερομηνία έναρξης αιτήσεων"
+    },
+    "SUBMISSION_END_DATE" : {
+      "LABEL": "Ημερομηνία λήξης αιτήσεων",
+      "PLACEHOLDER": "Ημερομηνία λήξης αιτήσεων"
+    },    
     "EXPERIENCE": {
       "TITLE": "Προϋπηρεσία",
       "LABEL" : {
