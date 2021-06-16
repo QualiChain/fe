@@ -157,7 +157,8 @@
     },
     "CONFIRM_ACTION": "Confirmar",
     "DELETE_MESSAGE": "Tem a certeza que quer remover esta lista de empregos?",
-    "CANCEL_MESSAGE": "Tem a certeza que quer cancelar esta ação?"
+    "CANCEL_MESSAGE": "Tem a certeza que quer cancelar esta ação?",
+    "CREATED_BY_ME": "Criado por mim"
   },
   "JOB": {
     "HEADER_TITLE": "Emprego",

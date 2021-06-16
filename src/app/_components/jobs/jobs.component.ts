@@ -117,11 +117,24 @@ export class JobsComponent implements OnInit {
     label: '',
     hiringOrganization: '',
     startDate: '',
-    endDate: ''
+    endDate: '',
+    creator_id: null
   };
 
+  createdByMe : boolean = false;
   showLoading : boolean = true;
   sortedData: Job[];
+
+  onChangeCreatedByMeCheckbox(checked: boolean) {
+    this.createdByMe = checked;
+    if (this.createdByMe) {
+      this.filterValues.creator_id = this.currentUser.id;
+    }
+    else {
+      this.filterValues.creator_id = null;
+    }
+    this.dataSource.filter = JSON.stringify(this.filterValues);
+  }
 
   //dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
   dateRangeChangeStart(dateRangeStart: HTMLInputElement) {
@@ -293,6 +306,17 @@ export class JobsComponent implements OnInit {
               dataToReturn = false;
             }
           }      
+          else {
+            dataToReturn = false;
+          }
+        }
+      }
+
+      if (dataToReturn) {
+        if (searchTerms.creator_id) {
+          if (data.creator_id==searchTerms.creator_id) {
+            dataToReturn = true;
+          }
           else {
             dataToReturn = false;
           }

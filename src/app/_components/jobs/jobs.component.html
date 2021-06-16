@@ -60,7 +60,8 @@
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
-
+          &nbsp;
+          <mat-checkbox *ngIf="isRecruiter" class="example-margin" [(ngModel)]="createdByMe" ngDefaultControl name="createdByMe" (change)="onChangeCreatedByMeCheckbox($event.checked)">{{ 'JOBS.CREATED_BY_ME' | translate }}</mat-checkbox>
 <!--
           &nbsp;
           <mat-form-field id=selectDates>
