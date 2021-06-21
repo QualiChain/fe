@@ -1,6 +1,12 @@
 <h1 >{{ 'NOTIFICATION_PREFERENCES.TITLE' | translate }}</h1>
 
-<div class="container">
+<div *ngIf="showLoading">
+    <div class="col-md-4 col-md-offset-4">
+      <app-qc-spinner ></app-qc-spinner>
+    </div>  
+  </div>
+
+<div class="container" [hidden]="showLoading">
 
     <div class="row alert alert-danger" *ngIf="displayErrorMessage">
         {{ 'NOTIFICATION_PREFERENCES.ERROR_MESSAGE' | translate }}

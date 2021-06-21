@@ -102,6 +102,16 @@ export class ProfilesAddComponent implements OnInit {
   gender: string = "";
   birthDate: string;
   //birthDate: Date;
+  //startAt: Date;
+
+  
+  yToday = ((new Date()).getFullYear()) - 18;
+  mToday = ((new Date()).getMonth());
+  dToday = ((new Date()).getDay());
+
+  startAt = new Date(this.yToday, this.mToday, this.dToday);  
+     
+
   country: string;
   state: string;
   city: string;
@@ -230,7 +240,11 @@ export class ProfilesAddComponent implements OnInit {
                 this.name = res.name;
                 this.surname = res.surname;
                 this.gender = res.gender;
-                this.birthDate = res.birthDate;
+                this.birthDate = res.birthDate;   
+
+                if (res.birthDate) {
+                  this.startAt = new Date(res.birthDate);
+                }
                 this.country = res.country;
                 this.city = res.city;
                 this.address = res.address;

@@ -32,6 +32,8 @@ export class QcSelectCityDialogComponent implements OnInit {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<QcSelectCityDialogComponent>,
     ) {
+      
+      
 
       this.profileForm = fb.group({
         // parent's own input
@@ -63,6 +65,14 @@ export class QcSelectCityDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("hi!!!");
+
+    //empty variable to avoid previous data
+    for (let i = ELEMENT_DATA.length; i > 0; i --) { 
+      ELEMENT_DATA.splice(i-1, 1);
+      console.log(i);
+    }
+    this.dataSource.data = [];
   }
 
   onConfirm(): void {

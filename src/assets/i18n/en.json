@@ -383,7 +383,7 @@
     },
     "BIRTHDATE": {
       "LABEL": "Birthdate",
-      "PLACEHOLDER": "Choose a birthdate date"
+      "PLACEHOLDER": "Choose a birth date"
     },
     "COUNTRY": {
       "LABEL": "Country",
@@ -602,7 +602,7 @@
     "NO_USERS_AVAILABLE": "No users available",
     "ENROLL_USER_TITLE": "Enroll users",
     "ENROLLMENT_STATUS": {
-      "LABEL": "Enrollent status",
+      "LABEL": "Enrollment status",
       "OPTIONS": {
         "ENROLLED": "Enrolled",
         "TAUGHT": "Taught",
@@ -637,9 +637,9 @@
   },
   "AWARD_SMART_BADGE" : {
     "TITLE": "Award Smart Badge",
-    "CREATE_BADGE": "Create new badge",
+    "CREATE_BADGE": "Create new smart badge",
     "NO_SMART_BADGES_AVAILABE" : "No smart awards available",
-    "SELECTED_BADGES": "Selected Badges",
+    "SELECTED_BADGES": "Selected smart badges",
     "BUTTON" : {
       "AWARD": "Award",
       "REVOKE_AWARD": "Revoke",
@@ -829,9 +829,9 @@
     }
   },
   "NOTIFICATION_PREFERENCES": {
-    "TITLE": "Notifications preferences",
+    "TITLE": "Notification preferences",
     "ERROR_MESSAGE": "Error saving your preferences",
-    "CONFIRM_MESSAGE": "Your preferences has been saved",
+    "CONFIRM_MESSAGE": "Your preferences have been saved",
     "LOCATIONS": {
       "LABEL": "Locations",
       "PLACEHOLDER": "Locations"
@@ -1030,8 +1030,8 @@
           "PLACEHOLDER": "Issuer Email"
         },
         "ISSUER_TELEPHONE": {
-          "LABEL": "Issuer telephone",
-          "PLACEHOLDER": "Issuer telephone"
+          "LABEL": "Telephone",
+          "PLACEHOLDER": "Telephone"
         },
         "ISSUER_DESCRIPTION": {
           "LABEL": "Issuer description",
@@ -1072,7 +1072,7 @@
     "REQUESTS": "Requests",
     "NO_REQUEST": "There are no request for this thesis"
   },
-  "INTERNAL_RELLOCATION_AVAILABILITY": "Internal rellocation availavility",
+  "INTERNAL_RELLOCATION_AVAILABILITY": "Internal relocation availability",
   "BADGES_TYPES": {
     "LABEL": "Type",
     "OPTIONS": {
@@ -1146,7 +1146,7 @@
     "MAIN_DATA_TAB": {
       "TITLE": "Main data",
       "MESSAGES": {
-        "VALIDATION_OK": "Validation Success",
+        "VALIDATION_OK": "Successful validation",
         "VALIDATION_KO": "The validation cannot be done"
       }
     },
@@ -1177,11 +1177,14 @@
     "NO_DATA": "No data available",
     "ORGANIZATIONS": "Organizations"
   },
-  "NO_AWARDS_AVAILABLE_FOR_BE_USED": "At this moment you don't have any SB in your list of available smart badges",
+  "NO_AWARDS_AVAILABLE_FOR_BE_USED": "At this moment you don't have any smart badge in your list of available smart badges",
   "ROLES_IAM": {
     "ACADEMIC": "University student",
     "RECRUITER": "Recruiter",
     "JOB_SEEKER_LEARNER": "Job seeker / Learner",
     "PROFESSOR": "Professor"
+  },
+  "CITY_SELECTOR": {
+    "HEADER":"City selector"
   }
 }

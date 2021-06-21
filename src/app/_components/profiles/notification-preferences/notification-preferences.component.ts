@@ -74,6 +74,8 @@ export class NotificationPreferencesComponent implements OnInit {
   filteredSpecializations: Observable<string[]>;
   internal_reallocation_availability: boolean = false;
 
+  showLoading: boolean = true;
+
   @ViewChild('specializationsInput', {static: false}) specializationsInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
@@ -185,9 +187,12 @@ export class NotificationPreferencesComponent implements OnInit {
                 });
               }
 
+              this.showLoading = false;
+
             },
             error => {
-              console.log("Error getting data");                            
+              console.log("Error getting data");  
+              this.showLoading = false;                          
             }
           );               
         }
@@ -329,16 +334,18 @@ export class NotificationPreferencesComponent implements OnInit {
 
 
   saveData(dataToPost) {
-
+    this.showLoading = true;
     this.ms.addUserNotificationsPreferences(dataToPost).subscribe(
       res => {
         //console.log(res);
         //alert("Saved!!!");
         this.displayMessage = true;
+        this.showLoading = false;
       },
       error => {        
           //alert("Error saving notification preferences!!");
           this.displayErrorMessage = true;
+          this.showLoading = false;
         }
       );
 

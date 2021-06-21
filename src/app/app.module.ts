@@ -84,6 +84,7 @@ import { EmploymentTypePipe } from './_pipes/employment-type/employment-type.pip
 import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
 import { FilterArrayByValueGetListPipe } from './_pipes/filterArrayByValueGetList/filterArrayByValueGetList.pipe';
+import { HighlightPipe } from './_pipes/highlight/highlight.pipe';
 
 /*custom components*/
 //import { CvsComponent } from './_components/cvs/cvs.component';
@@ -296,6 +297,7 @@ export function tokenGetter() {
     LevelTypePipe,
     FilterArrayByValuePipe,
     FilterArrayByValueGetListPipe,
+    HighlightPipe,
     DndDirective,
     ProgressComponent,
     UploadFilesComponent,

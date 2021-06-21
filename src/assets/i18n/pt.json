@@ -45,7 +45,7 @@
     "QUESTIONNAIRE": "Questionário",
     "THESIS": "Tese",
     "THESIS_HELP_TEXT": "Aqui encontra a lista de teses disponíveis",
-    "MY_COLLEAGUES_NETWORK": "My Colleagues"
+    "MY_COLLEAGUES_NETWORK": "Os meus colegas"
   },
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Arquivo de ficheiros pessoais",
@@ -413,7 +413,7 @@
       "LABEL": "Número de telefone",
       "PLACEHOLDER": "999999999"
     },
-    "NO_SMART_BADGE_YET": "Este usuário ainda não tem um selo inteligente."
+    "NO_SMART_BADGE_YET": "Este utilizador ainda não foi distinguido."
   },
   "CHANGE_PASSWORD": {
     "TITLE": "Alterar palavra-chave",
@@ -580,9 +580,9 @@
     "RELATED_SKILLS": "Competências relacionadas",
     "RELATED_SKILLS_NO_DATA": "Não existem competências relacionadas para este curso.",
     "COURSE_BADGES": "Course Badges",
-    "COURSE_BADGES_NO_DATA": "Este curso ainda não tem selo inteligente.",
+    "COURSE_BADGES_NO_DATA": "Este curso ainda não tem distinções.",
     "UPDATE": "Atualizar",
-    "AWARD_SMART_BADGE": "Atribuir Selo Inteligente",
+    "AWARD_SMART_BADGE": "Atribuir Distinção",
     "CV_GAP_ANALYSIS": "Análise de lacuna do currículo",
     "BUTTON": {
       "ENROLL_TO_COURSE" : "Inscrever no curso",
@@ -636,12 +636,12 @@
     }
   },
   "AWARD_SMART_BADGE" : {
-    "TITLE": "Atribuir Selo Inteligente",
-    "CREATE_BADGE": "Criar novo selo",
-    "NO_SMART_BADGES_AVAILABE" : "Selos inteligentes não disponíveis",
-    "SELECTED_BADGES": "Selos selecionados",
+    "TITLE": "Atribuir distinção",
+    "CREATE_BADGE": "Criar novo distinção",
+    "NO_SMART_BADGES_AVAILABE" : "Distinções não disponíveis",
+    "SELECTED_BADGES": "Distinções selecionados",
     "BUTTON" : {
-      "AWARD": "Prémio",
+      "AWARD": "Premiar",
       "REVOKE_AWARD": "Anular",
       "UNASSIGN_AWARD": "Anular prémio",
       "ASSIGN_AWARD": "Atribuir",
@@ -829,7 +829,7 @@
     }
   },
   "NOTIFICATION_PREFERENCES": {
-    "TITLE": "Preferencias de notificações",
+    "TITLE": "Preferências de notificações",
     "ERROR_MESSAGE": "Erro ao gravar as suas preferências",
     "CONFIRM_MESSAGE": "As suas preferências foram gravadas",
     "LOCATIONS": {
@@ -856,7 +856,7 @@
       "TITLE": "Upload um avatar"
     },
     "FILES": {
-      "TITLE": "Upload ficheiros"
+      "TITLE": "Upload de ficheiros"
     },
     "ALLOWED_TYPES": "Tipos permitidos",
     "DRAG_AND_DROP_HERE": "Arraste e solte o ficheiro aqui",
@@ -1030,8 +1030,8 @@
           "PLACEHOLDER": "Email do emissor"
         },
         "ISSUER_TELEPHONE": {
-          "LABEL": "Telefone do emissor",
-          "PLACEHOLDER": "Telefone do emissor"
+          "LABEL": "Telefone",
+          "PLACEHOLDER": "Telefone"
         },
         "ISSUER_DESCRIPTION": {
           "LABEL": "Descrição do emisssor",
@@ -1173,15 +1173,18 @@
   "UNEXPECTED_ERROR": "Unexpected error",
   "PASSWORDS_DO_NOT_MATCH": "Passwords do not match",
   "MY_COLLEAGUES": {
-    "TITLE": "My colleagues",
+    "TITLE": "Os meus colegas",
     "NO_DATA": "No data available",
-    "ORGANIZATIONS": "Organizations"
+    "ORGANIZATIONS": "Organizações"
   },
-  "NO_AWARDS_AVAILABLE_FOR_BE_USED": "At this moment you don't have any SB in your list of available smart badges",
+  "NO_AWARDS_AVAILABLE_FOR_BE_USED": "At this moment you don't have any smart badge in your list of available smart badges",
   "ROLES_IAM": {
     "ACADEMIC": "University student",
     "RECRUITER": "Recruiter",
     "JOB_SEEKER_LEARNER": "Job seeker / Learner",
     "PROFESSOR": "Professor"
+  },
+  "CITY_SELECTOR": {
+    "HEADER":"Seletor de Cidades"
   }
 }
