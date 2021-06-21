@@ -21,7 +21,7 @@
 
       <div>
         <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
+          <input matInput [(ngModel)]="searchedTerm" (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
         </mat-form-field>
       </div>
 
@@ -59,7 +59,15 @@
           <!-- Label Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.NAME.LABEL' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element"> 
+              <span  [innerHTML]="element.name | highlight: searchedTerm"></span>
+              <button mat-icon-button  (click)="showDescription[element.courseid]=!showDescription[element.courseid]">
+                <mat-icon *ngIf="!showDescription[element.courseid]" class="small" id="higlightsearchterm">more_vert</mat-icon>
+                <mat-icon *ngIf="showDescription[element.courseid]" class="small" id="higlightsearchterm">more_horiz</mat-icon>
+              </button>
+              <br>  
+              <span *ngIf="showDescription[element.courseid]" [innerHTML]="element.description | highlight: searchedTerm"></span>
+              </td>
           </ng-container>
         
         

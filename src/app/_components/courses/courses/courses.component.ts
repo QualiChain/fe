@@ -42,6 +42,9 @@ export class CoursesComponent implements OnInit {
   //displayedColumns: string[] = ['courseid', 'name', 'semester', 'action'];
   displayedColumns: string[] = ['name', 'semester', 'action'];
 
+  searchedTerm: string = null;
+  showDescription: any[] = [];
+
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   currentUser: User;

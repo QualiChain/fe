@@ -62,7 +62,8 @@ export class ProfilesComponent implements OnInit {
   
 
   //displayedColumns: string[] = ['id', 'userName', 'name', 'surname', 'role', 'action'];
-  displayedColumns: string[] = ['userName', 'name', 'surname', 'action'];
+  //displayedColumns: string[] = ['userName', 'name', 'surname', 'action'];
+  displayedColumns: string[] = ['userName', 'name'];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   //dataSource = new MatTableDataSource();
@@ -99,17 +100,21 @@ export class ProfilesComponent implements OnInit {
     this.us
       .getUsers()
       .subscribe((data: User[]) => {
-        /*
+        
         data.forEach(element => {
-        //  data.push(element);
+          //console.log(element);
           //this.canViewUser[element.id] = false;
+          this.dataSource.data.push({id:element.id, userName:element.userName, name:element.name});
+          this.dataSource.data = this.dataSource.data.slice();
+/*          
           if (this.isAdmin) {
             this.canViewUser[element.id] = true;
           }
+*/          
           //console.log(element);
         });
-        */
-        this.dataSource.data = data;
+
+        //this.dataSource.data = data;
         this.showLoading = false;
     },
     error => {
@@ -175,8 +180,14 @@ export interface listOfUsers {
   role: string
 }
 
-const ELEMENT_DATA: User[] = [];
+//const ELEMENT_DATA: User[] = [];
+class UserForList {
+  id: number;
+  userName: string;
+  name: string;
+}
 
+const ELEMENT_DATA: UserForList[] = [];
 
 @Component({
   selector: 'createChangePasswordDialog',

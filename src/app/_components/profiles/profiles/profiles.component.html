@@ -24,13 +24,10 @@
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
-
+<!--
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
             <td mat-cell *matCellDef="let element">
-              <!--
-              <a [routerLink]="['/profiles', element.id]" class="btn btn-primary">View</a> 
-              -->
               <button [hidden]="(!canViewUser[element.id] && !isAdmin)" *appCanAccess="['view_other_profile']" class="btn btn-primary" [routerLink]="['/profiles', element.id]">
                 <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
               </button>
@@ -42,14 +39,9 @@
               <button *appCanAccess="['delete_other_profile']" class="btn btn-danger" (click)="confirmDialog(element.id, element.userName)">
                 <i _ngcontent-axy-c0="" class="material-icons small"> delete </i> {{ 'BUTTON.DELETE' | translate }}
               </button>
-  <!--
-              <button *ngIf="((element.id==currentUser.id) || (isAdmin))" class="btn btn-primary" (click)="openChangePasswordDialog(element.id)">
-                <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.CHANGE_PASSWORD' | translate }}
-              </button>
-  -->
             </td>
           </ng-container>
-
+-->
     <!-- id Column -->
     <!--
     <ng-container matColumnDef="id">
@@ -70,11 +62,12 @@
     </ng-container>
 
     <!-- Surname Column -->
+<!--
     <ng-container matColumnDef="surname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PROFILE.SURNAME.LABEL' | translate }} </th>
       <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
     </ng-container>
-
+-->
       <!-- Role Column -->
       <!--
       <ng-container matColumnDef="role">

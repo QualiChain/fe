@@ -102,7 +102,7 @@
             <mat-label>{{ 'PROFILE.BIRTHDATE.PLACEHOLDER' | translate }}</mat-label>
             <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="birthDate" #birthDateInput="ngModel" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker startView="year" [startAt]="birthDate" format="DD-MM-YYYY"></mat-datepicker>
+            <mat-datepicker #picker startView="year" [startAt]="startAt" format="DD-MM-YYYY"></mat-datepicker>
           </mat-form-field>
         </div>
   
@@ -184,7 +184,7 @@
         <div class="form-group field" [class.has-error]="homePhoneInput.invalid">
             <mat-form-field class="create-profile-full-width">
               <mat-label>{{ 'PROFILE.HOMEPHONE.LABEL' | translate }}</mat-label>
-              <input matInput required [(ngModel)]="homePhone" name="homePhone" value="homePhone" placeholder="{{ 'PROFILE.HOMEPHONE.PLACEHOLDER' | translate }}" #homePhoneInput="ngModel">
+              <input matInput [(ngModel)]="homePhone" name="homePhone" value="homePhone" placeholder="{{ 'PROFILE.HOMEPHONE.PLACEHOLDER' | translate }}" #homePhoneInput="ngModel">
             </mat-form-field>
         </div>
 
