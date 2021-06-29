@@ -89,7 +89,7 @@
   },
   "HOME": {
     "TITLE": "Αρχική",
-    "BODY": "Αυτή είναι η αρχική σελίδα του QualiChain FE"
+    "BODY": "<b>QualiChain</b> is an <b>open source distributed platform</b> for storing, validating and verifying academic and professional certificates. <br>QualiChain also provides <b>extended services on career counselling</b> to <b>students</b> through added-value analytics and decision support tools and assists <b>HR professionals</b> (both private and public sector) on competencies and skills-based career management."
   },
   "LOGIN": {
     "TITLE": "Καλώς ήρθατε στο QualiChain",

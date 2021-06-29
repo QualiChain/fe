@@ -10,7 +10,8 @@
     <h1>{{ 'HOME.TITLE' | translate }}</h1>
 
     <div *ngIf="!isauthenticated">
-        <p>	{{ 'HOME.BODY' | translate }} </p>
+        <img src="assets/img/qualichain-intro.png">
+        <p  [innerHTML]=" 'HOME.BODY' | translate "></p>
     </div>
 <!--
     <div class="row">
