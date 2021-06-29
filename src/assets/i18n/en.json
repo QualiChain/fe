@@ -42,7 +42,7 @@
     "SKILLS_HELP_TEXT": "Here you can find the list of skills",
     "NOTIFICATION_PREFERENCES": "Notification Preferences",
     "PERSONAL_FILES_REPOSITORY": "Files Repository",
-    "QUESTIONNAIRE": "Questionnaire",
+    "QUESTIONNAIRE": "Feedback",
     "THESIS": "Thesis",
     "THESIS_HELP_TEXT": "Here you can find the list of available thesis",
     "MY_COLLEAGUES_NETWORK": "My Colleagues"
@@ -89,7 +89,7 @@
   },
   "HOME": {
     "TITLE": "Home",
-    "BODY": "This is the home page of the QualiChain FE"
+    "BODY": "<b>QualiChain</b> is an <b>open source distributed platform</b> for storing, validating and verifying academic and professional certificates. <br>QualiChain also provides <b>extended services on career counselling</b> to <b>students</b> through added-value analytics and decision support tools and assists <b>HR professionals</b> (both private and public sector) on competencies and skills-based career management."
   },
   "LOGIN": {
     "TITLE": "Welcome to QualiChain",
@@ -413,7 +413,7 @@
       "LABEL": "Home Phone",
       "PLACEHOLDER": "999999999"
     },
-    "NO_SMART_BADGE_YET": "This user does not have any smart badge yet."
+    "NO_SMART_BADGE_YET": "This user does not have any smart badges yet."
   },
   "CHANGE_PASSWORD": {
     "TITLE": "Change user password",
@@ -588,8 +588,8 @@
       "ENROLL_TO_COURSE" : "Enroll me to the course",
       "UNENROLL_TO_COURSE" : "Leave course",
       "TOUGH_THE_COURSE" : "Set me as teacher",
-      "UNTOUGH_THE_COURSE" : "Delete me from the teacher of this course",
-      "COURSE_DONE" : "Set as done",
+      "UNTOUGH_THE_COURSE" : "Remove me as teacher of this course",
+      "COURSE_DONE" : "Set as completed",
       "COURSE_UNDONE": "Delete me from the users that did this course",
       "ADD_NEW_RELATION": "Add new user relation"
     },
@@ -612,7 +612,7 @@
       "WARNING_ALL_USERS_SAME_SCORE": "All selected users will receive the same score"
     },
     "NO_DONE_BY_USERS": "No users",
-    "DONE_BY": "Done by",
+    "DONE_BY": "Completed by",
     "NO_ENROLLED_USERS": "No enrolled users",
     "ENROLLED_USERS": "Enrolled users",
     "NO_TEACHERS": "No professors",
@@ -931,8 +931,8 @@
     }
   },
   "QUESTIONNAIRE": {
-    "TITLE": "Questionnaire",
-    "HELP_MESSAGE": "The answer to this questionnaire is anonymous",
+    "TITLE": "Feedback",
+    "HELP_MESSAGE": "The answer to this feedback is anonymous",
     "QUESTION": "How satisfied have you been today/ recently with the performance of QualiChain on a scale of 1 to 5?",
     "THAKS_MESSAGE": "Thanks for your feedback!!!",
     "ANSWER": {
