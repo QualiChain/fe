@@ -1,0 +1,23 @@
+<h1>{{ 'AWARDS.TITLE' | translate }}</h1>
+
+<div class="row">
+    <div class="col col-lg-8">
+        <app-qc-smart-badges-list  formatOutput="table"></app-qc-smart-badges-list>
+    </div>
+
+    <div class="col col-lg-4" >
+        <mat-accordion class="example-headers-align" multi>
+
+            <mat-expansion-panel  [expanded]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>{{ 'AWARDS.SMART_BADGES_ASSIGNED_TO_ME' | translate }}</mat-panel-title>
+                  <mat-panel-description></mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <app-qc-smart-badges-list-by-user [userId]="currentUser?.id" formatOutput="list"></app-qc-smart-badges-list-by-user>
+ 
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
+           
