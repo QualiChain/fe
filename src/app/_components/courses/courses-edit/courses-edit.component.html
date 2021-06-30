@@ -22,8 +22,53 @@
         <div class="form-group field" [class.has-error]="courseSemesterInput.invalid">
             <mat-form-field class="create-course-full-width">
                 <mat-label>{{ 'COURSE.SEMESTER.LABEL' | translate }}</mat-label>
-                <input matInput required [(ngModel)]="courseSemester" name="courseSemester" value="courseSemester" placeholder="{{ 'COURSE.SEMESTER.PLACEHOLDER' | translate }}"  #courseSemesterInput="ngModel">
+                <input matInput  [(ngModel)]="courseSemester" name="courseSemester" value="courseSemester" placeholder="{{ 'COURSE.SEMESTER.PLACEHOLDER' | translate }}"  #courseSemesterInput="ngModel">
             </mat-form-field>
+        </div>
+
+
+        <!-- Coursestart_date  -->
+        <div class="form-group field" >
+
+            <mat-form-field class="create-course-full-width">
+                <mat-label>{{ 'COURSE.START_DATE.LABEL' | translate }}</mat-label>
+                <input matInput 
+                #resultPickerStartDateModel="ngModel"
+                [matDatepicker]="pickerStartDate" [min]="" [max]="courseEndDate" name="start_date" [(ngModel)]="courseStartDate" #startDateInput="ngModel" >
+                <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartDate startView="year" [startAt]="courseStartDate" format="DD-MM-YYYY"></mat-datepicker>
+                
+                <mat-error *ngIf="resultPickerStartDateModel.hasError('matDatepickerParse')">
+                  "{{resultPickerStartDateModel.getError('matDatepickerParse').text}}"
+                  {{ 'ERRORS.IS_NOT_A_VALID_DATE' | translate }}
+                </mat-error>
+                <mat-error *ngIf="resultPickerStartDateModel.hasError('matDatepickerMax')">
+                  {{ 'ERRORS.MAXIMUM_DATE_SHOULD_BE' | translate }} {{courseEndDate | date }}
+                </mat-error> 
+
+              </mat-form-field>
+
+        </div>
+
+        <!-- Courseend_date  -->
+        <div class="form-group field" >
+            <mat-form-field class="create-course-full-width">
+            <mat-label>{{ 'COURSE.END_DATE.LABEL' | translate }}</mat-label>
+            <input matInput 
+                #resultPickerEndDateModel="ngModel"
+                [matDatepicker]="pickerEndDate" [min]="courseStartDate" [max]="" name="end_date" [(ngModel)]="courseEndDate" #endDateInput="ngModel" >
+                <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEndDate startView="year" [startAt]="courseEndDate"></mat-datepicker>
+
+                <mat-error *ngIf="resultPickerEndDateModel.hasError('matDatepickerParse')">
+                  "{{resultPickerEndDateModel.getError('matDatepickerParse').text}}"
+                  {{ 'ERRORS.IS_NOT_A_VALID_DATE' | translate }}
+                </mat-error>
+                <mat-error *ngIf="resultPickerEndDateModel.hasError('matDatepickerMin')">
+                  {{ 'ERRORS.MINIMUM_DATE_SHOULD_BE' | translate }} {{courseStartDate | date }}
+                </mat-error> 
+            </mat-form-field>
+
         </div>
 
         <!-- CourseAcademicOrganization -->

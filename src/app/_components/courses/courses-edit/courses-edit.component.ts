@@ -62,6 +62,8 @@ export class CoursesEditComponent implements OnInit {
   courseName: string = '';
   courseDescription: string = '';
   courseSemester: string = '';
+  courseStartDate: string = '';
+  courseEndDate: string = '';
   startDate: string = '';
   endDate: string = '';
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -308,6 +310,8 @@ openCreateAwardDialog() {
             this.courseName = res.name;
             this.courseDescription = res.description;
             this.courseSemester = res.semester;
+            this.courseStartDate = res.start_date;
+            this.courseEndDate = res.end_date;
             this.startDate = res.startDate;
             this.endDate = res.endDate;
             this.skills = res.skills;
@@ -464,6 +468,8 @@ openCreateAwardDialog() {
         "name": this.courseName,
         "description": this.courseDescription,
         "semester": this.courseSemester,
+        "start_date": this.courseStartDate,
+        "end_date": this.courseEndDate,
         "skills": finalSkillList,
         "events": this.events,
         "academic_organisation_id": orgID,

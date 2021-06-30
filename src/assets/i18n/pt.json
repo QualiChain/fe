@@ -571,6 +571,12 @@
       "LABEL": "Semestre",
       "PLACEHOLDER": "Semestre"
     },
+    "START_DATE": {
+      "LABEL": "Data de início"
+    },
+    "END_DATE": {
+      "LABEL": "Data de fim"
+    },       
     "STARTDATE": {
       "LABEL": "Data de início"
     },

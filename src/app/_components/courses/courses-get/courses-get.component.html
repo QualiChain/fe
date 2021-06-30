@@ -69,9 +69,17 @@
           <div class="col ">
               <div><span class="labelcourse">{{ 'COURSE.DESCRIPTION.LABEL' | translate }}:</span> {{courseData.description}}</div> 
           </div>
-          <div class="col ">
+          <div class="col " *ngIf="courseData.semester">
             <div><span class="labelcourse">{{ 'COURSE.SEMESTER.LABEL' | translate }}:</span> {{courseData.semester}}</div> 
           </div>
+
+          <div class="col " *ngIf="courseData.start_date">
+            <div><span class="labelcourse">{{ 'COURSE.START_DATE.LABEL' | translate }}:</span> {{courseData.start_date | date }}</div> 
+          </div>
+          <div class="col " *ngIf="courseData.end_date">
+            <div><span class="labelcourse">{{ 'COURSE.END_DATE.LABEL' | translate }}:</span> {{courseData.end_date | date }}</div> 
+          </div>
+
           <!--
           <div class="col ">
               <div><span class="labelcourse">{{ 'COURSE.STARTDATE.LABEL' | translate }}:</span> {{courseData.startDate }}</div> 
