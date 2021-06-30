@@ -524,9 +524,20 @@ export class privacyPolicy_modal implements OnInit {
 
   ngOnInit() {
 
-    
-
   }
+
+  ngAfterViewInit(): void {   
+    
+    setTimeout( () => { 
+      let element = document.getElementById('termsOfUseDialog');    
+      //element.scrollIntoView(true);   
+      element.scrollTop = 0;
+     }, 
+    600 );
+   
+  
+  }
+
 
 }
 
@@ -645,7 +656,7 @@ export class ProfilesAddIAMUserComponent implements OnInit {
 
     const dialogRef = this.privacyPolicyDialog.open(privacyPolicy_modal, {
       disableClose: false,
-      width: '600px',
+      width: '800px',
       data: {}
     });
 

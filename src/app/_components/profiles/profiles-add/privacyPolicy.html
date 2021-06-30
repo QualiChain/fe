@@ -1,11 +1,17 @@
+<!--
 <h1 mat-dialog-title>{{ 'PRIVACY_POLICY.TITLE' | translate }} </h1>
+-->
+<h1 mat-dialog-title>{{ 'TERMS_OF_USE.TITLE' | translate }}</h1>
 
 <mat-dialog-content class="mat-typography" id="termsOfUseDialog">
     
     <div class="bodyTermsOfUse">                
+      <!--
         <p>
           {{ 'PRIVACY_POLICY.BODY' | translate }}          
         </p>
+      -->
+      <div class="termsofuse" [innerHTML]="'TERMS_OF_USE.BODY' | translate"></div>
     </div>
 
 </mat-dialog-content>

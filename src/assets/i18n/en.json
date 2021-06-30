@@ -571,6 +571,12 @@
       "LABEL": "Semester",
       "PLACEHOLDER": "Semester"
     },
+    "START_DATE": {
+      "LABEL": "Start date"
+    },
+    "END_DATE": {
+      "LABEL": "End date"
+    },    
     "STARTDATE": {
       "LABEL": "Start date"
     },

@@ -91,7 +91,7 @@ export class AwardSmartBadgeComponent implements OnInit {
 
   loadData() {
     this.showLoading = true;
-    this.courseData = {courseid: 0, name: "", description: "", semester: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
+    this.courseData = {courseid: 0, name: "", description: "", semester: "", start_date: "", end_date: "", startDate: "", endDate: "", updateDate: "", skills: [], events: [] };
     this.route.params.subscribe(params => {
 
       let id:number = 0;      
