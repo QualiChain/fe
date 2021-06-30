@@ -23,7 +23,7 @@ import { AccessDeniedComponent } from './_components/utils/access-denied/access-
 import { CoursesComponent } from './_components/courses/courses/courses.component';
 import { CoursesGetComponent } from './_components/courses/courses-get/courses-get.component';
 import { CoursesEditComponent } from './_components/courses/courses-edit/courses-edit.component';
-import { AwardSmartBadgeComponent } from './_components/award-smart-badge/award-smart-badge.component';
+import { AwardSmartBadgeComponent, AwardsListComponent } from './_components/award-smart-badge/award-smart-badge.component';
 import { RecomendedCoursesComponent, RecomendedCoursesComponentPage } from './_components/recomended-courses/recomended-courses.component';
 import { RecomendedJobsComponent, RecomendedJobsComponentPage } from './_components/recomended-jobs/recomended-jobs.component';
 import { RecomendedSkillsComponent, RecomendedSkillsComponentPage } from './_components/recomended-skills/recomended-skills.component';
@@ -427,6 +427,12 @@ const routes: Routes = [
     canActivate: [AuthGuardByPermission],
     data: { roles: [Role.authenticated], title: 'My colleagues'}
   },  
+  {
+    path: 'awards',
+    component: AwardsListComponent,
+    canActivate: [AuthGuardByPermission],
+    data: { roles: [Role.authenticated], title: 'Awards'} 
+  },
   {
     path: 'access_denied',
     component: AccessDeniedComponent,

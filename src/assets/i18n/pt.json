@@ -45,8 +45,15 @@
     "QUESTIONNAIRE": "Questionário",
     "THESIS": "Tese",
     "THESIS_HELP_TEXT": "Aqui encontra a lista de teses disponíveis",
-    "MY_COLLEAGUES_NETWORK": "Os meus colegas"
+    "MY_COLLEAGUES_NETWORK": "Os meus colegas",
+    "AWARDS": "Selos inteligentes",
+    "AWARDS_HELP_TEXT": "Here you can find the list of smart badges"
   },
+  "AWARDS": {
+    "TITLE": "Selos inteligentes",
+    "SMART_BADGES_ASSIGNED_TO_ME": "Smart badges assigned to me",
+    "NO_AWARDS": "No awards available"
+  },  
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Arquivo de ficheiros pessoais",
     "DELETE_MESSAGE": "Tem a certeza que quer remover o ficheiro?",

@@ -95,7 +95,7 @@ import { RecruitmentComponent } from './_components/recruitment/recruitment.comp
 import { HeaderComponent } from './_components/utils/header/header.component';
 import { FooterComponent } from './_components/utils/footer/footer.component';
 import { JobsComponent, applyJobDialog_modal } from './_components/jobs/jobs.component';
-import { AwardSmartBadgeComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
+import { AwardSmartBadgeComponent, AwardsListComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
 import { HomeComponent } from './_components/home/home.component';
 import { PilotHomeComponent } from './_components/pilot-home/pilot-home.component';
 import { HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilot4Component, HomePilot5Component } from './_components/pilot-home/pilot-home.component';
@@ -183,6 +183,8 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
 import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-use.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+
+import { QcSmartBadgesListComponent } from './_components/utils/qc-smart-badges-list/qc-smart-badges-list.component';
 import { QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent } from './_components/utils/qc-smart-badges-list-by-user/qc-smart-badges-list-by-user.component';
 import { QcSmartBadgesListByCourseComponent } from './_components/utils/qc-smart-badges-list-by-course/qc-smart-badges-list-by-course.component';
 import { MyColleaguesComponent } from './_components/my-colleagues/my-colleagues.component';
@@ -267,7 +269,7 @@ export function tokenGetter() {
     FooterComponent,
     JobsComponent,
     applyJobDialog_modal,
-    AwardSmartBadgeComponent,
+    AwardSmartBadgeComponent, AwardsListComponent, 
     awardDialog_modal,
     createAwardDialog_modal,
     HomeComponent,
@@ -325,7 +327,7 @@ export function tokenGetter() {
     ThesisComponent, ThesisComponentSummaryPage,
     ThesisGetComponent,
     ThesisEditComponent,
-    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent, QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent, QcSmartBadgesListByCourseComponent, MyColleaguesComponent
+    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent, QcSmartBadgesListComponent, QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent, QcSmartBadgesListByCourseComponent, MyColleaguesComponent
   ],
   imports: [
     MomentDateModule,

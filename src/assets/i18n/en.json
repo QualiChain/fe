@@ -45,7 +45,14 @@
     "QUESTIONNAIRE": "Feedback",
     "THESIS": "Thesis",
     "THESIS_HELP_TEXT": "Here you can find the list of available thesis",
-    "MY_COLLEAGUES_NETWORK": "My Colleagues"
+    "MY_COLLEAGUES_NETWORK": "My Colleagues",
+    "AWARDS": "Smart badges",
+    "AWARDS_HELP_TEXT": "Here you can find the list of smart badges"
+  },
+  "AWARDS": {
+    "TITLE": "Smart badges",
+    "SMART_BADGES_ASSIGNED_TO_ME": "Smart badges assigned to me",
+    "NO_AWARDS": "No awards available"
   },
   "PERSONAL_FILES_REPOSITORY": {
     "TITLE": "Personal files repository",

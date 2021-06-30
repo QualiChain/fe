@@ -1,0 +1,145 @@
+
+<div id="userAwardList">
+    <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid"></mat-spinner>
+    <div [hidden]="lodingspinnerid">
+
+        <div *ngIf="aqcuired_badges_by_user.length==0" class="col-lg-8  smartBudge">                                
+            {{ 'AWARDS.NO_AWARDS' | translate }}
+        </div>
+        <div [hidden]="aqcuired_badges_by_user.length==0">
+            
+            <div *ngIf="formatOutput=='small'">
+                <span *ngFor="let element_badge of aqcuired_badges_by_user; index as i">                    
+                    <div class="sbbox" >
+                        <a href="" class="noborder" (click)="intialerts()" data-toggle="modal" [attr.data-target]="'#sba_' + element_badge.id + '_'"><img style="margin: 3px 7px 3px 1px; width: 30px;" *ngIf="element_badge.oubadge.image" class="center" [src]="element_badge.oubadge.image" [title]="element_badge.name" [alt]="element_badge.name" > </a>
+                    </div>
+                </span>
+            </div>
+            <div *ngIf="formatOutput=='card'">
+                                
+                <span *ngFor="let element_badge of aqcuired_badges_by_user; index as i">                 
+                    <mat-card class="col-lg-12 example-card" >
+                        <mat-card-header>
+                            <div mat-card-avatar title="{{element_badge.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge.oubadge.image}}");'></div>
+                            <mat-card-title>
+                                <a href="" class="noborder" (click)="intialerts()" data-toggle="modal" [attr.data-target]="'#sba_' + element_badge.id + '_'">
+                                    <span *ngIf="element_badge.name.length<=20">{{element_badge.name}}</span>
+                                    <span *ngIf="element_badge.name.length>20">{{element_badge.name | slice:0:20}} ...</span>
+                                </a>
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}:</label> {{element_badge.issuer}}</div>                            
+                        </mat-card-content>
+                    </mat-card>
+                    
+
+                </span>
+
+            </div>
+
+            <div [hidden]="formatOutput!='table'">
+
+                
+                <button *appCanAccess="['create_smart_badge']" class="btn btn-primary" (click)="openCreateAwardDialog()">
+                    <i _ngcontent-axy-c0="" class="material-icons small"> add </i> {{ 'AWARD_SMART_BADGE.CREATE_BADGE' | translate }}
+                </button>
+                                       
+                <div>
+                    <mat-form-field>
+                      <input matInput [(ngModel)]="searchedTerm" (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
+                    </mat-form-field>
+                </div>
+
+                <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
+                        <td mat-cell *matCellDef="let element_badge; let i = index;" style=" white-space: nowrap;">
+                            <a class="btn btn-primary" (click)="intialerts()" data-toggle="modal" [attr.data-target]="'#sba_' + element_badge.id + '_'">
+                                <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                            </a>
+                        </td>
+                    </ng-container>
+                        
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+                            <td mat-cell *matCellDef="let element_badge"> 
+                                <div mat-card-avatar title="{{element_badge.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge.oubadge.image}}");'></div>    
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'BADGES.BADGE.TITLE.LABEL' | translate }} </th>
+                            <td mat-cell *matCellDef="let element_badge"> {{element_badge.name }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="issuer">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }} </th>
+                            <td mat-cell *matCellDef="let element_badge"> {{element_badge.issuer}} </td>
+                        </ng-container>
+                        
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div *ngFor="let element_badge of aqcuired_badges_by_user; index as i" class="modal fade" id="sba_{{element_badge.id}}_" role="dialog">
+    <div class="modal-dialog">
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">
+            {{element_badge.name}}</h4>                                              
+        </div>
+        <div class="modal-body">
+                  
+            <div class="row" *ngIf="loadingLoginSpinner">
+                <app-qc-spinner></app-qc-spinner>
+            </div>   
+
+            <div [hidden]="loadingLoginSpinner">
+                <!--
+                <br *ngIf="showErrorMessage || validationSuccess">
+                <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO' | translate }}
+                </div>
+                <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK' | translate }}
+                </div>
+                -->
+                <div [ngClass]="modalClass">
+                    <app-qc-smart-badge-card [awardId]="element_badge.id"></app-qc-smart-badge-card>
+                </div>
+            </div>
+
+            
+            
+            <div [hidden]="loadingLoginSpinner">
+                <br *ngIf="showErrorMessage || validationSuccess">
+                <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO' | translate }}
+                </div>
+                <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
+                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK' | translate }}
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">    
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'BUTTON.CLOSE' | translate }}</button>                                              
+        </div>
+      </div>
+    </div>
+</div>                                                                          

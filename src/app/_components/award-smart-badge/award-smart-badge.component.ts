@@ -434,9 +434,9 @@ export class createAwardDialog_modal implements OnInit {
    this.ous
         .createBadgeV2(smartBadgetData).subscribe(
           res => {
-            console.log("Badge created");
-            console.log(res);
-            console.log("We need to send the response to the NTUA's API")
+            //console.log("Badge created");
+            //console.log(res);
+            //console.log("We need to send the response to the NTUA's API")
 
             let smartDadgeData = {
               'type': this.smartBadgeType,
@@ -444,7 +444,7 @@ export class createAwardDialog_modal implements OnInit {
             }
             this.bs.addBadge(smartDadgeData).subscribe(
               resSBNTUA => {
-                console.log(resSBNTUA);
+                //console.log(resSBNTUA);
                 var splitted = resSBNTUA.split("="); 
                 var splitted2 = splitted[1].split(" "); 
 
@@ -463,7 +463,7 @@ export class createAwardDialog_modal implements OnInit {
                   awardedId: '',
                   ou_metadata: {}
                   }
-                console.log(mainDataSB);
+                //console.log(mainDataSB);
                 fulListOfSmartAwards.push(mainDataSB);
                 if (this.data.badgesList) {
                   this.data.badgesList.push(mainDataSB);
@@ -1432,3 +1432,28 @@ const fulListOfSmartAwards = [
 ];
 */
 const fulListOfSmartAwards = [];
+
+
+@Component({
+  selector: 'app-awards-list',
+  templateUrl: './awards-list.component.html',
+  styleUrls: ['./award-smart-badge.component.css']
+})
+
+export class AwardsListComponent implements OnInit {
+
+  currentUser: User;
+
+  constructor(
+    public authservice: AuthService
+  ) { 
+    
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
+
+  ngOnInit() {
+    
+  }
+
+}
