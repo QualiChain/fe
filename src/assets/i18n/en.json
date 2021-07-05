@@ -649,6 +649,7 @@
     }
   },
   "AWARD_SMART_BADGE" : {
+    "CREATED_BY_ME": "Created by me",
     "TITLE": "Award Smart Badge",
     "CREATE_BADGE": "Create new smart badge",
     "NO_SMART_BADGES_AVAILABE" : "No smart awards available",

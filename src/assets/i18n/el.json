@@ -649,6 +649,7 @@
     }
   },
   "AWARD_SMART_BADGE" : {
+    "CREATED_BY_ME": "Created by me",
     "TITLE": "Απονομή έξυπνης ετικέτας",
     "CREATE_BADGE": "Δημιουργία νέας ετικέτας",
     "NO_SMART_BADGES_AVAILABE" : "Δεν υπάρχουν διαθέσιμες έξυπνες ετικέτες",

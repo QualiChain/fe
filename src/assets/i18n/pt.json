@@ -649,6 +649,7 @@
     }
   },
   "AWARD_SMART_BADGE" : {
+    "CREATED_BY_ME": "Created by me",
     "TITLE": "Atribuir distinção",
     "CREATE_BADGE": "Criar novo distinção",
     "NO_SMART_BADGES_AVAILABE" : "Distinções não disponíveis",

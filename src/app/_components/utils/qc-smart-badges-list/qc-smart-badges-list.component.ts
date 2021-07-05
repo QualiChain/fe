@@ -10,6 +10,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { createAwardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
+import { AuthService } from '../../../_services';
+import User from '../../../_models/user';
+import { FormControl } from '@angular/forms';
 
 let ELEMENT_DATA: any[] = [];
 
@@ -31,8 +34,34 @@ export class QcSmartBadgesListComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  createdByMe : boolean = false;
+  currentUser: User;
+
+  nameFilter = new FormControl('');
+
+  filterValues = { 
+    name: '',
+    creator_email: null
+  };
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+
+  onChangeCreatedByMeCheckbox(checked: boolean) {
+    //console.log("ddddddddddddd");
+    this.createdByMe = checked;
+    console.log(this.currentUser);
+    console.log(this.dataSource.data);
+    if (this.createdByMe) {
+      this.filterValues.creator_email = this.currentUser.email;
+    }
+    else {
+      this.filterValues.creator_email = null;
+    }
+    console.log(this.filterValues);
+    this.dataSource.filter = JSON.stringify(this.filterValues);
   }
 
   lodingspinnerid: boolean = true;
@@ -53,13 +82,19 @@ export class QcSmartBadgesListComponent implements OnInit {
   searchedTerm: string = null;
 
   constructor(
+    public authservice: AuthService,
     public createAwardDialog: MatDialog,
     private mc: QCMatomoConnectorService,
     private appcomponent: AppComponent,
     private bs: BadgesService,
     public awardDialog: MatDialog,
     private ous: OUService
-  ) { }
+  ) { 
+
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+    this.dataSource.filterPredicate = this.createFilter();
+
+  }
 
   isAdmin = this.appcomponent.isAdmin;
   isProfessor = this.appcomponent.isProfessor;
@@ -94,11 +129,33 @@ export class QcSmartBadgesListComponent implements OnInit {
     this.bs.getBadges().subscribe(
       badges => {
         badges.sort((a, b) => a.name.localeCompare(b.name));
+        
+        
         this.aqcuired_badges_by_user = badges;
 
         this.dataSource.data = badges;        
         ELEMENT_DATA = badges;
+        
 
+        /*
+        badges.forEach((badge, index) => {  
+          console.log(badge);
+          let newBadgeData = {};
+          newBadgeData = badge;
+
+          var index = this.aqcuired_badges_by_user.map(function(e) { return e.id; }).indexOf(badge.id);
+          console.log(index);
+
+          newBadgeData['creator_email'] = badge.oubadge.issuer.email;
+          this.aqcuired_badges_by_user.push(newBadgeData);
+          this.dataSource.data.push(newBadgeData);
+          ELEMENT_DATA.push(newBadgeData);
+          this.dataSource.data = this.dataSource.data.slice();
+          
+
+        });
+        */
+        //console.log(this.dataSource.data)
         this.lodingspinnerid = false;
       },
       error => {
@@ -107,10 +164,51 @@ export class QcSmartBadgesListComponent implements OnInit {
       }
     );
   }
+
+
+
+
+  createFilter(): (data: any, filter: string) => boolean {
+    let filterFunction = function(data, filter): boolean {
+      //console.log(filter);
+      let searchTerms = JSON.parse(filter);
+
+      let dataToReturn : boolean = true;
+
+      if (searchTerms.name) {
+        dataToReturn = data.name.toString().toLowerCase().indexOf(searchTerms.name.toLowerCase()) !== -1;
+      }
+      
+
+      if (dataToReturn) {
+        if (searchTerms.creator_email) {
+          if (data.oubadge.issuer.email.toString().toLowerCase()==searchTerms.creator_email.toString().toLowerCase()) {
+            dataToReturn = true;
+          }
+          else {
+            dataToReturn = false;
+          }
+        }
+      }
+
+      return dataToReturn;
+       
+    }
+    return filterFunction;
+  }  
   ngOnInit(): void {
     
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.nameFilter.valueChanges
+    .subscribe(
+      label => {
+        this.filterValues.name = label;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
 
       this.loadAllBadges();
 
