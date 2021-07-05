@@ -47,8 +47,12 @@
                                        
                 <div>
                     <mat-form-field>
-                      <input matInput [(ngModel)]="searchedTerm" (keyup)="applyFilter($event.target.value)" placeholder="{{ 'FILTER' | translate }}">
+                        <input matInput [formControl]="nameFilter" placeholder="{{ 'FILTER' | translate }}">
                     </mat-form-field>
+
+                    &nbsp;
+                    <mat-checkbox class="example-margin" [(ngModel)]="createdByMe" ngDefaultControl name="createdByMe" (change)="onChangeCreatedByMeCheckbox($event.checked)">{{ 'AWARD_SMART_BADGE.CREATED_BY_ME' | translate }}</mat-checkbox>
+
                 </div>
 
                 <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
