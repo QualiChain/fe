@@ -795,7 +795,7 @@
         "PLACEHOLDER": "Όνομα κριτηρίου"
       },
       "WEIGHT":  {
-        "LABEL": "Σημαντικότητα",
+        "LABEL": "Βάρος κριτηρίου",
         "PLACEHOLDER": "ένας αριθμός"
        },
       "TYPE":  {
@@ -821,8 +821,8 @@
      },
      "ALTERNATIVE": {
       "NAME": {
-        "LABEL": "Εναλλακτικό όνομα",
-        "PLACEHOLDER": "Εναλλακτικό όνομα"
+        "LABEL": "Εναλλακτική",
+        "PLACEHOLDER": "Εναλλακτική"
       },
       "VALUE": {
         "LABEL": "Τιμή",
