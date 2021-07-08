@@ -133,6 +133,7 @@ import { QcLocationCountryComponent } from './_components/utils/qc-location-coun
 import { QcLocationStateCountryComponent } from './_components/utils/qc-location-state-country/qc-location-state-country.component';
 import { QcLocationCityStateComponent } from './_components/utils/qc-location-city-state/qc-location-city-state.component';
 
+import { NavigationService } from './_services/navigation.service';
 import { RecruitingComponent } from './_components/recruiting/recruiting.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { ValidateService } from './_services/recruiting/validate.service';
@@ -366,7 +367,7 @@ export function tokenGetter() {
     FlashMessagesModule.forRoot()
   ],
   exports: [materialModules, CanAccessDirective],
-  providers: [ ThesisService, PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, ValidateService, AuthService, QCStorageService, JwtHelperService,
+  providers: [ ThesisService, PilotsService, DatePipe, SafePipeModule, UsersService, JobsService, SkillsService, UploadService, CoursesService, RecomendationsService, NavigationService, ValidateService, AuthService, QCStorageService, JwtHelperService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {  
       provide: MatPaginatorIntl, 

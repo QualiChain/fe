@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NotFoundComponent } from '../../_components/utils/not-found/not-found.component';
 import { QCStorageService } from '../../_services/QC_storage.services';
+import { AppComponent } from '../../app.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -24,7 +25,7 @@ describe('HomeComponent', () => {
           [{path: 'not_found', component: NotFoundComponent}]
         )
         ],
-        providers: [QCStorageService]
+        providers: [AppComponent, QCStorageService]
     })
     .compileComponents();
   }));

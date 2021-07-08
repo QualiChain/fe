@@ -3,6 +3,7 @@ import { MessageService } from '../../_services/index';
 import { QCStorageService } from '../../_services/QC_storage.services';
 import { PilotsService, HEADER_MENU } from '../../_services/pilots.services';
 import { trigger, animate, transition, style, state } from '@angular/animations';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +34,13 @@ export class HomeComponent implements OnInit {
   selectedSubmenu: boolean = false;
 
   state = 'off';
-  
+
+  isLogged = this.appcomponent.isLogged;
+  isAdmin = this.appcomponent.isAdmin;
+  isRecruiter = this.appcomponent.isRecruiter;
+  isProfessor = this.appcomponent.isProfessor;
+  isStudent = this.appcomponent.isStudent;
+  isEmployee = this.appcomponent.isEmployee;  
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -42,6 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(
+    private appcomponent: AppComponent,
     private ps: PilotsService,
     private qcStorageService: QCStorageService,
     private messageService: MessageService) { }
