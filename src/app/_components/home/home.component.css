@@ -1,3 +1,7 @@
 #div-menu-home {
   padding: 0px 7px;
 }
+
+.post-content {
+  min-height: 170px;
+}

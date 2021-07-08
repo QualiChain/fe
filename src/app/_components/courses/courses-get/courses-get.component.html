@@ -2,7 +2,9 @@
 
 <div class="container">
     <div class="row">
-
+<!--
+      <button class="btn btn-primary" (click)="navigation.back()"><i _ngcontent-axy-c0="" class="material-icons small"> arrow_back </i> Back </button>
+-->
       <button *ngIf="isAdmin || (isProfessor && canEditCourse[courseData.courseid] && isUserAsTaught)" class="btn btn-primary" [routerLink]="['/courses', courseData.courseid, 'edit']">
         <i _ngcontent-axy-c0="" class="material-icons small"> edit </i> {{ 'BUTTON.EDIT' | translate }}
       </button>          

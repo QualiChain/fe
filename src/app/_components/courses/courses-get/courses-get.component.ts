@@ -20,6 +20,7 @@ import {MatPaginator} from '@angular/material/paginator'
 import { awardDialog_modal } from '../../../_components/award-smart-badge/award-smart-badge.component';
 import AcademicOrganisation from '../../../_models/academicorganisation';
 import { AcademicOrganisationService } from '../../../_services/academicorganisation.services';
+import { NavigationService } from '../../../_services/navigation.service';
 
 export interface DialogData {
   grade: number;
@@ -81,6 +82,7 @@ export class CoursesGetComponent implements OnInit {
   descriptionAcademicOrganisation: string = null;
 
   constructor(
+    public navigation: NavigationService,
     public aos: AcademicOrganisationService,
     private appcomponent: AppComponent,
     private router: Router,
