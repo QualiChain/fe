@@ -4,6 +4,7 @@ import { QCStorageService } from '../../_services/QC_storage.services';
 import { PilotsService, HEADER_MENU } from '../../_services/pilots.services';
 import { trigger, animate, transition, style, state } from '@angular/animations';
 import { AppComponent } from '../../app.component';
+import { AuthService } from '../../_services';
 
 @Component({
   selector: 'app-home',
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(
+    private authservice: AuthService,
     private appcomponent: AppComponent,
     private ps: PilotsService,
     private qcStorageService: QCStorageService,
@@ -103,7 +105,7 @@ export class HomeComponent implements OnInit {
     return JSON.parse(JSON.stringify(src));
   }
   
-  ngOnInit() {
+  async ngOnInit() {
 
     //let userdata = JSON.parse(localStorage.getItem('userdata'));
     let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
@@ -117,6 +119,12 @@ export class HomeComponent implements OnInit {
         this.menuOptionsPerPilot = this.ps.getPilot(1);
 
         this.menuOptionsToPlot = this.jsonCopy(this.menuOptionsPerPilot);
+
+
+        let dataValidToken = await this.authservice.validateTokenIAMAsync();
+        //console.log(dataValidToken);
+        this.isLogged = dataValidToken;
+
       }
     }
     else {
