@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   loadingLoginSpinner: boolean = false;
   loadingRequestPasswordSpinner: boolean = false;
   customErrorMessageLogin: string = "";
+  customErrorMessageChangePassword: string = "";
   credentialsValidated: boolean = false;
   paramRedirectUrl: string;
 
@@ -144,6 +145,34 @@ export class LoginComponent implements OnInit {
         this.loadingRequestPasswordSpinner = false;
       }
     );
+  }
+
+  async processFormRequestPasswordIAM() {
+    console.log("--processFormRequestPasswordIAM--");
+    console.log(this);
+    this.customErrorMessageChangePassword = "";
+    this.loadingRequestPasswordSpinner = true;
+    this.requestPasswordError = false;
+    this.requestPasswordConfirmation = false;
+    
+    let resLogin:any = await this.ls.requestpasswordIAM(this.email);
+    //console.log(resLogin);
+    if (resLogin['succeeded']) {
+      //console.log("Valid credentials for the auth service");
+      //console.log("Request OK");
+      this.customErrorMessageChangePassword = resLogin['message'];
+      this.requestPasswordConfirmation = true;
+      this.loadingRequestPasswordSpinner = false;
+      //this.email = "";
+    }
+    else {            
+      //console.log(resLogin['message']);
+      this.customErrorMessageChangePassword = resLogin['message'];
+      this.requestPasswordError = true;
+      this.loadingRequestPasswordSpinner = false;          
+    }
+
+    
   }
 
   async processFormIAM() {

@@ -358,6 +358,8 @@ export class AppComponent  implements OnInit {
   let dataValidToken = await this.authservice.validateTokenIAMAsync();  
   if (!dataValidToken) {
     this.authservice.logout();
+    //this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    //this.router.navigate(['/login'], { queryParams: { } });
   }
 
   let dataP = await this.authservice.recoverPerimissionsAsync();

@@ -128,6 +128,34 @@ export class AuthService {
       )
   }
 
+  async requestpasswordIAM(email) {
+
+    let myAuthObj= {};
+    const formData = new FormData();
+    
+    formData.append('email', email);
+    
+    
+    let data:any = await this.httpClient.post(`${this.IAMAuthUrl}/changePassword`, formData).toPromise().catch(()=>
+    {
+        //if there is an error we return emty response
+        return myAuthObj;
+    });
+
+    if (data.succeeded) {
+
+      return data;
+
+    }
+    else {
+      myAuthObj = data;
+    }
+    
+    return myAuthObj; 
+
+    
+}
+
   createQCAuthorizationHeaderForFormDataReturnBlob(){
     let token = localStorage.getItem('token');      
     //let token = "AABBCCCDDD";
