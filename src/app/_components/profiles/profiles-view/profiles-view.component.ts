@@ -49,6 +49,7 @@ import {  MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 import { Subscription } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
+import { SpecializationsService } from '../../../_services/specializations.service';
 
 @Component({
   selector: 'app-profiles-view',
@@ -975,10 +976,14 @@ connectToOU() {
     let educationHeaderLabel = ""
     if (cvDataIn != null) {
 
-      cvDescription = cvDataIn.description;
+      if (cvDataIn.description) {
+        cvDescription = cvDataIn.description;
+      }
       cvDescriptionLabel = this.translate.instant('CV.DESCRIPTION.LABEL');
-      
-      targetSector = cvDataIn.targetSector;
+      console.log(cvDataIn);
+      if (cvDataIn.targetSector) {
+        targetSector = cvDataIn.targetSector;
+      }
       targetSectorLabel = this.translate.instant('CV.TARGET_SECTOR.LABEL');
 
       skillsHeaderLabel = this.translate.instant('CV.SKILLS');
@@ -1242,6 +1247,11 @@ interface CompetencyLevelValues {
   viewValue: string;
 }
 
+export interface Specialization {
+  title: string;
+  id: number;
+}
+
 /************************/
 @Component({
   selector: 'CVDialog',
@@ -1271,6 +1281,8 @@ export class CVDialog_modal implements OnInit {
   userHasCV: boolean = false;
   uriCV: string = ""
 
+  allSpecialisations: Specialization[] = [];
+
   competencies: CompetencyLevelValues[] = [
     {value: 'basic', viewValue: 'Basic'},
     {value: 'medium', viewValue: 'Medium'},
@@ -1279,6 +1291,7 @@ export class CVDialog_modal implements OnInit {
 
   //private appcomponent: AppComponent,
   constructor(            
+    private ss: SpecializationsService,
     private router: Router,  
     private us: UsersService, private authservice: AuthService,
     private cvs: CVService,
@@ -1428,6 +1441,23 @@ export class CVDialog_modal implements OnInit {
     else if (this.isRecruiter) {
       this.canViewCV = true;
     }
+
+
+    this.ss.getSpecializations().subscribe(
+      dataSpecializations => { 
+        //console.log(dataSpecializations);
+        dataSpecializations.forEach(element => {
+          this.allSpecialisations.push({id:element.id, title: element.title});
+        }); 
+
+        this.allSpecialisations.sort((a, b) => (a.title > b.title) ? 1 : -1);
+
+        //console.log(this.allSpecialisations);
+      },
+      error => {            
+        console.log("Error recovering specializations list")
+      }
+    );
 
   }
 
