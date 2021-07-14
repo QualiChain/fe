@@ -960,126 +960,257 @@ connectToOU() {
   }
   
 
+  async completePDF(action, cvDataIn) {
+
+    let cvDescription = "";
+    let targetSector = ""
+    
+    let skills= [];
+    let WH = [];
+    let education = [];
+    let targetSectorLabel = "";
+    let cvDescriptionLabel = "";
+    let skillsHeaderLabel = "";
+    let WHHeaderLabel = "";
+    let educationHeaderLabel = ""
+    if (cvDataIn != null) {
+
+      cvDescription = cvDataIn.description;
+      cvDescriptionLabel = this.translate.instant('CV.DESCRIPTION.LABEL');
+      
+      targetSector = cvDataIn.targetSector;
+      targetSectorLabel = this.translate.instant('CV.TARGET_SECTOR.LABEL');
+
+      skillsHeaderLabel = this.translate.instant('CV.SKILLS');
+      WHHeaderLabel = this.translate.instant('CV.WORK_HISTORY');
+      educationHeaderLabel = this.translate.instant('CV.EDUCATION_HISTORY');
+
+      if (cvDataIn.skills.length>0) {
+        skills.push([ this.translate.instant('CV.SKILL_LABEL') ,this.translate.instant('CV.SKILL_PROFIENCY_LEVEL'), this.translate.instant('CV.SKILL_COMMENT')]);
+        cvDataIn.skills.forEach(element => {
+          skills.push([element.skillRefLabel, element.proficiencyLevel, element.skillRefComment])
+        });
+      }
+
+      if (cvDataIn.workHistory.length>0) {
+        WH.push([ this.translate.instant('CV.WORK_POSITION') ,this.translate.instant('CV.WORK_FROM'), this.translate.instant('CV.WORK_TO')]);
+        cvDataIn.workHistory.forEach(element => {
+          WH.push([element.position, element.from, element.to])
+        });
+      }
+      
+      if (cvDataIn.education.length>0) {
+        education.push([ this.translate.instant('CV.EDUCATION_TITLE') ,this.translate.instant('CV.EDUCATION_FROM'), this.translate.instant('CV.EDUCATION_TO')]);
+        cvDataIn.education.forEach(element => {
+          education.push([element.label, element.from, element.to])
+        });
+      }
+
+    }
+
+    function tableCVData() {
+
+      let returnValue :any;
+      //returnValue = {text: " "};
+
+      returnValue = {columns: [
+        [
+          {
+            text: " "
+          }       
+        ]]
+      };
+      
+      if (targetSector!="") {
+        returnValue['columns'][0].push({text: targetSectorLabel+': ' + targetSector, color: '#0e3664'});        
+      }
+
+      if (cvDescription!="") {
+        returnValue['columns'][0].push({text: cvDescriptionLabel+': ', color: '#0e3664'});
+        returnValue['columns'][0].push({text: cvDescription, color: '#0e3664'});
+      }
+      
+
+      if (skills.length>0) {
+        let $tmpText = skillsHeaderLabel;
+        returnValue['columns'][0].push({text: " "});
+        returnValue['columns'][0].push({text: $tmpText+": ", color: '#0e3664'});
+        returnValue['columns'][0].push({
+          table: {
+              headerRows: 1,
+              widths: [ '*', '*', '*'],
+              body: skills
+          }
+        });
+      }
+      
+      if (WH.length>0) {
+        let $tmpText = WHHeaderLabel;
+        returnValue['columns'][0].push({text: " "});
+        returnValue['columns'][0].push({text: $tmpText+": ", color: '#0e3664'});
+        returnValue['columns'][0].push({
+          table: {
+              headerRows: 1,
+              widths: [ '*', '*', '*'],
+              body: WH
+          }
+        });
+      }
+      
+      if (education.length>0) {
+        let $tmpText = educationHeaderLabel;
+        returnValue['columns'][0].push({text: " "});
+        returnValue['columns'][0].push({text: $tmpText+": ", color: '#0e3664'});
+        returnValue['columns'][0].push({
+          table: {
+              headerRows: 1,
+              widths: [ '*', '*', '*'],
+              body: education
+          }
+        });
+      }
+  
+      return returnValue;
+  }
+
+    let docDefinition = {
+      footer: function(currentPage, pageCount) {
+        return {
+            margin:10,
+            columns: [          
+            {
+                fontSize: 9,
+                text:[
+                {
+                text: '--------------------------------------------------------------------------' +
+                '\n',
+                margin: [0, 20]
+                },
+                {
+                text: '© QualiChain. ' + currentPage.toString() + ' of ' + pageCount,
+                }
+                ],
+                alignment: 'center',
+                color: '#0e3664'
+            }
+            ]
+        };
+    },
+      header: {
+        margin: 10,
+        columns: [
+            {
+                // usually you would use a dataUri instead of the name for client-side printing
+                // sampleImage.jpg however works inside playground so you can play with it
+                image: await this.getBase64ImageFromURL(
+                  '/assets/img/qualichain-icon-white.png'
+                ),
+                width: 20,
+                margin: [40, 0, 0, 0],
+            },
+            {
+                margin: [0, 0, 40, 0],
+                text: 'QualiChain',
+                color: '#0e3664',
+                alignment: 'right',
+            }
+        ]
+    },
+      content: [      
+        {
+          text: this.translate.instant('PROFILES.PROFILE'),
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20],
+          color: '#0e3664'
+        },
+        {
+          canvas: [
+              {
+                  type: 'line',
+                  lineColor: '#0e3664',
+                  x1: 0,
+                  y1: -10,
+                  x2: 520,
+                  y2: -10,
+                  lineWidth: 5,
+              }
+          ]
+      },
+        {
+          columns: [
+            [
+              {
+                text: " "
+             },
+            {
+              text: this.translate.instant('PROFILES.USERNAME')+' : ' + this.userdata.userName, color: '#0e3664'
+            },
+            {
+              text: this.translate.instant('PROFILES.NAME')+': ' + this.userdata.name, color: '#0e3664'
+            },
+            {
+              text: this.translate.instant('PROFILES.SURNAME')+': ' + this.userdata.surname, color: '#0e3664'
+            },      
+            {
+              text: this.translate.instant('PROFILES.EMAIL')+': ' + this.userdata.email, color: '#0e3664'
+            },
+            {
+              text: this.translate.instant('PROFILES.GENDER')+': ' + this.userdata.gender, color: '#0e3664'
+            }
+          ],
+            [ 
+              {image: await this.getBase64ImageFromURL(
+                this.userdata.avatar_path
+              ),
+              height: 130,
+              width: 130            
+              }
+            ]
+           ]      
+        },
+        await tableCVData() 
+      ],
+      defaultStyle: {
+        color: '#0e3664'
+      }
+    };
+
+
+    
+
+
+    //pdfMake.createPdf(docDefinition).open();
+    switch (action) {
+      case 'open': pdfMake.createPdf(docDefinition).open();    
+      break;
+      case 'print': pdfMake.createPdf(docDefinition).print(); 
+      break;
+      case 'download':     
+      pdfMake.createPdf(docDefinition).download(); 
+      break;
+      default: pdfMake.createPdf(docDefinition).open(); 
+      break;
+    }
+  }
  
 async generatePdf(action = 'open') {
   //console.log(this.userdata.avatar_path);
   if (!this.userdata.avatar_path) {
     this.userdata.avatar_path = 'assets/img/no_avatar.jpg';
   }
-  console.log(this.userdata.avatar_path);
+  //console.log(this.userdata);
+  let CVData = {};
+  this.cvs
+  .getCV(this.userdata.id)
+  .subscribe((data: any) => {   
+    this.completePDF(action, data);    
+  },
+  error => {            
+    this.completePDF(action, null);
+  });  
   
-  let docDefinition = {
-    footer: function(currentPage, pageCount) {
-      return {
-          margin:10,
-          columns: [          
-          {
-              fontSize: 9,
-              text:[
-              {
-              text: '--------------------------------------------------------------------------' +
-              '\n',
-              margin: [0, 20]
-              },
-              {
-              text: '© QualiChain. ' + currentPage.toString() + ' of ' + pageCount,
-              }
-              ],
-              alignment: 'center',
-              color: '#0e3664'
-          }
-          ]
-      };
-  },
-    header: {
-      margin: 10,
-      columns: [
-          {
-              // usually you would use a dataUri instead of the name for client-side printing
-              // sampleImage.jpg however works inside playground so you can play with it
-              image: await this.getBase64ImageFromURL(
-                '/assets/img/qualichain-icon-white.png'
-              ),
-              width: 20,
-              margin: [40, 0, 0, 0],
-          },
-          {
-              margin: [0, 0, 40, 0],
-              text: 'QualiChain',
-              color: '#0e3664',
-              alignment: 'right',
-          }
-      ]
-  },
-    content: [      
-      {
-        text: this.translate.instant('PROFILES.PROFILE'),
-        bold: true,
-        fontSize: 20,
-        alignment: 'center',
-        margin: [0, 0, 0, 20],
-        color: '#0e3664'
-      },
-      {
-        canvas: [
-            {
-                type: 'line',
-                lineColor: '#0e3664',
-                x1: 0,
-                y1: -10,
-                x2: 520,
-                y2: -10,
-                lineWidth: 5,
-            }
-        ]
-    },
-      {
-        columns: [
-          [
-            {
-              text: " "
-           },
-          {
-            text: this.translate.instant('PROFILES.USERNAME')+' : ' + this.userdata.userName, color: '#0e3664'
-          },
-          {
-            text: this.translate.instant('PROFILES.NAME')+': ' + this.userdata.name, color: '#0e3664'
-          },
-          {
-            text: this.translate.instant('PROFILES.SURNAME')+': ' + this.userdata.surname, color: '#0e3664'
-          },      
-          {
-            text: this.translate.instant('PROFILES.EMAIL')+': ' + this.userdata.email, color: '#0e3664'
-          },
-          {
-            text: this.translate.instant('PROFILES.GENDER')+': ' + this.userdata.gender, color: '#0e3664'
-          }
-        ],
-          [ 
-            {image: await this.getBase64ImageFromURL(
-              this.userdata.avatar_path
-            ),
-            height: 130,
-            width: 130            
-            }
-          ]
-         ]      
-      }      
-    ]
-  };
-
-  //pdfMake.createPdf(docDefinition).open();
-  switch (action) {
-    case 'open': pdfMake.createPdf(docDefinition).open();    
-    break;
-    case 'print': pdfMake.createPdf(docDefinition).print(); 
-    break;
-    case 'download':     
-    pdfMake.createPdf(docDefinition).download(); 
-    break;
-    default: pdfMake.createPdf(docDefinition).open(); 
-    break;
-  }
 }
 
 
