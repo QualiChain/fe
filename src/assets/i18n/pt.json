@@ -54,11 +54,11 @@
     "THESIS_HELP_TEXT_STUDENT": "Lists the available thesis subjects on the platform, allowing students to apply for them.",
     "THESIS_HELP_TEXT_PROFESSOR": "Lists the available thesis subjects on the platform, allowing professors to accept students’ applications and create/manage new thesis subjects when necessary.",
     "MY_COLLEAGUES_NETWORK": "Os meus colegas",
-    "AWARDS": "Selos inteligentes",    
+    "AWARDS": "Distinções",    
     "AWARDS_HELP_TEXT": "Includes a list of the created smart badges on the platform and facilitates smart badge creation and management."    
   },
   "AWARDS": {
-    "TITLE": "Selos inteligentes",
+    "TITLE": "Distinções",
     "SMART_BADGES_ASSIGNED_TO_ME": "Smart badges assigned to me",
     "NO_AWARDS": "No awards available"
   },  
@@ -145,6 +145,8 @@
   },
   "JOBS": {
     "TITLE": "Empregos",
+    "CREATE": "Criar",
+    "EDIT": "Editar",    
     "NO_JOBS_AVAILABLE": "Não há empregos disponíveis",
     "NONE": "Vazio",
     "FILTER": {
@@ -177,9 +179,9 @@
   },
   "JOB": {
     "HEADER_TITLE": "Emprego",
-    "SPECIALIZATION": "Specialization",
+    "SPECIALIZATION": "Especialização",
     "RECRUITMENT_ORGANIZATION": {
-      "LABEL": "Recruitment organisation"
+      "LABEL": "Instituição a recrutar"
     },
     "CANDIDATES": "Candidatos",    
     "ASSIGNED": "Atribuído",
@@ -267,7 +269,7 @@
       "PLACEHOLDER": "Data de fim"
     },
     "EXPERIENCE": {
-      "TITLE": "Exepriência de trabalho",
+      "TITLE": "Experiência de trabalho",
       "NAME" : {
         "LABEL": "Posição",
         "PLACEHOLDER": "Titulo da posição"
@@ -461,7 +463,7 @@
     "GENDER": "Género",
     "COMPLETED_COURSES": "Cursos concluídos",
     "TEACHING_COURSES": "Cursos de Ensino",
-    "SMART_BADGES": "Selos inteligentes",
+    "SMART_BADGES": "Distinções",
     "CV": "CV",
     "DSS_CV_RE_DESIGN": "Redefinir Currículo",
     "BEST_CAREER_OPTIONS": "Melhores opções de carreira",

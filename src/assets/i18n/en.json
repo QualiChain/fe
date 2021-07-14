@@ -145,6 +145,8 @@
   },
   "JOBS": {
     "TITLE": "Jobs",
+    "CREATE": "Create",
+    "EDIT": "Edit",
     "NO_JOBS_AVAILABLE": "There are no jobs available",
     "NONE": "None",
     "FILTER": {
