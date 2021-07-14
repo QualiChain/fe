@@ -1,4 +1,4 @@
-<h1>{{ 'JOBS.TITLE' | translate }} - <span *ngIf="mode=='Create'">Create</span><span *ngIf="mode=='Edit'">Edit</span></h1>
+<h1>{{ 'JOBS.TITLE' | translate }} - <span *ngIf="mode=='Create'">{{ 'JOBS.CREATE' | translate }}</span><span *ngIf="mode=='Edit'">{{ 'JOBS.EDIT' | translate }}</span></h1>
 
 <div *ngIf="showLoading">
   <div class="col-md-4 col-md-offset-4">
