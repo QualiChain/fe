@@ -40,7 +40,7 @@
                     <!--
                     <input matInput required type="text" [(ngModel)]="skill_profiency_level" name="skill_profiency_level">
                     -->
-                    <mat-select required [(ngModel)]="skill_profiency_level" name="skill_profiency_level" >
+                    <mat-select [(ngModel)]="skill_profiency_level" name="skill_profiency_level" >
                         <mat-option *ngFor="let competencie of competencies" [value]="competencie.value">
                           {{ 'COMPETENCY_LEVEL.LEVELS.'+competencie.viewValue | uppercase | translate}}
                         </mat-option>
@@ -52,7 +52,7 @@
             <div class="form-group col-6">
                 <mat-form-field class="cv-full-width">
                     <mat-label>{{ 'CV.SKILL_COMMENT' | translate }}</mat-label>                            
-                    <input matInput required type="text" [(ngModel)]="skill_comment" name="skill_comment">
+                    <input matInput type="text" [(ngModel)]="skill_comment" name="skill_comment">
                 </mat-form-field>          
             </div>
 

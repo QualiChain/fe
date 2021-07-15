@@ -98,7 +98,8 @@
                             <!--              
                             <input matInput required type="text" formControlName="proficiencyLevel"  >
                             -->
-                            <mat-select required formControlName="proficiencyLevel" >
+                            <mat-select formControlName="proficiencyLevel" >
+                              <mat-option value=""> </mat-option>
                               <mat-option *ngFor="let competencie of competencies" [value]="competencie.value">
                                 {{ 'COMPETENCY_LEVEL.LEVELS.'+competencie.viewValue | uppercase | translate}}
                               </mat-option>
@@ -110,7 +111,7 @@
                       <div class="form-group col-6">
                         <mat-form-field class="cv-full-width" *ngIf="canEditCV">
                             <mat-label>{{ 'CV.SKILL_COMMENT' | translate }}</mat-label>                            
-                            <input matInput required type="text" formControlName="comment"  >
+                            <input matInput type="text" formControlName="comment"  >
                         </mat-form-field>
                         <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.SKILL_COMMENT' | translate }}</span> {{skillsCV[i].comment}}</span>
                       </div>
