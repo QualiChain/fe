@@ -270,6 +270,10 @@
     },
     "EXPERIENCE": {
       "TITLE": "Experiência de trabalho",
+      "LABEL" : {
+        "LABEL": "Título",
+        "PLACEHOLDER": "Título"
+      },
       "NAME" : {
         "LABEL": "Posição",
         "PLACEHOLDER": "Titulo da posição"
@@ -277,6 +281,10 @@
       "DESCRIPTION" : {
         "LABEL": "Descrição",
         "PLACEHOLDER": "Descrição da posição"
+      },
+      "DURATION" : {
+        "LABEL": "Duration",
+        "PLACEHOLDER": "Duration"
       }
     },
     "EDUCATION": {

@@ -993,7 +993,7 @@ connectToOU() {
       if (cvDataIn.skills.length>0) {
         skills.push([ this.translate.instant('CV.SKILL_LABEL') ,this.translate.instant('CV.SKILL_PROFIENCY_LEVEL'), this.translate.instant('CV.SKILL_COMMENT')]);
         cvDataIn.skills.forEach(element => {
-          skills.push([element.skillRefLabel, element.proficiencyLevel, element.skillRefComment])
+          skills.push([element.skillRefLabel, this.translate.instant('COMPETENCY_LEVEL.LEVELS.'+element.proficiencyLevel.toUpperCase()), element.skillRefComment])
         });
       }
 
@@ -1357,8 +1357,10 @@ export class CVDialog_modal implements OnInit {
                 evalDate: [element.evalDate],
                 acquiredDate: [element.acquiredDate],
                 progress: [element.progress],
-                proficiencyLevel: [element.proficiencyLevel, Validators.required],
-                comment: [element.skillRefComment, [Validators.required]],      
+                //proficiencyLevel: [element.proficiencyLevel, Validators.required],
+                proficiencyLevel: [element.proficiencyLevel],
+                //comment: [element.skillRefComment, [Validators.required]],
+                comment: [element.skillRefComment],
               }));
             }
             else {
@@ -1369,8 +1371,10 @@ export class CVDialog_modal implements OnInit {
                 evalDate: [element.evalDate],
                 acquiredDate: [element.acquiredDate],
                 progress: [element.progress],
-                proficiencyLevel: [element.skillLevel, Validators.required],
-                comment: [element.skillRefComment, [Validators.required]],      
+                //proficiencyLevel: [element.skillLevel, Validators.required],
+                proficiencyLevel: [element.skillLevel],
+                //comment: [element.skillRefComment, [Validators.required]],
+                comment: [element.skillRefComment],
               }));
             }
             });
@@ -1512,8 +1516,10 @@ openAddNewItem(e, type) {
           skillID: [result.id.replace(":",""), [Validators.required]],
           skillURI: [result.id, [Validators.required]],
           label: [result.label, [Validators.required]],
-          proficiencyLevel: [result.proficiencyLevel, Validators.required],
-          comment: [result.comment, [Validators.required]],      
+          //proficiencyLevel: [result.proficiencyLevel, Validators.required],
+          proficiencyLevel: [result.proficiencyLevel],
+          //comment: [result.comment, [Validators.required]],
+          comment: [result.comment],
         };
         
         this.t.push(this.formBuilder.group(newItem));
@@ -1548,8 +1554,10 @@ addFormGroupItem(e, type) {
       skillID: ['', [Validators.required]],
       skillURI: ['', [Validators.required]],
       label: ['', [Validators.required]],
-      proficiencyLevel: ['', Validators.required],
-      comment: ['', [Validators.required]],      
+      //proficiencyLevel: ['', Validators.required],
+      proficiencyLevel: [''],
+      //comment: ['', [Validators.required]],
+      comment: [''],
     }));
   }
   else if (type=='workitem') {
@@ -1583,6 +1591,8 @@ onSubmit() {
   var userId: string = this.data.userId.toString();
   var re = /:/gi;
   var newsUserId: string = userId.replace(re, "");
+
+  //console.log(this.dynamicForm.value.Skills);
 
   var dataToSend = {
     'personURI': ":"+newsUserId,

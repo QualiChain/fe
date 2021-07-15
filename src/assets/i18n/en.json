@@ -281,6 +281,10 @@
       "DESCRIPTION" : {
         "LABEL": "Description",
         "PLACEHOLDER": "Position description"
+      },
+      "DURATION" : {
+        "LABEL": "Duration",
+        "PLACEHOLDER": "Duration"
       }
     },
     "EDUCATION": {
