@@ -283,8 +283,8 @@
         "PLACEHOLDER": "Descrição da posição"
       },
       "DURATION" : {
-        "LABEL": "Duration",
-        "PLACEHOLDER": "Duration"
+        "LABEL": "Duração",
+        "PLACEHOLDER": "Duração"
       }
     },
     "EDUCATION": {
