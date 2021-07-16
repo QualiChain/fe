@@ -148,8 +148,8 @@ export class LoginComponent implements OnInit {
   }
 
   async processFormRequestPasswordIAM() {
-    console.log("--processFormRequestPasswordIAM--");
-    console.log(this);
+    //console.log("--processFormRequestPasswordIAM--");
+    //console.log(this);
     this.customErrorMessageChangePassword = "";
     this.loadingRequestPasswordSpinner = true;
     this.requestPasswordError = false;
