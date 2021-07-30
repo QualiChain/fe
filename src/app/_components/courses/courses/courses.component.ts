@@ -252,17 +252,40 @@ export class CoursesEnrollmentByUserComponent implements OnInit {
 
     if (this.userId) {
 
-      this.cs.getCompletedCourseByUserId(+this.userId).subscribe(
-        coursesCompletedByUser => {
+      
+      this.cs.getEnrolledCourseByUserId(+this.userId).subscribe(
+        coursesEnrolledByUser => {
           
-          //console.log(coursesCompletedByUser);
-          this.myCourses = coursesCompletedByUser;
+          //console.log(coursesEnrolledByUser);
+          //this.myCourses = coursesEnrolledByUser;
+          coursesEnrolledByUser.forEach((elementCourse, index) => {
+            this.myCourses.push(elementCourse);
+          });
+          this.myCourses.sort((a, b) => (a.course.name.toUpperCase() > b.course.name.toUpperCase()) ? 1 : -1)
           this.lodingspinner = false;
           
         },
         error => {
           this.lodingspinner = false;
-          console.log("error getting courses per user");
+          console.log("error getting enrolled courses per user");
+        }
+      );
+
+      this.cs.getCompletedCourseByUserId(+this.userId).subscribe(
+        coursesCompletedByUser => {
+          
+          //console.log(coursesCompletedByUser);
+          //this.myCourses = coursesCompletedByUser;
+          coursesCompletedByUser.forEach((elementCourse, index) => {
+            this.myCourses.push(elementCourse)
+          });
+          this.myCourses.sort((a, b) => (a.course.name.toUpperCase() > b.course.name.toUpperCase()) ? 1 : -1)
+          this.lodingspinner = false;
+          
+        },
+        error => {
+          this.lodingspinner = false;
+          console.log("error getting completted courses per user");
         }
       );
 
