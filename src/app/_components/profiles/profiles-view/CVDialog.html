@@ -19,14 +19,14 @@
       <!--  label -->
         <mat-form-field class="cv-full-width" *ngIf="canEditCV">            
             <mat-label>{{ 'CV.TITLE.LABEL' | translate }}</mat-label>
-            <input matInput required [(ngModel)]="label" name="label" value="label" placeholder="{{ 'CV.TITLE.PLACEHOLDER' | translate }}">
+            <input matInput  [(ngModel)]="label" name="label" value="label" placeholder="{{ 'CV.TITLE.PLACEHOLDER' | translate }}">
         </mat-form-field>   
         <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.TITLE.LABEL' | translate }}</span> {{label}}</span>
         <br>
         <!-- description -->
         <mat-form-field class="cv-full-width" *ngIf="canEditCV">
             <mat-label>{{ 'CV.DESCRIPTION.LABEL' | translate }}</mat-label>            
-            <textarea matInput required [(ngModel)]="description" name="description" value="description" placeholder="{{ 'CV.DESCRIPTION.PLACEHOLDER' | translate }}"></textarea>
+            <textarea matInput  [(ngModel)]="description" name="description" value="description" placeholder="{{ 'CV.DESCRIPTION.PLACEHOLDER' | translate }}"></textarea>
         </mat-form-field>
         <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.DESCRIPTION.LABEL' | translate }}</span> {{description}}</span>
         <br>
