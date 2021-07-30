@@ -633,7 +633,7 @@
       "OPTIONS": {
         "ENROLLED": "Enrolled",
         "TAUGHT": "Taught",
-        "DONE": "Done",
+        "DONE": "Completed",
         "ASSISTED": "PhD/Assisted"
       },
       "WARNING_ALL_USERS_SAME_SCORE": "All selected users will receive the same score"
@@ -1111,8 +1111,8 @@
     }
   },  
   "MY_COURSES": {
-    "HEADER": "My assigned courses",
-    "NO_DATA": "There are no assignments"
+    "HEADER": "My enrolled courses",
+    "NO_DATA": "There are no courses"
   },
   "CHARTS": {
     "USER_SKILLS_JOB_SKILLS": {
