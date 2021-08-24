@@ -132,10 +132,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   } 
 
   changeItemStatus(item: any): void {
-    // change messages staus
-    //console.log(item);
+    // change messages staus   
+    var newItem = {read: false}
+    newItem.read = !item.read;
+    
     this.loadingNotificationSpinnerid = item.id;
-    this.messageService.changeNotificationStatus(item.id, item).subscribe(
+    this.messageService.changeNotificationStatus(item.id, newItem).subscribe(
       res => {
         console.log("Notification status changed");
         item.read = !item.read;
@@ -147,7 +149,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         alert("Error changing notification status!!");
         this.loadingNotificationSpinnerid = null;
       }
-    );    
+    ); 
   }   
 
   deleteNotificationItem(item: any, posI: number): void {
