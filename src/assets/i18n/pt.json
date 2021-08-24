@@ -81,7 +81,7 @@
       "PLACEHOLDER": "CivilID (ex., 12345678)"
     },
     "BUTTON": {
-      "VERIFY_CERTIFICATE": "Verificar certificado"
+      "VERIFY_CERTIFICATE": "Validação de Certificado"
     },
     "INSTRUCTIONS": {
       "TITLE": "Instruções",
