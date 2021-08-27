@@ -69,7 +69,8 @@ export class MCDSSComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  
+  listOfCriterias: any[] = [];
+
   dynamicFormCriterias: FormGroup;
   dynamicForAlternatives: FormGroup;
   criteriaCtrl = new FormControl();
@@ -365,6 +366,110 @@ checkboxLabel(row: any): string {
   
   @ViewChildren ('checkBox') checkBox:QueryList<any>;
   
+  compareSelectionFile() {
+    //console.log("compareSelectionFile");
+    const checked = this.checkBox.filter(checkbox => checkbox.checked);
+    this.dataToCompare = [];
+    let criteriasValues = [];
+    let maxCriterias = [];
+  
+
+    let csvSeparator = ";";
+    let readerCriteriaDetails: FileReader = new FileReader();
+    readerCriteriaDetails.readAsText(this.fileToUploadCriteriaDetails);
+    readerCriteriaDetails.onload = (e) => {
+       let csvCriteriaDetails: string = readerCriteriaDetails.result as string;
+      // console.log(csvCriteriaDetails);
+
+       const lines = csvCriteriaDetails.split('\n');
+
+       //console.log(lines);
+       const col0: string[] = lines[0].split(csvSeparator);
+       //console.log(col0);
+       var numberOfCriterias = Number(col0[1]);
+       for (var j = 0, len = numberOfCriterias; j < len; j++) {
+        maxCriterias.push(0);
+      }
+
+       //console.log("numberOfCriterias: "+numberOfCriterias);
+
+       var criteriasValuesList = lines[2].split(csvSeparator);
+       criteriasValuesList.splice(0, 1);
+       //console.log(criteriasValuesList);
+       this.listOfCriterias = [];
+
+       for (var ii =0, len = criteriasValuesList.length; ii < len; ii++) {
+         //console.log(ii + "·--" + criteriasValuesList[ii]);
+        this.listOfCriterias.push(criteriasValuesList[ii]);
+       }
+
+
+        let readerDecisionMatrix: FileReader = new FileReader();
+        readerDecisionMatrix.readAsText(this.fileToUploadDecisionMatrix);
+        readerDecisionMatrix.onload = (e) => {
+          let csvDecisionMatrix: string = readerDecisionMatrix.result as string;
+          //console.log(csvDecisionMatrix);
+          const linesDecisionMatrix = csvDecisionMatrix.split('\n');
+
+          checked.forEach(data => {
+            //console.log(data);
+              //console.log(data.checked);
+              //console.log(data.value);
+              //console.log(data.value.AID);
+              if (data.checked) {
+                var alternativeName = data.value.Alternative;
+                //console.log(alternativeName);
+
+                linesDecisionMatrix.forEach(element => {
+                  const cols: string[] = element.split(csvSeparator);
+                  //console.log(cols[0])
+
+                  if (cols[0]==alternativeName) {
+                    //console.log("values for this alternative");
+                    //console.log(cols);
+                    criteriasValues = [];
+                    for (var j = 1, len = numberOfCriterias; j <= len; j++) {
+                      //console.log(j+":"+cols[j]);
+
+                      if (maxCriterias[j-1]<cols[j]) {
+                        maxCriterias[j-1] = cols[j];
+                      }
+
+                      criteriasValues[j-1] = cols[j];
+                    
+                    }
+                    //console.log("maxCriterias");
+                    //console.log(maxCriterias);
+
+                  }
+                  //csv.push(cols);
+               });
+
+
+               let itemToCompare = {
+                "Score": data.value.Score,
+                "Ranking": data.value.Ranking,
+                "AlternativeName": alternativeName,
+                "Criterias": criteriasValues,
+                "maxCriterias": maxCriterias
+              }
+              //console.log(itemToCompare);
+              this.dataToCompare.push(itemToCompare);
+
+              }  
+  
+            })
+  
+            this.viewCompare = true;
+
+        }
+
+        
+    }   
+    
+    
+  }
+
   compareSelection() {
     const checked = this.checkBox.filter(checkbox => checkbox.checked);
     this.dataToCompare = [];
@@ -375,7 +480,10 @@ checkboxLabel(row: any): string {
       maxCriterias.push(0);
     }
 
+    this.listOfCriterias = this.dataToPost?.Decision_Matrix?.Criteria;
+
     checked.forEach(data => {
+      //console.log(data);
         //console.log(data.checked);
         //console.log(data.value);
         //console.log(data.value.AID);
@@ -410,6 +518,7 @@ checkboxLabel(row: any): string {
             "Criterias": criteriasValues,
             "maxCriterias": maxCriterias
           }
+          //console.log(itemToCompare);
           this.dataToCompare.push(itemToCompare);
         }
     })
@@ -466,7 +575,8 @@ checkboxLabel(row: any): string {
         for (let indexAlt = 0; indexAlt < this.dynamicForAlternatives.value.Alternatives.length; indexAlt++) {
           let indexC = Object.keys(this.dynamicForAlternatives.value.Alternatives[indexAlt].Values).length
 
-          this.dynamicForAlternatives.value.Alternatives[indexAlt].Values[indexC] = {value: 95};
+          //this.dynamicForAlternatives.value.Alternatives[indexAlt].Values[indexC] = {value: 95};
+          this.dynamicForAlternatives.value.Alternatives[indexAlt].Values[indexC] = {value: 0};
           
 
         }
