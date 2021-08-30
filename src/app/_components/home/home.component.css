@@ -5,3 +5,8 @@
 .post-content {
   min-height: 170px;
 }
+
+.customPHomeClass {
+  height: 70px;
+  overflow-y: scroll;
+}
