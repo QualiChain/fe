@@ -23,7 +23,7 @@
                     <th mat-header-cell *matHeaderCellDef> {{ 'ACTION' | translate }} </th>
                     <td mat-cell *matCellDef="let element">
                         <a  *appCanAccess="['view_skills']" [routerLink]="['/skills',element.id]" class="btn btn-primary small">
-                            <i _ngcontent-axy-c0="" class="material-icons small"> details </i> {{ 'BUTTON.VIEW' | translate }}
+                            <i _ngcontent-axy-c0="" class="material-icons small"> pageview </i> {{ 'BUTTON.VIEW' | translate }}
                         </a>
                     </td>
                     </ng-container>

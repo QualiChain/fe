@@ -42,7 +42,7 @@
                 <td mat-cell *matCellDef="let element">
     
                   <button *appCanAccess="['view_thesis_subjects']" class="btn btn-primary" [routerLink]="['/thesis', element.id]">
-                    <i _ngcontent-axy-c0="" class="material-icons small"> details  </i> {{ 'BUTTON.VIEW' | translate }}
+                    <i _ngcontent-axy-c0="" class="material-icons small"> pageview  </i> {{ 'BUTTON.VIEW' | translate }}
                   </button>
     
                   <button [hidden]="element.professor.id!=newUserId && !isAdmin" *appCanAccess="['add_and_update_thesis']" class="btn btn-primary" [routerLink]="['/thesis', element.id, 'edit']">
