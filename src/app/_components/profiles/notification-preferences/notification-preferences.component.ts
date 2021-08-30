@@ -50,8 +50,8 @@ export class NotificationPreferencesComponent implements OnInit {
   specializations: Specialization[] = [];
   selectableSpecialization = true;
   removableSpecialization = true;  
-  //addOnBlurSpecialization = true;
-  addOnBlurSpecialization = false;
+  addOnBlurSpecialization = true;
+  //addOnBlurSpecialization = false;
 
   locations: Location[] = [];
   selectableLocation = true;
