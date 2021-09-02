@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Inject, Input } from '@angular/core';
+import {Component, OnInit, ViewChild, Inject, Input, HostListener } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -29,8 +29,6 @@ export interface AvailableCourses {
 //const ELEMENT_DATA: Course[] = [];
 let ELEMENT_DATA: Course[] = [];
 
-
-
 @Component({
   selector: 'app-coursess',
   templateUrl: './courses.component.html',
@@ -45,6 +43,11 @@ export class CoursesComponent implements OnInit {
   searchedTerm: string = null;
   showDescription: any[] = [];
 
+  //matSortActiveValue: string = "name";
+  //matSortDirectionValue: string = "asc";
+  matSortActiveValue: string = localStorage.getItem('QC_course_search_sort_name');
+  matSortDirectionValue: string = localStorage.getItem('QC_course_search_sort_direction');
+
   //dataSource = ELEMENT_DATA;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   currentUser: User;
@@ -55,8 +58,21 @@ export class CoursesComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  changeDefaultSort() {
+    //console.log("changeDefaultSort");
+    localStorage.setItem('QC_course_search_sort_name', this.sort.active);
+    localStorage.setItem('QC_course_search_sort_direction', this.sort.direction);
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (filterValue) {
+      localStorage.setItem('QC_course_search_term', filterValue);
+    }
+    else {
+      localStorage.removeItem('QC_course_search_term');
+    }
+    
   }
 
   courses: Course[];
@@ -126,10 +142,15 @@ export class CoursesComponent implements OnInit {
        return element.course_status==='taught'; 
   }
   
+  paginatorAction(event: any) {
+    localStorage.setItem('QC_course_search_pagination_index', event.pageIndex);
+  }
 
   ngOnInit() {
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    
 
     if(!this.currentUser) {
       //if(!this.currentUser.hasOwnProperty('id')){
@@ -151,6 +172,19 @@ export class CoursesComponent implements OnInit {
         this.courses = data;                
         this.dataSource.data = data;        
         ELEMENT_DATA = data;
+        this.searchedTerm = localStorage.getItem('QC_course_search_term');
+        if (this.searchedTerm) {
+          this.applyFilter(this.searchedTerm);          
+        }
+        let defaultPage = localStorage.getItem('QC_course_search_pagination_index');
+        if (defaultPage) {
+          this.paginator.pageIndex = +(defaultPage);
+        }
+        else {
+          this.paginator.pageIndex = 0;
+        }
+        
+
         this.showLoading = false;
         /*
         data.forEach(element => {

@@ -138,7 +138,29 @@ export class UploadFilesComponent implements OnInit {
             item.validfile = true;
           }
           else {
-            item.validfile = false;
+            let newTextToSearch = "";
+            if (item.type=='application/vnd.openxmlformats-officedocument.presentationml.presentation') {
+              newTextToSearch = 'pptx';
+            } else if (item.type=='application/vnd.ms-powerpoint') {
+              newTextToSearch = 'ppt';
+            } else if (item.type=='application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+              newTextToSearch = 'docx';
+            } else if (item.type=='application/msword') {
+              newTextToSearch = 'doc';
+            } else if (item.type=='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+              newTextToSearch = 'xlsx';
+            } else if (item.type=='application/vnd.ms-excel') {
+              newTextToSearch = 'xls';
+            }
+
+            existInArray = this.validFiles.indexOf(newTextToSearch);
+            if (existInArray>=0) {
+              item.validfile = true;
+            }
+            else {
+              item.validfile = false;
+            }
+            
           }
           //console.log(existInArray);
         }
