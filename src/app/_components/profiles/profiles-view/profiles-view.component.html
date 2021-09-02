@@ -87,7 +87,7 @@
               <span *ngFor="let role of userdata.roles;  let i = index"><span>&nbsp;</span>{{ 'ROLES.'+role | translate}}<span *ngIf="(i<userdata?.roles.length-1)">,&nbsp;</span></span></div>
             <div *ngIf="userdata?.gender && userdata?.gender!='unknown'" ><span class="profileLabel">{{ 'PROFILES.GENDER' | translate }}:</span> <span *ngIf="userdata.gender"> {{ 'PROFILE.GENDER.TYPE.'+userdata.gender.toUpperCase() | translate}}</span></div>
             <div *ngIf="currentJobPosition"><span class="profileLabel">{{ 'PROFILES.CURRENT_JOB_POSITION' | translate }}:</span>&nbsp;{{currentJobPosition}}</div>
-
+            <div *ngIf="(((isEmployee || isStudent) && (userdata?.id==currentUser.id)) || (isRecruiter && (userdata?.id!=currentUser.id)))"><span class="profileLabel">{{ 'INTERNAL_RELLOCATION_AVAILABILITY' | translate }}:</span>&nbsp;<span *ngIf="internal_reallocation_availability" > {{ 'BUTTON.YES' | translate}} </span><span *ngIf="!internal_reallocation_availability" > {{ 'BUTTON.NO' | translate}} </span></div>
             <div class="row"><br></div>
             <!--
             <div class="row" *ngIf="userdata.role.toLowerCase()=='student' || userdata.role.toLowerCase()=='employee'">
@@ -335,11 +335,12 @@
     <div class="col col-lg-4" *ngIf="(userdata?.id==currentUser.id)">
     
       <mat-accordion class="example-headers-align" multi>
+        <app-courses-enrollment-by-user  *ngIf="isStudent || isEmployee" userId="{{userdata.id}}"></app-courses-enrollment-by-user>        
         <app-thesis-summary *appCanAccess="['view_thesis_subjects', 'add_and_update_thesis']" userId="{{userdata.id}}" [viewBottons]=true></app-thesis-summary>
         <app-recomended-jobs *appCanAccess="['get_job_recommendations']" userId="{{userdata.id}}"></app-recomended-jobs>
         <div *ngIf="_reload"><app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{userdata.id}}"></app-recomended-courses></div>
         <div *ngIf="_reload"><app-recomended-skills *appCanAccess="['get_skills_recomendations']" userId="{{userdata.id}}"></app-recomended-skills></div>
-        <app-job-applications-by-user *appCanAccess="['get_their_job_applications']" userId="{{userdata.id}}"></app-job-applications-by-user>
+        <app-job-applications-by-user *appCanAccess="['get_their_job_applications']" userId="{{userdata.id}}"></app-job-applications-by-user>        
       </mat-accordion>
 
     </div>

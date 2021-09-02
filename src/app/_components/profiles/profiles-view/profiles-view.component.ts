@@ -16,6 +16,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import {TranslateService} from '@ngx-translate/core';
 import { AuthService } from '../../../_services';
+import { MessageService } from '../../../_services/message.service'
 
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
@@ -142,6 +143,7 @@ export class ProfilesViewComponent implements OnInit {
     private ous: OUService,
     private cs: CoursesService,
     public CVDialog: MatDialog,
+    private ms : MessageService,
     private router: Router, public awardDialog: MatDialog, private bs: BadgesService, private us: UsersService, public authservice: AuthService, private route: ActivatedRoute, private formBuilder: FormBuilder, private cvs: CVService, private translate: TranslateService) { 
 
     this.authservice.currentUser.subscribe(x => this.currentUser = x);
@@ -159,6 +161,7 @@ export class ProfilesViewComponent implements OnInit {
   isProfessor = this.appcomponent.isProfessor;
   isStudent = this.appcomponent.isStudent;
   isEmployee = this.appcomponent.isEmployee;
+  internal_reallocation_availability: boolean = false;
 
   completenessColor: string = "";
   public chartType = 'pie';
@@ -293,6 +296,20 @@ export class ProfilesViewComponent implements OnInit {
     return this.allSkills.filter(skill => skill.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  getUserPreferences(id) {
+    console.log(id);
+    this.ms.getUserNotificationsPreferences(+id).subscribe(
+      res => {
+        if (res) {
+          this.internal_reallocation_availability = res['internal_reallocation_availability'];
+        }
+      },
+      error => {
+        console.log("Error getting data");  
+      }
+    );
+  }
+
   getPercentageCVByUser(id) {
     this.cvs
     .getPercentatgeCompletenessCV(id)
@@ -318,6 +335,8 @@ export class ProfilesViewComponent implements OnInit {
     },
     error => {            
       console.log("error recovering getPercentatgeCompletenessCV")
+      this.CvPercentatge = 0;
+      this.completenessColor= 'rgba(0, 0, 0, 1)';
     })
   }
 
@@ -412,6 +431,8 @@ export class ProfilesViewComponent implements OnInit {
           this.getSmartBadgesByUser(id);
 
           this.getPercentageCVByUser(id);
+
+          this.getUserPreferences(id);
 
         }
 

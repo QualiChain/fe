@@ -26,7 +26,7 @@
       </div>
 
       <div class="">  
-        <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+        <table mat-table [dataSource]="dataSource" matSort [matSortActive]="matSortActiveValue" [matSortDirection]="matSortDirectionValue" matSortDisableClear class="table table-striped">
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
         
@@ -58,7 +58,7 @@
         
           <!-- Label Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.NAME.LABEL' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.NAME.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> 
               <span  [innerHTML]="element.name | highlight: searchedTerm"></span>
               <button mat-icon-button  (click)="showDescription[element.courseid]=!showDescription[element.courseid]">
@@ -73,7 +73,7 @@
         
           <!-- semester Column -->
           <ng-container matColumnDef="semester">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.SEMESTER.LABEL' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.SEMESTER.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{ element.semester }} </td>
           </ng-container>
       
@@ -83,7 +83,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="paginatorAction($event)"></mat-paginator>
       </div>
     </div>
 

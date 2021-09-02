@@ -85,6 +85,7 @@ import { LevelTypePipe } from './_pipes/level-type/level-type.pipe';
 import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayByValue.pipe';
 import { FilterArrayByValueGetListPipe } from './_pipes/filterArrayByValueGetList/filterArrayByValueGetList.pipe';
 import { HighlightPipe } from './_pipes/highlight/highlight.pipe';
+import { ReplaceValuesInStringPipe } from './_pipes/replaceValuesInString/replaceValuesInString.pipe';
 
 /*custom components*/
 //import { CvsComponent } from './_components/cvs/cvs.component';
@@ -301,6 +302,7 @@ export function tokenGetter() {
     FilterArrayByValuePipe,
     FilterArrayByValueGetListPipe,
     HighlightPipe,
+    ReplaceValuesInStringPipe,
     DndDirective,
     ProgressComponent,
     UploadFilesComponent,

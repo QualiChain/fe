@@ -137,7 +137,9 @@ export class FilesRepositoryComponent implements OnInit {
               let dataType = response.type;
               let binaryData = [];
               binaryData.push(response);
-
+              if (dataType=='application/octet-stream') {
+                dataType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+              }              
               let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
               //console.log(url);
               window.open(url);

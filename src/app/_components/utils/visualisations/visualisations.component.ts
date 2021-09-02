@@ -22,7 +22,7 @@ export interface Specialization {
 })
 export class VisualisationHelperDialogComponent implements OnInit {
   title: string;
-  message: string;
+  message: string; 
 
   constructor(
     public dialogRef: MatDialogRef<VisualisationHelperDialogComponent>,
@@ -77,6 +77,7 @@ export class VisualisationsComponent implements OnInit {
   extraClass: string = "";
   showHelp: boolean = false;
   visualisationHelpId: string = "";
+  colorsList: {} = {0:'blue', 1:'red', 2:'green', 3:'yellow', 4:'orange', 5:'black', 6:'cyan', 7:'purple', 8:'fuchsia', 9:'gold'};
   
   loadEvent(event) {
     this.cnt = this.cnt + 1;    
@@ -532,13 +533,26 @@ export class VisualisationsSpecializationDemandInFunctionOfTime extends Visualis
   ngOnChanges(): void {    
 
     let tmpURL = '';
+    let defaultColor = "false";
+    let i=0;
+    let lineColor = "";
     this.specializations.forEach(element => {
       //console.log(element);
-      tmpURL = tmpURL+"&y_var_names[]="+element.title+"&y_var_titles[]="+element.title+"&y_var_units[]=job%20postings";
-
+      
+      if (i<Object.keys(this.colorsList).length) {
+        defaultColor = "false";
+        lineColor = this.colorsList[i];
+      }
+      else {
+        defaultColor = "true";
+        lineColor = this.colorsList[0];
+      }
+      tmpURL = tmpURL+"&y_var_names[]="+element.title+"&y_var_titles[]="+element.title+"&y_var_units[]=job%20postings&color_list_request[]="+lineColor;
+      i=i+1;
     });
 
-    tmpURL = urlVisualisations+"/show_line_chart?x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Specialization%20Demand%20Demand&color_list_request[]=blue&color_list_request[]=red&use_default_colors=true&min_max_y_value[]=0&min_max_y_value[]=2000&base_query=specialization_demand_in_time"+tmpURL;
+    //tmpURL = urlVisualisations+"/show_line_chart?x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Specialization%20Demand%20Demand&color_list_request[]=blue&color_list_request[]=red&use_default_colors=true&min_max_y_value[]=0&min_max_y_value[]=2000&base_query=specialization_demand_in_time"+tmpURL;
+    tmpURL = urlVisualisations+"/show_line_chart?x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Specialization%20Demand%20Demand&use_default_colors="+defaultColor+"&min_max_y_value[]=0&min_max_y_value[]=2000&base_query=specialization_demand_in_time"+tmpURL;
     
     //console.log(tmpURL);
 

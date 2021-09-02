@@ -59,6 +59,10 @@ export class AuthService {
     localStorage.removeItem('userdataQC');
     localStorage.removeItem('token');
     localStorage.removeItem('QC_seen_questionnaire');
+    localStorage.removeItem('QC_course_search_term');
+    localStorage.removeItem('QC_course_search_pagination_index');
+    localStorage.removeItem('QC_course_search_sort_name');
+    localStorage.removeItem('QC_course_search_sort_direction');
     //localStorage.removeItem('QCP');
     localStorage.removeItem('qc.candidatesList');
     localStorage.removeItem('qc.recruitment');

@@ -51,7 +51,7 @@
         "pathRewrite": {"^/ntuaAPI8080" : ""}    
     },        
     "/proxyKBZ/*": {
-        "target": "http://knowledgebizvpn.ddns.net:8000",
+        "target": "http://vpnknowledgebiz.ddns.net",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug",

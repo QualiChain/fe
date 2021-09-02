@@ -52,7 +52,8 @@
             <div class="form-group field" >
               <app-upload-files 
               [callbackFunction]="myCallbackFunction"
-              [validFiles]="['image/png','image/jpg','image/jpeg','image/gif', 'application/pdf']" [maxNumberOfFiles]="99" [userId]=profileId fileDestination="personalFileRepository"></app-upload-files>
+              [validFiles]="['image/png','image/jpg','image/jpeg','image/gif', 'application/pdf', 'ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx']"
+              [maxNumberOfFiles]="99" [userId]=profileId fileDestination="personalFileRepository"></app-upload-files>
             </div>
         </div>
 
