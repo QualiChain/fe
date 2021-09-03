@@ -4,12 +4,16 @@
     <span *ngIf="data.type=='educationitem'" >{{ 'CV.EDUCATION' | translate }}</span>
 </h1>
 
-
+<div class="row" *ngIf="data.type=='skillitem' && loadingSpinner">
+    <div class="col-md-4 col-md-offset-4">
+      <app-qc-spinner></app-qc-spinner>
+    </div>
+</div>
 
 <mat-dialog-content>
     
     <form #formAddItem="ngForm" class="add-item-form" >
-        <div *ngIf="data.type=='skillitem'" class="form-row">
+        <div *ngIf="data.type=='skillitem' && !loadingSpinner" class="form-row">
 
             <div class="form-group col-6">
                 <mat-form-field class="cv-full-width">          

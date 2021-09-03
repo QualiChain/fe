@@ -254,6 +254,7 @@ export class ItemCDDialog_modal implements OnInit {
 
   @ViewChild(MatAutocompleteTrigger) trigger: MatAutocompleteTrigger;
   subscription: Subscription;
+  loadingSpinner: boolean = true;
 
   constructor(
     private ss: SkillsService,
@@ -274,6 +275,7 @@ export class ItemCDDialog_modal implements OnInit {
   }
 
   getFinalSkillsList(listOfCurrentSkillsIds) {
+    console.log(listOfCurrentSkillsIds);
     this.cs
     .getCompetencesSkills()
     .subscribe((data: any[]) => {       
@@ -288,8 +290,13 @@ export class ItemCDDialog_modal implements OnInit {
           //console.log(listOfCurrentSkillsIds);
           //console.log(i)
           //only skill we don't have
-         if (!listOfCurrentSkillsIds.includes(i.replace(":","")))
-         {
+          /*
+         if (!listOfCurrentSkillsIds.includes(i.replace(":",""))){
+           //console.log("in if");
+           competencesList.push({'id':i, 'name':data[i]}) 
+         }
+         */
+         if (!listOfCurrentSkillsIds.includes(i.replace("saro:",""))) {
            //console.log("in if");
            competencesList.push({'id':i, 'name':data[i]}) 
          }
@@ -301,9 +308,16 @@ export class ItemCDDialog_modal implements OnInit {
 
       this.options = competencesList;
 
-  });    
+      this.loadingSpinner = false;
+
+  },
+  error => {
+    console.log("Error loading competences skills list");  
+    this.loadingSpinner = false;                  
+  }); 
   }
 
+  
   getSkillsList() {
 
     this.cs.getCompetencesByUser(this.data.userId)
@@ -311,6 +325,7 @@ export class ItemCDDialog_modal implements OnInit {
       //console.log(data);
       let listOfCurrentSkillsIds = [];
       for (let i in data) {
+        //console.log(data[i]['skillID']);
         //console.log(data[i]['skillID']);
         listOfCurrentSkillsIds.push(data[i]['skillID']);
       }
@@ -447,6 +462,7 @@ export class ItemCDDialog_modal implements OnInit {
       this.item.evalDate = this.datepipe.transform(newDateEvalDate, 'yyyy-MM-dd');     
       //console.log(this.item.evalDate);
 
+      this.loadingSpinner = false;
     }
 
 

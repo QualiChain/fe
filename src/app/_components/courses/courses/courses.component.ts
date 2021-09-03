@@ -20,6 +20,8 @@ import { UsersService } from '../../../_services/users.service';
 import User from '../../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from '../../../app.component';
+import AcademicOrganisation from '../../../_models/academicorganisation';
+import { AcademicOrganisationService } from '../../../_services/academicorganisation.services';
 
 export interface AvailableCourses {
   id: number;
@@ -27,7 +29,8 @@ export interface AvailableCourses {
 }
 
 //const ELEMENT_DATA: Course[] = [];
-let ELEMENT_DATA: Course[] = [];
+//let ELEMENT_DATA: Course[] = [];
+let ELEMENT_DATA: any[] = [];
 
 @Component({
   selector: 'app-coursess',
@@ -38,7 +41,7 @@ let ELEMENT_DATA: Course[] = [];
 
 export class CoursesComponent implements OnInit {
   //displayedColumns: string[] = ['courseid', 'name', 'semester', 'action'];
-  displayedColumns: string[] = ['name', 'semester', 'action'];
+  displayedColumns: string[] = ['name', 'semester', 'academic_organisation', 'action'];
 
   searchedTerm: string = null;
   showDescription: any[] = [];
@@ -76,8 +79,11 @@ export class CoursesComponent implements OnInit {
   }
 
   courses: Course[];
+  listAllAcademicOrganizations: AcademicOrganisation[] = [];
+
   showLoading : boolean = true;
   constructor(
+    public aos: AcademicOrganisationService,
     private appcomponent: AppComponent,
     private router: Router, private us: UsersService, public authservice: AuthService, private cs: CoursesService, private excelService:ExcelServiceService, public dialog: MatDialog, private translate: TranslateService) { 
     
@@ -157,6 +163,17 @@ export class CoursesComponent implements OnInit {
         this.currentUser={id:0,role:'', userName:'', name:'', surname:'', email:''};
       }
 
+      this.aos.getAcademicOrganizations().subscribe(
+        academicOrganizationsData => {
+          //console.log(academicOrganizationsData);
+          academicOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+          this.listAllAcademicOrganizations = academicOrganizationsData;
+        },
+        error => {
+          console.log("error getting academic organisations data");
+        }
+      );
+
     this.cs.getTeachingCourseByUserId(this.currentUser.id).subscribe((myTeachingCourses: any[]) => {
       //console.log(myTeachingCourses);
       myTeachingCourses.forEach(element => {
@@ -165,13 +182,34 @@ export class CoursesComponent implements OnInit {
 
     });
 
+    this.dataSource.data = [];
     this.cs
       .getCourses()
       .subscribe((data: Course[]) => {
         //console.log(data);
-        this.courses = data;                
-        this.dataSource.data = data;        
-        ELEMENT_DATA = data;
+        let dataToPush: any[] =[];
+        
+        data.forEach(element => {
+                    
+          let orgName = "";
+
+          if (element.academic_organisation_id) {
+              let orgObject = this.listAllAcademicOrganizations.find(i => i.id === element.academic_organisation_id);
+              if (orgObject) {
+                orgName = orgObject['title'];
+              }
+          }
+          
+          dataToPush.push({courseid:element.courseid, name:element.name, semester: element.semester, description:element.description, academic_organisation: orgName});
+          //console.log(element);
+        });
+        
+        this.courses = dataToPush;                
+        this.dataSource.data = dataToPush;        
+        ELEMENT_DATA = dataToPush;
+        
+        
+
         this.searchedTerm = localStorage.getItem('QC_course_search_term');
         if (this.searchedTerm) {
           this.applyFilter(this.searchedTerm);          

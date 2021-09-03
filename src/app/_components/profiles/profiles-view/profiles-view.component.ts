@@ -297,7 +297,7 @@ export class ProfilesViewComponent implements OnInit {
   }
 
   getUserPreferences(id) {
-    console.log(id);
+    //console.log(id);
     this.ms.getUserNotificationsPreferences(+id).subscribe(
       res => {
         if (res) {
@@ -1782,6 +1782,7 @@ export class AddItemDialog_modal implements OnInit {
   myControl: FormControl;
   filteredStates: any;
   options: any[] = [];
+  loadingSpinner: boolean = true;
   filteredOptions: Observable<string[]>;
   autocompletOption :any;
   @ViewChild(MatAutocompleteTrigger) trigger: MatAutocompleteTrigger;
@@ -1836,6 +1837,7 @@ export class AddItemDialog_modal implements OnInit {
          competencesList.sort((a, b) => (a.name > b.name) ? 1 : -1)
   
          this.options = competencesList;
+         this.loadingSpinner = false;
   
      });    
       
