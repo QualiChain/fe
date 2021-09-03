@@ -340,7 +340,7 @@
         <app-recomended-jobs *appCanAccess="['get_job_recommendations']" userId="{{userdata.id}}"></app-recomended-jobs>
         <div *ngIf="_reload"><app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{userdata.id}}"></app-recomended-courses></div>
         <div *ngIf="_reload"><app-recomended-skills *appCanAccess="['get_skills_recomendations']" userId="{{userdata.id}}"></app-recomended-skills></div>
-        <app-job-applications-by-user *appCanAccess="['get_their_job_applications']" userId="{{userdata.id}}"></app-job-applications-by-user>        
+        <app-job-applications-by-user *appCanAccess="['view_jobs']" userId="{{userdata.id}}"></app-job-applications-by-user>        
       </mat-accordion>
 
     </div>
