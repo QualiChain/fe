@@ -76,7 +76,15 @@
             <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.SEMESTER.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{ element.semester }} </td>
           </ng-container>
-      
+
+          
+          <!-- academic_organisation Column -->
+          <ng-container matColumnDef="academic_organisation">
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'COURSE.ACADEMIC_ORGANIZATION.LABEL' | translate }} </th>
+            <td mat-cell *matCellDef="let element">
+              <span [innerHTML]="element.academic_organisation | highlight: searchedTerm"></span>
+            </td>
+          </ng-container>      
       
       
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
