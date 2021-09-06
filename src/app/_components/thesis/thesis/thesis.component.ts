@@ -40,6 +40,8 @@ export class ThesisComponent implements OnInit {
   paginator: MatPaginator;  
 
   thesisList: Thesis[] = [];
+  searchedTerm: string = null;
+  showDescription: any[] = [];
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
