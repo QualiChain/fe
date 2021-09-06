@@ -38,7 +38,7 @@
 
         <div class="col col-lg-12">
 
-            <div class="col ">
+            <div class="col "  *ngIf="jobData.jobDescription">
                 <div><span class="labeljob">{{ 'JOB.DESCRIPTION.LABEL' | translate }}:</span> {{jobData.jobDescription}}</div> 
             </div>
             <div class="col " *ngIf="jobData.specialization">
@@ -50,10 +50,10 @@
             <div *ngIf="jobData.endDate" class="col ">
                 <div><span class="labeljob">{{ 'JOB.SUBMISSION_END_DATE.LABEL' | translate }}:</span> {{jobData.endDate | date }}</div> 
             </div>
-            <div class="col ">
+            <div class="col " *ngIf="jobData.contractType" >
                 <div><span class="labeljob">{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+jobData.contractType | uppercase | translate }}</div> 
             </div>
-            <div class="col ">
+            <div class="col " *ngIf="jobData.seniorityLevel" >
                 <div><span class="labeljob">{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+jobData.seniorityLevel | uppercase | translate }}</div> 
             </div>
             <div class="col " *ngIf="jobData?.hiringOrganization">
