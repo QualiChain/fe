@@ -129,6 +129,12 @@ export class FilesRepositoryComponent implements OnInit {
   downLoadFile(fileId: number, fileName: string, action:string) {
     this.showError = false;
     if (action=='open') {
+
+        
+        var splitted = fileName.split("."); 
+        var extension = splitted[splitted.length-1];
+        //console.log(extension);
+
         //window.open(downloadUrl+'/file/'+fileId);
         this.us.getFile(fileId).subscribe(
           (response: any) =>{
@@ -137,12 +143,47 @@ export class FilesRepositoryComponent implements OnInit {
               let dataType = response.type;
               let binaryData = [];
               binaryData.push(response);
-              if (dataType=='application/octet-stream') {
+              
+              let open: boolean = true;
+              //console.log(dataType);
+              //if (dataType=='application/octet-stream') {
+              if (extension.toUpperCase()=='PPTX') {
+                dataType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+                open = false;
+              }
+              else if (extension.toUpperCase()=='PPT') {
+                dataType = 'application/vnd.ms-powerpoint';
+                open = false;
+              }
+              else if (extension.toUpperCase()=='DOCX') {
                 dataType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-              }              
+                open = false;
+              }
+              else if (extension.toUpperCase()=='DOC') {
+                dataType = 'application/msword';
+                open = false;
+              }
+              else if (extension.toUpperCase()=='XLSX') {
+                dataType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                open = false;
+              }
+              else if (extension.toUpperCase()=='XLS') {
+                dataType = 'application/vnd.ms-excel';
+                open = false;
+              }
+              //console.log(dataType);
+            
               let url = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
               //console.log(url);
-              window.open(url);
+              if (open) {
+                window.open(url);
+              }
+              else {
+                const anchor = document.createElement("a");
+                anchor.download = fileName;
+                anchor.href = url;
+                anchor.click();
+              }
 
           },
           error => {
