@@ -39,6 +39,8 @@ export class SkillsComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  searchedTerm: string = null;
+  
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

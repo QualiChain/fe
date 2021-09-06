@@ -112,6 +112,7 @@ export class JobsComponent implements OnInit {
   organizationFilter = new FormControl('');
   datesFilter = new FormControl('');
 
+  searchedTerm: string = null;
 
   filterValues = {
     label: '',

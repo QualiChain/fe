@@ -86,6 +86,7 @@ import { FilterArrayByValuePipe } from './_pipes/filterArrayByValue/filterArrayB
 import { FilterArrayByValueGetListPipe } from './_pipes/filterArrayByValueGetList/filterArrayByValueGetList.pipe';
 import { HighlightPipe } from './_pipes/highlight/highlight.pipe';
 import { ReplaceValuesInStringPipe } from './_pipes/replaceValuesInString/replaceValuesInString.pipe';
+import { RemoveHTLMTagsPipe } from './_pipes/removeHTMLTags/removeHTMLTags.pipe';
 
 /*custom components*/
 //import { CvsComponent } from './_components/cvs/cvs.component';
@@ -303,6 +304,7 @@ export function tokenGetter() {
     FilterArrayByValueGetListPipe,
     HighlightPipe,
     ReplaceValuesInStringPipe,
+    RemoveHTLMTagsPipe,
     DndDirective,
     ProgressComponent,
     UploadFilesComponent,
