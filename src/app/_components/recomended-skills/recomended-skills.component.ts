@@ -14,7 +14,7 @@ import {MatSort} from '@angular/material/sort';
 export class RecomendedSkillsComponent implements OnInit {
 
   @Input() userId: number = null;
-
+  searchedTerm: string = null;
   loadingSpinner: boolean = true;
 
   //displayedColumns: string[] = ['title', 'job_description', 'action'];
