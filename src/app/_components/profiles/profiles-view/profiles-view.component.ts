@@ -162,6 +162,7 @@ export class ProfilesViewComponent implements OnInit {
   isStudent = this.appcomponent.isStudent;
   isEmployee = this.appcomponent.isEmployee;
   internal_reallocation_availability: boolean = false;
+  user_locations_preferences: string = "";
 
   completenessColor: string = "";
   public chartType = 'pie';
@@ -302,6 +303,7 @@ export class ProfilesViewComponent implements OnInit {
       res => {
         if (res) {
           this.internal_reallocation_availability = res['internal_reallocation_availability'];
+          this.user_locations_preferences = res['locations'];
         }
       },
       error => {
