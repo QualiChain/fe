@@ -56,7 +56,7 @@
             <div class="form-group field" [class.has-error]="emailInput.invalid">
                 <mat-form-field class="create-profile-full-width">
                     <mat-label>{{ 'PROFILE.EMAIL.LABEL' | translate }}</mat-label>
-                    <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}" #emailInput="ngModel">
+                    <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9_.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'PROFILE.EMAIL.PLACEHOLDER' | translate }}" #emailInput="ngModel">
                 </mat-form-field>
             </div>
 

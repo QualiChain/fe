@@ -37,7 +37,7 @@
                 <div class="form-group field" [class.has-error]="emailInput.invalid">
                   <mat-form-field class="userlogin-full-width">
                     <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
-                    <input matInput pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email" name="email" value="email" placeholder="{{ 'LOGIN.EMAIL' | translate }}" #emailInput="ngModel">
+                    <input matInput pattern="[a-zA-Z0-9_.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email" name="email" value="email" placeholder="{{ 'LOGIN.EMAIL' | translate }}" #emailInput="ngModel">
                   </mat-form-field>
                   <div class="help is-error alert-warning" *ngIf="(emailInput.invalid && emailInput.dirty)  || (!email)">
                     {{ 'LOGIN.EMAIL_HELP' | translate }}
@@ -126,7 +126,7 @@
                   <div class="form-group field" [class.has-error]="emailInput.invalid">
                     <mat-form-field class="requestPasword-full-width">
                       <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
-                      <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'LOGIN.EMAIL' | translate }}" #emailInput="ngModel">
+                      <input matInput required [(ngModel)]="email" name="email" value="email" pattern="[a-zA-Z0-9_.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="{{ 'LOGIN.EMAIL' | translate }}" #emailInput="ngModel">
                     </mat-form-field>      
                     <div class="help is-error alert-warning">{{ 'LOGIN.EMAIL_HELP' | translate }}</div>
                   </div>
