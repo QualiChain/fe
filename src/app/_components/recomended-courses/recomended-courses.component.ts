@@ -17,6 +17,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 export class RecomendedCoursesComponent implements OnInit {
 
   @Input() userId: number = null;
+  searchedTerm: string = null;
   
   loadingSpinner: boolean = true;
   
