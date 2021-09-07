@@ -7,7 +7,7 @@
 export const environment = {
   production: false,
   localStorageSecretKey: 'QC_secret_key_to_be_replaced',  
-  recomendationsUrlByCV : '/ntuaAPI7000/recommend',
+  recomendationsUrlByCV : '/ntuaAPI5004/recommend',
   coursesUrl: '/ntuaAPI5004/courses',
   courseUrl: '/ntuaAPI5004/course',
   uploadFilesUrl : '/ntuaAPI5004/user',
