@@ -126,8 +126,8 @@
 															<hr>
 													</div>															
 											</li>										
-											<li *appCanAccess="['view_own_profile']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/myprofile'}">
-												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/myprofile'}" routerLink="/myprofile" (click)="route='/myprofile'" >{{ 'MENU.PROFILE' | translate }}</a>
+											<li *appCanAccess="['view_own_profile']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: (router.url==='/myprofile' || router.url==='/profiles/'+currentUser?.id)}">
+												<a class="navbar-item" [ngClass]="{selectedItem: (router.url==='/myprofile' || router.url==='/profiles/'+currentUser?.id)}" routerLink="/myprofile" (click)="route='/myprofile'" >{{ 'MENU.PROFILE' | translate }}</a>
 											</li>
 											<li *appCanAccess="['manage_own_notifications_preferences']" class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page" [ngClass]="{current_page_parent: router.url==='/preferences/'+currentUser?.id}">
 												<a class="navbar-item" [ngClass]="{selectedItem: router.url==='/profiles/'+currentUser?.id+'/notifications-preferences'}" routerLink="/profiles/{{currentUser?.id}}/notifications-preferences" (click)="route='/profiles/'+currentUser?.id+'/notifications-preferences'" >{{ 'MENU.NOTIFICATION_PREFERENCES' | translate }}</a>
