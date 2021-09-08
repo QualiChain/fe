@@ -126,11 +126,11 @@
             <button *ngIf="canViewCV" class="btn btn-primary" (click)="openUserCV(userdata?.id)" >  
               <i _ngcontent-axy-c0="" class="material-icons small"> account_box </i> {{ 'PROFILES.CV' | translate }} 
             </button>
-            
+            <!--
             <button *ngIf="((userdata?.id==currentUser.id) || (isAdmin))" class="btn btn-primary" (click)="uploadUserCVKG(userdata?.id)" >  
               <i _ngcontent-axy-c0="" class="material-icons small">  cloud_upload </i> {{ 'UPLOAD_CV_KG.BUTTON' | translate }} 
             </button>
-            
+            -->
             <button *ngIf="((userdata?.id==currentUser.id && (isStudent || isEmployee)) || (isAdmin))" class="btn btn-success" [routerLink]="['/profiles', userdata?.id,'best-career-options']">  
               <i _ngcontent-axy-c0="" class="material-icons small"> stars </i> {{ 'PROFILES.BEST_CAREER_OPTIONS' | translate }}
             </button>
@@ -340,7 +340,9 @@
         <app-recomended-jobs *appCanAccess="['get_job_recommendations']" userId="{{userdata.id}}"></app-recomended-jobs>
         <div *ngIf="_reload"><app-recomended-courses *appCanAccess="['get_courses_recomendations']" userId="{{userdata.id}}"></app-recomended-courses></div>
         <div *ngIf="_reload"><app-recomended-skills *appCanAccess="['get_skills_recomendations']" userId="{{userdata.id}}"></app-recomended-skills></div>
-        <app-job-applications-by-user *appCanAccess="['view_jobs']" userId="{{userdata.id}}"></app-job-applications-by-user>        
+        <span *appCanAccess="['apply_for_a_job_position']">
+          <app-job-applications-by-user *appCanAccess="['view_jobs']" userId="{{userdata.id}}"></app-job-applications-by-user>        
+        </span>
       </mat-accordion>
 
     </div>
