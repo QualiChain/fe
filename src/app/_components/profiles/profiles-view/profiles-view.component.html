@@ -99,8 +99,8 @@
               <div *ngIf="userdata?.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(' + profileAvatarImg + ')'}"> </div>
               <div *ngIf="!userdata?.avatar_path" class="user-avatar-img" [ngStyle]="{'background-image': 'url(assets/img/no_avatar.jpg)'}"> </div>
           </div>
-          <div  *ngIf="(canViewCV && (isStudent || isEmployee || isRecruiter))" class="col col-lg-4 cv_comp">
-                <div class="wrapperpiechart2">
+          <div  *ngIf="(canViewCV && (isStudent || isEmployee || isRecruiter))" class="col col-lg-4 cv_comp">                
+                <div class="wrapperpiechart2">                  
                   <canvas id="canvas_pie_chart" baseChart
                       [datasets]="[{ data: [CvPercentatge,(100-CvPercentatge)],
                         label: 'PROFILES.COMPLETENESS' | translate , backgroundColor: [
@@ -111,9 +111,10 @@
                       [options]="chartOptions"
                       [chartType]="chartType">
                   </canvas>
-                  <p class="profileLabel">{{ 'PROFILES.CV_COMPLETENESS' | translate }}</p>
-                </div>
-
+                  <p class="profileLabel">{{ 'PROFILES.CV_COMPLETENESS' | translate }}
+                    <a class="noborder " [routerLink]="" (click)="openHelperCVDialog(userdata?.id)"><mat-icon class="smallHelp">help_outline</mat-icon> </a>
+                  </p>
+                </div>                
             </div>
             
         </div>

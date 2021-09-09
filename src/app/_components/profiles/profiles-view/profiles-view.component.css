@@ -105,3 +105,11 @@ div.cv_add_course {
     font-size: 1.3rem;
     margin: 0px 0 7px 0;
 }
+
+.withData {
+    color: green;
+}
+
+.withoutData {
+    color: red;
+}

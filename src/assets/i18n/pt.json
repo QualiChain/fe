@@ -289,10 +289,6 @@
     },
     "EDUCATION": {
       "TITLE": "Grau Académico",
-      "LABEL" : {
-        "LABEL": "Titulo",
-        "PLACEHOLDER": "Titulo"
-      },
       "NAME" : {
         "LABEL": "Titulo",
         "PLACEHOLDER": "Título do grau académico"
@@ -1218,5 +1214,16 @@
   },
   "CITY_SELECTOR": {
     "HEADER":"Seletor de Cidades"
+  },
+  "CV_COMPLETENESS_HELPER": {
+    "TITLE": "CV completeness helper",
+    "BODY": "The percentage of completeness of your CV is calculated according to the following:",
+    "PERCENTATGE_RELATION_WITH_SKILLS_COMPLETED": "Your skills are {{value1}}% of 34%, currently you have {{value2}} skills introduced.",
+    "PERCENTATGE_RELATION_WITH_SKILLS_MISSSING": "Your skills are {{value1}}% of 34%, currently you have none introduced.",
+    "PERCENTATGE_RELATION_WITH_WORK_HISTORY_COMPLETED": "Your work history is {{value1}}% of 33%, currently you have {{value2}} works introduced.",
+    "PERCENTATGE_RELATION_WITH_WORK_HISTORY_MISSSING": "Your work history is {{value1}}% of 33%, currently you have none introduced.",
+    "PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_COMPLETED": "Your educational history is {{value1}}% of 33%, currently you have {{value2}} educationals introduced.",
+    "PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_MISSING": "Your educational history is {{value1}}% of 33%, currently you have none introduced.",
+    "CURRENT_PERCENTATGE": "Your current percentatge is {{value}}%"
   }
 }
