@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>{{ 'CV_COMPLETENESS_HELPER.TITLE' | translate }}</h1>
+
+<div class="row" *ngIf="loadingSpinner">
+    <div class="col-md-4 col-md-offset-4">
+      <app-qc-spinner></app-qc-spinner>
+    </div>
+ </div>
+ 
+<div *ngIf="!loadingSpinner">
+    <div mat-dialog-content> 
+        {{ 'CV_COMPLETENESS_HELPER.BODY' | translate }}        
+        <div [ngClass]="skillsByUser>0 ? 'withData' : 'withoutData' ">
+            <span *ngIf="skillsByUser>0">
+                <mat-icon>done</mat-icon>
+                {{'CV_COMPLETENESS_HELPER.PERCENTATGE_RELATION_WITH_SKILLS_COMPLETED' | translate : {value1: 34, value2: skillsByUser} }}
+            </span>
+            <span *ngIf="skillsByUser==0">
+                <mat-icon>highlight_off</mat-icon> 
+                {{'CV_COMPLETENESS_HELPER.PERCENTATGE_RELATION_WITH_SKILLS_MISSSING' | translate : {value1: 0} }}
+            </span>            
+        </div>
+        <div [ngClass]="workHistoryByUser>0 ? 'withData' : 'withoutData' ">
+            <span *ngIf="workHistoryByUser>0">
+                <mat-icon>done</mat-icon>
+                {{'CV_COMPLETENESS_HELPER.PERCENTATGE_RELATION_WITH_WORK_HISTORY_COMPLETED' | translate : {value1: 33, value2: workHistoryByUser} }}
+            </span>
+            <span *ngIf="workHistoryByUser==0">
+                <mat-icon>highlight_off</mat-icon>
+                {{'CV_COMPLETENESS_HELPER.PERCENTATGE_RELATION_WITH_WORK_HISTORY_MISSSING' | translate : {value1: 0} }}
+            </span>            
+        </div>
+        <div [ngClass]="educationHistoryByUser>0 ? 'withData' : 'withoutData' ">
+            <span *ngIf="educationHistoryByUser>0">
+                <mat-icon>done</mat-icon>
+                {{'CV_COMPLETENESS_HELPER.PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_COMPLETED' | translate : {value1: 33, value2: educationHistoryByUser} }}
+            </span>
+            <span *ngIf="educationHistoryByUser==0">
+                <mat-icon>highlight_off</mat-icon>
+                {{'CV_COMPLETENESS_HELPER.PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_MISSING' | translate : {value1: 0} }}
+            </span>
+        </div>
+        <br>        
+        {{'CV_COMPLETENESS_HELPER.CURRENT_PERCENTATGE' | translate : {value: userPercentatge} }}
+        <br>
+        <div style="max-width: 200px">
+            <canvas id="canvas_pie_chart_modal_helper" baseChart
+                      [datasets]="[{ data: [userPercentatge,(100-userPercentatge)],
+                        label: 'PROFILES.COMPLETENESS' | translate , backgroundColor: [
+                      completenessColor,
+                      'rgba(0, 0, 0, 1)'
+                      ]}]"
+                      [labels]="chartLabels"
+                      [options]="chartOptions"
+                      [chartType]="chartType">
+            </canvas>
+        </div>
+    </div>
+
+    <mat-dialog-actions align="end">
+        <div class="modal-footer">      
+    
+            <button type="button" class="btn btn-danger" [mat-dialog-close]="false" id="closeAwardModalWindow">
+                <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
+            </button>
+        </div>
+    </mat-dialog-actions> 
+
+</div>

@@ -154,6 +154,20 @@ export class ProfilesViewComponent implements OnInit {
 
   }
 
+  openHelperCVDialog(userId: number) {
+    
+
+    const dialogRef = this.dialog.open(DialogHelperCVCompleteness, {
+      disableClose: false,
+      width: '550px',
+      data: {userId: userId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+
+  }
+
   isLogged = this.appcomponent.isLogged;
   isAdmin = this.appcomponent.isAdmin;
   isRecruiter = this.appcomponent.isRecruiter;
@@ -1928,4 +1942,115 @@ export class AddItemDialog_modal implements OnInit {
 
     }
 
+}
+
+
+@Component({
+  selector: 'dialog-cv-completeness-dialog',
+  templateUrl: 'dialog-cv-completeness-dialog.html',
+  styleUrls: ['./profiles-view.component.css']
+})
+export class DialogHelperCVCompleteness implements OnInit {
+
+
+  loadingSpinner: boolean = false;
+  skillsByUser: number = 0;
+  workHistoryByUser: number = 0;
+  educationHistoryByUser: number = 0;
+  userPercentatge: number = 0;
+
+  completenessColor: string = "";
+  public chartType = 'pie';
+
+  public chartLabels: Array<any> = [this.translate.instant('PROFILES.COMPLETENESS'), this.translate.instant('PROFILES.NOT_COMPLETENESS')];
+
+  public chartOptions: any = {
+    responsive: true,
+    tooltips: {
+      enabled: true,
+      mode: 'single',
+      callbacks: {
+        label: function (tooltipItems, data) {
+          return data.labels[tooltipItems.index]+": "+data.datasets[0].data[tooltipItems.index] + ' %';
+          //return data.datasets[0].data[tooltipItems.index] + ' %';
+        }
+      }
+    },
+      plugins: {
+      datalabels: {
+        display: true,
+        align: 'top',
+        anchor: 'end',
+        //color: "#2756B3",
+        color: "#222",
+        font: {
+          family: 'FontAwesome',
+          size: 14
+        },
+      
+      },
+      deferred: false,
+      legend: false,
+    },
+
+  };
+
+  constructor(            
+    private cvs: CVService,
+    private translate: TranslateService,
+    public dialogRef: MatDialogRef<DialogHelperCVCompleteness>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogHelperCVData) {}
+
+
+  getUserCV(id:string) {
+    this.loadingSpinner = true;
+    this.userPercentatge = 0;
+    console.log(id);
+    this.cvs
+      .getCV(id)
+      .subscribe((data: any) => {
+        console.log(data);
+
+        this.skillsByUser = data.skills.length;
+        if (this.skillsByUser>0) {
+          this.userPercentatge = this.userPercentatge + 34;
+        }
+        this.workHistoryByUser = data.workHistory.length;
+        if (this.workHistoryByUser>0) {
+          this.userPercentatge = this.userPercentatge + 33;
+        }
+        this.educationHistoryByUser = data.education.length;
+        if (this.educationHistoryByUser>0) {
+          this.userPercentatge = this.userPercentatge + 33;
+        }
+
+        this.completenessColor= 'rgba(30, 144, 255, 1)';
+        if (this.userPercentatge < 20) {
+          this.completenessColor= '#d9534f';
+        }
+        else if (this.userPercentatge < 70) {
+          this.completenessColor= '#337ab7';
+        }
+        else if (this.userPercentatge >= 70) {
+          this.completenessColor= '#4cae4c';
+        }
+
+        this.loadingSpinner = false;
+
+      },
+      error => {            
+        console.log("error recovering CV");
+        this.loadingSpinner = false;
+        this.completenessColor= 'rgba(0, 0, 0, 1)';
+      });
+  }
+
+  ngOnInit() {
+    console.log(this.data);
+    this.getUserCV(this.data.userId.toString());
+  }
+}
+
+export interface DialogHelperCVData {
+  userId: string;
 }
