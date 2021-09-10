@@ -82,13 +82,21 @@
       
                   <div [formGroup]="skillItem" class="form-row">
                       <div class="form-group col-6">
-                        
                         <mat-form-field class="cv-full-width" *ngIf="canEditCV">
-                            <mat-label>{{ 'CV.SKILL_LABEL' | translate }}</mat-label>         
-                            <label [hidden]="!skillItem.get('label').value" >{{ skillItem.get('label').value }}</label>
+                            <mat-label>{{ 'CV.SKILL_LABEL' | translate }}</mat-label>                            
+                            <label [hidden]="!skillItem.get('label').value" >
+                              <span [hidden]="skillItem.get('translation').value==''">{{ skillItem.get('translation').value }}</span>
+                              <span [hidden]="skillItem.get('translation').value!=''">{{ skillItem.get('label').value }}</span>
+                            </label>
                             <input [hidden]="skillItem.get('label').value" matInput required type="text" formControlName="label"  >
                         </mat-form-field>
-                        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.SKILL_LABEL' | translate }}</span> {{skillsCV[i].label}}</span>
+                        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.SKILL_LABEL' | translate }}</span>&nbsp;
+                            <span [hidden]="skillItem.get('translation').value==''">{{ skillItem.get('translation').value }}</span>
+                            <span [hidden]="skillItem.get('translation').value!=''">{{ skillItem.get('label').value }}</span>
+                            <!--
+                            {{skillsCV[i].label}}
+                            -->
+                        </span>
                         
                       </div>
 

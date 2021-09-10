@@ -15,6 +15,7 @@ export class CVService {
  
   uri = environment.cvUrl;
   uriSkillCV = environment.skillsCV;
+  uriSkillCV_v2 = environment.skillCV;
   //uri = 'http://localhost:4000/cvs';
 
  
@@ -139,6 +140,35 @@ export class CVService {
             return throwError( 'Something went wrong!' );
         })
     )
-  }  
+  }
+  
+  
+  getCompetencesSkillFields() {
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    //return this.httpClient.get(`${this.uri}/${userId}/skillsRefs`, {headers:headers}).
+    return this.httpClient.get(`${this.uriSkillCV_v2}/getFields`, {headers:headers}).
+    pipe(
+        map((data: []) => {
+            return data;
+        }), catchError( error => {
+            return throwError( 'Something went wrong!' );
+        })
+    )
+  }
+
+  getCompetencesSkillsByField(searchTerm:string) {
+    let headers = this.authService.createQCAuthorizationHeader();
+
+    //return this.httpClient.get(`${this.uri}/${userId}/skillsRefs`, {headers:headers}).
+    return this.httpClient.get(`${this.uriSkillCV_v2}/searchByField/`+searchTerm, {headers:headers}).
+    pipe(
+        map((data: []) => {
+            return data;
+        }), catchError( error => {
+            return throwError( 'Something went wrong!' );
+        })
+    )
+  }
 
 }

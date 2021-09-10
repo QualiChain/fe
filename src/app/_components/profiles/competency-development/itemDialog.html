@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ 'COMPETENCY_LEVEL.HEADER' | translate }} - {{mode}} {{skillName}}</h1>
+<h1 mat-dialog-title>{{ 'COMPETENCY_LEVEL.HEADER' | translate }} - {{mode}} {{skillNameTranslation}}</h1>
 
 <div class="row" *ngIf="loadingSpinner">
   <div class="col-md-4 col-md-offset-4">
@@ -15,16 +15,28 @@
             <input matInput required [(ngModel)]="item.competency" name="competency" value="competency" placeholder="{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}">
         </mat-form-field>
       -->
-        <mat-form-field class="item-full-width" *ngIf="mode=='Create'">          
+
+
+        <mat-form-field class="item-full-width">
+            <mat-label>{{ 'CV.SKILL_FIELD' | translate }}</mat-label>  
+            <mat-select [(ngModel)]="skill_field" name="skill_field" (selectionChange)="SkillFieldOptionSelected($event)" required>
+                <mat-option *ngFor="let skill_value of skillsFields" [value]="skill_value">
+                  {{ 'CV.SKILL_FIELD_VALUE.'+skill_value | uppercase | translate}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>                        
+
+      <div *ngIf="skill_field">
+        <mat-form-field class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
             <input required type="text"
-                   placeholder="Pick one"
+                   placeholder="{{ 'PICK_ONE' | translate }}"
                    matInput
                    [formControl]="myControl"
                    [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="OptionSelected($event)">
-              <mat-option *ngFor="let opt of options of filteredOptions | async" [id]="opt.id" [value]="opt.name">
-                {{opt.name}}
+              <mat-option *ngFor="let opt of options of filteredOptions | async" [id]="opt.id" [value]="opt.translations[currentUserLang] ">
+                {{opt.translations[currentUserLang]}}
               </mat-option>
             </mat-autocomplete>
         </mat-form-field>
@@ -81,7 +93,7 @@
             <mat-label>{{ 'COMPETENCY_LEVEL.COMMENT' | translate }}</mat-label>
             <textarea matInput [(ngModel)]="item.comment" name="comment" placeholder="{{ 'COMPETENCY_LEVEL.COMMENT' | translate }}"></textarea>
           </mat-form-field>
-
+        </div>
     </form> 
 </mat-dialog-content>
 

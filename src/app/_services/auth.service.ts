@@ -66,6 +66,10 @@ export class AuthService {
     //localStorage.removeItem('QCP');
     localStorage.removeItem('qc.candidatesList');
     localStorage.removeItem('qc.recruitment');
+
+    localStorage.removeItem('last_skillsList');
+    localStorage.removeItem('last_skillField');
+
     this.currentUserSubject.next(null);
   }
   

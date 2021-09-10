@@ -770,7 +770,15 @@
     "EDUCATION_FROM": "Από",
     "EDUCATION_TO": "εως",
     "EDUCATION_ORGANISATION": "Οργανισμός",
-    "EDUCATION_DESCRIPTION": "Περιγραφή"
+    "EDUCATION_DESCRIPTION": "Περιγραφή",
+    "SKILL_FIELD": "Πεδίο δεξιοτήτων",
+    "SKILL_FIELD_VALUE": {
+      "HEALTH": "Υγεία",
+      "TEACHING": "Διδασκαλία",
+      "LEGALSOCIALCULTURAL": "Νομική Κοινωνική Πολιτιστική",
+      "BUSINESSADMINISTRATION": "Διοίκηση Επιχειρήσεων",
+      "SCIENCEENGINEERING": "Επιστήμη Μηχανική"
+    }    
   },
   "MCDSS": {
     "TITLE": "Σύστημα πολυκριτηριακής υποστήριξης αποφάσεων", 
@@ -1225,5 +1233,6 @@
     "PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_COMPLETED": "Your educational history is {{value1}}% of 33%, currently you have {{value2}} educationals introduced.",
     "PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_MISSING": "Your educational history is {{value1}}% of 33%, currently you have none introduced.",
     "CURRENT_PERCENTATGE": "Your current percentatge is {{value}}%"
-  }
+  },
+  "PICK_ONE": "Επιλέξτε ένα"
 }
