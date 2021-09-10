@@ -770,7 +770,15 @@
     "EDUCATION_FROM": "From",
     "EDUCATION_TO": "To",
     "EDUCATION_ORGANISATION": "Organisation",
-    "EDUCATION_DESCRIPTION": "Description"
+    "EDUCATION_DESCRIPTION": "Description",
+    "SKILL_FIELD": "Skill Field",
+    "SKILL_FIELD_VALUE": {
+      "HEALTH": "Health",
+      "TEACHING": "Teaching",
+      "LEGALSOCIALCULTURAL": "Legal Social Cultural",
+      "BUSINESSADMINISTRATION": "Business Administration",
+      "SCIENCEENGINEERING": "Science Enginnering"
+    }
   },
   "MCDSS": {
     "TITLE": "Multicriteria Decision Support System",
@@ -1225,5 +1233,6 @@
     "PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_COMPLETED": "Your educational history is {{value1}}% of 33%, currently you have {{value2}} educationals introduced.",
     "PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_MISSING": "Your educational history is {{value1}}% of 33%, currently you have none introduced.",
     "CURRENT_PERCENTATGE": "Your current percentatge is {{value}}%"
-  }
+  },
+  "PICK_ONE": "Pick one"
 }

@@ -26,6 +26,7 @@ export const environment = {
   //jobsProfilesUrl : '/proxyKBZ/profiles',
   jobsProfilesUrl : 'http://vpnknowledgebiz.ddns.net/proxyKBZ/profiles',
   skillsUrl : 'http://qualichain.epu.ntua.gr:5004/skills',
+  skillCV : 'http://vpnknowledgebiz.ddns.net/proxyKBZ/skill',
   specializationsURL : 'http://qualichain.epu.ntua.gr:5004/specializations',
   notificationsURL : 'http://qualichain.epu.ntua.gr:5004/notifications',
   //cvUrl : '/proxyKBZ/cv',

@@ -51,6 +51,7 @@ import {  MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { Subscription } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
 import { SpecializationsService } from '../../../_services/specializations.service';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 @Component({
   selector: 'app-profiles-view',
@@ -1026,11 +1027,20 @@ connectToOU() {
       skillsHeaderLabel = this.translate.instant('CV.SKILLS');
       WHHeaderLabel = this.translate.instant('CV.WORK_HISTORY');
       educationHeaderLabel = this.translate.instant('CV.EDUCATION_HISTORY');
+      
+      let currentLang = localStorage.getItem('last_language'); 
+      if (!currentLang) {
+        currentLang = 'en';
+      }
 
       if (cvDataIn.skills.length>0) {
         skills.push([ this.translate.instant('CV.SKILL_LABEL') ,this.translate.instant('CV.SKILL_PROFIENCY_LEVEL'), this.translate.instant('CV.SKILL_COMMENT')]);
         cvDataIn.skills.forEach(element => {
-          skills.push([element.skillRefLabel, this.translate.instant('COMPETENCY_LEVEL.LEVELS.'+element.proficiencyLevel.toUpperCase()), element.skillRefComment])
+          let skilLabel = element.skillRefLabel;
+          if (element.translations[currentLang]) {
+            skilLabel = element.translations[currentLang];
+          }
+          skills.push([skilLabel, this.translate.instant('COMPETENCY_LEVEL.LEVELS.'+element.proficiencyLevel.toUpperCase()), element.skillRefComment])
         });
       }
 
@@ -1371,6 +1381,12 @@ export class CVDialog_modal implements OnInit {
     }
     
     getUserCV(id:string) {
+
+      let currentLang = localStorage.getItem('last_language'); 
+      if (!currentLang) {
+        currentLang = 'en';
+      }
+
       this.cvs
       .getCV(id)
       .subscribe((data: any) => {
@@ -1386,6 +1402,10 @@ export class CVDialog_modal implements OnInit {
           if(data.skills){
            data.skills.forEach(element => {
             //console.log(element);
+            let trans = element.label;
+            if (element.translations[currentLang]) {
+              trans = element.translations[currentLang];
+            }
             if (element.proficiencyLevel) {
               this.t.push(this.formBuilder.group({
                 skillID: [element.skillID, [Validators.required]],
@@ -1398,6 +1418,12 @@ export class CVDialog_modal implements OnInit {
                 proficiencyLevel: [element.proficiencyLevel],
                 //comment: [element.skillRefComment, [Validators.required]],
                 comment: [element.skillRefComment],
+                translation: [trans],
+                translations: [{
+                  "el": element.translations['el'],
+                  "pt": element.translations['pt'],
+                  "en": element.translations['en']
+                  }],
               }));
             }
             else {
@@ -1412,6 +1438,12 @@ export class CVDialog_modal implements OnInit {
                 proficiencyLevel: [element.skillLevel],
                 //comment: [element.skillRefComment, [Validators.required]],
                 comment: [element.skillRefComment],
+                translation: [trans],
+                translations: [{
+                  "el": element.translations['el'],
+                  "pt": element.translations['pt'],
+                  "en": element.translations['en']
+                  }],
               }));
             }
             });
@@ -1557,6 +1589,12 @@ openAddNewItem(e, type) {
           proficiencyLevel: [result.proficiencyLevel],
           //comment: [result.comment, [Validators.required]],
           comment: [result.comment],
+          translation: [result.translation, [Validators.required]],
+          translations: [{
+            "el": '',
+            "pt": '',
+            "en": ''
+            }]
         };
         
         this.t.push(this.formBuilder.group(newItem));
@@ -1595,6 +1633,12 @@ addFormGroupItem(e, type) {
       proficiencyLevel: [''],
       //comment: ['', [Validators.required]],
       comment: [''],
+      translation: [''],
+      translations: [{
+        "el": '',
+        "pt": '',
+        "en": ''
+        }],
     }));
   }
   else if (type=='workitem') {
@@ -1683,8 +1727,6 @@ onSubmit() {
       }
     );
   }
-
-
   
 }
 
@@ -1770,6 +1812,7 @@ export class AddItemDialog_modal implements OnInit {
   //skill
   skill_id: string = "";
   skill_label: string = "";
+  skill_label_translation: string = "";
   skill_profiency_level: string = "";
   skill_comment: string = "";
   
@@ -1803,8 +1846,12 @@ export class AddItemDialog_modal implements OnInit {
   autocompletOption :any;
   @ViewChild(MatAutocompleteTrigger) trigger: MatAutocompleteTrigger;
   subscription: Subscription;
+  skillsFields: any[] = [];
+  skill_field: string = "";
+  currentUserLang = localStorage.getItem('last_language');
 
   constructor(
+    private qcStorageService: QCStorageService,
     private ss: SkillsService,
     private cs: CVService,
     private us: UtilsService,
@@ -1827,6 +1874,87 @@ export class AddItemDialog_modal implements OnInit {
       return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
     }
 
+    getSkillsFields() {
+      this.cs
+      .getCompetencesSkillFields()
+      .subscribe((data: any[]) => {
+        //console.log(data);
+        this.skillsFields = data;
+        
+
+        if (localStorage.getItem('last_skillField')) {
+          this.skill_field = localStorage.getItem('last_skillField');
+          
+          let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+          if (last_skillsList) {
+            console.log(last_skillsList);
+
+            last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+            this.options = [];
+            this.options = last_skillsList;
+            console.log(this.options);
+            this.loadingSpinner = false;
+          }
+          else {
+            this.getFilteredSkillsList(this.skill_field);
+          }          
+        }
+        else {
+          this.loadingSpinner = false;
+        }
+      },
+      error => {
+        console.log("Error getting skills fields");
+        this.loadingSpinner = false;
+      });
+    }
+
+    getFilteredSkillsList(textToFilter: string) {
+
+      localStorage.removeItem('last_skillsList');
+      this.loadingSpinner = true;
+      this.options = [];
+      let currentLang = localStorage.getItem('last_language'); 
+      if (!currentLang) {
+        currentLang = 'en';
+      }
+      //console.log("currentLang: "+currentLang);
+      this.cs
+      .getCompetencesSkillsByField(textToFilter)
+      .subscribe((data: any[]) => {
+        let competencesList = [];
+        for (let i in data) {
+          
+          //console.log(data[i].uri);
+          //console.log(data[i].label);
+          
+          if (data[i].uri) {
+            //console.log(listOfCurrentSkillsIds);
+            //console.log(data[i].uri);
+            //only skill we don't have           
+             competencesList.push({'id':data[i].uri, 'name':data[i].label, 'translation': data[i].translations[currentLang], 'translations': data[i].translations}) 
+          }
+          
+        }
+        competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
+        //console.log("sorted list")
+        //console.log(competencesList);
+        this.options = competencesList;
+
+        let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
+        localStorage.setItem('last_skillsList', encryptedData);
+
+        
+        this.loadingSpinner = false;
+      },
+      error => {
+        console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
+        this.loadingSpinner = false;
+      });
+      
+    }
+
     getSkillsList() {
   
        this.cs
@@ -1837,7 +1965,7 @@ export class AddItemDialog_modal implements OnInit {
          //console.log(typeof data);
          let competencesList = [];
          for (let i in data) {
-           //console.log(i);
+           console.log(i);
            //console.log(data[i]);
            if (data[i]) {
              //console.log(listOfCurrentSkillsIds);
@@ -1859,11 +1987,29 @@ export class AddItemDialog_modal implements OnInit {
       
     }
 
+    SkillFieldOptionSelected($event) {
+      //console.log($event);
+      this.options = [];
+      localStorage.setItem('last_skillField', $event.value);
+      this.getFilteredSkillsList($event.value);
+    }
+
     OptionSelected($event: MatAutocompleteSelectedEvent){
       //console.log($event);
       this.skill_id = $event.option.id;
-      this.skill_label = $event.option.value;
+      //console.log($event.option.id);
+      //console.log(this.options);
+
+      let selectedItemData =  this.options.find(x => x.id == $event.option.id);
+      //console.log(selectedItemData);
+      let skilOriginalName = selectedItemData.name;
+      let skilTranslationName = selectedItemData.translations[this.currentUserLang];
+
+      this.skill_label = skilOriginalName;
+      this.skill_label_translation = skilTranslationName;
+
       this.myControl.setValue($event.option.value);
+      //this.myControl.setValue(selectedSkillName);
     }
   
 
@@ -1900,7 +2046,8 @@ export class AddItemDialog_modal implements OnInit {
         map(value => this._filter(value))
       );
 
-      this.getSkillsList();
+      //this.getSkillsList();
+      this.getSkillsFields();
 
     }
 
@@ -1914,7 +2061,8 @@ export class AddItemDialog_modal implements OnInit {
           'id': this.skill_id,
           "label": this.skill_label,
           "proficiencyLevel": this.skill_profiency_level,
-          "comment": this.skill_comment
+          "comment": this.skill_comment,
+          "translation": this.skill_label_translation
         }
       }
       else if (this.data.type=='workitem') {
@@ -1936,7 +2084,7 @@ export class AddItemDialog_modal implements OnInit {
           "description": this.education_description
         }
       }
-
+      //console.log(dataToReturn);
       this.dialogRef.close(dataToReturn);
       
 
@@ -2009,7 +2157,7 @@ export class DialogHelperCVCompleteness implements OnInit {
     this.cvs
       .getCV(id)
       .subscribe((data: any) => {
-        console.log(data);
+        //console.log(data);
 
         this.skillsByUser = data.skills.length;
         if (this.skillsByUser>0) {

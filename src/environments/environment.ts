@@ -32,6 +32,7 @@ export const environment = {
   cvUrl : 'http://vpnknowledgebiz.ddns.net/proxyKBZ/cv',
   //skillsCV : '/proxyKBZ/skills',
   skillsCV : 'http://vpnknowledgebiz.ddns.net/proxyKBZ/skills',
+  skillCV : 'http://vpnknowledgebiz.ddns.net/proxyKBZ/skill',
   //jobmatchingUrl : '/proxyKBZ/jobs',
   jobmatchingUrl : 'http://vpnknowledgebiz.ddns.net/proxyKBZ/jobs',
   //jobpostUrl : '/proxyKBZ/jobs',

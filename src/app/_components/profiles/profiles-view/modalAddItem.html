@@ -16,16 +16,29 @@
         <div *ngIf="data.type=='skillitem' && !loadingSpinner" class="form-row">
 
             <div class="form-group col-6">
+                <mat-form-field class="cv-full-width">
+                    <mat-label>{{ 'CV.SKILL_FIELD' | translate }}</mat-label>  
+                    <mat-select [(ngModel)]="skill_field" name="skill_field" (selectionChange)="SkillFieldOptionSelected($event)" required>
+                        <mat-option *ngFor="let skill_value of skillsFields" [value]="skill_value">
+                          {{ 'CV.SKILL_FIELD_VALUE.'+skill_value | uppercase | translate}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>                        
+            </div>
+            
+            <div *ngIf="skill_field">
+
+            <div class="form-group col-6">
                 <mat-form-field class="cv-full-width">          
                     <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
                     <input required type="text"
-                           placeholder="Pick one"
+                           placeholder="{{ 'PICK_ONE' | translate }}"
                            matInput
                            [formControl]="myControl"
                            [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="OptionSelected($event)">
-                      <mat-option *ngFor="let opt of options of filteredOptions | async" [id]="opt.id" [value]="opt.name">
-                        {{opt.name}}
+                      <mat-option *ngFor="let opt of options of filteredOptions | async" [id]="opt.id" [value]="opt.translations[currentUserLang] ">
+                        {{opt.translations[currentUserLang]}}
                       </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
@@ -59,7 +72,7 @@
                     <input matInput type="text" [(ngModel)]="skill_comment" name="skill_comment">
                 </mat-form-field>          
             </div>
-
+            </div>
         </div>
 
         <div *ngIf="data.type=='workitem'" class="form-row">

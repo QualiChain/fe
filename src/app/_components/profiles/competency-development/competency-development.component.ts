@@ -26,6 +26,7 @@ import {  MatAutocompleteTrigger } from '@angular/material/autocomplete';
 //MatOptionSelectionChange
 import { Subscription } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
+import { QCStorageService } from '../../../_services/QC_storage.services';
 
 class competencyLevel {
   id?: number;
@@ -67,6 +68,9 @@ export class CompetencyDevelopmentComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   fromURL: boolean = false;
 
+  currentLang = localStorage.getItem('last_language'); 
+  
+
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;  
@@ -90,6 +94,10 @@ export class CompetencyDevelopmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if (!this.currentLang) {
+      this.currentLang = 'en';
+    }
 
     if (!this.userId) {
       this.route.params.subscribe(params => {
@@ -123,11 +131,23 @@ export class CompetencyDevelopmentComponent implements OnInit {
     if (this.userId) {
       sUId = this.userId.toString();
     
+      
+
       this.cs.getCompetencesByUser(sUId)
       .subscribe((data: any[]) => {
         //console.log(data);
         const filteredData = data.filter(row => row != null);
         //console.log(filteredData);
+
+        /*
+        filteredData.forEach(element => {
+          console.log(element.translations[this.currentLang]);
+          if(element.translations[this.currentLang]) {
+
+          }
+        });
+        */
+
 
         //let dataTmp = data;
         let dataTmp = filteredData;
@@ -235,6 +255,7 @@ export class ItemCDDialog_modal implements OnInit {
   autocompletOption :any;
   label: string = null;
   skillName: string = null;
+  skillNameTranslation: string = null;
 
   itemToPost: competencyLevelToPost = {
     "label": null,
@@ -246,6 +267,10 @@ export class ItemCDDialog_modal implements OnInit {
     "progress": null,
   }
 
+  skillsFields: any[] = [];
+  skill_field: string = "";
+  currentUserLang = localStorage.getItem('last_language');
+
   competencies: CompetencyLevelValues[] = [
     {value: 'basic', viewValue: 'Basic'},
     {value: 'medium', viewValue: 'Medium'},
@@ -256,7 +281,10 @@ export class ItemCDDialog_modal implements OnInit {
   subscription: Subscription;
   loadingSpinner: boolean = true;
 
+  listOfCurrentSkillsByUser: any[] = [];
+
   constructor(
+    private qcStorageService: QCStorageService,
     private ss: SkillsService,
     private cs: CVService,
     public dialogRef: MatDialogRef<ItemCDDialog_modal>,    
@@ -273,6 +301,116 @@ export class ItemCDDialog_modal implements OnInit {
 
     return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
   }
+
+
+  SkillFieldOptionSelected($event) {
+    console.log($event);
+    this.options = [];
+    localStorage.setItem('last_skillField', $event.value);
+    this.getFilteredSkillsList($event.value);
+  }
+
+  getSkillsFields() {
+    this.cs
+    .getCompetencesSkillFields()
+    .subscribe((data: any[]) => {
+      //console.log(data);
+      this.skillsFields = data;
+      
+
+      if (localStorage.getItem('last_skillField')) {
+        this.skill_field = localStorage.getItem('last_skillField');
+        
+        let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+        if (last_skillsList) {
+          //console.log(last_skillsList);
+
+          last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+          //console.log(last_skillsList);
+          let competencesList = [];
+          for (let i in last_skillsList) {
+
+            if (last_skillsList[i].id) {
+              //console.log(listOfCurrentSkillsIds);
+              //console.log(data[i].uri);
+              //only skill we don't have      
+              //console.log(last_skillsList[i].id);
+              if (!this.listOfCurrentSkillsByUser.includes(last_skillsList[i].id.replace("saro:",""))) {     
+                competencesList.push({'id':last_skillsList[i].id, 'name':last_skillsList[i].name, 'translation': last_skillsList[i].translations[this.currentUserLang], 'translations': last_skillsList[i].translations}) 
+              }
+            }
+
+          }
+
+          this.options = [];
+          //this.options = last_skillsList;
+          this.options = competencesList;
+          //console.log(this.options);
+          this.loadingSpinner = false;
+        }
+        else {
+          this.getFilteredSkillsList(this.skill_field);
+        }          
+      }
+      else {
+        this.loadingSpinner = false;
+      }
+    },
+    error => {
+      console.log("Error getting skills fields");
+      this.loadingSpinner = false;
+    });
+  }
+
+  getFilteredSkillsList(textToFilter: string) {
+
+    localStorage.removeItem('last_skillsList');
+    console.log(this.listOfCurrentSkillsByUser);
+    this.loadingSpinner = true;
+    this.options = [];
+    let currentLang = localStorage.getItem('last_language'); 
+    if (!currentLang) {
+      currentLang = 'en';
+    }
+    //console.log("currentLang: "+currentLang);
+    this.cs
+    .getCompetencesSkillsByField(textToFilter)
+    .subscribe((data: any[]) => {
+      let competencesList = [];
+      for (let i in data) {
+        
+        //console.log(data[i].uri);
+        //console.log(data[i].label);
+        
+        if (data[i].uri) {
+          //console.log(listOfCurrentSkillsIds);
+          //console.log(data[i].uri);
+          //only skill we don't have      
+          //console.log(data[i].uri);
+          if (!this.listOfCurrentSkillsByUser.includes(data[i].uri.replace("saro:",""))) {     
+            competencesList.push({'id':data[i].uri, 'name':data[i].label, 'translation': data[i].translations[currentLang], 'translations': data[i].translations}) 
+          }
+        }
+        
+      }
+      competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
+      //console.log("sorted list")
+      //console.log(competencesList);
+      this.options = competencesList;
+
+      let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
+      localStorage.setItem('last_skillsList', encryptedData);
+
+      
+      this.loadingSpinner = false;
+    },
+    error => {
+      console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
+      this.loadingSpinner = false;
+    });
+    
+  }  
 
   getFinalSkillsList(listOfCurrentSkillsIds) {
     console.log(listOfCurrentSkillsIds);
@@ -324,10 +462,12 @@ export class ItemCDDialog_modal implements OnInit {
     .subscribe((data: any[]) => {
       //console.log(data);
       let listOfCurrentSkillsIds = [];
+      this.listOfCurrentSkillsByUser = [];
       for (let i in data) {
         //console.log(data[i]['skillID']);
         //console.log(data[i]['skillID']);
         listOfCurrentSkillsIds.push(data[i]['skillID']);
+        this.listOfCurrentSkillsByUser.push(data[i]['skillID']);
       }
 
       /*
@@ -339,13 +479,15 @@ export class ItemCDDialog_modal implements OnInit {
       });
       */
 
-      this.getFinalSkillsList(listOfCurrentSkillsIds);
+      //this.getFinalSkillsList(listOfCurrentSkillsIds);
+      this.getSkillsFields();
     
 
     },
     error => {
       console.log("Error loading personal skills");  
-      this.getFinalSkillsList([]);                    
+      //this.getFinalSkillsList([]);                  
+      this.getSkillsFields();  
     }); 
 
     
@@ -399,6 +541,12 @@ export class ItemCDDialog_modal implements OnInit {
   }
 
   ngOnInit() {
+
+    let currentLang = localStorage.getItem('last_language'); 
+    if (!currentLang) {
+      currentLang = 'en';
+    }
+
     this.dateAdapter.setLocale('en-GB');
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -418,11 +566,19 @@ export class ItemCDDialog_modal implements OnInit {
       //console.log(this.data.element)
       //console.log(this.data.element);
       let dataAPI: any = this.data.element;
-      //console.log(dataAPI);
+
+      console.log(currentLang);
+      console.log(dataAPI);
       if (dataAPI.skillName) {
         //this.myControl.setValue('greek');
         this.myControl.setValue(dataAPI.skillName);
       }
+
+      this.skillNameTranslation  = dataAPI.label;
+      if (dataAPI.translations[currentLang]) {
+        this.skillNameTranslation = dataAPI.translations[currentLang];
+      }     
+
       //this.itemToPost.label = dataAPI.label;
 
       this.label = dataAPI.label;
