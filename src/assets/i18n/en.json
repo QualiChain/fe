@@ -875,6 +875,10 @@
     "SPECIALIZATIONS": {
       "LABEL": "Specializations",
       "PLACEHOLDER": "Specializations"
+    },
+    "RECRUITMENT_ORGANIZATION": {
+      "LABEL": "Recruitment organisation",
+      "ALL": "All organisations"
     }
   },
   "FILE": {

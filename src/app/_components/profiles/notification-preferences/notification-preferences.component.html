@@ -27,6 +27,20 @@
             </div>
         </div>
         <div class="row">          
+            <!-- JobRecruitmentOrganization -->
+            <div class="form-group field" >
+                <mat-form-field class="notification-notfull-width">
+                    <mat-label>{{ 'NOTIFICATION_PREFERENCES.RECRUITMENT_ORGANIZATION.LABEL' | translate }}</mat-label>
+                    <mat-select required name="recruitmentorganisation" [(ngModel)]="userPreferences.organisation" ngDefaultControl>
+                        <mat-option [value]="0">{{ 'NOTIFICATION_PREFERENCES.RECRUITMENT_ORGANIZATION.ALL' | translate }}</mat-option>
+                        <mat-option *ngFor="let recruitmentOrganization of listAllRecruitmentOrganizations" [value]="recruitmentOrganization.id">
+                            {{recruitmentOrganization.title}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>  
+            </div>
+        </div>
+        <div class="row">          
             <!--Locations-->
             <div class="form-group field" >
                 <mat-form-field class="notification-notfull-width">
