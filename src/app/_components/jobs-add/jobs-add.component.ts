@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobsService } from '../../_services/jobs.service';
@@ -19,6 +19,10 @@ import { SpecializationsService } from '../../_services/specializations.service'
 
 import RecruitmentOrganisation from '../../_models/recruitmentorganisation';
 import { RecruitmentOrganisationService } from '../../_services/recruitmentorganisation.services';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 //import { tap } from 'rxjs/operators';
 export interface Specialization {
@@ -56,7 +60,10 @@ export class JobsAddComponent implements OnInit {
     jobRecruitmentOrganization: number = null;
     showLoading : boolean = true;
 
+    currentUserLang = localStorage.getItem('last_language');
+
     constructor(      
+      public addItemDialog: MatDialog,
       private ros: RecruitmentOrganisationService,
       private ss: SpecializationsService,
       private cs: CVService,
@@ -75,6 +82,32 @@ export class JobsAddComponent implements OnInit {
       return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
     }
 
+    openAddNewItem(e, type) {
+      const dialogRef = this.addItemDialog.open(AddJobItemDialog_modal, {
+        disableClose: true,
+        width: '550px',
+        data: {type: type}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        //console.log(result);
+        if (result!=false) {
+          if (type=='skillitem') {
+            //console.log(result);
+            let newJobSkill = {} as JobSkill;
+            newJobSkill.label = result.label;
+            newJobSkill.skillURI = result.id;
+            newJobSkill.proficiencyLevel = result.proficiencyLevel; 
+            newJobSkill.priorityLevel = result.priorityLevel; 
+            newJobSkill.translation = result.translation; 
+            this.dataIn.skillReq.push(newJobSkill);
+
+
+          }
+        }
+      });
+
+    }
     
     OptionSelected(event, i){
       //console.log(event);
@@ -133,7 +166,8 @@ export class JobsAddComponent implements OnInit {
           uri: ['', Validators.required ],
           label: ['', Validators.required ],
           proficiencyLevel:  ['', Validators.required ],
-          priorityLevel:  ['', Validators.required ]
+          priorityLevel:  ['', Validators.required ],
+          translation:  ['']
       });
     }
 
@@ -229,6 +263,9 @@ export class JobsAddComponent implements OnInit {
 
 
       this.jobDataToPost = dataToSend;
+      for (let i=0; i<dataToSend.skillReq.length; i++) {
+        delete dataToSend.skillReq[i]['translation'];
+      }
       //console.log(dataToSend);
 
       this.js.getLastJobId().subscribe(
@@ -260,8 +297,6 @@ export class JobsAddComponent implements OnInit {
 		      //this.router.navigate(["/jobs"]);          
         }
       );
-
-
 
     }
     
@@ -304,7 +339,10 @@ export class JobsAddComponent implements OnInit {
           newJobSkill.label = dataObject.skillReq[i].label;
           newJobSkill.priorityLevel = dataObject.skillReq[i].priorityLevel;
           newJobSkill.proficiencyLevel = dataObject.skillReq[i].proficiencyLevel;
-          
+
+          newJobSkill.label = dataObject.skillReq[i].label;
+          newJobSkill.translation = dataObject.skillReq[i].translations[this.currentUserLang];
+
           if (dataObject.skillReq[i].hasOwnProperty('skillURI') ) {
             newJobSkill.skillURI = dataObject.skillReq[i].skillURI;
           }
@@ -332,6 +370,7 @@ export class JobsAddComponent implements OnInit {
 */
       //this.angForm.setValue(dataIn);
 
+      this.showLoading = false;
     }
 
 
@@ -410,7 +449,7 @@ export class JobsAddComponent implements OnInit {
         map(value => this._filter(value))
       );
 
-    this.getSkillsList();
+    //this.getSkillsList();
     this.getSpecializations();
 
     this.dataIn = {id: null, startDate: "", endDate: "", label:"", jobDescription:"",jobLocation:"", contractType:"", seniorityLevel:"",
@@ -426,8 +465,9 @@ export class JobsAddComponent implements OnInit {
         this.js.getJob(this.jobId).subscribe(
           res => {
             //console.log("Request OK");
-            this.loadDataJob(res);
             //console.log(res);
+            this.loadDataJob(res);
+            //console.log(res);            
           },
           error => {
             //console.log("Error getting data");
@@ -442,6 +482,203 @@ export class JobsAddComponent implements OnInit {
       }
 
     });
+
+  }
+
+}
+
+
+
+
+/************* */
+export interface AddItemDialogData {
+  type: string;
+}
+
+
+@Component({
+  selector: 'AddIJobtemDialog',
+  templateUrl: './modalJobAddItem.html',
+  styleUrls: ['./jobs-add.component.css']
+})
+export class AddJobItemDialog_modal implements OnInit {
+  
+  //skill
+  skill_id: string = "";
+  skill_label: string = "";
+  skill_label_translation: string = "";
+  skill_profiency_level: string = "";
+  skill_priority_level: string = "";
+  
+  filteredOptions: Observable<string[]>;
+  myControl: FormControl;
+  options: any[] = [];
+  loadingSpinner : boolean = false;
+  skillsFields: any[] = [];
+  skill_field: string = "";
+  currentUserLang = localStorage.getItem('last_language');
+  filteredData: any;
+
+  
+
+  constructor(
+    private qcStorageService: QCStorageService,
+    private cs: CVService,
+    public dialogRef: MatDialogRef<AddJobItemDialog_modal>,
+    @Inject(MAT_DIALOG_DATA) public data: AddItemDialogData) {
+
+      this.myControl = new FormControl();
+      this.filteredData = this.myControl.valueChanges
+      .pipe(
+      startWith(null),
+      map(name => this._filter(name))
+      );
+
+    }
+
+    private _filter(value: string): string[] {
+    
+      const filterValue = value.toString().toLowerCase();   
+  
+      return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    }
+
+    addSkillToJob() {
+      var dataToReturn = {};
+
+      if (this.data.type=='skillitem') {
+        dataToReturn = {
+          'id': this.skill_id,
+          "label": this.skill_label,
+          "proficiencyLevel": this.skill_profiency_level,
+          "priorityLevel": this.skill_priority_level,
+          "translation": this.skill_label_translation
+        }
+      }      
+      //console.log(dataToReturn);
+      this.dialogRef.close(dataToReturn);
+
+    }
+
+    SkillFieldOptionSelected($event) {
+      //console.log($event);
+      this.options = [];
+      localStorage.setItem('last_skillField', $event.value);
+      this.getFilteredSkillsList($event.value);
+    }    
+
+    OptionSelected($event: MatAutocompleteSelectedEvent){
+      //console.log($event);
+      this.skill_id = $event.option.id;
+      //console.log($event.option.id);
+      //console.log(this.options);
+
+      let selectedItemData =  this.options.find(x => x.id == $event.option.id);
+      //console.log(selectedItemData);
+      let skilOriginalName = selectedItemData.name;
+      let skilTranslationName = selectedItemData.translations[this.currentUserLang];
+
+      this.skill_label = skilOriginalName;
+      this.skill_label_translation = skilTranslationName;
+      
+      this.myControl.setValue($event.option.value);
+      //this.myControl.setValue(selectedSkillName);
+    }
+
+    getSkillsFields() {
+
+      this.loadingSpinner = true;
+
+      this.cs
+      .getCompetencesSkillFields()
+      .subscribe((data: any[]) => {
+        //console.log(data);
+        this.skillsFields = data;
+        
+
+        if (localStorage.getItem('last_skillField')) {
+          this.skill_field = localStorage.getItem('last_skillField');
+          
+          let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+          if (last_skillsList) {
+            //console.log(last_skillsList);
+
+            last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+            this.options = [];
+            this.options = last_skillsList;
+            //console.log(this.options);
+            this.loadingSpinner = false;
+          }
+          else {
+            this.getFilteredSkillsList(this.skill_field);
+          }          
+        }
+        else {
+          this.loadingSpinner = false;
+        }
+      },
+      error => {
+        console.log("Error getting skills fields");
+        this.loadingSpinner = false;
+      });
+    }
+
+    getFilteredSkillsList(textToFilter: string) {
+
+      localStorage.removeItem('last_skillsList');
+      this.loadingSpinner = true;
+      this.options = [];
+      let currentLang = localStorage.getItem('last_language'); 
+      if (!currentLang) {
+        currentLang = 'en';
+      }
+      //console.log("currentLang: "+currentLang);
+      this.cs
+      .getCompetencesSkillsByField(textToFilter)
+      .subscribe((data: any[]) => {
+        let competencesList = [];
+        for (let i in data) {
+          
+          //console.log(data[i].uri);
+          //console.log(data[i].label);
+          
+          if (data[i].uri) {
+            //console.log(listOfCurrentSkillsIds);
+            //console.log(data[i].uri);
+            //only skill we don't have           
+             competencesList.push({'id':data[i].uri, 'name':data[i].label, 'translation': data[i].translations[currentLang], 'translations': data[i].translations}) 
+          }
+          
+        }
+        competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
+        //console.log("sorted list")
+        //console.log(competencesList);
+        this.options = competencesList;
+
+        let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
+        localStorage.setItem('last_skillsList', encryptedData);
+
+        
+        this.loadingSpinner = false;
+      },
+      error => {
+        console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
+        this.loadingSpinner = false;
+      });
+      
+    }
+
+
+  ngOnInit() {
+
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
+    this.getSkillsFields();
 
   }
 

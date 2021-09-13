@@ -151,6 +151,12 @@
                 <div class="card mb-3">
                   <div class="card-header">
                     <span>{{ 'JOBS.REQUIRED_SKILLS' | translate }}</span>
+
+                    <a class="btn btn-primary float-right" ng-href="" (click)="openAddNewItem($event, 'skillitem')">
+                      <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                      {{ 'BUTTON.ADD' | translate }}
+                    </a>  
+
                   </div>
                   <div class="card-body">
   
@@ -178,6 +184,7 @@
                           </mat-autocomplete>
                       </mat-form-field>
                     -->
+                    <!--
                       <mat-form-field class="create-job-full-width" >
                         <mat-select required ngDefaultControl [(ngModel)]="skill.skillURI" name="skillUri_{{i}}" placeholder="Pick one" (selectionChange)="SelectionChanged($event.value, i)">
                           <mat-option *ngFor="let opt of options" [value]="opt.id">
@@ -185,13 +192,19 @@
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
+                    -->
 
                         <!-- SkillLabel -->
-                        <!--
-                        <mat-form-field class="create-job-full-width">
-                          <mat-label>{{ 'JOB.SKILL.NAME.LABEL' | translate }}</mat-label>
-                            <input matInput required [(ngModel)]="skill.label" name="label_{{i}}" value="label" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
-                        </mat-form-field>
+                      <mat-form-field class="create-job-full-width">
+                        <mat-label>{{ 'JOB.SKILL.NAME.LABEL' | translate }}</mat-label>
+                        
+                          <span [hidden]="skill.translation==''">{{ skill.translation }}</span>
+                          <span [hidden]="skill.translation!=''">{{ skill.label }}</span>                       
+
+                        <input [hidden]="skill.label"  matInput required [(ngModel)]="skill.label" name="label_{{i}}" value="label" placeholder="{{ 'JOB.SKILL.NAME.PLACEHOLDER' | translate }}" #jobTitleInput="ngModel">
+                      </mat-form-field>
+
+                      <!--
                         <br/>
                         -->
                         <!-- proficiencyLevel -->
@@ -234,12 +247,20 @@
 
                   <div>
                     <span class="table-add float-right mb-3 mr-2">
+                      <!--
                       <button class="btn btn-primary" (click) = "addSkill()">
                         <i _ngcontent-axy-c0="" class="material-icons"> add </i>
                         {{ 'JOBS.BUTTON.ADD_SKILL' | translate }}</button>
+                      -->
+
+                      <button *ngIf="dataIn.skillReq.length>0" class="btn btn-primary" (click)="openAddNewItem($event, 'skillitem')">
+                        <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                        {{ 'JOBS.BUTTON.ADD_SKILL' | translate }}</button>
+
                     </span>
+                  
                   </div>
-  
+
                    </div>
                 </div>
     
@@ -251,6 +272,12 @@
                 <div class="card mb-3">
                   <div class="card-header">
                     <span>{{ 'JOBS.REQUIRED_EDUCATIONS' | translate }}</span>
+
+                    <a class="btn btn-primary float-right" ng-href="" (click)="addEducation()">
+                      <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                      {{ 'BUTTON.ADD' | translate }}
+                    </a>  
+
                   </div>
                   <div class="card-body">
   
@@ -286,7 +313,7 @@
                     </div>
 
                   <div>
-                    <span class="table-add float-right mb-3 mr-2">
+                    <span *ngIf="dataIn.educationReq.length>0" class="table-add float-right mb-3 mr-2">
                       <button class="btn btn-primary" (click) = "addEducation()">
                         <i _ngcontent-axy-c0="" class="material-icons"> add </i>
                         {{ 'JOBS.BUTTON.ADD_EDUCATION' | translate }}</button>
@@ -304,6 +331,12 @@
                 <div class="card mb-3">
                   <div class="card-header">
                     <span>{{ 'JOBS.REQUIRED_EXPERIENCES' | translate }}</span>
+
+                    <a class="btn btn-primary float-right" ng-href="" (click)="addExperience()">
+                      <i _ngcontent-axy-c0="" class="material-icons small"> add </i>
+                      {{ 'BUTTON.ADD' | translate }}
+                    </a>
+
                   </div>
                   <div class="card-body">
   
@@ -353,7 +386,7 @@
                     </div>
 
                   <div>
-                    <span class="table-add float-right mb-3 mr-2">
+                    <span *ngIf="dataIn.workExperienceReq.length>0" class="table-add float-right mb-3 mr-2">
                       <button class="btn btn-primary" (click) = "addExperience()">
                         <i _ngcontent-axy-c0="" class="material-icons"> add </i>
                         {{ 'JOBS.BUTTON.ADD_EXPERIENCE' | translate }}</button>

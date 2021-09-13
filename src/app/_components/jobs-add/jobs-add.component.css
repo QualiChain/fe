@@ -7,3 +7,7 @@
   .create-job-full-width {
     width: 100%;
   }
+
+  .float-right {
+    float: right!important;
+}

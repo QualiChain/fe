@@ -92,7 +92,10 @@
                         <tbody role="rowgroup">
                           <tr *ngFor="let skill of jobData.skillReq; let i=index" class="mat-row cdk-row ng-star-inserted" >
                             <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{i+1}}</td>
-                            <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">{{skill.label}}</td>
+                            <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted">
+                              <span *ngIf="(skill.translations[currentLang])">{{skill.translations[currentLang]}}</span>
+                              <span *ngIf="!(skill.translations[currentLang])">{{skill.label}}</span>
+                            </td>
                             <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted"><span *ngIf="skill.priorityLevel">{{ 'JOB.SKILL.PRIORITY.OPTIONS.'+skill.priorityLevel | uppercase | translate }}</span></td>
                             <td role="gridcell" class="mat-cell cdk-cell cdk-column-label mat-column-label ng-star-inserted"><span *ngIf="skill.proficiencyLevel">{{ 'JOB.SKILL.LEVEL.OPTIONS.'+skill.proficiencyLevel | uppercase | translate }}</span></td>
                             <!--<td>{{skill.assign}}</td>-->

@@ -59,6 +59,8 @@ export class JobsGetComponent implements OnInit {
   currentUserHasCV: boolean = false;
   isJobApplyanceOpened: boolean = false;
 
+  currentLang = localStorage.getItem('last_language'); 
+
   constructor(
     private appcomponent: AppComponent,
     private router: Router,
