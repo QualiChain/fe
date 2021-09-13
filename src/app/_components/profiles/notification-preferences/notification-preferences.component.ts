@@ -12,6 +12,9 @@ import {FormControl} from '@angular/forms'
 import {map, startWith} from 'rxjs/operators';
 import { SpecializationsService } from '../../../_services/specializations.service'
 
+import RecruitmentOrganisation from '../../../_models/recruitmentorganisation';
+import { RecruitmentOrganisationService } from '../../../_services/recruitmentorganisation.services';
+
 import { MatDialog } from '@angular/material/dialog';
 //import { MatDialogRef } from '@angular/material/dialog';
 //import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -75,6 +78,7 @@ export class NotificationPreferencesComponent implements OnInit {
   internal_reallocation_availability: boolean = false;
 
   showLoading: boolean = true;
+  listAllRecruitmentOrganizations: RecruitmentOrganisation[] = [];
 
   @ViewChild('specializationsInput', {static: false}) specializationsInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
@@ -115,6 +119,7 @@ export class NotificationPreferencesComponent implements OnInit {
   }
 
   constructor(
+    private ros: RecruitmentOrganisationService,
     private appcomponent: AppComponent,
     private qcStorageService: QCStorageService,
     private fb: FormBuilder,
@@ -147,6 +152,19 @@ export class NotificationPreferencesComponent implements OnInit {
       const id = +params.id;
       
       if (id && id > 0) {
+
+        this.ros.getRecruitmentOrganisations().subscribe(
+          recruitmentOrganizationsData => {
+            //console.log(recruitmentOrganizationsData);
+            recruitmentOrganizationsData.sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : ((b.title.toUpperCase() > a.title.toUpperCase()) ? -1 : 0))
+            this.listAllRecruitmentOrganizations = recruitmentOrganizationsData;
+            //console.log(this.listAllRecruitmentOrganizations);
+          },
+          error => {
+            console.log("error getting recruitment organisations data");
+          }
+        );
+
         //let userdata = JSON.parse(localStorage.getItem('userdata'));
         let userdata = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('userdataQC')));
         //console.log(userdata.role.toLowerCase());
@@ -160,6 +178,10 @@ export class NotificationPreferencesComponent implements OnInit {
               //console.log("Request OK");
               //console.log(res);
               this.userPreferences = res;
+
+              if (!this.userPreferences.organisation) {
+                this.userPreferences.organisation = 0;
+              }
 
               if ((this.userPreferences.internal_reallocation_availability==false) || this.userPreferences.internal_reallocation_availability==true) {
                 this.internal_reallocation_availability = this.userPreferences.internal_reallocation_availability;
@@ -301,11 +323,17 @@ export class NotificationPreferencesComponent implements OnInit {
       listOfSpecializations = listOfSpecializations+element.title;
     });
 
+    let organisationId = this.userPreferences.organisation;
+    if (organisationId==0) {
+      organisationId = null;
+    }
+    
     let dataToPost = {
       "user_id": this.userId,
       "locations": listOfLocations,
       "specializations": listOfSpecializations,
-      "internal_reallocation_availability": this.internal_reallocation_availability
+      "internal_reallocation_availability": this.internal_reallocation_availability,
+      "organisation": organisationId
       };
       //console.log(dataToPost);      
       this.saveData(dataToPost);

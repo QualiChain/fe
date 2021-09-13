@@ -875,6 +875,10 @@
     "SPECIALIZATIONS": {
       "LABEL": "Ειδικεύσεις",
       "PLACEHOLDER": "Ειδικεύσεις"
+    },
+    "RECRUITMENT_ORGANIZATION": {
+      "LABEL": "Οργάνωση προσλήψεων",
+      "ALL": "Όλοι οι οργανισμοί"
     }
   },
   "FILE": {
