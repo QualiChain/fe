@@ -105,7 +105,7 @@ import { HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilo
 import { AccessDeniedComponent } from './_components/utils/access-denied/access-denied.component';
 import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
 import { ConfirmDialogComponent } from './_components/utils/confirm-dialog/confirm-dialog.component';
-import { JobsAddComponent } from './_components/jobs-add/jobs-add.component';
+import { JobsAddComponent, AddJobItemDialog_modal } from './_components/jobs-add/jobs-add.component';
 import { JobsGetComponent } from './_components/jobs-get/jobs-get.component';
 import { ProfilesViewComponent, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal, DialogHelperCVCompleteness } from './_components/profiles/profiles-view/profiles-view.component';
 import { ProfilesAddComponent, privacyPolicy_modal, ProfilesAddIAMUserComponent } from './_components/profiles/profiles-add/profiles-add.component';
@@ -283,7 +283,7 @@ export function tokenGetter() {
     RecruitmentComponent,
     NotFoundComponent,
     LoginComponent,
-    JobsAddComponent,
+    JobsAddComponent, AddJobItemDialog_modal,
     JobsGetComponent,
     ConfirmDialogComponent,
     ProfilesViewComponent, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal, DialogHelperCVCompleteness,

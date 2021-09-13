@@ -13,6 +13,7 @@ export class JobSkill {
     priorityLevel: string;
     proficiencyLevel: string;
     skillURI: string;
+    translation: [];
   }  
 
   export class WorkHistory {

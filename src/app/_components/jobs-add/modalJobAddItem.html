@@ -1,0 +1,81 @@
+<h1 mat-dialog-title>{{ 'BUTTON.ADD' | translate }}:
+    <span *ngIf="data.type=='skillitem'" >{{ 'CV.SKILL' | translate }}</span>
+    <span *ngIf="data.type=='workitem'" >{{ 'CV.WORK' | translate }}</span>
+    <span *ngIf="data.type=='educationitem'" >{{ 'CV.EDUCATION' | translate }}</span>
+</h1>
+
+<div class="row" *ngIf="data.type=='skillitem' && loadingSpinner">
+    <div class="col-md-4 col-md-offset-4">
+      <app-qc-spinner></app-qc-spinner>
+    </div>
+</div>
+
+<mat-dialog-content>
+    <form #formAddItem="ngForm" class="add-item-form" >
+
+        <div class="form-group col-6" *ngIf="(!loadingSpinner)">
+            <mat-form-field class="create-job-form">
+                <mat-label>{{ 'CV.SKILL_FIELD' | translate }}</mat-label>  
+                <mat-select [(ngModel)]="skill_field" name="skill_field" (selectionChange)="SkillFieldOptionSelected($event)" required>
+                    <mat-option *ngFor="let skill_value of skillsFields" [value]="skill_value">
+                      {{ 'CV.SKILL_FIELD_VALUE.'+skill_value | uppercase | translate}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>                        
+        </div>
+        <div *ngIf="(skill_field!='' && !loadingSpinner)">
+            <div class="form-group col-6">
+                <mat-form-field class="create-job-form">       
+                    <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
+                    <input required type="text"
+                        placeholder="{{ 'PICK_ONE' | translate }}"
+                        matInput
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="OptionSelected($event)">
+                    <mat-option *ngFor="let opt of options of filteredOptions | async" [id]="opt.id" [value]="opt.translations[currentUserLang] ">
+                        {{opt.translations[currentUserLang]}}
+                    </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+
+            <!-- proficiencyLevel -->
+            <div class="form-group col-6">
+                <mat-form-field class="create-job-full-width">
+                    <mat-label>{{ 'JOB.SKILL.LEVEL.LABEL' | translate }}</mat-label>
+                    <mat-select [(ngModel)]="skill_profiency_level" name="skillproficiencyLevel" required ngDefaultControl>
+                        <mat-option value="basic">{{ 'JOB.SKILL.LEVEL.OPTIONS.BASIC' | translate }}</mat-option>
+                        <mat-option value="intermediate">{{ 'JOB.SKILL.LEVEL.OPTIONS.INTERMEDIATE' | translate }}</mat-option>
+                        <mat-option value="advanced">{{ 'JOB.SKILL.LEVEL.OPTIONS.ADVANCED' | translate }}</mat-option>
+                        <mat-option value="expert">{{ 'JOB.SKILL.LEVEL.OPTIONS.EXPERT' | translate }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- priority -->
+            <div class="form-group col-6">
+                <mat-form-field class="create-job-full-width">
+                    <mat-label>{{ 'JOB.SKILL.PRIORITY.LABEL' | translate }}</mat-label>
+                    <mat-select [(ngModel)]="skill_priority_level" name="priority" required ngDefaultControl>
+                        <mat-option value="low">{{ 'JOB.SKILL.PRIORITY.OPTIONS.LOW' | translate }}</mat-option>
+                        <mat-option value="medium">{{ 'JOB.SKILL.PRIORITY.OPTIONS.MEDIUM' | translate }}</mat-option>
+                        <mat-option value="high">{{ 'JOB.SKILL.PRIORITY.OPTIONS.HIGH' | translate }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+    </form> 
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="modal-footer">      
+        <button *ngIf="(!loadingSpinner)" [disabled]="!formAddItem.valid" type="button" class="btn btn-success"  (click)="addSkillToJob()">
+            <i _ngcontent-axy-c0="" class="material-icons"> add </i>
+            {{ 'BUTTON.ADD' | translate }}
+        </button>
+        <button type="button" class="btn btn-danger" [mat-dialog-close]="false" id="closeAwardModalWindow">
+            <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CLOSE' | translate }}
+        </button>
+    </div>
+</mat-dialog-actions>
