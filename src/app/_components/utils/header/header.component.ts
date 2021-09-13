@@ -373,7 +373,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     if (!this.isQuestionnaireOpen) {
 
-      if ((localStorage.getItem('QC_seen_questionnaire') != (new Date()).getDate().toString()) || (action=="manual")){
+      //let day = (new Date()).getDate().toString();
+      let month = (new Date()).getMonth().toString();
+      //console.log(day);
+      //console.log(month);
+
+      if ((localStorage.getItem('QC_seen_questionnaire') != (month)) || (action=="manual")){
+
+        localStorage.setItem('QC_seen_questionnaire', month);
 
         this.isQuestionnaireOpen = true;
         const dialogRef = this.dialog.open(QcEvaluationQuestionnaireComponent, {
@@ -385,7 +392,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     
         dialogRef.afterClosed().subscribe(dialogResult => {
           //console.log(dialogResult);
-          localStorage.setItem('QC_seen_questionnaire', new Date().getDate().toString());
+          //localStorage.setItem('QC_seen_questionnaire', new Date().getDate().toString());
+          //localStorage.setItem('QC_seen_questionnaire', month);
           
           this.isQuestionnaireOpen = false;  
         });
