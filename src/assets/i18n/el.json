@@ -775,9 +775,9 @@
     "SKILL_FIELD_VALUE": {
       "HEALTH": "Υγεία",
       "TEACHING": "Διδασκαλία",
-      "LEGALSOCIALCULTURAL": "Νομική Κοινωνική Πολιτιστική",
+      "LEGALSOCIALCULTURAL": "Νομικά, Κοινωνικά, Πολιτιστικά",
       "BUSINESSADMINISTRATION": "Διοίκηση Επιχειρήσεων",
-      "SCIENCEENGINEERING": "Επιστήμη Μηχανική"
+      "SCIENCEENGINEERING": "Επιστήμη των υπολογιστών"
     }    
   },
   "MCDSS": {
