@@ -1849,7 +1849,7 @@ export class AddItemDialog_modal implements OnInit {
   skillsFields: any[] = [];
   skill_field: string = "";
   currentUserLang = localStorage.getItem('last_language');
-
+  
   constructor(
     private qcStorageService: QCStorageService,
     private ss: SkillsService,
@@ -1887,13 +1887,13 @@ export class AddItemDialog_modal implements OnInit {
           
           let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
           if (last_skillsList) {
-            console.log(last_skillsList);
+            //console.log(last_skillsList);
 
             last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
 
             this.options = [];
             this.options = last_skillsList;
-            console.log(this.options);
+            //console.log(this.options);
             this.loadingSpinner = false;
           }
           else {
@@ -2047,6 +2047,11 @@ export class AddItemDialog_modal implements OnInit {
       );
 
       //this.getSkillsList();
+
+      if (!this.currentUserLang) {
+        this.currentUserLang = 'en';
+      }
+
       this.getSkillsFields();
 
     }

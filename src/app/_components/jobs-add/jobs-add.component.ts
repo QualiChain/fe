@@ -519,8 +519,6 @@ export class AddJobItemDialog_modal implements OnInit {
   currentUserLang = localStorage.getItem('last_language');
   filteredData: any;
 
-  
-
   constructor(
     private qcStorageService: QCStorageService,
     private cs: CVService,
@@ -677,6 +675,10 @@ export class AddJobItemDialog_modal implements OnInit {
         startWith(''),
         map(value => this._filter(value))
       );
+      
+      if (!this.currentUserLang) {
+        this.currentUserLang = 'en';
+      }
 
     this.getSkillsFields();
 
