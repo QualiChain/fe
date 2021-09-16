@@ -24,6 +24,7 @@ let ELEMENT_DATA: any[] = [];
 })
 export class MyColleaguesComponent implements OnInit {
 
+  searchedTerm: string ="";
   currentUser: User;
   showLoading = true;
   displayedColumns: string[] = ['name', 'surname', 'organizations', 'aqcuired_badges', 'action'];
