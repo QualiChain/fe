@@ -17,22 +17,21 @@
         <ng-template #userHasBadges>
             <div *ngIf="formatOutput=='small'">
                 <span *ngFor="let element_badge of aqcuired_badges_by_user; index as i">                    
-                    <div class="sbbox" [ngClass]='whatClassIsIt(element_badge.oubadge_user.signature.account)'>
-                        <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge.oubadge_user.signature.account);intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId"><img style="margin: 3px 7px 3px 1px; width: 30px;" *ngIf="element_badge.badge.oubadge.image" class="center" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > </a>
+                    <div class="sbbox" [ngClass]='whatClassIsIt(element_badge?.oubadge_user?.signature?.account)'>                                                
+                        <a href="" (click)="modalClass=whatClassIsIt(element_badge?.oubadge_user?.signature?.account);intialerts()" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId"><img style="margin: 3px 7px 3px 1px; width: 30px;" *ngIf="element_badge.badge.oubadge.image" class="center" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > </a>
                     </div>
                 </span>
             </div>
             <div *ngIf="formatOutput=='card'">
-                                
                 <span *ngFor="let element_badge of aqcuired_badges_by_user; index as i">
 
                     <mat-card class="col-lg-6 example-card" >
                         <mat-card-header>
-                            <div [ngClass]='whatClassIsIt(element_badge.oubadge_user.signature.account)' mat-card-avatar title="{{element_badge.badge.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge.oubadge_user.badge.image}}");'></div>
+                            <div [ngClass]='whatClassIsIt(element_badge?.oubadge_user?.signature?.account)' mat-card-avatar title="{{element_badge?.badge?.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge?.oubadge_user?.badge?.image}}");'></div>
                             <mat-card-title>
-                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge.oubadge_user.signature.account);intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
-                                    <span *ngIf="element_badge.badge.name.length<=20">{{element_badge.badge.name}}</span>
-                                    <span *ngIf="element_badge.badge.name.length>20">{{element_badge.badge.name | slice:0:20}} ...</span>
+                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge?.oubadge_user?.signature?.account);intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
+                                    <span *ngIf="element_badge?.badge?.name?.length<=20">{{element_badge?.badge?.name}}</span>
+                                    <span *ngIf="element_badge?.badge?.name?.length>20">{{element_badge?.badge?.name | slice:0:20}} ...</span>
                                 </a>
                             </mat-card-title>
                         </mat-card-header>
@@ -107,7 +106,7 @@
                 </div>
             </div>
 
-            <div *ngIf="isAdmin || isProfessor || isAcademicOrganisation">
+            <div *ngIf="((isAdmin || isProfessor || isAcademicOrganisation) && (element_badge?.oubadge_user))">
                 <br>
                 <mat-accordion class="example-headers-align">
                     <mat-expansion-panel  hideToggle>
