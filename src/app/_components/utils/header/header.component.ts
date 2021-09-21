@@ -28,6 +28,7 @@ import {GlobalApp, StorageService} from '../../../_helpers/global';
 import { QCStorageService } from '../../../_services/QC_storage.services';
 import { QcEvaluationQuestionnaireModel, QcEvaluationQuestionnaireComponent } from '../../utils/qc-evaluation-questionnaire/qc-evaluation-questionnaire.component';
 import { UploadService } from '../../../_services/upload.service';
+import { CVService } from '../../../_services/cv.service';
 
 export interface OPTIONS_MENU {
   id: number;
@@ -75,6 +76,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   avatarImg: string = 'assets/img/no_avatar.jpg';
 
   constructor(
+    private cs: CVService,
     public dialog: MatDialog,
     private qcStorageService: QCStorageService,
     public globalApp: GlobalApp,
@@ -250,6 +252,79 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }    
   }
 
+  loadSkillsMainData() {
+
+    let currentLang = localStorage.getItem('last_language'); 
+    if (!currentLang) {
+      currentLang = 'en';
+    }
+
+    this.cs
+    .getCompetencesSkillFields()
+    .subscribe((data: any[]) => {
+      //console.log(data);      
+      let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(data));      
+      //localStorage.setItem('last_CompetencesList', encryptedData);
+
+      data.forEach(element => {
+        
+        this.cs
+        .getCompetencesSkillsByField(element)
+        .subscribe((data: any[]) => {
+          let competencesList = [];
+          for (let i in data) {
+            
+            if (data[i].uri) {
+              //console.log(listOfCurrentSkillsIds);
+              //console.log(data[i].uri);
+              //only skill we don't have    
+
+              let translationAvailable = data[i].label;             
+              let itemTrans = {'en': translationAvailable, 'pt': translationAvailable, 'el': translationAvailable};
+
+              if (Object.keys(data[i].translations).length>0) {
+              //if (data[i].translations) {
+                  itemTrans = data[i].translations;
+
+                  if (data[i].translations[currentLang]!="") {
+                    translationAvailable = data[i].translations[currentLang];
+                  }
+              }
+
+              competencesList.push({'id':data[i].uri, 'name':translationAvailable, 'translation': translationAvailable, 'translations': itemTrans}) 
+            }
+            
+          }
+          competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
+
+          let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));   
+          let storageName = 'last_CompetencesList_'+element;          
+          localStorage.removeItem(storageName);          
+          localStorage.setItem(storageName, encryptedData);
+          
+          /*
+          let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
+          localStorage.setItem('last_skillsList', encryptedData);
+          */
+          
+          
+        },
+        error => {
+          console.log("Error getting filtered list of skills. Filtering by text");          
+        });
+        
+      });
+      
+      
+    },
+    error => {
+      console.log("Error getting skills fields");
+      
+    });
+
+  }
+
+
   getTopMenus(userdata) {
     //console.log("getTopMenus");
 
@@ -291,6 +366,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.getTopMenus(userdata);
       this.getCurrentAvatarImage(userdata);
       
+      this.loadSkillsMainData();
 
       this.userdata = userdata;
 

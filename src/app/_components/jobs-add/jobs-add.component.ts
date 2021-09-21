@@ -270,10 +270,10 @@ export class JobsAddComponent implements OnInit {
 
       this.js.getLastJobId().subscribe(
         res => {
-          console.log("get last job id");
-          console.log(res);
+          //console.log("get last job id");
+          //console.log(res);
           dataToSend['id']= res;
-          console.log(dataToSend);
+          //console.log(dataToSend);
           this.js.addJob(dataToSend).subscribe(
             res => {
               console.log("Job created");
@@ -518,6 +518,7 @@ export class AddJobItemDialog_modal implements OnInit {
   skill_field: string = "";
   currentUserLang = localStorage.getItem('last_language');
   filteredData: any;
+  competencyItem: string = "";
 
   constructor(
     private qcStorageService: QCStorageService,
@@ -560,6 +561,7 @@ export class AddJobItemDialog_modal implements OnInit {
 
     SkillFieldOptionSelected($event) {
       //console.log($event);
+      this.competencyItem = "";
       this.options = [];
       localStorage.setItem('last_skillField', $event.value);
       this.getFilteredSkillsList($event.value);
@@ -583,88 +585,116 @@ export class AddJobItemDialog_modal implements OnInit {
       //this.myControl.setValue(selectedSkillName);
     }
 
+    loadSkillsBySkillField() {
+      if (localStorage.getItem('last_skillField')) {
+        this.skill_field = localStorage.getItem('last_skillField');
+                
+        //console.log(this.skill_field) ;
+        let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList_'+this.skill_field)))
+        if (!last_skillsList) {
+          last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+        }
+
+        if (last_skillsList) {
+          last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+          this.options = [];
+          this.options = last_skillsList;
+          //console.log(this.options);
+          this.loadingSpinner = false;
+        }
+        else {
+          this.getFilteredSkillsList(this.skill_field);
+        }          
+      }
+      else {
+        this.loadingSpinner = false;
+      }
+    }
+
     getSkillsFields() {
 
       this.loadingSpinner = true;
 
-      this.cs
-      .getCompetencesSkillFields()
-      .subscribe((data: any[]) => {
-        //console.log(data);
-        this.skillsFields = data;
-        
+      if (localStorage.getItem('last_CompetencesList')) {
+        this.skillsFields = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList')));       
+        this.loadSkillsBySkillField();
+      }
+      else {
+        this.cs
+        .getCompetencesSkillFields()
+        .subscribe((data: any[]) => {
+          //console.log(data);
+          this.skillsFields = data;
 
-        if (localStorage.getItem('last_skillField')) {
-          this.skill_field = localStorage.getItem('last_skillField');
+          this.loadSkillsBySkillField();
           
-          let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
-          if (last_skillsList) {
-            //console.log(last_skillsList);
-
-            last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
-
-            this.options = [];
-            this.options = last_skillsList;
-            //console.log(this.options);
-            this.loadingSpinner = false;
-          }
-          else {
-            this.getFilteredSkillsList(this.skill_field);
-          }          
-        }
-        else {
+          
+        },
+        error => {
+          console.log("Error getting skills fields");
           this.loadingSpinner = false;
-        }
-      },
-      error => {
-        console.log("Error getting skills fields");
-        this.loadingSpinner = false;
-      });
+        });
+      }
     }
 
     getFilteredSkillsList(textToFilter: string) {
 
-      localStorage.removeItem('last_skillsList');
-      this.loadingSpinner = true;
-      this.options = [];
-      let currentLang = localStorage.getItem('last_language'); 
-      if (!currentLang) {
-        currentLang = 'en';
-      }
-      //console.log("currentLang: "+currentLang);
-      this.cs
-      .getCompetencesSkillsByField(textToFilter)
-      .subscribe((data: any[]) => {
-        let competencesList = [];
-        for (let i in data) {
-          
-          //console.log(data[i].uri);
-          //console.log(data[i].label);
-          
-          if (data[i].uri) {
-            //console.log(listOfCurrentSkillsIds);
-            //console.log(data[i].uri);
-            //only skill we don't have           
-             competencesList.push({'id':data[i].uri, 'name':data[i].label, 'translation': data[i].translations[currentLang], 'translations': data[i].translations}) 
-          }
-          
-        }
-        competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
-        //console.log("sorted list")
-        //console.log(competencesList);
-        this.options = competencesList;
-
-        let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
-        localStorage.setItem('last_skillsList', encryptedData);
-
-        
-        this.loadingSpinner = false;
-      },
-      error => {
-        console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
-        this.loadingSpinner = false;
-      });
       
+      if (localStorage.getItem('last_CompetencesList_'+textToFilter)) {
+        console.log("if - "+textToFilter);
+        this.loadingSpinner = true;
+        this.options = [];
+        let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList_'+textToFilter)))
+        this.options = last_skillsList;
+        let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(last_skillsList));      
+        localStorage.setItem('last_skillsList', encryptedData);
+        this.loadingSpinner = false;
+      }
+      else {
+        console.log("else - "+textToFilter);
+        localStorage.removeItem('last_skillsList');
+        this.loadingSpinner = true;
+        this.options = [];
+        let currentLang = localStorage.getItem('last_language'); 
+        if (!currentLang) {
+          currentLang = 'en';
+        }
+        //console.log("currentLang: "+currentLang);
+        this.cs
+        .getCompetencesSkillsByField(textToFilter)
+        .subscribe((data: any[]) => {
+          let competencesList = [];
+          for (let i in data) {
+            
+            //console.log(data[i].uri);
+            //console.log(data[i].label);
+            
+            if (data[i].uri) {
+              //console.log(listOfCurrentSkillsIds);
+              //console.log(data[i].uri);
+              //only skill we don't have           
+              competencesList.push({'id':data[i].uri, 'name':data[i].label, 'translation': data[i].translations[currentLang], 'translations': data[i].translations}) 
+            }
+            
+          }
+          competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
+          //console.log("sorted list")
+          //console.log(competencesList);
+          this.options = competencesList;
+
+          let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
+          localStorage.setItem('last_skillsList', encryptedData);
+
+          
+          this.loadingSpinner = false;
+        },
+        error => {
+          console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
+          this.loadingSpinner = false;
+        });
+      
+      }
     }
 
 

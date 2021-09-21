@@ -256,6 +256,7 @@ export class ItemCDDialog_modal implements OnInit {
   label: string = null;
   skillName: string = null;
   skillNameTranslation: string = null;
+  competencyItem: string = "";
 
   itemToPost: competencyLevelToPost = {
     "label": null,
@@ -304,69 +305,100 @@ export class ItemCDDialog_modal implements OnInit {
 
 
   SkillFieldOptionSelected($event) {
-    console.log($event);
+    //console.log($event);
+    this.competencyItem = "";
     this.options = [];
     localStorage.setItem('last_skillField', $event.value);
     this.getFilteredSkillsList($event.value);
   }
 
   getSkillsFields() {
-    this.cs
-    .getCompetencesSkillFields()
-    .subscribe((data: any[]) => {
-      //console.log(data);
-      this.skillsFields = data;
-      
+
+    if (JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList')))) {
+      this.skillsFields = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList')));
 
       if (localStorage.getItem('last_skillField')) {
         this.skill_field = localStorage.getItem('last_skillField');
-        
-        let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+
+        let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList_'+this.skill_field)))
+
         if (last_skillsList) {
           //console.log(last_skillsList);
 
           last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
 
-          //console.log(last_skillsList);
-          let competencesList = [];
-          for (let i in last_skillsList) {
-
-            if (last_skillsList[i].id) {
-              //console.log(listOfCurrentSkillsIds);
-              //console.log(data[i].uri);
-              //only skill we don't have      
-              //console.log(last_skillsList[i].id);
-              if (!this.listOfCurrentSkillsByUser.includes(last_skillsList[i].id.replace("saro:",""))) {     
-                competencesList.push({'id':last_skillsList[i].id, 'name':last_skillsList[i].name, 'translation': last_skillsList[i].translations[this.currentUserLang], 'translations': last_skillsList[i].translations}) 
-              }
-            }
-
-          }
-
           this.options = [];
-          //this.options = last_skillsList;
-          this.options = competencesList;
+          this.options = last_skillsList;
           //console.log(this.options);
           this.loadingSpinner = false;
         }
         else {
           this.getFilteredSkillsList(this.skill_field);
-        }          
+        }  
+
       }
-      else {
-        this.loadingSpinner = false;
-      }
-    },
-    error => {
-      console.log("Error getting skills fields");
+      
       this.loadingSpinner = false;
-    });
+    }
+    else {
+      this.cs
+      .getCompetencesSkillFields()
+      .subscribe((data: any[]) => {
+        console.log(data);
+        this.skillsFields = data;
+        
+
+        if (localStorage.getItem('last_skillField')) {
+          this.skill_field = localStorage.getItem('last_skillField');
+          
+          let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+          if (last_skillsList) {
+            //console.log(last_skillsList);
+
+            last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+            //console.log(last_skillsList);
+            let competencesList = [];
+            for (let i in last_skillsList) {
+
+              if (last_skillsList[i].id) {
+                //console.log(listOfCurrentSkillsIds);
+                //console.log(data[i].uri);
+                //only skill we don't have      
+                //console.log(last_skillsList[i].id);
+                if (!this.listOfCurrentSkillsByUser.includes(last_skillsList[i].id.replace("saro:",""))) {     
+                  competencesList.push({'id':last_skillsList[i].id, 'name':last_skillsList[i].name, 'translation': last_skillsList[i].translations[this.currentUserLang], 'translations': last_skillsList[i].translations}) 
+                }
+              }
+
+            }
+
+            this.options = [];
+            //this.options = last_skillsList;
+            this.options = competencesList;
+            //console.log(this.options);
+            this.loadingSpinner = false;
+          }
+          else {
+            this.getFilteredSkillsList(this.skill_field);
+          }          
+        }
+        else {
+          this.loadingSpinner = false;
+        }
+      },
+      error => {
+        console.log("Error getting skills fields");
+        this.loadingSpinner = false;
+      });
+
+    }
   }
 
   getFilteredSkillsList(textToFilter: string) {
 
     localStorage.removeItem('last_skillsList');
-    console.log(this.listOfCurrentSkillsByUser);
+    //console.log(this.listOfCurrentSkillsByUser);
     this.loadingSpinner = true;
     this.options = [];
     let currentLang = localStorage.getItem('last_language'); 
@@ -374,41 +406,57 @@ export class ItemCDDialog_modal implements OnInit {
       currentLang = 'en';
     }
     //console.log("currentLang: "+currentLang);
-    this.cs
-    .getCompetencesSkillsByField(textToFilter)
-    .subscribe((data: any[]) => {
-      let competencesList = [];
-      for (let i in data) {
-        
-        //console.log(data[i].uri);
-        //console.log(data[i].label);
-        
-        if (data[i].uri) {
-          //console.log(listOfCurrentSkillsIds);
+
+    let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList_'+textToFilter)))
+
+    if (last_skillsList) {
+      //console.log(last_skillsList);
+
+      last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+      this.options = [];
+      this.options = last_skillsList;
+      //console.log(this.options);
+      this.loadingSpinner = false;
+    }
+    else {
+
+      this.cs
+      .getCompetencesSkillsByField(textToFilter)
+      .subscribe((data: any[]) => {
+        let competencesList = [];
+        for (let i in data) {
+          
           //console.log(data[i].uri);
-          //only skill we don't have      
-          //console.log(data[i].uri);
-          if (!this.listOfCurrentSkillsByUser.includes(data[i].uri.replace("saro:",""))) {     
-            competencesList.push({'id':data[i].uri, 'name':data[i].label, 'translation': data[i].translations[currentLang], 'translations': data[i].translations}) 
+          //console.log(data[i].label);
+          
+          if (data[i].uri) {
+            //console.log(listOfCurrentSkillsIds);
+            //console.log(data[i].uri);
+            //only skill we don't have      
+            //console.log(data[i].uri);
+            if (!this.listOfCurrentSkillsByUser.includes(data[i].uri.replace("saro:",""))) {     
+              competencesList.push({'id':data[i].uri, 'name':data[i].label, 'translation': data[i].translations[currentLang], 'translations': data[i].translations}) 
+            }
           }
+          
         }
+        competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
+        //console.log("sorted list")
+        //console.log(competencesList);
+        this.options = competencesList;
+
+        let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
+        localStorage.setItem('last_skillsList', encryptedData);
+
         
-      }
-      competencesList.sort((a, b) => (a.translation > b.translation) ? 1 : -1)
-      //console.log("sorted list")
-      //console.log(competencesList);
-      this.options = competencesList;
-
-      let encryptedData = this.qcStorageService.QCEncryptData(JSON.stringify(competencesList));      
-      localStorage.setItem('last_skillsList', encryptedData);
-
-      
-      this.loadingSpinner = false;
-    },
-    error => {
-      console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
-      this.loadingSpinner = false;
-    });
+        this.loadingSpinner = false;
+      },
+      error => {
+        console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
+        this.loadingSpinner = false;
+      });
+    }
     
   }  
 
@@ -567,8 +615,8 @@ export class ItemCDDialog_modal implements OnInit {
       //console.log(this.data.element);
       let dataAPI: any = this.data.element;
 
-      console.log(currentLang);
-      console.log(dataAPI);
+      //console.log(currentLang);
+      //console.log(dataAPI);
       if (dataAPI.skillName) {
         //this.myControl.setValue('greek');
         this.myControl.setValue(dataAPI.skillName);

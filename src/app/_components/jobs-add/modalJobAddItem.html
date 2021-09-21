@@ -28,6 +28,7 @@
                 <mat-form-field class="create-job-form">       
                     <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
                     <input required type="text"
+                    [(ngModel)]="competencyItem"
                         placeholder="{{ 'PICK_ONE' | translate }}"
                         matInput
                         [formControl]="myControl"

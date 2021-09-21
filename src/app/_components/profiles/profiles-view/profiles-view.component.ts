@@ -1849,6 +1849,7 @@ export class AddItemDialog_modal implements OnInit {
   skillsFields: any[] = [];
   skill_field: string = "";
   currentUserLang = localStorage.getItem('last_language');
+  competencyItem: string = "";
   
   constructor(
     private qcStorageService: QCStorageService,
@@ -1875,17 +1876,15 @@ export class AddItemDialog_modal implements OnInit {
     }
 
     getSkillsFields() {
-      this.cs
-      .getCompetencesSkillFields()
-      .subscribe((data: any[]) => {
-        //console.log(data);
-        this.skillsFields = data;
-        
+      //console.log(JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList'))));
+      if (JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList')))) {
+        this.skillsFields = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList')));
 
         if (localStorage.getItem('last_skillField')) {
           this.skill_field = localStorage.getItem('last_skillField');
-          
-          let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+
+          let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList_'+this.skill_field)))
+
           if (last_skillsList) {
             //console.log(last_skillsList);
 
@@ -1898,20 +1897,54 @@ export class AddItemDialog_modal implements OnInit {
           }
           else {
             this.getFilteredSkillsList(this.skill_field);
-          }          
+          }  
+
         }
-        else {
-          this.loadingSpinner = false;
-        }
-      },
-      error => {
-        console.log("Error getting skills fields");
+        
+
         this.loadingSpinner = false;
-      });
+      }
+      else {
+
+        this.cs
+        .getCompetencesSkillFields()
+        .subscribe((data: any[]) => {
+          //console.log(data);
+          this.skillsFields = data;
+          
+
+          if (localStorage.getItem('last_skillField')) {
+            this.skill_field = localStorage.getItem('last_skillField');
+            
+            let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_skillsList')))
+            if (last_skillsList) {
+              //console.log(last_skillsList);
+
+              last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+              this.options = [];
+              this.options = last_skillsList;
+              //console.log(this.options);
+              this.loadingSpinner = false;
+            }
+            else {
+              this.getFilteredSkillsList(this.skill_field);
+            }          
+          }
+          else {
+            this.loadingSpinner = false;
+          }
+        },
+        error => {
+          console.log("Error getting skills fields");
+          this.loadingSpinner = false;
+        });
+
+      }
     }
 
     getFilteredSkillsList(textToFilter: string) {
-
+      this.competencyItem = '';
       localStorage.removeItem('last_skillsList');
       this.loadingSpinner = true;
       this.options = [];
@@ -1920,6 +1953,23 @@ export class AddItemDialog_modal implements OnInit {
         currentLang = 'en';
       }
       //console.log("currentLang: "+currentLang);
+
+
+        let last_skillsList = JSON.parse(this.qcStorageService.QCDecryptData(localStorage.getItem('last_CompetencesList_'+textToFilter)))
+
+        if (last_skillsList) {
+          //console.log(last_skillsList);
+
+          last_skillsList.sort((a, b) => (a.translations[this.currentUserLang] > b.translations[this.currentUserLang]) ? 1 : -1)
+
+          this.options = [];
+          this.options = last_skillsList;
+          //console.log(this.options);
+          this.loadingSpinner = false;
+        }
+        else {
+      
+
       this.cs
       .getCompetencesSkillsByField(textToFilter)
       .subscribe((data: any[]) => {
@@ -1952,6 +2002,8 @@ export class AddItemDialog_modal implements OnInit {
         console.log("Error getting filtered list of skills. Filtering by "+textToFilter);
         this.loadingSpinner = false;
       });
+
+    }
       
     }
 
@@ -2158,7 +2210,7 @@ export class DialogHelperCVCompleteness implements OnInit {
   getUserCV(id:string) {
     this.loadingSpinner = true;
     this.userPercentatge = 0;
-    console.log(id);
+    //console.log(id);
     this.cvs
       .getCV(id)
       .subscribe((data: any) => {
@@ -2199,7 +2251,7 @@ export class DialogHelperCVCompleteness implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
+    //console.log(this.data);
     this.getUserCV(this.data.userId.toString());
   }
 }
