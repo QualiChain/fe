@@ -9,15 +9,8 @@
 <div *ngIf="!loadingSpinner">
 <mat-dialog-content class="mat-typography">
     <form #formCDItem="ngForm" class="cv-form" (ngSubmit)="onSubmit()">
-      <!--
-        <mat-form-field class="item-full-width" >
-            <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
-            <input matInput required [(ngModel)]="item.competency" name="competency" value="competency" placeholder="{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}">
-        </mat-form-field>
-      -->
 
-
-        <mat-form-field class="item-full-width">
+        <mat-form-field *ngIf="mode!='Edit'" class="item-full-width">
             <mat-label>{{ 'CV.SKILL_FIELD' | translate }}</mat-label>  
             <mat-select [(ngModel)]="skill_field" name="skill_field" (selectionChange)="SkillFieldOptionSelected($event)" required>
                 <mat-option *ngFor="let skill_value of skillsFields" [value]="skill_value">
@@ -27,9 +20,10 @@
         </mat-form-field>                        
 
       <div *ngIf="skill_field">
-        <mat-form-field class="item-full-width" >
+        <mat-form-field *ngIf="mode!='Edit'" class="item-full-width" >
             <mat-label>{{ 'COMPETENCY_LEVEL.COMPETENCY' | translate }}</mat-label>
-            <input required type="text"
+            <input required type="text"            
+                [(ngModel)]="competencyItem"
                    placeholder="{{ 'PICK_ONE' | translate }}"
                    matInput
                    [formControl]="myControl"
