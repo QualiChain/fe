@@ -344,7 +344,8 @@
     },
     "EXPECTED_SALARY": {
       "TITLE": "Expected Salary",
-      "PLACEHOLDER": "Expected Salary"
+      "PLACEHOLDER": "Expected Salary",
+      "HELP_TEXT": "Please, introduce the expected salary in €"
     },
     "SCORE": "Score",
     "ROLE": "Role"

@@ -344,7 +344,8 @@
     },
     "EXPECTED_SALARY": {
       "TITLE": "Salário esperado",
-      "PLACEHOLDER": "Salário esperado"
+      "PLACEHOLDER": "Salário esperado",
+      "HELP_TEXT": "Por favor, introduza o salário esperado em €"
     },
     "SCORE": "Pontuação",
     "ROLE": "Função"
