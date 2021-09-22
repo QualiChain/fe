@@ -1332,8 +1332,9 @@ export class CVDialog_modal implements OnInit {
 
   competencies: CompetencyLevelValues[] = [
     {value: 'basic', viewValue: 'Basic'},
-    {value: 'medium', viewValue: 'Medium'},
-    {value: 'advanced', viewValue: 'Advanced'}
+    {value: 'intermediate', viewValue: 'Intermediate'},
+    {value: 'advanced', viewValue: 'Advanced'},
+    {value: 'expert', viewValue: 'Expert'}
   ];
 
   //private appcomponent: AppComponent,
@@ -1833,8 +1834,9 @@ export class AddItemDialog_modal implements OnInit {
 
   competencies: CompetencyLevelValues[] = [
     {value: 'basic', viewValue: 'Basic'},
-    {value: 'medium', viewValue: 'Medium'},
-    {value: 'advanced', viewValue: 'Advanced'}
+    {value: 'intermediate', viewValue: 'Intermediate'},
+    {value: 'advanced', viewValue: 'Advanced'},
+    {value: 'expert', viewValue: 'Expert'}
   ];
 
   //myControl = new FormControl();

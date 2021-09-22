@@ -274,8 +274,9 @@ export class ItemCDDialog_modal implements OnInit {
 
   competencies: CompetencyLevelValues[] = [
     {value: 'basic', viewValue: 'Basic'},
-    {value: 'medium', viewValue: 'Medium'},
-    {value: 'advanced', viewValue: 'Advanced'}
+    {value: 'intermediate', viewValue: 'Intermediate'},
+    {value: 'advanced', viewValue: 'Advanced'},
+    {value: 'expert', viewValue: 'Expert'}
   ];
 
   @ViewChild(MatAutocompleteTrigger) trigger: MatAutocompleteTrigger;
