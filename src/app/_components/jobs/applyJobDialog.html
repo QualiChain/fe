@@ -25,7 +25,8 @@
     <!-- expsalary label -->
     <mat-form-field class="apply-job-full-width">
       <mat-label>{{ 'JOB_APPLY.EXPECTED_SALARY.TITLE' | translate }}</mat-label>
-      <input matInput  [(ngModel)]="expsalary" name="expsalary" value="expsalary" placeholder="{{ 'JOB_APPLY.EXPECTED_SALARY.PLACEHOLDER' | translate }}">
+      <input matInput min="0" step="1000" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" type="number" [(ngModel)]="expsalary" name="expsalary" value="expsalary" placeholder="{{ 'JOB_APPLY.EXPECTED_SALARY.PLACEHOLDER' | translate }}">
+      <mat-hint>{{ 'JOB_APPLY.EXPECTED_SALARY.HELP_TEXT' | translate }}</mat-hint>
     </mat-form-field>        
     <br/>
     <!-- score label 
