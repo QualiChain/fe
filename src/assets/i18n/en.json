@@ -1042,6 +1042,7 @@
     "LEVELS": {
       "BASIC": "Basic",
       "MEDIUM": "Medium",
+      "INTERMEDIATE": "Intermediate",
       "ADVANCED": "Advanced",
       "EXPERT": "Expert"
     }
