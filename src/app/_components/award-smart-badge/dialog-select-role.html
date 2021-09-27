@@ -1,0 +1,25 @@
+
+
+<mat-dialog-content class="mat-typography">
+    <form #formSelectRole="ngForm" class="select_role-form">
+      {{'AWARD_AS' | translate}}
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'PROFILE.ROLE.SELECT_ONE' | translate }}</mat-label>
+        <mat-select  [(ngModel)]="selectedRole" name="role" id="role" required>
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{'ROLES.'+role.toLowerCase() | translate}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="modal-footer">   
+      <button [disabled]="formSelectRole.invalid" class="btn btn-primary" [mat-dialog-close]="selectedRole">
+        <i _ngcontent-axy-c0="" class="material-icons"> emoji_events </i> {{ 'AWARD_SMART_BADGE.BUTTON.AWARD' | translate }}
+      </button>
+      <button type="button" class="btn btn-danger" [mat-dialog-close]="false" id="closeAwardModalWindow">
+        <i _ngcontent-axy-c0="" class="material-icons"> close </i> {{ 'BUTTON.CANCEL' | translate }}
+      </button>
+    </div>
+</mat-dialog-actions>

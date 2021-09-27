@@ -1241,5 +1241,11 @@
     "PERCENTATGE_RELATION_WITH_EDUCATIONAL_HISTORY_MISSING": "Your educational history is {{value1}}% of 33%, currently you have none introduced.",
     "CURRENT_PERCENTATGE": "Your current percentatge is {{value}}%"
   },
-  "PICK_ONE": "Pick one"
+  "PICK_ONE": "Pick one",
+  "UNKNOWN_ROLE": "Unknown role",
+  "AWARDED_BY": "Awarded by",
+  "AWARD_AS": "Award as",
+  "AWARD_ASSIGNED": "Award assigned",
+  "SUCCESSFUL_VALIDATIONS": "Successful validations",
+  "INCORRECT_VALIDATIONS": "Incorrect validations"
 }

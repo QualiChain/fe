@@ -10,6 +10,7 @@ export const environment = {
   downloadFilesUrl : 'http://qualichain.epu.ntua.gr:5004/download',
   deleteFilesUrl : 'http://qualichain.epu.ntua.gr:5004/delete',
   badgesUrl : 'http://qualichain.epu.ntua.gr:5004/badges',
+  badgesV2Url : 'http://qualichain.epu.ntua.gr:5004',
   authUrl : 'http://qualichain.epu.ntua.gr:5004/auth',
   IAMtokenvalidation : true,
   IAMAuthUrl : 'https://qualichain.herokuapp.com/users',
