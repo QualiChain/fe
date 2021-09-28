@@ -14,6 +14,7 @@ export const environment = {
   downloadFilesUrl : '/ntuaAPI5004/download',
   deleteFilesUrl : '/ntuaAPI5004/delete',
   badgesUrl : '/ntuaAPI5004/badges',
+  badgesV2Url : '/ntuaAPI5004',
   authUrl : '/ntuaAPI5004/auth',
   IAMtokenvalidation : true,
   IAMAuthUrl : 'https://qualichain.herokuapp.com/users',

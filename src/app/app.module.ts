@@ -97,7 +97,7 @@ import { RecruitmentComponent } from './_components/recruitment/recruitment.comp
 import { HeaderComponent } from './_components/utils/header/header.component';
 import { FooterComponent } from './_components/utils/footer/footer.component';
 import { JobsComponent, applyJobDialog_modal } from './_components/jobs/jobs.component';
-import { AwardSmartBadgeComponent, AwardsListComponent, awardDialog_modal, createAwardDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
+import { AwardSmartBadgeComponent, AwardsListComponent, awardDialog_modal, createAwardDialog_modal, dialogSelectRoleDialog_modal } from './_components/award-smart-badge/award-smart-badge.component';
 import { HomeComponent } from './_components/home/home.component';
 import { PilotHomeComponent } from './_components/pilot-home/pilot-home.component';
 import { HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilot4Component, HomePilot5Component } from './_components/pilot-home/pilot-home.component';
@@ -265,7 +265,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  entryComponents: [QcEvaluationQuestionnaireComponent, VisualisationHelperDialogComponent, VisualisationModalWindowDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal, DialogHelperCVCompleteness, MCDSSDialogContent, MCDSSDialogContentForField],
+  entryComponents: [QcEvaluationQuestionnaireComponent, VisualisationHelperDialogComponent, VisualisationModalWindowDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, dialogSelectRoleDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal, DialogHelperCVCompleteness, MCDSSDialogContent, MCDSSDialogContentForField],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -274,7 +274,7 @@ export function tokenGetter() {
     applyJobDialog_modal,
     AwardSmartBadgeComponent, AwardsListComponent, 
     awardDialog_modal,
-    createAwardDialog_modal,
+    createAwardDialog_modal, dialogSelectRoleDialog_modal,
     HomeComponent,
     PilotHomeComponent,
     HomePilot1Component, HomePilot2Component, HomePilot3Component, HomePilot4Component, HomePilot5Component,

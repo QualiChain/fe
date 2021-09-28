@@ -47,7 +47,7 @@
                                        
                 <div>
                     <mat-form-field>
-                        <input matInput [formControl]="nameFilter" placeholder="{{ 'FILTER' | translate }}">
+                        <input matInput [(ngModel)]="searchedTerm" [formControl]="nameFilter" placeholder="{{ 'FILTER' | translate }}">
                     </mat-form-field>
 
                     &nbsp;
@@ -74,7 +74,9 @@
 
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'BADGES.BADGE.TITLE.LABEL' | translate }} </th>
-                            <td mat-cell *matCellDef="let element_badge"> {{element_badge.name }} </td>
+                            <td mat-cell *matCellDef="let element_badge">
+                                <span  [innerHTML]="element_badge.name | highlight: searchedTerm"></span>
+                            </td>
                         </ng-container>
 
                         <ng-container matColumnDef="issuer">

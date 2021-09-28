@@ -2,24 +2,21 @@
 <div id="userAwardList">
     <mat-spinner diameter="20" color="warn" *ngIf="lodingspinnerid; else loadEnd"></mat-spinner>
     <ng-template #loadEnd>
-<!--
-        <div *ngIf="formatOutput=='card'">
-            <div *appCanAccess="['issue_smart_badge']" class="col-lg-12 ">
-                <button class="btn btn-primary" (click)="openAwardDialogInUserProfile(+userId, aqcuired_badges_by_user)">
-                    <i _ngcontent-axy-c0="" class="material-icons small"> emoji_events </i> Award
-                </button>
-            </div> 
-        </div>
--->
+
         <div *ngIf="aqcuired_badges_by_user.length==0; else userHasBadges" class="col-lg-8  smartBudge">                                
             {{ 'PROFILE.NO_SMART_BADGE_YET' | translate }}
         </div>
         <ng-template #userHasBadges>
             <div *ngIf="formatOutput=='small'">
-                <span *ngFor="let element_badge of aqcuired_badges_by_user; index as i">                    
-                    <div class="sbbox" [ngClass]='whatClassIsIt(element_badge?.oubadge_user?.signature?.account)'>                                                
-                        <a href="" (click)="modalClass=whatClassIsIt(element_badge?.oubadge_user?.signature?.account);intialerts()" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId"><img style="margin: 3px 7px 3px 1px; width: 30px;" *ngIf="element_badge.badge.oubadge.image" class="center" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" > </a>
-                    </div>
+                <span *ngFor="let element_badge of aqcuired_badges_by_user; index as i">          
+                        <div class="sbbox" [ngClass]='whatClassIsIt(element_badge?.badge_details?.oubadge_user?.signature?.account)'>                                                                        
+                            <span matBadge="{{element_badge?.count}}" 
+                            matBadgePosition="before" 
+                            matBadgeOverlap="true">
+                                <a href="" (click)="modalClass=whatClassIsIt(element_badge?.badge_details?.oubadge_user?.signature?.account);intialerts(element_badge?.badge_details?.id)" class="noborder" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId"><img style="margin: 3px 7px 3px 1px; width: 30px;" *ngIf="element_badge.badge_details.oubadge.image" class="center" [src]="element_badge.badge_details.oubadge.image" [title]="element_badge.badge_details.name" [alt]="element_badge.badge_details.name" > </a>
+                            </span>
+                        </div> 
+                        &nbsp;
                 </span>
             </div>
             <div *ngIf="formatOutput=='card'">
@@ -27,17 +24,24 @@
 
                     <mat-card class="col-lg-6 example-card" >
                         <mat-card-header>
-                            <div [ngClass]='whatClassIsIt(element_badge?.oubadge_user?.signature?.account)' mat-card-avatar title="{{element_badge?.badge?.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge?.oubadge_user?.badge?.image}}");'></div>
+                            
+                            <div [ngClass]='whatClassIsIt(element_badge?.badge_details?.oubadge_user?.signature?.account)' mat-card-avatar title="{{element_badge?.badge_details?.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge?.badge_details?.oubadge?.image}}");'>
+                                <span matBadge="{{element_badge?.count}}" 
+                                matBadgePosition="after" 
+                                matBadgeOverlap="true">                                
+                                </span>
+                            </div>
+                            
                             <mat-card-title>
-                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge?.oubadge_user?.signature?.account);intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
-                                    <span *ngIf="element_badge?.badge?.name?.length<=20">{{element_badge?.badge?.name}}</span>
-                                    <span *ngIf="element_badge?.badge?.name?.length>20">{{element_badge?.badge?.name | slice:0:20}} ...</span>
+                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge?.badge_details?.oubadge_user?.signature?.account);intialerts(element_badge?.badge_details?.id)" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
+                                    <span *ngIf="element_badge?.badge_details?.name?.length<=20">{{element_badge?.badge_details?.name}}</span>
+                                    <span *ngIf="element_badge?.badge_details?.name?.length>20">{{element_badge?.badge_details?.name | slice:0:20}} ...</span>
                                 </a>
                             </mat-card-title>
                         </mat-card-header>
                         
                         <mat-card-content>                                                              
-                            <div><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}:</label> {{element_badge.badge.issuer}}</div>                            
+                            <div><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}:</label> {{element_badge.badge_details.issuer}}</div>                            
                         </mat-card-content>
                     </mat-card>                    
                 </span>
@@ -50,17 +54,22 @@
 
                     <mat-card class="col-lg-12 example-card" >
                         <mat-card-header>
-                            <div [ngClass]='whatClassIsIt(element_badge.oubadge_user.signature.account)' mat-card-avatar title="{{element_badge.badge.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge.oubadge_user.badge.image}}");'></div>
+                            <div [ngClass]='whatClassIsIt(element_badge.badge_details?.oubadge_user?.signature?.account)' mat-card-avatar title="{{element_badge?.badge_details?.name}}" class="example-header-image" style='border-radius: 0%; background-size: cover;background-image: url("{{element_badge?.badge_details?.oubadge?.image}}");'>
+                                <span matBadge="{{element_badge?.count}}" 
+                                matBadgePosition="after" 
+                                matBadgeOverlap="true">
+                                </span>
+                            </div>
                             <mat-card-title>
-                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge.oubadge_user.signature.account);intialerts()" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
-                                    <span *ngIf="element_badge.badge.name.length<=20">{{element_badge.badge.name}}</span>
-                                    <span *ngIf="element_badge.badge.name.length>20">{{element_badge.badge.name | slice:0:20}} ...</span>
+                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge.badge_details?.oubadge_user.signature.account);intialerts(element_badge?.badge_details?.id)" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
+                                    <span *ngIf="element_badge.badge_details?.name.length<=20">{{element_badge.badge_details?.name}}</span>
+                                    <span *ngIf="element_badge.badge_details?.name.length>20">{{element_badge.badge_details?.name | slice:0:20}} ...</span>
                                 </a>
                             </mat-card-title>
                         </mat-card-header>
                         
                         <mat-card-content>                                                              
-                            <div><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}:</label> {{element_badge.badge.issuer}}</div>                            
+                            <div><label>{{ 'BADGES.BADGE.ISSUER.ISSUER_NAME.LABEL' | translate }}:</label> {{element_badge.badge_details?.issuer}}</div>                            
                         </mat-card-content>
                     </mat-card>                    
                 </span>
@@ -79,11 +88,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">
-<!--
-    <img style="width:30px" *ngIf="element_badge.badge.oubadge.image" [src]="element_badge.badge.oubadge.image" [title]="element_badge.badge.name" [alt]="element_badge.badge.name" >
--->
-            {{element_badge.badge.name}}</h4>                                              
+          <h4 class="modal-title">           
+                {{element_badge.badge_details?.name}}
+                <span matBadge="{{element_badge?.count}}" 
+                matBadgePosition="after" 
+                matBadgeOverlap="true"></span> 
+          </h4>                                              
+                   
         </div>
         <div class="modal-body">
                   
@@ -92,21 +103,39 @@
             </div>   
 
             <div [hidden]="loadingLoginSpinner">
-                <!--
-                <br *ngIf="showErrorMessage || validationSuccess">
-                <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
-                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO' | translate }}
+
+                <div *ngIf="awardedBy"> 
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>                                                    
+                                {{'AWARDED_BY' | translate}}:
+                            </mat-panel-title>
+                            <mat-panel-description>
+                              
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <p>
+                              
+                            <span *ngFor="let role of awardedBy | keyvalue ; index as i">  
+                                <div *ngIf="role.key!='null'">{{'ROLES.'+role.key.toLowerCase() | translate}}: {{role.value}}</div>
+                                <div *ngIf="role.key=='null'">{{'UNKNOWN_ROLE' | translate}}: {{role.value}}</div>
+                            </span>
+
+                          </p>
+                        </mat-expansion-panel>
+                        
+                    </mat-accordion>
+                    <br>
+
                 </div>
-                <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
-                    {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK' | translate }}
-                </div>
-                -->
+
                 <div [ngClass]="modalClass">
-                    <app-qc-smart-badge-card [awardId]="element_badge.badge.id"></app-qc-smart-badge-card>
+                    <app-qc-smart-badge-card [awardId]="element_badge.badge_details?.id"></app-qc-smart-badge-card>
                 </div>
             </div>
-
-            <div *ngIf="((isAdmin || isProfessor || isAcademicOrganisation) && (element_badge?.oubadge_user))">
+<!--
+            <div *ngIf="((isAdmin || isProfessor || isAcademicOrganisation) && (element_badge?.badge_details?.oubadge_user))">
                 <br>
                 <mat-accordion class="example-headers-align">
                     <mat-expansion-panel  hideToggle>
@@ -150,24 +179,32 @@
 
                 </mat-accordion>
             </div>
-            
+-->            
             <div [hidden]="loadingLoginSpinner">
                 <br *ngIf="showErrorMessage || validationSuccess">
+                <div *ngIf="cntValidationOK>0" class="alert alert-info" role="alert">
+                    {{ 'SUCCESSFUL_VALIDATIONS' | translate }}: {{cntValidationOK}} / {{listOfAwardsToValidate.length}}
+                </div>
+                <div *ngIf="cntValidationKO>0" class="alert alert-danger" role="alert">                    
+                    {{ 'INCORRECT_VALIDATIONS' | translate }}: {{cntValidationKO}} / {{listOfAwardsToValidate.length}}
+                </div>
+                <!--
                 <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">                    
                     {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_KO' | translate }}
                 </div>
                 <div *ngIf="validationSuccess" class="alert alert-info" role="alert">                    
                     {{ 'SMART_BADGE.MAIN_DATA_TAB.MESSAGES.VALIDATION_OK' | translate }}
                 </div>
+                -->
             </div>
 
         </div>
         <div class="modal-footer">    
-           <button [hidden]="loadingLoginSpinner" (click)="verifySmartBadge(element_badge)" type="button" class="btn btn-secondary">
+           <button [hidden]="loadingLoginSpinner" [disabled]="this.listOfAwardsToValidate.length==0" (click)="verifySmartBadgeV2()" type="button" class="btn btn-secondary">
                 <i _ngcontent-axy-c0="" class="material-icons small">  star  </i> {{ 'AWARD_SMART_BADGE.BUTTON.VALIDATE_AWARD' | translate }}
            </button>     
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'BUTTON.CLOSE' | translate }}</button>                                              
         </div>
       </div>
     </div>
-</div>                                                                          
+</div>                                                         

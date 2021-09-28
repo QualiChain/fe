@@ -591,11 +591,16 @@ export class ItemCDDialog_modal implements OnInit {
 
   ngOnInit() {
 
+
+
     let currentLang = localStorage.getItem('last_language'); 
     if (!currentLang) {
       currentLang = 'en';
     }
 
+    if (!this.currentUserLang) {
+      this.currentUserLang = 'en';
+    }
     this.dateAdapter.setLocale('en-GB');
     this.filteredOptions = this.myControl.valueChanges
       .pipe(

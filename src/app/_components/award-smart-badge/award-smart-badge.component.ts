@@ -16,6 +16,7 @@ import { BadgesService } from '../../_services/badges.service';
 import { AuthService } from '../../_services/auth.service';
 import { OUService } from '../../_services/ou.service'
 import { CoursesService } from '../../_services/courses.service';
+import { AwardsService } from '../../_services/awards.service';
 
 import Course from '../../_models/course';
 //import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -25,6 +26,7 @@ import {PageEvent} from '@angular/material/paginator';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../utils/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { QCMatomoConnectorService} from '../../_services/qc-matomo-connector.service';
+import { exit } from 'process';
 
 @Component({
   selector: 'app-award-smart-badge',
@@ -598,6 +600,7 @@ export class awardDialog_modal implements OnInit {
   currentUser: any;
   showLoading = true;
   isAdmin: boolean = false;
+  assignedAsRole: string = null;
 
   constructor(
     private authservice: AuthService,
@@ -608,6 +611,7 @@ export class awardDialog_modal implements OnInit {
     public createAwardDialog: MatDialog,
     private us: UsersService,
     private bs: BadgesService,
+    private aws: AwardsService,
     private as: AuthService,
     private ous: OUService,
     private cs: CoursesService,
@@ -633,12 +637,16 @@ export class awardDialog_modal implements OnInit {
     this.showLoading = true;
     //console.log(this.currentUser.email);
     this.listOfSmartAwards = [];
-    this.bs.getBadges()
+    //console.log("this.currentUser.id:"+this.currentUser.id);
+    //console.log("this.data.userId:"+this.data.userId);
+
+    this.aws.getListBadgesAllowedToAward(this.data.userId, this.currentUser.id)
+    //this.bs.getBadges()
       .subscribe(( dataSmatBadges: any) => {
         //console.log (dataSmatBadges);
         dataSmatBadges.forEach(element => {
           //console.log(element.oubadge.issuer.email);
-          if (this.currentUser.email.toUpperCase()==element.oubadge.issuer.email.toUpperCase()) {
+          //if (this.currentUser.email.toUpperCase()==element.oubadge.issuer.email.toUpperCase()) {
             this.listOfSmartAwards.push(
               {
               id: element.id,
@@ -660,10 +668,12 @@ export class awardDialog_modal implements OnInit {
             this.SBList = this.listOfSmartAwards;
             this.lengthSB = this.SBList.length;
             this.pagedListSB = this.SBList.slice(0, this.pageSizeSB);
-          }
+            this.showLoading = false;
+          //}
         });
 
         //recover the list of smart badges of the user
+        /*
         this.bs.getBadgesByUser(this.data.userId)
         .subscribe((assignedSmartBadges: any) => {
 
@@ -702,7 +712,7 @@ export class awardDialog_modal implements OnInit {
           this.showLoading = false;
           console.log("error recovering list of smart badges per user")
         });
-        
+        */
       },
       error => {
         this.showLoading = false;
@@ -932,34 +942,12 @@ export class awardDialog_modal implements OnInit {
     */
   }
 
-  issueSmartBadge(smartBadgeData, i) {
-    //console.log("issueSmartBadge");
+
+  sendDataSB(dataToPost, smartBadgeData, i) {
+
+    //console.log(dataToPost);
     //console.log(smartBadgeData);
-    this.resetErrorMessages(i);    
-    
-    let dataToPost = {};
-    //console.log(this.data.userId);
-    if (this.data.userId) {
-      
-      dataToPost = {
-        "badge":smartBadgeData.oubadge,
-        "recipient":{"name": this.userDataRec.fullName, "email": this.userDataRec.email}
-        };
-
-        //console.log(this.currentUser.email);
-        //if we need to replace issueremail by the email of the current user uncomment next line
-        //dataToPost['badge']['issuer']['email'] = this.currentUser.email;
-
-    }
-    else if (this.data.courseId) {
-
-      dataToPost = {
-        "badge":smartBadgeData.oubadge,
-        "recipient":{"name": this.courseDataRec.name, "email": "qualichain@qualichain.com"}
-        };
-
-    }
-          //console.log(dataToPost);
+    //console.log(i);
 
           this.ous
           .issueSmartBadgeV2(dataToPost).subscribe(
@@ -972,19 +960,29 @@ export class awardDialog_modal implements OnInit {
             
             if (this.data.userId) {
               
+              
+              //let userBadgeData = {
+              //  "user_id": this.data.userId,
+              //  "badge_id": smartBadgeData.id,
+              //  "oubadge_user":  res.badge,
+              //  "ou_metadata": res.metadata            
+              //};
 
               let userBadgeData = {
+                "awarded_by_id": this.currentUser.id,
+                "awarded_by_role": this.assignedAsRole,
                 "user_id": this.data.userId,
                 "badge_id": smartBadgeData.id,
                 "oubadge_user":  res.badge,
-                "ou_metadata": res.metadata            
+                "ou_metadata": res.metadata
               };
 
               //console.log("------");
               //console.log(userBadgeData);
               this.lodingspinnerid = null;
 
-              this.bs.addBadgeToUser(userBadgeData).subscribe(
+              //this.bs.addBadgeToUser(userBadgeData).subscribe(
+              this.aws.awardASmartBadge(userBadgeData).subscribe(
                 resNTUA => {
                   //console.log("res assign badge to user NTUAs API")
                   //console.log(resNTUA);
@@ -1021,6 +1019,69 @@ export class awardDialog_modal implements OnInit {
             this.lodingspinnerid = null;                      
           }
         );
+          
+
+  }
+
+  issueSmartBadge(smartBadgeData, i) {
+    //console.log("issueSmartBadge");
+    //console.log(smartBadgeData);
+    this.resetErrorMessages(i);    
+    
+    let dataToPost = {};
+    //console.log(this.data.userId);
+    if (this.data.userId) {
+      
+      this.assignedAsRole = null;
+
+      dataToPost = {
+        "badge":smartBadgeData.oubadge,
+        "recipient":{"name": this.userDataRec.fullName, "email": this.userDataRec.email}
+        };
+
+      if ((this.currentUser.roles.length)>1) {
+      
+        const dialogRef = this.dialog.open(dialogSelectRoleDialog_modal);
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(result);
+          if (result!=false) {
+            console.log("if");
+            this.assignedAsRole = result;
+
+            this.sendDataSB(dataToPost, smartBadgeData, i);
+          }
+          else {
+            console.log("else");
+            this.lodingspinnerid = null;
+            this.assignedAsRole = null;
+            //exit;
+          }
+        });
+
+      }
+      else {
+        this.assignedAsRole = this.currentUser.roles[0];
+        this.sendDataSB(dataToPost, smartBadgeData, i);
+      }
+      
+     
+
+        //console.log(this.currentUser.email);
+        //if we need to replace issueremail by the email of the current user uncomment next line
+        //dataToPost['badge']['issuer']['email'] = this.currentUser.email;
+
+    }
+    else if (this.data.courseId) {
+
+      dataToPost = {
+        "badge":smartBadgeData.oubadge,
+        "recipient":{"name": this.courseDataRec.name, "email": "qualichain@qualichain.com"}
+        };
+
+        this.sendDataSB(dataToPost, smartBadgeData, i);
+
+    }
           
       
   
@@ -1443,6 +1504,7 @@ const fulListOfSmartAwards = [];
 export class AwardsListComponent implements OnInit {
 
   currentUser: User;
+  searchedTerm: string = '';
 
   constructor(
     public authservice: AuthService
@@ -1455,5 +1517,32 @@ export class AwardsListComponent implements OnInit {
   ngOnInit() {
     
   }
+
+}
+
+@Component({
+  selector: 'dialog-select-role-dialog',
+  templateUrl: 'dialog-select-role.html',
+})
+export class dialogSelectRoleDialog_modal {
+  
+  currentUser: any;
+  roles = [];
+  selectedRole: string = null;
+
+  constructor(
+    public authservice: AuthService
+  ) { 
+    
+    this.authservice.currentUser.subscribe(x => this.currentUser = x);
+
+  }
+
+  ngOnInit() {
+    this.roles = this.currentUser.roles;
+    console.log(this.roles);
+
+  }
+
 
 }

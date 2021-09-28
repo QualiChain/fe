@@ -52,15 +52,15 @@ export class QcSmartBadgesListComponent implements OnInit {
   onChangeCreatedByMeCheckbox(checked: boolean) {
     //console.log("ddddddddddddd");
     this.createdByMe = checked;
-    console.log(this.currentUser);
-    console.log(this.dataSource.data);
+    //console.log(this.currentUser);
+    //console.log(this.dataSource.data);
     if (this.createdByMe) {
       this.filterValues.creator_email = this.currentUser.email;
     }
     else {
       this.filterValues.creator_email = null;
     }
-    console.log(this.filterValues);
+    //console.log(this.filterValues);
     this.dataSource.filter = JSON.stringify(this.filterValues);
   }
 

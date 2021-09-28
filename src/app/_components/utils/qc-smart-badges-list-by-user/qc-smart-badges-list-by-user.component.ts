@@ -6,6 +6,7 @@ import { awardDialog_modal } from '../../../_components/award-smart-badge/award-
 import { OUService } from '../../../_services/ou.service'
 import { AppComponent } from '../../../app.component';
 import { QCMatomoConnectorService} from '../../../_services/qc-matomo-connector.service';
+import { AwardsService } from 'src/app/_services/awards.service';
 
 @Component({
   selector: 'app-qc-smart-badges-list-by-user',
@@ -34,9 +35,16 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   downloadPNGImage: any = null;
   showErrorDowloadingPNG: boolean = false;
 
+  awardedBy: {} = null;
+
+  listOfAwardsToValidate = [];
+  cntValidationOK = 0;
+  cntValidationKO = 0;
+
   constructor(
     private mc: QCMatomoConnectorService,
     private appcomponent: AppComponent,
+    private aws: AwardsService,
     private bs: BadgesService,
     public awardDialog: MatDialog,
     private ous: OUService
@@ -46,11 +54,39 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   isProfessor = this.appcomponent.isProfessor;
   isAcademicOrganisation = this.appcomponent.isAcademicOrganisation;
 
-  intialerts() {
+  intialerts(awardId) {
+    //console.log(awardId);
+    this.loadingLoginSpinner = true;
+    this.listOfAwardsToValidate = [];
+
+    this.aws.getAggregatedDataForUserAndBadgeId(+this.userId, +awardId).subscribe(      
+        aggegatedDataBadgeByUser => {
+          //console.log(aggegatedDataBadgeByUser);
+          this.awardedBy= aggegatedDataBadgeByUser['awarded_by'];
+          
+          this.aws.getAwwardingsForUserAndBadgeId(+this.userId, +awardId).subscribe(      
+            SBDataByUserIdAndAwardId => {
+              //console.log(SBDataByUserIdAndAwardId);
+              this.listOfAwardsToValidate = SBDataByUserIdAndAwardId;
+              this.loadingLoginSpinner = false;
+            },
+            error => {
+              console.log("error getting aggrgated data badges per user");
+              this.loadingLoginSpinner = false;
+            });
+
+        },
+        error => {
+          console.log("error getting aggrgated data badges per user");
+          this.loadingLoginSpinner = false;
+        }
+    );
+
     this.errorMessage = "";
     this.showErrorMessage = false;
-    this.loadingLoginSpinner = false;
+    //this.loadingLoginSpinner = false;
     this.validationSuccess = false;
+    
   }
   modalClass: string = "";
 
@@ -70,11 +106,14 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
         return "defaultBadge";
    }
 
+
   loadUserBadges() {
     this.lodingspinnerid = true;
-    this.bs.getBadgesByUser(+this.userId).subscribe(
+    this.aws.getUsersBagesWithCounters(+this.userId).subscribe(
+    //this.bs.getBadgesByUser(+this.userId).subscribe(
       badgesByUser => {
-        badgesByUser.sort((a, b) => a.badge.name.localeCompare(b.badge.name));
+        //console.log(badgesByUser);
+        //badgesByUser.sort((a, b) => a.badge_details.badge.name.localeCompare(b.badge_details.badge.name));
         this.aqcuired_badges_by_user = badgesByUser;
         this.lodingspinnerid = false;
         
@@ -88,7 +127,7 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   ngOnInit(): void {
     //console.log("this.userId:"+this.userId);
     //console.log("this.formatOutput:"+this.formatOutput);
-
+    this.listOfAwardsToValidate = [];
     if (this.userId) {
       this.loadUserBadges();
       
@@ -160,6 +199,19 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
     return dataToPost;
   }
 
+  verifySmartBadgeV2() {
+    //console.log("verifySmartBadgeV2");
+    this.loadingLoginSpinner = true;
+    this.validationSuccess = false;
+
+    
+    this.listOfAwardsToValidate.forEach((award, index) => {    
+      //console.log(award);
+      this.verifySmartBadge(award);
+    });
+
+  }
+
   verifySmartBadge(smartBadgeData) {
     this.loadingLoginSpinner = true;
     this.validationSuccess = false;
@@ -171,7 +223,7 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
     //console.log("verifySmartBadge");
     //console.log("data In:");
     //console.log(smartBadgeData);
-
+    
     let dataToPost = this.createBadgeDataToSend(smartBadgeData);
     
     //console.log(dataToPost);
@@ -180,7 +232,7 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
           res => {
 
             this.loadingLoginSpinner = false;
-            //console.log("smart badget verification finished, status:"+res);
+            console.log("smart badget verification finished, status:"+res);
             if (res) {
 
               let EndTime = + new Date();
@@ -200,12 +252,14 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
 
               this.validationSuccess = true;
               this.showErrorMessage = false;
+              this.cntValidationOK = this.cntValidationOK + 1;
+              
             }
             else {
               this.errorMessage = "The validation cannot be done!!!";
               this.validationSuccess = false;
               this.showErrorMessage = true;
-              
+              this.cntValidationKO = this.cntValidationKO + 1;
             }
           },
           error => {
@@ -214,6 +268,7 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
             this.errorMessage = error.message;
             this.validationSuccess = false;
             this.showErrorMessage = true;
+            this.cntValidationKO = this.cntValidationKO + 1;
           }
         );
 
