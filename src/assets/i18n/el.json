@@ -1242,10 +1242,10 @@
     "CURRENT_PERCENTATGE": "Your current percentatge is {{value}}%"
   },
   "PICK_ONE": "Επιλέξτε ένα",
-  "UNKNOWN_ROLE": "Unknown role",
-  "AWARDED_BY": "Awarded by",
-  "AWARD_AS": "Award as",
-  "AWARD_ASSIGNED": "Award assigned",
-  "SUCCESSFUL_VALIDATIONS": "Successful validations",
-  "INCORRECT_VALIDATIONS": "Incorrect validations"
+  "UNKNOWN_ROLE": "Άγνωστος τύπος χρήστη",
+  "AWARDED_BY":  "Απονομή από",
+  "AWARD_AS": "Απονομή ως",
+  "AWARD_ASSIGNED": "Επιτυχής απονομή",
+  "SUCCESSFUL_VALIDATIONS": "Επιτυχείς επικυρώσεις",
+  "INCORRECT_VALIDATIONS": "Ανεπιτυχείς επικυρώσεις"
 }
