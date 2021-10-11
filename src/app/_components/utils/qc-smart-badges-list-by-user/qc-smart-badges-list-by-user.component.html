@@ -61,7 +61,7 @@
                                 </span>
                             </div>
                             <mat-card-title>
-                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge.badge_details?.oubadge_user.signature.account);intialerts(element_badge?.badge_details?.id)" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
+                                <a href="" class="noborder" (click)="modalClass=whatClassIsIt(element_badge.badge_details?.oubadge_user?.signature?.account);intialerts(element_badge?.badge_details?.id)" data-toggle="modal" [attr.data-target]="'#smdesc_user_' + i + '_' + userId">
                                     <span *ngIf="element_badge.badge_details?.name.length<=20">{{element_badge.badge_details?.name}}</span>
                                     <span *ngIf="element_badge.badge_details?.name.length>20">{{element_badge.badge_details?.name | slice:0:20}} ...</span>
                                 </a>
