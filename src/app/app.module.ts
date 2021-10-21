@@ -191,6 +191,7 @@ import { QcSmartBadgesListComponent } from './_components/utils/qc-smart-badges-
 import { QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent } from './_components/utils/qc-smart-badges-list-by-user/qc-smart-badges-list-by-user.component';
 import { QcSmartBadgesListByCourseComponent } from './_components/utils/qc-smart-badges-list-by-course/qc-smart-badges-list-by-course.component';
 import { MyColleaguesComponent } from './_components/my-colleagues/my-colleagues.component';
+import { DegreeComparisonComponent, DegreeComparisonDialogContent } from './_components/degree-comparison/degree-comparison.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -265,7 +266,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  entryComponents: [QcEvaluationQuestionnaireComponent, VisualisationHelperDialogComponent, VisualisationModalWindowDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, dialogSelectRoleDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal, DialogHelperCVCompleteness, MCDSSDialogContent, MCDSSDialogContentForField],
+  entryComponents: [QcEvaluationQuestionnaireComponent, VisualisationHelperDialogComponent, VisualisationModalWindowDialogComponent, ConfirmDialogComponent, awardDialog_modal, createAwardDialog_modal, dialogSelectRoleDialog_modal, applyJobDialog_modal, createChangePasswordDialog_modal, CVDialog_modal, UPLOAD_CV_KG_Dialog_modal, AddItemDialog_modal, DialogHelperCVCompleteness, MCDSSDialogContent, MCDSSDialogContentForField, DegreeComparisonDialogContent],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -332,7 +333,7 @@ export function tokenGetter() {
     ThesisComponent, ThesisComponentSummaryPage,
     ThesisGetComponent,
     ThesisEditComponent,
-    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent, QcSmartBadgesListComponent, QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent, QcSmartBadgesListByCourseComponent, MyColleaguesComponent
+    CompetencyDevelopmentComponent, ItemCDDialog_modal, QcSelectCityDialogComponent, TermsOfUseComponent, QcSmartBadgesListComponent, QcSmartBadgesListByUserComponent, QcSmartBadgeCardComponent, QcSmartBadgesListByCourseComponent, MyColleaguesComponent, DegreeComparisonComponent, DegreeComparisonDialogContent
   ],
   imports: [
     MomentDateModule,

@@ -55,7 +55,9 @@
     "THESIS_HELP_TEXT_PROFESSOR": "Mostra a lista de tópicos de tese disponíveis na plataforma, permitindo aos professores aceitar as candidaturas a tese dos estudantes e criar/gerir novos tópicos de tese quando necessário.",
     "MY_COLLEAGUES_NETWORK": "Os meus colegas",
     "AWARDS": "Distinções",    
-    "AWARDS_HELP_TEXT": "Inclui uma lista de distinções criadas na plataforma e permite a criação e gestão de distinções."    
+    "AWARDS_HELP_TEXT": "Inclui uma lista de distinções criadas na plataforma e permite a criação e gestão de distinções."    ,
+    "DEGREE_COMPARISON": "Degree comparison",
+    "DEGREE_COMPARISON_HELP_TEXT": "Facilitates the comparison of two degrees in a json format"
   },
   "AWARDS": {
     "TITLE": "Distinções",
@@ -970,6 +972,14 @@
         "PREFERENCE": "Set a preference threshold to denote the preference for this criterion.",
         "INDIFFERENCE": "Set an indifference threshold to denote the minimum level of difference that is not negligible for this criterion."
       }               
+    },
+    "DEGREE_COMPARISON": {
+      "HEADER": "Degree comparison help",
+      "BODY": ["Here you can find two json example files. You must use similar json files as input"],
+      "DEMO_FILES": {
+        "FILE_1": "Demo file 1",
+        "FILE_2": "Demo file 2"
+      }
     }
   },
   "QUESTIONNAIRE": {
@@ -1247,5 +1257,25 @@
   "AWARD_AS": "Premiado como",
   "AWARD_ASSIGNED": "Prêmio concedido",
   "SUCCESSFUL_VALIDATIONS": "Validações realizadas com sucesso",
-  "INCORRECT_VALIDATIONS": "Validações incorretas"
+  "INCORRECT_VALIDATIONS": "Validações incorretas",
+  "DEGREE_COMPARISON": {
+    "TITLE": "Degree comparison",
+    "RESULTS": {
+      "TITLE": "Results",
+      "COL_1": "Ficheiro 1",
+      "COL_2": "Ficheiro 2",
+      "COL_3": "Comparison result"
+    },
+    "CHOOSE_FILE_1": "Escolha o ficheiro 1",
+    "CHOOSE_FILE_2": "Escolha o ficheiro 2",
+    "NO_DATA": "No data available",
+    "NOT_VALID_FILE": "This file is not valid, it must be a json file",
+    "INSTRUCTIONS": {
+      "TITLE": "Instruções",
+      "STEP_1": "You must introduce two degrees in a json format and push the button 'Compare' to get the results"
+    },
+    "BUTTON": {
+      "COMPARE": "Compare"
+    }
+  }
 }

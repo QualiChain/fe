@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{ 'HELP.DEGREE_COMPARISON.HEADER' | translate }}</h2>
+
+<div mat-dialog-content>
+  <div *ngFor="let helptext of 'HELP.DEGREE_COMPARISON.BODY' | translate; index as i" [innerHTML]="helptext + '<br>&nbsp;'"></div> 
+
+  <br>
+  <a [routerLink]="" (click)="openJsonExample('assets/demoData/exampleDegree1.json')">{{ 'HELP.DEGREE_COMPARISON.DEMO_FILES.FILE_1' | translate }}</a>
+  <br>
+  &nbsp;
+  <br>
+  <a [routerLink]="" (click)="openJsonExample('assets/demoData/exampleDegree2.json')">{{ 'HELP.DEGREE_COMPARISON.DEMO_FILES.FILE_2' | translate }}</a>
+</div>
+
+
+<mat-dialog-actions align="end">
+  <div class="modal-footer">   
+    <button mat-button class="btn btn-primary" mat-dialog-close><i _ngcontent-axy-c0="" class="material-icons small"> close </i> {{ 'BUTTON.CLOSE' | translate }} </button>    
+  </div>
+</mat-dialog-actions>

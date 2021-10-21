@@ -58,5 +58,6 @@ export const environment = {
   academicorganisationUrl: '/ntuaAPI5004/academicorganisation',
   recruitmentorganisationUrl: '/ntuaAPI5004/recruitmentorganisation',
   getLastJobIdUrl: '/ntuaAPI5004/getlastjobid',
-  getLastJobApplicationIdUrl: '/ntuaAPI5004/getlastjobapplicationid'
+  getLastJobApplicationIdUrl: '/ntuaAPI5004/getlastjobapplicationid',
+  degreComparison: '/degree-comparison/compare/similarity'
 };

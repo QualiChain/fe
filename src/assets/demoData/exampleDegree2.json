@@ -1,0 +1,94 @@
+{
+    "properties": {
+        "name": "Computer Science and Engineering - Alameda",
+        "school": "Instituto Superior Técnico, Universidade de Lisboa",
+        "ects": 180,
+        "courses": [
+            {
+                "name": "Analysis and Synthesis of Algorithms",
+                "description": "Introduction to Analysis and Synthesis of algorithms; mathematical fundamentals for algorithm analysis; revision of ordering algorithms: mergesort; heapsort; quicksort; non-comparison-based ordering algorithms; revision of Data Structures: lists; stacks; rows; dispersion tables; binary demand trees; balanced trees; depreciated analysis. Application examples: binomial piles; Introduction to Computational Geometry. Graphical algorithms: elementary algorithms; lower cost comprehensive trees; shorter paths; maximum flows; Introduction to Linear Programming: simplex algorithm; Algorithm synthesis techniques: Dynamic programming; greedy algorithms; algorithms for Maximum pairing; Introduction to complexity: classes P and NP; NP-complete problems; Cook theorem; Study of Some NP-complete problems; approaches algorithms for NP-workmen problems;",
+                "ects": 6.0
+            },
+            {
+                "name": "Linear Algebra",
+                "description": "Resolution of linear equations systems. Method of elimination of Gauss. Matrices and vectors. Linear spaces and linear transformations. Linear independence. Bases and dimension. Core and contradiction of a linear transformation. Internal products and standards. applications to linear differential equations. Orthogonal bases and Gram-Schmidt orthogonization. Orthogonal supplements and projections. Straight equations and plans. Determinants and applications. Own values and vectors. Invariant subspaces. Diagonalization of arrays. Hermitage, anti-Hermitage and unitary transformations. Quadratic shapes.",
+                "ects": 6.0
+            },
+            {
+                "name": "Software Engineering",
+                "description": "Introduction to Software Engineering. Software design. Program writing. Development process. Engineering requirements. Project Management. Verification and validation.",
+                "ects": 7.5
+            },
+            {
+                "name": "Theory of Computation",
+                "description": "<B> computability </b> deterministic, non-deterministic and enumerating Turing machines. Computable functions. Recursively enumerable sets. Oracles. Reductions. The problem of termination (Introduction to diagonalization technique). Kleene's theorem. Virus. virus. Rice's theorem and its applications. The postulate of Church-Turing.<b> complexity </b> computational resources. Constraints of functions. Hierarchical theorems (use of diagonalization). Savitch's theorem. Computational classes: P, PSPACE, NP, EXPTIME, BPP. Structural relations. Complete sets. Construction of polynomial hierarchy. Relativism.",
+                "ects": 4.5
+            },
+            {
+                "name": "Differential and Integral Calculus II",
+                "description": "Algebraic and topological structure of R<sup> N </sup>. Functions of r <sup> N </sup> in r <sup> M </sup>: limit and continuity. Differentiability. Partial derivative. Derived from the compound function. Taylor's theorem in r <sup> N </sup> and application to extreme study. Inverse function and implicit function theorems. Conditioned extremes. Multiple integrals: Fubini theorem, variable change theorem, applications to the calculation of physical quantities. Line integrals: Integrals of scalar fields and vector fields; fundamental theorem of calculation for line integrals, gradient and potential scalar fields; green theorem. Surface integrals: Integrals of scalar fields and vector field flows; Stokes divergence theorem.",
+                "ects": 7.5
+            },
+            {
+                "name": "Introduction to Probability and Statistics / Probabilistic and Statistics",
+                "description": "<I> basics:</i> random experience. Events. Frequent and subjective concepts of probability. Kolmogorov's axiomatic. Probability conditioned. Bayes theorem independence.<i> random variables:</i> distribution function. Discrete and continuous random variables. Expected value, variance and other parameters. <I> Joint distributions and add-ons:</i> Joint, marginal and conditional distributions. Independence. Correlation. Approaches between distributions. Central boundary theorem. Law of large numbers. <i> Sampling and punctual estimation:</i> Descriptive versus inductive statistics. Random sample. Statistics. Punctual pet. Properties of estimators. Method of maximum verosimility. Average and variance sample distributions. <I> pets by intervals:</i> basics. Reliable intervals for normal and other population parameters. <I> hypothesis tests:</i> basics. Hypothesis tests for parameters of normal populations and others. Pearson adjustment tests and independence in contingency tables.<i> simple linear regression:</i> estimation by the minimum square method and their properties. Inference in the simple linear regression model. Determination coefficient and empirical analysis of waste.",
+                "ects": 6.0
+            },
+            {
+                "name": "Introduction to Algorithms and Data Structures",
+                "description": "Introduction to imperative programming and programming language C. Introduction to the study of algorithm efficiency. Elementary and advanced ordering algorithms: direct insertion, direct selection, Bubblesort, quicksort, binary fusion and heapsort. Data types: Stacks, waiting queues, priority queues, piles, trees. Vector and dynamic implementations. Binary search trees. Balanced Research trees. Dispersion tables. Resolution of collisions by ring and open addressing. Linear addressing, quadratic and dual dispersion.",
+                "ects": 7.5
+            },
+            {
+                "name": "Differential and Integral Calculus I",
+                "description": "Real numbers (body properties; order ratio and Supreme axiom). Natural numbers. Induction method. Real functions of real variable: limit and continuity; differentiability-fundamental theorems; Cauchy rule and lifting indeterminations; Taylor formula. Primitivation. Integral R calculation: Integral of Riemann; integrability of sectionally continuous functions; fundamental theory of calculation; integration formulas by parts and by substitution. Elementary transcendent functions: Logarithm, exponential and hyperbolic functions. Numerical series: Geometric series; comparison criteria; absolutely converging series; power series",
+                "ects": 6.0
+            },
+            {
+                "name": "Systems Analysis and Modeling",
+                "description": "Systems Engineering: concepts, techniques and processesfundamental concepts of conceptual modeling in the context of systems engineering; definitions of \"system\" and \"system system\"; concepts of context and system architecture, \"stakeholders\", \"concern\", \"viewpoint\", \"View\" and models. The ISO 42010 and Zackman ontologies. contextual representation techniques, with emphasis on the technique of conceptual maps. Concepts, motivations for MDA (Model Driven Architecture) and MDE (Model Driven Engineering). Presentation of the main reference standardization entities (ISO, ITU, IEEE, W3C, IETF, INCOSE, NISO, IPQ, Oasis, The Open Group, OMG). Requirements Engineering: fundamental concepts, processes and techniques: requirements such as “concerns” and system constraints. The processes of lifting, negotiation, validation and documentation of requirements. Requirements management tools. Techniques for lifting requirements. Rules for expression of well-formed and smart requirements (specific, measurable, achievable, realisable, traceable). Traceability techniques, functional requirements. Views concepts of \"black box\" and \"white box\" systems. Use cases and scenarios of use cases as requirements engineering techniques (UML and SysML). non functional requirements. Context of system and ethical, social and political issues. Ethical and moral dimensions of systems analysis. Codes of ethics in engineering. (IEEE, ACM and oe). Object-Oriented Analysis and Modeling-Structure Models: Object-Oriented Modeling: concepts; structure and behavior views. Physical systems and logical systems. Information Systems as logical systems. Analysis of speech universes and development of domain models in UML. Associations in UML models (generalization and specialization; generic associations; composition and aggregation; association classes). Components and installation diagrams in UML. Modeling interfaces. Object diagrams. Object-Oriented Analysis and Modeling-behavior models: behavior views “black box” (use cases) and “White Box” (events, flows, and messages). UML techniques for the development of behavior views: message diagrams (sequence, communication, temporal; general interaction), activity diagrams, and state machines. Information Systems-analysis and modeling of business processes the process as input transformation into outputs with an emphasis on final product and value production. The relevance of the view of processes of an organization (quality and responsibility in ISO 9001). Porter's value chain. Process Architecture in Business Architecture. Basic elements of the BPMN language (events, activities, gateways, sequences, messages, associations, data objects). Generic diagrams in BPMN. Public processes, private processes and collaborations. Process Orchestration versus choreography. Good practice and bad practice.",
+                "ects": 6.0
+            },
+            {
+                "name": "Electromagnetism and Optics",
+                "description": "1. electrostatic field in vacuum. Coulomb's law. Overlap principle. Field and potential wedding. Electric dipole. Gauss law. Capacitor. 2.electrostatic field in matter. Dielectrics. Polarization. Electric energy3.stationary electric current. Density and current intensity. Load continuity equation. Ohm's law. Joule's law. Kirchoff's laws. Rc.4.magnetic field in vacuum circuit. Biot-Savart law. Ampere's law. Lorentz's strength. Magnetic flux. Induction Coefficients. Bobina.5.magnetic field in matter. Magnetization. Diamagnetism, paramagnetism and ferromagnetism. Energy in magnetostactic.6.electromagnetic induction. Faraday's law. Electric motors and generators. Displacement current. Electromagnetic energy. Maxwell's rlc.7.equations circuit. Electromagnetic waves. Monochromatic flat waves. Energy and intensity of electromagnetic waves.8.electromagnetic nature of light. Dispersion, polarization, reflection, interference and diffraction. The boundary of geometric optics and the laws of reflection and refraction. Fresnel equations and Fermat principle.",
+                "ects": 6.0
+            },
+            {
+                "name": "Human-Computer Interaction",
+                "description": "Introduction and presentation interactive systems and Eng. Analysis of tasks I and II human factors I and II III-drawing of interactive systems mental and conceptual models I and II prototyping IV-evaluation by experts (aval. Heuristic) predictive (user models) with users evaluation data analysis V-design and construction of visual interfaces interaction devices interaction styles screen design documentation and help VI-www web page design web design patterns Web customization homepages and standards VII-development and toolkits Model-View-Controller toolkits (Output) toolkits (input)",
+                "ects": 7.5
+            },
+            {
+                "name": "Computing and Society",
+                "description": "Ethics and Integrity. Morality and ethics, legality and legitimiseethics in the field of information technology and professional responsibility of information engineers professional organizationsacceptable programmes of information crime and crime systemsthe establishment of security policyeducation of stakeholders. prevention, detection and response to incidents. Legislation. Privacy protection privacy and anonymity of expression control of access to information anonymity on the Internet. Defamation intellectual property copyrights free software. Open access. Information Technologies in societyinformation technologies, investment and productivity exclusion digitalinformation technologies in societynetworks commercial use of societycyberbullying networks and cyberstalkingsharing of virtual content. Educational and commercial use. Crime in the virtual worlds. Ethics of organisationmanagement of employees and external suppliers green computing.",
+                "ects": 3.0
+            },
+            {
+                "name": "Distributed Systems",
+                "description": "Introduction:. Problems introduced by distribution. Historical evolution. Reference architectures. Distributed communication: Transport level and their API. Call of remote procedures. Distributed object systems. web services name Management name properties, name management systems. Directory systems. Name Management service architecture. Political security and security mechanism. Reliable computational base. Secure channels. Introduction to encryption. Symmetric wrench and asymmetric wrench, key distribution. Authentication. Authorization. Integrity? Digital signatures. Web Services security fault tolerance system model, fault types; dense, Byzantine. Great: reliability, availability. Fault tolerance policies? Error Recovery, error processing. Passive replication system. X/Open Architecture distributed transactions, two-phase termination, transactional monitors. Message queues synchronous and asynchronous communication. Message Oriented Middleware. Java messages, integration platform analysis: Sun-RPC, CORBA, J2EE, Web services",
+                "ects": 7.5
+            },
+            {
+                "name": "Complex Analysis and Differential Equations",
+                "description": "Complex analysis. Complex plan. Numerical series. Absolutely convergent series. Series of powers. Differentiability, holomorphic functions. Add-ons on series of functions, analytical functions. Cauchy's theorem. Homotopia. Cauchy's full formula. Isolated singularities. Laurent series. Waste theorem. Improper integrals. Convergence theorems. Leibniz rule. ordinary differential equations. First order equations. Linear, separable, exact equations and integral factors. Existence and uniqueness of solution. Solution Extension. Resolution of linear ordinary equations systems. Exponential matrix. Formula of variation of constants. Fourier series. superior order linear equations. Fourier series convergence. Partial differential equations. Variable separation method. Heat equation. Laplace equation. Wave equation, transformed from Laplace.",
+                "ects": 7.5
+            },
+            {
+                "name": "Discrete Mathematics",
+                "description": "<B> algorithm </b> Introduction to Mathematica programming language. Procedure versus algorithm. Analysis of the efficiency of mandatory programs in the worst case and in the average case. Asymptotic notation. Somatories, productions. Inclusion-exclusion principle. Finite induction demonstration of closed forms. Euler sum formula. Motivation: analysis of algorithms on arrays, research and ordering.<b> elementary number theory </b> modular arithmetic. Divisibility, maximum common divider, Euclides algorithm. factorization and primality, Euler theorem. Chinese theorem of remnants, relations of equivalence and congruence. Finite bodies. Polynomial on finite bodies. Transformed from discrete Fourier, its efficient calculation and correction. Motivation: Cryptography (RSA), algorithmic theory of numbers. <B> generating functions </b> generating function of a succession. Properties. Binary coefficients. generating function of a discrete random variable, moments. Recurrence analysis. Theorem of rational expansion. Resolution of linear equations to differences. Motivation: counting problems, recursive algorithm analysis, dispersion tables (hashing). <B> program correction </b> partial program correction, invariant conditions. Program termination, variants expressions. pre-condition and post-condition. Hoare calculation for partial correction of mandatory programs. Partial, well-founded orders and induction. Hoare calculation for total correction of mandatory programs. motivation: total correction of search and ordering algorithms.<b> graphs </b> graphs, paths and cycles. Trees. minimum path problem, Dijkstra algorithm and its analysis, distributed solutions (Chandy-Misra). Driven graphs, flows and cuts. Maximum flow theorem, Ford-Fulkerson algorithm. motivation: Optimization, network routing problems. <B> Languages and Automata </b> finite deterministic and non-deterministic automata. Regular expressions, regular grammar, regular languages. Motivation: pattern recognition, Knuth algorithm-Morris-Pratt. pumping motto. stack automats and context-free languages, Chomsky hierarchy.",
+                "ects": 7.5
+            },
+            {
+                "name": "Compilers",
+                "description": "Unix development environment: GCC, GDB, CVS, make, Lex and yacc tools. Regular Languages and lexical analysis: Modeling the recognition of phrases, in lexical analyzers, by finite automata (deterministic and non-deterministic). Context-free languages: context-free grammatical, shunt trees, stack-finite automata, LL(1) descending syntactic analyzers, And ascends LR(0)/ SLR(1)/ LALR(1). Attribute grammar and attribute assessment. Treatment and Recovery of errors, analyze static and dynamic semantics: grammatical errors, handle identifiers, typification and activation trees. Generation of intermediate code on abstract trees and Postfix code. End code generation and optimization topics for \"load and store\" machines.",
+                "ects": 6.0
+            },
+            {
+                "name": "Logic for Programming",
+                "description": "Propositions and arguments, components of a logic, purposeful logic (deductive and semantic system), first order logic (deductive and semantic system), solidity and completeness, resolution, programming in logic.",
+                "ects": 7.5
+            }
+        ]
+    }
+}

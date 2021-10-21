@@ -51,5 +51,6 @@ export const environment = {
   academicorganisationUrl: 'http://qualichain.epu.ntua.gr:5004/academicorganisation',
   recruitmentorganisationUrl: 'http://qualichain.epu.ntua.gr:5004/recruitmentorganisation',
   getLastJobIdUrl: 'http://qualichain.epu.ntua.gr:5004/getlastjobid',
-  getLastJobApplicationIdUrl: 'http://qualichain.epu.ntua.gr:5004/getlastjobapplicationid'
+  getLastJobApplicationIdUrl: 'http://qualichain.epu.ntua.gr:5004/getlastjobapplicationid',
+  degreComparison: '/degree-comparison/compare/similarity'
 };
