@@ -50,6 +50,7 @@ import { ThesisEditComponent } from './_components/thesis/thesis-edit/thesis-edi
 import { CompetencyDevelopmentComponent } from './_components/profiles/competency-development/competency-development.component';
 import { TermsOfUseComponent } from './_components/utils/terms-of-use/terms-of-use.component';
 import { MyColleaguesComponent } from './_components/my-colleagues/my-colleagues.component';
+import { DegreeComparisonComponent } from './_components/degree-comparison/degree-comparison.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,16 @@ const routes: Routes = [
     canActivate: [AuthGuardForAnonymous],
     data: {title: 'Login'}
    },
+   {
+    path: 'degree_comparison',
+    component: DegreeComparisonComponent,
+    canActivate: [AuthGuardByPermission],
+    data: { 
+        roles: [Role.professor, Role.admin, Role.administrator ],
+        permissions: ['add_and_update_thesis'],
+        title: 'Degree comparison'
+      }
+   },    
    {
     path: 'skills',
     component: SkillsComponent,

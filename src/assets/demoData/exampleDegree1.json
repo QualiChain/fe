@@ -1,0 +1,109 @@
+{
+    "properties": {
+        "name": "Industrial Engineering and Management",
+        "school": "Instituto Superior Técnico, Universidade de Lisboa",
+        "ects": 180,
+        "courses": [
+            {
+                "name": "Information Systems and Databases",
+                "description": "The proposed program is: database modeling techniques. Customer information systems architecture servantdevelopment of information systems in integrative environments students should have minimal programming knowledge. customer information systems architecture. The programming used will be forms and SQL, both involving only elementary programming notions.",
+                "ects": 6.0
+            },
+            {
+                "name": "Thermodynamics and Transport Phenomena",
+                "description": "Thermodynamic systems and borders; control volumes; interaction with envelope; concepts of heat and work. heat transmission and mechanisms; Fourier (conduction), Newton (convection) and Stefan-Boltzmann (radiation) laws; heat equation, thermal conductivity and thermal diversity; initial and border conditions; Combined modes of heat transmission. Mass conservation; energy conservation and 1st law of thermodynamics; entropy and 2nd law of thermodynamics; thermodynamics properties and models; Carnot machine, thermodynamic yield, inverted Carnot cycle. Energy conversion machines: ideal Rankine cycle and real steam cycles; Brayton cycle and real gas turbine cycles; air-cooling cycles for absorption and compression of steam; air-cooling cycles; Heat pump cycles, non-reactive mixtures of ideal gases and Psychrometry.",
+                "ects": 6.0
+            },
+            {
+                "name": "Safety and Quality Management",
+                "description": "Safety and Risk, prevention and protection, risk factors, management and risk assessment (qualitative equantitative methods); hygiene and safety at work; Foundations of combustion and fire and explosion risks; riscosem nuclear power plants; environmental risks: Pollutant cycle, the AHP method (Analytical Hierarchy Process) And its use in the particular case of RSU management (urban solid waste); industrial accidents. Concepts, quality characteristics for products and services; philosophies and quality management systems (TQM, ISO, 6-sigma/lean); quality costs; quality tools, causes analysis; QFD; statistical control of the case (Control Letters, captivity, analysis of measurement systems); sampling control principles. Level of organization development and quality. Each module has a duration of seven weeks.",
+                "ects": 6.0
+            },
+            {
+                "name": "Fundamentals of Operations Research",
+                "description": "1-Introduction to Operational Research (IO) historical perspective. IO capabilities and limitations. Io.2 methodology-the linear programming model (pl) 3-formulation of problems4-graphic resolution of problems of PL.5-interpretation and substantiation of the simplex.6 method-simplex methods of the two phases and M-grande.8-duality and sensitivity analysis in pl.9-special cases of pl: transport, transshipment and disaster problems.10-predications.11-simulation.",
+                "ects": 6.0
+            },
+            {
+                "name": "Computational Mathematics",
+                "description": "Basic concepts of numerical calculation; representation of numbers, rounding and propagation of errors; standards, errors, convergence, conditioning and stability. Numerical resolution of equations and systems; non-linear equations: fixed-point, secant and Newton-Raphson methods; Linear Systems: Methods of Jacobi, Gauss-Seidel, Sor and conjugated gradient; non-Linear Systems: fixed-point method and Newton method; error analysis, stability and convergence. Approach of functions; polynomial and trigonometric interpolation. Lagrange and Newton formulas; discrete Fourier transformation (DFT and FFT); minimum square method; numerical integration: Newton-Côtes and Gauss formulas; numerical derivation; error analysis, stability and convergence. Numerical resolution of differential equations and applications; initial value problems: simple step methods (Euler, Runge-Kutta) and multiple (Adams); problems with border values: methods of finite differences; error analysis, stability and convergence; examples of application to engineering problems.",
+                "ects": 4.5
+            },
+            {
+                "name": "Project Appraisal",
+                "description": "Part one? Fundamentals of investment analysis1. Scope of analysis of investment projects: economic-social evaluation versus financial evaluation 1.1 Definition and typology of investment1.2 objective of Project Evaluation: economic-social and financial evaluation. Cost-effective and multicriterio.2. Criteria for the analysis of profitability 2.1 the net current value.2.2 the internal profitability rate.2.3 other profitability criteria: internal modified profitability rate; profitability index; capital recovery period; average return on investment in accounting value3. Selection of investments: comparison between investment alternatives under specific circumstances as3.1 differential cash flows and replacement investment analysis3.2 analysis of investments of different duration and cycle of vida3.3 optimal timing of investment and deferral of decision to invest 3.4 budgetary restraints4. Calculation of cash flows and refresh rate 4.1 Cash flows from an investimento4.2 Project Choice of refresh rate. Constant Price and current analysis 5. Interaction between investment and financing decisions: Post-financing profitability analysis, from the point of view of owncapital 5.1 Adjusted net current value5.2 weighted average cost of capital5.3 equity method (flow-to equity) part 2? Preparation of an investment study 6. General plan of an investmentstudy 6.1 general outline of an investmentstudy 6.2 structuring the project file 6.3 Maps constituting the investment project file. Historical accounting and financial analysis and the preparation of a spreadsheet of the forecast maps of investment, exploitation, treasury, finance and patrimonies.7. Strategic Analysis and marketing 7.1 investment decision and strategic diagnosis 7.2 Market Study: procura8. Analysis of Risk and incertes8.1 notions of uncertainty and risco8.2 techniques and indicators for the analysis of uncertainty and risk",
+                "ects": 6.0
+            },
+            {
+                "name": "Differential and Integral Calculus II",
+                "description": "Algebraic and topological structure of R<sup> N </sup>. Functions of r <sup> N </sup> in r <sup> M </sup>: limit and continuity. Differentiability. Partial derivative. Derived from the compound function. Taylor's theorem in r <sup> N </sup> and application to extreme study. Inverse function and implicit function theorems. Conditioned extremes. Multiple integrals: Fubini theorem, variable change theorem, applications to the calculation of physical quantities. Line integrals: Integrals of scalar fields and vector fields; fundamental theorem of calculation for line integrals, gradient and potential scalar fields; green theorem. Surface integrals: Integrals of scalar fields and vector field flows; Stokes divergence theorem.",
+                "ects": 7.5
+            },
+            {
+                "name": "Elements of Civil Engineering",
+                "description": "1. The structural Mechanics module: static, basic notions of material resistance, models and methods of structural analysis, phases of a structure Project 2. Geotechnical module: basic principles of soil mechanics. Soil identification and classification. Actual voltages. Tensions on the soil. One-dimensional percolation. Consolidation. Cutting resistance. 3. hydraulic module: general concepts of hydraulics (hydrology, hydrostatic, hydrodynamics, pressure flows, pumps and turbines), specificity of hydraulic works.",
+                "ects": 6.0
+            },
+            {
+                "name": "Elements of Electrothecnics",
+                "description": "Static electric field? Capacity of a condenser, electric power, system of more than two conductors. Stationary chains? Recitation of a piece of conductor, Joule effect, generators, electric circuits, Introduction to electrical network analysis. Stationary magnetic field? Magnetic Circuit law, magnetic properties of materials, circuits with permanent magnets. Induction law? Induction Coefficients, magnetic black. Calculation of magnetic forces? Application to electro-magnet, electrodynamic stresses, binary calculation in rotary systems. Maxwell's laws? Energy interpretation, quasi-stationary regime. Sinusoidal forced circuits? Notion of complex amplitude and symbolic calculation, notion of impedance, active power, reactive and complex. Resonance. Power factor compensation. Single phase transformer? Equivalent schemes, losses. Induction law with moving bodies, principle of electromechanical energy conversion, rotary electric machines. Three-phase systems, generator and load configurations, three-phase power, Rotary Field. Direct current machine? Universal series motor. Asynchronous machine? Equivalent scheme on a permanent basis. Features. Synchronous machine? Equivalent scheme on a permanent basis. Features.",
+                "ects": 6.0
+            },
+            {
+                "name": "Technical Drawing and Geometrical Modelling",
+                "description": "1) Introduction to technical drawing. Graphic communication of ideas; technical drawing and artistic drawing; CAD and geometric modeling. 2) general aspects of technical drawing. Standards, writing, drawing sheets, frames and subtitles, types of lines and traces, scales. 3) Basic rules of free hand drawing and drafting sketches. 4) projections: orthogonal. Views. 5) cuts and sections. Representation and indication. 6) quotation. Rating elements and criteria. 7) perspectives. Types of outlook and construction methods. 8) project in CAD. Creation of 3D CAD models and their use in the different stages of product development. 9) production drawings. Functional scheme. Drawing piece by piece and set. Drawings of exploded sets. Review of drawings. 10) representation of mechanical components and threaded parts. 11) Introduction to dimensional and geometric tolerance. 12) Introduction to the representation of surface states and welds.",
+                "ects": 4.5
+            },
+            {
+                "name": "Corporate Law",
+                "description": "I introduction to Portuguese law and legal system 1. Apresentação2. What is the law and legal method? 3. Institutions and powers4. The Portuguese legal system: Sources of law, branches of European Community law and law, the removal of the profession II the legal life of an undertaking and of the enterprises.1 Business training subjects. Business Governance 3 Financing matters and recourse to financial markets.4 Expansion Strategies: Mergers & Acquisitions 5. Regulation of labor relations 6. Contracts and trades III regulation of industrial activity 1. Administrative Law: organization of public administration, exercise of authority and sources of administrative directive2. Protection of Industrial Property 3. Regulation of competition",
+                "ects": 1.5
+            },
+            {
+                "name": "Probabilistic and Statistics",
+                "description": "<I> basics:</i> random experience. Events. Frequent and subjective concepts of probability. Kolmogorov's axiomatic. Probability conditioned. Bayes theorem independence.<i> random variables:</i> distribution function. Discrete and continuous random variables. Expected value, variance and other parameters. <I> Joint distributions and add-ons:</i> Joint, marginal and conditional distributions. Independence. Correlation. Approaches between distributions. Central boundary theorem. Law of large numbers. <i> Sampling and punctual estimation:</i> Descriptive versus inductive statistics. Random sample. Statistics. Punctual pet. Properties of estimators. Method of maximum verosimility. Average and variance sample distributions. <I> pets by intervals:</i> basics. Reliable intervals for normal and other population parameters. <I> hypothesis tests:</i> basics. Hypothesis tests for parameters of normal populations and others. Pearson adjustment tests and independence in contingency tables.<i> simple linear regression:</i> estimation by the minimum square method and their properties. Inference in the simple linear regression model. Determination coefficient and empirical analysis of waste.",
+                "ects": 6.0
+            },
+            {
+                "name": "Microeconomics",
+                "description": "1. markets, demand and offers2. Demand, consumer surplus and elasticity 3. Production: short-and long-term decisions; factor market; technological development. Company costs, economies of scale, range and experience5. The company in environment concorrencial6. The company with market power: market structures 7. Strategic Interaction and game theory 8. Pricing policies 9. The state and the company: market power, externalities, common resources and public good10. Internal organization of the company",
+                "ects": 6.0
+            },
+            {
+                "name": "Materials Science",
+                "description": "1-Introduction 2? Materials-primas.3? Mechanical properties of materials. 4? 4? Composite Materials. 5? Structure of material.6? Polymericos.7-solidification.8? Atomic diffusion in solide.9? Fases.10 balance diagrams? Iron and Steel. Material Processing Technologies. 12? Recycling of materials.13? Other properties of materials.",
+                "ects": 6.0
+            },
+            {
+                "name": "Complex Analysis and Differential Equations",
+                "description": "Complex analysis. Complex plan. Numerical series. Absolutely convergent series. Series of powers. Differentiability, holomorphic functions. Add-ons on series of functions, analytical functions. Cauchy's theorem. Homotopia. Cauchy's full formula. Isolated singularities. Laurent series. Waste theorem. Improper integrals. Convergence theorems. Leibniz rule. ordinary differential equations. First order equations. Linear, separable, exact equations and integral factors. Existence and uniqueness of solution. Solution Extension. Resolution of linear ordinary equations systems. Exponential matrix. Formula of variation of constants. Fourier series. superior order linear equations. Fourier series convergence. Partial differential equations. Variable separation method. Heat equation. Laplace equation. Wave equation, transformed from Laplace.",
+                "ects": 7.5
+            },
+            {
+                "name": "Differential and Integral Calculus I",
+                "description": "Real numbers (body properties; order ratio and Supreme axiom). Natural numbers. Induction method. Real functions of real variable: limit and continuity; differentiability-fundamental theorems; Cauchy rule and lifting indeterminations; Taylor formula. Primitivation. Integral R calculation: Integral of Riemann; integrability of sectionally continuous functions; fundamental theory of calculation; integration formulas by parts and by substitution. Elementary transcendent functions: Logarithm, exponential and hyperbolic functions. Numerical series: Geometric series; comparison criteria; absolutely converging series; power series",
+                "ects": 6.0
+            },
+            {
+                "name": "Mechanics and Waves",
+                "description": "1. movement description in space and time. Cinematic. Relative movement. Dynamics (Newtonian mechanics): principle of inertia; concepts of mass and strength; action and reaction2.conservation laws and symmetries of space-time. Conservation of Energy (mechanical), linear moment and angular moment. Kinetic energy and potential energy.3.mechanical interaction between systems. External forces. Mass center. Work of a force. Conservative and dissipative systems. Movement of particle systems.4.movement of the rigid body: angular speed and acceleration; rotation of the rigid body; torque or moment of a force. Moment of inertia 5.stability of systems. Simple harmonic oscillations. Oscillations with friction and force.6.waves. Wave propagation. Propagation speed, amplitude, frequency and phase. Wave equation. Transverse waves and longitudinal waves.7.fluids: hydrostatic pressure. Principle of archimedes.8.einstein's strict relativity. Light speed in vacuum. Transformation of Galilee and transformation of Lorentz. Time dilation and space contraction. E = MC².",
+                "ects": 6.0
+            },
+            {
+                "name": "Operations Management",
+                "description": "1-Introduction to Operations Management: The Operations function. The Historical Evolution of operations management. Aprofession. Trends and challenges.2-Operational Strategy and Competitiveness: manufacturing vs. services. Competitiveness. Productivity, efficiency, efficiency.3-products and processes: Industry vs. services: product design, design and development. Process selection. Process and Product structures. Processing analysis.4-layout of installations: typical layouts; product layout; group technology; fixed layouts; customer services.5-planning: Aggregate planning. Production master plan. Needs planning emcapacity.6-Materials Management: dependent demand materials vs. independent search.7-Introduction to staggering: prioritization rules, shop-floor8 control-Continuous Improvement: lean production. Production synchronizada.9-Introduction to Supply Chain Management: Concepts. Operations and the future.",
+                "ects": 6.0
+            },
+            {
+                "name": "Management of Energy Systems",
+                "description": "Energy and environmental impacts and human health. Energy, economy and renewable and non-renewable energy resources. Portuguese energy balance. Primary Energy, final and useful. Energy transitions. Energy flow diagrams (Sankey diagrams). Methodologies for calculating primary energy. Energy Analysis of Systems: block diagrams. Energy and Economic Analysis of Systems: input-output matrices. Use of energy in industry and legislation (sgcie). Use of energy in transport and legislation. Use of energy in buildings and legislation. Energy supply and demand modeling. Review of mass, energy and entropy balances for closed and open systems. Energy efficiencies of 1A and 2A law. energy audits and energy rationalization plans. Case Studies. Energy efficiency in heating. Heat recovery. cogeneration. energy efficiency in air conditioning and mechanical ventilation.",
+                "ects": 6.0
+            },
+            {
+                "name": "Linear Algebra",
+                "description": "Resolution of linear equations systems. Method of elimination of Gauss. Matrices and vectors. Linear spaces and linear transformations. Linear independence. Bases and dimension. Core and contradiction of a linear transformation. Internal products and standards. applications to linear differential equations. Orthogonal bases and Gram-Schmidt orthogonization. Orthogonal supplements and projections. Straight equations and plans. Determinants and applications. Own values and vectors. Invariant subspaces. Diagonalization of arrays. Hermitage, anti-Hermitage and unitary transformations. Quadratic shapes.",
+                "ects": 6.0
+            }
+        ]
+    }
+}

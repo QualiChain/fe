@@ -73,4 +73,5 @@ PILOTS_DATA.push({'id':1, 'label':'AUTHENTICATED', 'menu':[
   {'id': 8, 'order': 7,  'image': '/assets/img/mcdss.jpg', 'label': 'MENU.MCDSS', 'route': '/MCDSS', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['access_MCDSS']},
   //{'id': 9, 'order': 8,  'image': '/assets/img/skills.jpg', 'label': 'MENU.SKILLS', 'route': '/skills', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_skills']},
   {'id': 10, 'order': 9,  'image': '/assets/img/awards.png', 'label': 'MENU.AWARDS', 'route': '/awards', 'public': false, 'rolesPermissions':[Role.student, Role.employee, Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['view_own_profile']},
+  {'id': 11, 'order': 10,  'image': '/assets/img/degree_comparison.png', 'label': 'MENU.DEGREE_COMPARISON', 'route': '/degree_comparison', 'public': false, 'rolesPermissions':[Role.professor, Role.admin, Role.administrator], 'submenu': [], 'permissions': ['add_and_update_thesis']},
 ]});

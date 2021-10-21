@@ -55,7 +55,9 @@
     "THESIS_HELP_TEXT_PROFESSOR": "Εμφανίζεται μία λίστα με τα διαθέσιμα θέματα διπλωματικής εργασίας στην πλατφόρμα, επιτρέποντας στους καθηγητές να δέχονται/ απορρίπτουν τις αιτήσεις των φοιτητών και να δημιουργούν νέα θέματα διπλωματικών εργασιών όταν αυτό είναι απαραίτητο.",
     "MY_COLLEAGUES_NETWORK": "My Colleagues",
     "AWARDS": "Έξυπνες ετικέτες",
-    "AWARDS_HELP_TEXT": "Εμφανίζεται μία λίστα με τα smart badges που δημιουργήθηκαν στην πλατφόρμα και διευκολύνει τη δημιουργία και τη διαχείριση νέων."
+    "AWARDS_HELP_TEXT": "Εμφανίζεται μία λίστα με τα smart badges που δημιουργήθηκαν στην πλατφόρμα και διευκολύνει τη δημιουργία και τη διαχείριση νέων.",
+    "DEGREE_COMPARISON": "Degree comparison",
+    "DEGREE_COMPARISON_HELP_TEXT": "Facilitates the comparison of two degrees in a json format"
   },
   "AWARDS": {
     "TITLE": "Έξυπνες ετικέτες",
@@ -970,6 +972,14 @@
         "PREFERENCE": "Set a preference threshold to denote the preference for this criterion.",
         "INDIFFERENCE": "Set an indifference threshold to denote the minimum level of difference that is not negligible for this criterion."
       }        
+    },
+    "DEGREE_COMPARISON": {
+      "HEADER": "Degree comparison help",
+      "BODY": ["Here you can find two json example files. You must use similar json files as input"],
+      "DEMO_FILES": {
+        "FILE_1": "Demo file 1",
+        "FILE_2": "Demo file 2"
+      }
     }
   },
   "QUESTIONNAIRE": {
@@ -1247,5 +1257,25 @@
   "AWARD_AS": "Απονομή ως",
   "AWARD_ASSIGNED": "Επιτυχής απονομή",
   "SUCCESSFUL_VALIDATIONS": "Επιτυχείς επικυρώσεις",
-  "INCORRECT_VALIDATIONS": "Ανεπιτυχείς επικυρώσεις"
+  "INCORRECT_VALIDATIONS": "Ανεπιτυχείς επικυρώσεις",
+  "DEGREE_COMPARISON": {
+    "TITLE": "Degree comparison",
+    "RESULTS": {
+      "TITLE": "Results",
+      "COL_1": "File 1",
+      "COL_2": "File 2",
+      "COL_3": "Comparison result"
+    },
+    "CHOOSE_FILE_1": "αρχείου 1",
+    "CHOOSE_FILE_2": "αρχείου 2",
+    "NO_DATA": "No data available",
+    "NOT_VALID_FILE": "This file is not valid, it must be a json file",
+    "INSTRUCTIONS": {
+      "TITLE": "Οδηγίες",
+      "STEP_1": "You must introduce two degrees in a json format and push the button 'Compare' to get the results"
+    },
+    "BUTTON": {
+      "COMPARE": "Compare"
+    }
+  }
 }
