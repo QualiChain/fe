@@ -56,8 +56,8 @@
     "MY_COLLEAGUES_NETWORK": "My Colleagues",
     "AWARDS": "Έξυπνες ετικέτες",
     "AWARDS_HELP_TEXT": "Εμφανίζεται μία λίστα με τα smart badges που δημιουργήθηκαν στην πλατφόρμα και διευκολύνει τη δημιουργία και τη διαχείριση νέων.",
-    "DEGREE_COMPARISON": "Degree comparison",
-    "DEGREE_COMPARISON_HELP_TEXT": "Facilitates the comparison of two degrees in a json format"
+    "DEGREE_COMPARISON": "Σύγκριση πτυχίων",
+    "DEGREE_COMPARISON_HELP_TEXT": "Προσφέρει τη δυνατότητα σύγκρισης μεταξύ δύο πτυχίων σε μορφή JSON"
   },
   "AWARDS": {
     "TITLE": "Έξυπνες ετικέτες",
@@ -974,11 +974,11 @@
       }        
     },
     "DEGREE_COMPARISON": {
-      "HEADER": "Degree comparison help",
-      "BODY": ["Here you can find two json example files. You must use similar json files as input"],
+      "HEADER": "Σύγκριση πτυχίων - Βοήθεια",
+      "BODY": ["Παρακάτω μπορείτε να βρείτε δύο παραδείγματα αρχείων σε μορφή JSON. Παρακαλώ χρησιμοποιήστε ως είσοδο αρχεία με την ίδια δομή."],
       "DEMO_FILES": {
-        "FILE_1": "Demo file 1",
-        "FILE_2": "Demo file 2"
+        "FILE_1": "Πρότυπο αρχείο 1",
+        "FILE_2": "Πρότυπο αρχείο 2"
       }
     }
   },
@@ -1259,23 +1259,23 @@
   "SUCCESSFUL_VALIDATIONS": "Επιτυχείς επικυρώσεις",
   "INCORRECT_VALIDATIONS": "Ανεπιτυχείς επικυρώσεις",
   "DEGREE_COMPARISON": {
-    "TITLE": "Degree comparison",
+    "TITLE": "Σύγκριση πτυχίων",
     "RESULTS": {
-      "TITLE": "Results",
-      "COL_1": "File 1",
-      "COL_2": "File 2",
-      "COL_3": "Comparison result"
+      "TITLE": "Αποτελέσματα",
+      "COL_1": "Αρχείο 1",
+      "COL_2": "Αρχείο 2",
+      "COL_3": "Αποτέλεσμα σύγκρισης"
     },
-    "CHOOSE_FILE_1": "αρχείου 1",
-    "CHOOSE_FILE_2": "αρχείου 2",
-    "NO_DATA": "No data available",
-    "NOT_VALID_FILE": "This file is not valid, it must be a json file",
+    "CHOOSE_FILE_1": "Επιλογή πρώτου αρχείου",
+    "CHOOSE_FILE_2": "Επιλογή δεύτερου αρχείου",
+    "NO_DATA": "Δεν υπάρχουν διαθέσιμα δεδομένα",
+    "NOT_VALID_FILE": "Το αρχείο εισόδου δεν είναι έγκυρο. Απαιτείται αρχείο σε μορφή JSON",
     "INSTRUCTIONS": {
       "TITLE": "Οδηγίες",
-      "STEP_1": "You must introduce two degrees in a json format and push the button 'Compare' to get the results"
+      "STEP_1": "Παρακαλώ εισάγετε δύο πτυχία σε μορφή JSON και πιέστε το κουμπί 'Σύγκριση' για να δείτε τα αποτελέσματα της σύγκρισης"
     },
     "BUTTON": {
-      "COMPARE": "Compare"
+      "COMPARE": "Σύγκριση"
     }
   }
 }
