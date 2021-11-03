@@ -55,9 +55,9 @@
     "THESIS_HELP_TEXT_PROFESSOR": "Mostra a lista de tópicos de tese disponíveis na plataforma, permitindo aos professores aceitar as candidaturas a tese dos estudantes e criar/gerir novos tópicos de tese quando necessário.",
     "MY_COLLEAGUES_NETWORK": "Os meus colegas",
     "AWARDS": "Distinções",    
-    "AWARDS_HELP_TEXT": "Inclui uma lista de distinções criadas na plataforma e permite a criação e gestão de distinções."    ,
-    "DEGREE_COMPARISON": "Degree comparison",
-    "DEGREE_COMPARISON_HELP_TEXT": "Facilitates the comparison of two degrees in a json format"
+    "AWARDS_HELP_TEXT": "Inclui uma lista de distinções criadas na plataforma e permite a criação e gestão de distinções.",
+    "DEGREE_COMPARISON": "Comparação de diplomas",
+    "DEGREE_COMPARISON_HELP_TEXT": "Facilita a comparação entre dois diplomas em formato json"
   },
   "AWARDS": {
     "TITLE": "Distinções",
@@ -974,11 +974,11 @@
       }               
     },
     "DEGREE_COMPARISON": {
-      "HEADER": "Degree comparison help",
-      "BODY": ["Here you can find two json example files. You must use similar json files as input"],
+      "HEADER": "Apoio à comparação de diplomas",
+      "BODY": ["Aqui estão dois exemplos de ficheiros em formato json. Insira ficheiros json semelhantes"],
       "DEMO_FILES": {
-        "FILE_1": "Demo file 1",
-        "FILE_2": "Demo file 2"
+        "FILE_1": "Primeiro ficheiro de exemplo",
+        "FILE_2": "Segundo ficheiro de exemplo"
       }
     }
   },
@@ -1259,23 +1259,23 @@
   "SUCCESSFUL_VALIDATIONS": "Validações realizadas com sucesso",
   "INCORRECT_VALIDATIONS": "Validações incorretas",
   "DEGREE_COMPARISON": {
-    "TITLE": "Degree comparison",
+    "TITLE": "Comparação de diplomas",
     "RESULTS": {
-      "TITLE": "Results",
-      "COL_1": "Ficheiro 1",
-      "COL_2": "Ficheiro 2",
-      "COL_3": "Comparison result"
+      "TITLE": "Resultados",
+      "COL_1": "Primeiro ficheiro",
+      "COL_2": "Segundo ficheiro",
+      "COL_3": "Resultados da comparação"
     },
-    "CHOOSE_FILE_1": "Escolha o ficheiro 1",
-    "CHOOSE_FILE_2": "Escolha o ficheiro 2",
-    "NO_DATA": "No data available",
-    "NOT_VALID_FILE": "This file is not valid, it must be a json file",
+    "CHOOSE_FILE_1": "Escolher primeiro ficheiro",
+    "CHOOSE_FILE_2": "Escolher segundo ficheiro",
+    "NO_DATA": "Sem dados disponíveis",
+    "NOT_VALID_FILE": "O ficheiro não é valido, tem de inserir um ficheiro em formato json",
     "INSTRUCTIONS": {
       "TITLE": "Instruções",
-      "STEP_1": "You must introduce two degrees in a json format and push the button 'Compare' to get the results"
+      "STEP_1": "Tem de introduzir dois ficheiros em formato json e clicar no botão 'Comparar' para receber os resultados"
     },
     "BUTTON": {
-      "COMPARE": "Compare"
+      "COMPARE": "Comparar"
     }
   }
 }
