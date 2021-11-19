@@ -37,7 +37,8 @@
 							*ngFor="let menuOption of menuOptionsPerPilot.menu" 
 							class="menu-item menu-item-type-post_type menu-item-object-page topmenubuttonoption dynamicmenuoptions" [ngClass]="displayActivenessMenuOption(route, menuOption.route , 'li')">
 								<span *appCanAccess="menuOption.permissions">
-									<a *ngIf="menuOption.submenu.length==0" class="btn navbar-item" routerLink="{{ menuOption.route }}" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a>
+									<a *ngIf="menuOption.submenu.length==0 && !menuOption.external" class="btn navbar-item" routerLink="{{ menuOption.route }}" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a>
+									<a *ngIf="menuOption.submenu.length==0 && menuOption.external" class="btn navbar-item" href="{{ menuOption.route }}" target="_NEW" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" (click)="route=menuOption.route">{{ menuOption.label | translate }}</a>
 									<div *ngIf="menuOption.submenu.length>0" class="dropdown dropdown-menu-right">
 										<a class="btn navbar-item dropdown-toggle" [ngClass]="displayActivenessMenuOption(route, menuOption.route, 'a')" id="dropdownMenuButtonRecruitment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuOption.label | translate }}</a>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -52,7 +53,8 @@
 												*ngFor="let subMenuOption of menuOption.submenu" 												
 												class="dropdown-item menu-item menu-item-type-post_type menu-item-object-page " [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'li')">
 													<span *appCanAccess="subMenuOption.permissions">
-														<a class="navbar-item" [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'a')" routerLink="{{ subMenuOption.route }}" (click)="route=subMenuOption.route">{{ subMenuOption.label | translate }}</a>												
+														<a *ngIf="!subMenuOption.external" class="navbar-item" [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'a')" routerLink="{{ subMenuOption.route }}" (click)="route=subMenuOption.route">{{ subMenuOption.label | translate }}</a>
+														<a *ngIf="subMenuOption.external" class="navbar-item" [ngClass]="displayActivenessSubMenuOption(route, subMenuOption.route, 'a')" href="{{ subMenuOption.route }}" target="_NEW">{{ subMenuOption.label | translate }}</a>
 													</span>
 												</li>
 											</ul>

@@ -310,7 +310,12 @@ const routes: Routes = [
       permissions: ['get_their_job_applications'],
       title: 'Profile | :id | Job applies' }    
   },
-  {
+  { 
+    path: 'recruitment/certificate-validation',
+    component: NotFoundComponent,
+    data: {title: 'Not found'}
+  } ,
+  /*{
     path: 'recruitment/certificate-validation',
     component: RecruitingComponent,
     //canActivate: [AuthGuard],
@@ -319,7 +324,7 @@ const routes: Routes = [
       permissions: ['view_recruitment'],
       title: 'Recruitment | Certificate validation'
     }
-   }, 
+   },*/
   {
     path: 'recruitment',
     component: RecruitmentComponent,

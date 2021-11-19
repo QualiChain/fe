@@ -37,7 +37,8 @@
                     
                     <div class="post-module hover">
                         <div class="thumbnail">
-                            <a *ngIf="menuOption.submenu.length==0" routerLink="{{ menuOption.route }}" class="noborder" title="{{ menuOption.label | translate }}"><img src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}"></a>
+                            <a *ngIf="menuOption.submenu.length==0 && !menuOption.external" routerLink="{{ menuOption.route }}" class="noborder" title="{{ menuOption.label | translate }}"><img src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}"></a>
+                            <a *ngIf="menuOption.submenu.length==0 && menuOption.external" href="{{ menuOption.route }}" target="_NEW" class="noborder" title="{{ menuOption.label | translate }}"><img src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}"></a>
                             <a *ngIf="menuOption.submenu.length!=0" [routerLink]="" (click)="selectSubMenu(menuOption)" class="noborder" title="{{ menuOption.label | translate }}"><img 
                                 
                                 src="{{menuOption.image}}" height="100%" alt="{{ menuOption.label | translate }}" title="{{ menuOption.label | translate }}"></a>
@@ -46,7 +47,8 @@
                         <div class="post-content">
                             
                             <h1 class="title">
-                                <a *ngIf="menuOption.submenu.length==0" routerLink="{{ menuOption.route }}" >{{ menuOption.label | translate }}</a>
+                                <a *ngIf="menuOption.submenu.length==0 && !menuOption.external" routerLink="{{ menuOption.route }}" >{{ menuOption.label | translate }}</a>
+                                <a *ngIf="menuOption.submenu.length==0 && menuOption.external" href="{{ menuOption.route }}" target="_NEW">{{ menuOption.label | translate }}</a>
                                 <a [routerLink]="" *ngIf="menuOption.submenu.length>0" (click)="selectSubMenu(menuOption)">{{ menuOption.label | translate }}</a>
                             </h1>
                             <!--<h2 class="authors"></h2>-->
