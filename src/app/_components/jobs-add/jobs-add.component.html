@@ -27,7 +27,7 @@
                 <mat-label>{{ 'JOB.SPECIALIZATION' | translate }}</mat-label>
                 <mat-select required [(ngModel)]="dataIn.specialization" name="specialization">
                   <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization.title">
-                    {{specialization.title}}
+                    {{'SPECIALIZATIONS.'+specialization.title | translate}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>              

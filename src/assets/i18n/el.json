@@ -1277,5 +1277,28 @@
     "BUTTON": {
       "COMPARE": "Σύγκριση"
     }
+  },
+  "SPECIALIZATIONS": {
+    "Backend Developer": "Προγραμματιστής Backend",
+    "Frontend Developer": "Προγραμματιστής Frontend",
+    "Database Developer": "Προγραμματιστής Συστημάτων Βάσεων Δεδομένων",
+    "Hardware Engineer": "Μηχανικός Υλικού Η/Υ",
+    "Data Analyst": "Αναλυτής Δεδομένων",
+    "Data Engineer": "Μηχανικός Διαχείρισης Δεδομένων",
+    "Machine Learning Engineer": "Μηχανικός Συστημάτων Μηχανικής Μάθησης",
+    "Network Architect": "Αρχιτέκτονας Δικτύων",
+    "Devops Engineer": "Μηχανικός Διαδικασιών Ανάπτυξης Λογισμικού",
+    "Security Engineer": "Μηχανικός Ασφαλείας",
+    "Web Developer": "Προγραμματιστής Δικτυακών Εφαρμογών",
+    "Mobile Developer": "Προγραμματιστής Mobile Εφαρμογών",
+    "QA Engineer": "Μηχανικός Ποιοτικού Ελέγχου",
+    "Business Analyst": "Επιχειρηματικός Αναλυτής",
+    "UI/UX Designer": "Σχεδιαστής Διεπαφών και Εμπειρίας Χρήστη",
+    "Project Manager": "Υπεύθυνος Έργου",
+    "Test Developer": "Προγραμματιστής Ελέγχου Συστημάτων",
+    "Health Assistant": "Νοσηλευτής",
+    "Health Graduate Staff": "Επικουρικό προσωπικό υγείας",
+    "Health Technician": "Τεχνικός επαγγελμάτων υγείας",
+    "Health Operating Assistant": "Βοηθός λειτουργειών επαγγελμάτων υγείας"
   }
 }

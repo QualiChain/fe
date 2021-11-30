@@ -28,6 +28,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface Specialization {
   title: string;
   id: number;
+  translateTitle : string;
 }
 
 @Component({
@@ -413,10 +414,14 @@ export class JobsAddComponent implements OnInit {
         
           resSpecializations.forEach(element => {
             //console.log(element.title);
-            let data: Specialization = {title:element.title, id:element.id};
+            let translation = element.title;
+
+            translation = this.translate.instant('SPECIALIZATIONS.'+translation);
+
+            let data: Specialization = {title:element.title, id:element.id, translateTitle: translation};
             this.allSpecializations.push(data)                           
           });       
-          this.allSpecializations.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+          this.allSpecializations.sort((a,b) => (a.translateTitle > b.translateTitle) ? 1 : ((b.translateTitle > a.translateTitle) ? -1 : 0))
           //console.log(this.allSpecializations);
         },
         error => {
