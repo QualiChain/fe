@@ -1277,5 +1277,28 @@
     "BUTTON": {
       "COMPARE": "Compare"
     }
+  },
+  "SPECIALIZATIONS": {
+    "Backend Developer": "Backend Developer",
+    "Frontend Developer": "Frontend Developer",
+    "Database Developer": "Database Developer",
+    "Hardware Engineer": "Hardware Engineer",
+    "Data Analyst": "Data Analyst",
+    "Data Engineer": "Data Engineer",
+    "Machine Learning Engineer": "Machine Learning Engineer",
+    "Network Architect": "Network Architect",
+    "Devops Engineer": "Devops Engineer",
+    "Security Engineer": "Security Engineer",
+    "Web Developer": "Web Developer",
+    "Mobile Developer": "Mobile Developer",
+    "QA Engineer": "QA Engineer",
+    "Business Analyst": "Business Analyst",
+    "UI/UX Designer": "UI/UX Designer",
+    "Project Manager": "Project Manager",
+    "Test Developer": "Test Developer",
+    "Health Assistant": "Health Assistant",
+    "Health Graduate Staff": "Health Graduate Staff",
+    "Health Technician": "Health Technician",
+    "Health Operating Assistant": "Health Operating Assistant"
   }
 }
