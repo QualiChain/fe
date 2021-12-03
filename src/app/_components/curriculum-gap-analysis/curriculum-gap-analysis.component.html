@@ -62,23 +62,32 @@
             <div class="col col-lg-6">
 
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body">                       
                         <div class="col-sm-12">
-                            <h5 class="card-title">{{recommendedSkill.title}}</h5>  
+                            <h5 class="card-title"> {{ 'SKILL.TITLE' | translate }}: {{recommendedSkill.skill_title}}</h5>  
                         </div>
-                        <div class="col-sm-12">
-                            {{ 'CV_GAP_ANALYSIS.RELATION_TO_COURSES' | translate }}
-                        </div>
-                        
-                            <div *ngFor="let course of recommendedSkill.courses" class="col-sm-12">
 
-                                <div class="progress col-sm-6" >
-                                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':course.relation}" attr.aria-valuenow="{{course.relation}}"  aria-valuemin="0" aria-valuemax="100">{{course.relation}}%</div>
-                                </div>
-                                <div class="col-sm-6" >
-                                    &nbsp;{{course.title}}
-                                </div>
+                        <div class="col-sm-12">
+                            {{ 'DSS_CV_RE_DESIGN.RELATED_SKILLS' | translate }}: 
+                        </div>
+                        <div class="col-sm-12" *ngIf="recommendedSkill.relevant_skills.length==0">{{ 'NONE' | translate }} </div>
+                        <div class="col-sm-12" *ngIf="recommendedSkill.relevant_skills.length>0">
+                            <span *ngFor="let skill_list of recommendedSkill.relevant_skills let j = index"><span class="badge badge-info ml-2">{{skill_list.skill_title}}</span>&nbsp;</span> 
+                        </div>
+                        <div class="col-sm-12"><br>&nbsp;</div>
+                        
+                        <div class="col-sm-12">
+                            {{ 'CV_GAP_ANALYSIS.RELATION_TO_COURSES' | translate }}:
+                        </div>
+                        <div class="col-sm-12" *ngIf="recommendedSkill['scored_courses'].length==0">{{ 'NONE' | translate }} </div>
+                        <div class="col-sm-12" *ngFor="let course of recommendedSkill.scored_courses">
+                            <div class="progress col-sm-6" >
+                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%':course.score*100}" attr.aria-valuenow="{{course.score*100}}"  aria-valuemin="0" aria-valuemax="1">{{course.score}}</div>
                             </div>
+                            <div class="col-sm-6" >
+                                &nbsp;<a href="" routerLink="/courses/{{course.course_id}}">{{course.course_title}}</a>
+                            </div>
+                        </div>
                         
                     </div>
                 
@@ -86,7 +95,18 @@
 
             </div>
             <div class="col col-lg-6">
-                <app-visualisations-skills-demand-in-time-per-specialization-chart [skillId]="recommendedSkill.id" [specialization]=""></app-visualisations-skills-demand-in-time-per-specialization-chart>
+                <div>
+                    <mat-form-field class="create-job-full-width">
+                        <mat-label>{{ 'FILTER' | translate }}: {{ 'JOB.SPECIALIZATION' | translate }} </mat-label>
+                        <mat-select [(ngModel)]="specialization" name="specialization">
+                          <mat-option>{{ 'ALL' | translate }}</mat-option>
+                          <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization.id">
+                            {{'SPECIALIZATIONS.'+specialization.title | translate}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <app-visualisations-skills-demand-in-time-per-specialization-chart [skillId]="recommendedSkill?.skill_id" [specialization]="specialization"></app-visualisations-skills-demand-in-time-per-specialization-chart>
                 <!--
                 <canvas
                     baseChart

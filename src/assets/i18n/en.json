@@ -1300,5 +1300,7 @@
     "Health Graduate Staff": "Health Graduate Staff",
     "Health Technician": "Health Technician",
     "Health Operating Assistant": "Health Operating Assistant"
-  }
+  },
+  "NONE": "None",
+  "ALL": "All"
 }

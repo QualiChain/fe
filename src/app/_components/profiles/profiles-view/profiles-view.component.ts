@@ -674,35 +674,39 @@ export class ProfilesViewComponent implements OnInit {
 
   getUserCurrentJobPosition(id:string) {
     //console.log("getUserCurrentJobPosition-"+id);
-    this.us.getUserProfileInJobEndPoint(+id).subscribe(
-      data => {
-        //console.log(data);
-        if ( data ) {
-          if ( data.hasOwnProperty('currentJobURI') ) {
-            if (data.currentJobURI) {
-              //console.log(data.currentJobURI);
-              var splitted = data.currentJobURI.split(":"); 
-              //console.log(splitted[splitted.length-1]);
-              let jobId = splitted[splitted.length-1];
-              
-              this.js.getJob(jobId).subscribe(
-                (jobData:any) => {
-                  //console.log(jobData);
-                  this.currentJobPosition = jobData.label;
-                },
-                error => {
-                  console.log("error recovering job data - jid:"+jobId);                  
-                }
-              );
-              
+    //console.log("this.isStudent: "+this.isStudent);
+    //console.log("this.isEmployee: "+this.isEmployee);
+    if (this.isEmployee || this.isStudent) {
+      this.us.getUserProfileInJobEndPoint(+id).subscribe(
+        data => {
+          //console.log(data);
+          if ( data ) {
+            if ( data.hasOwnProperty('currentJobURI') ) {
+              if (data.currentJobURI) {
+                //console.log(data.currentJobURI);
+                var splitted = data.currentJobURI.split(":"); 
+                //console.log(splitted[splitted.length-1]);
+                let jobId = splitted[splitted.length-1];
+                
+                this.js.getJob(jobId).subscribe(
+                  (jobData:any) => {
+                    //console.log(jobData);
+                    this.currentJobPosition = jobData.label;
+                  },
+                  error => {
+                    console.log("error recovering job data - jid:"+jobId);                  
+                  }
+                );
+                
+              }
             }
           }
+        },
+        error => {
+          console.log("error recovering user data from job endpoint - uid:"+id);
         }
-      },
-      error => {
-        console.log("error recovering user data from job endpoint - uid:"+id);
-      }
-    );
+      );
+    }
 
   }  
 

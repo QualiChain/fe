@@ -113,10 +113,11 @@ export class DSSCurriculumReDesignComponent implements OnInit {
     ];
 
     //missing skills
+    //console.log(this.dataToSend);
     this.DSSs
     .getMissingSkillsData(this.dataToSend).subscribe(
       dataMissingSkills => {
-        //console.log("Mising skillss");
+        //console.log("Missing skills");
         this.missingSkills = dataMissingSkills.recommended_skills;
       },
       error => {

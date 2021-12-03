@@ -1300,5 +1300,7 @@
     "Health Graduate Staff": "Επικουρικό προσωπικό υγείας",
     "Health Technician": "Τεχνικός επαγγελμάτων υγείας",
     "Health Operating Assistant": "Βοηθός λειτουργειών επαγγελμάτων υγείας"
-  }
+  },
+  "NONE": "Καμία",
+  "ALL": "Ολα"
 }
