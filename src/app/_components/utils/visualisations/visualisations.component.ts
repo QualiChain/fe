@@ -434,30 +434,34 @@ export class VisualisationsSkillsDemandInTimePerSpecialization extends Visualisa
   }
   ngOnChanges(): void {    
     
-
+    //this.skillId = "963";
+    //console.log("skill id:"+this.skillId);
+    //console.log("specialization id:"+this.specialization);
     let Y_VAR_UNIT = this.translate.instant('CHARTS.SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION.Y.VAR_UNIT');
     let X_AXIS_TITLE = this.translate.instant('CHARTS.SKILLS_DEMAND_IN_TIME_PER_SPECIALIZATION.X.AXIS_TITLE');
 
-    this.ss
-    .getSkill(+this.skillId).subscribe(
-      dataSkill => {
-        //console.log("skille in db");
-        //console.log(dataSkill);
-        let skillName = dataSkill.name;
-        let tmpURL = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d="+skillName+"&y_var_units%5b%5d="+Y_VAR_UNIT+"&x_axis_type=time&x_axis_name=time&x_axis_title="+X_AXIS_TITLE+"&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId
-        if (this.specialization) {
-          tmpURL = tmpURL +"&specialization="+this.specialization;
-        }
-        tmpURL = tmpURL +"&base_query=skill_demand_in_time"; 
-        //this.urlSafe = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d=skill_demand&y_var_units%5b%5d=Job%20posting&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId+"&specialization="+this.specialization+"&base_query=skill_demand_in_time"; 
-        this.urlSafe = tmpURL;
+    if(this.skillId) {
+      this.ss
+      .getSkill(+this.skillId).subscribe(
+        dataSkill => {
+          //console.log("skille in db");
+          //console.log(dataSkill);
+          let skillName = dataSkill.name;
+          let tmpURL = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d="+skillName+"&y_var_units%5b%5d="+Y_VAR_UNIT+"&x_axis_type=time&x_axis_name=time&x_axis_title="+X_AXIS_TITLE+"&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId
+          if (this.specialization) {
+            tmpURL = tmpURL +"&specialization="+this.specialization;
+          }
+          tmpURL = tmpURL +"&base_query=skill_demand_in_time"; 
+          //this.urlSafe = urlVisualisations+"/show_line_chart?y_var_names%5b%5d=skill_demand&y_var_titles%5b%5d=skill_demand&y_var_units%5b%5d=Job%20posting&x_axis_type=time&x_axis_name=time&x_axis_title=Time&x_axis_unit=-&y_axis_title=Skill%20Demand&color_list_request%5b%5d=blue&color_list_request%5b%5d=red&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=2000&skill_id="+this.skillId+"&specialization="+this.specialization+"&base_query=skill_demand_in_time"; 
+          this.urlSafe = tmpURL;
 
-      },
-      error => {
-        console.log("Error recovering skill id "+this.skillId);
-        this.urlSafe = "";
-      }
-    ); 
+        },
+        error => {
+          console.log("Error recovering skill id "+this.skillId);
+          this.urlSafe = "";
+        }
+      ); 
+    }
 
     
   }

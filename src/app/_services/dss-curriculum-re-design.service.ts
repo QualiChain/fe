@@ -20,7 +20,7 @@ export class DSSCurriculumReDesignService {
 
   getMissingSkillsData(dataIn: object) {
     let headers = this.authService.createQCAuthorizationHeader();
-
+    //console.log(this.uri);
     return this.httpClient.post(`${this.uri}`, JSON.stringify(dataIn), {headers:headers}).
     pipe(
        map((data: any) => {

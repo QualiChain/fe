@@ -25,8 +25,18 @@ export class RecomendationsService {
     private cs: CoursesService) { }
 
   async recomendedDataByCVByUserId(userId: number, type: string) {
-
-    const dataCVs = await this.cvss.getCV(userId).toPromise();    
+    //userId= 18;
+    //console.log("userId:"+userId+"--type:"+type);
+    let dataCVs = {};
+    //const dataCVs = await this.cvss.getCV(userId).toPromise();   
+    let CVdataRecovered = false;
+    try {
+      dataCVs = await this.cvss.getCV(userId).toPromise();   
+      CVdataRecovered = true;
+    }
+    catch(e){
+      //console.log(e);
+    }
     //console.log(dataCVs);
     let datatCVToSend = dataCVs;
     //console.log(datatCVToSend);
@@ -90,9 +100,12 @@ export class RecomendationsService {
         "recommendation_type": "courses"
     };
             
-    //console.log(datatCVToSend);
-
-    let dataRecommendationByCV = await this.getRecomendationsByCV(datatCVToSend).toPromise();
+    console.log(datatCVToSend);
+    let dataRecommendationByCV = {};
+    if (CVdataRecovered) {
+      dataRecommendationByCV = await this.getRecomendationsByCV(datatCVToSend).toPromise();  
+    }
+    
     let recomendedData = [];
 
     if ((type=='courses') || (type=='courses_and_skills')) {

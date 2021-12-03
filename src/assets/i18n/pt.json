@@ -1300,5 +1300,7 @@
     "Health Graduate Staff": "Técnico Superior",
     "Health Technician": "Técnico",
     "Health Operating Assistant": "Assistente operacional"
-  }
+  },
+  "NONE": "Vazio",
+  "ALL": "Todas"
 }

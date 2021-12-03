@@ -6,6 +6,14 @@ import { CoursesService } from '../../_services/courses.service'
 import Course from '../../_models/course';
 import {PageEvent} from '@angular/material/paginator';
 import { RecomendationsService } from '../../_services/recomendations.service';
+import { DSSCurriculumReDesignService } from '../../_services/dss-curriculum-re-design.service';
+import { SpecializationsService } from '../../_services/specializations.service'
+
+export interface Specialization {
+  title: string;
+  id: number;
+  translateTitle : string;
+}
 
 @Component({
   selector: 'app-curriculum-gap-analysis',
@@ -42,8 +50,12 @@ export class CurriculumGapAnalysisComponent implements OnInit {
   lengthRS: number = 0;
   pageSizeRS: number =14;  //displaying three cards each row
   pageSizeOptionsRS: number[] = [1];
+  allSpecializations: Specialization[] = [];
+  specialization: number = null;
 
   constructor(
+    private ss: SpecializationsService,
+    private DSSs: DSSCurriculumReDesignService,
     private route: ActivatedRoute, 
     private translate: TranslateService,
     private router: Router,
@@ -52,18 +64,67 @@ export class CurriculumGapAnalysisComponent implements OnInit {
     private rs: RecomendationsService
     ) { }
 
+    /* 
+    //old version
     public async recomendedSkillsByUserId(userId: number) {
-
+      console.log("------------------recomendedSkillsByUserId---userId:"+userId);
       let dataTest = await this.rs.recomendedDataByCVByUserId(userId, 'skills');      
-      console.log(dataTest);
+      //console.log(dataTest);
+      //console.log("------------------");
       this.recommendedSkills = dataTest['recommended_skills'];
       this.lengthRS = this.recommendedSkills.length;
       this.pagedListRS = this.recommendedSkills.slice(0, 1);      
 
     }
+    */
+
+    public async recomendedSkillsByUserId(userId: number) {
+      //console.log("recomendedSkillsByUserId");
+      let dataToSend = {};
+      this.DSSs
+      .getMissingSkillsData(dataToSend).subscribe(
+        dataMissingSkills => {
+          //console.log("Missing skills");
+          //console.log(dataMissingSkills);
+          this.recommendedSkills = dataMissingSkills['recommended_skills'];
+          this.lengthRS = this.recommendedSkills.length;
+          this.pagedListRS = this.recommendedSkills.slice(0, 1);
+        },
+        error => {
+          console.log("Error getting missing skills data!!");
+        }
+      );
+    }
+
+    getSpecializations() {
+      //this.selectedSpecializationValue = "Mobile Developer";
+      this.allSpecializations = [];
+          this.ss.getSpecializations().subscribe(
+          resSpecializations => {
+            //console.log("Request OK");
+            //console.log(resSpecializations); 
+          
+            resSpecializations.forEach(element => {
+              //console.log(element.title);
+              let translation = element.title;
+  
+              translation = this.translate.instant('SPECIALIZATIONS.'+translation);
+  
+              let data: Specialization = {title:element.title, id:element.id, translateTitle: translation};
+              this.allSpecializations.push(data)                           
+            });       
+            this.allSpecializations.sort((a,b) => (a.translateTitle > b.translateTitle) ? 1 : ((b.translateTitle > a.translateTitle) ? -1 : 0))
+            //console.log(this.allSpecializations);
+          },
+          error => {
+              console.log("Error getting data");            
+          });
+    }
 
   ngOnInit(): void {
-
+    
+    this.getSpecializations();
+    
     this.route.params.subscribe(params => {
       /*
       this.recommendedSkills.push({id: 354, title: 'Python (Programming Language)', courses:[{title:'Introduction to Programming', relation:72},{title:'Algorithmic Techniques', relation:50},{title:'Software Technology', relation:48}]});
