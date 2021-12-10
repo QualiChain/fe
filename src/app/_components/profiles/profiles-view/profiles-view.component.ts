@@ -1032,7 +1032,7 @@ connectToOU() {
       skillsHeaderLabel = this.translate.instant('CV.SKILLS');
       WHHeaderLabel = this.translate.instant('CV.WORK_HISTORY');
       educationHeaderLabel = this.translate.instant('CV.EDUCATION_HISTORY');
-      
+          
       let currentLang = localStorage.getItem('last_language'); 
       if (!currentLang) {
         currentLang = 'en';
@@ -1130,6 +1130,11 @@ connectToOU() {
       return returnValue;
   }
 
+    let gender = "";
+    if (this.userdata.gender!="") {
+      gender = this.translate.instant('PROFILE.GENDER.TYPE.'+this.userdata.gender.toUpperCase());
+    }
+
     let docDefinition = {
       footer: function(currentPage, pageCount) {
         return {
@@ -1214,7 +1219,7 @@ connectToOU() {
               text: this.translate.instant('PROFILES.EMAIL')+': ' + this.userdata.email, color: '#0e3664'
             },
             {
-              text: this.translate.instant('PROFILES.GENDER')+': ' + this.userdata.gender, color: '#0e3664'
+              text: this.translate.instant('PROFILES.GENDER')+': ' + gender, color: '#0e3664'
             }
           ],
             [ 
