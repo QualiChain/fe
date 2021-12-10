@@ -1022,9 +1022,10 @@ connectToOU() {
         cvDescription = cvDataIn.description;
       }
       cvDescriptionLabel = this.translate.instant('CV.DESCRIPTION.LABEL');
-      console.log(cvDataIn);
+      //console.log(cvDataIn);
       if (cvDataIn.targetSector) {
-        targetSector = cvDataIn.targetSector;
+        //targetSector = cvDataIn.targetSector;
+        targetSector = this.translate.instant('SPECIALIZATIONS.'+ cvDataIn.targetSector);
       }
       targetSectorLabel = this.translate.instant('CV.TARGET_SECTOR.LABEL');
 
@@ -1301,6 +1302,7 @@ interface CompetencyLevelValues {
 export interface Specialization {
   title: string;
   id: number;
+  translateTitle : string;
 }
 
 /************************/
@@ -1343,6 +1345,7 @@ export class CVDialog_modal implements OnInit {
 
   //private appcomponent: AppComponent,
   constructor(            
+    private translate: TranslateService,
     private ss: SpecializationsService,
     private router: Router,  
     private us: UsersService, private authservice: AuthService,
@@ -1525,10 +1528,16 @@ export class CVDialog_modal implements OnInit {
       dataSpecializations => { 
         //console.log(dataSpecializations);
         dataSpecializations.forEach(element => {
-          this.allSpecialisations.push({id:element.id, title: element.title});
+
+          let translation = element.title;
+
+          translation = this.translate.instant('SPECIALIZATIONS.'+translation);
+
+          this.allSpecialisations.push({id:element.id, title: element.title, translateTitle: translation});
         }); 
 
-        this.allSpecialisations.sort((a, b) => (a.title > b.title) ? 1 : -1);
+        //this.allSpecialisations.sort((a, b) => (a.title > b.title) ? 1 : -1);
+        this.allSpecialisations.sort((a,b) => (a.translateTitle > b.translateTitle) ? 1 : ((b.translateTitle > a.translateTitle) ? -1 : 0))
 
         //console.log(this.allSpecialisations);
       },
