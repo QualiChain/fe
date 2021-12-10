@@ -36,8 +36,8 @@
           <mat-label>{{ 'CV.TARGET_SECTOR.LABEL' | translate }}</mat-label> 
           <mat-select [(ngModel)]="targetSector" name="targetSector" value="targetSector">
             <mat-option>  </mat-option>
-            <mat-option *ngFor="let specialisation of allSpecialisations" [value]="specialisation.title">
-              {{specialisation.title}}
+            <mat-option *ngFor="let specialisation of allSpecialisations" [value]="specialisation.title">              
+              {{'SPECIALIZATIONS.'+specialisation.title | translate}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -47,7 +47,7 @@
             <input matInput required [(ngModel)]="targetSector" name="targetSector" value="targetSector" placeholder="{{ 'CV.TARGET_SECTOR.PLACEHOLDER' | translate }}">
         </mat-form-field>   
 -->              
-        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.TARGET_SECTOR.LABEL' | translate }}</span> {{targetSector}}</span>
+        <span *ngIf="!canEditCV"><span class="CVlabel">{{ 'CV.TARGET_SECTOR.LABEL' | translate }}</span> {{'SPECIALIZATIONS.'+targetSector | translate}}</span>
         <br>
         <br>
 
