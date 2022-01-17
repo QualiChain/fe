@@ -25,3 +25,9 @@
     -webkit-hyphens: auto;
     hyphens: auto;
   }
+
+
+td {
+    max-width:160px;
+    word-wrap:break-word;
+}
