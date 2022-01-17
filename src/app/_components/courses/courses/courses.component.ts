@@ -68,11 +68,13 @@ export class CoursesComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    
     if (filterValue) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
       localStorage.setItem('QC_course_search_term', filterValue);
     }
     else {
+      this.dataSource.filter = "";
       localStorage.removeItem('QC_course_search_term');
     }
     
@@ -228,7 +230,7 @@ export class CoursesComponent implements OnInit {
           this.paginator.pageSize = +(defaultSize);
         }
         
-        
+        this.applyFilter(this.searchedTerm);
 
         this.showLoading = false;
         /*
