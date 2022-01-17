@@ -63,6 +63,18 @@ export class AuthService {
     localStorage.removeItem('QC_course_search_pagination_index');
     localStorage.removeItem('QC_course_search_sort_name');
     localStorage.removeItem('QC_course_search_sort_direction');
+    localStorage.removeItem('QC_course_search_pagination_size');
+    //delete jobs data
+    localStorage.removeItem('QC_job_search_term');
+    localStorage.removeItem('QC_job_search_hiringOrganization');
+    localStorage.removeItem('QC_job_search_startDate');
+    localStorage.removeItem('QC_job_search_endDate');
+    localStorage.removeItem('QC_job_search_createdByMe');
+    localStorage.removeItem('QC_job_search_sort_direction');
+    localStorage.removeItem('QC_job_search_sort_name');
+    localStorage.removeItem('QC_job_search_pagination_index');
+    localStorage.removeItem('QC_job_search_pagination_size');
+
     //localStorage.removeItem('QCP');
     localStorage.removeItem('qc.candidatesList');
     localStorage.removeItem('qc.recruitment');

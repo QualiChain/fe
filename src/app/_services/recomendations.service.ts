@@ -100,7 +100,7 @@ export class RecomendationsService {
         "recommendation_type": "courses"
     };
             
-    console.log(datatCVToSend);
+    //console.log(datatCVToSend);
     let dataRecommendationByCV = {};
     if (CVdataRecovered) {
       dataRecommendationByCV = await this.getRecomendationsByCV(datatCVToSend).toPromise();  

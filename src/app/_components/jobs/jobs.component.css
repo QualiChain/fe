@@ -27,7 +27,7 @@
   }
 
 
-td {
+td.mat-column-label {
     max-width:160px;
     word-wrap:break-word;
 }
