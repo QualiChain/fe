@@ -18,6 +18,7 @@ import { AuthService } from '../../_services';
 import User from '../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from '../../app.component';
+import { V } from '@angular/cdk/keycodes';
 
 export interface AvailableJobs {
   id: number;
@@ -87,7 +88,9 @@ export class JobsComponent implements OnInit {
 export class JobsComponent implements OnInit {
 
 
- 
+  matSortActiveValue: string = localStorage.getItem('QC_job_search_sort_name');
+  matSortDirectionValue: string = localStorage.getItem('QC_job_search_sort_direction');
+  
 
   //displayedColumns: string[] = ['label', 'employment_type', 'level', 'hiringOrg', 'action'];
   displayedColumns: string[] = ['label', 'contractType', 'level', 'hiringOrganization', 'startDate', 'endDate', 'action'];
@@ -102,8 +105,27 @@ export class JobsComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  changeDefaultSort() {
+    //console.log("changeDefaultSort");
+    localStorage.setItem('QC_job_search_sort_name', this.sort.active);
+    localStorage.setItem('QC_job_search_sort_direction', this.sort.direction);
+  }
+
+  paginatorAction(event: any) {
+    localStorage.setItem('QC_job_search_pagination_index', event.pageIndex);
+    localStorage.setItem('QC_job_search_pagination_size', event.pageSize);
+  }
+
   applyFilter(filterValue: string) {
+    //console.log("applyFilter");
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (filterValue) {
+      localStorage.setItem('QC_job_search_term', filterValue);
+    }
+    else {
+      localStorage.removeItem('QC_job_search_term');
+    }
+
   }
 
     jobs: Job[];
@@ -125,14 +147,21 @@ export class JobsComponent implements OnInit {
   createdByMe : boolean = false;
   showLoading : boolean = true;
   sortedData: Job[];
+  organization : string;
+  startDateFilter: any;
+  endDateFilter: any;
+  
+  
 
   onChangeCreatedByMeCheckbox(checked: boolean) {
     this.createdByMe = checked;
     if (this.createdByMe) {
       this.filterValues.creator_id = this.currentUser.id;
+      localStorage.setItem('QC_job_search_createdByMe', this.currentUser.id.toString());
     }
     else {
       this.filterValues.creator_id = null;
+      localStorage.removeItem('QC_job_search_createdByMe');
     }
     this.dataSource.filter = JSON.stringify(this.filterValues);
   }
@@ -141,9 +170,12 @@ export class JobsComponent implements OnInit {
   dateRangeChangeStart(dateRangeStart: HTMLInputElement) {
     if (dateRangeStart.value) {
       this.filterValues.startDate = dateRangeStart.value;
+      
+      localStorage.setItem('QC_job_search_startDate', dateRangeStart.value);
     }
     else {
       this.filterValues.startDate = '';
+      localStorage.removeItem('QC_job_search_startDate');
     }
     this.dataSource.filter = JSON.stringify(this.filterValues);
   }
@@ -151,9 +183,12 @@ export class JobsComponent implements OnInit {
   dateRangeChangeEnd(dateRangeEnd: HTMLInputElement) {
     if (dateRangeEnd.value) {
       this.filterValues.endDate = dateRangeEnd.value;
+
+      localStorage.setItem('QC_job_search_endDate', dateRangeEnd.value);
     }
     else {
       this.filterValues.endDate = '';
+      localStorage.removeItem('QC_job_search_startDate');
     }
     this.dataSource.filter = JSON.stringify(this.filterValues);
   }
@@ -257,12 +292,22 @@ export class JobsComponent implements OnInit {
       let dataToReturn : boolean = true;
 
       if (searchTerms.label) {
+
+        let filterValue = searchTerms.label;
+        localStorage.setItem('QC_job_search_term', filterValue);
+
         dataToReturn = data.label.toString().toLowerCase().indexOf(searchTerms.label.toLowerCase()) !== -1;
+      }
+      else {
+        localStorage.removeItem('QC_job_search_term');
       }
       
       if (dataToReturn) {
         if ( data.hiringOrganization ) {
           if (searchTerms.hiringOrganization) {
+
+            localStorage.setItem('QC_job_search_hiringOrganization', searchTerms.hiringOrganization);
+
             dataToReturn = (data.hiringOrganization.toString().toLowerCase().indexOf(searchTerms.hiringOrganization.toLowerCase()) !== -1);
             if (data.hiringOrganization?.toString().toLowerCase().indexOf(searchTerms.hiringOrganization.toLowerCase()) !== -1) {
               dataToReturn = true;
@@ -276,6 +321,8 @@ export class JobsComponent implements OnInit {
           }
         }
         else {
+          localStorage.removeItem('QC_job_search_hiringOrganization');
+
           if (searchTerms.hiringOrganization) {
             dataToReturn = false;
           }
@@ -284,6 +331,7 @@ export class JobsComponent implements OnInit {
       
       if (dataToReturn) {      
         if (searchTerms.startDate) {  
+          localStorage.setItem('QC_job_search_startDate', searchTerms.startDate);
           if ( data.startDate ) {
             if(new Date(data.startDate).getTime() >= new Date(searchTerms.startDate).getTime()){
               dataToReturn = true;
@@ -375,6 +423,39 @@ export class JobsComponent implements OnInit {
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.searchedTerm = localStorage.getItem('QC_job_search_term');
+    this.organization = localStorage.getItem('QC_job_search_hiringOrganization');
+    
+    if (localStorage.getItem('QC_job_search_startDate')) {
+      this.startDateFilter = new FormControl(new Date(localStorage.getItem('QC_job_search_startDate')).toISOString());
+    }
+    if (localStorage.getItem('QC_job_search_endDate')) {
+      this.endDateFilter = new FormControl((new Date(localStorage.getItem('QC_job_search_endDate'))).toISOString());
+    }
+    if (localStorage.getItem('QC_job_search_createdByMe')) {
+      this.createdByMe= true;      
+    }
+    
+
+    if (this.searchedTerm || this.organization || this.startDateFilter || this.endDateFilter || this.createdByMe) {  
+      this.createFilter();        
+    }
+
+    let defaultPage = localStorage.getItem('QC_job_search_pagination_index');
+    if (defaultPage) {
+      this.paginator.pageIndex = +(defaultPage);
+    }
+    else {
+      if (this.paginator) {
+        this.paginator.pageIndex = 0;
+      }
+    }
+
+    let defaultSize = localStorage.getItem('QC_job_search_pagination_size');
+    if (defaultSize) {
+      this.paginator.pageSize = +(defaultSize);
+    }
 
     this.nameFilter.valueChanges
     .subscribe(

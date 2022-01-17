@@ -40,7 +40,7 @@
           
           &nbsp;
           <mat-form-field>
-            <mat-select [formControl]="organizationFilter" placeholder="{{ 'JOBS.FILTER.ORGANIZATION' | translate }}" (selectionChange)="selectCompany($event.value)">          
+            <mat-select [formControl]="organizationFilter" [(ngModel)]="organization" placeholder="{{ 'JOBS.FILTER.ORGANIZATION' | translate }}" (selectionChange)="selectCompany($event.value)">          
               <mat-option>{{ 'JOBS.NONE' | translate }}</mat-option>
               <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
             </mat-select>
@@ -49,14 +49,14 @@
           &nbsp;
           <mat-form-field>
             <mat-label>{{'JOB.SUBMISSION_START_DATE.PLACEHOLDER' | translate}} (>=)</mat-label>
-            <input #dateRangeStart matInput [matDatepicker]="picker1" (dateChange)="dateRangeChangeStart(dateRangeStart)">
+            <input #dateRangeStart matInput [matDatepicker]="picker1" [formControl]="startDateFilter" (dateChange)="dateRangeChangeStart(dateRangeStart)">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
           &nbsp;
           <mat-form-field>
             <mat-label>{{'JOB.SUBMISSION_END_DATE.PLACEHOLDER' | translate}} (<=)</mat-label>
-            <input #dateRangeEnd matInput [matDatepicker]="picker2" (dateChange)="dateRangeChangeEnd(dateRangeEnd)">
+            <input #dateRangeEnd matInput [matDatepicker]="picker2" [formControl]="endDateFilter" (dateChange)="dateRangeChangeEnd(dateRangeEnd)">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
@@ -80,7 +80,7 @@
       </div>
 
       <div class="" [hidden]="dataSource.data.length==0">  
-        <table mat-table [dataSource]="dataSource" matSort class="table table-striped" (matSortChange)="sortData($event)">
+        <table mat-table [dataSource]="dataSource" matSort [matSortActive]="matSortActiveValue" [matSortDirection]="matSortDirectionValue" matSortDisableClear class="table table-striped" (matSortChange)="sortData($event)">
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
         
@@ -119,7 +119,7 @@
           -->
           <!-- Label Column -->
           <ng-container matColumnDef="label">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="label"> {{ 'JOB.TITLE.LABEL' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header="label"> {{ 'JOB.TITLE.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element">
               <span [innerHTML]="element.label | highlight: searchedTerm"></span>
             </td>
@@ -128,30 +128,30 @@
         
           <!-- employmentType Column -->
           <ng-container matColumnDef="contractType">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="contractType"> {{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header="contractType"> {{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> <span *ngIf="element.contractType">{{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+element.contractType | uppercase | translate }} </span></td>
           </ng-container>
       
           <!-- level Column -->
           <ng-container matColumnDef="level">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="seniorityLevel"> {{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header="seniorityLevel"> {{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> <span *ngIf="element.seniorityLevel">{{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+element.seniorityLevel | uppercase | translate }}</span> </td>
           </ng-container>
           
           <!-- hiringOrganization Column -->          
           <ng-container matColumnDef="hiringOrganization">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="hiringOrganization"> {{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header="hiringOrganization"> {{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element?.hiringOrganization }} </td>
           </ng-container>
           
           <!-- startDate Column -->
           <ng-container matColumnDef="startDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="startDate"> {{ 'JOB.SUBMISSION_START_DATE.PLACEHOLDER' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header="startDate"> {{ 'JOB.SUBMISSION_START_DATE.PLACEHOLDER' | translate }} </th>
             <td mat-cell *matCellDef="let element"> <span *ngIf="element?.startDate">{{element?.startDate | date }} </span></td>
           </ng-container>
           <!-- endDate Column -->
           <ng-container matColumnDef="endDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="endDate"> {{ 'JOB.SUBMISSION_END_DATE.PLACEHOLDER' | translate }} </th>
+            <th (click)="changeDefaultSort()" mat-header-cell *matHeaderCellDef mat-sort-header="endDate"> {{ 'JOB.SUBMISSION_END_DATE.PLACEHOLDER' | translate }} </th>
             <td mat-cell *matCellDef="let element"> <span *ngIf="element?.endDate">{{element?.endDate | date }} </span></td>
           </ng-container>
 
@@ -159,7 +159,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="paginatorAction($event)"></mat-paginator>
       </div>
 
     </div>

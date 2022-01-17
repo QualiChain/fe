@@ -150,6 +150,7 @@ export class CoursesComponent implements OnInit {
   
   paginatorAction(event: any) {
     localStorage.setItem('QC_course_search_pagination_index', event.pageIndex);
+    localStorage.setItem('QC_course_search_pagination_size', event.pageSize);
   }
 
   ngOnInit() {
@@ -221,6 +222,12 @@ export class CoursesComponent implements OnInit {
         else {
           this.paginator.pageIndex = 0;
         }
+        
+        let defaultSize = localStorage.getItem('QC_course_search_pagination_size');
+        if (defaultSize) {
+          this.paginator.pageSize = +(defaultSize);
+        }
+        
         
 
         this.showLoading = false;
