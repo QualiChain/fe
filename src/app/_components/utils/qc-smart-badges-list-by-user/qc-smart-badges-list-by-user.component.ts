@@ -56,6 +56,8 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
 
   intialerts(awardId) {
     //console.log(awardId);
+    this.cntValidationOK = 0;
+    this.cntValidationKO = 0;
     this.loadingLoginSpinner = true;
     this.listOfAwardsToValidate = [];
 
@@ -213,6 +215,8 @@ export class QcSmartBadgesListByUserComponent implements OnInit {
   }
 
   verifySmartBadge(smartBadgeData) {
+    this.cntValidationOK = 0;
+    this.cntValidationKO = 0;
     this.loadingLoginSpinner = true;
     this.validationSuccess = false;
 
