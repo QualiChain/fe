@@ -329,7 +329,11 @@
 
                 <div class="" *ngIf="!showLoadingRecomendedSkills && recommendedSkills.length==0"><div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.NO_DATA' | translate }}</div></div>
                 <div class="" *ngIf="!showLoadingRecomendedSkills && recommendedSkills.length>0">
-                    <div class="col-sm-12">{{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.HELP_TEXT' | translate }}</div>
+                    <div class="col-sm-12">
+                        <!--
+                            {{ 'CAREER_ADVISOR.TABS.SKILLS_RECOMMENDATION.HELP_TEXT' | translate }}
+                        -->
+                    </div>
 
                     <div class="col-sm-12" >
                         <div class="col-sm-6 recomendedBox" *ngFor="let recommendedSkill of pagedListRS; let i = index">
@@ -339,9 +343,11 @@
                                         <h5 class="card-title">{{recommendedSkill.title}}</h5>
                                     </div>                                    
                                     <div class="col-sm-2">
+                                        <!--
                                         <mat-checkbox class="example-margin" 
                                         [checked]="(selectedSkills.indexOf(recommendedSkill.id)>=0)"
                                         (change)="changeSelectedSkills($event, recommendedSkill.id)"></mat-checkbox>
+                                        -->
                                     </div>
                                     <div class="col-sm-12">                   
                                         <p class="card-text">{{recommendedSkill.description}}</p>                                
@@ -395,7 +401,9 @@
                         </div>
 
                         <div class="col-sm-12">
+                            <!--
                             {{ 'CAREER_ADVISOR.YOU_HAVE_SELECTED_N_SKILLS' | translate : {value: selectedSkills.length} }}
+                            -->
                         </div>
 
                         <div class="col-sm-12">
@@ -413,12 +421,14 @@
                     <div class="">
                         <div class="col col-lg-8"></div>
                         <div class="col col-lg-2">
+                            <!--
                             <button [disabled]="selectedSkills.length==0" class="btn btn-success" 
                             [routerLink] = "['/profiles',userid,'education-plan']"
                             [queryParams]="{type: 'skills', ids: selectedSkills.toString()}"
                             > 
                                 <i _ngcontent-axy-c0="" class="material-icons"> menu_book </i> {{ 'CAREER_ADVISOR.BUTTON.SHOW_EDUCATION_PLAN' | translate }}
                             </button>
+                            -->
                         </div>
                     </div>
 

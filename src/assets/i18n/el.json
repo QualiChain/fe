@@ -484,8 +484,8 @@
     "DELETE_OWN_PROFILE": "Διαγραφή του προφίλ σας",
     "DELETE_OWN_PROFILE_HELP_MESSAGE": "Πρόκειται να διαγράψετε τον λογαριασμό σας, δεν είναι δυνατή η αναίρεση αυτής της ενέργειας. Όλα τα δεδομένα σας θα χαθούν.",
     "COMPETENCY_DEVELOPMENT": "Ανάπτυξη ικανοτήτων",
-    "COMPLETENESS": "Πληρότητα",
-    "NOT_COMPLETENESS": "Όχι πληρότητα",
+    "COMPLETENESS": "Πλήρες",
+    "NOT_COMPLETENESS": "Ελλιπές",    
     "CV_COMPLETENESS": "Πληρότητα βιογραφικού"
   },
   "BCO": {

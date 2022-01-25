@@ -52,6 +52,8 @@ export class CurriculumGapAnalysisComponent implements OnInit {
   pageSizeOptionsRS: number[] = [1];
   allSpecializations: Specialization[] = [];
   specialization: number = null;
+  withPagination = false;
+  allRecomendations = [];
 
   constructor(
     private ss: SpecializationsService,
@@ -84,9 +86,12 @@ export class CurriculumGapAnalysisComponent implements OnInit {
       this.DSSs
       .getMissingSkillsData(dataToSend).subscribe(
         dataMissingSkills => {
+          //console.log(dataMissingSkills);
+          dataMissingSkills['recommended_skills'].sort((a, b) => a.skill_title.localeCompare(b.skill_title));
           //console.log("Missing skills");
           //console.log(dataMissingSkills);
           this.recommendedSkills = dataMissingSkills['recommended_skills'];
+          this.allRecomendations = dataMissingSkills['recommended_skills'];
           this.lengthRS = this.recommendedSkills.length;
           this.pagedListRS = this.recommendedSkills.slice(0, 1);
         },

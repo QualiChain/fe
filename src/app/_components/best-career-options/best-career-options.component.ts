@@ -123,12 +123,14 @@ public pieChartOptions: ChartOptions = {
 
   lengthBCO: number = 0;
   pagedListBCO = [];
+  fullListRecommendations = [];
+
   pageSizeBCO: number = 1;  //displaying three cards each row
   pageSizeOptionsBCO: number[] = [1];
-
   recomendedJobs = [];
   
   showLoading: boolean = true;
+  withPagination: boolean = false;
 
   constructor(
     private rs: RecomendationsService,
@@ -158,12 +160,17 @@ public pieChartOptions: ChartOptions = {
         .getRecomendationsJobs(this.userid).subscribe(
           data => {
             //console.log("list of recomended jobs");
+            data.sort((a, b) => a.label.localeCompare(b.label));
             console.log(data);
             this.recomendedJobs = data;
             this.best_career_options = data;
 
             this.lengthBCO = this.best_career_options.length;
             this.pagedListBCO = this.best_career_options.slice(0, 1);
+            this.fullListRecommendations = this.best_career_options;
+
+            
+
             this.showLoading = false;
           },
           error => {

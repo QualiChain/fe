@@ -3,11 +3,19 @@
 <div class="container">
 
     <div class="row">
-        <div class="col col-lg-2">
+        <div class="col col-lg-12">
 
             <button class="btn btn-primary" [routerLink]="['/profiles', userid]">
                 <i _ngcontent-axy-c0="" class="material-icons small"> arrow_back </i> {{ 'BUTTON.BACK_TO_USER_PROFILE' | translate }}
             </button>
+
+            <button *ngIf="!withPagination" class="btn btn-primary" [routerLink]="['/profiles',userid,'recomended','courses']">
+                {{ 'BCO.BUTTON.COURSE_RECOMMENDATION' | translate }}
+            </button>
+            <button *ngIf="!withPagination" class="btn btn-primary" [routerLink]="['/profiles',userid,'recomended','skills']">
+                {{ 'BCO.BUTTON.SKILL_RECOMMENDATION' | translate }}
+            </button>
+
             <!--
                 <a [routerLink]="['/profiles', userid]" class="btn btn-primary">❮  Back to user profile</a> 
              -->
@@ -17,7 +25,40 @@
     <app-qc-spinner *ngIf="showLoading"></app-qc-spinner>
     <div class="col col-lg-12" *ngIf="(!showLoading && best_career_options.length==0)"><br>{{ 'BCO.NO_DATA' | translate }}<br>&nbsp;</div>
 
-    <div [hidden]="cardToDisplay!=i" class="bco-card" *ngFor="let bco of pagedListBCO; let i = index">
+    <div [hidden]="withPagination" class="bco-card" *ngFor="let bco of fullListRecommendations; let i = index">
+        <mat-accordion class="example-headers-align" >
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{bco.label}}
+                  </mat-panel-title>                  
+                </mat-expansion-panel-header>
+            
+                    <div class="bco-body">
+                        <div class="bco-body-title">{{ 'BCO.DESCRIPTION' | translate }}</div>
+                        <div class="bco-body-content"><p>{{bco.jobDescription}}</p></div>
+            
+                        <div class="bco-body-title">{{ 'BCO.STATISITICS' | translate }}</div>
+                        <div class="bco-body-content">
+                            <div class="row">
+                                    <div class="col col-lg-4">                                        
+                                    </div>
+                                    <div class="col col-lg-8">                            
+                                        <app-visualisations-user-skillset-coverage-to-applied-job-skills-chart [userId]="userid" [jobId]="bco.id"></app-visualisations-user-skillset-coverage-to-applied-job-skills-chart>                            
+                                    </div>                                    
+                            </div>
+            
+                        </div>
+            
+                        
+                    </div>
+            
+              </mat-expansion-panel>
+            </mat-accordion>              
+  
+    </div>
+
+    <div [hidden]="!withPagination || cardToDisplay!=i" class="bco-card" *ngFor="let bco of pagedListBCO; let i = index">
         <div class="bco-head">{{bco.label}} </div>
         <div class="bco-body">
             <div class="bco-body-title">{{ 'BCO.DESCRIPTION' | translate }}</div>
@@ -98,13 +139,15 @@
         </div>    
     </div>
 
-    <div *ngIf="!(!showLoading && best_career_options.length==0)" class="col-sm-12">
-        <mat-paginator 
-            [length]="best_career_options.length"
-            [pageSize]="best_career_options.slice(0, 1)"
-            [pageSizeOptions]="pageSizeOptionsBCO"
-            (page)="OnPageChangeBCO($event)">
-        </mat-paginator>
+    <div *ngIf="withPagination">
+        <div *ngIf="!(!showLoading && best_career_options.length==0)" class="col-sm-12">
+            <mat-paginator 
+                [length]="best_career_options.length"
+                [pageSize]="best_career_options.slice(0, 1)"
+                [pageSizeOptions]="pageSizeOptionsBCO"
+                (page)="OnPageChangeBCO($event)">
+            </mat-paginator>
+        </div>
     </div>
     <!--
     <div class="row">

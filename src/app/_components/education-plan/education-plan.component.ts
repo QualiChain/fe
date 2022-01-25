@@ -77,7 +77,8 @@ export class EducationPlanComponent implements OnInit {
       //console.log(element);
       if (this.typeURL=='COURSES') {
 
-        this.displayedColumns = ['name', 'semester', 'rating'];
+        //this.displayedColumns = ['name', 'semester', 'rating'];
+        this.displayedColumns = ['name', 'semester', 'action'];
 
         this.cs
           .getCourse(+element).subscribe(
