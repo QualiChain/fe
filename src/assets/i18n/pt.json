@@ -484,8 +484,8 @@
     "DELETE_OWN_PROFILE": "Apagar perfil próprio",
     "DELETE_OWN_PROFILE_HELP_MESSAGE": "Vai apagar a sua conta, esta ação é irreversível. Todos os dados serão perdidos.",
     "COMPETENCY_DEVELOPMENT": "Desenvolvimento de competências",
-    "COMPLETENESS": "Completeness",
-    "NOT_COMPLETENESS": "Not completeness",
+    "COMPLETENESS": "Completo",
+    "NOT_COMPLETENESS": "Incompleto",
     "CV_COMPLETENESS": "CV completeness"
   },
   "BCO": {

@@ -280,8 +280,8 @@ export class VisualisationsEnrolledCoursesSkillsCoverageToUsersAppliedJobsSkills
   }
   ngOnChanges(): void {    
     
-    //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request[]=red&color_list_request[]=blue&use_default_colors=false&min_max_y_value[]=0&min_max_y_value[]=200&base_query=skills_courses_skills_coverage&user_id="+this.userId);
-    this.urlSafe = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request[]=red&color_list_request[]=blue&use_default_colors=false&min_max_y_value[]=0&min_max_y_value[]=200&base_query=skills_courses_skills_coverage&user_id="+this.userId;
+    //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request[]=red&color_list_request[]=blue&use_default_colors=false&min_max_y_value[]=0&min_max_y_value[]=100&base_query=skills_courses_skills_coverage&user_id="+this.userId);
+    this.urlSafe = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request[]=red&color_list_request[]=blue&use_default_colors=false&min_max_y_value[]=0&min_max_y_value[]=100&base_query=skills_courses_skills_coverage&user_id="+this.userId;
   }
 
 }
@@ -364,7 +364,7 @@ export class VisualisationsUserSkillsetCoverageToAppliedJobSkills extends Visual
     //console.log(this.jobId);
     this.jobId = this.jobId.toLowerCase().replace("job", "");
     //console.log("job id:"+this.jobId);
-    this.urlSafe = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request%5b%5d=red&color_list_request%5b%5d=blue&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=200&base_query=skills_coverage&user_id="+this.userId+"&job_id="+this.jobId;    
+    this.urlSafe = urlVisualisations+"/show_circular_gauge_chart?x_axis_name=Strength&x_axis_title=Power&x_axis_unit=W&color_list_request%5b%5d=red&color_list_request%5b%5d=blue&use_default_colors=false&min_max_y_value%5b%5d=0&min_max_y_value%5b%5d=100&base_query=skills_coverage&user_id="+this.userId+"&job_id="+this.jobId;    
   }
 
 }
