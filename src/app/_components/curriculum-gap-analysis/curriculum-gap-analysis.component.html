@@ -68,7 +68,7 @@
                       </mat-panel-title>                  
                     </mat-expansion-panel-header>
 
-                    <div class="col col-lg-6">
+                    <div class="col col-lg-12">
                         <div class="card">
                             <div class="card-body">                       
        
@@ -98,6 +98,8 @@
                         
                         </div>
                     </div>
+                    <!--
+                        hide to avoid to display empty charts
                     <div class="col col-lg-6">
                         <div>
                             <mat-form-field class="create-job-full-width">
@@ -112,6 +114,7 @@
                         </div>
                         <app-visualisations-skills-demand-in-time-per-specialization-chart [skillId]="recommendedSkill?.skill_id" [specialization]="specialization"></app-visualisations-skills-demand-in-time-per-specialization-chart>
                     </div>
+                    -->
 
                 </mat-expansion-panel>
             </mat-accordion>
