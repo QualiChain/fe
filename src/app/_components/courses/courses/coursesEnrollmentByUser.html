@@ -5,40 +5,63 @@
     </mat-expansion-panel-header>
   
     <mat-spinner diameter="20" color="warn" *ngIf="lodingspinner; else loadEnd"></mat-spinner>
-    <ng-template #loadEnd>
-        <div *ngIf="myCourses.length==0">{{ 'MY_COURSES.NO_DATA' | translate }} </div>
-  
-        <mat-accordion *ngIf="myCourses.length>=0" activeIds="course-0">
-        <mat-expansion-panel  id="course-{{i}}" *ngFor="let course of myCourses; let i = index">
-            <mat-expansion-panel-header>
-            <mat-panel-title>
-                {{course?.course?.name}}
-            </mat-panel-title>
-            <mat-panel-description>
+    <ng-template #loadEnd> 
+        <h3>{{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.ENROLLED' | translate }}</h3>
+        <div *ngIf="(myCourses | FilterArrayByValue : 'course_status' : 'enrolled')==0">{{ 'MY_COURSES.NO_DATA' | translate }} </div>
+        <mat-accordion *ngIf="(myCourses | FilterArrayByValue : 'course_status' : 'enrolled')>0" activeIds="course-0">
+            <mat-expansion-panel  id="course-{{i}}" *ngFor="let course of myCourses  | FilterArrayByValueGetList : 'course_status' : 'enrolled'; let i = index">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{course?.course?.name}}
+                    </mat-panel-title>
+                    <mat-panel-description></mat-panel-description>
+                </mat-expansion-panel-header>
                 
-            </mat-panel-description>
-            </mat-expansion-panel-header>
+                <div class="course-card">                    
+                    <div class="course-card-body">
+                        
+                        <div class="course-card-text">
+                            {{course?.course?.description}}
+                            <br/>
+                            <div *ngIf="course?.grade"><span class="labelcourse">{{ 'COURSE.SCORE.LABEL' | translate }}:</span> <span> {{course?.grade}}</span></div>
+                        </div>       
             
-            <div class="course-card">                    
-            <div class="course-card-body">                      
-                <div class="course-card-text">
-                    {{course?.course?.description}}
-                    <br/>
-                    <div *ngIf="course?.course_status"><span class="labelcourse">{{ 'COURSE.ENROLLMENT_STATUS.LABEL' | translate }}:</span> <span> {{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.'+course?.course_status.toUpperCase() | translate }}</span></div>
-                    <div *ngIf="course?.grade"><span class="labelcourse">{{ 'COURSE.SCORE.LABEL' | translate }}:</span> <span> {{course?.grade}}</span></div>
-                </div>       
-    
-                <br/>
-                <button *appCanAccess="['view_courses']" class="btn btn-primary" [routerLink]="['/courses', course?.course?.courseid]">
-                <i _ngcontent-axy-c0="" class="material-icons small"> pageview </i> {{ 'BUTTON.VIEW' | translate }}
-                </button>
-    
-            </div>
-        </div>
-    
-    
-        </mat-expansion-panel>
-        
+                        <br/>
+                        <button *appCanAccess="['view_courses']" class="btn btn-primary" [routerLink]="['/courses', course?.course?.courseid]">
+                        <i _ngcontent-axy-c0="" class="material-icons small"> pageview </i> {{ 'BUTTON.VIEW' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+        <h3>{{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.DONE' | translate }}</h3>
+        <div *ngIf="(myCourses | FilterArrayByValue : 'course_status' : 'done')==0">{{ 'MY_COURSES.NO_DATA' | translate }} </div>
+        <mat-accordion *ngIf="(myCourses | FilterArrayByValue : 'course_status' : 'done')>0" activeIds="course-0">
+            <mat-expansion-panel  id="course-{{i}}" *ngFor="let course of myCourses  | FilterArrayByValueGetList : 'course_status' : 'done'; let i = index">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{course?.course?.name}}
+                    </mat-panel-title>
+                    <mat-panel-description></mat-panel-description>
+                </mat-expansion-panel-header>
+                
+                <div class="course-card">                    
+                    <div class="course-card-body">      
+
+                        <div class="course-card-text">
+                            {{course?.course?.description}}
+                            <br/>
+                            <div *ngIf="course?.grade"><span class="labelcourse">{{ 'COURSE.SCORE.LABEL' | translate }}:</span> <span> {{course?.grade}}</span></div>
+                        </div>       
+            
+                        <br/>
+                        <button *appCanAccess="['view_courses']" class="btn btn-primary" [routerLink]="['/courses', course?.course?.courseid]">
+                        <i _ngcontent-axy-c0="" class="material-icons small"> pageview </i> {{ 'BUTTON.VIEW' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
         </mat-accordion>
   
     </ng-template>
