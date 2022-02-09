@@ -188,6 +188,9 @@
                             <div class=""><h3>{{selectedCourse.course.name}}</h3></div>
                             <div class="">{{selectedCourse.course.description}}</div>
                             <div class="">{{ 'COURSE.SCORE.LABEL' | translate }}: {{selectedCourse.grade}}</div>
+                            <!--
+                            <div *ngIf="selectedCourse?.course_status"><span class="statusourse">{{ 'COURSE.ENROLLMENT_STATUS.LABEL' | translate }}:</span> <span> {{ 'COURSE.ENROLLMENT_STATUS.OPTIONS.'+selectedCourse?.course_status | uppercase | translate }}</span></div>
+                            -->
                             <div class=""><br/><a class="btn btn-danger" [routerLink]="" (click)="selectedCourse=null">{{ 'BUTTON.CLOSE' | translate }}</a> 
                               &nbsp; <a class="btn btn-success" [routerLink]="['/courses', selectedCourse.course.courseid]" >{{ 'BUTTON.VIEW_MORE' | translate }}</a>
                             </div>

@@ -323,7 +323,9 @@ export class CoursesTouchByUserComponent implements OnInit {
 export class CoursesEnrollmentByUserComponent implements OnInit {
 
   @Input() userId: number;
-  myCourses : any[] = [];
+  coursesEnrolledByUser : any[] = [];
+  coursesCompletedByUser : any[] = [];
+
   lodingspinner : boolean = false;
   constructor(
     private cs: CoursesService
@@ -340,9 +342,9 @@ export class CoursesEnrollmentByUserComponent implements OnInit {
           //console.log(coursesEnrolledByUser);
           //this.myCourses = coursesEnrolledByUser;
           coursesEnrolledByUser.forEach((elementCourse, index) => {
-            this.myCourses.push(elementCourse);
+            this.coursesEnrolledByUser.push(elementCourse);
           });
-          this.myCourses.sort((a, b) => (a.course.name.toUpperCase() > b.course.name.toUpperCase()) ? 1 : -1)
+          this.coursesEnrolledByUser.sort((a, b) => (a.course.name.toUpperCase() > b.course.name.toUpperCase()) ? 1 : -1)
           this.lodingspinner = false;
           
         },
@@ -358,9 +360,9 @@ export class CoursesEnrollmentByUserComponent implements OnInit {
           //console.log(coursesCompletedByUser);
           //this.myCourses = coursesCompletedByUser;
           coursesCompletedByUser.forEach((elementCourse, index) => {
-            this.myCourses.push(elementCourse)
+            this.coursesCompletedByUser.push(elementCourse)
           });
-          this.myCourses.sort((a, b) => (a.course.name.toUpperCase() > b.course.name.toUpperCase()) ? 1 : -1)
+          this.coursesCompletedByUser.sort((a, b) => (a.course.name.toUpperCase() > b.course.name.toUpperCase()) ? 1 : -1)
           this.lodingspinner = false;
           
         },
