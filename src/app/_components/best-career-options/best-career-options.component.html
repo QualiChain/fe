@@ -35,9 +35,36 @@
                 </mat-expansion-panel-header>
             
                     <div class="bco-body">
-                        <div class="bco-body-title">{{ 'BCO.DESCRIPTION' | translate }}</div>
-                        <div class="bco-body-content"><p>{{bco.jobDescription}}</p></div>
-            
+                        <!--
+                        <div *ngIf="bco.jobDescription" class="bco-body-title">{{ 'BCO.DESCRIPTION' | translate }}</div>
+                        <div *ngIf="bco.jobDescription" class="bco-body-content"><p>{{bco.jobDescription}}</p></div>
+                        -->
+                        <div class="bco-body-content">
+
+                            <div class="col " *ngIf="bco.jobDescription">
+                                <div><span class="labeljob">{{ 'BCO.DESCRIPTION' | translate }}:</span> {{bco.jobDescription}}</div> 
+                            </div> 
+
+                            <div class="col " *ngIf="bco.specialization">
+                                <div><span class="labeljob">{{ 'JOB.SPECIALIZATION' | translate }}:</span> {{'SPECIALIZATIONS.'+bco.specialization | translate}}</div> 
+                            </div>            
+                            <div *ngIf="bco.startDate" class="col ">
+                                <div><span class="labeljob">{{ 'JOB.SUBMISSION_START_DATE.LABEL' | translate }}:</span> {{bco.startDate | date }}</div> 
+                            </div>
+                            <div *ngIf="bco.endDate" class="col ">
+                                <div><span class="labeljob">{{ 'JOB.SUBMISSION_END_DATE.LABEL' | translate }}:</span> {{bco.endDate | date }}</div> 
+                            </div>
+                            <div class="col " *ngIf="bco.contractType" >
+                                <div><span class="labeljob">{{ 'JOB.EMPLOYMENT_TYPE.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_TYPE.OPTIONS.'+bco.contractType | uppercase | translate }}</div> 
+                            </div>
+                            <div class="col " *ngIf="bco.seniorityLevel" >
+                                <div><span class="labeljob">{{ 'JOB.EMPLOYMENT_LEVEL.LABEL' | translate }}:</span> {{ 'JOB.EMPLOYMENT_LEVEL.OPTIONS.'+bco.seniorityLevel | uppercase | translate }}</div> 
+                            </div>
+                            <div class="col " *ngIf="bco?.hiringOrganization">
+                                <div><span class="labeljob">{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}:</span> {{ bco?.hiringOrganization }} </div> 
+                            </div>
+                        </div>
+
                         <div class="bco-body-title">{{ 'BCO.STATISITICS' | translate }}</div>
                         <div class="bco-body-content">
                             <div class="row">
@@ -48,6 +75,12 @@
                                     </div>                                    
                             </div>
             
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" [routerLink]="['/jobs', bco.id]">
+                                <i _ngcontent-axy-c0="" class="material-icons small"> pageview </i> {{ 'BUTTON.VIEW' | translate }}
+                            </button>
                         </div>
             
                         
