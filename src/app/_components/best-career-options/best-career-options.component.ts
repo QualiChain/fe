@@ -161,7 +161,7 @@ public pieChartOptions: ChartOptions = {
           data => {
             //console.log("list of recomended jobs");
             data.sort((a, b) => a.label.localeCompare(b.label));
-            console.log(data);
+            //console.log(data);
             this.recomendedJobs = data;
             this.best_career_options = data;
 
