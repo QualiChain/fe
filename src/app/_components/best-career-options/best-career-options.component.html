@@ -63,8 +63,11 @@
                             <div class="col " *ngIf="bco?.hiringOrganization">
                                 <div><span class="labeljob">{{ 'JOB.RECRUITMENT_ORGANIZATION.LABEL' | translate }}:</span> {{ bco?.hiringOrganization }} </div> 
                             </div>
+                            <div class="col " *ngIf="bco?.score">
+                                <div><span class="labeljob">{{ 'COURSE.SCORE.LABEL' | translate }}:</span> {{ bco?.score }} %</div> 
+                            </div>
                         </div>
-
+                        <!--
                         <div class="bco-body-title">{{ 'BCO.STATISITICS' | translate }}</div>
                         <div class="bco-body-content">
                             <div class="row">
@@ -74,9 +77,9 @@
                                         <app-visualisations-user-skillset-coverage-to-applied-job-skills-chart [userId]="userid" [jobId]="bco.id"></app-visualisations-user-skillset-coverage-to-applied-job-skills-chart>                            
                                     </div>                                    
                             </div>
-            
                         </div>
-
+                        -->
+                        <br>
                         <div>
                             <button class="btn btn-primary" [routerLink]="['/jobs', bco.id]">
                                 <i _ngcontent-axy-c0="" class="material-icons small"> pageview </i> {{ 'BUTTON.VIEW' | translate }}

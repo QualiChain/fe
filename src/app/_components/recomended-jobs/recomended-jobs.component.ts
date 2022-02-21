@@ -16,7 +16,7 @@ export class RecomendedJobsComponent implements OnInit {
   @Input() userId: number = null;
   searchedTerm: string = null;
   //displayedColumns: string[] = ['title', 'job_description', 'rating', 'action'];
-  displayedColumns: string[] = ['label', 'jobDescription', 'action'];
+  displayedColumns: string[] = ['label', 'jobDescription', 'score', 'action'];
   
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -59,6 +59,16 @@ export class RecomendedJobsComponent implements OnInit {
         data => {
           //console.log("list of recomended jobs");
           //console.log(data);
+
+          data.sort(
+            function(a, b) {          
+               if (a.score === b.score) {
+                  // label is only important when score are the same
+                  return a.label.localeCompare(b.label);
+               }
+               return a.score > b.score ? 1 : -1;
+            });
+
           this.recomendedJobs = data;
 
           //console.log(this.userId);    
