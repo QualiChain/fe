@@ -22,6 +22,7 @@
           <div class="job-card-text">
             {{job?.jobDescription}}
             <br/>
+            <div *ngIf="job?.score">{{ 'COURSE.SCORE.LABEL' | translate }}: {{job?.score}}%</div>
             <!--{{ 'RECOMENDED_JOBS.MATCH' | translate }}:-->
           </div>
           

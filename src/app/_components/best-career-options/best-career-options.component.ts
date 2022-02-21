@@ -160,8 +160,18 @@ public pieChartOptions: ChartOptions = {
         .getRecomendationsJobs(this.userid).subscribe(
           data => {
             //console.log("list of recomended jobs");
-            data.sort((a, b) => a.label.localeCompare(b.label));
+            //data.sort((a, b) => a.label.localeCompare(b.label));
             //console.log(data);
+
+            data.sort(
+              function(a, b) {          
+                 if (a.score === b.score) {
+                    // label is only important when score are the same
+                    return a.label.localeCompare(b.label);
+                 }
+                 return a.score > b.score ? 1 : -1;
+              });
+
             this.recomendedJobs = data;
             this.best_career_options = data;
 
