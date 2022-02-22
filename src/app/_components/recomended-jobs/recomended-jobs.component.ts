@@ -59,16 +59,16 @@ export class RecomendedJobsComponent implements OnInit {
         data => {
           //console.log("list of recomended jobs");
           //console.log(data);
-
+          
           data.sort(
             function(a, b) {          
                if (a.score === b.score) {
                   // label is only important when score are the same
                   return a.label.localeCompare(b.label);
                }
-               return a.score > b.score ? 1 : -1;
+               return a.score < b.score ? 1 : -1;
             });
-
+          
           this.recomendedJobs = data;
 
           //console.log(this.userId);    

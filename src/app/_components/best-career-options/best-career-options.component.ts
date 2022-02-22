@@ -169,7 +169,7 @@ public pieChartOptions: ChartOptions = {
                     // label is only important when score are the same
                     return a.label.localeCompare(b.label);
                  }
-                 return a.score > b.score ? 1 : -1;
+                 return a.score < b.score ? 1 : -1;
               });
 
             this.recomendedJobs = data;
